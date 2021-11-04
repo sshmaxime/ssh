@@ -213,3 +213,14 @@ body,
 #root {
   min-height: 100vh;
 }
+
+/*  */
+
+html {
+  background-color: #fbfcfc;
+}
+
+@font-face {
+  font-family: bar;
+  src: url(./assets/fonts/bar.ttf);
+}
