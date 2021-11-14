@@ -217,10 +217,40 @@ body,
 /*  */
 
 html {
-  background-color: #fbfcfc;
+  background-color: #f9f9fb;
 }
 
 @font-face {
-  font-family: bar;
-  src: url(./assets/fonts/bar.ttf);
+  font-family: headbd;
+  src: url(./assets/fonts/headbd.ttf);
+}
+
+@font-face {
+  font-family: nobar;
+  src: url(./assets/fonts/nobar.ttf);
+}
+
+@font-face {
+  font-family: test;
+  src: url(./assets/fonts/nobartest.ttf);
+}
+
+@font-face {
+  font-family: normal;
+  src: url(./assets/fonts/SourceCodePro-Regular.ttf);
+}
+
+@font-face {
+  font-family: montserrat-black;
+  src: url(./assets/fonts/Montserrat-Black.ttf);
+}
+
+@font-face {
+  font-family: montserrat-black-italic;
+  src: url(./assets/fonts/Montserrat-BlackItalic.ttf);
+}
+
+@font-face {
+  font-family: montserrat-normal;
+  src: url(./assets/fonts/Montserrat-Regular.ttf);
 }

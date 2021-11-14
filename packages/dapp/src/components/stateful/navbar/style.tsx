@@ -13,20 +13,21 @@ const style = {
     flexGrow: 1,
   })),
   AppBar: styled(AppBar)(({ theme }) => ({
-    backgroundColor: "white",
+    backgroundColor: `rgba(249,249,251)`,
     boxShadow: "none",
     position: "relative",
+    height: "80px",
     paddingTop: "10px",
     paddingBottom: "10px",
 
     // AppBar breakpoints should be similar to app-> Root
     [theme.breakpoints.up("lg")]: {
-      paddingLeft: "18vw",
-      paddingRight: "18vw",
-    },
-    [theme.breakpoints.down("lg")]: {
       paddingLeft: "15vw",
       paddingRight: "15vw",
+    },
+    [theme.breakpoints.down("lg")]: {
+      paddingLeft: "13vw",
+      paddingRight: "13vw",
     },
     [theme.breakpoints.down("md")]: {
       paddingLeft: "10vw",
@@ -39,9 +40,9 @@ const style = {
   })),
   Title: styled(Typography)(({ theme }) => ({
     position: "absolute",
-    fontFamily: "bar",
-    letterSpacing: "5px",
-    fontSize: "3em",
+    fontFamily: "nobar",
+    letterSpacing: "-15px",
+    fontSize: "5em",
     "& > a": {
       textDecoration: "none",
       color: "black",
