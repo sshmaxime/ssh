@@ -27,6 +27,8 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import { NAME } from "../../components/constants";
 
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+
 const AF1xCryptoPunks: FC = () => {
   return (
     <Style.Root>
@@ -90,65 +92,115 @@ const AF1xCryptoPunks: FC = () => {
               <Style.Gif src={af1x_exemple} />
             </Style.ProjectExplanationGifContainer>
           </Grid>
+          <Grid item xs={6}>
+            <Grid
+              container
+              spacing={0}
+              style={{
+                boxShadow: "5px 5px 5px #bebebe, -5px -5px 0px #fff",
+                padding: "25px",
+                backgroundColor: "#f9f9fb",
+                borderRadius: "25px",
+              }}
+            >
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  spacing={0}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Grid item xs={10}>
+                    <Style.ProjectExplanationTitle>
+                      AF1xCryptoPunks
+                    </Style.ProjectExplanationTitle>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Style.ProjectExplanationStatus>
+                      0 / 10.000
+                    </Style.ProjectExplanationStatus>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Style.ProjectExplanationNumberItems>
+                  &nbsp; &nbsp; &nbsp;
+                </Style.ProjectExplanationNumberItems>
+              </Grid>
+
+              <Grid item xs={12} md={10}>
+                <Style.ProjectExplanationDescription>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged. It was popularised in the 1960s with
+                  the release of Letraset sheets containing Lorem Ipsum
+                  passages, and more recently with desktop publishing software
+                  like Aldus PageMaker including versions of Lorem Ipsum.
+                </Style.ProjectExplanationDescription>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Style.ProjectExplanation>
+
+      <Style.ProjectExplanation2>
+        <Grid
+          container
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Grid
             item
             xs={6}
             style={{
               display: "flex",
-              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "5px 5px 10px grey, -1px -1px 1px white",
+              backgroundColor: "white",
+              borderRadius: "15px",
+              padding: "25px",
             }}
           >
-            <Grid container spacing={6}>
-              <Grid item xs={12}>
-                <Style.ProjectExplanationNumberItems>
-                  10.000 AF1xCryptoPunks
-                </Style.ProjectExplanationNumberItems>
-              </Grid>
+            <Style.ProjectExplanationGrid>
+              <Style.ProjectExplanationImg src={punk_exemple} />
+              <Style.ProjectExplanationImgText>
+                CryptoPunks
+              </Style.ProjectExplanationImgText>
+            </Style.ProjectExplanationGrid>
 
-              <Grid item xs={12}>
-                Description
-              </Grid>
-            </Grid>
+            <Style.ProjectExplanationBigCharContainer>
+              <Style.ProjectExplanationBigChar children={"+"} />
+            </Style.ProjectExplanationBigCharContainer>
+
+            <Style.ProjectExplanationGrid>
+              <Style.ProjectExplanationImg src={image2} />
+              <Style.ProjectExplanationImgText>
+                AF1x
+              </Style.ProjectExplanationImgText>
+            </Style.ProjectExplanationGrid>
+
+            <Style.ProjectExplanationBigCharContainer>
+              <Style.ProjectExplanationBigChar children={"="} />
+            </Style.ProjectExplanationBigCharContainer>
+
+            <Style.ProjectExplanationGrid>
+              <Style.ProjectExplanationImg src={af1x_exemple} />
+              <Style.ProjectExplanationImgText>
+                AF1xCryptoPunks
+              </Style.ProjectExplanationImgText>
+            </Style.ProjectExplanationGrid>
           </Grid>
         </Grid>
-        <Grid
-          container
-          style={{
-            marginTop: "10vh",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Style.ProjectExplanationGrid>
-            <Style.ProjectExplanationImg src={punk_exemple} />
-            <Style.ProjectExplanationImgText>
-              Your Punk
-            </Style.ProjectExplanationImgText>
-          </Style.ProjectExplanationGrid>
-
-          <Style.ProjectExplanationBigCharContainer>
-            <Style.ProjectExplanationBigChar children={"+"} />
-          </Style.ProjectExplanationBigCharContainer>
-
-          <Style.ProjectExplanationGrid>
-            <Style.ProjectExplanationImg src={image2} />
-            <Style.ProjectExplanationImgText>
-              AF1x
-            </Style.ProjectExplanationImgText>
-          </Style.ProjectExplanationGrid>
-
-          <Style.ProjectExplanationBigCharContainer>
-            <Style.ProjectExplanationBigChar children={"="} />
-          </Style.ProjectExplanationBigCharContainer>
-
-          <Style.ProjectExplanationGrid>
-            <Style.ProjectExplanationImg src={af1x_exemple} />
-            <Style.ProjectExplanationImgText>
-              Custom
-            </Style.ProjectExplanationImgText>
-          </Style.ProjectExplanationGrid>
-        </Grid>
-      </Style.ProjectExplanation>
+      </Style.ProjectExplanation2>
 
       <Style.ProjectPlan>
         <Style.ProjectPlanTitle>WHAT'S THE PLAN</Style.ProjectPlanTitle>
@@ -159,21 +211,76 @@ const AF1xCryptoPunks: FC = () => {
             justifyContent: "space-around",
           }}
         >
-          <Grid item xs={2}>
-            Identify Your Punk
-          </Grid>
-          <Grid item xs={2}>
-            generate it
-          </Grid>
-          <Grid item xs={2}>
-            mint it
-          </Grid>
-          <Grid item xs={2}>
-            burn it
-          </Grid>
-          <Grid item xs={2}>
-            receive your custom
-          </Grid>
+          <Style.ProjectPlanGrid item xs={2}>
+            <Style.ProjectPlanGridContainer
+              style={{
+                backgroundColor: "#b6ccfe",
+              }}
+            >
+              <AcUnitIcon
+                style={{
+                  fontSize: "60px",
+                  color: "white",
+                }}
+              />
+            </Style.ProjectPlanGridContainer>
+          </Style.ProjectPlanGrid>
+          <Style.ProjectPlanGrid item xs={2}>
+            <Style.ProjectPlanGridContainer
+              style={{
+                backgroundColor: "#ffd6ba",
+              }}
+            >
+              <AcUnitIcon
+                style={{
+                  fontSize: "60px",
+                  color: "white",
+                }}
+              />
+            </Style.ProjectPlanGridContainer>
+          </Style.ProjectPlanGrid>
+          <Style.ProjectPlanGrid item xs={2}>
+            <Style.ProjectPlanGridContainer
+              style={{
+                backgroundColor: "#f29479",
+              }}
+            >
+              <AcUnitIcon
+                style={{
+                  fontSize: "60px",
+                  color: "white",
+                }}
+              />
+            </Style.ProjectPlanGridContainer>
+          </Style.ProjectPlanGrid>
+          <Style.ProjectPlanGrid item xs={2}>
+            <Style.ProjectPlanGridContainer
+              style={{
+                backgroundColor: "#98f5e1",
+              }}
+            >
+              <AcUnitIcon
+                style={{
+                  fontSize: "60px",
+                  color: "white",
+                }}
+              />
+            </Style.ProjectPlanGridContainer>
+          </Style.ProjectPlanGrid>
+          <Style.ProjectPlanGrid item xs={2}>
+            <Style.ProjectPlanGridContainer
+              style={{
+                backgroundColor: "#cfbaf0",
+              }}
+            >
+              <AcUnitIcon
+                style={{
+                  fontSize: "60px",
+                  color: "white",
+                }}
+              />
+            </Style.ProjectPlanGridContainer>
+          </Style.ProjectPlanGrid>
         </Grid>
         <Grid
           container

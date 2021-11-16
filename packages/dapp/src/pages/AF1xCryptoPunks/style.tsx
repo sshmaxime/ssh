@@ -57,9 +57,7 @@ const style = {
     margin: "0 auto",
   })),
   ProjectExplanationContainer: styled("div")(({ theme }) => ({
-    borderTopLeftRadius: "10px",
-    borderTopRightRadius: "10px",
-    backgroundColor: "white",
+    backgroundColor: "#ffffff",
   })),
   LinkContainer: styled(Grid)(({ theme }) => ({
     display: "flex",
@@ -79,12 +77,13 @@ const style = {
     boxShadow: "5px 5px 5px #b3b3b5, -5px -5px 5px #ffffff",
   })),
   ProjectExplanation: styled("div")(({ theme }) => ({
-    minHeight: "calc(100vh - 150px)",
+    minHeight: "calc(80vh - 150px)",
     borderBottomLeftRadius: "5px",
     borderBottomRightRadius: "5px",
-    backgroundColor: "white",
+    background:
+      "linear-gradient(0deg, rgba(249,249,251,1) 0%, rgba(255,255,255,1) 100%)",
     paddingTop: "20vh",
-    paddingBottom: "10vh",
+    paddingBottom: "5vh",
   })),
   ProjectExplanationGifContainer: styled("div")(({ theme }) => ({
     display: "flex",
@@ -96,9 +95,38 @@ const style = {
     border: "3px solid black",
     boxShadow: "5px 5px 5px #bebebe, -5px -5px 0px #ffffff",
   })),
+  ProjectExplanationTitle: styled(Typography)(({ theme }) => ({
+    fontSize: "2.3em",
+    color: "red",
+    fontFamily: "montserrat-black",
+    marginBottom: "10px",
+  })),
+  ProjectExplanationStatus: styled("div")(({ theme }) => ({
+    textAlign: "center",
+    height: "30px",
+    backgroundColor: "#caffbf",
+    borderRadius: "20px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontFamily: "montserrat",
+    fontWeight: 600,
+  })),
   ProjectExplanationNumberItems: styled("div")(({ theme }) => ({
     fontSize: "2em",
-    fontFamily: "montserrat-black",
+    display: "inline-block",
+    color: "black",
+    fontFamily: "montserrat",
+    fontWeight: 600,
+    paddingBottom: "5px",
+    borderBottom: "5px solid black",
+    marginBottom: "50px",
+  })),
+  ProjectExplanationDescription: styled(Typography)(({ theme }) => ({
+    fontSize: "1.2em",
+    color: "black",
+    fontWeight: 300,
+    fontFamily: "montserrat",
   })),
   ProjectExplanationGrid: styled("div")(({ theme }) => ({
     display: "flex",
@@ -106,13 +134,24 @@ const style = {
     justifyContent: "center",
     alignItems: "center",
   })),
+  ProjectExplanation2: styled("div")(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "linear-gradient(0deg, #f9f9fb 50%, #ffffff 50%)",
+    paddingTop: "10vh",
+    paddingBottom: "10vh",
+  })),
+  // boxShadow: "3px 3px 1px red, 0px 0px 0px #ffffff",
+
   ProjectExplanationImg: styled("img")(({ theme }) => ({
     width: "200px",
-    borderRadius: "5px",
-    boxShadow: "15px 15px 5px #bebebe, -5px -5px 0px #ffffff",
+    boxShadow: "3px 3px 1px #bebebe, 0px 0px 0px #ffffff",
   })),
   ProjectExplanationImgText: styled("div")(({ theme }) => ({
-    fontFamily: "montserrat",
+    fontFamily: "montserrat-black-italic",
+    fontSize: "1.2em",
     paddingTop: "25px",
   })),
   ProjectExplanationBigCharContainer: styled(Grid)(({ theme }) => ({
@@ -129,6 +168,19 @@ const style = {
     borderRadius: "5px",
     backgroundColor: "#f9f9fb",
     paddingTop: "50px",
+  })),
+  ProjectPlanGrid: styled(Grid)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  })),
+  ProjectPlanGridContainer: styled("div")(({ theme }) => ({
+    height: "80px",
+    width: "80px",
+    borderRadius: "40px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   })),
   ImgReference: styled("img")(({ theme }) => ({
     width: "100%",
@@ -155,7 +207,7 @@ const style = {
   RoadMapItem: styled("div")(({ theme }) => ({})),
   RoadMapItemTitle: styled(Typography)(({ theme }) => ({
     paddingBottom: "35px",
-    color: "black",
+    color: "#E94F37",
     fontFamily: "montserrat",
     fontWeight: 800,
     fontSize: "2em",
