@@ -1,8 +1,4 @@
-import React, { FC } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-
-import Slider from "react-slick";
+import { FC } from "react";
 
 // styles
 import Style from "./style";
@@ -33,55 +29,12 @@ const AF1xCryptoPunks: FC = () => {
   return (
     <Style.Root>
       <Style.HeaderProject>
-        <div>
-          <Style.HeaderProjectTitle>WEAR YOUR PUNKS</Style.HeaderProjectTitle>
-          <Style.HeaderProjectSmallTitle>
-            <Style.HeaderProjectSmallTitleHead>
-              AF1x
-            </Style.HeaderProjectSmallTitleHead>
-            CryptoPunks
-          </Style.HeaderProjectSmallTitle>
-        </div>
+        <Style.HeaderProjectTitle>WEAR YOUR PUNKS</Style.HeaderProjectTitle>
       </Style.HeaderProject>
 
-      <Style.LinkContainer container spacing={4}>
-        <Style.LinkContainerItem item md={2} sm={6}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "end",
-              alignItems: "center",
-            }}
-          >
-            <Style.LinkContainerItemText>Etherscan</Style.LinkContainerItemText>
-          </div>
-        </Style.LinkContainerItem>
-
-        <Style.LinkContainerItem
-          item
-          md={2}
-          sm={6}
-          sx={{ display: { xs: "none", sm: "none", md: "block" } }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "start",
-              alignItems: "center",
-            }}
-          >
-            <Style.LinkContainerItemText>Github</Style.LinkContainerItemText>
-          </div>
-        </Style.LinkContainerItem>
-      </Style.LinkContainer>
-
-      <Style.ProjectExplanationContainer>
-        <Style.Triangle />
-      </Style.ProjectExplanationContainer>
-
       <Style.ProjectExplanation>
-        <Grid container spacing={12} style={{ paddingBottom: "10vh" }}>
-          <Grid item xs={5}>
+        <Grid container spacing={12}>
+          <Grid item xs={12} md={5} lg={4}>
             <Style.ProjectExplanationGifContainer
               style={{
                 display: "flex",
@@ -97,13 +50,33 @@ const AF1xCryptoPunks: FC = () => {
               container
               spacing={0}
               style={{
-                boxShadow: "5px 5px 5px #bebebe, -5px -5px 0px #fff",
+                boxShadow: "5px 5px 5px #bebebe, -1px -1px 1px #fff",
                 padding: "25px",
-                backgroundColor: "#f9f9fb",
+                backgroundColor: "#fff",
                 borderRadius: "25px",
               }}
             >
               <Grid item xs={12}>
+                <Grid
+                  container
+                  spacing={1}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                  }}
+                >
+                  <Grid item xs={2}>
+                    <Style.ProjectExplanationStatus>
+                      0 / 10.000
+                    </Style.ProjectExplanationStatus>
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Style.ProjectExplanationStatus2>
+                      AF1x
+                    </Style.ProjectExplanationStatus2>
+                  </Grid>
+                </Grid>
+
                 <Grid
                   container
                   spacing={0}
@@ -113,14 +86,12 @@ const AF1xCryptoPunks: FC = () => {
                   }}
                 >
                   <Grid item xs={10}>
-                    <Style.ProjectExplanationTitle>
-                      AF1xCryptoPunks
-                    </Style.ProjectExplanationTitle>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Style.ProjectExplanationStatus>
-                      0 / 10.000
-                    </Style.ProjectExplanationStatus>
+                    <Style.HeaderProjectSmallTitle>
+                      <Style.HeaderProjectSmallTitleHead>
+                        AF1x
+                      </Style.HeaderProjectSmallTitleHead>
+                      CryptoPunks
+                    </Style.HeaderProjectSmallTitle>
                   </Grid>
                 </Grid>
               </Grid>
@@ -138,17 +109,30 @@ const AF1xCryptoPunks: FC = () => {
                   standard dummy text ever since the 1500s, when an unknown
                   printer took a galley of type and scrambled it to make a type
                   specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
+                  also the leap into electronic typesetting, remaining.
                 </Style.ProjectExplanationDescription>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  style={{
+                    display: "flex",
+                    flexDirection: "row-reverse",
+                  }}
+                >
+                  <Grid item xs={1}>
+                    <Style.MintButton>mint</Style.MintButton>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Style.ProjectExplanation>
+
+      <Style.ProjectExplanationContainer>
+        <Style.Triangle />
+      </Style.ProjectExplanationContainer>
 
       <Style.ProjectExplanation2>
         <Grid
@@ -171,10 +155,10 @@ const AF1xCryptoPunks: FC = () => {
             }}
           >
             <Style.ProjectExplanationGrid>
-              <Style.ProjectExplanationImg src={punk_exemple} />
               <Style.ProjectExplanationImgText>
                 CryptoPunks
               </Style.ProjectExplanationImgText>
+              <Style.ProjectExplanationImg src={punk_exemple} />
             </Style.ProjectExplanationGrid>
 
             <Style.ProjectExplanationBigCharContainer>
@@ -182,10 +166,10 @@ const AF1xCryptoPunks: FC = () => {
             </Style.ProjectExplanationBigCharContainer>
 
             <Style.ProjectExplanationGrid>
-              <Style.ProjectExplanationImg src={image2} />
               <Style.ProjectExplanationImgText>
                 AF1x
               </Style.ProjectExplanationImgText>
+              <Style.ProjectExplanationImg src={image2} />
             </Style.ProjectExplanationGrid>
 
             <Style.ProjectExplanationBigCharContainer>
@@ -193,17 +177,23 @@ const AF1xCryptoPunks: FC = () => {
             </Style.ProjectExplanationBigCharContainer>
 
             <Style.ProjectExplanationGrid>
-              <Style.ProjectExplanationImg src={af1x_exemple} />
               <Style.ProjectExplanationImgText>
                 AF1xCryptoPunks
               </Style.ProjectExplanationImgText>
+              <Style.ProjectExplanationImg src={af1x_exemple} />
             </Style.ProjectExplanationGrid>
           </Grid>
         </Grid>
       </Style.ProjectExplanation2>
 
       <Style.ProjectPlan>
-        <Style.ProjectPlanTitle>WHAT'S THE PLAN</Style.ProjectPlanTitle>
+        <Style.ProjectPlanTitle>
+          The&nbsp;
+          <Style.HeaderProjectSmallTitleHead>
+            AF1x
+          </Style.HeaderProjectSmallTitleHead>
+          Project
+        </Style.ProjectPlanTitle>
         <Grid
           container
           style={{
@@ -288,13 +278,61 @@ const AF1xCryptoPunks: FC = () => {
             display: "flex",
             justifyContent: "space-around",
             paddingTop: "10vh",
+            paddingBottom: "10vh",
           }}
         >
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={4} lg={3}>
             <Style.ImgReference src={af1x_exemple} />
           </Grid>
         </Grid>
       </Style.ProjectPlan>
+
+      <Style.ProjectExempleImgs>
+        <Grid
+          container
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Grid item xs={8}>
+            <Grid
+              container
+              spacing={2}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Grid item xs={2}>
+                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+              </Grid>
+              <Grid item xs={2}>
+                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+              </Grid>
+              <Grid item xs={2}>
+                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+              </Grid>
+              <Grid item xs={2}>
+                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+              </Grid>
+              <Grid item xs={2}>
+                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              spacing={2}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Grid item xs={6}></Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Style.ProjectExempleImgs>
 
       <Style.Roadmap>
         <Style.ProjectPlanTitle>ROADMAP</Style.ProjectPlanTitle>
@@ -302,7 +340,27 @@ const AF1xCryptoPunks: FC = () => {
         <Timeline>
           <TimelineItem>
             <TimelineOppositeContent color="text.secondary">
-              1% (of the total supply is minted)
+              0% (of the total supply is minted)
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+              <TimelineDot style={{ backgroundColor: "red" }} />
+              <TimelineConnector style={{ backgroundColor: "red" }} />
+            </TimelineSeparator>
+            <TimelineContent>
+              <Style.RoadMapItem>
+                <Style.RoadMapItemTitle>Deployment.</Style.RoadMapItemTitle>
+                <Style.RoadMapItemContent>
+                  Once the project kicked of a bit and 100 AF1xCryptoPunks have
+                  been minted, we will airdrop an AF1x to those 100 first
+                  supporters. To read more about AF1x, check out this page.
+                  {/* @TODO add link */}
+                </Style.RoadMapItemContent>
+              </Style.RoadMapItem>
+            </TimelineContent>
+          </TimelineItem>
+          <TimelineItem>
+            <TimelineOppositeContent color="text.secondary">
+              1%
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineDot />
