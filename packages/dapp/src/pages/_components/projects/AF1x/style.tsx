@@ -198,6 +198,15 @@ const style = {
     border: "3px solid black",
     boxShadow: "5px 5px 5px #bebebe, -5px -5px 0px #ffffff",
   })),
+  TextReference: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "1.2em",
+  })),
+  ReadMore: styled(Grid)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.7em",
+    color: "grey",
+  })),
 
   // View 4
   View_4: styled("div")(({ theme }) => ({})),
