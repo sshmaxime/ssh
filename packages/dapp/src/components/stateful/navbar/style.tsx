@@ -5,8 +5,11 @@ import {
   Toolbar,
   Typography,
   Button,
+  Grid,
   SwipeableDrawer,
 } from "@mui/material";
+
+import { Link } from "react-router-dom";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
@@ -38,37 +41,43 @@ const style = {
       paddingRight: "5vw",
     },
   })),
-  Title: styled(Typography)(({ theme }) => ({
-    position: "absolute",
-    fontFamily: "nobar",
-    letterSpacing: "-15px",
-    fontSize: "5em",
+  Title: styled(Grid)(({ theme }) => ({
     "& > a": {
       textDecoration: "none",
+      textAlign: "center",
       color: "black",
     },
     "& a:focus": {
       outline: "none",
     },
   })),
+  Link: styled(Link)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "1.5em",
+    letterSpacing: "0.3em",
+    borderTop: "4px solid black",
+    borderBottom: "4px solid black",
+    marginBottom: "25px",
+    fontWeight: 900,
+  })),
+  ExtraMenuButton: styled("div")(({ theme }) => ({
+    color: "black",
+    padding: "5px 20px 5px 20px",
+    fontFamily: theme.fontFamily.secondary,
+    fontWeight: 500,
+    borderTop: "2px solid black",
+    borderLeft: "2px solid black",
+  })),
   Connect: styled("div")(({ theme }) => ({
     backgroundColor: "black",
+    borderRadius: "5px",
     color: "white",
-    position: "absolute",
-    right: 0,
     padding: "5px 20px 5px 20px",
     transition: "all 0.5s ease-in-out",
-    "&:hover": {
-      backgroundColor: "black",
-      transform: "scale(1.1)",
-    },
-    "& a": {
-      textDecoration: "none",
-      color: "black",
-    },
-    "& a:focus": {
-      outline: "none",
-    },
+    borderTop: "2px solid white",
+    borderLeft: "2px solid white",
+    flex: 1,
+    alignItems: "center",
   })),
 };
 

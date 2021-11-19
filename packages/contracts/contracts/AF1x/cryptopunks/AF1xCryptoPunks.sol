@@ -31,11 +31,12 @@ contract AF1xCryptoPunks is Ownable, ERC721Enumerable {
     // dev address
     address public immutable _dev;
 
-    // cryptopunks contract
+    // size contract
     IAF1xSizes public immutable _Sizes;
+    // cryptopunks contract
     ICryptoPunksMarket public immutable _CryptoPunks;
 
-    uint64 constant ITEM_PRICE = 0.2 ether;
+    uint64 constant PRICE = 0.2 ether;
     uint16 constant MAX_SUPPLY = 10000;
 
     mapping(uint16 => AF1xCC) public _AF1xCC;
@@ -57,7 +58,7 @@ contract AF1xCryptoPunks is Ownable, ERC721Enumerable {
 
     function mint(uint16 tokenId, bytes32 tokenName) external payable {
         // if minting without paying, revert
-        if (msg.value < ITEM_PRICE) revert InsufficientFunds();
+        if (msg.value < PRICE) revert InsufficientFunds();
 
         // if minting out of range, revert
         if (tokenId >= MAX_SUPPLY || tokenId < 0) revert OutOfBound();
