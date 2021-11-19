@@ -14,6 +14,7 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 type props = {
   view_1: {
@@ -296,6 +297,7 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               <Style.ImgReference src={image_reference} />
             </Grid>
             <Grid item xs={12} lg={4}>
+              <Style.TextTitle>&nbsp;ABOUT&nbsp;</Style.TextTitle>
               <Style.TextReference>
                 The AF1x project is a first step into building the bridge
                 between our life on earth and the metaverse.
@@ -314,9 +316,15 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                 <br />
                 <br />
                 .Terra Invicta.
-                <Grid container flexDirection="row-reverse">
-                  <Style.ReadMore item>Read more.</Style.ReadMore>
-                </Grid>
+                <Style.ReadMore
+                  container
+                  flexDirection="row-reverse"
+                  style={{
+                    alignItems: "center",
+                  }}
+                >
+                  <ArrowRightAltIcon /> Read more
+                </Style.ReadMore>
               </Style.TextReference>
             </Grid>
           </Grid>
@@ -379,7 +387,18 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
           <Style.ProjectPlanTitle>ROADMAP</Style.ProjectPlanTitle>
 
           <Timeline>
-            {roadmapArray.map((roadmapItem) => {
+            <TimelineItem>
+              <TimelineOppositeContent color="text.secondary"></TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineConnector
+                  style={{
+                    backgroundColor: "red",
+                  }}
+                />
+              </TimelineSeparator>
+              <TimelineContent />
+            </TimelineItem>
+            {roadmapArray.map((roadmapItem, index) => {
               return (
                 <TimelineItem>
                   <TimelineOppositeContent color="text.secondary">
@@ -391,16 +410,18 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                         backgroundColor: roadmapItem.done ? "red" : "",
                       }}
                     />
-                    <TimelineConnector
-                      style={{
-                        backgroundColor: roadmapItem.done ? "red" : "",
-                      }}
-                    />
+                    {roadmapArray.length === index + 1 ? null : (
+                      <TimelineConnector
+                        style={{
+                          backgroundColor: roadmapItem.done ? "red" : "",
+                        }}
+                      />
+                    )}
                   </TimelineSeparator>
                   <TimelineContent>
                     <Style.RoadMapItem>
                       <Style.RoadMapItemTitle>
-                        {roadmapItem.title}
+                        . {roadmapItem.title} .
                       </Style.RoadMapItemTitle>
                       <Style.RoadMapItemContent>
                         {roadmapItem.description}

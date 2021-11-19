@@ -5,6 +5,13 @@ import AF1x from "../_components/projects/AF1x";
 // images
 import af1x_exemple from "../../assets/images/Punk_7804.png";
 
+import Punk_3011 from "../../assets/images/Punk_3011.png";
+import Punk_5217 from "../../assets/images/Punk_5217.png";
+import Punk_7804 from "../../assets/images/Punk_7804.png";
+import CPunk_7804 from "../../assets/images/CPunk_7804.png";
+import Punk_8857 from "../../assets/images/Punk_8857.png";
+import Punk_dogg from "../../assets/images/Punk_dogg.png";
+
 const AF1xCryptoPunks: FC = () => {
   return (
     <AF1x
@@ -29,7 +36,7 @@ const AF1xCryptoPunks: FC = () => {
         ],
       }}
       view_2={{
-        image_step_1: af1x_exemple,
+        image_step_1: CPunk_7804,
         image_step_2: af1x_exemple,
         image_step_3: af1x_exemple,
       }}
@@ -37,28 +44,28 @@ const AF1xCryptoPunks: FC = () => {
         image_reference: af1x_exemple,
       }}
       view_4={{
-        image_1: af1x_exemple,
-        image_2: af1x_exemple,
-        image_3: af1x_exemple,
-        image_4: af1x_exemple,
-        image_5: af1x_exemple,
+        image_1: Punk_3011,
+        image_2: Punk_5217,
+        image_3: Punk_7804,
+        image_4: Punk_8857,
+        image_5: Punk_dogg,
       }}
       view_5={[
         {
-          percent: "",
-          title: "",
-          description: <Fragment></Fragment>,
-          done: true,
-        },
-        {
-          percent: "1% (minted)",
+          percent: "0.1% (minted)",
           title: "AF1x Airdrop",
           description: (
             <Fragment>
-              Once the project kicked of a bit and 100 AF1xCryptoPunks have been
-              minted, we will airdrop an AF1xWorld to those first supporters.
+              Once the project kicked of a bit and 10 AF1xCryptoPunks have been
+              minted, we will airdrop 2x AF1xWorld to those 10 first supporters.
             </Fragment>
           ),
+          done: false,
+        },
+        {
+          percent: "1%",
+          title: "???",
+          description: <Fragment>???</Fragment>,
           done: false,
         },
         {

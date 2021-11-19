@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity 0.8.9;
 
+// sizes are Euro Sizes
 contract AF1xSizes {
     mapping(bytes32 => bool) public _sizes;
 
