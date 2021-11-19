@@ -296,7 +296,28 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               <Style.ImgReference src={image_reference} />
             </Grid>
             <Grid item xs={12} lg={4}>
-              The AF1x project is a key project to Huper.
+              <Style.TextReference>
+                The AF1x project is a first step into building the bridge
+                between our life on earth and the metaverse.
+                <br />
+                <br />
+                It aims at showing the world what can be done through the power
+                of blockchain technology.
+                <br />
+                <br />
+                Buying an AF1x, gives you the opportunity to join an exclusive
+                group of like minded people, working together to make this world
+                a better place.
+                <br />
+                <br />
+                We must strive for a better life on earth.
+                <br />
+                <br />
+                .Terra Invicta.
+                <Grid container flexDirection="row-reverse">
+                  <Style.ReadMore item>Read more.</Style.ReadMore>
+                </Grid>
+              </Style.TextReference>
             </Grid>
           </Grid>
         </Style.ProjectPlan>

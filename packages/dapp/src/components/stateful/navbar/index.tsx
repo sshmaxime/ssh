@@ -23,7 +23,7 @@ export const NavbarComponent: FC = () => {
       <Style.AppBar position="static">
         <Toolbar style={{ padding: "0px" }}>
           <Style.Title>
-            <Link to="/">SSH</Link>
+            <Link to="/">META INVICTA</Link>
           </Style.Title>
           <Style.Connect>connect</Style.Connect>
         </Toolbar>

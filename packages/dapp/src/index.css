@@ -221,8 +221,20 @@ html {
 }
 
 @font-face {
+  font-family: bar;
+  src: url(./assets/fonts/bar.ttf);
+}
+
+@font-face {
   font-family: nobar;
   src: url(./assets/fonts/nobar.ttf);
+}
+
+/* Roman */
+@font-face {
+  font-family: roman;
+  src: url(./assets/fonts/roman.ttf);
+  font-weight: 500;
 }
 
 /* SourceCode */
