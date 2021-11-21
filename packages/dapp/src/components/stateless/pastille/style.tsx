@@ -7,9 +7,12 @@ type rootProps = {
 const style = {
   Root: styled("div")<rootProps>(({ theme, color }) => ({
     textAlign: "center",
-    height: "30px",
+    height: "20px",
+    fontSize: "0.8em",
     backgroundColor: color,
     borderRadius: "20px",
+    paddingLeft: "20px",
+    paddingRight: "20px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

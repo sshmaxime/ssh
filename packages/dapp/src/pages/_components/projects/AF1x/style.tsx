@@ -23,7 +23,7 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontStyle: "italic",
     fontWeight: 900,
-    textShadow: "5px 2px grey",
+    textShadow: "5px 5px #d3d3d3",
     [theme.breakpoints.down("md")]: {
       fontSize: "2em",
     },
@@ -34,7 +34,7 @@ const style = {
   ImageContainer: styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
-    justifyContent: "end",
+    justifyContent: "center",
   })),
   GridContainerCard: styled(Grid)(({ theme }) => ({
     ...theme.cards.primary,
@@ -42,7 +42,6 @@ const style = {
   Image: styled("img")(({ theme }) => ({
     width: "75%",
     borderRadius: "5px",
-    border: "3px solid black",
     boxShadow: "5px 5px 5px #bebebe, -5px -5px 1px #ffffff",
   })),
   ProjectTitleContainer: styled(Typography)(({ theme }) => ({
@@ -72,14 +71,14 @@ const style = {
     fontWeight: 600,
     paddingBottom: "5px",
     borderBottom: "5px solid black",
-    marginBottom: "50px",
+    marginBottom: "40px",
   })),
   ProjectDescription: styled(Typography)(({ theme }) => ({
-    fontSize: "1.2em",
+    fontSize: "1.1em",
     color: "black",
     fontWeight: 300,
     fontFamily: theme.fontFamily.primary,
-    paddingBottom: "25px",
+    paddingBottom: "30px",
   })),
   MintButton: styled("div")(({ theme }) => ({
     padding: "5px",
@@ -89,7 +88,20 @@ const style = {
     textAlign: "center",
     paddingRight: "25px",
     paddingLeft: "25px",
+    fontSize: "1em",
     boxShadow: "3px 3px 0px #bebebe, -5px -5px 0px #ffffff",
+  })),
+  MintPrice: styled("div")(({ theme }) => ({
+    padding: "5px",
+    borderRadius: "50px",
+    textAlign: "center",
+    fontFamily: theme.fontFamily.secondary,
+    color: "black",
+    fontSize: "0.9em",
+    backgroundColor: "#F1F1F1",
+    paddingRight: "20px",
+    paddingLeft: "20px",
+    boxShadow: "3px 3px 5px #bebebe, -5px -5px 0px #ffffff",
   })),
   ExternalLink: styled("div")(({ theme }) => ({
     padding: "5px",
@@ -97,6 +109,7 @@ const style = {
     textAlign: "center",
     fontFamily: theme.fontFamily.secondary,
     fontWeight: 500,
+    fontSize: "1em",
     backgroundColor: "beige",
     letterSpacing: "-1px",
     paddingRight: "10px",
@@ -127,7 +140,8 @@ const style = {
     justifyContent: "center",
     alignItems: "center",
     paddingTop: "100px",
-    background: "linear-gradient(0deg, #ffffff 35%, #f9f9fb 35%)",
+    background: "linear-gradient(0deg, #ffffff 55%, #f9f9fb 55%)",
+    paddingBottom: "15vh",
   })),
   ProjectPresentationGrid: styled(Grid)(({ theme }) => ({
     // display: "flex",
@@ -159,7 +173,6 @@ const style = {
     borderRadius: "5px",
     background:
       "linear-gradient(0deg, rgba(249,249,251,1) 0%, rgba(255,255,255,1) 100%)",
-    paddingTop: "10vh",
   })),
   ProjectPlanTitle: styled(Typography)(({ theme }) => ({
     color: "black",
@@ -192,10 +205,9 @@ const style = {
     justifyContent: "center",
     alignItems: "center",
   })),
-  ImgReference: styled("img")(({ theme }) => ({
+  ImgAbout: styled("img")(({ theme }) => ({
     width: "100%",
     borderRadius: "5px",
-    border: "3px solid black",
     boxShadow: "5px 5px 5px #bebebe, -5px -5px 0px #ffffff",
   })),
   TextTitle: styled(Typography)(({ theme }) => ({
@@ -208,9 +220,10 @@ const style = {
     display: "inline-block",
     fontWeight: 900,
   })),
-  TextReference: styled(Typography)(({ theme }) => ({
+  TextAbout: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "1em",
+    fontSize: "1.1em",
+    fontWeight: 300,
   })),
   ReadMore: styled(Grid)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -250,19 +263,22 @@ const style = {
     padding: "5px",
     paddingLeft: "20px",
     paddingRight: "20px",
-    borderRadius: "5px",
+    borderRadius: "15px",
     display: "inline-block",
-    color: "white",
-    backgroundColor: "red",
-    fontFamily: "montserrat",
-    fontWeight: 600,
-    fontSize: "1.5em",
+    textShadow: "3px 3px white",
+    color: "black",
+    backgroundColor: "#dbeaff",
+    fontStyle: "italic",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    letterSpacing: "2px",
+    fontSize: "1.1em",
     marginTop: "-15px",
   })),
   RoadMapItemContent: styled(Typography)(({ theme }) => ({
     color: "black",
     fontFamily: "montserrat",
-    fontWeight: 200,
+    fontWeight: 300,
     fontSize: "1.1em",
     paddingBottom: "5vh",
     marginTop: "-15px",

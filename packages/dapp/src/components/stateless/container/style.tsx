@@ -20,7 +20,6 @@ const style = {
     fontFamily: "montserrat-black",
     letterSpacing: "-2px",
     marginBottom: "100px",
-    // borderBottom: "5px black solid",
   })),
 };
 
