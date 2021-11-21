@@ -192,6 +192,9 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               >
                 <Style.ProjectPresentationGrid xs={3}>
                   <Style.ProjectPresentationImg src={image_step_1} />
+                  <Style.ProjectPresentationTitle>
+                    &nbsp;CryptoPunks&nbsp;
+                  </Style.ProjectPresentationTitle>
                 </Style.ProjectPresentationGrid>
 
                 <Style.ProjectPresentationBigCharContainer xs={1}>
@@ -200,6 +203,9 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
 
                 <Style.ProjectPresentationGrid xs={3}>
                   <Style.ProjectPresentationImg src={image_step_2} />
+                  <Style.ProjectPresentationTitle>
+                    &nbsp;AF1&nbsp;
+                  </Style.ProjectPresentationTitle>
                 </Style.ProjectPresentationGrid>
 
                 <Style.ProjectPresentationBigCharContainer xs={1}>
@@ -208,6 +214,9 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
 
                 <Style.ProjectPresentationGrid xs={3}>
                   <Style.ProjectPresentationImg src={image_step_3} />
+                  <Style.ProjectPresentationTitle>
+                    &nbsp;AF1x CryptoPunks&nbsp;
+                  </Style.ProjectPresentationTitle>
                 </Style.ProjectPresentationGrid>
               </Grid>
             </Grid>
@@ -381,7 +390,6 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
 
           <Timeline>
             <TimelineItem>
-              <TimelineOppositeContent color="text.secondary"></TimelineOppositeContent>
               <TimelineSeparator>
                 <TimelineConnector
                   style={{
@@ -397,7 +405,7 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
             {roadmapArray.map((roadmapItem, index) => {
               return (
                 <TimelineItem>
-                  <TimelineOppositeContent color="text.secondary">
+                  <TimelineOppositeContent style={{ color: "#c6c6c6" }}>
                     {roadmapItem.percent}
                   </TimelineOppositeContent>
                   <TimelineSeparator>
