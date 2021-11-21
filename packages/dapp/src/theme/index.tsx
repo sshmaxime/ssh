@@ -54,7 +54,7 @@ export const theme = createTheme({
   cards: {
     primary: {
       boxShadow: "5px 5px 5px #bebebe, -1px -1px 1px #fff",
-      padding: "25px",
+      padding: "20px",
       backgroundColor: "#fff",
       borderRadius: "25px",
     },

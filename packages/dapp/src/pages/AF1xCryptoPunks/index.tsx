@@ -17,22 +17,23 @@ const AF1xCryptoPunks: FC = () => {
     <AF1x
       view_1={{
         title: "CryptoPunks",
+        headline: "WEAR YOUR PUNKS",
         image: af1x_exemple,
+        info: {
+          mintPrice: "0.1 ETH",
+        },
         description: (
           <Fragment>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining.
+            Having a CryptoPunks is cool .. but rocking it on your shoes is
+            waaay cooler !
           </Fragment>
         ),
 
         pastilles: [
           { title: "0 / 10.000", color: "#caffbf", size: 2 },
-          { title: "AF1x", color: "#a0c4ff", size: 1 },
-          { title: "IRL", color: "#ffdab9", size: 1 },
+          { title: "AF1x", color: "#a0c4ff" },
+          { title: "IRL", color: "#ffdab9" },
+          { title: "KEY", color: "#cfbaf0" },
         ],
       }}
       view_2={{
@@ -41,7 +42,22 @@ const AF1xCryptoPunks: FC = () => {
         image_step_3: af1x_exemple,
       }}
       view_3={{
-        image_reference: af1x_exemple,
+        image_about: af1x_exemple,
+        text_about: (
+          <Fragment>
+            The AF1x project is a first step into building the bridge between
+            our life on earth and the metaverse.
+            <br />
+            <br />
+            It aims at showing the world what can be done through the power of
+            blockchain technology.
+            <br />
+            <br />
+            Buying an AF1x, gives you the opportunity to join an exclusive group
+            of like minded people, working together to make this world a better
+            place.
+          </Fragment>
+        ),
       }}
       view_4={{
         image_1: Punk_3011,
@@ -53,24 +69,18 @@ const AF1xCryptoPunks: FC = () => {
       view_5={[
         {
           percent: "0.1% (minted)",
-          title: "AF1x Airdrop",
+          title: "AIRDROP",
           description: (
             <Fragment>
               Once the project kicked of a bit and 10 AF1xCryptoPunks have been
-              minted, we will airdrop 2x AF1xWorld to those 10 first supporters.
+              minted, we will airdrop 1x AF1xWorld to those 10 first supporters.
             </Fragment>
           ),
           done: false,
         },
         {
-          percent: "1%",
-          title: "???",
-          description: <Fragment>???</Fragment>,
-          done: false,
-        },
-        {
           percent: "25%",
-          title: "Redeem",
+          title: "REDEEM",
           description: (
             <Fragment>
               Until that milestone, AF1xCryptoPunks could be minted but not

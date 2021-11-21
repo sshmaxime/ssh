@@ -14,16 +14,19 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 type props = {
   view_1: {
     // children = description
     title: string;
+    headline: string;
     image: string;
     description: any;
+    info: {
+      mintPrice: string;
+    };
     pastilles: {
-      size: GridSize;
+      size?: GridSize;
       title: string;
       color: string;
     }[];
@@ -34,7 +37,8 @@ type props = {
     image_step_3: string;
   };
   view_3: {
-    image_reference: string;
+    image_about: string;
+    text_about: any;
   };
   view_4: {
     image_1: string;
@@ -52,9 +56,9 @@ type props = {
 };
 
 const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
-  const { title, image, pastilles, description } = view_1;
+  const { title, headline, info, image, pastilles, description } = view_1;
   const { image_step_1, image_step_2, image_step_3 } = view_2;
-  const { image_reference } = view_3;
+  const { image_about, text_about } = view_3;
   const { image_1, image_2, image_3, image_4, image_5 } = view_4;
   const roadmapArray = view_5;
 
@@ -63,9 +67,9 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
       {/* View 1 */}
       <Style.View_1>
         <Style.PageTitleContainer>
-          <Style.PageTitle children={"WEAR YOUR PUNKS"} />
+          <Style.PageTitle children={headline} />
         </Style.PageTitleContainer>
-        <Style.HeaderContainer container spacing={12}>
+        <Style.HeaderContainer container spacing={2} justifyContent={"center"}>
           <Grid item xs={12} md={5} lg={4}>
             <Style.ImageContainer>
               <Style.Image src={image} />
@@ -83,7 +87,11 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                   }}
                 >
                   {pastilles.map((pastille) => (
-                    <Grid key={pastille.title} item xs={pastille.size}>
+                    <Grid
+                      key={pastille.title}
+                      item
+                      xs={pastille.size || "auto"}
+                    >
                       <Pastille title={pastille.title} color={pastille.color} />
                     </Grid>
                   ))}
@@ -109,34 +117,46 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               </Grid>
 
               <Grid item xs={12}>
-                <Style.ProjectSpacer>&nbsp; &nbsp; &nbsp;</Style.ProjectSpacer>
+                <Style.ProjectSpacer>&nbsp;&nbsp;&nbsp;</Style.ProjectSpacer>
               </Grid>
 
-              <Grid item xs={12} md={10}>
+              <Grid item xs={12}>
                 <Style.ProjectDescription>
                   {description}
                 </Style.ProjectDescription>
               </Grid>
               <Grid item xs={12}>
-                <Grid
-                  container
-                  spacing={1}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row-reverse",
-                  }}
-                >
-                  <Grid item>
-                    <Style.MintButton>mint</Style.MintButton>
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <Grid container spacing={1}>
+                      <Grid item>
+                        <Style.MintPrice>{info.mintPrice}</Style.MintPrice>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <>&nbsp;&nbsp;&nbsp;</>
-                  </Grid>
-                  <Grid item>
-                    <Style.ExternalLink>Etherscan</Style.ExternalLink>
-                  </Grid>
-                  <Grid item>
-                    <Style.ExternalLink>OpenSea</Style.ExternalLink>
+
+                  <Grid item xs={6}>
+                    <Grid
+                      container
+                      spacing={1}
+                      style={{
+                        display: "flex",
+                        flexDirection: "row-reverse",
+                      }}
+                    >
+                      <Grid item>
+                        <Style.MintButton>mint</Style.MintButton>
+                      </Grid>
+                      <Grid item>
+                        <>&nbsp;&nbsp;&nbsp;</>
+                      </Grid>
+                      <Grid item>
+                        <Style.ExternalLink>Etherscan</Style.ExternalLink>
+                      </Grid>
+                      <Grid item>
+                        <Style.ExternalLink>OpenSea</Style.ExternalLink>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
@@ -164,7 +184,7 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  boxShadow: "5px 5px 10px grey, -1px -1px 1px white",
+                  boxShadow: "3px 3px 5px grey, -1px -1px 1px white",
                   backgroundColor: "white",
                   borderRadius: "15px",
                   padding: "25px",
@@ -199,17 +219,17 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
       <Style.View_3>
         <Style.ProjectPlan>
           <Style.ProjectPlanTitle>
-            The&nbsp;
             <Style.HeaderProjectSmallTitleHead>
               AF1x
             </Style.HeaderProjectSmallTitleHead>
-            Project
+            {title}
           </Style.ProjectPlanTitle>
           <Grid
             container
             style={{
               display: "flex",
               justifyContent: "space-around",
+              paddingBottom: "5vh",
             }}
           >
             <Style.ProjectPlanGrid item xs={2}>
@@ -294,38 +314,11 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
             }}
           >
             <Grid item xs={12} lg={4}>
-              <Style.ImgReference src={image_reference} />
+              <Style.ImgAbout src={image_about} />
             </Grid>
             <Grid item xs={12} lg={4}>
               <Style.TextTitle>&nbsp;ABOUT&nbsp;</Style.TextTitle>
-              <Style.TextReference>
-                The AF1x project is a first step into building the bridge
-                between our life on earth and the metaverse.
-                <br />
-                <br />
-                It aims at showing the world what can be done through the power
-                of blockchain technology.
-                <br />
-                <br />
-                Buying an AF1x, gives you the opportunity to join an exclusive
-                group of like minded people, working together to make this world
-                a better place.
-                <br />
-                <br />
-                We must strive for a better life on earth.
-                <br />
-                <br />
-                .Terra Invicta.
-                <Style.ReadMore
-                  container
-                  flexDirection="row-reverse"
-                  style={{
-                    alignItems: "center",
-                  }}
-                >
-                  <ArrowRightAltIcon /> Read more
-                </Style.ReadMore>
-              </Style.TextReference>
+              <Style.TextAbout>{text_about}</Style.TextAbout>
             </Grid>
           </Grid>
         </Style.ProjectPlan>
@@ -392,7 +385,10 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               <TimelineSeparator>
                 <TimelineConnector
                   style={{
-                    backgroundColor: "red",
+                    backgroundColor: "#dbeaff",
+                    boxShadow: "3px 3px 1px #bebebe, 0px 0px 0px #ffffff",
+                    borderRadius: "25px",
+                    width: "6px",
                   }}
                 />
               </TimelineSeparator>
@@ -407,13 +403,18 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                   <TimelineSeparator>
                     <TimelineDot
                       style={{
-                        backgroundColor: roadmapItem.done ? "red" : "",
+                        backgroundColor: roadmapItem.done ? "#dbeaff" : "",
                       }}
                     />
                     {roadmapArray.length === index + 1 ? null : (
                       <TimelineConnector
                         style={{
-                          backgroundColor: roadmapItem.done ? "red" : "",
+                          backgroundColor: roadmapItem.done ? "#dbeaff" : "",
+                          boxShadow: roadmapItem.done
+                            ? "2px 2px 1px #bebebe, 0px 0px 0px #ffffff"
+                            : "",
+                          borderRadius: "25px",
+                          width: roadmapItem.done ? "5px" : "3px",
                         }}
                       />
                     )}
@@ -421,7 +422,7 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                   <TimelineContent>
                     <Style.RoadMapItem>
                       <Style.RoadMapItemTitle>
-                        . {roadmapItem.title} .
+                        {roadmapItem.title}
                       </Style.RoadMapItemTitle>
                       <Style.RoadMapItemContent>
                         {roadmapItem.description}
