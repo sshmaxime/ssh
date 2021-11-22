@@ -11,6 +11,7 @@ import Punk_7804 from "../../assets/images/Punk_7804.png";
 import CPunk_7804 from "../../assets/images/CPunk_7804.png";
 import Punk_8857 from "../../assets/images/Punk_8857.png";
 import Punk_dogg from "../../assets/images/Punk_dogg.png";
+import artist from "../../assets/images/aliendope.jpeg";
 
 const AF1xCryptoPunks: FC = () => {
   return (
@@ -30,10 +31,27 @@ const AF1xCryptoPunks: FC = () => {
         ),
 
         pastilles: [
-          { title: "0 / 10.000", color: "#caffbf", size: 2 },
-          { title: "AF1x", color: "#a0c4ff" },
-          { title: "IRL", color: "#ffdab9" },
-          { title: "KEY", color: "#cfbaf0" },
+          {
+            title: "0 / 10.000",
+            description: "Minted supply / Total supply",
+            color: "#caffbf",
+            size: 2,
+          },
+          {
+            title: "AF1x",
+            description: "This NFT is a part of the AF1x ecosystem.",
+            color: "#a0c4ff",
+          },
+          {
+            title: "IRL",
+            description: "This NFT holds a physical object.",
+            color: "#ffdab9",
+          },
+          {
+            title: "KEY",
+            description: "This NFT is a key to the SSH ecosystem.",
+            color: "#cfbaf0",
+          },
         ],
       }}
       view_2={{
@@ -58,6 +76,8 @@ const AF1xCryptoPunks: FC = () => {
             place.
           </Fragment>
         ),
+        image_artist: artist,
+        text_artist: <Fragment>blabla</Fragment>,
       }}
       view_4={{
         image_1: Punk_3011,
@@ -72,14 +92,38 @@ const AF1xCryptoPunks: FC = () => {
           title: "AIRDROP",
           description: (
             <Fragment>
-              Once the project kicked of a bit and 10 AF1xCryptoPunks have been
-              minted, we will airdrop 1x AF1xWorld to those 10 first supporters.
+              Once this project kicked of a bit, we will airdrop 1x AF1xWorld to
+              those first supporters.
             </Fragment>
           ),
           done: false,
         },
         {
-          percent: "25%",
+          percent: "1%",
+          title: "XXX",
+          description: <Fragment></Fragment>,
+          done: false,
+        },
+        {
+          percent: "2%",
+          title: "XXX",
+          description: <Fragment></Fragment>,
+          done: false,
+        },
+        {
+          percent: "3%",
+          title: "XXX",
+          description: <Fragment></Fragment>,
+          done: false,
+        },
+        {
+          percent: "4%",
+          title: "XXX",
+          description: <Fragment></Fragment>,
+          done: false,
+        },
+        {
+          percent: "5%",
           title: "REDEEM",
           description: (
             <Fragment>

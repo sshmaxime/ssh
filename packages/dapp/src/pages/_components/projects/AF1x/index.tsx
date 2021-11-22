@@ -3,7 +3,7 @@ import { FC } from "react";
 // styles
 import Style from "./style";
 
-import { Grid, GridSize } from "@mui/material";
+import { Grid, GridSize, Button } from "@mui/material";
 import Pastille from "../../../../components/stateless/pastille";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 
@@ -14,6 +14,8 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+
+import Tooltip from "@mui/material/Tooltip";
 
 type props = {
   view_1: {
@@ -28,6 +30,7 @@ type props = {
     pastilles: {
       size?: GridSize;
       title: string;
+      description: string;
       color: string;
     }[];
   };
@@ -39,6 +42,8 @@ type props = {
   view_3: {
     image_about: string;
     text_about: any;
+    image_artist: string;
+    text_artist: any;
   };
   view_4: {
     image_1: string;
@@ -58,7 +63,7 @@ type props = {
 const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
   const { title, headline, info, image, pastilles, description } = view_1;
   const { image_step_1, image_step_2, image_step_3 } = view_2;
-  const { image_about, text_about } = view_3;
+  const { image_about, text_about, image_artist, text_artist } = view_3;
   const { image_1, image_2, image_3, image_4, image_5 } = view_4;
   const roadmapArray = view_5;
 
@@ -92,7 +97,18 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                       item
                       xs={pastille.size || "auto"}
                     >
-                      <Pastille title={pastille.title} color={pastille.color} />
+                      <Tooltip
+                        arrow
+                        title={pastille.description}
+                        placement="top"
+                      >
+                        <div>
+                          <Pastille
+                            title={pastille.title}
+                            color={pastille.color}
+                          />
+                        </div>
+                      </Tooltip>
                     </Grid>
                   ))}
                 </Grid>
@@ -326,8 +342,53 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               <Style.ImgAbout src={image_about} />
             </Grid>
             <Grid item xs={12} lg={4}>
-              <Style.TextTitle>&nbsp;ABOUT&nbsp;</Style.TextTitle>
+              <Style.TextTitleContainer>
+                <Style.TextTitle>&nbsp;ABOUT&nbsp;</Style.TextTitle>
+              </Style.TextTitleContainer>
               <Style.TextAbout>{text_about}</Style.TextAbout>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Grid
+                container
+                columnSpacing={12}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingTop: "10vh",
+                  paddingBottom: "10vh",
+                }}
+              >
+                <Grid item xs={12} lg={4}>
+                  <Style.TextTitleContainer>
+                    <Style.TextTitle>&nbsp;ARTIST&nbsp;</Style.TextTitle>
+                  </Style.TextTitleContainer>
+                  <Style.TextAbout>{text_artist}</Style.TextAbout>
+                </Grid>
+                <Grid item xs={12} lg={4}>
+                  <Grid
+                    container
+                    spacing={2}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Grid item xs={12} lg={6}>
+                      <Style.ImgAbout src={image_artist} />
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                      <Style.ImgAbout src={image_artist} />
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                      <Style.ImgAbout src={image_artist} />
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                      <Style.ImgAbout src={image_artist} />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Style.ProjectPlan>
@@ -387,8 +448,7 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
       <Style.View_5>
         <Style.Roadmap>
           <Style.ProjectPlanTitle>ROADMAP</Style.ProjectPlanTitle>
-
-          <Timeline>
+          <Timeline position="alternate">
             <TimelineItem>
               <TimelineSeparator>
                 <TimelineConnector
