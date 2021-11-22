@@ -231,6 +231,30 @@ const style = {
     marginBottom: "25px",
     fontWeight: 900,
   })),
+  InfoNft: styled("div")(({ theme }) => ({
+    paddingTop: "5vh",
+    paddingBottom: "5vh",
+    paddingLeft: "20vw",
+    paddingRight: "20vw",
+    backgroundColor: "white",
+  })),
+  InfoNftContainer: styled(Grid)(({ theme }) => ({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  })),
+  InfoNftContent: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 500,
+    fontSize: "3em",
+  })),
+  InfoNftTitle: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.secondary,
+    fontWeight: 900,
+    fontSize: "0.9em",
+    color: "#f29479",
+  })),
   TextAbout: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "1.1em",

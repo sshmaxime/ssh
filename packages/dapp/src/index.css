@@ -250,6 +250,18 @@ html {
   font-weight: 500;
 }
 
+@font-face {
+  font-family: sourcecode;
+  src: url(./assets/fonts/SourceCodePro-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: sourcecode;
+  src: url(./assets/fonts/SourceCodePro-Black.ttf);
+  font-weight: 900;
+}
+
 /* Montserrat */
 @font-face {
   font-family: montserrat;
