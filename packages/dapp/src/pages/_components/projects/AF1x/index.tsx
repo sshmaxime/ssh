@@ -44,6 +44,12 @@ type props = {
     text_about: any;
     image_artist: string;
     text_artist: any;
+    info_nft: {
+      launchDate: string;
+      currentlyMinted: number;
+      totalSupply: number;
+      owners: number;
+    };
   };
   view_4: {
     image_1: string;
@@ -63,7 +69,8 @@ type props = {
 const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
   const { title, headline, info, image, pastilles, description } = view_1;
   const { image_step_1, image_step_2, image_step_3 } = view_2;
-  const { image_about, text_about, image_artist, text_artist } = view_3;
+  const { image_about, text_about, image_artist, text_artist, info_nft } =
+    view_3;
   const { image_1, image_2, image_3, image_4, image_5 } = view_4;
   const roadmapArray = view_5;
 
@@ -328,6 +335,7 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               </Style.ProjectPlanGridContainer>
             </Style.ProjectPlanGrid>
           </Grid>
+
           <Grid
             container
             columnSpacing={12}
@@ -347,45 +355,66 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
               </Style.TextTitleContainer>
               <Style.TextAbout>{text_about}</Style.TextAbout>
             </Grid>
+          </Grid>
 
-            <Grid item xs={12}>
-              <Grid
-                container
-                columnSpacing={12}
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  paddingTop: "10vh",
-                  paddingBottom: "10vh",
-                }}
-              >
-                <Grid item xs={12} lg={4}>
-                  <Style.TextTitleContainer>
-                    <Style.TextTitle>&nbsp;ARTIST&nbsp;</Style.TextTitle>
-                  </Style.TextTitleContainer>
-                  <Style.TextAbout>{text_artist}</Style.TextAbout>
-                </Grid>
-                <Grid item xs={12} lg={4}>
-                  <Grid
-                    container
-                    spacing={2}
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Grid item xs={12} lg={6}>
-                      <Style.ImgAbout src={image_artist} />
-                    </Grid>
-                    <Grid item xs={12} lg={6}>
-                      <Style.ImgAbout src={image_artist} />
-                    </Grid>
-                    <Grid item xs={12} lg={6}>
-                      <Style.ImgAbout src={image_artist} />
-                    </Grid>
-                    <Grid item xs={12} lg={6}>
-                      <Style.ImgAbout src={image_artist} />
-                    </Grid>
+          <Style.InfoNft>
+            <Grid container columnSpacing={12}>
+              <Style.InfoNftContainer item xs={4}>
+                <Style.InfoNftContent>
+                  {info_nft.currentlyMinted}
+                </Style.InfoNftContent>
+                <Style.InfoNftTitle>CURRENT SUPPLY</Style.InfoNftTitle>
+              </Style.InfoNftContainer>
+              <Style.InfoNftContainer item xs={4}>
+                <Style.InfoNftContent>{info_nft.owners}</Style.InfoNftContent>
+                <Style.InfoNftTitle>OWNERS</Style.InfoNftTitle>
+              </Style.InfoNftContainer>
+              <Style.InfoNftContainer item xs={4}>
+                <Style.InfoNftContent>
+                  {info_nft.totalSupply}
+                </Style.InfoNftContent>
+                <Style.InfoNftTitle>TOTAL SUPPLY</Style.InfoNftTitle>
+              </Style.InfoNftContainer>
+            </Grid>
+          </Style.InfoNft>
+
+          <Grid item xs={12}>
+            <Grid
+              container
+              columnSpacing={12}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                paddingTop: "10vh",
+                paddingBottom: "10vh",
+              }}
+            >
+              <Grid item xs={12} lg={4}>
+                <Style.TextTitleContainer>
+                  <Style.TextTitle>&nbsp;ARTIST&nbsp;</Style.TextTitle>
+                </Style.TextTitleContainer>
+                <Style.TextAbout>{text_artist}</Style.TextAbout>
+              </Grid>
+              <Grid item xs={12} lg={4}>
+                <Grid
+                  container
+                  spacing={2}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Grid item xs={12} lg={6}>
+                    <Style.ImgAbout src={image_artist} />
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Style.ImgAbout src={image_artist} />
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Style.ImgAbout src={image_artist} />
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                    <Style.ImgAbout src={image_artist} />
                   </Grid>
                 </Grid>
               </Grid>

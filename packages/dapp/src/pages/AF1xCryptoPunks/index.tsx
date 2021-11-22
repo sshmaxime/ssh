@@ -78,6 +78,12 @@ const AF1xCryptoPunks: FC = () => {
         ),
         image_artist: artist,
         text_artist: <Fragment>blabla</Fragment>,
+        info_nft: {
+          launchDate: "11/22/2021",
+          currentlyMinted: 0,
+          totalSupply: 10000,
+          owners: 135,
+        },
       }}
       view_4={{
         image_1: Punk_3011,
