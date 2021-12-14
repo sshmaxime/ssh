@@ -7,6 +7,7 @@ const style = {
 
   // View 1
   View_1: styled("div")(({ theme }) => ({
+    minHeight: "100vh",
     background:
       "linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(249,249,251,1) 100%)",
   })),
@@ -14,10 +15,8 @@ const style = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "10vh",
   })),
   PageTitle: styled(Typography)(({ theme }) => ({
-    paddingTop: "5vh",
     textAlign: "center",
     fontSize: "4.5em",
     fontFamily: theme.fontFamily.primary,
@@ -44,7 +43,7 @@ const style = {
     borderRadius: "5px",
     boxShadow: "5px 5px 5px #bebebe, -5px -5px 1px #ffffff",
   })),
-  ProjectTitleContainer: styled(Typography)(({ theme }) => ({
+  ProjectTitleContainer: styled("div")(({ theme }) => ({
     fontSize: "2em",
     fontFamily: theme.fontFamily.primary,
     fontStyle: "italic",
@@ -119,12 +118,9 @@ const style = {
 
   // View 2
   View_2: styled("div")(({ theme }) => ({
-    background:
-      "linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(249,249,251,1) 100%)",
-  })),
-  TriangleContainer: styled("div")(({ theme }) => ({
     backgroundColor: "#f9f9fb",
   })),
+  TriangleContainer: styled("div")(({ theme }) => ({})),
   Triangle: styled("div")(({ theme }) => ({
     height: 0,
     width: 0,
@@ -139,9 +135,8 @@ const style = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: "100px",
-    background: "linear-gradient(0deg, #ffffff 55%, #f9f9fb 55%)",
-    paddingBottom: "15vh",
+    paddingTop: "5vh",
+    paddingBottom: "5vh",
   })),
   ProjectPresentationGrid: styled(Grid)(({ theme }) => ({})),
   ProjectPresentationTitle: styled(Typography)(({ theme }) => ({
@@ -171,12 +166,11 @@ const style = {
   })),
 
   // View 3
-  View_3: styled("div")(({ theme }) => ({
-    background:
-      "linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(249,249,251,1) 100%)",
-  })),
+  View_3: styled("div")(({ theme }) => ({})),
   ProjectPlan: styled("div")(({ theme }) => ({
     borderRadius: "5px",
+  })),
+  ProjectPlan_Wrapper1: styled("div")(({ theme }) => ({
     background:
       "linear-gradient(0deg, rgba(249,249,251,1) 0%, rgba(255,255,255,1) 100%)",
   })),
@@ -216,7 +210,7 @@ const style = {
     borderRadius: "5px",
     boxShadow: "5px 5px 5px #bebebe, -5px -5px 0px #ffffff",
   })),
-  TextTitleContainer: styled(Typography)(({ theme }) => ({
+  TextTitleContainer: styled("div")(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -246,7 +240,7 @@ const style = {
   })),
   InfoNftContent: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontWeight: 500,
+    fontWeight: 700,
     fontSize: "3em",
   })),
   InfoNftTitle: styled(Typography)(({ theme }) => ({

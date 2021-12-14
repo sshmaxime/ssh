@@ -1,4 +1,2 @@
 // basics
-const NAME = "SSH";
-
-export { NAME };
+export const NAME = "SSH";

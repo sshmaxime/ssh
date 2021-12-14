@@ -1,25 +1,22 @@
 import { IAppState } from "../reducers/index";
 import { sdk } from "../../sdk";
 
-//////////
-// CONNECT //
-//////////
-export const CONNECT = "CONNECT";
+/////////////
+// SIGN_IN //
+/////////////
+export const SIGN_IN = "SIGN_IN";
 export interface ActionInit {
-  type: typeof CONNECT;
+  type: typeof SIGN_IN;
   payload: {
-    connected: boolean;
+    signedIn: boolean;
     address: string;
   };
 }
 
-export const A_connect = () => {
-  const toDispatch = (payload: {
-    connected: boolean;
-    address: string;
-  }): ActionInit => {
+export const signIn = () => {
+  const toDispatch = (payload: ActionInit["payload"]): ActionInit => {
     return {
-      type: CONNECT,
+      type: SIGN_IN,
       payload: payload,
     };
   };
@@ -27,13 +24,11 @@ export const A_connect = () => {
   return async (dispatch: any, getState: () => IAppState) => {
     try {
       await sdk.connect();
-
       const { address } = sdk.getInfo();
+      console.log(address);
 
-      return dispatch(toDispatch({ connected: true, address: address }));
-    } catch (e) {
-      return dispatch(toDispatch({ connected: false, address: "" }));
-    }
+      return dispatch(toDispatch({ signedIn: true, address: address }));
+    } catch (e) {}
   };
 };
 

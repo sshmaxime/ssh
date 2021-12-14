@@ -6,32 +6,39 @@ import {
   Typography,
   Button,
   Card,
+  Grid,
   SwipeableDrawer,
   Container,
 } from "@mui/material";
 
+const triangleHeight = "10vh";
+
 const style = {
-  Root: styled("div")(({ theme }) => ({
-    height: "100%",
-    [theme.breakpoints.up("lg")]: {
-      paddingLeft: "15vw",
-      paddingRight: "15vw",
-    },
-    [theme.breakpoints.down("lg")]: {
-      paddingLeft: "13vw",
-      paddingRight: "13vw",
-    },
-    [theme.breakpoints.down("md")]: {
-      paddingLeft: "10vw",
-      paddingRight: "10vw",
-    },
-    [theme.breakpoints.down("sm")]: {
-      paddingLeft: "5vw",
-      paddingRight: "5vw",
-    },
+  Root: styled("div")(({ theme }) => ({})),
+
+  View1: styled("div")(({ theme }) => ({
+    position: "relative",
+    height: "100vh",
   })),
-  Container: styled(Container)(({ theme }) => ({
-    padding: "20px",
+  Title: styled(Typography)(({ theme }) => ({
+    position: "absolute",
+    fontFamily: theme.fontFamily.secondary,
+    fontSize: "2em",
+    top: `calc(50% - ${triangleHeight})`,
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  })),
+  Triangle: styled("div")(({ theme }) => ({
+    position: "absolute",
+    bottom: 0,
+    height: 0,
+    width: 0,
+    borderTop: "125px solid transparent",
+    borderRight: `50vw solid  ${theme.backgroundColor.secondary}`,
+    borderLeft: `50vw solid ${theme.backgroundColor.secondary}`,
+    display: "table",
+    margin: "0 auto",
+    paddingBottom: `${triangleHeight}`,
   })),
 };
 

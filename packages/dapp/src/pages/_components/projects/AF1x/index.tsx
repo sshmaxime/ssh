@@ -47,7 +47,7 @@ type props = {
     info_nft: {
       launchDate: string;
       currentlyMinted: number;
-      totalSupply: number;
+      totalSupply: string;
       owners: number;
     };
   };
@@ -207,35 +207,31 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  boxShadow: "3px 3px 5px grey, -1px -1px 1px white",
-                  backgroundColor: "white",
-                  borderRadius: "15px",
-                  padding: "25px",
                 }}
               >
-                <Style.ProjectPresentationGrid xs={3}>
+                <Style.ProjectPresentationGrid item xs={3}>
                   <Style.ProjectPresentationImg src={image_step_1} />
                   <Style.ProjectPresentationTitle>
                     &nbsp;CryptoPunks&nbsp;
                   </Style.ProjectPresentationTitle>
                 </Style.ProjectPresentationGrid>
 
-                <Style.ProjectPresentationBigCharContainer xs={1}>
+                <Style.ProjectPresentationBigCharContainer item xs={1}>
                   <Style.ProjectPresentationBigChar children={"+"} />
                 </Style.ProjectPresentationBigCharContainer>
 
-                <Style.ProjectPresentationGrid xs={3}>
+                <Style.ProjectPresentationGrid item xs={3}>
                   <Style.ProjectPresentationImg src={image_step_2} />
                   <Style.ProjectPresentationTitle>
                     &nbsp;AF1&nbsp;
                   </Style.ProjectPresentationTitle>
                 </Style.ProjectPresentationGrid>
 
-                <Style.ProjectPresentationBigCharContainer xs={1}>
+                <Style.ProjectPresentationBigCharContainer item xs={1}>
                   <Style.ProjectPresentationBigChar children={"="} />
                 </Style.ProjectPresentationBigCharContainer>
 
-                <Style.ProjectPresentationGrid xs={3}>
+                <Style.ProjectPresentationGrid item xs={3}>
                   <Style.ProjectPresentationImg src={image_step_3} />
                   <Style.ProjectPresentationTitle>
                     &nbsp;AF1x CryptoPunks&nbsp;
@@ -250,112 +246,114 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
       {/* View 3 */}
       <Style.View_3>
         <Style.ProjectPlan>
-          <Style.ProjectPlanTitle>
-            <Style.HeaderProjectSmallTitleHead>
-              AF1x
-            </Style.HeaderProjectSmallTitleHead>
-            {title}
-          </Style.ProjectPlanTitle>
-          <Grid
-            container
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              paddingBottom: "5vh",
-            }}
-          >
-            <Style.ProjectPlanGrid item xs={2}>
-              <Style.ProjectPlanGridContainer
-                style={{
-                  backgroundColor: "#b6ccfe",
-                }}
-              >
-                <AcUnitIcon
+          <Style.ProjectPlan_Wrapper1>
+            <Style.ProjectPlanTitle>
+              <Style.HeaderProjectSmallTitleHead>
+                AF1x
+              </Style.HeaderProjectSmallTitleHead>
+              {title}
+            </Style.ProjectPlanTitle>
+            <Grid
+              container
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                paddingBottom: "5vh",
+              }}
+            >
+              <Style.ProjectPlanGrid item xs={2}>
+                <Style.ProjectPlanGridContainer
                   style={{
-                    fontSize: "60px",
-                    color: "white",
+                    backgroundColor: "#b6ccfe",
                   }}
-                />
-              </Style.ProjectPlanGridContainer>
-            </Style.ProjectPlanGrid>
-            <Style.ProjectPlanGrid item xs={2}>
-              <Style.ProjectPlanGridContainer
-                style={{
-                  backgroundColor: "#ffd6ba",
-                }}
-              >
-                <AcUnitIcon
+                >
+                  <AcUnitIcon
+                    style={{
+                      fontSize: "60px",
+                      color: "white",
+                    }}
+                  />
+                </Style.ProjectPlanGridContainer>
+              </Style.ProjectPlanGrid>
+              <Style.ProjectPlanGrid item xs={2}>
+                <Style.ProjectPlanGridContainer
                   style={{
-                    fontSize: "60px",
-                    color: "white",
+                    backgroundColor: "#ffd6ba",
                   }}
-                />
-              </Style.ProjectPlanGridContainer>
-            </Style.ProjectPlanGrid>
-            <Style.ProjectPlanGrid item xs={2}>
-              <Style.ProjectPlanGridContainer
-                style={{
-                  backgroundColor: "#f29479",
-                }}
-              >
-                <AcUnitIcon
+                >
+                  <AcUnitIcon
+                    style={{
+                      fontSize: "60px",
+                      color: "white",
+                    }}
+                  />
+                </Style.ProjectPlanGridContainer>
+              </Style.ProjectPlanGrid>
+              <Style.ProjectPlanGrid item xs={2}>
+                <Style.ProjectPlanGridContainer
                   style={{
-                    fontSize: "60px",
-                    color: "white",
+                    backgroundColor: "#f29479",
                   }}
-                />
-              </Style.ProjectPlanGridContainer>
-            </Style.ProjectPlanGrid>
-            <Style.ProjectPlanGrid item xs={2}>
-              <Style.ProjectPlanGridContainer
-                style={{
-                  backgroundColor: "#98f5e1",
-                }}
-              >
-                <AcUnitIcon
+                >
+                  <AcUnitIcon
+                    style={{
+                      fontSize: "60px",
+                      color: "white",
+                    }}
+                  />
+                </Style.ProjectPlanGridContainer>
+              </Style.ProjectPlanGrid>
+              <Style.ProjectPlanGrid item xs={2}>
+                <Style.ProjectPlanGridContainer
                   style={{
-                    fontSize: "60px",
-                    color: "white",
+                    backgroundColor: "#98f5e1",
                   }}
-                />
-              </Style.ProjectPlanGridContainer>
-            </Style.ProjectPlanGrid>
-            <Style.ProjectPlanGrid item xs={2}>
-              <Style.ProjectPlanGridContainer
-                style={{
-                  backgroundColor: "#cfbaf0",
-                }}
-              >
-                <AcUnitIcon
+                >
+                  <AcUnitIcon
+                    style={{
+                      fontSize: "60px",
+                      color: "white",
+                    }}
+                  />
+                </Style.ProjectPlanGridContainer>
+              </Style.ProjectPlanGrid>
+              <Style.ProjectPlanGrid item xs={2}>
+                <Style.ProjectPlanGridContainer
                   style={{
-                    fontSize: "60px",
-                    color: "white",
+                    backgroundColor: "#cfbaf0",
                   }}
-                />
-              </Style.ProjectPlanGridContainer>
-            </Style.ProjectPlanGrid>
-          </Grid>
+                >
+                  <AcUnitIcon
+                    style={{
+                      fontSize: "60px",
+                      color: "white",
+                    }}
+                  />
+                </Style.ProjectPlanGridContainer>
+              </Style.ProjectPlanGrid>
+            </Grid>
 
-          <Grid
-            container
-            columnSpacing={12}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              paddingTop: "10vh",
-              paddingBottom: "10vh",
-            }}
-          >
-            <Grid item xs={12} lg={4}>
-              <Style.ImgAbout src={image_about} />
+            <Grid
+              container
+              columnSpacing={12}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                paddingTop: "10vh",
+                paddingBottom: "10vh",
+              }}
+            >
+              <Grid item xs={12} lg={4}>
+                <Style.ImgAbout src={image_about} />
+              </Grid>
+              <Grid item xs={12} lg={4}>
+                <Style.TextTitleContainer>
+                  <Style.TextTitle>&nbsp;ABOUT&nbsp;</Style.TextTitle>
+                </Style.TextTitleContainer>
+                <Style.TextAbout>{text_about}</Style.TextAbout>
+              </Grid>
             </Grid>
-            <Grid item xs={12} lg={4}>
-              <Style.TextTitleContainer>
-                <Style.TextTitle>&nbsp;ABOUT&nbsp;</Style.TextTitle>
-              </Style.TextTitleContainer>
-              <Style.TextAbout>{text_about}</Style.TextAbout>
-            </Grid>
-          </Grid>
+          </Style.ProjectPlan_Wrapper1>
 
           <Style.InfoNft>
             <Grid container columnSpacing={12}>
@@ -493,7 +491,7 @@ const AF1x: FC<props> = ({ view_1, view_2, view_3, view_4, view_5 }) => {
             </TimelineItem>
             {roadmapArray.map((roadmapItem, index) => {
               return (
-                <TimelineItem>
+                <TimelineItem key={index}>
                   <TimelineOppositeContent style={{ color: "#c6c6c6" }}>
                     {roadmapItem.percent}
                   </TimelineOppositeContent>
