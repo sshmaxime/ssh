@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import NavbarComponent from "./components/stateful/navbar";
-import FooterComponent from "./components/stateful/footer";
+import NavbarComponent from "./components/basics/navbar";
+import FooterComponent from "./components/basics/footer";
 
 // router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -18,14 +18,14 @@ const App: FC = () => {
   return (
     <>
       <BrowserRouter>
-        <NavbarComponent />
         <Style.Root>
+          <NavbarComponent />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/AF1xCryptoPunks" element={<AF1xCryptoPunks />} />
           </Routes>
+          <FooterComponent />
         </Style.Root>
-        <FooterComponent />
       </BrowserRouter>
     </>
   );

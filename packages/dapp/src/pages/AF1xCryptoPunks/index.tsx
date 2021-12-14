@@ -81,7 +81,7 @@ const AF1xCryptoPunks: FC = () => {
         info_nft: {
           launchDate: "11/22/2021",
           currentlyMinted: 0,
-          totalSupply: 10000,
+          totalSupply: "10,000",
           owners: 135,
         },
       }}

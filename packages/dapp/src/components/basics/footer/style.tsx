@@ -10,7 +10,10 @@ import {
 
 const style = {
   Root: styled("div")(({ theme }) => ({
-    flexGrow: 1,
+    ...theme.basicBreakpoints(theme),
+
+    padding: "50px",
+    backgroundColor: theme.backgroundColor.secondary,
   })),
 };
 

@@ -1,48 +1,31 @@
-import { ethers } from "ethers";
+import { ethers, Signer } from "ethers";
 
 class SDK {
-  //
-  private _connected: boolean;
-  private _provider!: ethers.providers.Web3Provider;
+  private _signer: Signer | undefined;
   private _address: string;
 
   constructor() {
-    this._connected = false;
     this._address = "";
   }
 
   // getters
   getInfo = () => {
     return {
-      connected: this._connected,
       address: this._address,
     };
   };
 
-  // setters
-  _setConnected = (isConnected: boolean) => {
-    this._connected = isConnected;
-  };
-
-  _setProvider = (newProvider: ethers.providers.Web3Provider) => {
-    this._provider = newProvider;
-  };
-
-  _setAddress = (newAddress: string) => {
-    this._address = newAddress;
+  _setSigner = async (newSigner: Signer) => {
+    this._signer = newSigner;
+    this._address = await newSigner.getAddress();
   };
 
   //
   connect = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    if (provider.provider.request) {
-      provider.provider.request({ method: "eth_requestAccounts" });
-    }
-
-    this._setAddress(await provider.getSigner().getAddress());
-    this._setProvider(provider);
-    this._setConnected(true);
+    await provider.send("eth_requestAccounts", []);
+    await this._setSigner(provider.getSigner());
   };
 }
 
