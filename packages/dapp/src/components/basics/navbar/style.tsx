@@ -33,14 +33,14 @@ const style = {
     },
   })),
   Link: styled(Link)(({ theme }) => ({
-    color: "black",
+    color: "white",
     fontFamily: theme.fontFamily.primary,
     fontSize: "1.5em",
     marginBottom: "25px",
     fontWeight: 900,
   })),
   ExtraMenuButton: styled("div")(({ theme }) => ({
-    color: "black",
+    color: "white",
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
