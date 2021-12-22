@@ -2,7 +2,16 @@ import { createTheme } from "@mui/material";
 
 declare module "@mui/material/styles" {
   interface Theme {
-    basicBreakpoints: Function;
+    myBreakpoints: (param: Theme) => {
+      level0: any;
+      level1: any;
+      level2: any;
+    };
+    titles: (param: Theme) => {
+      primary: any;
+      secondary: any;
+    };
+
     backgroundColor: {
       primary: string;
       secondary: string;
@@ -27,7 +36,8 @@ declare module "@mui/material/styles" {
 
   // allow configuration using `createTheme`
   interface ThemeOptions {
-    basicBreakpoints: Function;
+    myBreakpoints: Function;
+    titles: Function;
 
     backgroundColor: {
       primary: string;
@@ -61,7 +71,7 @@ export const theme = createTheme({
 
   fontFamily: {
     primary: "montserrat",
-    secondary: "helvetica",
+    secondary: "sourcecode",
   },
 
   cards: {
@@ -77,23 +87,79 @@ export const theme = createTheme({
     cursor: "pointer",
   },
 
-  basicBreakpoints: (themeObj: any) => {
+  titles: (themeObj: any) => {
     return {
-      [themeObj.breakpoints.up("lg")]: {
-        paddingLeft: "15vw",
-        paddingRight: "15vw",
+      primary: {
+        color: "black",
+        fontFamily: themeObj.fontFamily.primary,
+        fontSize: "1.75em",
+        fontWeight: 900,
       },
-      [themeObj.breakpoints.down("lg")]: {
-        paddingLeft: "12vw",
-        paddingRight: "12vw",
+      secondary: {
+        color: "black",
+        fontFamily: themeObj.fontFamily.primary,
+        fontSize: "1em",
+        letterSpacing: "-0.025em",
+        fontWeight: 900,
       },
-      [themeObj.breakpoints.down("md")]: {
-        paddingLeft: "8vw",
-        paddingRight: "8vw",
+    };
+  },
+
+  myBreakpoints: (themeObj: any) => {
+    return {
+      level0: {
+        [themeObj.breakpoints.up("lg")]: {
+          paddingLeft: "25vw",
+          paddingRight: "25vw",
+        },
+        [themeObj.breakpoints.down("lg")]: {
+          paddingLeft: "15vw",
+          paddingRight: "15vw",
+        },
+        [themeObj.breakpoints.down("md")]: {
+          paddingLeft: "12vw",
+          paddingRight: "12vw",
+        },
+        [themeObj.breakpoints.down("sm")]: {
+          paddingLeft: "8vw",
+          paddingRight: "8vw",
+        },
       },
-      [themeObj.breakpoints.down("sm")]: {
-        paddingLeft: "3vw",
-        paddingRight: "3vw",
+      level1: {
+        [themeObj.breakpoints.up("lg")]: {
+          paddingLeft: "15vw",
+          paddingRight: "15vw",
+        },
+        [themeObj.breakpoints.down("lg")]: {
+          paddingLeft: "12vw",
+          paddingRight: "12vw",
+        },
+        [themeObj.breakpoints.down("md")]: {
+          paddingLeft: "8vw",
+          paddingRight: "8vw",
+        },
+        [themeObj.breakpoints.down("sm")]: {
+          paddingLeft: "3vw",
+          paddingRight: "3vw",
+        },
+      },
+      level2: {
+        [themeObj.breakpoints.up("lg")]: {
+          paddingLeft: "8vw",
+          paddingRight: "8vw",
+        },
+        [themeObj.breakpoints.down("lg")]: {
+          paddingLeft: "7vw",
+          paddingRight: "7vw",
+        },
+        [themeObj.breakpoints.down("md")]: {
+          paddingLeft: "5vw",
+          paddingRight: "5vw",
+        },
+        [themeObj.breakpoints.down("sm")]: {
+          paddingLeft: "2vw",
+          paddingRight: "2vw",
+        },
       },
     };
   },

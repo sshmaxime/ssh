@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const style = {
   Root: styled("div")(({ theme }) => ({})),
   AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.basicBreakpoints(theme),
+    ...theme.myBreakpoints(theme).level1,
 
     padding: 0,
     paddingTop: "25px",
@@ -33,14 +33,10 @@ const style = {
     },
   })),
   Link: styled(Link)(({ theme }) => ({
-    color: "white",
-    fontFamily: theme.fontFamily.primary,
-    fontSize: "1.5em",
-    marginBottom: "25px",
-    fontWeight: 900,
+    ...theme.titles(theme).primary,
   })),
   ExtraMenuButton: styled("div")(({ theme }) => ({
-    color: "white",
+    color: "black",
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
@@ -51,9 +47,8 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     backgroundColor: "white",
-    borderRadius: "10px",
-    border: "2px solid #cbcbdc",
-    boxShadow: "5px 5px 0px #cbcbdc",
+    border: `2px solid ${theme.backgroundColor.tertiary}`,
+    boxShadow: `5px 5px 0px ${theme.backgroundColor.tertiary}`,
   })),
 };
 

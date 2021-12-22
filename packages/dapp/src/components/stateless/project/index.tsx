@@ -8,100 +8,128 @@ import Style from "./style";
 // components
 import Card from "../card";
 import Button from "../button";
-import { Grid } from "@mui/material";
+import { Grid, GridSize } from "@mui/material";
+import Pastille from "../../../components/stateless/pastille";
 
 import placeholder from "../../../assets/images/placeholder.jpeg";
+import Tooltip from "@mui/material/Tooltip";
 
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 type props = {
-  inputTitle?: string;
-  inputImgs?: [string, string, string, string];
-  inputLinks?: { linkName: string; linkUrl: string }[];
-  disabled?: boolean;
+  title: string;
+  image?: string;
+  description: any;
+  info: {
+    mintPrice: string;
+  };
+  pastilles: {
+    size?: GridSize;
+    title: string;
+    description: string;
+    color: string;
+  }[];
 };
 
-const Project: FC<props> = ({
-  inputTitle,
-  inputImgs,
-  inputLinks,
-  disabled,
-}) => {
-  const imgs: [string, string, string, string] = disabled
-    ? [placeholder, placeholder, placeholder, placeholder]
-    : [
-        inputImgs ? inputImgs[0] : placeholder,
-        inputImgs ? inputImgs[1] : placeholder,
-        inputImgs ? inputImgs[2] : placeholder,
-        inputImgs ? inputImgs[3] : placeholder,
-      ];
-
-  const title = !disabled ? inputTitle : "Coming soon ...";
-
-  const Title = !disabled ? (
-    <>
-      <Style.Title>{title}</Style.Title>
-    </>
-  ) : (
-    <>
-      <Style.TitleDisabled>{title}</Style.TitleDisabled>
-    </>
-  );
-
+const Project: FC<props> = ({ title, image, description, info, pastilles }) => {
   return (
     <Style.Root>
-      <Card>
-        <Grid container spacing={6}>
-          {/* Title, Description, Links */}
-          <Grid item sm={4} md={12} lg={6}>
-            <Grid container direction="column" rowSpacing={4}>
-              <Grid item xs={12}>
-                {Title}
+      <Style.HeaderContainer container spacing={2} justifyContent={"center"}>
+        {image ? (
+          <Grid item xs={12} md={4} lg={3}>
+            <Style.ImageContainer>
+              <Style.Image src={image} />
+            </Style.ImageContainer>
+          </Grid>
+        ) : null}
+
+        <Grid item xs={12} md={image ? 6 : 12}>
+          <Style.GridContainerCard container spacing={0}>
+            <Grid item xs={12}>
+              <Grid
+                container
+                spacing={1}
+                style={{
+                  display: "flex",
+                  flexDirection: "row-reverse",
+                }}
+              >
+                {pastilles.map((pastille) => (
+                  <Grid key={pastille.title} item xs={pastille.size || "auto"}>
+                    <Tooltip arrow title={pastille.description} placement="top">
+                      <div>
+                        <Pastille
+                          title={pastille.title}
+                          color={pastille.color}
+                        />
+                      </div>
+                    </Tooltip>
+                  </Grid>
+                ))}
               </Grid>
 
-              <Grid item xs={12}>
-                <Grid container spacing={2}>
-                  {inputLinks?.map((obj) => {
-                    return (
-                      <Grid key={obj.linkName} item xs={6} md={6} lg={4}>
-                        <Button title={obj.linkName} />
-                      </Grid>
-                    );
-                  })}
+              <Grid
+                container
+                spacing={0}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Grid item xs={10}>
+                  <Style.ProjectTitleContainer>
+                    <Style.ProjectTitleKeyword>SSHx</Style.ProjectTitleKeyword>
+                    {title}
+                  </Style.ProjectTitleContainer>
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
 
-          {/* 4 images of the project */}
-          <Grid item sm={8} md={12} lg={6}>
-            <Grid container spacing={1}>
-              <Grid item lg={3} md={6} xs={6}>
-                <Style.Image src={imgs[0]} alt="" />
-              </Grid>
-              <Grid item lg={3} md={6} xs={6}>
-                <Style.Image src={imgs[1]} alt="" />
-              </Grid>
-              <Grid item lg={3} md={6} xs={6}>
-                <Style.Image src={imgs[2]} alt="" />
-              </Grid>
-              <Grid item lg={3} md={6} xs={6}>
-                <Style.ImageContainer>
-                  <Style.Image src={imgs[3]} alt="" />
-                  {!disabled && (
-                    <>
-                      <Style.Overlay />
-                      <Style.OverlayText>
-                        <ArrowForwardIcon fontSize="large" />
-                      </Style.OverlayText>
-                    </>
-                  )}
-                </Style.ImageContainer>
+            <Grid item xs={12}>
+              <Style.ProjectSpacer>&nbsp;&nbsp;&nbsp;</Style.ProjectSpacer>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Style.ProjectDescription>{description}</Style.ProjectDescription>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container spacing={1}>
+                <Grid item xs={6}>
+                  <Grid container spacing={1}>
+                    <Grid item>
+                      <Style.MintPrice>{info.mintPrice}</Style.MintPrice>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <Grid
+                    container
+                    spacing={1}
+                    style={{
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                    }}
+                  >
+                    <Grid item>
+                      <Style.MintButton>explore</Style.MintButton>
+                    </Grid>
+                    <Grid item>
+                      <>&nbsp;&nbsp;&nbsp;</>
+                    </Grid>
+                    <Grid item>
+                      <Style.ExternalLink>Etherscan</Style.ExternalLink>
+                    </Grid>
+                    <Grid item>
+                      <Style.ExternalLink>OpenSea</Style.ExternalLink>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Style.GridContainerCard>
         </Grid>
-      </Card>
+      </Style.HeaderContainer>
     </Style.Root>
   );
 };
