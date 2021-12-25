@@ -9,7 +9,7 @@ import Style from "./style";
 import Card from "../card";
 import Button from "../button";
 import { Grid, GridSize } from "@mui/material";
-import Pastille from "../../../components/stateless/pastille";
+import Pastille from "../pastille";
 
 import placeholder from "../../../assets/images/placeholder.jpeg";
 import Tooltip from "@mui/material/Tooltip";
