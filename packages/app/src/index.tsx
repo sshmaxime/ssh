@@ -1,24 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 
 // theme
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme";
 
-import { store } from "./store";
+// navigation
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./index.css";
 
-import App from "./App";
+import App from "./app";
+import DApp from "./dapp";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <App />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/app" element={<DApp />} />
+        </Routes>
       </ThemeProvider>
-    </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

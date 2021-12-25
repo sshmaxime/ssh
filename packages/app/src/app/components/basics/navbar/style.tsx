@@ -41,8 +41,9 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
   })),
-  GoToAppButton: styled("div")(({ theme }) => ({
+  GoToAppButton: styled(Link)(({ theme }) => ({
     color: "black",
+    textDecoration: "none",
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
