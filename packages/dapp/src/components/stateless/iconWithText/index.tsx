@@ -18,18 +18,13 @@ const IconWithText: FC<props> = ({ children, title, icon }) => {
       <Grid container columnSpacing={12} justifyContent="center">
         <Grid item xs={12}>
           <Style.ProjectPlanGrid>
-            <Style.ProjectPlanGridContainer
-              style={{
-                backgroundColor: "#b6ccfe",
-                marginBottom: "10px",
-              }}
-            >
+            <Style.ProjectPlanGridContainer>
               <img src={icon} style={{ height: "75%" }} alt="" />
             </Style.ProjectPlanGridContainer>
           </Style.ProjectPlanGrid>
         </Grid>
         <Grid item xs={12}>
-          <div style={{ textAlign: "center" }}>{title}</div>
+          <Style.IconTitle>{title}</Style.IconTitle>
         </Grid>
       </Grid>
     </Style.Root>
