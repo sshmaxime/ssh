@@ -1,34 +1,24 @@
 import { styled } from "@mui/material/styles";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Card,
-  Grid,
-  SwipeableDrawer,
-} from "@mui/material";
+import { Typography } from "@mui/material";
 
 const style = {
   Root: styled("div")(({ theme }) => ({})),
-  RoadMapItemStep: styled(Typography)<{ color: string; bgColor: string }>(
-    ({ theme, bgColor, color }) => ({
-      backgroundColor: bgColor,
-      padding: "5px 10px 5px 10px",
-      borderRadius: "10px",
-      display: "inline-block",
-      paddingLeft: "10px",
-      paddingRight: "10px",
-      fontFamily: "montserrat",
-      fontWeight: 700,
-      fontSize: "0.75em",
-      color: color,
-    })
-  ),
+  RoadMapItemStep: styled(Typography)(({ theme }) => ({
+    color: "black",
+    textShadow: "5px 5px 0px #2AFE00",
+    padding: "5px 10px 5px 10px",
+    borderRadius: "10px",
+    display: "inline-block",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    fontFamily: "montserrat",
+    fontWeight: 700,
+    fontSize: "0.8em",
+  })),
   RoadMapItem: styled("div")(({ theme }) => ({
     padding: "10px",
-    borderRadius: "15px",
+    borderRadius: "5px",
     boxShadow: `25px -25px 2.5px ${theme.backgroundColor.primary}`,
     backgroundColor: `white`,
   })),

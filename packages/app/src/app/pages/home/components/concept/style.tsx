@@ -89,15 +89,13 @@ const style = {
     cursor: pointer;
     margin-right: 25px;
     font-family: ${theme.fontFamily.primary};
-    font-weight: 800;
+    font-weight: 900;
     background: none;
     color: black;
-    font-size: 0.8em;
+    font-size: 1em;
     border: none;
-    text-shadow: -2px 2px 2px white,
-      -3px 3px 0px #303049,
-      -5px 5px 4px ${theme.backgroundColor.tertiary};
-      opacity: 25%;
+    text-shadow: 1px 1px 0px #A4FF92;
+    opacity: 50%;
 
     &:hover {
       opacity: 50%;
@@ -109,7 +107,7 @@ const style = {
     }
 
     &.${tabUnstyledClasses.selected} {
-      color: black;
+      text-shadow: 5px 5px 0px #2AFE00;
       opacity: 100%;
       font-size: 1.5em;
     }
