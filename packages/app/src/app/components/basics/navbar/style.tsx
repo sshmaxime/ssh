@@ -24,6 +24,7 @@ const style = {
     paddingBottom: "10px",
   })),
   Title: styled(Grid)(({ theme }) => ({
+    textShadow: "5px 5px 0px #2AFE00",
     "& > a": {
       textDecoration: "none",
       textAlign: "center",
@@ -34,14 +35,14 @@ const style = {
   })),
   Link: styled(Link)(({ theme }) => ({
     ...theme.titles(theme).primary,
-    color: "white",
   })),
   ExtraMenuButton: styled("div")(({ theme }) => ({
-    color: "white",
+    textShadow: "5px 5px 0px #2AFE00",
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
     fontSize: "0.85em",
+    color: "black",
   })),
   GoToAppButton: styled(Link)(({ theme }) => ({
     color: "black",
@@ -49,9 +50,8 @@ const style = {
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
-    backgroundColor: "white",
-    border: `2px solid ${theme.backgroundColor.tertiary}`,
-    boxShadow: `5px 5px 0px ${theme.backgroundColor.tertiary}`,
+    borderRadius: "2.5px",
+    boxShadow: `2.5px 2.5px 0px #2AFE00`,
   })),
 };
 

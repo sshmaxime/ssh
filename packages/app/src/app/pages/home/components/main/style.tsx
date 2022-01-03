@@ -19,8 +19,6 @@ const style = {
   })),
   Background: styled("div")(({ theme }) => ({
     height: "100%",
-    backgroundImage: `url(https://64.media.tumblr.com/3b5c065819d2fad71e5494b6b5157524/tumblr_mymoywwK8q1qmwrnuo1_1280.jpg)`,
-    backgroundPosition: "center",
 
     "&:before": {
       content: `""`,
@@ -29,10 +27,10 @@ const style = {
       left: 0,
       width: "100%",
       height: "100%",
-      backgroundColor: "black",
-      opacity: 0.5,
+      // backgroundColor: "black",
+      // opacity: 0.25,
     },
-    // backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.backgroundColor.secondary,
   })),
   TitleContainer: styled(Typography)(({ theme }) => ({
     position: "absolute",

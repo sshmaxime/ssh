@@ -120,16 +120,76 @@ const Home: FC = () => {
             imgs: { 1: af1x_exemple, 2: af1x_exemple, 3: af1x_exemple },
             innerTab: (
               <React.Fragment>
-                DROPs are a very exclusive and limited piece of art that lives
-                in the metaverse.
+                <p>
+                  A DROP is a very<b> exclusive </b>and<b> limited </b>
+                  piece of art that initially lives inside the blockchain as an
+                  <b> NFT</b>.
+                </p>
                 <br />
+                <p>
+                  At the root of every DROP a long process of thought and
+                  discussion has occured to chose the<b> best products </b>,
+                  <b> design </b>and <b> collections</b>. To be fully
+                  transparent at the first stage of SSH LABS, we, the team @ SSH
+                  LABS will completely lead the process of it but the more the
+                  SSH community grows the more we will give you, the community,
+                  the lead on many decisions of the company.
+                </p>
                 <br />
-                When you buy a DROP you are getting: Full Ownership of your
-                DROP, 3D Model, SSH Membership and an SSH Key.
+                <p>
+                  When you buy a DROP on our platform you are getting: a
+                  <b> Full Ownership </b> of your DROP, a<b> 3D Model </b> and
+                  an<b> SSH Key</b>.
+                </p>
                 <br />
+                <p>
+                  Every single DROP is redeemable physically by burning an
+                  <b> SSH Key </b>. But be careful, <b> SSH Key </b> might{" "}
+                  <b>(they will)</b> become necessary at some point.
+                </p>
                 <br />
-                You can get your DROP in real life by burning an SSH Key. SSH
-                Keys are fungible.
+                <p>
+                  <b>/ SSH .</b>
+                </p>
+              </React.Fragment>
+            ),
+          },
+          {
+            title: "/ DROP .",
+            imgs: { 1: af1x_exemple, 2: af1x_exemple, 3: af1x_exemple },
+            innerTab: (
+              <React.Fragment>
+                <p>
+                  A DROP is a very<b> exclusive </b>and<b> limited </b>
+                  piece of art that initially lives inside the blockchain as an
+                  <b> NFT</b>.
+                </p>
+                <br />
+                <p>
+                  At the root of every DROP a long process of thought and
+                  discussion has occured to chose the<b> best products </b>,
+                  <b> design </b>and <b> collections</b>. To be fully
+                  transparent at the first stage of SSH LABS, we, the team @ SSH
+                  LABS will completely lead the process of it but the more the
+                  SSH community grows the more we will give you, the community,
+                  the lead on many decisions of the company.
+                </p>
+                <br />
+                <p>
+                  When you buy a DROP on our platform you are getting: a
+                  <b> Full Ownership </b> of your DROP, a<b> 3D Model </b> and
+                  an<b> SSH Key</b>.
+                </p>
+                <br />
+                <p>
+                  Every single DROP is redeemable physically by burning an
+                  <b> SSH Key </b>. But be careful, <b> SSH Key </b> might{" "}
+                  <b>(they will)</b> become necessary at some point.
+                </p>
+                <br />
+                <p>
+                  <b>/ SSH .</b>
+                </p>
               </React.Fragment>
             ),
           },

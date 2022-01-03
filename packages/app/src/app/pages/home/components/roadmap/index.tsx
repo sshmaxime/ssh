@@ -54,10 +54,7 @@ const RoadmapComponent: FC<props> = ({
                   fontWeight: 900,
                 }}
               >
-                <Style.RoadMapItemStep
-                  color={roadmapItem.colors.color}
-                  bgColor={roadmapItem.colors.bg}
-                >
+                <Style.RoadMapItemStep>
                   {roadmapItem.step}
                 </Style.RoadMapItemStep>
               </TimelineOppositeContent>
