@@ -92,7 +92,7 @@ const style = {
     font-weight: 800;
     background: none;
     color: black;
-    font-size: 0.9em;
+    font-size: 0.8em;
     border: none;
     text-shadow: -2px 2px 2px white,
       -3px 3px 0px #303049,
@@ -120,6 +120,12 @@ const style = {
     }
   `
   ),
+
+  InnerTab: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "1em",
+    fontWeight: 300,
+  })),
 
   TabPanel: styled(TabPanelUnstyled)``,
 

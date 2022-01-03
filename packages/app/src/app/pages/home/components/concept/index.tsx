@@ -50,7 +50,7 @@ const ConceptComponent: FC<props> = ({
                 }}
               >
                 <Grid item xs={8}>
-                  {tab.innerTab}
+                  <Style.InnerTab>{tab.innerTab}</Style.InnerTab>
                 </Grid>
 
                 <Grid item xs={4}>

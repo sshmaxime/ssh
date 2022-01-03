@@ -20,6 +20,7 @@ declare module "@mui/material/styles" {
     fontFamily: {
       primary: string;
       secondary: string;
+      tertiary: string;
     };
     cards: {
       primary: {
@@ -47,6 +48,7 @@ declare module "@mui/material/styles" {
     fontFamily: {
       primary: string;
       secondary: string;
+      tertiary: string;
     };
     cards: {
       primary: {
@@ -72,6 +74,7 @@ export const theme = createTheme({
   fontFamily: {
     primary: "montserrat",
     secondary: "sourcecode",
+    tertiary: "sourcesans",
   },
 
   cards: {
