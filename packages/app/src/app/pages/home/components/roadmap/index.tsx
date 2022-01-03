@@ -66,7 +66,6 @@ const RoadmapComponent: FC<props> = ({
                   style={{
                     color: "white",
                     boxShadow: "none",
-                    padding: "5px",
                     backgroundColor: "black",
                   }}
                 />

@@ -104,7 +104,7 @@ const Project: FC<props> = ({
                     }}
                   >
                     <Grid item>
-                      <Style.MintButton>mint</Style.MintButton>
+                      <Style.MintButton>Explore</Style.MintButton>
                     </Grid>
                     <Grid item>
                       <>&nbsp;&nbsp;&nbsp;</>

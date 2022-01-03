@@ -74,7 +74,7 @@ const Home: FC = () => {
       <Style.View3>
         <Project
           title={"DROP"}
-          id={"1234"}
+          id={"1"}
           description={
             <Fragment>
               For this very first drop, SSH LABS is happy to give you the
@@ -98,7 +98,7 @@ const Home: FC = () => {
             },
             {
               title: "IRL",
-              description: "This NFT holds a physical object.",
+              description: "This NFT holds a redeemable physical object.",
               color: "#ffdab9",
             },
             {
@@ -120,19 +120,16 @@ const Home: FC = () => {
             imgs: { 1: af1x_exemple, 2: af1x_exemple, 3: af1x_exemple },
             innerTab: (
               <React.Fragment>
-                <Style.TextAbout>
-                  DROPs are a very exclusive and limited piece of art that lives
-                  in the metaverse. Our goal is to have Supreme and Off-White in
-                  one of our drop. We aim at the very top.
-                  <br />
-                  <br />
-                  When you buy a DROP you are getting: Full Ownership of your
-                  DROP, 3D Model, SSH Membership and an SSH Key.
-                  <br />
-                  <br />
-                  You can get your DROP in real life by burning an SSH Key. SSH
-                  Keys are fungible.
-                </Style.TextAbout>
+                DROPs are a very exclusive and limited piece of art that lives
+                in the metaverse.
+                <br />
+                <br />
+                When you buy a DROP you are getting: Full Ownership of your
+                DROP, 3D Model, SSH Membership and an SSH Key.
+                <br />
+                <br />
+                You can get your DROP in real life by burning an SSH Key. SSH
+                Keys are fungible.
               </React.Fragment>
             ),
           },

@@ -41,7 +41,7 @@ const style = {
     fontSize: "1.25em",
     color: "black",
     marginTop: "5px",
-    marginBottom: "15px",
+    marginBottom: "5px",
   })),
   RoadMapItemContent: styled(Typography)(({ theme }) => ({
     paddingLeft: "10px",

@@ -258,6 +258,31 @@ body,
   font-weight: 900;
 }
 
+/* SourceSans */
+@font-face {
+  font-family: sourcesans;
+  src: url(./_assets/fonts/SourceSansPro-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: sourcesans;
+  src: url(./_assets/fonts/SourceSansPro-Regular.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: sourcesans;
+  src: url(./_assets/fonts/SourceSansPro-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: sourcesans;
+  src: url(./_assets/fonts/SourceSansPro-Black.ttf);
+  font-weight: 900;
+}
+
 /* Montserrat */
 @font-face {
   font-family: montserrat;
