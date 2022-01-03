@@ -40,6 +40,7 @@ const style = {
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
+    fontSize: "0.85em",
   })),
   GoToAppButton: styled(Link)(({ theme }) => ({
     color: "black",

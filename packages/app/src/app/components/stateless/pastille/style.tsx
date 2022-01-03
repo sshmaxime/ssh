@@ -8,7 +8,7 @@ const style = {
   Root: styled("div")<rootProps>(({ theme, color }) => ({
     textAlign: "center",
     height: "20px",
-    fontSize: "0.8em",
+    fontSize: "0.7em",
     backgroundColor: color,
     borderRadius: "20px",
     paddingLeft: "20px",

@@ -5,7 +5,9 @@ import { NAME, HEADLINE, CREDENTIALS } from "../../constants";
 import { Grid } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import a from "../../../assets/icons/discord2.svg";
+import DiscordIcon from "../../../assets/icons/discord2.svg";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import Clickable from "../../stateless/clickable";
 
 export const FooterComponent: FC = () => {
   return (
@@ -31,16 +33,31 @@ export const FooterComponent: FC = () => {
                 alignContent="center"
               >
                 <Grid item>
-                  <TwitterIcon />
+                  <Clickable
+                    onClick={() => {
+                      window.open("https://github.com/ssh-labs0");
+                    }}
+                  >
+                    <GitHubIcon />
+                  </Clickable>
                 </Grid>
                 <Grid item>
-                  <InstagramIcon />
+                  <Clickable
+                    onClick={() => {
+                      window.open("https://discord.gg/FRAWgJJz4f");
+                    }}
+                  >
+                    <Style.ImgIcon src={DiscordIcon} alt="" />
+                  </Clickable>
                 </Grid>
                 <Grid item>
-                  <Style.ImgIcon src={a} alt="" />
-                </Grid>
-                <Grid item>
-                  <TwitterIcon />
+                  <Clickable
+                    onClick={() => {
+                      window.open("https://twitter.com/sshlabs_");
+                    }}
+                  >
+                    <TwitterIcon />
+                  </Clickable>
                 </Grid>
               </Grid>
             </Grid>

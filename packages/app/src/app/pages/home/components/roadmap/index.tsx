@@ -40,27 +40,18 @@ const RoadmapComponent: FC<props> = ({
   return (
     <Container title={title} subtitle={subtitle} bgColor={bgColor}>
       <Timeline position="alternate">
-        <TimelineItem>
-          <TimelineSeparator>
-            <TimelineConnector
-              style={{
-                backgroundColor: "black",
-                boxShadow: "1px 1px 1px #bebebe, 0px 0px 0px #ffffff",
-                borderRadius: "25px",
-                width: "6px",
-              }}
-            />
-          </TimelineSeparator>
-          <TimelineContent />
-        </TimelineItem>
+        <TimelineItem style={{ display: "none" }}></TimelineItem>
         {roadmapItems.map((roadmapItem, index) => {
+          const lineBetweenColor = roadmapItem.done
+            ? roadmapItems[index].colors.bg
+            : "";
+
           return (
             <TimelineItem key={index}>
               <TimelineOppositeContent
                 style={{
                   color: roadmapItem.colors.color,
                   fontWeight: 900,
-                  marginTop: "12.5px",
                 }}
               >
                 <Style.RoadMapItemStep
@@ -73,20 +64,18 @@ const RoadmapComponent: FC<props> = ({
               <TimelineSeparator>
                 <TimelineDot
                   style={{
-                    color: roadmapItem.colors.color,
+                    color: "white",
                     boxShadow: "none",
-                    padding: "10px",
-                    backgroundColor: roadmapItem.colors.bg,
+                    padding: "5px",
+                    backgroundColor: "black",
                   }}
-                >
-                  {roadmapItem.icon}
-                </TimelineDot>
+                />
                 {roadmapItems.length === index + 1 ? null : (
                   <TimelineConnector
                     style={{
-                      backgroundColor: roadmapItem.done ? "#8080AE" : "",
+                      backgroundColor: lineBetweenColor,
                       boxShadow: roadmapItem.done
-                        ? "2px 2px 1px #bebebe, 0px 0px 0px #ffffff"
+                        ? "1px 1px 2.5px grey, 0px 0px 0px #ffffff"
                         : "",
                       borderRadius: "25px",
                       width: roadmapItem.done ? "5px" : "3px",
@@ -105,7 +94,6 @@ const RoadmapComponent: FC<props> = ({
                       <Style.RoadMapItemTitle
                         style={{
                           color: roadmapItem.colors.bg,
-                          textShadow: "2px 2px 1px grey",
                         }}
                       >
                         {roadmapItem.title}
@@ -125,7 +113,6 @@ const RoadmapComponent: FC<props> = ({
                       <Style.RoadMapItemTitle
                         style={{
                           color: roadmapItem.colors.bg,
-                          textShadow: "2px 2px 1px grey",
                         }}
                       >
                         {roadmapItem.title}

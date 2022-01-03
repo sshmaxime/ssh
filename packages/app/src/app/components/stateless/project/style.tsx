@@ -56,13 +56,11 @@ const style = {
     boxShadow: "5px 5px 5px #bebebe, -5px -5px 1px #ffffff",
   })),
   ProjectTitleContainer: styled("div")(({ theme }) => ({
-    fontSize: "2em",
+    fontSize: "1.25em",
     fontFamily: theme.fontFamily.primary,
     fontStyle: "italic",
     fontWeight: 900,
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1em",
-    },
+    letterSpacing: "1px",
   })),
   ProjectTitleKeyword: styled("span")(({ theme }) => ({
     backgroundColor: "red",
@@ -71,8 +69,9 @@ const style = {
     paddingLeft: "20px",
     paddingRight: "20px",
     borderRadius: "5px",
-    marginRight: "25px",
-    boxShadow: "10px 10px 2px #bebebe, -5px -5px 0px #ffffff",
+    marginRight: "15px",
+    boxShadow: "5px 5px 2px #bebebe, -5px -5px 0px #ffffff",
+    letterSpacing: "-0.5px",
   })),
   ProjectSpacer: styled("div")(({ theme }) => ({
     fontSize: "2em",
@@ -85,7 +84,7 @@ const style = {
     marginBottom: "40px",
   })),
   ProjectDescription: styled(Typography)(({ theme }) => ({
-    fontSize: "1.1em",
+    fontSize: "1em",
     color: "black",
     fontWeight: 300,
     fontFamily: theme.fontFamily.primary,

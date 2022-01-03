@@ -10,6 +10,7 @@ import Style from "./style";
 import Container, { ContainerProps } from "../../../_components/container";
 
 import { Fade } from "react-awesome-reveal";
+import Clickable from "../../../../components/stateless/clickable";
 
 type props = ContainerProps & {
   peoples: {
@@ -17,6 +18,7 @@ type props = ContainerProps & {
     job: string;
     img: string;
     bgColor?: string;
+    icons: { img: any | string; link: string }[];
   }[];
 };
 
@@ -27,8 +29,6 @@ const TeamComponent: FC<props> = ({
   bgColor,
   peoples,
 }) => {
-  const defaultColor = "black";
-
   return (
     <Container title={title} subtitle={subtitle} bgColor={bgColor}>
       <Grid
@@ -43,21 +43,44 @@ const TeamComponent: FC<props> = ({
           {peoples.map((person) => (
             <Grid item xs={3}>
               <Fade triggerOnce>
-                <Grid container spacing={1} flexDirection="column">
-                  <Grid item xs={12}>
-                    <Grid container spacing={0} flexDirection="column">
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Grid container spacing={0}>
                       <Grid item xs={12}>
-                        <Style.TeamName
-                          bgColor={person.bgColor || defaultColor}
-                        >
-                          {person.name}
-                        </Style.TeamName>
+                        <Style.TeamName>{person.name}</Style.TeamName>
                       </Grid>
-                      <Grid item xs={12}>
+
+                      <Grid item>
                         <Style.TeamNameTitle>{person.job}</Style.TeamNameTitle>
                       </Grid>
                     </Grid>
                   </Grid>
+
+                  <Grid item xs={6}>
+                    <Grid
+                      container
+                      spacing={1}
+                      style={{
+                        paddingRight: "5px",
+                      }}
+                      justifyContent="flex-end"
+                    >
+                      {person.icons.map((icon) => {
+                        return (
+                          <Grid item>
+                            <Clickable onClick={() => window.open(icon.link)}>
+                              {typeof icon.img === "string" ? (
+                                <img src={icon.img} alt="" />
+                              ) : (
+                                icon.img
+                              )}
+                            </Clickable>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Grid>
+
                   <Grid item xs={12}>
                     <Grid item xs={12}>
                       <Style.ImgTeam src={person.img} alt="" />

@@ -6,32 +6,34 @@ import { Provider } from "react-redux";
 import Style from "./style";
 
 // components
-import Card from "../card";
-import Button from "../button";
 import { Grid, GridSize } from "@mui/material";
 import Pastille from "../pastille";
 
-import placeholder from "../../../assets/images/placeholder.jpeg";
 import Tooltip from "@mui/material/Tooltip";
-
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 type props = {
   title: string;
+  id: string;
   image?: string;
   description: any;
   info: {
     mintPrice: string;
   };
   pastilles: {
-    size?: GridSize;
     title: string;
     description: string;
     color: string;
   }[];
 };
 
-const Project: FC<props> = ({ title, image, description, info, pastilles }) => {
+const Project: FC<props> = ({
+  title,
+  id,
+  image,
+  description,
+  info,
+  pastilles,
+}) => {
   return (
     <Style.Root>
       <Style.HeaderContainer container spacing={2} justifyContent={"center"}>
@@ -45,7 +47,13 @@ const Project: FC<props> = ({ title, image, description, info, pastilles }) => {
 
         <Grid item xs={12} md={image ? 6 : 12}>
           <Style.GridContainerCard container spacing={0}>
-            <Grid item xs={12}>
+            <Grid item xs={4}>
+              <Style.ProjectTitleContainer>
+                <Style.ProjectTitleKeyword>{title}</Style.ProjectTitleKeyword>#
+                {id}
+              </Style.ProjectTitleContainer>
+            </Grid>
+            <Grid item xs={8}>
               <Grid
                 container
                 spacing={1}
@@ -55,7 +63,7 @@ const Project: FC<props> = ({ title, image, description, info, pastilles }) => {
                 }}
               >
                 {pastilles.map((pastille) => (
-                  <Grid key={pastille.title} item xs={pastille.size || "auto"}>
+                  <Grid key={pastille.title} item>
                     <Tooltip arrow title={pastille.description} placement="top">
                       <div>
                         <Pastille
@@ -66,22 +74,6 @@ const Project: FC<props> = ({ title, image, description, info, pastilles }) => {
                     </Tooltip>
                   </Grid>
                 ))}
-              </Grid>
-
-              <Grid
-                container
-                spacing={0}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Grid item xs={10}>
-                  <Style.ProjectTitleContainer>
-                    <Style.ProjectTitleKeyword>SSHx</Style.ProjectTitleKeyword>
-                    {title}
-                  </Style.ProjectTitleContainer>
-                </Grid>
               </Grid>
             </Grid>
 
@@ -112,7 +104,7 @@ const Project: FC<props> = ({ title, image, description, info, pastilles }) => {
                     }}
                   >
                     <Grid item>
-                      <Style.MintButton>explore</Style.MintButton>
+                      <Style.MintButton>mint</Style.MintButton>
                     </Grid>
                     <Grid item>
                       <>&nbsp;&nbsp;&nbsp;</>

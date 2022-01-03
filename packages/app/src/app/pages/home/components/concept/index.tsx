@@ -40,7 +40,7 @@ const ConceptComponent: FC<props> = ({
 
         {tabs.map((tab, index) => (
           <Style.TabPanel value={index}>
-            <Fade duration={1500}>
+            <Fade duration={1500} triggerOnce>
               <Grid
                 container
                 columnSpacing={12}
