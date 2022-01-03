@@ -4,6 +4,7 @@ import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
 import { NAME } from "../../constants";
+import Clickable from "../../stateless/clickable";
 
 export const NavbarComponent: FC = () => {
   return (
@@ -26,11 +27,26 @@ export const NavbarComponent: FC = () => {
                   <Style.GoToAppButton to="/app">Enter App</Style.GoToAppButton>
                 </Grid>
                 <div style={{ width: "50px" }} />
+
                 <Grid item>
-                  <Style.ExtraMenuButton>About</Style.ExtraMenuButton>
+                  <Clickable onClick={() => {}}>
+                    <Style.ExtraMenuButton>Team</Style.ExtraMenuButton>
+                  </Clickable>
                 </Grid>
                 <Grid item>
-                  <Style.ExtraMenuButton>Projects</Style.ExtraMenuButton>
+                  <Clickable onClick={() => {}}>
+                    <Style.ExtraMenuButton>Roadmap</Style.ExtraMenuButton>
+                  </Clickable>
+                </Grid>
+                <Grid item>
+                  <Clickable onClick={() => {}}>
+                    <Style.ExtraMenuButton>Concept</Style.ExtraMenuButton>
+                  </Clickable>
+                </Grid>
+                <Grid item>
+                  <Clickable onClick={() => {}}>
+                    <Style.ExtraMenuButton>Projects</Style.ExtraMenuButton>
+                  </Clickable>
                 </Grid>
               </Grid>
             </Grid>

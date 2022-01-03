@@ -92,7 +92,7 @@ const style = {
     font-weight: 800;
     background: none;
     color: black;
-    font-size: 1.25em;
+    font-size: 0.9em;
     border: none;
     text-shadow: -2px 2px 2px white,
       -3px 3px 0px #303049,
@@ -111,7 +111,7 @@ const style = {
     &.${tabUnstyledClasses.selected} {
       color: black;
       opacity: 100%;
-      font-size: 1.75em;
+      font-size: 1.5em;
     }
 
     &.${buttonUnstyledClasses.disabled} {

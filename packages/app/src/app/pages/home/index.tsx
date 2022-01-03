@@ -6,7 +6,8 @@ import Style from "./style";
 import { Grid, styled, Tabs, Box, Typography } from "@mui/material";
 
 import af1x_exemple from "../../assets/images/Punk_7804.png";
-import ArrowDownwardSharp from "@mui/icons-material/ArrowDownwardRounded";
+import me from "../../assets/images/me.jpeg";
+import comingSoon from "../../assets/images/comingsoon.png";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Project from "../../components/stateless/project";
 
@@ -22,6 +23,9 @@ import selectNft from "../../assets/icons/selectNft.png";
 import redeem from "../../assets/icons/redeem.png";
 import clothes from "../../assets/icons/clothes.png";
 
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
 const Home: FC = () => {
   return (
     <Style.Root>
@@ -34,6 +38,7 @@ const Home: FC = () => {
           style={{
             display: "flex",
             justifyContent: "center",
+            marginBottom: "2.5vh",
           }}
         >
           <Grid item xs={12}>
@@ -46,19 +51,19 @@ const Home: FC = () => {
               }}
             >
               <Grid item xs={2}>
-                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+                <Style.ProjectExplanationImg2 src={comingSoon} />
               </Grid>
               <Grid item xs={2}>
-                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+                <Style.ProjectExplanationImg2 src={comingSoon} />
               </Grid>
               <Grid item xs={2}>
                 <Style.ProjectExplanationImg2Active src={af1x_exemple} />
               </Grid>
               <Grid item xs={2}>
-                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+                <Style.ProjectExplanationImg2 src={comingSoon} />
               </Grid>
               <Grid item xs={2}>
-                <Style.ProjectExplanationImg2 src={af1x_exemple} />
+                <Style.ProjectExplanationImg2 src={comingSoon} />
               </Grid>
             </Grid>
           </Grid>
@@ -67,39 +72,28 @@ const Home: FC = () => {
 
       {/* View 3 */}
       <Style.View3>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: "10px",
-          }}
-        >
-          <ArrowDownwardSharp
-            style={{
-              fontSize: "25px",
-            }}
-          />
-        </div>
         <Project
-          title={"CryptoPunks"}
-          description={`
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                vehicula ultrices sem, eget laoreet est tincidunt et. Maecenas
-                dolor mi, posuere non iaculis sed, faucibus eget elit. Duis dui
-                mauris, sollicitudin eu auctor vel, lacinia vitae sem.
-          `}
+          title={"DROP"}
+          id={"1234"}
+          description={
+            <Fragment>
+              For this very first drop, SSH LABS is happy to give you the
+              opportunity to mint an exclusive
+              <span style={{ fontWeight: 600 }}> skateboard deck</span> made in
+              collaboration with <span style={{ fontWeight: 600 }}> X</span>.
+              Rock it in the metaverse or in real life !
+            </Fragment>
+          }
           info={{ mintPrice: "0.1 ETH" }}
           pastilles={[
             {
-              title: "0 / 10.000",
+              title: "0 / 250",
               description: "Minted supply / Total supply",
               color: "#caffbf",
-              size: 2,
             },
             {
-              title: "AF1x",
-              description: "This NFT is a part of the AF1x ecosystem.",
+              title: "3D",
+              description: "This NFT holds a 3D model.",
               color: "#a0c4ff",
             },
             {
@@ -109,7 +103,7 @@ const Home: FC = () => {
             },
             {
               title: "KEY",
-              description: "This NFT is a key to the SSH ecosystem.",
+              description: "This NFT holds a key to the SSH ecosystem.",
               color: "#cfbaf0",
             },
           ]}
@@ -122,115 +116,23 @@ const Home: FC = () => {
         subtitle="WHAT ARE WE DOING ?"
         tabs={[
           {
-            title: "SSH DROP.",
+            title: "/ DROP .",
             imgs: { 1: af1x_exemple, 2: af1x_exemple, 3: af1x_exemple },
             innerTab: (
               <React.Fragment>
                 <Style.TextAbout>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                  vehicula ultrices sem, eget laoreet est tincidunt et. Maecenas
-                  dolor mi, posuere non iaculis sed, faucibus eget elit. Duis
-                  dui mauris, sollicitudin eu auctor vel, lacinia vitae sem.
-                  Donec quis sapien pellentesque, ultrices augue non, mollis
-                  ipsum. Nunc congue purus in purus consectetur tincidunt.
-                  Integer sit amet tellus fermentum, dignissim urna quis,
-                  fringilla elit. Nunc bibendum posuere turpis, vel gravida
-                  lacus lobortis sit amet. Aenean id viverra ipsum. Vivamus
-                  luctus, nunc id iaculis blandit, tellus nisl dignissim nisi,
-                  quis tempus nisl sapien vitae libero. Ut aliquam egestas lacus
-                  vitae faucibus. Ut pellentesque eget eros vel sodales. Sed
-                  sagittis felis metus, ut elementum leo fringilla eget.
+                  DROPs are a very exclusive and limited piece of art that lives
+                  in the metaverse. Our goal is to have Supreme and Off-White in
+                  one of our drop. We aim at the very top.
+                  <br />
+                  <br />
+                  When you buy a DROP you are getting: Full Ownership of your
+                  DROP, 3D Model, SSH Membership and an SSH Key.
+                  <br />
+                  <br />
+                  You can get your DROP in real life by burning an SSH Key. SSH
+                  Keys are fungible.
                 </Style.TextAbout>
-                <Grid
-                  container
-                  spacing={2}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="1. SELECT YOUR NFT" icon={selectNft} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="2. PICK YOUR OBJECT" icon={clothes} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="3. MINT" icon={mintNft} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="4. REDEEM" icon={redeem} />
-                  </Style.ProjectPlanGrid>
-                </Grid>
-              </React.Fragment>
-            ),
-          },
-          {
-            title: "SSH DROP.",
-            imgs: { 1: af1x_exemple, 2: af1x_exemple, 3: af1x_exemple },
-            innerTab: (
-              <React.Fragment>
-                <Style.TextAbout>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                  vehicula ultrices sem, eget laoreet est tincidunt et. Maecenas
-                  dolor mi, posuere non iaculis sed, faucibus eget elit. Duis
-                  dui mauris, sollicitudin eu auctor vel, lacinia vitae sem.
-                  Donec quis sapien pellentesque, ultrices augue non, mollis
-                  ipsum. Nunc congue purus in purus consectetur tincidunt.
-                </Style.TextAbout>
-                <Grid
-                  container
-                  spacing={2}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="1. SELECT YOUR NFT" icon={selectNft} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="2. PICK YOUR OBJECT" icon={clothes} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="3. MINT" icon={mintNft} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="4. REDEEM" icon={redeem} />
-                  </Style.ProjectPlanGrid>
-                </Grid>
-              </React.Fragment>
-            ),
-          },
-          {
-            title: "SSH DROP.",
-            imgs: { 1: af1x_exemple, 2: af1x_exemple, 3: af1x_exemple },
-            innerTab: (
-              <React.Fragment>
-                <Style.TextAbout>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </Style.TextAbout>
-                <Grid
-                  container
-                  spacing={2}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="1. SELECT YOUR NFT" icon={selectNft} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="2. PICK YOUR OBJECT" icon={clothes} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="3. MINT" icon={mintNft} />
-                  </Style.ProjectPlanGrid>
-                  <Style.ProjectPlanGrid item xs={3}>
-                    <IconWithText title="4. REDEEM" icon={redeem} />
-                  </Style.ProjectPlanGrid>
-                </Grid>
               </React.Fragment>
             ),
           },
@@ -243,57 +145,51 @@ const Home: FC = () => {
         bgColor="secondary"
         roadmapItems={[
           {
-            step: "Q1. 2022",
+            step: "February. 2022.",
             title: "SSH DROP",
             icon: <FastfoodIcon />,
             description: (
               <Fragment>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                vitae fermentum turpis, ut molestie justo. Donec sodales quis
-                magna ac elementum. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra.
+                After several months of work, SSH LABS will release the first of
+                its many more to come DROP.
               </Fragment>
             ),
-            done: false,
+            done: true,
             colors: {
-              bg: "#DCE8FF",
-              color: "#6178D5",
+              bg: "black",
+              color: "#2AFE00",
             },
           },
           {
-            step: "Q1. 2022",
-            title: "SSH PROJECT",
+            step: "February. 2022.",
+            title: "SSH DROP",
             icon: <FastfoodIcon />,
             description: (
               <Fragment>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                vitae fermentum turpis, ut molestie justo. Donec sodales quis
-                magna ac elementum. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra.
+                After several months of work, SSH LABS will release the first of
+                its many more to come DROP.
               </Fragment>
             ),
-            done: false,
+            done: true,
             colors: {
-              bg: "#FFE4C8",
-              color: "#FFA449",
+              bg: "black",
+              color: "#2AFE00",
             },
           },
           {
-            step: "Q2. 2022",
-            title: "SSH PREMIUM",
+            step: "February. 2022.",
+            title: "SSH DROP",
             icon: <FastfoodIcon />,
             description: (
               <Fragment>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                vitae fermentum turpis, ut molestie justo. Donec sodales quis
-                magna ac elementum. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra.
+                After several months of work, SSH LABS will release the first of
+                its many more to come DROP.
               </Fragment>
             ),
-            done: false,
+            done: true,
             colors: {
-              bg: "#CFC6DD",
-              color: "#685289",
+              bg: "black",
+              color: "#2AFE00",
             },
           },
         ]}
@@ -305,21 +201,19 @@ const Home: FC = () => {
         peoples={[
           {
             name: "SSH",
-            job: "CEO & CTO",
-            img: af1x_exemple,
+            job: "FOUNDER",
+            img: me,
             bgColor: "#B4FFA5",
-          },
-          {
-            name: "BUSCA",
-            job: "CEO & CTO",
-            img: af1x_exemple,
-            bgColor: "#9EFFEF",
-          },
-          {
-            name: "GAMBAS",
-            job: "CEO & CTO",
-            img: af1x_exemple,
-            bgColor: "#FFBE9E",
+            icons: [
+              {
+                img: <GitHubIcon />,
+                link: "https://github.com/sshmaxime",
+              },
+              {
+                img: <LinkedInIcon />,
+                link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
+              },
+            ],
           },
         ]}
       />

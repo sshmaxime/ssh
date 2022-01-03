@@ -18,17 +18,11 @@ const style = {
   })),
   ImgTeam: styled("img")(({ theme }) => ({
     width: "100%",
-    borderRadius: "2.5px",
+    borderRadius: "5px",
   })),
-  TeamName: styled(Typography)<{ bgColor: string }>(({ theme, bgColor }) => ({
+  TeamName: styled(Typography)(({ theme }) => ({
     ...theme.titles(theme).secondary,
-    color: "white",
-    textShadow: "2.5px 2.5px 1px black, -1px -1px 1px grey",
-    borderRadius: "10px",
-    padding: "1px",
-    paddingLeft: "7.5px",
-    paddingRight: "7.5px",
-    backgroundColor: bgColor,
+    paddingLeft: "5px",
   })),
   SubTextSubtitle: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -40,10 +34,10 @@ const style = {
   })),
   TeamNameTitle: styled(Typography)(({ theme }) => ({
     ...theme.titles(theme).secondary,
-    color: "black",
+    color: "grey",
     paddingLeft: "5px",
-    paddingRight: "5px",
-    fontSize: "0.75em",
+    fontSize: "0.6em",
+    marginBottom: "5px",
   })),
   TextSubtitle2: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

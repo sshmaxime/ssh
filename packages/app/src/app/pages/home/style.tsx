@@ -44,7 +44,6 @@ const style = {
   })),
   TextAbout: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    letterSpacing: "0.05em",
     fontSize: "1em",
     fontWeight: 300,
     paddingBottom: "2.5vh",
@@ -58,6 +57,7 @@ const style = {
     width: "100%",
     transition: "all .2s ease-in-out",
     borderRadius: "10px",
+    opacity: "25%",
     boxShadow: `10px 15px 2px ${theme.backgroundColor.tertiary}`,
     backgroundColor: "white",
   })),
