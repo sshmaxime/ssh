@@ -64,11 +64,12 @@ const TeamComponent: FC<props> = ({
                         paddingRight: "5px",
                       }}
                       justifyContent="flex-end"
+                      alignItems="center"
                     >
                       {person.icons.map((icon) => {
                         return (
                           <Grid item>
-                            <Clickable onClick={() => window.open(icon.link)}>
+                            <Clickable address={icon.link}>
                               {typeof icon.img === "string" ? (
                                 <img src={icon.img} alt="" />
                               ) : (

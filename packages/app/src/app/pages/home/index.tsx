@@ -88,11 +88,8 @@ const Home: FC = () => {
               description={
                 <Fragment>
                   For this very first drop, SSH LABS is happy to give you the
-                  opportunity to mint an exclusive
-                  <span style={{ fontWeight: 600 }}> skateboard deck</span> made
-                  in collaboration with{" "}
-                  <span style={{ fontWeight: 600 }}> X</span>. Rock it in the
-                  metaverse or in real life !
+                  opportunity to mint an exclusive skateboard deck ! Rock it in
+                  the metaverse or in real life !
                 </Fragment>
               }
               info={{ mintPrice: "0.1 ETH" }}
@@ -202,7 +199,8 @@ const Home: FC = () => {
               },
               {
                 step: "February. 28th. 2022.",
-                title: "Drop #1 - END",
+                title: "Drop #1",
+                type: "END",
                 icon: <FastfoodIcon />,
                 description: <Fragment>All good things have an end.</Fragment>,
                 done: true,
@@ -213,7 +211,8 @@ const Home: FC = () => {
               },
               {
                 step: "TBD.",
-                title: "Drop #1 - REDEEM",
+                title: "Drop #1",
+                type: "REDEEM",
                 icon: <FastfoodIcon />,
                 description: (
                   <Fragment>

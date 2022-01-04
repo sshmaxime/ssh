@@ -6,6 +6,7 @@ import Style from "./style";
 import { NAME } from "../../constants";
 import Clickable from "../../stateless/clickable";
 import { useNavigate } from "react-router-dom";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export const NavbarComponent: FC = () => {
   const navigate = useNavigate();
@@ -37,7 +38,19 @@ export const NavbarComponent: FC = () => {
                       navigate("/docs");
                     }}
                   >
-                    <Style.ExtraMenuButton>Docs</Style.ExtraMenuButton>
+                    <Style.ExtraMenuButton>
+                      <Grid container alignItems="center">
+                        <Grid item>Docs</Grid>
+                        <Grid item>
+                          <ArrowRightAltIcon
+                            style={{
+                              transform: "rotate(-45deg)",
+                              fontSize: "1.25em",
+                            }}
+                          />
+                        </Grid>
+                      </Grid>
+                    </Style.ExtraMenuButton>
                   </Clickable>
                 </Grid>
 

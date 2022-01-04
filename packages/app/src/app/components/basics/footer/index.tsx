@@ -33,29 +33,17 @@ export const FooterComponent: FC = () => {
                 alignContent="center"
               >
                 <Grid item>
-                  <Clickable
-                    onClick={() => {
-                      window.open("https://github.com/ssh-labs0");
-                    }}
-                  >
+                  <Clickable address="https://github.com/ssh-labs0">
                     <GitHubIcon />
                   </Clickable>
                 </Grid>
                 <Grid item>
-                  <Clickable
-                    onClick={() => {
-                      window.open("https://discord.gg/FRAWgJJz4f");
-                    }}
-                  >
+                  <Clickable address="https://discord.gg/FRAWgJJz4f">
                     <Style.ImgIcon src={DiscordIcon} alt="" />
                   </Clickable>
                 </Grid>
                 <Grid item>
-                  <Clickable
-                    onClick={() => {
-                      window.open("https://twitter.com/sshlabs_");
-                    }}
-                  >
+                  <Clickable address="https://twitter.com/sshlabs_">
                     <TwitterIcon />
                   </Clickable>
                 </Grid>
