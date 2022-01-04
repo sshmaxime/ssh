@@ -18,8 +18,8 @@ ReactDOM.render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/" element={<App />} />
           <Route path="/app" element={<DApp />} />
+          <Route path="/*" element={<App />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
