@@ -8,7 +8,7 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
-import FastfoodIcon from "@mui/icons-material/Fastfood";
+import { Grid } from "@mui/material";
 
 // styles
 import Style from "./style";
@@ -24,6 +24,7 @@ type props = ContainerProps & {
     description: any;
     icon: any;
     done: boolean;
+    type?: string;
     colors: {
       bg: string;
       color: string;
@@ -82,18 +83,19 @@ const RoadmapComponent: FC<props> = ({
               <TimelineContent>
                 {index % 2 ? (
                   <Slide direction="right" triggerOnce>
-                    <Style.RoadMapItem
-                      style={{
-                        marginBottom: "5px",
-                      }}
-                    >
-                      <Style.RoadMapItemTitle
-                        style={{
-                          color: roadmapItem.colors.bg,
-                        }}
-                      >
-                        {roadmapItem.title}
-                      </Style.RoadMapItemTitle>
+                    <Style.RoadMapItem>
+                      <Grid container justifyContent={"space-between"}>
+                        <Style.RoadMapItemTitle>
+                          {roadmapItem.title}
+                        </Style.RoadMapItemTitle>
+                        {roadmapItem.type && (
+                          <div>
+                            <Style.RoadMapItemType>
+                              {roadmapItem.type}
+                            </Style.RoadMapItemType>
+                          </div>
+                        )}
+                      </Grid>
                       <Style.RoadMapItemContent>
                         {roadmapItem.description}
                       </Style.RoadMapItemContent>
@@ -101,18 +103,19 @@ const RoadmapComponent: FC<props> = ({
                   </Slide>
                 ) : (
                   <Slide direction="left" triggerOnce>
-                    <Style.RoadMapItem2
-                      style={{
-                        marginBottom: "5px",
-                      }}
-                    >
-                      <Style.RoadMapItemTitle
-                        style={{
-                          color: roadmapItem.colors.bg,
-                        }}
-                      >
-                        {roadmapItem.title}
-                      </Style.RoadMapItemTitle>
+                    <Style.RoadMapItem2>
+                      <Grid container justifyContent={"space-between"}>
+                        <Style.RoadMapItemTitle>
+                          {roadmapItem.title}
+                        </Style.RoadMapItemTitle>
+                        {roadmapItem.type && (
+                          <div>
+                            <Style.RoadMapItemType>
+                              {roadmapItem.type}
+                            </Style.RoadMapItemType>
+                          </div>
+                        )}
+                      </Grid>
                       <Style.RoadMapItemContent>
                         {roadmapItem.description}
                       </Style.RoadMapItemContent>

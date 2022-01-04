@@ -21,6 +21,7 @@ const style = {
     boxShadow: `25px -25px 2.5px ${theme.backgroundColor.primary}`,
     backgroundColor: `white`,
     marginLeft: "10px",
+    marginBottom: "5px",
   })),
   RoadMapItemTitle: styled(Typography)(({ theme }) => ({
     paddingLeft: "10px",
@@ -31,8 +32,18 @@ const style = {
     fontWeight: 900,
     fontSize: "1.1em",
     color: "black",
-    marginTop: "5px",
     marginBottom: "10px",
+  })),
+  RoadMapItemType: styled(Typography)(({ theme }) => ({
+    fontSize: "0.65em",
+    padding: "2.5px",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    fontWeight: 900,
+    letterSpacing: "0.5px",
+    fontFamily: theme.fontFamily.primary,
+    backgroundColor: theme.backgroundColor.primary,
+    borderRadius: "5px",
   })),
   RoadMapItemContent: styled(Typography)(({ theme }) => ({
     paddingLeft: "10px",
@@ -50,6 +61,7 @@ const style = {
     backgroundColor: `white`,
     textAlign: "start",
     marginRight: "10px",
+    marginBottom: "5px",
   })),
 };
 
