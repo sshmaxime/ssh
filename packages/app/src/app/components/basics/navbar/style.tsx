@@ -37,7 +37,6 @@ const style = {
     ...theme.titles(theme).primary,
   })),
   ExtraMenuButton: styled("div")(({ theme }) => ({
-    textShadow: "5px 5px 0px #2AFE00",
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
