@@ -18,6 +18,7 @@ const style = {
       cursor: "pointer",
     },
     color: "black",
+    textDecoration: "none",
   })),
 };
 

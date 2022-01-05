@@ -85,6 +85,11 @@ const Home: FC = () => {
             <Project
               title={"DROP"}
               id={"1"}
+              links={{
+                opensea: "https://google.com",
+                etherscan: "https://google.com",
+                mint: "https://google.com",
+              }}
               description={
                 <Fragment>
                   For this very first drop, SSH LABS is happy to give you the
@@ -97,22 +102,18 @@ const Home: FC = () => {
                 {
                   title: "0 / 250",
                   description: "Minted supply / Total supply",
-                  color: "#caffbf",
                 },
                 {
                   title: "3D",
                   description: "This NFT holds a 3D model.",
-                  color: "#a0c4ff",
                 },
                 {
                   title: "IRL",
                   description: "This NFT holds a redeemable physical object.",
-                  color: "#ffdab9",
                 },
                 {
                   title: "KEY",
                   description: "Minting this NFT gives your a free SSH Key.",
-                  color: "#cfbaf0",
                 },
               ]}
             />
@@ -179,7 +180,7 @@ const Home: FC = () => {
           <RoadmapComponent
             title="/ ROADMAP ."
             subtitle="WHERE ARE WE GOING ?"
-            bgColor="secondary"
+            bgcolor="secondary"
             roadmapItems={[
               {
                 step: "February. 1st. 2022.",

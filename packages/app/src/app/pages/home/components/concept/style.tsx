@@ -119,9 +119,10 @@ const style = {
   `
   ),
 
-  InnerTab: styled(Typography)(({ theme }) => ({
+  InnerTab: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "1em",
+    lineHeight: "1.5",
     fontWeight: 300,
   })),
 

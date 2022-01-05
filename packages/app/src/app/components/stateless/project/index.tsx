@@ -1,6 +1,4 @@
-import React, { FC } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import { FC } from "react";
 
 // styles
 import Style from "./style";
@@ -10,19 +8,24 @@ import { Grid, GridSize } from "@mui/material";
 import Pastille from "../pastille";
 
 import Tooltip from "@mui/material/Tooltip";
+import Clickable from "../clickable";
 
 type props = {
   title: string;
   id: string;
   image?: string;
   description: any;
+  links: {
+    opensea?: string;
+    etherscan?: string;
+    mint: string;
+  };
   info: {
     mintPrice: string;
   };
   pastilles: {
     title: string;
     description: string;
-    color: string;
   }[];
 };
 
@@ -32,6 +35,7 @@ const Project: FC<props> = ({
   image,
   description,
   info,
+  links,
   pastilles,
 }) => {
   return (
@@ -66,10 +70,7 @@ const Project: FC<props> = ({
                   <Grid key={pastille.title} item>
                     <Tooltip arrow title={pastille.description} placement="top">
                       <div>
-                        <Pastille
-                          title={pastille.title}
-                          color={pastille.color}
-                        />
+                        <Pastille title={pastille.title} />
                       </div>
                     </Tooltip>
                   </Grid>
@@ -101,20 +102,31 @@ const Project: FC<props> = ({
                     style={{
                       display: "flex",
                       flexDirection: "row-reverse",
+                      alignItems: "flex-end",
                     }}
                   >
                     <Grid item>
-                      <Style.MintButton>Mint</Style.MintButton>
+                      <Clickable address={links.mint} external={false}>
+                        <Style.MintButton>MINT</Style.MintButton>
+                      </Clickable>
                     </Grid>
-                    <Grid item>
-                      <>&nbsp;&nbsp;&nbsp;</>
-                    </Grid>
-                    <Grid item>
-                      <Style.ExternalLink>Etherscan</Style.ExternalLink>
-                    </Grid>
-                    <Grid item>
-                      <Style.ExternalLink>OpenSea</Style.ExternalLink>
-                    </Grid>
+                    <Grid item>&nbsp;&nbsp;&nbsp;</Grid>
+
+                    {links.etherscan && (
+                      <Grid item>
+                        <Clickable address={links.etherscan}>
+                          <Style.ExternalLink>Etherscan</Style.ExternalLink>
+                        </Clickable>
+                      </Grid>
+                    )}
+
+                    {links.opensea && (
+                      <Grid item>
+                        <Clickable address={links.opensea}>
+                          <Style.ExternalLink>OpenSea</Style.ExternalLink>
+                        </Clickable>
+                      </Grid>
+                    )}
                   </Grid>
                 </Grid>
               </Grid>

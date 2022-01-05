@@ -5,17 +5,17 @@ import Style from "./style";
 export type ContainerProps = {
   title: string;
   subtitle: string;
-  bgColor?: "primary" | "secondary";
+  bgcolor?: "primary" | "secondary";
 };
 
 const ContainerComponent: FC<ContainerProps> = ({
   children,
   title,
   subtitle,
-  bgColor = "primary",
+  bgcolor: bgColor = "primary",
 }) => {
   return (
-    <Style.Root bgColor={bgColor}>
+    <Style.Root bgcolor={bgColor}>
       <Style.Title>{title}</Style.Title>
       <Style.Subtitle>{subtitle}</Style.Subtitle>
       {children}

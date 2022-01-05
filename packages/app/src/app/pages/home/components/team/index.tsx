@@ -26,11 +26,11 @@ const TeamComponent: FC<props> = ({
   children,
   title,
   subtitle,
-  bgColor,
+  bgcolor: bgColor,
   peoples,
 }) => {
   return (
-    <Container title={title} subtitle={subtitle} bgColor={bgColor}>
+    <Container title={title} subtitle={subtitle} bgcolor={bgColor}>
       <Grid
         container
         columnSpacing={0}
@@ -41,7 +41,7 @@ const TeamComponent: FC<props> = ({
       >
         <Grid container spacing={4}>
           {peoples.map((person) => (
-            <Grid item xs={3}>
+            <Grid key={person.name} item xs={3}>
               <Fade triggerOnce>
                 <Grid container>
                   <Grid item xs={6}>
@@ -66,9 +66,9 @@ const TeamComponent: FC<props> = ({
                       justifyContent="flex-end"
                       alignItems="center"
                     >
-                      {person.icons.map((icon) => {
+                      {person.icons.map((icon, index) => {
                         return (
-                          <Grid item>
+                          <Grid key={index} item>
                             <Clickable address={icon.link}>
                               {typeof icon.img === "string" ? (
                                 <img src={icon.img} alt="" />

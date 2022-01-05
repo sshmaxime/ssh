@@ -24,22 +24,22 @@ const ConceptComponent: FC<props> = ({
   children,
   title,
   subtitle,
-  bgColor,
+  bgcolor: bgColor,
   tabs,
 }) => {
   return (
-    <Container title={title} subtitle={subtitle} bgColor={bgColor}>
+    <Container title={title} subtitle={subtitle} bgcolor={bgColor}>
       <TabsUnstyled defaultValue={0}>
         <Grid item xs={8}>
           <Style.TabsList>
             {tabs.map((tab) => (
-              <Style.Tab>{tab.title}</Style.Tab>
+              <Style.Tab key={tab.title}>{tab.title}</Style.Tab>
             ))}
           </Style.TabsList>
         </Grid>
 
         {tabs.map((tab, index) => (
-          <Style.TabPanel value={index}>
+          <Style.TabPanel key={index} value={index}>
             <Fade duration={1500} triggerOnce>
               <Grid
                 container
