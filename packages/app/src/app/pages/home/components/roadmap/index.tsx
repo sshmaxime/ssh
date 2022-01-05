@@ -35,11 +35,11 @@ type props = ContainerProps & {
 const RoadmapComponent: FC<props> = ({
   title,
   subtitle,
-  bgColor,
+  bgcolor: bgColor,
   roadmapItems,
 }) => {
   return (
-    <Container title={title} subtitle={subtitle} bgColor={bgColor}>
+    <Container title={title} subtitle={subtitle} bgcolor={bgColor}>
       <Timeline position="alternate">
         <TimelineItem style={{ display: "none" }}></TimelineItem>
         {roadmapItems.map((roadmapItem, index) => {

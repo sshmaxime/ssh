@@ -32,7 +32,7 @@ const style = {
     },
     backgroundColor: theme.backgroundColor.secondary,
   })),
-  TitleContainer: styled(Typography)(({ theme }) => ({
+  TitleContainer: styled("div")(({ theme }) => ({
     position: "absolute",
     top: "60%",
     left: "50%",

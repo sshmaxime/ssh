@@ -55,38 +55,22 @@ export const NavbarComponent: FC = () => {
                 </Grid>
 
                 <Grid item>
-                  <Clickable
-                    onClick={() => {
-                      navigate("/#team");
-                    }}
-                  >
+                  <Clickable address="/#team">
                     <Style.ExtraMenuButton>Team</Style.ExtraMenuButton>
                   </Clickable>
                 </Grid>
                 <Grid item>
-                  <Clickable
-                    onClick={() => {
-                      navigate("/#roadmap");
-                    }}
-                  >
+                  <Clickable address="/#roadmap">
                     <Style.ExtraMenuButton>Roadmap</Style.ExtraMenuButton>
                   </Clickable>
                 </Grid>
                 <Grid item>
-                  <Clickable
-                    onClick={() => {
-                      navigate("/#concept");
-                    }}
-                  >
+                  <Clickable address="/#concept">
                     <Style.ExtraMenuButton>Concept</Style.ExtraMenuButton>
                   </Clickable>
                 </Grid>
                 <Grid item>
-                  <Clickable
-                    onClick={() => {
-                      navigate("/#projects");
-                    }}
-                  >
+                  <Clickable address="/#projects">
                     <Style.ExtraMenuButton>Projects</Style.ExtraMenuButton>
                   </Clickable>
                 </Grid>
