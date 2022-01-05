@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
-import { NAME } from "../../constants";
+import { NAME, SHORTNAME } from "../../constants";
 import Clickable from "../../stateless/clickable";
 import { useNavigate } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -30,7 +30,7 @@ export const NavbarComponent: FC = () => {
                 <Grid item>
                   <Style.GoToAppButton to="/app">Enter App</Style.GoToAppButton>
                 </Grid>
-                <div style={{ width: "50px" }} />
+                <div style={{ width: "10px" }} />
 
                 <Grid item>
                   <Clickable
