@@ -12,6 +12,7 @@ const style = {
       cursor: "pointer",
     },
     color: "black",
+    textDecoration: "none",
   })),
   RootHref: styled("a")(({ theme }) => ({
     ":hover": {

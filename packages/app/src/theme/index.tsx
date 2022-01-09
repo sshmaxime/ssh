@@ -97,6 +97,7 @@ export const theme = createTheme({
         fontFamily: themeObj.fontFamily.primary,
         fontSize: "1.75em",
         fontWeight: 900,
+        fontStyle: "italic",
       },
       secondary: {
         color: "black",
@@ -130,8 +131,8 @@ export const theme = createTheme({
       },
       level1: {
         [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "17.5vw",
-          paddingRight: "17.5vw",
+          paddingLeft: "16.5vw",
+          paddingRight: "16.5vw",
         },
         [themeObj.breakpoints.down("lg")]: {
           paddingLeft: "10vw",

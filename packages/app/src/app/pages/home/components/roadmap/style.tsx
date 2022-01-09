@@ -6,8 +6,8 @@ const style = {
   Root: styled("div")(({ theme }) => ({})),
   RoadMapItemStep: styled(Typography)(({ theme }) => ({
     color: "black",
-    padding: "5px 10px 5px 10px",
-    borderRadius: "10px",
+    padding: "2.5px 5px 2.5px 5px",
+    borderRadius: "5px",
     display: "inline-block",
     paddingLeft: "10px",
     paddingRight: "10px",
@@ -42,7 +42,7 @@ const style = {
     fontWeight: 900,
     letterSpacing: "0.5px",
     fontFamily: theme.fontFamily.primary,
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.backgroundColor.secondary,
     borderRadius: "5px",
   })),
   RoadMapItemContent: styled(Typography)(({ theme }) => ({

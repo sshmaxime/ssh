@@ -11,11 +11,13 @@ import DApp from "./dapp";
 
 // store
 import { store } from "./store";
+import NavbarComponent from "./_components/navbar";
 
 const App: FC = () => {
   return (
     <>
       <Provider store={store}>
+        <NavbarComponent />
         <Routes>
           <Route path="/" element={<DApp />} />
         </Routes>
