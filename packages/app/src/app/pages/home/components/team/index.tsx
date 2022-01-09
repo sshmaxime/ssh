@@ -10,7 +10,7 @@ import Style from "./style";
 import Container, { ContainerProps } from "../../../_components/container";
 
 import { Fade } from "react-awesome-reveal";
-import Clickable from "../../../../components/stateless/clickable";
+import Clickable from "../../../../../_components/stateless/clickable";
 
 type props = ContainerProps & {
   peoples: {

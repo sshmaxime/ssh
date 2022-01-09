@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import NavbarComponent from "./components/basics/navbar";
-import FooterComponent from "./components/basics/footer";
+import NavbarComponent from "./components/navbar";
+import FooterComponent from "./components/footer";
 
 // router
 import { Routes, Route } from "react-router-dom";

@@ -5,11 +5,11 @@ import Style from "./style";
 
 import { Grid } from "@mui/material";
 
-import af1x_exemple from "../../assets/images/Punk_7804.png";
-import me from "../../assets/images/me.jpeg";
-import comingSoon from "../../assets/images/comingsoon.png";
+import af1x_exemple from "../../../_assets/images/Punk_7804.png";
+import me from "../../../_assets/images/me.jpeg";
+import comingSoon from "../../../_assets/images/comingsoon.png";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
-import Project from "../../components/stateless/project";
+import Project from "../../../_components/stateless/project";
 
 import TeamComponent from "./components/team";
 import ConceptComponent from "./components/concept";
@@ -88,7 +88,7 @@ const Home: FC = () => {
               links={{
                 opensea: "https://google.com",
                 etherscan: "https://google.com",
-                mint: "https://google.com",
+                mint: "/app",
               }}
               description={
                 <Fragment>

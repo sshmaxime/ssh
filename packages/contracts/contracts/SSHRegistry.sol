@@ -4,21 +4,16 @@ pragma solidity 0.8.9;
 import { IERC721 } from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
-error NotExisting();
-
 contract SSHRegistry is Ownable {
+    // mapping from project to its ERC721 contract
     mapping(bytes32 => IERC721) _Projects;
 
-    function isMember(bytes32 projectName, address caller) external view returns (bool) {
-        IERC721 project = _Projects[projectName];
-
-        if (address(project) == address(0)) revert NotExisting();
-
-        if (project.balanceOf(caller) > 0) {
-            return true;
-        }
-
-        return false;
+    /**
+     * @notice Return wether or not a project is a member of the SSH ecosystem
+     * @param projectName the project name to test
+     */
+    function isProjectMemberOfSSH(bytes32 projectName) external view returns (bool) {
+        return !(address(_Projects[projectName]) == address(0));
     }
 
     function add(bytes32 projectName, address projectAddress) external onlyOwner {
