@@ -7,11 +7,11 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import DApp from "./dapp";
+import Drop from "./pages/drop";
 
 // store
 import { store } from "./store";
-import NavbarComponent from "./_components/navbar";
+import NavbarComponent from "./components/navbar";
 
 const App: FC = () => {
   return (
@@ -19,7 +19,7 @@ const App: FC = () => {
       <Provider store={store}>
         <NavbarComponent />
         <Routes>
-          <Route path="/" element={<DApp />} />
+          <Route path="/drop/*" element={<Drop />} />
         </Routes>
       </Provider>
     </>

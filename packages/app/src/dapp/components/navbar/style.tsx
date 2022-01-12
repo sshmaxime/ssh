@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const style = {
   Root: styled("div")(({ theme }) => ({})),
   AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level1,
+    ...theme.myBreakpoints(theme).level2,
 
     padding: 0,
     paddingTop: "25px",
@@ -23,15 +23,12 @@ const style = {
     height: "80px",
     paddingBottom: "10px",
   })),
-  Title: styled(Grid)(({ theme }) => ({
+  Title: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    fontSize: "2em",
     textShadow: "5px 5px 0px #2AFE00",
-    "& > a": {
-      textDecoration: "none",
-      textAlign: "center",
-    },
-    "& a:focus": {
-      outline: "none",
-    },
+    color: "black",
   })),
   Link: styled(Link)(({ theme }) => ({
     ...theme.titles(theme).primary,
@@ -51,6 +48,7 @@ const style = {
     fontWeight: 900,
     borderRadius: "2.5px",
     boxShadow: `2.5px 2.5px 0px #2AFE00`,
+    height: "20px",
   })),
 };
 

@@ -3,23 +3,20 @@ import { FC } from "react";
 import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
-import { NAME, SHORTNAME } from "../../../constants";
 import Clickable from "../../../_components/stateless/clickable";
-import { useNavigate } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import Logo from "../../../_assets/images/logo-04.svg";
 
 export const NavbarComponent: FC = () => {
-  const navigate = useNavigate();
-
   return (
     <Style.Root>
       <Style.AppBar position="absolute">
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
-            <Style.Title item flexGrow={1}>
-              <Style.Link to="/">{NAME}</Style.Link>
-            </Style.Title>
-            <Grid item>
+            <Grid item flexGrow={1} xs={4}>
+              <img src={Logo} style={{ width: "60%" }} alt="" />
+            </Grid>
+            <Grid item xs={8} style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
                 columnSpacing={0}

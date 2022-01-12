@@ -1,11 +1,13 @@
 import { styled } from "@mui/material/styles";
 
 const style = {
-  Root: styled("div")(({ theme, color }) => ({
+  Root: styled("div")<{ secondary?: boolean }>(({ theme, secondary }) => ({
     textAlign: "center",
     height: "20px",
     fontSize: "0.7em",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: !secondary
+      ? theme.backgroundColor.primary
+      : theme.backgroundColor.secondary,
     color: "black",
     borderRadius: "20px",
     paddingLeft: "20px",
