@@ -15,11 +15,14 @@ type props = {
   id: string;
   image?: string;
   description: any;
-  links: {
-    opensea?: string;
-    etherscan?: string;
+  justHeader?: boolean;
+  defaultLinks: {
     mint: string;
   };
+  otherLinks?: {
+    name: string;
+    url: string;
+  }[];
   info: {
     mintPrice: string;
   };
@@ -35,7 +38,9 @@ const Project: FC<props> = ({
   image,
   description,
   info,
-  links,
+  justHeader,
+  defaultLinks,
+  otherLinks,
   pastilles,
 }) => {
   return (
@@ -78,59 +83,68 @@ const Project: FC<props> = ({
               </Grid>
             </Grid>
 
-            <Grid item xs={12}>
-              <Style.ProjectSpacer>&nbsp;&nbsp;&nbsp;</Style.ProjectSpacer>
-            </Grid>
+            {!justHeader && (
+              <>
+                <Grid item xs={12}>
+                  <Style.ProjectSpacer>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </Style.ProjectSpacer>
+                </Grid>
 
-            <Grid item xs={12}>
-              <Style.ProjectDescription>{description}</Style.ProjectDescription>
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container spacing={1}>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
+                  <Style.ProjectDescription>
+                    {description}
+                  </Style.ProjectDescription>
+                </Grid>
+
+                <Grid item xs={12}>
                   <Grid container spacing={1}>
-                    <Grid item>
-                      <Style.MintPrice>{info.mintPrice}</Style.MintPrice>
+                    <Grid item xs={6}>
+                      <Grid container spacing={1}>
+                        <Grid item>
+                          <Style.MintPrice>{info.mintPrice}</Style.MintPrice>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+
+                    <Grid item xs={6}>
+                      <Grid
+                        container
+                        spacing={1}
+                        style={{
+                          display: "flex",
+                          flexDirection: "row-reverse",
+                          alignItems: "flex-end",
+                        }}
+                      >
+                        <Grid item>
+                          <Clickable
+                            address={defaultLinks.mint}
+                            external={false}
+                          >
+                            <Style.MintButton>MINT</Style.MintButton>
+                          </Clickable>
+                        </Grid>
+                        <Grid item>&nbsp;&nbsp;&nbsp;</Grid>
+
+                        {otherLinks &&
+                          otherLinks.map((otherLink, index) => (
+                            <>
+                              <Grid item>
+                                <Clickable address={otherLink.url}>
+                                  <Style.ExternalLink>
+                                    {otherLink.name}
+                                  </Style.ExternalLink>
+                                </Clickable>
+                              </Grid>
+                            </>
+                          ))}
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>
-
-                <Grid item xs={6}>
-                  <Grid
-                    container
-                    spacing={1}
-                    style={{
-                      display: "flex",
-                      flexDirection: "row-reverse",
-                      alignItems: "flex-end",
-                    }}
-                  >
-                    <Grid item>
-                      <Clickable address={links.mint} external={false}>
-                        <Style.MintButton>MINT</Style.MintButton>
-                      </Clickable>
-                    </Grid>
-                    <Grid item>&nbsp;&nbsp;&nbsp;</Grid>
-
-                    {links.etherscan && (
-                      <Grid item>
-                        <Clickable address={links.etherscan}>
-                          <Style.ExternalLink>Etherscan</Style.ExternalLink>
-                        </Clickable>
-                      </Grid>
-                    )}
-
-                    {links.opensea && (
-                      <Grid item>
-                        <Clickable address={links.opensea}>
-                          <Style.ExternalLink>OpenSea</Style.ExternalLink>
-                        </Clickable>
-                      </Grid>
-                    )}
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
+              </>
+            )}
           </Style.GridContainerCard>
         </Grid>
       </Style.HeaderContainer>

@@ -14,23 +14,16 @@ const style = {
     minHeight: "100vh",
     display: "flex",
     alignContent: "center",
-    alignItems: "center",
   })),
 
   Root1: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level0,
-    padding: "10px",
+    ...theme.myBreakpoints(theme).level3,
+    paddingTop: "125px",
   })),
 
-  InnerRoot1: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
-    padding: "10px",
-    borderRadius: "5px",
-  })),
-
-  Machine: styled(Grid)(({ theme }) => ({
-    paddingTop: "50px",
-    ...theme.myBreakpoints(theme).level0,
+  Machine: styled("div")(({ theme }) => ({
+    marginTop: "25px",
+    ...theme.cards.primary,
   })),
 
   Title: styled(Typography)(({ theme }) => ({
@@ -42,25 +35,31 @@ const style = {
   })),
 
   CollectionName: styled("div")(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
+    fontFamily: theme.fontFamily.secondary,
     fontWeight: 500,
     marginBottom: "5px",
     fontSize: "0.9em",
     display: "inline-block",
     padding: "5px",
-    borderBottom: "2.5px solid black",
+    backgroundColor: theme.backgroundColor.secondary,
+    borderRadius: "5px",
   })),
 
   ScrollerChoose: styled("div")(({ theme }) => ({
     overflowY: "scroll",
     height: "45vh",
+    padding: "10px",
+    backgroundColor: theme.backgroundColor.primary,
+    borderRadius: "5px",
   })),
 
   StepTitle: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.secondary,
     fontWeight: 900,
-    marginBottom: "2.5px",
-    fontSize: "1em",
+    marginBottom: "20px",
+    fontSize: "1.1em",
+    borderBottom: "2.5px solid black",
+    display: "inline-block",
   })),
 
   SmallTitle: styled(Typography)(({ theme }) => ({

@@ -85,11 +85,19 @@ const Home: FC = () => {
             <Project
               title={"DROP"}
               id={"1"}
-              links={{
-                opensea: "https://google.com",
-                etherscan: "https://google.com",
+              defaultLinks={{
                 mint: "/app",
               }}
+              otherLinks={[
+                {
+                  name: "Opensea",
+                  url: "https://google.com",
+                },
+                {
+                  name: "Etherscan",
+                  url: "https://google.com",
+                },
+              ]}
               description={
                 <Fragment>
                   For this very first drop, SSH LABS is happy to give you the
