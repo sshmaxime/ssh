@@ -7,6 +7,7 @@ import { NAME, SHORTNAME } from "../../../constants";
 import Clickable from "../../../_components/stateless/clickable";
 import { useNavigate } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import Logo from "../../../_assets/images/logo-04.svg";
 
 export const NavbarComponent: FC = () => {
   const navigate = useNavigate();
@@ -16,13 +17,22 @@ export const NavbarComponent: FC = () => {
       <Style.AppBar position="absolute">
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
-            <Grid item flexGrow={1} />
-            <Grid item>
-              <Style.GoToAppButton to="/app">
-                Connect Wallet
-              </Style.GoToAppButton>
+            <Grid item flexGrow={1} xs={4} />
+            <Grid item xs={8} style={{ display: "flex", alignItems: "center" }}>
+              <Grid
+                container
+                columnSpacing={0}
+                rowSpacing={0}
+                flexDirection="row-reverse"
+                alignItems="center"
+              >
+                <Grid item>
+                  <Style.GoToAppButton to="/app">
+                    Connect Wallet
+                  </Style.GoToAppButton>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item />
           </Grid>
         </Toolbar>
       </Style.AppBar>

@@ -23,17 +23,6 @@ const style = {
     height: "80px",
     paddingBottom: "10px",
   })),
-  Title: styled(Grid)(({ theme }) => ({
-    textShadow: "5px 5px 0px #2AFE00",
-    letterSpacing: "-2.5px",
-    "& > a": {
-      textDecoration: "none",
-      textAlign: "center",
-    },
-    "& a:focus": {
-      outline: "none",
-    },
-  })),
   Link: styled(Link)(({ theme }) => ({
     ...theme.titles(theme).primary,
   })),
@@ -52,6 +41,7 @@ const style = {
     fontWeight: 900,
     borderRadius: "2.5px",
     boxShadow: `2.5px 2.5px 0px #2AFE00`,
+    height: "20px",
   })),
 };
 

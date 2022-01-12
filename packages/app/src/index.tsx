@@ -27,7 +27,7 @@ const Index: FC = () => {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/app" element={<DApp />} />
+          <Route path="/app/*" element={<DApp />} />
           <Route path="/*" element={<App />} />
         </Routes>
       </ThemeProvider>
