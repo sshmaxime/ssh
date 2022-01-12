@@ -11,9 +11,7 @@ import {
 } from "@mui/material";
 
 const style = {
-  Root: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.secondary,
-  })),
+  Root: styled("div")(({ theme }) => ({})),
   TextTitleContainer: styled("div")(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -72,15 +70,29 @@ const style = {
     boxShadow: "2.5px 2.5px 0px #2AFE00",
     letterSpacing: "-0.5px",
   })),
+  InnerRoot1: styled("div")(({ theme }) => ({
+    display: "inline-block",
+    padding: "10px",
+    borderRadius: "5px",
+    marginTop: "25px",
+    marginBottom: "-15px",
+  })),
+  SmallTitle: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.secondary,
+    fontWeight: 900,
+    marginBottom: "2.5px",
+    fontSize: "0.75em",
+  })),
   ProjectSpacer: styled("div")(({ theme }) => ({
-    fontSize: "2em",
+    fontSize: "1em",
+    marginTop: "10px",
     display: "inline-block",
     color: "black",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
     paddingBottom: "5px",
     borderBottom: "5px solid black",
-    marginBottom: "40px",
+    marginBottom: "25px",
   })),
   ProjectDescription: styled(Typography)(({ theme }) => ({
     fontSize: "1em",

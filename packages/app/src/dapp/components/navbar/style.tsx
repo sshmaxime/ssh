@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const style = {
   Root: styled("div")(({ theme }) => ({})),
   AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level2,
+    ...theme.myBreakpoints(theme).level1,
 
     padding: 0,
     paddingTop: "25px",

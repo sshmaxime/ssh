@@ -6,6 +6,7 @@ declare module "@mui/material/styles" {
       level0: any;
       level1: any;
       level2: any;
+      level3: any;
     };
     titles: (param: Theme) => {
       primary: any;
@@ -163,6 +164,24 @@ export const theme = createTheme({
         [themeObj.breakpoints.down("sm")]: {
           paddingLeft: "2vw",
           paddingRight: "2vw",
+        },
+      },
+      level3: {
+        [themeObj.breakpoints.up("lg")]: {
+          paddingLeft: "20vw",
+          paddingRight: "20vw",
+        },
+        [themeObj.breakpoints.down("lg")]: {
+          paddingLeft: "15vw",
+          paddingRight: "15vw",
+        },
+        [themeObj.breakpoints.down("md")]: {
+          paddingLeft: "12vw",
+          paddingRight: "12vw",
+        },
+        [themeObj.breakpoints.down("sm")]: {
+          paddingLeft: "8vw",
+          paddingRight: "8vw",
         },
       },
     };
