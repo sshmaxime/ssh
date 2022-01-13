@@ -86,7 +86,7 @@ const Home: FC = () => {
               title={"DROP"}
               id={"1"}
               defaultLinks={{
-                mint: "/app",
+                mint: "/app/drop/1",
               }}
               otherLinks={[
                 {
