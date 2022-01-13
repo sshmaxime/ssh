@@ -122,7 +122,7 @@ const Project: FC<props> = ({
                             address={defaultLinks.mint}
                             external={false}
                           >
-                            <Style.MintButton>MINT</Style.MintButton>
+                            <Style.MintButton>EXPLORE</Style.MintButton>
                           </Clickable>
                         </Grid>
                         <Grid item>&nbsp;&nbsp;&nbsp;</Grid>
