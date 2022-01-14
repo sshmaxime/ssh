@@ -12,17 +12,15 @@ const style = {
   Root: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.secondary,
     minHeight: "100vh",
-    display: "flex",
-    alignContent: "center",
   })),
 
   Root1: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
+    ...theme.myBreakpoints(theme).level1,
     paddingTop: "125px",
   })),
 
   Machine: styled("div")(({ theme }) => ({
-    marginTop: "25px",
+    marginTop: "15px",
     ...theme.cards.primary,
   })),
 
@@ -41,16 +39,16 @@ const style = {
     fontSize: "0.9em",
     display: "inline-block",
     padding: "5px",
+    boxShadow: "2.5px 2.5px 2.5px grey",
     backgroundColor: theme.backgroundColor.secondary,
     borderRadius: "5px",
   })),
 
   ScrollerChoose: styled("div")(({ theme }) => ({
     overflowY: "scroll",
-    height: "45vh",
-    padding: "10px",
     backgroundColor: theme.backgroundColor.primary,
     borderRadius: "5px",
+    padding: "10px",
   })),
 
   StepTitle: styled(Typography)(({ theme }) => ({
@@ -69,22 +67,30 @@ const style = {
     fontSize: "0.75em",
   })),
 
+  MintPrice: styled("div")(({ theme }) => ({
+    padding: "5px",
+    borderRadius: "5px",
+    textAlign: "center",
+    fontFamily: theme.fontFamily.secondary,
+    color: "black",
+    fontSize: "0.9em",
+    backgroundColor: theme.backgroundColor.primary,
+    paddingRight: "20px",
+    paddingLeft: "20px",
+    boxShadow: "1px 1px 2.5px #bebebe",
+  })),
+
   MintButton: styled("div")(({ theme }) => ({
     padding: "5px",
     backgroundColor: "black",
     color: "white",
     borderRadius: "2.5px",
     textAlign: "center",
-    paddingRight: "25px",
-    paddingLeft: "25px",
     fontFamily: theme.fontFamily.primary,
     fontSize: "0.8em",
     letterSpacing: "1px",
     fontWeight: 900,
     boxShadow: "2.5px 2.5px 0px #2AFE00",
-    marginTop: "5px",
-    display: "inline-block",
-    float: "right",
   })),
 
   Stepper: styled(Stepper)(

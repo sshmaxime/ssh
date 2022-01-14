@@ -142,16 +142,16 @@ const DropWithParam: FC = () => {
               },
             ]}
           />
-          {/*  */}
           <Style.Machine>
             <Grid container spacing={6}>
-              <Grid item xs={12}>
-                <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
-              </Grid>
+              <Grid item xs={12}></Grid>
             </Grid>
 
-            <Grid container justifyContent={"space-between"} spacing={6}>
-              <Grid item xs={6}>
+            <Grid container columnSpacing={2}>
+              <Grid item xs={4} style={{ height: "50vh" }}>
+                <Grid item xs={12}>
+                  <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
+                </Grid>
                 <Style.ScrollerChoose>
                   {listItems.map((list, index1) => (
                     <div key={index1}>
@@ -198,20 +198,78 @@ const DropWithParam: FC = () => {
               </Grid>
 
               <Grid item xs={6}>
-                <img
-                  style={{ width: "100%", borderRadius: "5px", float: "right" }}
-                  src={currentItem?.img || af1x_exemple}
-                  alt=""
-                />
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <img
+                      style={{
+                        width: "100%",
+                      }}
+                      src={currentItem?.img || af1x_exemple}
+                      alt=""
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <img
+                      style={{
+                        width: "100%",
+                      }}
+                      src={currentItem?.img || af1x_exemple}
+                      alt=""
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <img
+                      style={{
+                        width: "100%",
+                      }}
+                      src={currentItem?.img || af1x_exemple}
+                      alt=""
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <img
+                      style={{
+                        width: "100%",
+                      }}
+                      src={currentItem?.img || af1x_exemple}
+                      alt=""
+                    />
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={2}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Style.MintButton>DEFAULT</Style.MintButton>
+                  </Grid>
+
+                  <Grid item xs={4}>
+                    <Style.MintButton>3D</Style.MintButton>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Style.MintButton>2D</Style.MintButton>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Style.MintButton>IRL</Style.MintButton>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
 
             <Grid
               container
-              flexDirection={"row-reverse"}
-              style={{ marginTop: "10px" }}
+              spacing={2}
+              justifyContent="flex-end"
+              style={{ marginTop: "15px" }}
             >
-              <Style.MintButton>MINT</Style.MintButton>
+              <Grid item xs={2}>
+                <Style.MintPrice>0.1 ETH</Style.MintPrice>
+              </Grid>
+
+              <Grid item xs={2}>
+                <Style.MintButton>MINT</Style.MintButton>
+              </Grid>
             </Grid>
           </Style.Machine>
         </Style.Root1>
@@ -233,49 +291,55 @@ const DropWithoutParam: FC = () => {
     <Fade duration={1500} triggerOnce>
       <Style.Root>
         <Style.Root1>
-          <Project
-            title={"DROP"}
-            id={"0"}
-            defaultLinks={{
-              mint: "/app/drop/0",
-            }}
-            otherLinks={[
-              {
-                name: "Opensea",
-                url: "https://google.com",
-              },
-              {
-                name: "Etherscan",
-                url: "https://google.com",
-              },
-            ]}
-            description={
-              <Fragment>
-                For this very first drop, SSH LABS is happy to give you the
-                opportunity to mint an exclusive skateboard deck ! Rock it in
-                the metaverse or in real life !
-              </Fragment>
-            }
-            info={{ mintPrice: "0.1 ETH" }}
-            pastilles={[
-              {
-                title: "0 / 250",
-                description: "Minted supply / Total supply",
-              },
-              {
-                title: "3D",
-                description: "This NFT holds a 3D model.",
-              },
-              {
-                title: "IRL",
-                description: "This NFT holds a redeemable physical object.",
-              },
-              {
-                title: "KEY",
-                description: "Minting this NFT gives your a free SSH Key.",
-              },
-            ]}
-          />
+          <Grid container>
+            <Grid xs={3}>
+              <Project
+                title={"DROP"}
+                id={"0"}
+                image={af1x_exemple}
+                miniature
+                defaultLinks={{
+                  mint: "/app/drop/0",
+                }}
+                otherLinks={[
+                  {
+                    name: "Opensea",
+                    url: "https://google.com",
+                  },
+                  {
+                    name: "Etherscan",
+                    url: "https://google.com",
+                  },
+                ]}
+                description={
+                  <Fragment>
+                    For this very first drop, SSH LABS is happy to give you the
+                    opportunity to mint an exclusive skateboard deck ! Rock it
+                    in the metaverse or in real life !
+                  </Fragment>
+                }
+                info={{ mintPrice: "0.1 ETH" }}
+                pastilles={[
+                  {
+                    title: "0 / 250",
+                    description: "Minted supply / Total supply",
+                  },
+                  {
+                    title: "3D",
+                    description: "This NFT holds a 3D model.",
+                  },
+                  {
+                    title: "IRL",
+                    description: "This NFT holds a redeemable physical object.",
+                  },
+                  {
+                    title: "KEY",
+                    description: "Minting this NFT gives your a free SSH Key.",
+                  },
+                ]}
+              />
+            </Grid>
+          </Grid>
         </Style.Root1>
       </Style.Root>
     </Fade>

@@ -27,6 +27,14 @@ const style = {
     marginBottom: "25px",
     fontWeight: 900,
   })),
+  Overlay: styled("div")(({ theme }) => ({
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    paddingTop: "50px",
+    background: "rgba(0, 0, 0, 0.5)",
+    width: "100%",
+  })),
   TextAbout: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     paddingTop: "5vh",
@@ -35,11 +43,6 @@ const style = {
     fontWeight: 300,
   })),
   HeaderContainer: styled(Grid)(({ theme }) => ({})),
-  ImageContainer: styled("div")(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "start",
-  })),
   ImageContainerReverse: styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
@@ -47,6 +50,11 @@ const style = {
   })),
   GridContainerCard: styled(Grid)(({ theme }) => ({
     ...theme.cards.primary,
+  })),
+  GridContainerCard1: styled(Grid)(({ theme }) => ({
+    padding: "10px",
+    borderRadius: "5px",
+    backgroundColor: "white",
   })),
   Image: styled("img")(({ theme }) => ({
     width: "75%",
@@ -58,6 +66,13 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontStyle: "italic",
     fontWeight: 900,
+  })),
+  ProjectTitleContainer1: styled("div")(({ theme }) => ({
+    fontSize: "1.25em",
+    fontFamily: theme.fontFamily.primary,
+    fontStyle: "italic",
+    fontWeight: 900,
+    color: "white",
   })),
   ProjectTitleKeyword: styled("span")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.primary,

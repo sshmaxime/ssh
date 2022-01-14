@@ -10,12 +10,16 @@ import Pastille from "../pastille";
 import Tooltip from "@mui/material/Tooltip";
 import Clickable from "../clickable";
 
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+
 type props = {
   title: string;
   id: string;
   image?: string;
   description: any;
   justHeader?: boolean;
+  miniature?: boolean;
   defaultLinks: {
     mint: string;
   };
@@ -36,6 +40,7 @@ const Project: FC<props> = ({
   title,
   id,
   image,
+  miniature,
   description,
   info,
   justHeader,
@@ -43,18 +48,49 @@ const Project: FC<props> = ({
   otherLinks,
   pastilles,
 }) => {
+  if (miniature) {
+    return (
+      <Style.Root>
+        <Style.HeaderContainer container spacing={2} justifyContent={"center"}>
+          <Style.GridContainerCard1 container spacing={0}>
+            <Grid item xs={12} style={{ marginBottom: "10px" }}>
+              <Grid container spacing={1} alignContent={"center"}>
+                {pastilles.map((pastille) => (
+                  <Grid key={pastille.title} item>
+                    <Tooltip arrow title={pastille.description} placement="top">
+                      <div>
+                        <Pastille small title={pastille.title} />
+                      </div>
+                    </Tooltip>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+            <Clickable address="/app/drop/0" hoverEffect>
+              <div style={{ position: "relative" }}>
+                <img style={{ width: "100%" }} src={image} alt=""></img>
+                <Style.Overlay>
+                  <div style={{ position: "absolute", bottom: 15, left: 5 }}>
+                    <Style.ProjectTitleContainer1>
+                      <Style.ProjectTitleKeyword>
+                        {title}
+                      </Style.ProjectTitleKeyword>
+                      #{id}
+                    </Style.ProjectTitleContainer1>
+                  </div>
+                </Style.Overlay>
+              </div>
+            </Clickable>
+          </Style.GridContainerCard1>
+        </Style.HeaderContainer>
+      </Style.Root>
+    );
+  }
+
   return (
     <Style.Root>
       <Style.HeaderContainer container spacing={2} justifyContent={"center"}>
-        {image ? (
-          <Grid item xs={12} md={4} lg={3}>
-            <Style.ImageContainer>
-              <Style.Image src={image} />
-            </Style.ImageContainer>
-          </Grid>
-        ) : null}
-
-        <Grid item xs={12} md={image ? 6 : 12}>
+        <Grid item xs={12}>
           <Style.GridContainerCard container spacing={0}>
             <Grid item xs={4}>
               <Style.ProjectTitleContainer>
