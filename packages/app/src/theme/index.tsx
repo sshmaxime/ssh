@@ -30,6 +30,12 @@ declare module "@mui/material/styles" {
         backgroundColor: string;
         borderRadius: string;
       };
+      secondary: {
+        boxShadow: string;
+        padding: string;
+        backgroundColor: string;
+        borderRadius: string;
+      };
     };
     button: {
       cursor: string;
@@ -53,6 +59,12 @@ declare module "@mui/material/styles" {
     };
     cards: {
       primary: {
+        boxShadow: string;
+        padding: string;
+        backgroundColor: string;
+        borderRadius: string;
+      };
+      secondary: {
         boxShadow: string;
         padding: string;
         backgroundColor: string;
@@ -83,6 +95,12 @@ export const theme = createTheme({
       boxShadow: "5px 5px 5px #bebebe, -1px -1px 1px #fff",
       padding: "20px",
       backgroundColor: "#fff",
+      borderRadius: "25px",
+    },
+    secondary: {
+      boxShadow: "5px 5px 5px #bebebe, -1px -1px 1px #fff",
+      padding: "20px",
+      backgroundColor: "#f9f9fb",
       borderRadius: "25px",
     },
   },
