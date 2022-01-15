@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 
 const headerHeight = "10vh";
-const sizeWidthLeft = "1vw";
-const sizeWidthRight = "2.5vw";
+
+const bottomOverlayHeight = "30vh";
+
+const sizeWidthLeft = "20px";
+const sizeWidthRight = "20px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
@@ -18,22 +21,23 @@ const style = {
     position: "relative",
   })),
   Header: styled("div")(({ theme }) => ({
-    height: headerHeight,
-    width: "100%",
     position: "absolute",
     top: 0,
+    height: headerHeight,
+    width: "100vw",
+    zIndex: 1,
   })),
   Part1: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.secondary,
-    height: "calc(100vh - (125px + 15vh))",
+    height: `calc(100vh - ${bottomOverlayHeight})`,
     position: "relative",
   })),
   Overlay: styled("div")(({ theme }) => ({
+    position: "absolute",
+    height: bottomOverlayHeight,
+    bottom: 0,
     backgroundColor: theme.backgroundColor.primary,
     width: "100%",
-    position: "absolute",
-    bottom: 0,
-    height: "calc(125px + 15vh)",
     display: "flex",
     alignItems: "center",
   })),
@@ -42,46 +46,52 @@ const style = {
     justifyContent: "center",
     alignItems: "center",
   })),
-  BodyLeftSide: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
-    borderRadius: "5px",
+  LeftSide: styled("div")(({ theme }) => ({
     position: "absolute",
-    top: "15.25vh",
+    bottom: sizeWidthLeft,
     left: sizeWidthLeft,
     width: "20vw",
-    height: "55vh",
-    overflowY: "scroll",
-    //
-    opacity: 0.25,
-    transition: "all 1s",
-    ":hover": {
-      opacity: 1,
-    },
+    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - ${sizeWidthLeft})`,
   })),
-  LeftSide: styled("div")(({ theme }) => ({})),
   InnerLeftSide: styled("div")(({ theme }) => ({
     padding: "10px",
   })),
   HeaderLeftSide: styled(Grid)(({ theme }) => ({
     backgroundColor: "white",
     borderRadius: "5px",
-    position: "absolute",
-    top: "10vh",
-    left: sizeWidthLeft,
-    width: "20vw",
     padding: "10px",
+    height: "50px",
+  })),
+  BodyLeftSide: styled("div")(({ theme }) => ({
+    backgroundColor: theme.backgroundColor.primary,
+    borderRadius: "5px",
+    overflowY: "scroll",
+    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 50px - ${sizeWidthLeft})`,
+    opacity: 0.25,
+    transition: "all 1s",
+    ":hover": {
+      opacity: 1,
+    },
   })),
   ContainerInfo: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
+    zIndex: 2,
     position: "absolute",
     borderRadius: "5px",
-    padding: maxed ? "25px" : "0px",
     width: maxed ? "35vw" : "310px",
     bottom: maxed ? sizeWidthLeft : sizeWidthRight,
     right: maxed ? sizeWidthLeft : sizeWidthRight,
     backgroundColor: maxed ? "white" : "",
-    height: maxed ? "65vh" : "12.5vh",
+    height: maxed
+      ? `calc(100vh - 1vh - ${bottomOverlayHeight} - ${sizeWidthLeft})`
+      : "150px",
     transition: "all 0.5s ease-in-out",
   })),
+  InnerContainerInfo: styled("div")<{ maxed?: boolean }>(
+    ({ theme, maxed }) => ({
+      padding: maxed ? "25px" : "0px",
+      transition: "all 0.5s ease-in-out",
+    })
+  ),
   CloseContainerInfo: styled("div")<{ maxed?: boolean }>(
     ({ theme, maxed }) => ({
       position: "absolute",
@@ -99,11 +109,16 @@ const style = {
       fontWeight: 900,
     })
   ),
-  ContainerMoreInfoContent: styled("div")(({ theme }) => ({
-    marginTop: "25px",
-    height: "90%",
-    overflowY: "scroll",
-  })),
+  ContainerMoreInfoContent: styled("div")<{ maxed?: boolean }>(
+    ({ theme, maxed }) => ({
+      marginTop: "25px",
+      height: maxed
+        ? `calc(100vh - 1vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - 152.5px)`
+        : "0px",
+      overflowY: "scroll",
+      transition: "all 0.2s",
+    })
+  ),
   InnerContainerMoreInfoContent: styled("div")(({ theme }) => ({
     padding: "15px",
   })),
