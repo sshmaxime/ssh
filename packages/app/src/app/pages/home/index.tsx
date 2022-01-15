@@ -84,25 +84,23 @@ const Home: FC = () => {
           <Style.View3>
             <Project
               title={"DROP"}
-              id={"1"}
+              id={"0"}
               defaultLinks={{
-                mint: "/app/drop/1",
+                mint: "/app/drop/0",
               }}
-              otherLinks={[
-                {
-                  name: "Opensea",
-                  url: "https://google.com",
-                },
-                {
-                  name: "Etherscan",
-                  url: "https://google.com",
-                },
-              ]}
               description={
                 <Fragment>
-                  For this very first drop, SSH LABS is happy to give you the
-                  opportunity to mint an exclusive skateboard deck ! Rock it in
-                  the metaverse or in real life !
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                  aliquam arcu tristique sagittis tristique. Duis quis nulla
+                  sapien. Nam eleifend vulputate odio id semper. Proin augue
+                  est, malesuada quis malesuada sed, rutrum eu mauris. Phasellus
+                  lorem nisl, laoreet et congue non, dapibus sit amet erat.
+                  Etiam eget risus accumsan, scelerisque tellus eget,
+                  pellentesque ipsum. Nulla vulputate diam quam, ut consectetur
+                  sem suscipit ac. Fusce eget ex euismod, congue leo
+                  condimentum, lacinia augue. Vivamus mollis tempus orci a
+                  tincidunt. Nunc commodo augue eget ligula dapibus, a cursus
+                  nibh sollicitudin.
                 </Fragment>
               }
               info={{ mintPrice: "0.1 ETH" }}
@@ -136,7 +134,12 @@ const Home: FC = () => {
             tabs={[
               {
                 title: "/ DROP .",
-                imgs: { 1: af1x_exemple, 2: af1x_exemple, 3: af1x_exemple },
+                imgs: {
+                  1: af1x_exemple,
+                  2: af1x_exemple,
+                  3: af1x_exemple,
+                  4: af1x_exemple,
+                },
                 innerTab: (
                   <React.Fragment>
                     <p>
@@ -145,35 +148,36 @@ const Home: FC = () => {
                       blockchain as an <b> NFT</b> which is brought to life by a
                       <b> 3D model</b>.
                     </p>
-                    <br />
+                    <div style={{ height: "10px" }}></div>
                     <p>
                       In order to mint a DROP and original piece represented as
                       an NFT needs to be hold accountable for its creation.
                     </p>
-                    <br />
+                    <div style={{ height: "10px" }}></div>
                     <p>
                       Be assured, that at the root of every DROP a long process
                       of thought and discussion has occured to choose the
                       <b> best products </b> and <b> designs </b>.
                     </p>
-                    <br />
+                    <div style={{ height: "10px" }}></div>
                     <p>
                       Owning a DROP gives you<b> full ownership </b> over it and
                       its <b>3D model</b>.
                     </p>
-                    <br />
+                    <div style={{ height: "10px" }}></div>
                     <p>
                       Every single DROP is redeemable physically by burning an
                       <b> SSH Key </b> and the said DROP. However, be careful,
                       <b> SSH Key </b> might
                       <b> (they will)</b> become necessary at some point.
                     </p>
-                    <br />
+                    <div style={{ height: "10px" }}></div>
                     <p>
                       DROP bought on our platform gives to its buyer a free
                       <b> SSH Key</b>.
                     </p>
-                    <br />
+                    <div style={{ height: "10px" }}></div>
+                    <div style={{ height: "10px" }}></div>
                     <p>
                       <b>/ SSH .</b>
                     </p>

@@ -14,7 +14,9 @@ export const NavbarComponent: FC = () => {
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
             <Grid item flexGrow={1} xs={4}>
-              <img src={Logo} style={{ width: "60%" }} alt="" />
+              <Clickable address="/">
+                <img src={Logo} style={{ width: "60%" }} alt="" />
+              </Clickable>
             </Grid>
             <Grid item xs={8} style={{ display: "flex", alignItems: "center" }}>
               <Grid
@@ -31,7 +33,7 @@ export const NavbarComponent: FC = () => {
                 </Grid>
                 <div style={{ width: "25px" }} />
                 <Grid item>
-                  <Clickable address="/docs" external={false}>
+                  <Clickable address="/docs">
                     <Style.ExtraMenuButton>
                       <Grid container alignItems="center">
                         <Grid item>Docs</Grid>

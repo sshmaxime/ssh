@@ -14,7 +14,7 @@ export const NavbarComponent: FC = () => {
 
   return (
     <Style.Root>
-      <Style.AppBar position="absolute">
+      {/* <Style.AppBar position="absolute">
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
             <Grid item flexGrow={1} xs={4} />
@@ -35,7 +35,7 @@ export const NavbarComponent: FC = () => {
             </Grid>
           </Grid>
         </Toolbar>
-      </Style.AppBar>
+      </Style.AppBar> */}
     </Style.Root>
   );
 };
