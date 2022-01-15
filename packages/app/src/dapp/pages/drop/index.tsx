@@ -1,4 +1,4 @@
-import React, { Fragment, FC, useState, useEffect } from "react";
+import React, { Suspense, Fragment, FC, useState, useEffect } from "react";
 
 import {
   AppBar,
@@ -24,6 +24,10 @@ import { useLocation, useParams } from "react-router-dom";
 import af1x_exemple from "../../../_assets/images/Punk_7804.png";
 import comingSoon from "../../../_assets/images/comingsoon.png";
 import Pastille from "../../../_components/stateless/pastille";
+
+import { useLoader, Canvas } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Environment, OrbitControls } from "@react-three/drei";
 
 const listItems = [
   {
@@ -112,26 +116,50 @@ const pastilles = [
   },
 ];
 
+const Model = () => {
+  const gltf = useLoader(GLTFLoader, "/models/af1/AIR.gltf");
+  return (
+    <>
+      <primitive object={gltf.scene} scale={0.4} />
+    </>
+  );
+};
+
 const Drop: FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   let params = useParams();
 
-  console.log(params.id);
-  //
   const [currentItem, setItem] = React.useState(undefined as any);
 
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
-    setChecked((prev) => !prev);
+    if (checked === false) {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
   };
 
+  //
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
         <Style.Header></Style.Header>
         <Style.Part1>
+          {/* 3D */}
+          <Canvas
+            camera={{ position: [5, 5, 7.5] }}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <Suspense fallback={null}>
+              <Model />
+              <OrbitControls />
+              <Environment preset="sunset" />
+            </Suspense>
+          </Canvas>
+
           <Style.LeftSide>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
               <Grid item xs={6}>
@@ -210,42 +238,37 @@ const Drop: FC = () => {
           </Style.LeftSide>
 
           <Style.ContainerInfo maxed={checked}>
-            <Style.CloseContainerInfo maxed={checked} onClick={handleChange}>
-              CLOSE
-            </Style.CloseContainerInfo>
-            <Style.ContainerTitle>DROP #1</Style.ContainerTitle>
-            <Grid
-              container
-              spacing={1}
-              alignContent={"center"}
-              style={{ marginTop: "5px" }}
-            >
-              {pastilles.map((pastille) => (
-                <Grid key={pastille.title} item>
-                  <Tooltip arrow title={pastille.description} placement="top">
-                    <div>
-                      <Pastille title={pastille.title} />
-                    </div>
-                  </Tooltip>
-                </Grid>
-              ))}
-            </Grid>
-            <Style.ContainerMoreInfo maxed={checked} onClick={handleChange}>
-              <Grid container alignItems="center" justifyContent="center">
-                <Grid item>EXPLORE</Grid>
-                <Grid item>
-                  <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
-                </Grid>
+            <Style.InnerContainerInfo maxed={checked}>
+              <Style.CloseContainerInfo maxed={checked} onClick={handleChange}>
+                CLOSE
+              </Style.CloseContainerInfo>
+              <Style.ContainerTitle>DROP #1</Style.ContainerTitle>
+              <Grid
+                container
+                spacing={1}
+                alignContent={"center"}
+                style={{ marginTop: "5px" }}
+              >
+                {pastilles.map((pastille) => (
+                  <Grid key={pastille.title} item>
+                    <Tooltip arrow title={pastille.description} placement="top">
+                      <div>
+                        <Pastille title={pastille.title} />
+                      </div>
+                    </Tooltip>
+                  </Grid>
+                ))}
               </Grid>
-            </Style.ContainerMoreInfo>
+              <Style.ContainerMoreInfo maxed={checked} onClick={handleChange}>
+                <Grid container alignItems="center" justifyContent="center">
+                  <Grid item>EXPLORE</Grid>
+                  <Grid item>
+                    <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
+                  </Grid>
+                </Grid>
+              </Style.ContainerMoreInfo>
 
-            <Fade
-              reverse={!checked}
-              duration={250}
-              triggerOnce
-              style={{ height: "90%" }}
-            >
-              <Style.ContainerMoreInfoContent>
+              <Style.ContainerMoreInfoContent maxed={checked}>
                 <Style.InnerContainerMoreInfoContent>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Aliquam a nisl ac mi imperdiet vulputate sed eget nunc. Donec
@@ -340,13 +363,13 @@ const Drop: FC = () => {
                   vitae massa mattis, sodales nisi nec, imperdiet velit.
                 </Style.InnerContainerMoreInfoContent>
               </Style.ContainerMoreInfoContent>
-            </Fade>
+            </Style.InnerContainerInfo>
           </Style.ContainerInfo>
         </Style.Part1>
         <Style.Overlay>
           <Style.InnerOverlay>
             <Grid container alignItems="center" justifyContent="center">
-              <Grid item xs={9}>
+              <Grid item xs={10}>
                 <Grid
                   container
                   columnSpacing={4}
