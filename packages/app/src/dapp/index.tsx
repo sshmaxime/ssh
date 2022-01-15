@@ -21,7 +21,7 @@ const App: FC = () => {
         <NavbarComponent />
         <Routes>
           <Route path="/drop" element={<Drop />}>
-            <Route path=":id" element={<Drop />} />
+            <Route path=":id/:contract/:id" element={<Drop />} />
           </Route>
           {/* <Route path="/*" element={<Home />} /> */}
         </Routes>

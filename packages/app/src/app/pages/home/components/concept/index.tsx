@@ -15,7 +15,7 @@ import { Fade } from "react-awesome-reveal";
 type props = ContainerProps & {
   tabs: {
     title: string;
-    imgs: { 1: string; 2: string; 3: string };
+    imgs: { 1: string; 2: string; 3: string; 4: string };
     innerTab: any;
   }[];
 };
@@ -62,7 +62,7 @@ const ConceptComponent: FC<props> = ({
                       justifyContent: "center",
                     }}
                   >
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                       <Style.ImgTeam src={tab.imgs[1]} />
                     </Grid>
                     <Grid item xs={6}>
@@ -70,6 +70,9 @@ const ConceptComponent: FC<props> = ({
                     </Grid>
                     <Grid item xs={6}>
                       <Style.ImgTeam src={tab.imgs[3]} />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Style.ImgTeam src={tab.imgs[4]} />
                     </Grid>
                   </Grid>
                 </Grid>
