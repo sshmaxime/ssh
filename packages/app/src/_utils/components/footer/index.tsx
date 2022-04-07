@@ -1,13 +1,12 @@
 import { FC } from "react";
 
 import Style from "./style";
-import { NAME, HEADLINE, CREDENTIALS } from "../../../constants";
+import { HEADLINE, CREDENTIALS } from "../../constants";
 import { Grid } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import DiscordIcon from "../../../_assets/icons/discord2.svg";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import Clickable from "../../../_components/stateless/clickable";
-import Logo from "../../../_assets/images/logo-04.svg";
+import DiscordIcon from "../../assets/icons/discord2.svg";
+import Clickable from "../stateless/clickable";
+import Logo from "../../assets/images/logo-07.svg";
 
 export const FooterComponent: FC = () => {
   return (
