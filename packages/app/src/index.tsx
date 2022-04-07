@@ -1,43 +1,33 @@
-import React, { FC } from "react";
-import ReactDOM from "react-dom";
+import { FC } from "react";
 
-// theme
-import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "./theme";
+// store
+import { Provider } from "react-redux";
 
-// navigation
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+// router
+import { Routes, Route } from "react-router-dom";
 
-import "./index.css";
-
+// pages
 import App from "./app";
-import DApp from "./dapp";
+import Dapp from "./dapp";
+
+// store
+import { store } from "./store";
+import FooterComponent from "./_utils/components/footer";
+import NavbarComponent from "./_utils/components/navbar";
 
 const Index: FC = () => {
-  if (window.innerWidth < 1050) {
-    return (
-      <>
-        Mobile version is not stable yet. Use the website on your desktop. It's
-        much safer anyway.
-      </>
-    );
-  }
-
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
+    <>
+      <Provider store={store}>
+        <NavbarComponent />
         <Routes>
-          <Route path="/apps/*" element={<DApp />} />
-          <Route path="/*" element={<App />} />
+          <Route path="/" element={<App />} />
+          <Route path="/app" element={<Dapp />} />
         </Routes>
-      </ThemeProvider>
-    </BrowserRouter>
+        <FooterComponent />
+      </Provider>
+    </>
   );
 };
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Index />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+export default Index;

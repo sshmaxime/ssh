@@ -3,9 +3,9 @@ import { FC } from "react";
 import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
-import Clickable from "../../../_components/stateless/clickable";
+import Clickable from "../stateless/clickable";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import Logo from "../../../_assets/images/logo-04.svg";
+import Logo from "../../assets/images/logo-07.svg";
 
 export const NavbarComponent: FC = () => {
   return (
@@ -47,27 +47,6 @@ export const NavbarComponent: FC = () => {
                         </Grid>
                       </Grid>
                     </Style.ExtraMenuButton>
-                  </Clickable>
-                </Grid>
-
-                <Grid item>
-                  <Clickable address="/#team">
-                    <Style.ExtraMenuButton>Team</Style.ExtraMenuButton>
-                  </Clickable>
-                </Grid>
-                <Grid item>
-                  <Clickable address="/#roadmap">
-                    <Style.ExtraMenuButton>Roadmap</Style.ExtraMenuButton>
-                  </Clickable>
-                </Grid>
-                <Grid item>
-                  <Clickable address="/#concept">
-                    <Style.ExtraMenuButton>Concept</Style.ExtraMenuButton>
-                  </Clickable>
-                </Grid>
-                <Grid item>
-                  <Clickable address="/#projects">
-                    <Style.ExtraMenuButton>Projects</Style.ExtraMenuButton>
                   </Clickable>
                 </Grid>
               </Grid>
