@@ -23,7 +23,7 @@ const style = {
   TeamName: styled(Typography)(({ theme }) => ({
     ...theme.titles(theme).secondary,
     paddingLeft: "5px",
-    fontSize: "1.25em",
+    fontSize: "1em",
   })),
   SubTextSubtitle: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

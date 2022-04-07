@@ -94,7 +94,6 @@ const style = {
     color: black;
     font-size: 1em;
     border: none;
-    text-shadow: 1px 1px 0px #A4FF92;
     opacity: 50%;
 
     &:hover {
@@ -107,7 +106,6 @@ const style = {
     }
 
     &.${tabUnstyledClasses.selected} {
-      text-shadow: 5px 5px 0px #2AFE00;
       opacity: 100%;
       font-size: 1.5em;
     }

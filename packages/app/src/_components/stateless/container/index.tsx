@@ -1,21 +1,26 @@
-import React, { FC } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import { FC } from "react";
 
-// styles
 import Style from "./style";
 
-type props = {
+export type ContainerProps = {
   title: string;
+  subtitle: string;
+  bgcolor?: "primary" | "secondary";
 };
 
-const Container: FC<props> = ({ children, title }) => {
+const ContainerComponent: FC<ContainerProps> = ({
+  children,
+  title,
+  subtitle,
+  bgcolor: bgColor = "primary",
+}) => {
   return (
-    <Style.Root>
+    <Style.Root bgcolor={bgColor}>
       <Style.Title>{title}</Style.Title>
-      <Style.Container>{children}</Style.Container>
+      <Style.Subtitle>{subtitle}</Style.Subtitle>
+      {children}
     </Style.Root>
   );
 };
 
-export default Container;
+export default ContainerComponent;

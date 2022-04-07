@@ -13,7 +13,9 @@ import { Grid } from "@mui/material";
 // styles
 import Style from "./style";
 
-import Container, { ContainerProps } from "../../../_components/container";
+import Container, {
+  ContainerProps,
+} from "../../../../../_components/stateless/container";
 
 import { Slide } from "react-awesome-reveal";
 
@@ -40,7 +42,10 @@ const RoadmapComponent: FC<props> = ({
 }) => {
   return (
     <Container title={title} subtitle={subtitle} bgcolor={bgColor}>
-      <Timeline position="alternate">
+      <div style={{ fontFamily: "SourceCode", letterSpacing: "-0.5px" }}>
+        Coming soon ...
+      </div>
+      {/* <Timeline position="alternate">
         <TimelineItem style={{ display: "none" }}></TimelineItem>
         {roadmapItems.map((roadmapItem, index) => {
           const lineBetweenColor = roadmapItem.done
@@ -126,7 +131,7 @@ const RoadmapComponent: FC<props> = ({
             </TimelineItem>
           );
         })}
-      </Timeline>
+      </Timeline> */}
     </Container>
   );
 };

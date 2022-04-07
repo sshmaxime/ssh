@@ -7,15 +7,18 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import DiscordIcon from "../../../_assets/icons/discord2.svg";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Clickable from "../../../_components/stateless/clickable";
+import Logo from "../../../_assets/images/logo-04.svg";
 
 export const FooterComponent: FC = () => {
   return (
     <Style.Root>
       <Grid container>
         <Grid item xs={6}>
-          <Grid container spacing={0}>
+          <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Style.Title>{NAME}</Style.Title>
+              <Clickable address="/">
+                <img src={Logo} style={{ width: "250px" }} alt="" />
+              </Clickable>
             </Grid>
             <Grid item xs={12}>
               <Style.Subtitle>- {HEADLINE}</Style.Subtitle>
@@ -31,11 +34,6 @@ export const FooterComponent: FC = () => {
                 flexDirection="row-reverse"
                 alignContent="center"
               >
-                <Grid item>
-                  <Clickable address="https://github.com/ssh-labs0">
-                    <GitHubIcon />
-                  </Clickable>
-                </Grid>
                 <Grid item>
                   <Clickable address="https://discord.gg/FRAWgJJz4f">
                     <Style.ImgIcon src={DiscordIcon} alt="" />

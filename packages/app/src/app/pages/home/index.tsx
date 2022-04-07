@@ -6,7 +6,7 @@ import Style from "./style";
 import { Grid } from "@mui/material";
 
 import af1x_exemple from "../../../_assets/images/Punk_7804.png";
-import me from "../../../_assets/images/me.jpeg";
+import me from "../../../_assets/images/comingsoon.png";
 import comingSoon from "../../../_assets/images/comingsoon.png";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Project from "../../../_components/stateless/project";
@@ -15,9 +15,6 @@ import TeamComponent from "./components/team";
 import ConceptComponent from "./components/concept";
 import RoadmapComponent from "./components/roadmap";
 import MainComponent from "./components/main";
-
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import { useLocation } from "react-router-dom";
 
@@ -67,7 +64,7 @@ const Home: FC = () => {
                     <Style.ProjectExplanationImg2 src={comingSoon} />
                   </Grid>
                   <Grid item xs={2}>
-                    <Style.ProjectExplanationImg2Active src={af1x_exemple} />
+                    <Style.ProjectExplanationImg2 src={comingSoon} />
                   </Grid>
                   <Grid item xs={2}>
                     <Style.ProjectExplanationImg2 src={comingSoon} />
@@ -82,7 +79,7 @@ const Home: FC = () => {
 
           {/* View 3 */}
           <Style.View3>
-            <Project
+            {/* <Project
               title={"DROP"}
               id={"0"}
               defaultLinks={{
@@ -122,7 +119,7 @@ const Home: FC = () => {
                   description: "Minting this NFT gives your a free SSH Key.",
                 },
               ]}
-            />
+            /> */}
           </Style.View3>
         </Element>
 
@@ -146,18 +143,14 @@ const Home: FC = () => {
                       A DROP is a very<b> exclusive </b>and<b> limited </b>
                       piece of usable art that initially lives inside the
                       blockchain as an <b> NFT</b> which is brought to life by a
-                      <b> 3D model</b>.
+                      <b> 3D model</b> and a <b> physical object</b>.
                     </p>
                     <div style={{ height: "10px" }}></div>
                     <p>
-                      In order to mint a DROP and original piece represented as
-                      an NFT needs to be hold accountable for its creation.
-                    </p>
-                    <div style={{ height: "10px" }}></div>
-                    <p>
-                      Be assured, that at the root of every DROP a long process
-                      of thought and discussion has occured to choose the
-                      <b> best products </b> and <b> designs </b>.
+                      As is, a <b>DROP</b> is a bare NFT and cannot reach its
+                      full potential. In order for it to reveal itself a DROP
+                      will either have to be <b>MERGED</b> or
+                      <b> STAMPED</b>.
                     </p>
                     <div style={{ height: "10px" }}></div>
                     <p>
@@ -166,15 +159,15 @@ const Home: FC = () => {
                     </p>
                     <div style={{ height: "10px" }}></div>
                     <p>
-                      Every single DROP is redeemable physically by burning an
-                      <b> SSH Key </b> and the said DROP. However, be careful,
-                      <b> SSH Key </b> might
-                      <b> (they will)</b> become necessary at some point.
+                      Every single DROP is meant to be redeemable physically by
+                      burning an <b> SSH Key </b>. However, be careful,
+                      <b> SSH Key </b> might <b> (they will)</b> become
+                      necessary for other things at some point.
                     </p>
                     <div style={{ height: "10px" }}></div>
                     <p>
-                      DROP bought on our platform gives to its buyer a free
-                      <b> SSH Key</b>.
+                      DROP minted gives a free
+                      <b> SSH Key</b> to the minter.
                     </p>
                     <div style={{ height: "10px" }}></div>
                     <div style={{ height: "10px" }}></div>
@@ -196,7 +189,8 @@ const Home: FC = () => {
             roadmapItems={[
               {
                 step: "February. 1st. 2022.",
-                title: "Drop #1",
+                title: "MINT START",
+                type: "Drop #1",
                 icon: <FastfoodIcon />,
                 description: (
                   <Fragment>
@@ -212,8 +206,8 @@ const Home: FC = () => {
               },
               {
                 step: "February. 28th. 2022.",
-                title: "Drop #1",
-                type: "END",
+                title: "MINT END",
+                type: "Drop #1",
                 icon: <FastfoodIcon />,
                 description: <Fragment>All good things have an end.</Fragment>,
                 done: true,
@@ -224,8 +218,8 @@ const Home: FC = () => {
               },
               {
                 step: "TBD.",
-                title: "Drop #1",
-                type: "REDEEM",
+                title: "REDEEM",
+                type: "Drop #1",
                 icon: <FastfoodIcon />,
                 description: (
                   <Fragment>
@@ -253,16 +247,7 @@ const Home: FC = () => {
                 job: "FOUNDER",
                 img: me,
                 bgColor: "#B4FFA5",
-                icons: [
-                  {
-                    img: <GitHubIcon />,
-                    link: "https://github.com/sshmaxime",
-                  },
-                  {
-                    img: <LinkedInIcon />,
-                    link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
-                  },
-                ],
+                icons: [],
               },
             ]}
           />

@@ -37,7 +37,7 @@ const style = {
   })),
   //
   View3: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level0,
+    ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.secondary,
     paddingTop: "1vh",
     paddingBottom: "10vh",
