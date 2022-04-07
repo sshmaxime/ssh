@@ -7,7 +7,9 @@ import { Grid } from "@mui/material";
 // styles
 import Style from "./style";
 
-import Container, { ContainerProps } from "../../../_components/container";
+import Container, {
+  ContainerProps,
+} from "../../../../../_components/stateless/container";
 
 import { Fade } from "react-awesome-reveal";
 import Clickable from "../../../../../_components/stateless/clickable";
@@ -44,7 +46,7 @@ const TeamComponent: FC<props> = ({
             <Grid key={person.name} item xs={3}>
               <Fade triggerOnce>
                 <Grid container>
-                  <Grid item xs={6}>
+                  <Grid item xs={10}>
                     <Grid container spacing={0}>
                       <Grid item xs={12}>
                         <Style.TeamName>{person.name}</Style.TeamName>
@@ -56,7 +58,7 @@ const TeamComponent: FC<props> = ({
                     </Grid>
                   </Grid>
 
-                  <Grid item xs={6}>
+                  <Grid item xs={2}>
                     <Grid
                       container
                       spacing={1}

@@ -8,7 +8,9 @@ import { Transition } from "react-transition-group";
 import Style from "./style";
 
 import TabsUnstyled from "@mui/base/TabsUnstyled";
-import Container, { ContainerProps } from "../../../_components/container";
+import Container, {
+  ContainerProps,
+} from "../../../../../_components/stateless/container";
 
 import { Fade } from "react-awesome-reveal";
 
@@ -29,7 +31,10 @@ const ConceptComponent: FC<props> = ({
 }) => {
   return (
     <Container title={title} subtitle={subtitle} bgcolor={bgColor}>
-      <TabsUnstyled defaultValue={0}>
+      <div style={{ fontFamily: "SourceCode", letterSpacing: "-0.5px" }}>
+        Coming soon ...
+      </div>
+      {/* <TabsUnstyled defaultValue={0}>
         <Grid item xs={8}>
           <Style.TabsList>
             {tabs.map((tab) => (
@@ -80,7 +85,7 @@ const ConceptComponent: FC<props> = ({
             </Fade>
           </Style.TabPanel>
         ))}
-      </TabsUnstyled>
+      </TabsUnstyled> */}
     </Container>
   );
 };

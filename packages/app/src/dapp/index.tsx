@@ -4,15 +4,16 @@ import { FC } from "react";
 import { Provider } from "react-redux";
 
 // router
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // pages
-import Drop from "./pages/drop";
+import DropPage from "./projects/drop/page";
+import DropDapp from "./projects/drop/dapp";
 
 // store
 import { store } from "./store";
+import FooterComponent from "./components/footer";
 import NavbarComponent from "./components/navbar";
-import Home from "./pages/home";
 
 const App: FC = () => {
   return (
@@ -20,11 +21,11 @@ const App: FC = () => {
       <Provider store={store}>
         <NavbarComponent />
         <Routes>
-          <Route path="/drop" element={<Drop />}>
-            <Route path=":id/:contract/:id" element={<Drop />} />
-          </Route>
-          {/* <Route path="/*" element={<Home />} /> */}
+          {/* DROP */}
+          <Route path="/drop" element={<DropPage />} />
+          <Route path="/drop/app" element={<DropDapp />} />
         </Routes>
+        <FooterComponent />
       </Provider>
     </>
   );

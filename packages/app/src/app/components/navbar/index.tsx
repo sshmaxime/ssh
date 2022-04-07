@@ -15,7 +15,7 @@ export const NavbarComponent: FC = () => {
           <Grid container columnSpacing={0} rowSpacing={0}>
             <Grid item flexGrow={1} xs={4}>
               <Clickable address="/">
-                <img src={Logo} style={{ width: "60%" }} alt="" />
+                <img src={Logo} style={{ width: "250px" }} alt="" />
               </Clickable>
             </Grid>
             <Grid item xs={8} style={{ display: "flex", alignItems: "center" }}>
