@@ -7,7 +7,6 @@ import { Grid } from "@mui/material";
 // styles
 import Style from "./style";
 
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import af1x_exemple from "../_utils/assets/images/Punk_7804.png";
 import imgForMiddle from "../_utils/assets/images/imgForMiddle.png";
 import { My3DRoom } from "../dapp";
@@ -16,6 +15,8 @@ import { My3DRoom } from "../dapp";
 import ThreeDCoomponent from "../_utils/components/3d";
 import ModelSkate from "../_utils/assets/models/Skate";
 import { OrbitControls } from "@react-three/drei";
+import ThreeDHouse from "./components/3d_house";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 type props = {};
 
@@ -24,14 +25,11 @@ const MainComponent: FC<props> = ({ children }) => {
     <Style.Root>
       <Style.View1>
         <Style.Background>
-          <Suspense fallback={null}>
-            <My3DRoom />
-          </Suspense>
+          <ThreeDHouse />
           <Style.TitleContainer2>
             EXCLUSIVE <br />
             LIMITED <br />
-            USABLE <br />
-            WEARABLE
+            CUSTOMIZABLE
           </Style.TitleContainer2>
           <Style.TitleContainer>
             <ArrowRightAltIcon
@@ -66,7 +64,11 @@ const MainComponent: FC<props> = ({ children }) => {
               </b>
               piece of art that initially lives inside the blockchain as an{" "}
               <b>NFT</b> which is brought to life in the metaverse by a{" "}
-              <b>3D model</b> and backed IRL by a <b>physicial object</b>.
+              <b>3D model</b> and backed IRL by a{" "}
+              <b>
+                <u>redeemable</u> physical object
+              </b>
+              .
               <Style.View3Container>
                 <Grid container justifyContent="center">
                   <Grid item xs={4}>
@@ -93,10 +95,10 @@ const MainComponent: FC<props> = ({ children }) => {
                           NFT{" "}
                           <span
                             style={{
-                              fontSize: "0.6em",
+                              fontSize: "0.7em",
                             }}
                           >
-                            (SUBLIME)
+                            (SUBLIME#825)
                           </span>
                         </Style.View3StepName>
                       </Grid>
@@ -114,22 +116,14 @@ const MainComponent: FC<props> = ({ children }) => {
                   </Grid>
                 </Grid>
               </Style.View3Container>
-              <b>
-                <div
-                  style={{
-                    marginBottom: "10px",
-                    fontWeight: 900,
-                  }}
-                >
-                  <u>TO KNOW:</u>
-                </div>
-              </b>
-              - <b>Full Ownership</b>.
-              <br />- A DRIP can be in two states: <b>blank</b> or{" "}
-              <b>complete</b>.
-              <br />- Minting a DRIP gives an<b> SSH KEY </b>.
-              <br />- You can only redeem the physical object by burning an
-              <b> SSH KEY </b>.
+              <div style={{ fontWeight: 900, marginBottom: "10px" }}>
+                <u>WARRANTY:</u>
+              </div>
+              <ul>
+                <li>
+                  &#8226; The final product will be <b>dope af</b>.
+                </li>
+              </ul>
             </Style.View2Content>
             {/* <Style.View3> */}
           </Grid>
@@ -156,16 +150,26 @@ const MainComponent: FC<props> = ({ children }) => {
                   DRIPx{" "}
                   <span
                     style={{
-                      fontSize: "0.6em",
+                      fontSize: "0.7em",
                     }}
                   >
-                    SUBLIME
+                    SUBLIME#825
                   </span>
                 </Style.View3StepName>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+        <Style.MoreLinkContainer>
+          <Grid container>
+            <Grid item>
+              <Style.MoreLink>READ MORE</Style.MoreLink>
+            </Grid>
+            <Grid item>
+              <ArrowRightAltIcon style={{ fontSize: "1.5em" }} />
+            </Grid>
+          </Grid>
+        </Style.MoreLinkContainer>
       </Style.View2>
 
       {/* </Style.View3> */}

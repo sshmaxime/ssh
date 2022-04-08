@@ -98,12 +98,24 @@ const style = {
     marginBottom: "35px",
     display: "inline-block",
     borderRadius: "2.5px",
+    textShadow: `10px 10px ${theme.backgroundColor.tertiary}`,
   })),
   View2Content: styled("div")(({ theme }) => ({
     fontSize: "1.1em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
     lineHeight: "1.5em",
+  })),
+  MoreLinkContainer: styled("div")(({ theme }) => ({
+    paddingTop: "25px",
+  })),
+  MoreLink: styled("div")(({ theme }) => ({
+    fontSize: "0.8em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    color: "black",
+    textShadow: "5px 5px khaki",
+    letterSpacing: "1.5px",
   })),
 
   //
@@ -112,7 +124,7 @@ const style = {
     backgroundImage: `linear-gradient(180deg, ${theme.backgroundColor.primary} 50%,  ${theme.backgroundColor.secondary} 50%)`,
   })),
   View3StepName: styled(Typography)(({ theme }) => ({
-    fontSize: "1em",
+    fontSize: "1rem",
     paddingLeft: "15px",
     paddingRight: "15px",
     borderRadius: "5px",
@@ -132,8 +144,8 @@ const style = {
     textAlign: "center",
   })),
   View3Container: styled("div")(({ theme }) => ({
-    paddingTop: "5vh",
-    paddingBottom: "5vh",
+    paddingTop: "25px",
+    paddingBottom: "25px",
   })),
 
   //
