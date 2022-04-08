@@ -100,7 +100,7 @@ const style = {
     borderRadius: "2.5px",
   })),
   View2Content: styled("div")(({ theme }) => ({
-    fontSize: "1.25em",
+    fontSize: "1.1em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
     lineHeight: "1.5em",
@@ -112,9 +112,9 @@ const style = {
     backgroundImage: `linear-gradient(180deg, ${theme.backgroundColor.primary} 50%,  ${theme.backgroundColor.secondary} 50%)`,
   })),
   View3StepName: styled(Typography)(({ theme }) => ({
-    fontSize: "20px",
-    paddingLeft: "25px",
-    paddingRight: "25px",
+    fontSize: "1em",
+    paddingLeft: "15px",
+    paddingRight: "15px",
     borderRadius: "5px",
     fontStyle: "italic",
     fontFamily: theme.fontFamily.primary,

@@ -217,93 +217,93 @@ body,
 
 @font-face {
   font-family: bar;
-  src: url(./_assets/fonts/bar.ttf);
+  src: url(./_utils/assets/fonts/bar.ttf);
 }
 
 @font-face {
   font-family: nobar;
-  src: url(./_assets/fonts/nobar.ttf);
+  src: url(./_utils/assets/fonts/nobar.ttf);
 }
 
 /* Roman */
 @font-face {
   font-family: roman;
-  src: url(./_assets/fonts/roman.ttf);
+  src: url(./_utils/assets/fonts/roman.ttf);
   font-weight: 500;
 }
 
 /* SourceCode */
 @font-face {
   font-family: sourcecode;
-  src: url(./_assets/fonts/SourceCodePro-Light.ttf);
+  src: url(./_utils/assets/fonts/SourceCodePro-Light.ttf);
   font-weight: 300;
 }
 
 @font-face {
   font-family: sourcecode;
-  src: url(./_assets/fonts/SourceCodePro-Regular.ttf);
+  src: url(./_utils/assets/fonts/SourceCodePro-Regular.ttf);
   font-weight: 500;
 }
 
 @font-face {
   font-family: sourcecode;
-  src: url(./_assets/fonts/SourceCodePro-Bold.ttf);
+  src: url(./_utils/assets/fonts/SourceCodePro-Bold.ttf);
   font-weight: 700;
 }
 
 @font-face {
   font-family: sourcecode;
-  src: url(./_assets/fonts/SourceCodePro-Black.ttf);
+  src: url(./_utils/assets/fonts/SourceCodePro-Black.ttf);
   font-weight: 900;
 }
 
 /* SourceSans */
 @font-face {
   font-family: sourcesans;
-  src: url(./_assets/fonts/SourceSansPro-Light.ttf);
+  src: url(./_utils/assets/fonts/SourceSansPro-Light.ttf);
   font-weight: 300;
 }
 
 @font-face {
   font-family: sourcesans;
-  src: url(./_assets/fonts/SourceSansPro-Regular.ttf);
+  src: url(./_utils/assets/fonts/SourceSansPro-Regular.ttf);
   font-weight: 500;
 }
 
 @font-face {
   font-family: sourcesans;
-  src: url(./_assets/fonts/SourceSansPro-Bold.ttf);
+  src: url(./_utils/assets/fonts/SourceSansPro-Bold.ttf);
   font-weight: 700;
 }
 
 @font-face {
   font-family: sourcesans;
-  src: url(./_assets/fonts/SourceSansPro-Black.ttf);
+  src: url(./_utils/assets/fonts/SourceSansPro-Black.ttf);
   font-weight: 900;
 }
 
 /* Montserrat */
 @font-face {
   font-family: montserrat;
-  src: url(./_assets/fonts/Montserrat-Light.ttf);
+  src: url(./_utils/assets/fonts/Montserrat-Light.ttf);
   font-weight: 300;
 }
 
 @font-face {
   font-family: montserrat;
-  src: url(./_assets/fonts/Montserrat-Regular.ttf);
+  src: url(./_utils/assets/fonts/Montserrat-Regular.ttf);
   font-weight: 500;
 }
 
 @font-face {
   font-family: montserrat;
-  src: url(./_assets/fonts/Montserrat-Black.ttf);
+  src: url(./_utils/assets/fonts/Montserrat-Black.ttf);
   font-weight: 900;
 }
 
 @font-face {
   font-family: montserrat;
-  src: url(./_assets/fonts/Montserrat-BlackItalic.ttf);
+  src: url(./_utils/assets/fonts/Montserrat-BlackItalic.ttf);
   font-weight: 900;
   font-style: italic;
 }
