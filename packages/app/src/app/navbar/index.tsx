@@ -3,9 +3,9 @@ import { FC } from "react";
 import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
-import Clickable from "../stateless/clickable";
+import Clickable from "../../_utils/components/stateless/clickable";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import Logo from "../../assets/images/logo-07.svg";
+import Logo from "../../_utils/assets/images/logo-07.svg";
 
 export const NavbarComponent: FC = () => {
   return (

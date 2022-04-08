@@ -150,8 +150,8 @@ export const theme = createTheme({
       },
       level1: {
         [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "16.5vw",
-          paddingRight: "16.5vw",
+          paddingLeft: "12.5vw",
+          paddingRight: "12.5vw",
         },
         [themeObj.breakpoints.down("lg")]: {
           paddingLeft: "10vw",
