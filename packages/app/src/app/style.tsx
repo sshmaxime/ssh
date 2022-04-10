@@ -107,14 +107,14 @@ const style = {
     lineHeight: "1.5em",
   })),
   MoreLinkContainer: styled("div")(({ theme }) => ({
-    paddingTop: "25px",
+    paddingTop: "35px",
   })),
   MoreLink: styled("div")(({ theme }) => ({
-    fontSize: "0.8em",
+    fontSize: "0.85em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     color: "black",
-    textShadow: "5px 5px khaki",
+    textShadow: "2.5px 2.5px khaki",
     letterSpacing: "1.5px",
   })),
 

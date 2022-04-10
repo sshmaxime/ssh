@@ -1,4 +1,4 @@
-import React, { FC, Suspense } from "react";
+import React, { FC, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
@@ -20,7 +20,44 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 type props = {};
 
+const exempleDrip = [
+  {
+    itemId: 825,
+    texturePath: "/models/skate/Tex/Artboard 2.png",
+    placeholderPath: "/models/skate/Tex/imgForMiddle.png",
+  },
+  {
+    itemId: 397,
+    texturePath: "/models/skate/Tex/Artboard 2.png",
+    placeholderPath: "/models/skate/Tex/imgForMiddle1.png",
+  },
+  {
+    itemId: 527,
+    texturePath: "/models/skate/Tex/Artboard 2.png",
+    placeholderPath: "/models/skate/Tex/imgForMiddle2.png",
+  },
+];
+
 const MainComponent: FC<props> = ({ children }) => {
+  const [stateCounter, setStateCounter] = useState(0);
+  const [state, setState] = useState(exempleDrip[0]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      let innerStateCounter = stateCounter;
+
+      if (stateCounter === exempleDrip.length - 1) {
+        innerStateCounter = 0;
+      } else {
+        innerStateCounter = stateCounter + 1;
+      }
+      setState(exempleDrip[innerStateCounter]);
+      setStateCounter(innerStateCounter);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [stateCounter]);
+
   return (
     <Style.Root>
       <Style.View1>
@@ -29,7 +66,7 @@ const MainComponent: FC<props> = ({ children }) => {
           <Style.TitleContainer2>
             EXCLUSIVE <br />
             LIMITED <br />
-            CUSTOMIZABLE
+            CUSTOMIZABLE <br />
           </Style.TitleContainer2>
           <Style.TitleContainer>
             <ArrowRightAltIcon
@@ -98,13 +135,13 @@ const MainComponent: FC<props> = ({ children }) => {
                               fontSize: "0.7em",
                             }}
                           >
-                            (SUBLIME#825)
+                            (SUBLIME#{state.itemId})
                           </span>
                         </Style.View3StepName>
                       </Grid>
                       <Grid item xs={12}>
                         <img
-                          src={imgForMiddle}
+                          src={state.placeholderPath}
                           style={{ width: "100%" }}
                           alt=""
                         />
@@ -132,13 +169,10 @@ const MainComponent: FC<props> = ({ children }) => {
               <Grid item xs={12}>
                 <ThreeDCoomponent camera={[0, 0, -60]}>
                   <ambientLight intensity={0.95} />
-                  <ModelSkate
-                    position={[0, 0, 0]}
-                    rotation={[Math.PI / 2, Math.PI / 2, Math.PI]}
-                  />
+                  <ModelSkate {...state} />
                   <OrbitControls
                     autoRotate={true}
-                    autoRotateSpeed={10}
+                    autoRotateSpeed={7.5}
                     enableZoom={false}
                     enableRotate={false}
                     target={[0, 0, 0]}
@@ -162,21 +196,19 @@ const MainComponent: FC<props> = ({ children }) => {
         </Grid>
         <Style.MoreLinkContainer>
           <Grid container>
-            <Grid item>
+            <Grid item alignSelf={"center"}>
               <Style.MoreLink>READ MORE</Style.MoreLink>
             </Grid>
-            <Grid item>
-              <ArrowRightAltIcon style={{ fontSize: "1.5em" }} />
+            <Grid item alignSelf={"center"}>
+              <ArrowRightAltIcon style={{ fontSize: "1.8em" }} />
             </Grid>
           </Grid>
         </Style.MoreLinkContainer>
       </Style.View2>
 
-      {/* </Style.View3> */}
-
       <Style.View4>
         <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
-        <Style.View2Content>TBA</Style.View2Content>
+        <Style.View2Content>TBD</Style.View2Content>
       </Style.View4>
     </Style.Root>
   );
