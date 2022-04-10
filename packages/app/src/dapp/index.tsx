@@ -140,10 +140,10 @@ export const My3DScene: FC = () => {
       >
         {/*  */}
         <ambientLight intensity={0.95} />
-        <ModelSkate
+        {/* <ModelSkate
           position={[0, 45, 0]}
           rotation={[Math.PI / 2, Math.PI / 2, Math.PI]}
-        />
+        /> */}
         {/* <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
           <planeGeometry args={[100, 100, 100, 100]} />
           <meshBasicMaterial side={THREE.DoubleSide} color="black" />
