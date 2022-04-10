@@ -53,7 +53,7 @@ const MainComponent: FC<props> = ({ children }) => {
       }
       setState(exempleDrip[innerStateCounter]);
       setStateCounter(innerStateCounter);
-    }, 5000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, [stateCounter]);
@@ -153,12 +153,24 @@ const MainComponent: FC<props> = ({ children }) => {
                   </Grid>
                 </Grid>
               </Style.View3Container>
-              <div style={{ fontWeight: 900, marginBottom: "10px" }}>
+              <div
+                style={{
+                  fontSize: "1.1em",
+                  fontWeight: 900,
+                  marginBottom: "10px",
+                }}
+              >
                 <u>WARRANTY:</u>
               </div>
-              <ul>
+              <ul style={{ lineHeight: "1.70em" }}>
                 <li>
-                  &#8226; The final product will be <b>dope af</b>.
+                  &#8226; <b>High Quality</b> 3D models.
+                </li>
+                <li>
+                  &#8226; <b>High Quality</b> IRL products.
+                </li>
+                <li>
+                  &#8226; Final products will be <b>dope af</b>.
                 </li>
               </ul>
             </Style.View2Content>
