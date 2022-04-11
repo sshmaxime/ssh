@@ -8,7 +8,6 @@ import { GLTF } from "three-stdlib";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { Center, useGLTF, useTexture } from "@react-three/drei";
-import { props } from "./Skate";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -39,31 +38,28 @@ type GLTFResult = GLTF & {
 
 const modelPath = "/models/skate/skate-transformed.glb";
 
+export type props = {
+  placeholderTexture: THREE.Texture;
+  deckTexture: THREE.Texture;
+  id: number;
+};
+
 const SkateDefault: FC<props> = (props) => {
   const group = useRef<THREE.Group>(null);
-  const meshRef = useRef<THREE.Mesh>(null);
 
   // model
   const { nodes, materials } = useGLTF(modelPath) as GLTFResult;
 
-  // textures
-  const [deckTex] = useLoader(TextureLoader, [props.texturePath]);
-  const [placeholderTex] = useLoader(TextureLoader, [props.placeholderPath]);
-
-  // itemId
-  const itemId = "#" + props.itemId.toFixed();
-
   // Deck
-  deckTex.flipY = false;
-  materials.Deck.map = deckTex;
   materials.Deck.color = null as any;
   materials.Deck.toneMapped = false;
 
-  // Placeholder
-  placeholderTex.flipY = false;
-  materials.Placeholder.map = placeholderTex;
+  // // Placeholder
   materials.Placeholder.color = null as any;
   materials.Placeholder.toneMapped = false;
+
+  // itemId
+  const itemId = "#" + props.id.toFixed();
 
   const canvas = document.createElement("canvas");
 
@@ -80,6 +76,9 @@ const SkateDefault: FC<props> = (props) => {
 
   const newMaterial = new THREE.CanvasTexture(canvas);
 
+  materials.Deck.map = props.deckTexture;
+  materials.Placeholder.map = props.placeholderTexture;
+
   return (
     <Center>
       <group
@@ -94,7 +93,6 @@ const SkateDefault: FC<props> = (props) => {
           rotation={[Math.PI / 2, 0, 0]}
         />
         <mesh
-          ref={meshRef}
           geometry={nodes.Placeholder.geometry}
           material={materials.Placeholder}
           rotation={[Math.PI / 2, 0, 0]}
