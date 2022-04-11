@@ -14,7 +14,9 @@ const triangleHeight = "10vh";
 
 const style = {
   Root: styled("div")(({ theme }) => ({})),
-  View1: styled("div")(({ theme }) => ({
+
+  //
+  LandingScreenComponent: styled("div")(({ theme }) => ({
     height: "100vh",
   })),
   Background: styled("div")(({ theme }) => ({
@@ -84,7 +86,7 @@ const style = {
   })),
 
   //
-  View2: styled("div")(({ theme }) => ({
+  DripComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.primary,
     paddingBottom: "10vh",
@@ -149,7 +151,7 @@ const style = {
   })),
 
   //
-  View4: styled("div")(({ theme }) => ({
+  RoadmapComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.secondary,
     paddingTop: "10vh",
