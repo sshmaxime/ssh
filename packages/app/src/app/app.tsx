@@ -42,21 +42,21 @@ const MainComponent: FC<props> = ({ children }) => {
   const [stateCounter, setStateCounter] = useState(0);
   const [state, setState] = useState(exempleDrip[0]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      let innerStateCounter = stateCounter;
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     let innerStateCounter = stateCounter;
 
-      if (stateCounter === exempleDrip.length - 1) {
-        innerStateCounter = 0;
-      } else {
-        innerStateCounter = stateCounter + 1;
-      }
-      setState(exempleDrip[innerStateCounter]);
-      setStateCounter(innerStateCounter);
-    }, 2500);
+  //     if (stateCounter === exempleDrip.length - 1) {
+  //       innerStateCounter = 0;
+  //     } else {
+  //       innerStateCounter = stateCounter + 1;
+  //     }
+  //     setState(exempleDrip[innerStateCounter]);
+  //     setStateCounter(innerStateCounter);
+  //   }, 2500);
 
-    return () => clearInterval(interval);
-  }, [stateCounter]);
+  //   return () => clearInterval(interval);
+  // }, [stateCounter]);
 
   return (
     <Style.Root>
@@ -181,7 +181,7 @@ const MainComponent: FC<props> = ({ children }) => {
               <Grid item xs={12}>
                 <ThreeDCoomponent camera={[0, 0, -60]}>
                   <ambientLight intensity={0.95} />
-                  <ModelSkate {...state} />
+                  <ModelSkate />
                   <OrbitControls
                     autoRotate={true}
                     autoRotateSpeed={7.5}
