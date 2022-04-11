@@ -35,7 +35,7 @@ import Pastille from "../_utils/components/stateless/pastille";
 import { useLoader, Canvas } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Environment, OrbitControls } from "@react-three/drei";
-import ModelSkate from "../_utils/assets/models/Skate";
+import ModelSkate from "../app/3dscenes/demo/skate";
 import ModelRoom from "../_utils/assets/models/Room";
 import * as THREE from "three";
 
