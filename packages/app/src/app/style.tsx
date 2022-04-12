@@ -1,14 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Card,
-  Grid,
-  SwipeableDrawer,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Card, Grid, SwipeableDrawer } from "@mui/material";
 
 const triangleHeight = "10vh";
 
@@ -106,17 +98,23 @@ const style = {
     fontSize: "1.1em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
-    lineHeight: "1.5em",
+    lineHeight: "1.75em",
   })),
   MoreLinkContainer: styled("div")(({ theme }) => ({
-    paddingTop: "35px",
+    marginTop: "35px",
+    display: "inline-block",
+    backgroundColor: theme.backgroundColor.secondary,
+    paddingLeft: "7.5px",
+    paddingRight: "7.5px",
+    borderRadius: "5px",
   })),
+
   MoreLink: styled("div")(({ theme }) => ({
     fontSize: "0.85em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     color: "black",
-    textShadow: "2.5px 2.5px khaki",
+    textShadow: "5px 5px white",
     letterSpacing: "1.5px",
   })),
 
