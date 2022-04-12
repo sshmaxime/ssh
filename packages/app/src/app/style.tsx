@@ -83,6 +83,12 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     paddingBottom: "10vh",
   })),
+  DripWarningContainer: styled("div")(({ theme }) => ({
+    marginTop: "35px",
+    padding: "15px",
+    backgroundColor: theme.backgroundColor.secondary,
+    borderRadius: "5px",
+  })),
   ViewTitle: styled("div")(({ theme }) => ({
     fontSize: "3em",
     fontFamily: theme.fontFamily.primary,
@@ -103,18 +109,11 @@ const style = {
   MoreLinkContainer: styled("div")(({ theme }) => ({
     marginTop: "35px",
     display: "inline-block",
-    backgroundColor: theme.backgroundColor.secondary,
-    paddingLeft: "7.5px",
-    paddingRight: "7.5px",
-    borderRadius: "5px",
   })),
-
   MoreLink: styled("div")(({ theme }) => ({
     fontSize: "0.85em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
-    color: "black",
-    textShadow: "5px 5px white",
     letterSpacing: "1.5px",
   })),
 
