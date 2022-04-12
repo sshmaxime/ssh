@@ -158,27 +158,57 @@ const DripComponent: FC<props> = () => {
                 </Grid>
               </Grid>
             </Style.View3Container>
-            <div
-              style={{
-                fontSize: "0.9em",
-                fontWeight: 900,
-                marginBottom: "10px",
-                letterSpacing: "1px",
-              }}
-            >
-              <u>WARRANTY :</u>
-            </div>
-            <ul>
-              <li>
-                &#8226; <b>High Quality</b> 3D models.
-              </li>
-              <li>
-                &#8226; <b>High Quality</b> IRL products.
-              </li>
-              <li>
-                &#8226; Your friends will be <b>jealous</b>.
-              </li>
-            </ul>
+            At the border between the{" "}
+            <b>
+              <u>metaverse</u>
+            </b>{" "}
+            and the{" "}
+            <b>
+              <u>real world</u>
+            </b>
+            , you can finally{" "}
+            <b>
+              <u>wear</u>
+            </b>
+            {" & "}
+            <b>
+              <u>use your NFT</u>
+            </b>{" "}
+            through{" "}
+            <b>
+              <u>exclusive</u>
+            </b>
+            {" & "}
+            <b>
+              <u>collectionable</u>
+            </b>{" "}
+            items on the{" "}
+            <b>
+              <u>blockchain</u>
+            </b>{" "}
+            and{" "}
+            <b>
+              <u>IRL</u>
+            </b>
+            .
+            <br />
+            <Style.DripWarningContainer>
+              <div
+                style={{
+                  fontSize: "0.9em",
+                  fontWeight: 900,
+                  marginBottom: "10px",
+                  letterSpacing: "1px",
+                }}
+              >
+                <u>WARNING :</u>
+              </div>
+              <ul>
+                <li>
+                  &#8226; Your friends will be <b>jealous</b>.
+                </li>
+              </ul>
+            </Style.DripWarningContainer>
           </Style.View2Content>
         </Grid>
         <Grid item xs={4}>
@@ -223,7 +253,7 @@ const DripComponent: FC<props> = () => {
             <Style.MoreLink>READ MORE</Style.MoreLink>
           </Grid>
           <Grid item alignSelf={"center"}>
-            <ArrowRightAltIcon style={{ fontSize: "1.8em" }} />
+            <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
           </Grid>
         </Grid>
       </Style.MoreLinkContainer>
