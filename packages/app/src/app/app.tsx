@@ -65,7 +65,7 @@ const DripComponent: FC<props> = () => {
     },
   ];
 
-  const deckTextures = ["/models/skate/Tex/Artboard 2.png"];
+  const deckTextures = ["/models/skate/Tex/Deck_Sublimes.png"];
 
   const placeholderTexures = [
     "/models/skate/Tex/imgForMiddle.png",
@@ -88,7 +88,7 @@ const DripComponent: FC<props> = () => {
       }
       setState(demoSkateDrips[innerStateCounter]);
       setStateCounter(innerStateCounter);
-    }, 1000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [stateCounter]);
@@ -160,14 +160,15 @@ const DripComponent: FC<props> = () => {
             </Style.View3Container>
             <div
               style={{
-                fontSize: "1.1em",
+                fontSize: "0.9em",
                 fontWeight: 900,
                 marginBottom: "10px",
+                letterSpacing: "1px",
               }}
             >
-              <u>WARRANTY:</u>
+              <u>WARRANTY :</u>
             </div>
-            <ul style={{ lineHeight: "1.70em" }}>
+            <ul>
               <li>
                 &#8226; <b>High Quality</b> 3D models.
               </li>
@@ -175,11 +176,10 @@ const DripComponent: FC<props> = () => {
                 &#8226; <b>High Quality</b> IRL products.
               </li>
               <li>
-                &#8226; Final products will be <b>dope af</b>.
+                &#8226; Your friends will be <b>jealous</b>.
               </li>
             </ul>
           </Style.View2Content>
-          {/* <Style.View3> */}
         </Grid>
         <Grid item xs={4}>
           <Grid container style={{ height: "100%", width: "100%" }}>
@@ -191,7 +191,7 @@ const DripComponent: FC<props> = () => {
                   deckIndex={0}
                   placeholderTextures={placeholderTexures}
                   placeholderIndex={stateCounter}
-                  // id={demoSkateDrips[stateCounter].itemId}
+                  id={demoSkateDrips[stateCounter].itemId}
                 />
                 <OrbitControls
                   autoRotate={true}

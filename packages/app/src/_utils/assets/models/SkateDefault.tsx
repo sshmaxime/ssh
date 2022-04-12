@@ -97,10 +97,7 @@ const SkateDefault: FC<props> = (props) => {
           material={materials.Placeholder}
           rotation={[Math.PI / 2, 0, 0]}
         />
-        <mesh
-          position={[12.8, 6.75, 0]}
-          rotation={[Math.PI / 2, 0, -Math.PI / -2]}
-        >
+        <mesh position={[12.8, 6.75, 0]} rotation={[Math.PI / 2, 0, -Math.PI / -2]}>
           <planeGeometry args={[10, 10, 10, 10]} />
           <meshBasicMaterial transparent map={newMaterial} />
         </mesh>
