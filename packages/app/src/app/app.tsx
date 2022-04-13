@@ -1,4 +1,4 @@
-import React, { FC, Suspense, useEffect, useState } from "react";
+import React, { FC, Fragment, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
@@ -22,6 +22,21 @@ import ThreeDHouse from "./3dscenes/house";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useLoader } from "@react-three/fiber";
 import SkateDefault from "../_utils/assets/models/SkateDefault";
+
+//
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+
+//
+import { Slide } from "react-awesome-reveal";
+
+//
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 type props = {};
 
@@ -261,11 +276,26 @@ const DripComponent: FC<props> = () => {
   );
 };
 
-const RoadmapComponent: FC<props> = () => {
+type roadmapProps = {
+  roadmapItems: {
+    step: string;
+    title: string;
+    description: any;
+    icon: any;
+    done: boolean;
+    type?: string;
+    colors: {
+      bg: string;
+      color: string;
+    };
+  }[];
+};
+
+const RoadmapComponent: FC<roadmapProps> = ({ roadmapItems }) => {
   return (
     <Style.RoadmapComponent>
       <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
-      <Style.View2Content>TBD</Style.View2Content>
+      <Style.View2Content>Upcoming</Style.View2Content>
     </Style.RoadmapComponent>
   );
 };
@@ -275,7 +305,26 @@ const MainComponent: FC<props> = ({ children }) => {
     <Style.Root>
       <LandingScreenComponent />
       <DripComponent />
-      <RoadmapComponent />
+      <RoadmapComponent
+        roadmapItems={[
+          {
+            step: "TBA",
+            title: "Drop #1",
+            icon: <FastfoodIcon />,
+            description: (
+              <Fragment>
+                After several months of work, SSH LABS will release the first of its many more to
+                come drop.
+              </Fragment>
+            ),
+            done: true,
+            colors: {
+              bg: "black",
+              color: "#2AFE00",
+            },
+          },
+        ]}
+      />
     </Style.Root>
   );
 };
