@@ -181,15 +181,9 @@ const DripComponent: FC<props> = () => {
             <b>
               <u>real world</u>
             </b>
-            , you can finally{" "}
-            <b>
-              <u>wear</u>
-            </b>
+            , you can finally <b>wear</b>
             {" & "}
-            <b>
-              <u>use your NFT</u>
-            </b>{" "}
-            through{" "}
+            <b>use your NFT</b> through{" "}
             <b>
               <u>exclusive</u>
             </b>
@@ -197,15 +191,7 @@ const DripComponent: FC<props> = () => {
             <b>
               <u>collectionable</u>
             </b>{" "}
-            items on the{" "}
-            <b>
-              <u>blockchain</u>
-            </b>{" "}
-            and{" "}
-            <b>
-              <u>IRL</u>
-            </b>
-            .
+            items on the <b>blockchain</b> and <b>IRL</b> .
             <br />
             <Style.DripWarningContainer>
               <div
@@ -280,18 +266,46 @@ const Sbu: FC<{ no_u?: boolean }> = ({ children, no_u }) => {
   return <b>{no_u ? <>{children}</> : <u>{children}</u>}</b>;
 };
 
+const ColoredKw: FC<{ color: string }> = ({ color, children }) => {
+  return (
+    <span
+      style={{
+        backgroundColor: color,
+        padding: "1.5px 12.5px 1.5px 12.5px",
+        borderRadius: "2.5px",
+      }}
+    >
+      {children}
+    </span>
+  );
+};
+
 const RoadmapComponent: FC<{}> = () => {
   return (
     <Style.RoadmapComponent>
       <Style.ViewTitle>/ THE SOCIETY .</Style.ViewTitle>
       <Style.View2Content>
-        When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH KEY</Sbu>. It is
+        When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It is
         precious. Hold on to it. <Sbu>You will need it</Sbu>.
         <br /> <br />
-        This SSH KEY is a <Sbu>membership</Sbu> access to the <Sbu no_u>/ ssh society . </Sbu>,
-        whose benefits and offerings will increase over time. Your <Sbu>SSH KEY</Sbu> will open{" "}
-        <Sbu>undiscovered</Sbu> {"&"} <Sbu>exclusive</Sbu> digital doors for you.
+        This key is a <Sbu>membership</Sbu> access to the{" "}
+        <Sbu no_u>
+          <ColoredKw color="#F6EFB6">/ ssh society .</ColoredKw>
+        </Sbu>
+        , whose benefits and offerings will increase over time. Your <Sbu>SSH-KEY</Sbu> will open{" "}
+        <Sbu>undiscovered</Sbu> {"&"} <Sbu>exclusive</Sbu> digital doors for you,{" "}
+        <Sbu no_u>keep it safe</Sbu>.
       </Style.View2Content>
+      <Style.MoreLinkContainer>
+        <Grid container>
+          <Grid item alignSelf={"center"}>
+            <Style.MoreLink>READ MORE</Style.MoreLink>
+          </Grid>
+          <Grid item alignSelf={"center"}>
+            <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
+          </Grid>
+        </Grid>
+      </Style.MoreLinkContainer>
     </Style.RoadmapComponent>
   );
 };
