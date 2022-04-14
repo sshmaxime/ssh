@@ -24,7 +24,6 @@ export const FooterComponent: FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={1} />
         <Grid item xs={5}>
           <Grid container>
             <Grid item xs={4}>
@@ -57,7 +56,7 @@ export const FooterComponent: FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={3}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Grid container spacing={1} flexDirection="row-reverse" alignContent="center">
