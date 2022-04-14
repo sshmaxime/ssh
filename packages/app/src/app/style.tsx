@@ -90,15 +90,15 @@ const style = {
     borderRadius: "5px",
   })),
   ViewTitle: styled("div")(({ theme }) => ({
-    fontSize: "3em",
+    fontSize: "2.5em",
     fontFamily: theme.fontFamily.primary,
     fontStyle: "italic",
     lineHeight: "2em",
     fontWeight: 900,
-    marginBottom: "50px",
+    marginBottom: "35px",
     display: "inline-block",
     borderRadius: "2.5px",
-    textShadow: `10px 10px ${theme.backgroundColor.tertiary}`,
+    textShadow: `10px 5px ${theme.backgroundColor.tertiary}`,
   })),
   View2Content: styled("div")(({ theme }) => ({
     fontSize: "1.1em",

@@ -276,26 +276,22 @@ const DripComponent: FC<props> = () => {
   );
 };
 
-type roadmapProps = {
-  roadmapItems: {
-    step: string;
-    title: string;
-    description: any;
-    icon: any;
-    done: boolean;
-    type?: string;
-    colors: {
-      bg: string;
-      color: string;
-    };
-  }[];
+const Sbu: FC<{ no_u?: boolean }> = ({ children, no_u }) => {
+  return <b>{no_u ? <>{children}</> : <u>{children}</u>}</b>;
 };
 
-const RoadmapComponent: FC<roadmapProps> = ({ roadmapItems }) => {
+const RoadmapComponent: FC<{}> = () => {
   return (
     <Style.RoadmapComponent>
-      <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
-      <Style.View2Content>Upcoming</Style.View2Content>
+      <Style.ViewTitle>/ THE SOCIETY .</Style.ViewTitle>
+      <Style.View2Content>
+        When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH KEY</Sbu>. It is
+        precious. Hold on to it. <Sbu>You will need it</Sbu>.
+        <br /> <br />
+        This SSH KEY is a <Sbu>membership</Sbu> access to the <Sbu no_u>/ ssh society . </Sbu>,
+        whose benefits and offerings will increase over time. Your <Sbu>SSH KEY</Sbu> will open{" "}
+        <Sbu>undiscovered</Sbu> {"&"} <Sbu>exclusive</Sbu> digital doors for you.
+      </Style.View2Content>
     </Style.RoadmapComponent>
   );
 };
@@ -305,26 +301,7 @@ const MainComponent: FC<props> = ({ children }) => {
     <Style.Root>
       <LandingScreenComponent />
       <DripComponent />
-      <RoadmapComponent
-        roadmapItems={[
-          {
-            step: "TBA",
-            title: "Drop #1",
-            icon: <FastfoodIcon />,
-            description: (
-              <Fragment>
-                After several months of work, SSH LABS will release the first of its many more to
-                come drop.
-              </Fragment>
-            ),
-            done: true,
-            colors: {
-              bg: "black",
-              color: "#2AFE00",
-            },
-          },
-        ]}
-      />
+      <RoadmapComponent />
     </Style.Root>
   );
 };
