@@ -12,7 +12,7 @@ export const FooterComponent: FC = () => {
   return (
     <Style.Root>
       <Grid container>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Clickable address="/">
@@ -24,15 +24,43 @@ export const FooterComponent: FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={1} />
+        <Grid item xs={5}>
+          <Grid container>
+            <Grid item xs={4}>
+              <Style.TitleCategory>SSH LABS</Style.TitleCategory>
+              <Style.ContentCategory>
+                <ul>
+                  <li>About us</li>
+                </ul>
+              </Style.ContentCategory>
+            </Grid>
+            <Grid item xs={4}>
+              <Style.TitleCategory>ABOUT</Style.TitleCategory>
+              <Style.ContentCategory>
+                <ul>
+                  <li>FAQ</li>
+                  <li>Documentation</li>
+                  <li>Discord</li>
+                </ul>
+              </Style.ContentCategory>
+            </Grid>
+            <Grid item xs={4}>
+              <Style.TitleCategory>SUPPORT</Style.TitleCategory>
+              <Style.ContentCategory>
+                <ul>
+                  <li>Returns {"&"} Refunds</li>
+                  <li>Ordering {"&"} Payment</li>
+                  <li>Shipping {"&"} Delivery</li>
+                </ul>
+              </Style.ContentCategory>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={2}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Grid
-                container
-                spacing={1}
-                flexDirection="row-reverse"
-                alignContent="center"
-              >
+              <Grid container spacing={1} flexDirection="row-reverse" alignContent="center">
                 <Grid item>
                   <Clickable address="https://discord.gg/FRAWgJJz4f">
                     <Style.ImgIcon src={DiscordIcon} alt="" />
@@ -51,9 +79,7 @@ export const FooterComponent: FC = () => {
                   <Style.Credentials>{CREDENTIALS}</Style.Credentials>
                 </Grid>
                 <Grid item xs={12}>
-                  <Style.ExternalLink>
-                    {"SSH LABS, Terms & Conditions"}
-                  </Style.ExternalLink>
+                  <Style.ExternalLink>{"SSH LABS, Terms & Conditions"}</Style.ExternalLink>
                 </Grid>
               </Grid>
             </Grid>

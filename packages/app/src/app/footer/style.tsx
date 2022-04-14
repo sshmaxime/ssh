@@ -5,8 +5,8 @@ import { AppBar, Toolbar, Typography, Button, SwipeableDrawer } from "@mui/mater
 const style = {
   Root: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    paddingTop: "5vh",
-    paddingBottom: "5vh",
+    paddingTop: "7.5vh",
+    paddingBottom: "7.5vh",
     backgroundColor: theme.backgroundColor.primary,
   })),
   Title: styled(Typography)(({ theme }) => ({
@@ -32,6 +32,18 @@ const style = {
     textAlign: "right",
     fontSize: "0.8em",
     fontWeight: 500,
+  })),
+  TitleCategory: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.9em",
+    fontWeight: 900,
+    marginBottom: "5px",
+  })),
+  ContentCategory: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.8em",
+    fontWeight: 500,
+    lineHeight: "2em",
   })),
 };
 
