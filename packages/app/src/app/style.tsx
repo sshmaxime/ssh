@@ -120,7 +120,6 @@ const style = {
   //
   View3: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    backgroundImage: `linear-gradient(180deg, ${theme.backgroundColor.primary} 50%,  ${theme.backgroundColor.secondary} 50%)`,
   })),
   View3StepName: styled(Typography)(({ theme }) => ({
     fontSize: "1rem",
@@ -153,6 +152,20 @@ const style = {
     backgroundColor: theme.backgroundColor.secondary,
     paddingTop: "10vh",
     paddingBottom: "10vh",
+  })),
+
+  //
+  NowComponent: styled("div")(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level1,
+    backgroundImage: `linear-gradient(180deg, ${theme.backgroundColor.primary} 50%,  ${theme.backgroundColor.secondary} 50%)`,
+    paddingTop: "10vh",
+    paddingBottom: "10vh",
+  })),
+  NowContainer: styled("div")(({ theme }) => ({
+    backgroundColor: "white",
+    padding: "25px",
+    boxShadow: `5px 5px 0px ${theme.backgroundColor.primary} ,  -5px -5px 0px  ${theme.backgroundColor.secondary} `,
+    borderRadius: "5px",
   })),
 };
 

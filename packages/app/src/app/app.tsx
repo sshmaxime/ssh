@@ -280,7 +280,7 @@ const ColoredKw: FC<{ color: string }> = ({ color, children }) => {
   );
 };
 
-const RoadmapComponent: FC<{}> = () => {
+const SocietyComponent: FC<{}> = () => {
   return (
     <Style.RoadmapComponent>
       <Style.ViewTitle>/ THE SOCIETY .</Style.ViewTitle>
@@ -310,12 +310,21 @@ const RoadmapComponent: FC<{}> = () => {
   );
 };
 
+const NowComponent: FC<props> = ({ children }) => {
+  return (
+    <Style.NowComponent>
+      <Style.NowContainer>hello</Style.NowContainer>
+    </Style.NowComponent>
+  );
+};
+
 const MainComponent: FC<props> = ({ children }) => {
   return (
     <Style.Root>
       <LandingScreenComponent />
       <DripComponent />
-      <RoadmapComponent />
+      <SocietyComponent />
+      <NowComponent />
     </Style.Root>
   );
 };
