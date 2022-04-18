@@ -41,10 +41,10 @@ const modelPath = "/models/skate/skate-transformed.glb";
 export type props = {
   placeholderTexture: THREE.Texture;
   deckTexture: THREE.Texture;
-  id: number;
+  _id: number;
 };
 
-const SkateDefault: FC<props> = (props) => {
+const SkateDefault: FC<props & JSX.IntrinsicElements["group"]> = (props) => {
   const group = useRef<THREE.Group>(null);
 
   // model
@@ -59,7 +59,7 @@ const SkateDefault: FC<props> = (props) => {
   materials.Placeholder.toneMapped = false;
 
   // itemId
-  const itemId = "#" + props.id.toFixed();
+  const itemId = "#" + props._id.toFixed();
 
   const canvas = document.createElement("canvas");
 
@@ -79,14 +79,11 @@ const SkateDefault: FC<props> = (props) => {
   materials.Deck.map = props.deckTexture;
   materials.Placeholder.map = props.placeholderTexture;
 
+  console.log(props.position);
+
   return (
-    <Center>
-      <group
-        ref={group}
-        position={[0, 0, 0]}
-        rotation={[Math.PI / 2, Math.PI / 2, Math.PI]}
-        dispose={null}
-      >
+    <Center alignTop>
+      <group ref={group} rotation={[Math.PI / 2, Math.PI / 2, Math.PI]} dispose={null}>
         <mesh
           geometry={nodes.Deck.geometry}
           material={materials.Deck}

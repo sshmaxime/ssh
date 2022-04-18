@@ -1,11 +1,4 @@
-import React, {
-  Suspense,
-  Fragment,
-  FC,
-  useState,
-  useEffect,
-  useRef,
-} from "react";
+import React, { Suspense, Fragment, FC, useState, useEffect, useRef } from "react";
 
 import {
   AppBar,
@@ -129,28 +122,33 @@ const pastilles = [
   },
 ];
 
+const deckTextures = ["/models/skate/Tex/Deck_Sublimes.png"];
+const placeholderTextures = ["/models/skate/Tex/imgForMiddle.png"];
 export const My3DScene: FC = () => {
   return (
-    <>
-      <Canvas
-        flat={true}
-        linear={true}
-        camera={{ position: [0, 45, -75] }}
-        style={{ height: "100%", width: "100%" }}
-      >
-        {/*  */}
-        <ambientLight intensity={0.95} />
-        {/* <ModelSkate
-          position={[0, 45, 0]}
-          rotation={[Math.PI / 2, Math.PI / 2, Math.PI]}
-        /> */}
-        {/* <mesh position={[0, 0, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[100, 100, 100, 100]} />
-          <meshBasicMaterial side={THREE.DoubleSide} color="black" />
-        </mesh> */}
-        <OrbitControls target={[0, 45, 0]} />
-      </Canvas>
-    </>
+    <Canvas
+      flat={true}
+      linear={true}
+      camera={{ position: [0, 40, -60] }}
+      style={{ height: "100%", width: "100%" }}
+    >
+      {/*  */}
+      <ambientLight intensity={0.95} />
+      <ModelSkate
+        _id={0}
+        deckTextures={deckTextures}
+        deckIndex={0}
+        placeholderTextures={placeholderTextures}
+        placeholderIndex={0}
+      />
+      <OrbitControls
+        target={[0, 40, 0]}
+        autoRotate={true}
+        autoRotateSpeed={7.5}
+        enableZoom={false}
+        enableRotate={false}
+      />
+    </Canvas>
   );
 };
 
@@ -234,14 +232,8 @@ const Drop: FC = () => {
               <Style.InnerLeftSide>
                 {listItems.map((list, index1) => (
                   <div key={index1}>
-                    <Style.CollectionName>
-                      {list.collection}
-                    </Style.CollectionName>
-                    <ImageList
-                      cols={4}
-                      gap={4}
-                      style={{ marginBottom: "20px" }}
-                    >
+                    <Style.CollectionName>{list.collection}</Style.CollectionName>
+                    <ImageList cols={4} gap={4} style={{ marginBottom: "20px" }}>
                       {list.list.map((item, index) => (
                         <ImageListItem
                           key={index}
@@ -283,12 +275,7 @@ const Drop: FC = () => {
                 CLOSE
               </Style.CloseContainerInfo>
               <Style.ContainerTitle>DROP #1</Style.ContainerTitle>
-              <Grid
-                container
-                spacing={1}
-                alignContent={"center"}
-                style={{ marginTop: "5px" }}
-              >
+              <Grid container spacing={1} alignContent={"center"} style={{ marginTop: "5px" }}>
                 {pastilles.map((pastille) => (
                   <Grid key={pastille.title} item>
                     <Tooltip arrow title={pastille.description} placement="top">
@@ -325,11 +312,7 @@ const Drop: FC = () => {
                 </Style.InnerContainerPayment>
               </Style.ContainerPayment>
               <Style.ContainerMoreInfo maxed={checked} onClick={handleChange}>
-                <Style.DetailsContainer
-                  container
-                  alignItems="center"
-                  justifyContent="center"
-                >
+                <Style.DetailsContainer container alignItems="center" justifyContent="center">
                   <Grid item>DETAILS</Grid>
                   <Grid item>
                     <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
@@ -345,55 +328,35 @@ const Drop: FC = () => {
                     </Grid>
 
                     <Grid item xs={3}>
-                      <img
-                        src={af1x_exemple}
-                        style={{ width: "100%" }}
-                        alt=""
-                      />
+                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
                     </Grid>
                     <Grid item xs={9}>
                       Hello
                     </Grid>
 
                     <Grid item xs={3}>
-                      <img
-                        src={af1x_exemple}
-                        style={{ width: "100%" }}
-                        alt=""
-                      />
+                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
                     </Grid>
                     <Grid item xs={9}>
                       Hello
                     </Grid>
 
                     <Grid item xs={3}>
-                      <img
-                        src={af1x_exemple}
-                        style={{ width: "100%" }}
-                        alt=""
-                      />
+                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
                     </Grid>
                     <Grid item xs={9}>
                       Hello
                     </Grid>
 
                     <Grid item xs={3}>
-                      <img
-                        src={af1x_exemple}
-                        style={{ width: "100%" }}
-                        alt=""
-                      />
+                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
                     </Grid>
                     <Grid item xs={9}>
                       Hello
                     </Grid>
 
                     <Grid item xs={3}>
-                      <img
-                        src={af1x_exemple}
-                        style={{ width: "100%" }}
-                        alt=""
-                      />
+                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
                     </Grid>
                   </Grid>
                   <Grid container spacing={2} justifyContent="space-between">
@@ -402,11 +365,7 @@ const Drop: FC = () => {
                     </Grid>
 
                     <Grid item xs={3}>
-                      <img
-                        src={af1x_exemple}
-                        style={{ width: "100%" }}
-                        alt=""
-                      />
+                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
                     </Grid>
                   </Grid>
                 </Style.InnerContainerMoreInfoContent>

@@ -215,21 +215,21 @@ const DripComponent: FC<props> = () => {
         <Grid item xs={4}>
           <Grid container style={{ height: "100%", width: "100%" }}>
             <Grid item xs={12}>
-              <ThreeDCoomponent camera={[0, 0, -60]}>
+              <ThreeDCoomponent camera={[0, 40, -60]}>
                 <ambientLight intensity={0.95} />
                 <ModelSkate
                   deckTextures={deckTextures}
                   deckIndex={0}
                   placeholderTextures={placeholderTexures}
                   placeholderIndex={stateCounter}
-                  id={demoSkateDrips[stateCounter].itemId}
+                  _id={demoSkateDrips[stateCounter].itemId}
                 />
                 <OrbitControls
                   autoRotate={true}
                   autoRotateSpeed={7.5}
                   enableZoom={false}
                   enableRotate={false}
-                  target={[0, 0, 0]}
+                  target={[0, 40, 0]}
                 />
               </ThreeDCoomponent>
             </Grid>
