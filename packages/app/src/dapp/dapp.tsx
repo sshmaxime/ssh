@@ -17,23 +17,18 @@ import Style from "./style";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import Step from "@mui/material/Step";
 import { Fade } from "react-awesome-reveal";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import logoeth from "../_utils/assets/images/logoeth.svg";
 import af1x_exemple from "../_utils/assets/images/Punk_7804.png";
 import Pastille from "../_utils/components/stateless/pastille";
 
-import { useLoader, Canvas } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import ModelSkate from "../app/3dscenes/demo/skate";
 import ModelRoom from "../_utils/assets/models/Room";
-import * as THREE from "three";
 
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
-import { createCanvas, loadImage, Image } from "canvas";
 //
 const listItems = [
   {

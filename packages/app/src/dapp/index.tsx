@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import Navbar from "./../app/navbar";
+import Navbar from "./navbar";
 import DApp from "./dapp";
 
 type props = {};

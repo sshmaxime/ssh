@@ -17,8 +17,7 @@ const Index: FC = () => {
   if (window.innerWidth < 1050) {
     return (
       <>
-        Mobile version is not stable yet. Use the website on your desktop. It's
-        much safer anyway.
+        Mobile version is not stable yet. Use the website on your desktop. It's much safer anyway.
       </>
     );
   }
