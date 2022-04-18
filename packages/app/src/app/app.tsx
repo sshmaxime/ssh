@@ -9,7 +9,6 @@ import Style from "./style";
 
 import af1x_exemple from "../_utils/assets/images/Punk_7804.png";
 import imgForMiddle from "../_utils/assets/images/imgForMiddle.png";
-import { My3DRoom } from "../dapp";
 
 // 3D
 import * as THREE from "three";
