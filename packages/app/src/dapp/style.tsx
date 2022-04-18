@@ -1,12 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-import {
-  Typography,
-  Grid,
-  Stepper,
-  StepLabel,
-  StepContent,
-} from "@mui/material";
+import { Typography, Grid, Stepper, StepLabel, StepContent } from "@mui/material";
 
 const headerHeight = "10vh";
 
@@ -94,52 +88,44 @@ const style = {
     right: maxed ? sizeWidthLeft : sizeWidthRight,
     backgroundColor: maxed ? theme.backgroundColor.primary : "",
     height: maxed
-      ? `calc(100vh - 1vh - ${bottomOverlayHeight} - ${sizeWidthLeft})`
+      ? `calc(100vh - 1vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - ${headerHeight})`
       : rightHeightReduced,
     transition: "all 0.5s ease-in-out",
     boxShadow: maxed ? `5px 5px 2px ${theme.backgroundColor.tertiary}` : "",
   })),
-  InnerContainerInfo: styled("div")<{ maxed?: boolean }>(
-    ({ theme, maxed }) => ({
-      padding: maxed ? "25px" : "0px",
-      transition: "all .5s ease-in-out",
-    })
-  ),
-  CloseContainerInfo: styled("div")<{ maxed?: boolean }>(
-    ({ theme, maxed }) => ({
-      position: "absolute",
-      right: 25,
-      top: 35,
-      display: maxed ? "block" : "none",
-      opacity: 0.5,
-      backgroundColor: "#D6D6E4",
-      padding: "5px",
-      borderRadius: "5px",
-      fontFamily: theme.fontFamily.primary,
-      fontSize: "0.75em",
-      letterSpacing: "0.5px",
-      fontWeight: 900,
-    })
-  ),
-  ContainerMoreInfoContent: styled("div")<{ maxed?: boolean }>(
-    ({ theme, maxed }) => ({
-      marginTop: "25px",
-      height: maxed
-        ? `calc(100vh - 2vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - 152.5px)`
-        : "0px",
-      overflowY: "scroll",
-      borderRadius: "5px",
-      opacity: maxed ? 1 : 0,
-      transition: "all 1s",
-      display: maxed ? "block" : "none",
-      backgroundColor: maxed ? theme.backgroundColor.secondary : "white",
-    })
-  ),
-  InnerContainerMoreInfoContent: styled("div")<{ maxed?: boolean }>(
-    ({ theme, maxed }) => ({
-      padding: "15px",
-    })
-  ),
+  InnerContainerInfo: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
+    padding: maxed ? "25px" : "0px",
+    transition: "all .5s ease-in-out",
+  })),
+  CloseContainerInfo: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
+    position: "absolute",
+    right: 25,
+    top: 35,
+    display: maxed ? "block" : "none",
+    opacity: 0.5,
+    backgroundColor: "#D6D6E4",
+    padding: "5px",
+    borderRadius: "5px",
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.75em",
+    letterSpacing: "0.5px",
+    fontWeight: 900,
+  })),
+  ContainerMoreInfoContent: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
+    marginTop: "25px",
+    height: maxed
+      ? `calc(100vh - 2vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - ${headerHeight} - 152.5px)`
+      : "0px",
+    overflowY: "scroll",
+    borderRadius: "5px",
+    opacity: maxed ? 1 : 0,
+    transition: "all 1s",
+    display: maxed ? "block" : "none",
+    backgroundColor: maxed ? theme.backgroundColor.secondary : "white",
+  })),
+  InnerContainerMoreInfoContent: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
+    padding: "15px",
+  })),
   ContainerTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "3.5em",
@@ -162,13 +148,11 @@ const style = {
     marginTop: "20px",
     width: "100%",
   })),
-  InnerContainerPayment: styled("div")<{ maxed?: boolean }>(
-    ({ theme, maxed }) => ({
-      padding: "15px",
-      background: "white",
-      borderRadius: "5px",
-    })
-  ),
+  InnerContainerPayment: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
+    padding: "15px",
+    background: "white",
+    borderRadius: "5px",
+  })),
   MintButton: styled("div")(({ theme }) => ({
     backgroundColor: "black",
     fontFamily: theme.fontFamily.primary,
@@ -237,17 +221,15 @@ const style = {
   //
   //
   //
-  ProjectExplanationImg2: styled("img")<{ active?: boolean }>(
-    ({ theme, active }) => ({
-      width: "100%",
-      transition: "all .2s ease-in-out",
-      borderRadius: "5px",
-      opacity: active ? "" : "25%",
-      boxShadow: `10px 15px 2px ${theme.backgroundColor.tertiary}`,
-      backgroundColor: "white",
-      transform: active ? "scale(1.1)" : "",
-    })
-  ),
+  ProjectExplanationImg2: styled("img")<{ active?: boolean }>(({ theme, active }) => ({
+    width: "100%",
+    transition: "all .2s ease-in-out",
+    borderRadius: "5px",
+    opacity: active ? "" : "25%",
+    boxShadow: `10px 15px 2px ${theme.backgroundColor.tertiary}`,
+    backgroundColor: "white",
+    transform: active ? "scale(1.1)" : "",
+  })),
 };
 
 export default style;
