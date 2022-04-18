@@ -1,20 +1,13 @@
 import { styled } from "@mui/material/styles";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Grid,
-  SwipeableDrawer,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Grid, SwipeableDrawer } from "@mui/material";
 
 import { Link } from "react-router-dom";
 
 const style = {
   Root: styled("div")(({ theme }) => ({})),
   AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level1,
+    ...theme.myBreakpoints(theme).level4,
 
     padding: 0,
     paddingTop: "25px",
