@@ -14,10 +14,10 @@ export type props = {
   placeholderTextures: string[];
   placeholderIndex: number;
 
-  id: number;
+  _id: number;
 };
 
-const Skate: FC<props> = (props) => {
+const Skate: FC<props & JSX.IntrinsicElements["group"]> = (props) => {
   const deckTexsPath = props.deckTextures.map((elem) => elem);
   const deckTexs: THREE.Texture[] = useLoader(TxLoader, deckTexsPath);
   deckTexs.forEach((item) => (item.flipY = false));
@@ -28,9 +28,10 @@ const Skate: FC<props> = (props) => {
 
   return (
     <SkateDefault
+      {...props}
       deckTexture={deckTexs[props.deckIndex]}
       placeholderTexture={placeholderTexs[props.placeholderIndex]}
-      id={props.id}
+      _id={props._id}
     />
   );
 };
