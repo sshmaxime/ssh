@@ -1,13 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Grid,
-  SwipeableDrawer,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Grid, SwipeableDrawer } from "@mui/material";
 
 import { Link } from "react-router-dom";
 
@@ -17,11 +10,11 @@ const style = {
     ...theme.myBreakpoints(theme).level1,
 
     padding: 0,
-    paddingTop: "25px",
     backgroundColor: "transparent",
     boxShadow: "none",
-    height: "80px",
-    paddingBottom: "10px",
+    height: "100px",
+    display: "flex",
+    justifyContent: "center",
   })),
   Link: styled(Link)(({ theme }) => ({
     ...theme.titles(theme).primary,

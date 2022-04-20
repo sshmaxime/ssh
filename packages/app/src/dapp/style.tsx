@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 
 import { Typography, Grid, Stepper, StepLabel, StepContent } from "@mui/material";
 
-const headerHeight = "10vh";
+const headerHeight = "100px";
 
 const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "310px";

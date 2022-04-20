@@ -189,9 +189,7 @@ const Drop: FC = () => {
         <Style.Header></Style.Header>
         <Style.Part1>
           {/* 3D */}
-          <Suspense fallback={null}>
-            <My3DScene />
-          </Suspense>
+          <Suspense fallback={null}>{/* <My3DScene /> */}</Suspense>
 
           <Style.LeftSide>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
