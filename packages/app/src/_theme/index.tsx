@@ -205,8 +205,8 @@ export const theme = createTheme({
       },
       level4: {
         [themeObj.breakpoints.up("xs")]: {
-          paddingLeft: "25px",
-          paddingRight: "25px",
+          paddingLeft: "35px",
+          paddingRight: "35px",
         },
       },
     };
