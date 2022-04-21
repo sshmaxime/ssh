@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 
 import { Toolbar, Grid } from "@mui/material";
 
@@ -7,9 +7,21 @@ import Clickable from "../../_utils/components/stateless/clickable";
 import ArrowLeftAltIcon from "@mui/icons-material/West";
 import Logo from "../../_utils/assets/images/logo.svg";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import Button from "@mui/material/Button";
+import Popover from "@mui/material/Popover";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 export const NavbarComponent: FC = () => {
   const [connected, setConnected] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
 
   return (
     <Style.Root>
@@ -40,12 +52,42 @@ export const NavbarComponent: FC = () => {
                 alignItems="center"
               >
                 <Grid item>
-                  <AccountBalanceWalletIcon
-                    style={{
-                      fontSize: "40px",
-                      color: "black",
+                  <Clickable onClick={handlePopoverOpen}>
+                    <AccountBalanceWalletIcon
+                      style={{
+                        opacity: connected ? "" : "25%",
+                        fontSize: "40px",
+                        color: "black",
+                      }}
+                    />
+                  </Clickable>
+                  <Popover
+                    open={open}
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
                     }}
-                  />
+                    transformOrigin={{ horizontal: "left", vertical: -7.5 }}
+                    disableRestoreFocus
+                    style={{
+                      borderRadius: "25px",
+                      zIndex: 2000,
+                    }}
+                  >
+                    <ClickAwayListener onClickAway={handlePopoverClose}>
+                      <div
+                        style={{
+                          padding: "15px",
+                          width: "300px",
+                          backgroundColor: "white",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        hello
+                      </div>
+                    </ClickAwayListener>
+                  </Popover>
                 </Grid>
                 <Grid item>
                   {connected ? (
