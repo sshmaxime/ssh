@@ -9,56 +9,58 @@ import { GLTF } from "three-stdlib";
 
 type GLTFResult = GLTF & {
   nodes: {
-    Room: THREE.Mesh;
-    bed: THREE.Mesh;
-    Rabbit_Lamp: THREE.Mesh;
-    Cylinder: THREE.Mesh;
-    Cintre4: THREE.Mesh;
-    Cintre3: THREE.Mesh;
-    Cintre2: THREE.Mesh;
-    Cintre1: THREE.Mesh;
-    Cintre: THREE.Mesh;
-    Extrude: THREE.Mesh;
-    Sweep2: THREE.Mesh;
     Arm: THREE.Mesh;
-    Sweep: THREE.Mesh;
-    Plane1: THREE.Mesh;
-    Plane1_1: THREE.Mesh;
-    Plane1_2: THREE.Mesh;
-    Cylinder_1: THREE.Mesh;
-    Extrude_1: THREE.Mesh;
-    ["Cylinder1-Cylinder"]: THREE.Mesh;
-    Extrude_2: THREE.Mesh;
+    bed: THREE.Mesh;
+    Cintre: THREE.Mesh;
+    Cintre1: THREE.Mesh;
+    Cintre2: THREE.Mesh;
+    Cintre3: THREE.Mesh;
+    Cintre4: THREE.Mesh;
     Cloner: THREE.Mesh;
-    Deck4: THREE.Mesh;
-    Deck3: THREE.Mesh;
-    Deck2: THREE.Mesh;
-    Deck1: THREE.Mesh;
+    Cylinder: THREE.Mesh;
+    Cylinder001: THREE.Mesh;
+    ["Cylinder1-Cylinder"]: THREE.Mesh;
     Deck: THREE.Mesh;
-    ["desk-top"]: THREE.Mesh;
+    Deck1: THREE.Mesh;
+    Deck2: THREE.Mesh;
+    Deck3: THREE.Mesh;
+    Deck4: THREE.Mesh;
     ["desk-left"]: THREE.Mesh;
     ["desk-right"]: THREE.Mesh;
+    ["desk-top"]: THREE.Mesh;
+    Extrude: THREE.Mesh;
+    Extrude001: THREE.Mesh;
+    Extrude002: THREE.Mesh;
+    Extrude1: THREE.Mesh;
     Headphones: THREE.Mesh;
+    iMac: THREE.Mesh;
     Magic_Keyboard: THREE.Mesh;
     Magic_Mouse: THREE.Mesh;
-    iMac: THREE.Mesh;
-    Extrude1: THREE.Mesh;
+    Plane002: THREE.Mesh;
+    Plane003: THREE.Mesh;
+    Plane1: THREE.Mesh;
+    Rabbit_Lamp: THREE.Mesh;
+    Room: THREE.Mesh;
+    Sweep: THREE.Mesh;
+    Sweep2: THREE.Mesh;
+    Cube: THREE.Mesh;
   };
   materials: {
     Mat: THREE.MeshStandardMaterial;
+    Material: THREE.MeshStandardMaterial;
   };
 };
 
 export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
-  const { nodes, materials } = useGLTF("/models/room.gltf") as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/room-transformed.glb") as GLTFResult;
   return (
     <group ref={group} {...props} dispose={null}>
-      <group position={[-151.98, 194.59, -13.64]}>
+      <group position={[-26.73, 32.82, -1.37]} scale={0.16}>
         <mesh
-          geometry={nodes.Room.geometry}
-          material={nodes.Room.material}
-          position={[-20.71, 0.64, -388.05]}
+          geometry={nodes.Arm.geometry}
+          material={nodes.Arm.material}
+          position={[-116.96, -19.34, 253.32]}
         />
         <mesh
           geometry={nodes.bed.geometry}
@@ -66,32 +68,9 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
           position={[261.93, -81.69, 94.35]}
         />
         <mesh
-          geometry={nodes.Rabbit_Lamp.geometry}
-          material={nodes.Rabbit_Lamp.material}
-          position={[-221.46, -158.11, -368.18]}
-          rotation={[-Math.PI / 2, 0, -2.44]}
-          scale={[4.66, -4.66, 4.66]}
-        />
-        <mesh
-          geometry={nodes.Cylinder.geometry}
-          material={nodes.Cylinder.material}
-          position={[442.93, -116.07, -264.8]}
-          rotation={[-Math.PI, 1.57, 0]}
-        />
-        <mesh
-          geometry={nodes.Cintre4.geometry}
-          material={nodes.Cintre4.material}
-          position={[358.74, 208.7, -346.44]}
-        />
-        <mesh
-          geometry={nodes.Cintre3.geometry}
-          material={nodes.Cintre3.material}
-          position={[416.18, 208.7, -346.44]}
-        />
-        <mesh
-          geometry={nodes.Cintre2.geometry}
-          material={nodes.Cintre2.material}
-          position={[474.67, 208.7, -346.44]}
+          geometry={nodes.Cintre.geometry}
+          material={nodes.Cintre.material}
+          position={[579.88, 208.7, -346.44]}
         />
         <mesh
           geometry={nodes.Cintre1.geometry}
@@ -99,65 +78,19 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
           position={[517.3, 208.7, -346.44]}
         />
         <mesh
-          geometry={nodes.Cintre.geometry}
-          material={nodes.Cintre.material}
-          position={[579.88, 208.7, -346.44]}
+          geometry={nodes.Cintre2.geometry}
+          material={nodes.Cintre2.material}
+          position={[474.67, 208.7, -346.44]}
         />
         <mesh
-          geometry={nodes.Extrude.geometry}
-          material={nodes.Extrude.material}
-          position={[374.33, -78.17, -308.45]}
+          geometry={nodes.Cintre3.geometry}
+          material={nodes.Cintre3.material}
+          position={[416.18, 208.7, -346.44]}
         />
         <mesh
-          geometry={nodes.Sweep2.geometry}
-          material={nodes.Sweep2.material}
-          position={[448.56, -72.73, -340.59]}
-        />
-        <mesh
-          geometry={nodes.Arm.geometry}
-          material={nodes.Arm.material}
-          position={[-116.96, -19.34, 253.32]}
-        />
-        <mesh
-          geometry={nodes.Sweep.geometry}
-          material={nodes.Sweep.material}
-          position={[-118.36, 2.86, 239.09]}
-        />
-        <mesh
-          geometry={nodes.Plane1.geometry}
-          material={nodes.Plane1.material}
-          position={[-5.64, -23.48, 407.22]}
-        />
-        <mesh
-          geometry={nodes.Plane1_1.geometry}
-          material={nodes.Plane1_1.material}
-          position={[-8.08, -23.48, 407.22]}
-        />
-        <mesh
-          geometry={nodes.Plane1_2.geometry}
-          material={nodes.Plane1_2.material}
-          position={[-8.08, -28.07, 407.22]}
-        />
-        <mesh
-          geometry={nodes.Cylinder_1.geometry}
-          material={nodes.Cylinder_1.material}
-          position={[-118.36, -78.54, 230.59]}
-          rotation={[-Math.PI, 1.57, 0]}
-        />
-        <mesh
-          geometry={nodes.Extrude_1.geometry}
-          material={nodes.Extrude_1.material}
-          position={[-119.79, -57.29, 230.59]}
-        />
-        <mesh
-          geometry={nodes["Cylinder1-Cylinder"].geometry}
-          material={nodes["Cylinder1-Cylinder"].material}
-          position={[-118.36, -99.5, 230.59]}
-        />
-        <mesh
-          geometry={nodes.Extrude_2.geometry}
-          material={nodes.Extrude_2.material}
-          position={[-118.36, -115.77, 230.59]}
+          geometry={nodes.Cintre4.geometry}
+          material={nodes.Cintre4.material}
+          position={[358.74, 208.7, -346.44]}
         />
         <mesh
           geometry={nodes.Cloner.geometry}
@@ -165,23 +98,26 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
           position={[-118.36, -142.64, 230.59]}
         />
         <mesh
-          geometry={nodes.Deck4.geometry}
-          material={nodes.Deck4.material}
-          position={[-303.81, 226.78, -248.8]}
-          rotation={[0, 0, Math.PI / 2]}
-          scale={3}
+          geometry={nodes.Cylinder.geometry}
+          material={nodes.Cylinder.material}
+          position={[442.93, -116.07, -264.8]}
+          rotation={[Math.PI, Math.PI / 2, 0]}
         />
         <mesh
-          geometry={nodes.Deck3.geometry}
-          material={nodes.Deck3.material}
-          position={[-303.81, 226.78, -146.92]}
-          rotation={[0, 0, Math.PI / 2]}
-          scale={3}
+          geometry={nodes.Cylinder001.geometry}
+          material={nodes.Cylinder001.material}
+          position={[-118.36, -78.54, 230.59]}
+          rotation={[Math.PI, Math.PI / 2, 0]}
         />
         <mesh
-          geometry={nodes.Deck2.geometry}
-          material={nodes.Deck2.material}
-          position={[-303.81, 226.78, -44.87]}
+          geometry={nodes["Cylinder1-Cylinder"].geometry}
+          material={nodes["Cylinder1-Cylinder"].material}
+          position={[-118.36, -99.5, 230.59]}
+        />
+        <mesh
+          geometry={nodes.Deck.geometry}
+          material={nodes.Deck.material}
+          position={[-303.81, 226.78, 159.18]}
           rotation={[0, 0, Math.PI / 2]}
           scale={3}
         />
@@ -193,16 +129,25 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
           scale={3}
         />
         <mesh
-          geometry={nodes.Deck.geometry}
-          material={nodes.Deck.material}
-          position={[-303.81, 226.78, 159.18]}
+          geometry={nodes.Deck2.geometry}
+          material={nodes.Deck2.material}
+          position={[-303.81, 226.78, -44.87]}
           rotation={[0, 0, Math.PI / 2]}
           scale={3}
         />
         <mesh
-          geometry={nodes["desk-top"].geometry}
-          material={nodes["desk-top"].material}
-          position={[-214.12, 17.42, 266.02]}
+          geometry={nodes.Deck3.geometry}
+          material={nodes.Deck3.material}
+          position={[-303.81, 226.78, -146.92]}
+          rotation={[0, 0, Math.PI / 2]}
+          scale={3}
+        />
+        <mesh
+          geometry={nodes.Deck4.geometry}
+          material={nodes.Deck4.material}
+          position={[-303.81, 226.78, -248.8]}
+          rotation={[0, 0, Math.PI / 2]}
+          scale={3}
         />
         <mesh
           geometry={nodes["desk-left"].geometry}
@@ -215,10 +160,42 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
           position={[-239.56, -61.69, 106.07]}
         />
         <mesh
+          geometry={nodes["desk-top"].geometry}
+          material={nodes["desk-top"].material}
+          position={[-214.12, 17.42, 266.02]}
+        />
+        <mesh
+          geometry={nodes.Extrude.geometry}
+          material={nodes.Extrude.material}
+          position={[374.33, -78.17, -308.45]}
+        />
+        <mesh
+          geometry={nodes.Extrude001.geometry}
+          material={nodes.Extrude001.material}
+          position={[-119.79, -57.29, 230.59]}
+        />
+        <mesh
+          geometry={nodes.Extrude002.geometry}
+          material={nodes.Extrude002.material}
+          position={[-118.36, -115.77, 230.59]}
+        />
+        <mesh
+          geometry={nodes.Extrude1.geometry}
+          material={nodes.Extrude1.material}
+          position={[-227.19, 14.88, 236.08]}
+        />
+        <mesh
           geometry={nodes.Headphones.geometry}
           material={nodes.Headphones.material}
           position={[-211.27, 36.33, 376.26]}
           rotation={[0, 1.48, 0]}
+        />
+        <mesh
+          geometry={nodes.iMac.geometry}
+          material={nodes.iMac.material}
+          position={[-260.88, 109.85, 268.43]}
+          rotation={[0, 1.57, 0]}
+          scale={0.66}
         />
         <mesh
           geometry={nodes.Magic_Keyboard.geometry}
@@ -233,20 +210,51 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
           rotation={[-Math.PI / 2, 0, Math.PI / 2]}
         />
         <mesh
-          geometry={nodes.iMac.geometry}
-          material={nodes.iMac.material}
-          position={[-260.88, 109.85, 268.43]}
-          rotation={[0, 1.57, 0]}
-          scale={0.66}
+          geometry={nodes.Plane002.geometry}
+          material={nodes.Plane002.material}
+          position={[-8.08, -23.48, 407.22]}
         />
         <mesh
-          geometry={nodes.Extrude1.geometry}
-          material={nodes.Extrude1.material}
-          position={[-227.19, 14.88, 236.08]}
+          geometry={nodes.Plane003.geometry}
+          material={nodes.Plane003.material}
+          position={[-8.08, -28.07, 407.22]}
+        />
+        <mesh
+          geometry={nodes.Plane1.geometry}
+          material={nodes.Plane1.material}
+          position={[-5.64, -23.48, 407.22]}
+        />
+        <mesh
+          geometry={nodes.Rabbit_Lamp.geometry}
+          material={nodes.Rabbit_Lamp.material}
+          position={[-221.46, -158.11, -368.18]}
+          rotation={[-Math.PI / 2, 0, -2.44]}
+          scale={[4.66, -4.66, 4.66]}
+        />
+        <mesh
+          geometry={nodes.Room.geometry}
+          material={nodes.Room.material}
+          position={[-20.71, 0.64, -388.05]}
+        />
+        <mesh
+          geometry={nodes.Sweep.geometry}
+          material={nodes.Sweep.material}
+          position={[-118.36, 2.86, 239.09]}
+        />
+        <mesh
+          geometry={nodes.Sweep2.geometry}
+          material={nodes.Sweep2.material}
+          position={[448.56, -72.73, -340.59]}
         />
       </group>
+      <mesh
+        geometry={nodes.Cube.geometry}
+        material={materials.Material}
+        position={[-2.8, 2.17, 0.78]}
+        scale={0.16}
+      />
     </group>
   );
 }
 
-useGLTF.preload("/models/room.gltf");
+useGLTF.preload("/models/room-transformed.glb");
