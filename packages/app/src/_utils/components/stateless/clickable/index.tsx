@@ -19,13 +19,11 @@ const Clickable: FC<props> = ({
 }) => {
   let elem: any;
   if (onClick) {
-    elem = <Style.Root onClick={() => onClick()}>{children}</Style.Root>;
+    elem = <Style.Root onClick={(e) => onClick(e)}>{children}</Style.Root>;
   } else if (external) {
     elem = <Style.RootHref href={address}>{children}</Style.RootHref>;
   } else {
-    elem = (
-      <Style.RootLink to={{ pathname: address }}>{children}</Style.RootLink>
-    );
+    elem = <Style.RootLink to={{ pathname: address }}>{children}</Style.RootLink>;
   }
 
   return <Style.RealRoot hoverEffect={hoverEffect}>{elem}</Style.RealRoot>;
