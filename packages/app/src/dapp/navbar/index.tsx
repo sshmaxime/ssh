@@ -10,13 +10,41 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import VerifiedIcon from "@mui/icons-material/Verified";
+
+const dripsOwned = [
+  {
+    collection: "alpha",
+    id: 123,
+    img: "https://avatars.githubusercontent.com/u/96990732",
+  },
+  {
+    collection: "alpha",
+    id: 123,
+    img: "https://avatars.githubusercontent.com/u/96990732",
+  },
+  {
+    collection: "alpha",
+    id: 123,
+    img: "https://avatars.githubusercontent.com/u/96990732",
+  },
+  {
+    collection: "alpha",
+    id: 123,
+    img: "https://avatars.githubusercontent.com/u/96990732",
+  },
+  {
+    collection: "alpha",
+    id: 123,
+    img: "https://avatars.githubusercontent.com/u/96990732",
+  },
+];
 
 export const NavbarComponent: FC = () => {
   const [connected, setConnected] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
-    console.log(event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
   const handlePopoverClose = () => {
@@ -75,17 +103,96 @@ export const NavbarComponent: FC = () => {
                       vertical: "bottom",
                       horizontal: "left",
                     }}
-                    transformOrigin={{ horizontal: "left", vertical: -7.5 }}
+                    transformOrigin={{ horizontal: "left", vertical: -10 }}
                     disableRestoreFocus
-                    style={{
-                      borderRadius: "25px",
-                      zIndex: 2000,
-                      boxShadow: "none",
-                    }}
+                    style={{ zIndex: 2000 }}
                     elevation={0}
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
-                      <Style.WalletView>hello</Style.WalletView>
+                      <Style.WalletView>
+                        {dripsOwned.length ? (
+                          <Grid container>
+                            {dripsOwned.map((drip) => (
+                              <Grid item>
+                                <Grid container>
+                                  <Grid item xs={2}>
+                                    <img src={drip.img} style={{ width: "100%" }} alt="" />
+                                  </Grid>
+                                  <Grid
+                                    item
+                                    xs={10}
+                                    style={{ padding: "1.5px", paddingLeft: "10px" }}
+                                  >
+                                    <Grid container justifyContent="space-between">
+                                      <Grid item>
+                                        <Style.WalletTypoCollection>
+                                          <Grid container alignItems="center">
+                                            BAYC
+                                            <VerifiedIcon
+                                              style={{
+                                                marginLeft: "2.5px",
+                                                fontSize: "15px",
+                                                marginBottom: "2.5px",
+                                              }}
+                                            />
+                                          </Grid>
+                                        </Style.WalletTypoCollection>
+                                      </Grid>
+                                      <Grid item>
+                                        <Grid container columnSpacing={1}>
+                                          <Grid item>
+                                            <Style.WalletTypoCollectionDrop>
+                                              DROP 1
+                                            </Style.WalletTypoCollectionDrop>
+                                          </Grid>
+                                          <Grid item>
+                                            <Style.WalletTypoDripId>#1234</Style.WalletTypoDripId>
+                                          </Grid>
+                                        </Grid>
+                                      </Grid>
+                                    </Grid>
+                                    <Grid container style={{ marginTop: "5px" }}>
+                                      <Grid item>
+                                        <Style.WalletTypoDripAction>
+                                          View
+                                        </Style.WalletTypoDripAction>
+                                      </Grid>
+                                      <Grid item>
+                                        <Style.WalletTypoDripAction>
+                                          View
+                                        </Style.WalletTypoDripAction>
+                                      </Grid>
+                                      <Grid item>
+                                        <Style.WalletTypoDripAction>
+                                          View
+                                        </Style.WalletTypoDripAction>
+                                      </Grid>
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                                <div
+                                  style={{
+                                    height: "2px",
+                                    marginTop: "2.5px",
+                                    marginBottom: "5px",
+                                    backgroundColor: "grey",
+                                    opacity: "0.1",
+                                  }}
+                                ></div>
+                              </Grid>
+                            ))}
+                          </Grid>
+                        ) : (
+                          <Grid
+                            style={{ height: "100px" }}
+                            container
+                            justifyContent="center"
+                            alignItems="center"
+                          >
+                            <Style.WalletTypo1>You do not own any drips :'(</Style.WalletTypo1>
+                          </Grid>
+                        )}
+                      </Style.WalletView>
                     </ClickAwayListener>
                   </Popover>
                 </Grid>
