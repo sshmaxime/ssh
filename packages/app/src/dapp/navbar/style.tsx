@@ -15,7 +15,6 @@ const style = {
     height: "100px",
     display: "flex",
     justifyContent: "center",
-    // backgroundColor: "white",
   })),
   Link: styled(Link)(({ theme }) => ({
     ...theme.titles(theme).primary,
@@ -84,6 +83,12 @@ const style = {
     fontWeight: 600,
     color: "grey",
     fontSize: "0.75em",
+  })),
+  WalletView: styled("div")(({ theme }) => ({
+    padding: "15px",
+    width: "300px",
+    backgroundColor: "white",
+    borderRadius: "10px",
   })),
 };
 

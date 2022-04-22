@@ -43,7 +43,7 @@ const LandingScreenComponent: FC<props> = () => {
   return (
     <Style.LandingScreenComponent>
       <Style.Background>
-        <ThreeDHouse />
+        {/* <ThreeDHouse /> */}
         <Style.TitleContainer2>
           EXCLUSIVE <br />
           LIMITED <br />

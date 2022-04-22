@@ -13,7 +13,7 @@ const ThreeDHouse: FC<{ camera?: Vector3 }> = ({ children, camera }) => {
       <ThreeDCoomponent camera={[150, 150, 150]}>
         <ambientLight intensity={0.95} />
         <ModelRoom position={[0, 0, 0]} />
-        <OrbitControls enableZoom={false} enableRotate={false} />
+        <OrbitControls />
       </ThreeDCoomponent>
     </Style.Root>
   );

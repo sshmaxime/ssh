@@ -54,6 +54,18 @@ type GLTFResult = GLTF & {
 export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF("/models/room-transformed.glb") as GLTFResult;
+
+  for (const k in nodes) {
+    if ((nodes as any)[k].material) {
+      ((nodes as any)[k] as any).material.color = null as any;
+      ((nodes as any)[k] as any).material.toneMapped = false;
+    }
+  }
+  //
+
+  (nodes.Arm.material as any).color = null as any;
+  (nodes.Arm.material as any).toneMapped = false;
+
   return (
     <group ref={group} {...props} dispose={null}>
       <group position={[-26.73, 32.82, -1.37]} scale={0.16}>

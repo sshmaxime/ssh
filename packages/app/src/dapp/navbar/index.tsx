@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 import { Toolbar, Grid } from "@mui/material";
 
@@ -16,12 +16,19 @@ export const NavbarComponent: FC = () => {
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    console.log(event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
   const handlePopoverClose = () => {
     setAnchorEl(null);
   };
   const open = Boolean(anchorEl);
+
+  const ref = React.createRef() as any;
+
+  useEffect(() => {
+    setAnchorEl(ref.current);
+  }, []);
 
   return (
     <Style.Root>
@@ -51,7 +58,7 @@ export const NavbarComponent: FC = () => {
                 flexDirection="row-reverse"
                 alignItems="center"
               >
-                <Grid item>
+                <Grid item ref={ref}>
                   <Clickable onClick={handlePopoverOpen}>
                     <AccountBalanceWalletIcon
                       style={{
@@ -73,19 +80,12 @@ export const NavbarComponent: FC = () => {
                     style={{
                       borderRadius: "25px",
                       zIndex: 2000,
+                      boxShadow: "none",
                     }}
+                    elevation={0}
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
-                      <div
-                        style={{
-                          padding: "15px",
-                          width: "300px",
-                          backgroundColor: "white",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        hello
-                      </div>
+                      <Style.WalletView>hello</Style.WalletView>
                     </ClickAwayListener>
                   </Popover>
                 </Grid>
