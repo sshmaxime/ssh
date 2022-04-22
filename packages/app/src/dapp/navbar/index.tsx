@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import VerifiedIcon from "@mui/icons-material/Verified";
+import OpenseaIcon from "../../_utils/assets/icons/opensea.svg";
 
 const dripsOwned = [
   {
@@ -52,12 +53,6 @@ export const NavbarComponent: FC = () => {
   };
   const open = Boolean(anchorEl);
 
-  const ref = React.createRef() as any;
-
-  useEffect(() => {
-    setAnchorEl(ref.current);
-  }, []);
-
   return (
     <Style.Root>
       <Style.AppBar position="absolute">
@@ -86,11 +81,10 @@ export const NavbarComponent: FC = () => {
                 flexDirection="row-reverse"
                 alignItems="center"
               >
-                <Grid item ref={ref}>
-                  <Clickable onClick={handlePopoverOpen}>
+                <Grid item>
+                  <Clickable activated={connected} onClick={handlePopoverOpen}>
                     <AccountBalanceWalletIcon
                       style={{
-                        opacity: connected ? "" : "25%",
                         fontSize: "40px",
                         color: "black",
                       }}
@@ -151,21 +145,26 @@ export const NavbarComponent: FC = () => {
                                         </Grid>
                                       </Grid>
                                     </Grid>
-                                    <Grid container style={{ marginTop: "5px" }}>
+                                    <Grid
+                                      container
+                                      style={{ marginTop: "5px" }}
+                                      justifyContent="space-between"
+                                    >
                                       <Grid item>
                                         <Style.WalletTypoDripAction>
                                           View
                                         </Style.WalletTypoDripAction>
                                       </Grid>
                                       <Grid item>
-                                        <Style.WalletTypoDripAction>
-                                          View
-                                        </Style.WalletTypoDripAction>
-                                      </Grid>
-                                      <Grid item>
-                                        <Style.WalletTypoDripAction>
-                                          View
-                                        </Style.WalletTypoDripAction>
+                                        <Grid container>
+                                          <Grid item>
+                                            <img
+                                              style={{ width: "20px" }}
+                                              src={OpenseaIcon}
+                                              alt=""
+                                            />
+                                          </Grid>
+                                        </Grid>
                                       </Grid>
                                     </Grid>
                                   </Grid>

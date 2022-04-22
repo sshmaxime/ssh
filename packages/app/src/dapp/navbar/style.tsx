@@ -130,10 +130,9 @@ const style = {
   WalletTypoDripAction: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
-    letterSpacing: "0.5px",
     fontSize: "0.65em",
     padding: "2.5px",
-    color: "grey",
+    color: "#3366BB",
     borderRadius: "5px",
   })),
 };
