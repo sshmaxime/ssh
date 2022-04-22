@@ -7,26 +7,26 @@ type props = {
   onClick?: Function;
   address?: string;
   external?: boolean;
-  hoverEffect?: boolean;
+  activated?: boolean;
 };
 
 const Clickable: FC<props> = ({
   children,
   onClick,
-  hoverEffect,
   address = "https://google.com",
   external = true,
+  activated = true,
 }) => {
   let elem: any;
   if (onClick) {
-    elem = <Style.Root onClick={(e) => onClick(e)}>{children}</Style.Root>;
+    elem = <Style.Root onClick={(e) => (activated ? onClick(e) : () => {})}>{children}</Style.Root>;
   } else if (external) {
     elem = <Style.RootHref href={address}>{children}</Style.RootHref>;
   } else {
     elem = <Style.RootLink to={{ pathname: address }}>{children}</Style.RootLink>;
   }
 
-  return <Style.RealRoot hoverEffect={hoverEffect}>{elem}</Style.RealRoot>;
+  return <Style.RealRoot activated={activated}>{elem}</Style.RealRoot>;
 };
 
 export default Clickable;

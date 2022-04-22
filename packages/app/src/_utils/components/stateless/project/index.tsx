@@ -66,16 +66,13 @@ const Project: FC<props> = ({
                 ))}
               </Grid>
             </Grid>
-            <Clickable address="/app/drop/0" hoverEffect>
+            <Clickable address="/app/drop/0">
               <div style={{ position: "relative" }}>
                 <img style={{ width: "100%" }} src={image} alt=""></img>
                 <Style.Overlay>
                   <div style={{ position: "absolute", bottom: 15, left: 5 }}>
                     <Style.ProjectTitleContainer1>
-                      <Style.ProjectTitleKeyword>
-                        {title}
-                      </Style.ProjectTitleKeyword>
-                      #{id}
+                      <Style.ProjectTitleKeyword>{title}</Style.ProjectTitleKeyword>#{id}
                     </Style.ProjectTitleContainer1>
                   </div>
                 </Style.Overlay>
@@ -94,8 +91,7 @@ const Project: FC<props> = ({
           <Style.GridContainerCard container spacing={0}>
             <Grid item xs={4}>
               <Style.ProjectTitleContainer>
-                <Style.ProjectTitleKeyword>{title}</Style.ProjectTitleKeyword>#
-                {id}
+                <Style.ProjectTitleKeyword>{title}</Style.ProjectTitleKeyword>#{id}
               </Style.ProjectTitleContainer>
             </Grid>
             <Grid item xs={8}>
@@ -122,15 +118,11 @@ const Project: FC<props> = ({
             {!justHeader && (
               <>
                 <Grid item xs={12}>
-                  <Style.ProjectSpacer>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </Style.ProjectSpacer>
+                  <Style.ProjectSpacer>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Style.ProjectSpacer>
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Style.ProjectDescription>
-                    {description}
-                  </Style.ProjectDescription>
+                  <Style.ProjectDescription>{description}</Style.ProjectDescription>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -154,10 +146,7 @@ const Project: FC<props> = ({
                         }}
                       >
                         <Grid item>
-                          <Clickable
-                            address={defaultLinks.mint}
-                            external={false}
-                          >
+                          <Clickable address={defaultLinks.mint} external={false}>
                             <Style.MintButton>EXPLORE</Style.MintButton>
                           </Clickable>
                         </Grid>
@@ -168,9 +157,7 @@ const Project: FC<props> = ({
                             <>
                               <Grid item>
                                 <Clickable address={otherLink.url}>
-                                  <Style.ExternalLink>
-                                    {otherLink.name}
-                                  </Style.ExternalLink>
+                                  <Style.ExternalLink>{otherLink.name}</Style.ExternalLink>
                                 </Clickable>
                               </Grid>
                             </>
