@@ -79,8 +79,6 @@ const SkateDefault: FC<props & JSX.IntrinsicElements["group"]> = (props) => {
   materials.Deck.map = props.deckTexture;
   materials.Placeholder.map = props.placeholderTexture;
 
-  console.log(props.position);
-
   return (
     <Center alignTop>
       <group ref={group} rotation={[Math.PI / 2, Math.PI / 2, Math.PI]} dispose={null}>
