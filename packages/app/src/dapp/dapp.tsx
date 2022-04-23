@@ -28,6 +28,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import ModelSkate from "../app/3dscenes/demo/skate";
 import ModelRoom from "../_utils/assets/models/Room";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 //
 const listItems = [
@@ -112,7 +113,7 @@ const pastilles = [
     description: "This NFT holds a 3D model.",
   },
   {
-    title: "0 / 250",
+    title: "0 / 100",
     description: "Minted supply / Total supply",
   },
 ];
@@ -262,114 +263,89 @@ const Drop: FC = () => {
             </Style.BodyLeftSide>
           </Style.LeftSide>
 
-          <Style.ContainerInfo maxed={checked}>
-            <Style.InnerContainerInfo maxed={checked}>
-              <Style.CloseContainerInfo maxed={checked} onClick={handleChange}>
-                CLOSE
-              </Style.CloseContainerInfo>
-              <Style.ContainerTitle>DROP #1</Style.ContainerTitle>
-              <Grid container spacing={1} alignContent={"center"} style={{ marginTop: "5px" }}>
-                {pastilles.map((pastille) => (
-                  <Grid key={pastille.title} item>
-                    <Tooltip arrow title={pastille.description} placement="top">
-                      <div>
-                        <Pastille title={pastille.title} />
-                      </div>
-                    </Tooltip>
-                  </Grid>
-                ))}
-              </Grid>
-              <Style.ContainerPayment maxed={checked}>
-                <Style.InnerContainerPayment>
-                  <Grid container alignItems="center" rowSpacing={2}>
-                    <Grid item xs={12}>
-                      <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
+          <ClickAwayListener onClickAway={() => setChecked(false)}>
+            <Style.ContainerInfo maxed={checked}>
+              <Style.InnerContainerInfo maxed={checked}>
+                <Style.CloseContainerInfo maxed={checked} onClick={handleChange}>
+                  CLOSE
+                </Style.CloseContainerInfo>
+                <Style.ContainerTitle>DROP #1</Style.ContainerTitle>
+                <Grid container spacing={1} alignContent={"center"} style={{ marginTop: "5px" }}>
+                  {pastilles.map((pastille) => (
+                    <Grid key={pastille.title} item>
+                      <Tooltip arrow title={pastille.description} placement="top">
+                        <div>
+                          <Pastille title={pastille.title} />
+                        </div>
+                      </Tooltip>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Grid container alignItems="baseline" columnSpacing={1}>
-                        <Grid item xs={1}>
-                          <img src={logoeth} style={{ width: "90%" }} alt="" />
-                        </Grid>
-                        <Grid item>
-                          <Style.MintPrice>0.5</Style.MintPrice>
-                        </Grid>
-                        <Grid item>
-                          <Style.MintPriceUsd>($200.87)</Style.MintPriceUsd>
+                  ))}
+                </Grid>
+                <Style.ContainerPayment maxed={checked}>
+                  <Style.InnerContainerPayment>
+                    <Grid container alignItems="center" rowSpacing={2}>
+                      <Grid item xs={12}>
+                        <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Grid container alignItems="baseline" columnSpacing={1}>
+                          <Grid item xs={1}>
+                            <img src={logoeth} style={{ width: "90%" }} alt="" />
+                          </Grid>
+                          <Grid item>
+                            <Style.MintPrice>0.5</Style.MintPrice>
+                          </Grid>
+                          <Grid item>
+                            <Style.MintPriceUsd>($200.87)</Style.MintPriceUsd>
+                          </Grid>
                         </Grid>
                       </Grid>
+                      <Grid item xs={12}>
+                        <Style.MintButton>MINT</Style.MintButton>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Style.MintButton>MINT</Style.MintButton>
+                  </Style.InnerContainerPayment>
+                </Style.ContainerPayment>
+                <Style.ContainerMoreInfo maxed={checked} onClick={handleChange}>
+                  <Style.DetailsContainer container alignItems="center" justifyContent="center">
+                    <Grid item>DETAILS</Grid>
+                    <Grid item>
+                      <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
                     </Grid>
-                  </Grid>
-                </Style.InnerContainerPayment>
-              </Style.ContainerPayment>
-              <Style.ContainerMoreInfo maxed={checked} onClick={handleChange}>
-                <Style.DetailsContainer container alignItems="center" justifyContent="center">
-                  <Grid item>DETAILS</Grid>
-                  <Grid item>
-                    <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
-                  </Grid>
-                </Style.DetailsContainer>
-              </Style.ContainerMoreInfo>
+                  </Style.DetailsContainer>
+                </Style.ContainerMoreInfo>
 
-              <Style.ContainerMoreInfoContent maxed={checked}>
-                <Style.InnerContainerMoreInfoContent maxed={checked}>
-                  <Grid container spacing={2} justifyContent="space-between">
-                    <Grid item xs={9}>
-                      Hello
-                    </Grid>
+                <Style.ContainerMoreInfoContent maxed={checked}>
+                  <Style.InnerContainerMoreInfoContent maxed={checked}>
+                    <Grid container spacing={2} justifyContent="space-between">
+                      <Grid item xs={9}>
+                        Hello
+                      </Grid>
 
-                    <Grid item xs={3}>
-                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
-                    </Grid>
-                    <Grid item xs={9}>
-                      Hello
-                    </Grid>
+                      <Grid item xs={3}>
+                        <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
+                      </Grid>
+                      <Grid item xs={9}>
+                        Hello
+                      </Grid>
 
-                    <Grid item xs={3}>
-                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
+                      <Grid item xs={3}>
+                        <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
+                      </Grid>
+                      <Grid item xs={9}>
+                        Hello
+                      </Grid>
                     </Grid>
-                    <Grid item xs={9}>
-                      Hello
-                    </Grid>
-
-                    <Grid item xs={3}>
-                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
-                    </Grid>
-                    <Grid item xs={9}>
-                      Hello
-                    </Grid>
-
-                    <Grid item xs={3}>
-                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
-                    </Grid>
-                    <Grid item xs={9}>
-                      Hello
-                    </Grid>
-
-                    <Grid item xs={3}>
-                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={2} justifyContent="space-between">
-                    <Grid item xs={9}>
-                      Hello
-                    </Grid>
-
-                    <Grid item xs={3}>
-                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
-                    </Grid>
-                  </Grid>
-                </Style.InnerContainerMoreInfoContent>
-              </Style.ContainerMoreInfoContent>
-            </Style.InnerContainerInfo>
-          </Style.ContainerInfo>
+                  </Style.InnerContainerMoreInfoContent>
+                </Style.ContainerMoreInfoContent>
+              </Style.InnerContainerInfo>
+            </Style.ContainerInfo>
+          </ClickAwayListener>
         </Style.Part1>
         <Style.Overlay>
           <Style.InnerOverlay>
             <Style.InnerOverlayLeft></Style.InnerOverlayLeft>
-            <Style.InnerOverlayCenter>hey</Style.InnerOverlayCenter>
+            <Style.InnerOverlayCenter></Style.InnerOverlayCenter>
             <Style.InnerOverlayRight></Style.InnerOverlayRight>
           </Style.InnerOverlay>
         </Style.Overlay>
