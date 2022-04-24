@@ -29,6 +29,7 @@ import { OrbitControls } from "@react-three/drei";
 import ModelSkate from "../app/3dscenes/demo/skate";
 import ModelRoom from "../_utils/assets/models/Room";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Clickable from "../_utils/components/stateless/clickable";
 
 //
 const listItems = [
@@ -266,10 +267,16 @@ const Drop: FC = () => {
           <ClickAwayListener onClickAway={() => setChecked(false)}>
             <Style.ContainerInfo maxed={checked}>
               <Style.InnerContainerInfo maxed={checked}>
-                <Style.CloseContainerInfo maxed={checked} onClick={handleChange}>
-                  CLOSE
-                </Style.CloseContainerInfo>
-                <Style.ContainerTitle>DROP #1</Style.ContainerTitle>
+                <Grid container justifyContent="space-between">
+                  <Grid item>
+                    <Style.ContainerTitle>DROP #1</Style.ContainerTitle>
+                  </Grid>
+                  <Grid item>
+                    <Clickable onClick={handleChange}>
+                      <Style.CloseContainerInfo maxed={checked}>CLOSE</Style.CloseContainerInfo>
+                    </Clickable>
+                  </Grid>
+                </Grid>
                 <Grid container spacing={1} alignContent={"center"} style={{ marginTop: "5px" }}>
                   {pastilles.map((pastille) => (
                     <Grid key={pastille.title} item>
@@ -301,19 +308,23 @@ const Drop: FC = () => {
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
-                        <Style.MintButton>MINT</Style.MintButton>
+                        <Clickable onClick={() => {}}>
+                          <Style.MintButton>MINT</Style.MintButton>
+                        </Clickable>
                       </Grid>
                     </Grid>
                   </Style.InnerContainerPayment>
                 </Style.ContainerPayment>
-                <Style.ContainerMoreInfo maxed={checked} onClick={handleChange}>
-                  <Style.DetailsContainer container alignItems="center" justifyContent="center">
-                    <Grid item>DETAILS</Grid>
-                    <Grid item>
-                      <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
-                    </Grid>
-                  </Style.DetailsContainer>
-                </Style.ContainerMoreInfo>
+                <Clickable onClick={handleChange}>
+                  <Style.ContainerMoreInfo maxed={checked}>
+                    <Style.DetailsContainer container alignItems="center" justifyContent="center">
+                      <Grid item>DETAILS</Grid>
+                      <Grid item>
+                        <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
+                      </Grid>
+                    </Style.DetailsContainer>
+                  </Style.ContainerMoreInfo>
+                </Clickable>
 
                 <Style.ContainerMoreInfoContent maxed={checked}>
                   <Style.InnerContainerMoreInfoContent maxed={checked}>
@@ -343,10 +354,10 @@ const Drop: FC = () => {
           </ClickAwayListener>
         </Style.Part1>
         <Style.Overlay>
-          <Style.InnerOverlay>
-            <Style.InnerOverlayLeft></Style.InnerOverlayLeft>
-            <Style.InnerOverlayCenter></Style.InnerOverlayCenter>
-            <Style.InnerOverlayRight></Style.InnerOverlayRight>
+          <Style.InnerOverlay container justifyContent="space-evenly">
+            <Style.InnerOverlayLeft item></Style.InnerOverlayLeft>
+            <Style.InnerOverlayCenter item></Style.InnerOverlayCenter>
+            <Style.InnerOverlayRight item></Style.InnerOverlayRight>
           </Style.InnerOverlay>
         </Style.Overlay>
       </Style.Root>

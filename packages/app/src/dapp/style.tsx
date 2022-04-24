@@ -7,7 +7,7 @@ const headerHeight = "125px";
 const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "310px";
 
-const bottomOverlayHeight = "100px";
+const bottomOverlayHeight = "50px";
 const rightHeightReduced = "310px";
 
 const sizeWidthLeft = "20px";
@@ -39,18 +39,14 @@ const style = {
     display: "flex",
     alignItems: "center",
   })),
-  InnerOverlay: styled("div")(({ theme }) => ({
-    display: "flex",
+  InnerOverlay: styled(Grid)(({ theme }) => ({})),
+  InnerOverlayCenter: styled(Grid)(({ theme }) => ({
+    color: "grey",
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.75em",
   })),
-  InnerOverlayCenter: styled("div")(({ theme }) => ({
-    flex: 1,
-  })),
-  InnerOverlayLeft: styled("div")(({ theme }) => ({
-    flex: `0 0 ${leftDefaultWidth}`,
-  })),
-  InnerOverlayRight: styled("div")(({ theme }) => ({
-    flex: `0 0 ${rightDefaultWidth}`,
-  })),
+  InnerOverlayLeft: styled(Grid)(({ theme }) => ({})),
+  InnerOverlayRight: styled(Grid)(({ theme }) => ({})),
   LeftSide: styled("div")(({ theme }) => ({
     position: "absolute",
     bottom: sizeWidthLeft,
@@ -97,9 +93,6 @@ const style = {
     transition: "all .5s ease-in-out",
   })),
   CloseContainerInfo: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
-    position: "absolute",
-    right: 25,
-    top: 35,
     display: maxed ? "block" : "none",
     opacity: 0.5,
     backgroundColor: "#D6D6E4",
@@ -120,10 +113,10 @@ const style = {
     opacity: maxed ? 1 : 0,
     transition: "all 1s",
     display: maxed ? "block" : "none",
-    backgroundColor: maxed ? theme.backgroundColor.secondary : "white",
   })),
   InnerContainerMoreInfoContent: styled("div")<{ maxed?: boolean }>(({ theme, maxed }) => ({
     padding: "15px",
+    backgroundColor: theme.backgroundColor.secondary,
   })),
   ContainerTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

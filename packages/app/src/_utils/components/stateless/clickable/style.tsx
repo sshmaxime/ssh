@@ -6,7 +6,7 @@ const style = {
     transition: "all .2s ease-in-out",
     opacity: activated ? "" : "25%",
     ":hover": {
-      transform: activated ? "scale(1.02)" : "",
+      transform: activated ? "scale(1.01)" : "",
       cursor: activated ? "pointer" : "",
     },
   })),
