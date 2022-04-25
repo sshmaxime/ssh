@@ -37,6 +37,12 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
+import img_sshkey from "../_utils/assets/images/sshkey.png";
+import Clickable from "../_utils/components/stateless/clickable";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import me from "../_utils/assets/images/me.png";
+
 type props = {};
 
 const LandingScreenComponent: FC<props> = () => {
@@ -285,34 +291,94 @@ const SocietyComponent: FC<{}> = () => {
       <Style.ViewTitle>/ THE SOCIETY .</Style.ViewTitle>
       <Style.View2Content>
         When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It is
-        precious. Hold on to it. <Sbu>You will need it</Sbu>.
+        precious: <Sbu>hold on to it</Sbu>.
         <br /> <br />
-        This key is a <Sbu>membership</Sbu> access to the{" "}
+        The <Sbu>SSH-KEY</Sbu> is a <Sbu>membership</Sbu> access to the{" "}
         <Sbu no_u>
           <ColoredKw color="#F6EFB6">/ ssh society .</ColoredKw>
         </Sbu>
         , whose benefits and offerings will increase over time. Your <Sbu>SSH-KEY</Sbu> will open{" "}
-        <Sbu>undiscovered</Sbu> {"&"} <Sbu>exclusive</Sbu> digital doors for you,{" "}
+        <Sbu>undiscovered</Sbu> {"&"} <Sbu>exclusive</Sbu> digital & physical doors for you,{" "}
         <Sbu no_u>keep it safe</Sbu>.
       </Style.View2Content>
-      <Style.MoreLinkContainer>
-        <Grid container>
-          <Grid item alignSelf={"center"}>
-            <Style.MoreLink>READ MORE</Style.MoreLink>
-          </Grid>
-          <Grid item alignSelf={"center"}>
-            <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
-          </Grid>
-        </Grid>
-      </Style.MoreLinkContainer>
     </Style.RoadmapComponent>
   );
 };
 
-const NowComponent: FC<props> = ({ children }) => {
+const NowComponent: FC<{
+  people: {
+    name: string;
+    job: string;
+    img: string;
+    bgColor?: string;
+    icons: { img: any | string; link: string }[];
+  }[];
+}> = ({ children, people }) => {
   return (
     <Style.NowComponent>
-      <Style.NowContainer>hello</Style.NowContainer>
+      <Style.ViewTitle>/ THE TEAM .</Style.ViewTitle>
+      <Style.NowContainer>
+        <Grid
+          container
+          columnSpacing={0}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Grid container spacing={4}>
+            {people.map((person) => (
+              <Grid key={person.name} item xs={3}>
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Grid container spacing={0}>
+                      <Grid item xs={12}>
+                        <Style.TeamName>{person.name}</Style.TeamName>
+                      </Grid>
+
+                      <Grid item>
+                        <Style.TeamNameTitle>{person.job}</Style.TeamNameTitle>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <Grid
+                      container
+                      spacing={1}
+                      style={{
+                        paddingRight: "5px",
+                      }}
+                      justifyContent="flex-end"
+                      alignItems="center"
+                    >
+                      {person.icons.map((icon, index) => {
+                        return (
+                          <Grid key={index} item>
+                            <Clickable address={icon.link}>
+                              {typeof icon.img === "string" ? (
+                                <img src={icon.img} alt="" />
+                              ) : (
+                                icon.img
+                              )}
+                            </Clickable>
+                          </Grid>
+                        );
+                      })}
+                    </Grid>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Grid item xs={12}>
+                      <Style.ImgTeam src={person.img} alt="" />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+      </Style.NowContainer>
     </Style.NowComponent>
   );
 };
@@ -323,7 +389,58 @@ const MainComponent: FC<props> = ({ children }) => {
       <LandingScreenComponent />
       <DripComponent />
       <SocietyComponent />
-      <NowComponent />
+      <NowComponent
+        people={[
+          {
+            name: "SSH",
+            job: "FOUNDER",
+            img: me,
+            bgColor: "#B4FFA5",
+            icons: [
+              {
+                img: <GitHubIcon />,
+                link: "https://github.com/sshmaxime",
+              },
+              {
+                img: <LinkedInIcon />,
+                link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
+              },
+            ],
+          },
+          {
+            name: "SSH",
+            job: "FOUNDER",
+            img: me,
+            bgColor: "#B4FFA5",
+            icons: [
+              {
+                img: <GitHubIcon />,
+                link: "https://github.com/sshmaxime",
+              },
+              {
+                img: <LinkedInIcon />,
+                link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
+              },
+            ],
+          },
+          {
+            name: "SSH",
+            job: "FOUNDER",
+            img: me,
+            bgColor: "#B4FFA5",
+            icons: [
+              {
+                img: <GitHubIcon />,
+                link: "https://github.com/sshmaxime",
+              },
+              {
+                img: <LinkedInIcon />,
+                link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
+              },
+            ],
+          },
+        ]}
+      />
     </Style.Root>
   );
 };
