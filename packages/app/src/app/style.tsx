@@ -167,6 +167,38 @@ const style = {
     boxShadow: `5px 5px 0px ${theme.backgroundColor.primary} ,  -5px -5px 0px  ${theme.backgroundColor.secondary} `,
     borderRadius: "5px",
   })),
+  ImgTeam: styled("img")(({ theme }) => ({
+    width: "100%",
+    borderRadius: "5px",
+  })),
+  TeamName: styled(Typography)(({ theme }) => ({
+    ...theme.titles(theme).secondary,
+    paddingLeft: "5px",
+    fontSize: "1.25em",
+  })),
+  SubTextSubtitle: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    letterSpacing: "2px",
+    marginBottom: "50px",
+    color: "#2AFE00",
+    textShadow: "2px 2px 1px black, -1px -1px 1px black",
+  })),
+  TeamNameTitle: styled(Typography)(({ theme }) => ({
+    ...theme.titles(theme).secondary,
+    color: "grey",
+    paddingLeft: "5px",
+    fontSize: "0.7em",
+    marginBottom: "5px",
+  })),
+  TextSubtitle2: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 800,
+    fontSize: "3em",
+    textShadow: `-2px 2px 2px white,
+      -3px 3px 0px #303049,
+      -5px 5px 4px ${theme.backgroundColor.tertiary}`,
+  })),
 };
 
 export default style;
