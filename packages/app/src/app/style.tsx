@@ -149,55 +149,38 @@ const style = {
   //
   RoadmapComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    backgroundColor: theme.backgroundColor.secondary,
     paddingTop: "10vh",
     paddingBottom: "10vh",
   })),
 
   //
-  NowComponent: styled("div")(({ theme }) => ({
+  TeamComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    backgroundImage: `linear-gradient(180deg, ${theme.backgroundColor.primary} 50%,  ${theme.backgroundColor.secondary} 50%)`,
     paddingTop: "10vh",
     paddingBottom: "10vh",
   })),
-  NowContainer: styled("div")(({ theme }) => ({
-    backgroundColor: "white",
-    padding: "25px",
-    boxShadow: `5px 5px 0px ${theme.backgroundColor.primary} ,  -5px -5px 0px  ${theme.backgroundColor.secondary} `,
-    borderRadius: "5px",
-  })),
+  TeamContainer: styled("div")(({ theme }) => ({})),
   ImgTeam: styled("img")(({ theme }) => ({
     width: "100%",
     borderRadius: "5px",
   })),
   TeamName: styled(Typography)(({ theme }) => ({
-    ...theme.titles(theme).secondary,
+    ...theme.titles(theme).primary,
     paddingLeft: "5px",
-    fontSize: "1.25em",
-  })),
-  SubTextSubtitle: styled(Typography)(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: 900,
-    letterSpacing: "2px",
-    marginBottom: "50px",
-    color: "#2AFE00",
-    textShadow: "2px 2px 1px black, -1px -1px 1px black",
   })),
   TeamNameTitle: styled(Typography)(({ theme }) => ({
     ...theme.titles(theme).secondary,
-    color: "grey",
+    opacity: "35%",
     paddingLeft: "5px",
-    fontSize: "0.7em",
     marginBottom: "5px",
   })),
-  TextSubtitle2: styled(Typography)(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: 800,
-    fontSize: "3em",
-    textShadow: `-2px 2px 2px white,
-      -3px 3px 0px #303049,
-      -5px 5px 4px ${theme.backgroundColor.tertiary}`,
+
+  //
+  NowComponent: styled("div")(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level1,
+    backgroundColor: theme.backgroundColor.primary,
+    paddingTop: "10vh",
+    paddingBottom: "10vh",
   })),
 };
 
