@@ -41,7 +41,9 @@ import img_sshkey from "../_utils/assets/images/sshkey.png";
 import Clickable from "../_utils/components/stateless/clickable";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
 import me from "../_utils/assets/images/me.png";
+import rems from "../_utils/assets/images/rems.png";
 
 type props = {};
 
@@ -305,7 +307,7 @@ const SocietyComponent: FC<{}> = () => {
   );
 };
 
-const NowComponent: FC<{
+const TeamComponent: FC<{
   people: {
     name: string;
     job: string;
@@ -315,70 +317,68 @@ const NowComponent: FC<{
   }[];
 }> = ({ children, people }) => {
   return (
-    <Style.NowComponent>
+    <Style.TeamComponent>
       <Style.ViewTitle>/ THE TEAM .</Style.ViewTitle>
-      <Style.NowContainer>
-        <Grid
-          container
-          columnSpacing={0}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Grid container spacing={4}>
-            {people.map((person) => (
-              <Grid key={person.name} item xs={3}>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Grid container spacing={0}>
-                      <Grid item xs={12}>
-                        <Style.TeamName>{person.name}</Style.TeamName>
-                      </Grid>
-
-                      <Grid item>
-                        <Style.TeamNameTitle>{person.job}</Style.TeamNameTitle>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-
-                  <Grid item xs={6}>
-                    <Grid
-                      container
-                      spacing={1}
-                      style={{
-                        paddingRight: "5px",
-                      }}
-                      justifyContent="flex-end"
-                      alignItems="center"
-                    >
-                      {person.icons.map((icon, index) => {
-                        return (
-                          <Grid key={index} item>
-                            <Clickable address={icon.link}>
-                              {typeof icon.img === "string" ? (
-                                <img src={icon.img} alt="" />
-                              ) : (
-                                icon.img
-                              )}
-                            </Clickable>
-                          </Grid>
-                        );
-                      })}
-                    </Grid>
-                  </Grid>
-
-                  <Grid item xs={12}>
+      <Style.TeamContainer>
+        <Grid container spacing={3}>
+          {people.map((person) => (
+            <Grid key={person.name} item xs={3}>
+              <Grid container>
+                <Grid item xs={6}>
+                  <Grid container>
                     <Grid item xs={12}>
-                      <Style.ImgTeam src={person.img} alt="" />
+                      <Style.TeamName>{person.name}</Style.TeamName>
+                    </Grid>
+                    <Grid item>
+                      <Style.TeamNameTitle>{person.job}</Style.TeamNameTitle>
                     </Grid>
                   </Grid>
                 </Grid>
+
+                <Grid item xs={6}>
+                  <Grid
+                    container
+                    spacing={1}
+                    style={{
+                      paddingRight: "5px",
+                    }}
+                    justifyContent="flex-end"
+                    alignItems="center"
+                  >
+                    {person.icons.map((icon, index) => {
+                      return (
+                        <Grid key={index} item>
+                          <Clickable address={icon.link}>
+                            {typeof icon.img === "string" ? (
+                              <img src={icon.img} alt="" />
+                            ) : (
+                              icon.img
+                            )}
+                          </Clickable>
+                        </Grid>
+                      );
+                    })}
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Grid item xs={12}>
+                    <Style.ImgTeam src={person.img} alt="" />
+                  </Grid>
+                </Grid>
               </Grid>
-            ))}
-          </Grid>
+            </Grid>
+          ))}
         </Grid>
-      </Style.NowContainer>
+      </Style.TeamContainer>
+    </Style.TeamComponent>
+  );
+};
+
+const NowComponent: FC<props> = () => {
+  return (
+    <Style.NowComponent>
+      <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
     </Style.NowComponent>
   );
 };
@@ -389,55 +389,22 @@ const MainComponent: FC<props> = ({ children }) => {
       <LandingScreenComponent />
       <DripComponent />
       <SocietyComponent />
-      <NowComponent
+      <NowComponent />
+      <TeamComponent
         people={[
           {
             name: "SSH",
             job: "FOUNDER",
             img: me,
             bgColor: "#B4FFA5",
-            icons: [
-              {
-                img: <GitHubIcon />,
-                link: "https://github.com/sshmaxime",
-              },
-              {
-                img: <LinkedInIcon />,
-                link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
-              },
-            ],
+            icons: [],
           },
           {
-            name: "SSH",
-            job: "FOUNDER",
-            img: me,
+            name: "REMS",
+            job: "CO-FOUNDER",
+            img: rems,
             bgColor: "#B4FFA5",
-            icons: [
-              {
-                img: <GitHubIcon />,
-                link: "https://github.com/sshmaxime",
-              },
-              {
-                img: <LinkedInIcon />,
-                link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
-              },
-            ],
-          },
-          {
-            name: "SSH",
-            job: "FOUNDER",
-            img: me,
-            bgColor: "#B4FFA5",
-            icons: [
-              {
-                img: <GitHubIcon />,
-                link: "https://github.com/sshmaxime",
-              },
-              {
-                img: <LinkedInIcon />,
-                link: "https://www.linkedin.com/in/maxime-aubanel-4196a3b5/",
-              },
-            ],
+            icons: [],
           },
         ]}
       />

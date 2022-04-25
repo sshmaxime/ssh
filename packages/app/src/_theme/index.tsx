@@ -113,18 +113,16 @@ export const theme = createTheme({
   titles: (themeObj: any) => {
     return {
       primary: {
-        color: "black",
-        fontFamily: themeObj.fontFamily.primary,
-        fontSize: "1.75em",
-        fontWeight: 900,
-        fontStyle: "italic",
+        fontFamily: themeObj.fontFamily.secondary,
+        fontSize: "17.5px",
+        fontWeight: 700,
+        letterSpacing: "-1.15px",
       },
       secondary: {
-        color: "black",
-        fontFamily: themeObj.fontFamily.primary,
-        fontSize: "1em",
-        letterSpacing: "-0.025em",
-        fontWeight: 900,
+        fontFamily: themeObj.fontFamily.secondary,
+        fontSize: "12.5px",
+        letterSpacing: "-0.5px",
+        fontWeight: 600,
       },
     };
   },
