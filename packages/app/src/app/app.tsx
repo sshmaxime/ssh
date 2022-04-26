@@ -256,7 +256,7 @@ const DripComponent: FC<props> = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Style.MoreLinkContainer>
+      {/* <Style.MoreLinkContainer>
         <Grid container>
           <Grid item alignSelf={"center"}>
             <Style.MoreLink>READ MORE</Style.MoreLink>
@@ -265,7 +265,7 @@ const DripComponent: FC<props> = () => {
             <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
           </Grid>
         </Grid>
-      </Style.MoreLinkContainer>
+      </Style.MoreLinkContainer> */}
     </Style.DripComponent>
   );
 };
@@ -291,18 +291,18 @@ const ColoredKw: FC<{ color: string }> = ({ color, children }) => {
 const SocietyComponent: FC<{}> = () => {
   return (
     <Style.RoadmapComponent>
-      <Style.ViewTitle>/ THE SOCIETY .</Style.ViewTitle>
+      <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle>
       <Style.View2Content>
         When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It is
-        precious: <Sbu>hold on to it</Sbu>.
+        precious so <Sbu>hold on to it</Sbu>.
         <br /> <br />
         The <Sbu>SSH-KEY</Sbu> is a <Sbu>membership</Sbu> access to the{" "}
         <Sbu no_u>
           <ColoredKw color="#F6EFB6">/ ssh society .</ColoredKw>
         </Sbu>
         , whose benefits and offerings will increase over time. Your <Sbu>SSH-KEY</Sbu> will open{" "}
-        <Sbu>undiscovered</Sbu> {"&"} <Sbu>exclusive</Sbu> digital & physical doors for you,{" "}
-        <Sbu no_u>keep it safe</Sbu>.
+        <Sbu no_u>undiscovered</Sbu> {"&"} <Sbu no_u>exclusive</Sbu> digital & physical doors for
+        you, <Sbu>keep it safe</Sbu>.
       </Style.View2Content>
     </Style.RoadmapComponent>
   );
@@ -319,7 +319,7 @@ const TeamComponent: FC<{
 }> = ({ children, people }) => {
   return (
     <Style.TeamComponent>
-      <Style.ViewTitle>/ THE TEAM .</Style.ViewTitle>
+      <Style.ViewTitle>/ TEAM .</Style.ViewTitle>
       <Style.TeamContainer>
         <Grid container spacing={3}>
           {people.map((person) => (
@@ -378,10 +378,67 @@ const TeamComponent: FC<{
 
 const NowComponent: FC<props> = () => {
   return (
-    <Style.NowComponent>
-      <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
-      <Style.View2Content>TBA</Style.View2Content>
-    </Style.NowComponent>
+    <div>
+      <Style.NowComponent>
+        <Style.ViewTitle>/ PROJECT .</Style.ViewTitle>
+        <Style.View2Content>
+          If you are reading this, thank you.
+          <br />
+          We are pouring a lot of work into this project and it means a lot for us that your have
+          been interested enough to read up until here.
+          <br />
+          If you haven't figured out it yet, we are bringing a new dimension to the NFT world and
+          you might ask yourself if we will made it. It's a good question but the only way for you
+          to figure it out without missing out is to ride with us.
+          <br />
+          Indeed, new web3 projects are spawning everywhere nowadays. Some are cash grabs. Some are
+          pure scams. Some are just BS project. And some others ... fails. So why are we different ?
+          <br />
+          We are not backed by anyone and have for sole purpose making a big change in the web3
+          industry.
+          <br />
+        </Style.View2Content>
+      </Style.NowComponent>
+    </div>
+  );
+};
+
+const ContractsComponent: FC<props> = () => {
+  return (
+    <Style.ContractsComponent>
+      <Style.ContractsTitle>CONTRACTS</Style.ContractsTitle>
+      <Grid container justifyContent="center" rowSpacing={1}>
+        <Grid item xs={12}>
+          <Grid container alignItems="baseline">
+            <Grid item>
+              <Style.ContractsName>DRIP:</Style.ContractsName>
+            </Grid>
+            <Grid item>
+              <Clickable>
+                <Style.ContractsAddy>
+                  0x00192fb10df37c9fb26829eb2cc623cd1bf599e8
+                </Style.ContractsAddy>
+              </Clickable>
+            </Grid>
+          </Grid>
+        </Grid>
+        {/*  */}
+        <Grid item xs={12}>
+          <Grid container alignItems="baseline">
+            <Grid item>
+              <Style.ContractsName>SSH-KEY:</Style.ContractsName>
+            </Grid>
+            <Grid item>
+              <Clickable>
+                <Style.ContractsAddy>
+                  0x00192fb10df37c9fb26829eb2cc623cd1bf599e8
+                </Style.ContractsAddy>
+              </Clickable>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Style.ContractsComponent>
   );
 };
 
@@ -390,8 +447,8 @@ const MainComponent: FC<props> = ({ children }) => {
     <Style.Root>
       <LandingScreenComponent />
       <DripComponent />
-      <SocietyComponent />
       <NowComponent />
+      <SocietyComponent />
       <TeamComponent
         people={[
           {
@@ -410,6 +467,7 @@ const MainComponent: FC<props> = ({ children }) => {
           },
         ]}
       />
+      <ContractsComponent />
     </Style.Root>
   );
 };
