@@ -44,6 +44,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import me from "../_utils/assets/images/me.png";
 import rems from "../_utils/assets/images/rems.png";
+import Project from "../_utils/components/stateless/project";
 
 type props = {};
 
@@ -51,7 +52,7 @@ const LandingScreenComponent: FC<props> = () => {
   return (
     <Style.LandingScreenComponent>
       <Style.Background>
-        {/* <ThreeDHouse /> */}
+        <ThreeDHouse />
         <Style.TitleContainer2>
           EXCLUSIVE <br />
           LIMITED <br />
@@ -379,6 +380,7 @@ const NowComponent: FC<props> = () => {
   return (
     <Style.NowComponent>
       <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
+      <Style.View2Content>TBA</Style.View2Content>
     </Style.NowComponent>
   );
 };
@@ -413,3 +415,40 @@ const MainComponent: FC<props> = ({ children }) => {
 };
 
 export default MainComponent;
+
+// <Project
+// title={"DROP"}
+// id={"1"}
+// defaultLinks={{
+//   mint: "/app",
+// }}
+// description={
+//   <Fragment>
+//     For this very first drop, SSH LABS is happy to give you the opportunity to mint an
+//     exclusive skateboard deck ! Rock it in the metaverse or in real life !
+//   </Fragment>
+// }
+// info={{ mintPrice: "0.1 ETH" }}
+// pastilles={[
+//   {
+//     title: "0 / 250",
+//     description: "Minted supply / Total supply",
+//     // color: "#caffbf",
+//   },
+//   {
+//     title: "3D",
+//     description: "This NFT holds a 3D model.",
+//     // color: "#a0c4ff",
+//   },
+//   {
+//     title: "IRL",
+//     description: "This NFT holds a redeemable physical object.",
+//     // color: "#ffdab9",
+//   },
+//   {
+//     title: "KEY",
+//     description: "Minting this NFT gives your a free SSH Key.",
+//     // color: "#cfbaf0",
+//   },
+// ]}
+// />
