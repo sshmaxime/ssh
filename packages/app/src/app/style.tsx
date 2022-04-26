@@ -149,6 +149,7 @@ const style = {
   //
   RoadmapComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
+    backgroundColor: theme.backgroundColor.primary,
     paddingTop: "10vh",
     paddingBottom: "10vh",
   })),
@@ -156,10 +157,15 @@ const style = {
   //
   TeamComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
+    backgroundColor: theme.backgroundColor.secondary,
     paddingTop: "10vh",
     paddingBottom: "10vh",
   })),
-  TeamContainer: styled("div")(({ theme }) => ({})),
+  TeamContainer: styled("div")(({ theme }) => ({
+    backgroundColor: theme.backgroundColor.primary,
+    padding: "25px",
+    borderRadius: "5px",
+  })),
   ImgTeam: styled("img")(({ theme }) => ({
     width: "100%",
     borderRadius: "5px",
@@ -178,9 +184,36 @@ const style = {
   //
   NowComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.backgroundColor.secondary,
     paddingTop: "10vh",
     paddingBottom: "10vh",
+  })),
+  //
+  //
+  ContractsComponent: styled("div")(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level1,
+    backgroundColor: theme.backgroundColor.primary,
+    paddingTop: "2.5vh",
+    paddingBottom: "2.5vh",
+  })),
+  ContractsTitle: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "1em",
+    fontWeight: 900,
+    marginBottom: "15px",
+    display: "inline-block",
+    borderBottom: "2px solid black",
+  })),
+  ContractsName: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 700,
+    marginRight: "15px",
+    fontSize: "0.85em",
+  })),
+  ContractsAddy: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.8em",
+    opacity: "50%",
   })),
 };
 

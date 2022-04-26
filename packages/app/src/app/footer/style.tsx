@@ -7,7 +7,7 @@ const style = {
     ...theme.myBreakpoints(theme).level1,
     paddingTop: "7.5vh",
     paddingBottom: "7.5vh",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.backgroundColor.secondary,
   })),
   Title: styled(Typography)(({ theme }) => ({
     ...theme.titles(theme).primary,
