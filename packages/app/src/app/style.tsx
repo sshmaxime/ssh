@@ -200,9 +200,9 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontSize: "1em",
     fontWeight: 900,
-    marginBottom: "15px",
+    marginBottom: "20px",
     display: "inline-block",
-    borderBottom: "2px solid black",
+    borderBottom: "2.5px solid black",
   })),
   ContractsName: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -214,6 +214,7 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontSize: "0.8em",
     opacity: "50%",
+    textDecoration: "underline",
   })),
 };
 

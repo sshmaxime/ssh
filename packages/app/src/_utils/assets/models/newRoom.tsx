@@ -61,10 +61,6 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
       ((nodes as any)[k] as any).material.toneMapped = false;
     }
   }
-  //
-
-  (nodes.Arm.material as any).color = null as any;
-  (nodes.Arm.material as any).toneMapped = false;
 
   return (
     <group ref={group} {...props} dispose={null}>
