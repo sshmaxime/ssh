@@ -16,6 +16,8 @@ import { TextureLoader } from "three";
 
 import ThreeDCoomponent from "../_utils/components/3d";
 import ModelSkate from "./3dscenes/demo/skate";
+import ModelKey from "../_utils/assets/models/Key";
+
 import { OrbitControls } from "@react-three/drei";
 import ThreeDHouse from "./3dscenes/house";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -43,6 +45,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import me from "../_utils/assets/images/me.png";
+import test from "../_utils/assets/images/test.png";
 import rems from "../_utils/assets/images/rems.png";
 import Project from "../_utils/components/stateless/project";
 
@@ -274,13 +277,14 @@ const Sbu: FC<{ no_u?: boolean }> = ({ children, no_u }) => {
   return <b>{no_u ? <>{children}</> : <u>{children}</u>}</b>;
 };
 
-const ColoredKw: FC<{ color: string }> = ({ color, children }) => {
+const ColoredKw: FC<{ color?: string }> = ({ color = "black", children }) => {
   return (
     <span
       style={{
         backgroundColor: color,
         padding: "1.5px 12.5px 1.5px 12.5px",
-        borderRadius: "2.5px",
+        borderRadius: "3.5px",
+        color: color === "black" ? "white" : "black",
       }}
     >
       {children}
@@ -380,23 +384,28 @@ const NowComponent: FC<props> = () => {
   return (
     <div>
       <Style.NowComponent>
-        <Style.ViewTitle>/ PROJECT .</Style.ViewTitle>
+        <Style.ViewTitle>/ LABS .</Style.ViewTitle>
         <Style.View2Content>
-          If you are reading this, thank you.
-          <br />
-          We are pouring a lot of work into this project and it means a lot for us that your have
-          been interested enough to read up until here.
-          <br />
-          If you haven't figured out it yet, we are bringing a new dimension to the NFT world and
-          you might ask yourself if we will made it. It's a good question but the only way for you
-          to figure it out without missing out is to ride with us.
-          <br />
-          Indeed, new web3 projects are spawning everywhere nowadays. Some are cash grabs. Some are
-          pure scams. Some are just BS project. And some others ... fails. So why are we different ?
-          <br />
-          We are not backed by anyone and have for sole purpose making a big change in the web3
-          industry.
-          <br />
+          The{" "}
+          <Sbu no_u>
+            <ColoredKw color="#F6EFB6">/ ssh labs .</ColoredKw>
+          </Sbu>{" "}
+          is the entity at the center of this project.
+          <br /> <br />
+          It's not only a brand, a company & a movement, it's a mean to bring the web3 world to a
+          state of peace, trust and serenity. The web3 space have seen enough of scams and dodgy
+          projects. We need transparency.
+          <br /> <br />
+          The labs will operate on several layers and{" "}
+          <Sbu no_u>
+            <ColoredKw>/ drip .</ColoredKw>
+          </Sbu>{" "}
+          is the first.
+          <br /> <br />
+          For the following ones you can start imagining several things, from a free open-world
+          metaverse to some open-source software. Please, keep in mind that nothing is promised and
+          things will most likely change in the future - however this is what we are aiming for at
+          the moment.
         </Style.View2Content>
       </Style.NowComponent>
     </div>
