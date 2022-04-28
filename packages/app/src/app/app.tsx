@@ -7,17 +7,15 @@ import Style from "./style";
 
 import skateboard from "../_utils/assets/images/untitled.png";
 
-import ModelSkate from "./3dscenes/demo/skate";
+import SceneSkate from "@/_3d/scenes/skate_0";
+import SceneRoom from "@/_3d/scenes/room_0";
 
-import { OrbitControls } from "@react-three/drei";
-import ThreeDHouse from "./3dscenes/house";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import Clickable from "../_utils/components/stateless/clickable";
 
 import me from "../_utils/assets/images/me.png";
 import rems from "../_utils/assets/images/rems.png";
-import LoaderModel from "../_utils/3d/loaderModel";
 
 type props = {};
 
@@ -25,7 +23,7 @@ const LandingScreenComponent: FC<props> = () => {
   return (
     <Style.LandingScreenComponent>
       <Style.Background>
-        <ThreeDHouse />
+        <SceneRoom />
         <Style.TitleContainer2>{/*  */}</Style.TitleContainer2>
         <Style.TitleContainer>
           <ArrowRightAltIcon
@@ -192,23 +190,13 @@ const DripComponent: FC<props> = () => {
         <Grid item xs={4}>
           <Grid container style={{ height: "100%", width: "100%" }}>
             <Grid item xs={12}>
-              <LoaderModel camera={[0, 40, -60]}>
-                <ambientLight intensity={0.95} />
-                <ModelSkate
-                  deckTextures={deckTextures}
-                  deckIndex={0}
-                  placeholderTextures={placeholderTexures}
-                  placeholderIndex={stateCounter}
-                  _id={demoSkateDrips[stateCounter].itemId}
-                />
-                <OrbitControls
-                  autoRotate={true}
-                  autoRotateSpeed={7.5}
-                  enableZoom={false}
-                  enableRotate={false}
-                  target={[0, 40, 0]}
-                />
-              </LoaderModel>
+              <SceneSkate
+                deckTextures={deckTextures}
+                deckIndex={0}
+                placeholderTextures={placeholderTexures}
+                placeholderIndex={stateCounter}
+                _id={demoSkateDrips[stateCounter].itemId}
+              />
             </Grid>
             <Grid item xs={12}>
               <Style.View3StepName>

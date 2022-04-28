@@ -26,8 +26,10 @@ import Pastille from "../_utils/components/stateless/pastille";
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import ModelSkate from "../app/3dscenes/demo/skate";
-import ModelRoom from "../_utils/assets/models/Room";
+
+import ModelSkate from "@/_3d/scenes/skate_0";
+import ModelRoom from "@/_3d/models/room";
+
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Clickable from "../_utils/components/stateless/clickable";
 
