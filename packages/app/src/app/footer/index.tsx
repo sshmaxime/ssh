@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import Style from "./style";
-import { HEADLINE, CREDENTIALS } from "../../_utils/constants";
+import { HEADLINE, CREDENTIALS } from "../../_constants";
 import { Grid } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DiscordIcon from "../../_utils/assets/icons/discord2.svg";

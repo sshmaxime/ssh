@@ -1,17 +1,12 @@
 import { styled } from "@mui/material/styles";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Card,
-  Grid,
-  SwipeableDrawer,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Card, Grid, SwipeableDrawer } from "@mui/material";
 
 const style = {
-  Root: styled("div")(({ theme }) => ({})),
+  Root: styled("div")(({ theme }) => ({
+    height: "100%",
+    width: "100%",
+  })),
   TextTitleContainer: styled("div")(({ theme }) => ({
     display: "flex",
     justifyContent: "center",
@@ -35,13 +30,6 @@ const style = {
     background: "rgba(0, 0, 0, 0.5)",
     width: "100%",
   })),
-  TextAbout: styled(Typography)(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    paddingTop: "5vh",
-    textAlign: "center",
-    fontSize: "1.2em",
-    fontWeight: 300,
-  })),
   HeaderContainer: styled(Grid)(({ theme }) => ({})),
   ImageContainerReverse: styled("div")(({ theme }) => ({
     display: "flex",
@@ -50,6 +38,7 @@ const style = {
   })),
   GridContainerCard: styled(Grid)(({ theme }) => ({
     ...theme.cards.primary,
+    backgroundColor: "rgba(255, 255, 255, 0.75)",
   })),
   GridContainerCard1: styled(Grid)(({ theme }) => ({
     padding: "10px",
@@ -110,7 +99,7 @@ const style = {
     marginBottom: "25px",
   })),
   ProjectDescription: styled(Typography)(({ theme }) => ({
-    fontSize: "1em",
+    fontSize: "0.8em",
     color: "black",
     fontWeight: 300,
     fontFamily: theme.fontFamily.primary,

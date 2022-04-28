@@ -23,7 +23,7 @@ const Clickable: FC<props> = ({
   } else if (external) {
     elem = <Style.RootHref href={address}>{children}</Style.RootHref>;
   } else {
-    elem = <Style.RootLink to={{ pathname: address }}>{children}</Style.RootLink>;
+    elem = <Style.RootLink>{children}</Style.RootLink>;
   }
 
   return <Style.RealRoot activated={activated}>{elem}</Style.RealRoot>;
