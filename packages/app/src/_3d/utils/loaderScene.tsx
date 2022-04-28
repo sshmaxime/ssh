@@ -3,7 +3,7 @@ import { FC, Suspense } from "react";
 import { ThemeProvider } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-const LoaderModel: FC<{ camera?: Vector3 }> = ({ children, camera }) => {
+const LoaderScene: FC<{ camera?: Vector3 }> = ({ children, camera }) => {
   const theme = useTheme();
 
   return (
@@ -22,4 +22,4 @@ const LoaderModel: FC<{ camera?: Vector3 }> = ({ children, camera }) => {
   );
 };
 
-export default LoaderModel;
+export default LoaderScene;

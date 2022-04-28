@@ -8,10 +8,10 @@ import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { Html } from "@react-three/drei";
 
-import Project from "../../components/stateless/project";
+import Project from "../../_utils/components/stateless/project";
 
 import { ThemeProvider, useTheme } from "@mui/material/styles";
-import LoaderHtml from "../../3d/loaderHtml";
+import LoaderHtml from "@/_3d/utils/loaderHtml";
 
 //
 
