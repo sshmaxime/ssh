@@ -1,6 +1,4 @@
-import React, { FC, Fragment, Suspense, useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import { FC, useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
 
@@ -8,46 +6,18 @@ import { Grid } from "@mui/material";
 import Style from "./style";
 
 import af1x_exemple from "../_utils/assets/images/Punk_7804.png";
-import imgForMiddle from "../_utils/assets/images/imgForMiddle.png";
 
-// 3D
-import * as THREE from "three";
-import { TextureLoader } from "three";
-
-import ThreeDCoomponent from "../_utils/components/3d";
 import ModelSkate from "./3dscenes/demo/skate";
-import ModelKey from "../_utils/assets/models/Key";
 
 import { OrbitControls } from "@react-three/drei";
 import ThreeDHouse from "./3dscenes/house";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import { useLoader } from "@react-three/fiber";
-import SkateDefault from "../_utils/assets/models/SkateDefault";
 
-//
-import FastfoodIcon from "@mui/icons-material/Fastfood";
-
-//
-import { Slide } from "react-awesome-reveal";
-
-//
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-
-import img_sshkey from "../_utils/assets/images/sshkey.png";
 import Clickable from "../_utils/components/stateless/clickable";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import me from "../_utils/assets/images/me.png";
-import test from "../_utils/assets/images/test.png";
 import rems from "../_utils/assets/images/rems.png";
-import Project from "../_utils/components/stateless/project";
+import LoaderModel from "../_utils/3d/loaderModel";
 
 type props = {};
 
@@ -56,11 +26,7 @@ const LandingScreenComponent: FC<props> = () => {
     <Style.LandingScreenComponent>
       <Style.Background>
         <ThreeDHouse />
-        <Style.TitleContainer2>
-          EXCLUSIVE <br />
-          LIMITED <br />
-          CUSTOMIZABLE <br />
-        </Style.TitleContainer2>
+        <Style.TitleContainer2>{/*  */}</Style.TitleContainer2>
         <Style.TitleContainer>
           <ArrowRightAltIcon
             style={{
@@ -213,7 +179,7 @@ const DripComponent: FC<props> = () => {
                   letterSpacing: "1px",
                 }}
               >
-                <u>WARNING :</u>
+                WARNING :
               </div>
               <ul>
                 <li>
@@ -226,7 +192,7 @@ const DripComponent: FC<props> = () => {
         <Grid item xs={4}>
           <Grid container style={{ height: "100%", width: "100%" }}>
             <Grid item xs={12}>
-              <ThreeDCoomponent camera={[0, 40, -60]}>
+              <LoaderModel camera={[0, 40, -60]}>
                 <ambientLight intensity={0.95} />
                 <ModelSkate
                   deckTextures={deckTextures}
@@ -242,7 +208,7 @@ const DripComponent: FC<props> = () => {
                   enableRotate={false}
                   target={[0, 40, 0]}
                 />
-              </ThreeDCoomponent>
+              </LoaderModel>
             </Grid>
             <Grid item xs={12}>
               <Style.View3StepName>
@@ -259,16 +225,18 @@ const DripComponent: FC<props> = () => {
           </Grid>
         </Grid>
       </Grid>
-      {/* <Style.MoreLinkContainer>
-        <Grid container>
-          <Grid item alignSelf={"center"}>
-            <Style.MoreLink>READ MORE</Style.MoreLink>
+      <Style.MoreLinkContainer>
+        <Clickable onClick={() => {}}>
+          <Grid container>
+            <Grid item alignSelf={"center"}>
+              <Style.MoreLink>DISCOVER</Style.MoreLink>
+            </Grid>
+            <Grid item alignSelf={"center"}>
+              <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
+            </Grid>
           </Grid>
-          <Grid item alignSelf={"center"}>
-            <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
-          </Grid>
-        </Grid>
-      </Style.MoreLinkContainer> */}
+        </Clickable>
+      </Style.MoreLinkContainer>
     </Style.DripComponent>
   );
 };
@@ -294,7 +262,7 @@ const ColoredKw: FC<{ color?: string }> = ({ color = "black", children }) => {
 
 const SocietyComponent: FC<{}> = () => {
   return (
-    <Style.RoadmapComponent>
+    <Style.SocietyComponent>
       <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle>
       <Style.View2Content>
         When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It is
@@ -307,8 +275,9 @@ const SocietyComponent: FC<{}> = () => {
         , whose benefits and offerings will increase over time. Your <Sbu>SSH-KEY</Sbu> will open{" "}
         <Sbu no_u>undiscovered</Sbu> {"&"} <Sbu no_u>exclusive</Sbu> digital & physical doors for
         you, <Sbu>keep it safe</Sbu>.
+        <br /> <br />
       </Style.View2Content>
-    </Style.RoadmapComponent>
+    </Style.SocietyComponent>
   );
 };
 
@@ -380,10 +349,10 @@ const TeamComponent: FC<{
   );
 };
 
-const NowComponent: FC<props> = () => {
+const LabsComponent: FC<props> = () => {
   return (
     <div>
-      <Style.NowComponent>
+      <Style.LabsComponent>
         <Style.ViewTitle>/ LABS .</Style.ViewTitle>
         <Style.View2Content>
           The{" "}
@@ -392,22 +361,23 @@ const NowComponent: FC<props> = () => {
           </Sbu>{" "}
           is the entity at the center of this project.
           <br /> <br />
-          It's not only a brand, a company & a movement, it's a mean to bring the web3 world to a
-          state of peace, trust and serenity. The web3 space have seen enough of scams and dodgy
-          projects. We need transparency.
+          It's not only a <Sbu no_u>brand</Sbu>, a <Sbu no_u>company</Sbu> & a{" "}
+          <Sbu no_u>movement</Sbu>, it's a mean to bring the web3 world to a state of{" "}
+          <Sbu no_u>peace</Sbu>, <Sbu no_u>trust</Sbu> and <Sbu no_u>serenity</Sbu>. The web3 space
+          have seen enough of scams and dodgy projects. <Sbu>We need transparency</Sbu>.
           <br /> <br />
           The labs will operate on several layers and{" "}
           <Sbu no_u>
-            <ColoredKw>/ drip .</ColoredKw>
+            <ColoredKw>/ ssh drip .</ColoredKw>
           </Sbu>{" "}
           is the first.
           <br /> <br />
-          For the following ones you can start imagining several things, from a free open-world
-          metaverse to some open-source software. Please, keep in mind that nothing is promised and
-          things will most likely change in the future - however this is what we are aiming for at
-          the moment.
+          For the following ones you can start imagining several things, from a free{" "}
+          <Sbu>open-world metaverse</Sbu> to <Sbu>open-source software</Sbu> through{" "}
+          <Sbu>DeFi strategies</Sbu>. Please, keep in mind that nothing is promised and things will
+          most likely change in the future - however this is what we are aiming for at the moment.
         </Style.View2Content>
-      </Style.NowComponent>
+      </Style.LabsComponent>
     </div>
   );
 };
@@ -456,7 +426,7 @@ const MainComponent: FC<props> = ({ children }) => {
     <Style.Root>
       <LandingScreenComponent />
       <DripComponent />
-      <NowComponent />
+      <LabsComponent />
       <SocietyComponent />
       <TeamComponent
         people={[
@@ -482,40 +452,3 @@ const MainComponent: FC<props> = ({ children }) => {
 };
 
 export default MainComponent;
-
-// <Project
-// title={"DROP"}
-// id={"1"}
-// defaultLinks={{
-//   mint: "/app",
-// }}
-// description={
-//   <Fragment>
-//     For this very first drop, SSH LABS is happy to give you the opportunity to mint an
-//     exclusive skateboard deck ! Rock it in the metaverse or in real life !
-//   </Fragment>
-// }
-// info={{ mintPrice: "0.1 ETH" }}
-// pastilles={[
-//   {
-//     title: "0 / 250",
-//     description: "Minted supply / Total supply",
-//     // color: "#caffbf",
-//   },
-//   {
-//     title: "3D",
-//     description: "This NFT holds a 3D model.",
-//     // color: "#a0c4ff",
-//   },
-//   {
-//     title: "IRL",
-//     description: "This NFT holds a redeemable physical object.",
-//     // color: "#ffdab9",
-//   },
-//   {
-//     title: "KEY",
-//     description: "Minting this NFT gives your a free SSH Key.",
-//     // color: "#cfbaf0",
-//   },
-// ]}
-// />

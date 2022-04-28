@@ -6,7 +6,6 @@ const triangleHeight = "10vh";
 
 const style = {
   Root: styled("div")(({ theme }) => ({})),
-
   //
   LandingScreenComponent: styled("div")(({ theme }) => ({
     height: "100vh",
@@ -30,9 +29,12 @@ const style = {
     transform: "translate(-50%, -50%)",
   })),
   TitleContainer2: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level1,
+    // ...theme.myBreakpoints(theme).level1,
     position: "absolute",
     top: "30%",
+    width: "700px",
+    height: "100px",
+
     //
     fontSize: "2em",
     fontFamily: theme.fontFamily.primary,
@@ -81,7 +83,7 @@ const style = {
   DripComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.primary,
-    paddingBottom: "10vh",
+    paddingBottom: "7.5vh",
   })),
   DripWarningContainer: styled("div")(({ theme }) => ({
     marginTop: "35px",
@@ -90,18 +92,18 @@ const style = {
     borderRadius: "5px",
   })),
   ViewTitle: styled("div")(({ theme }) => ({
-    fontSize: "2.5em",
+    fontSize: "2em",
     fontFamily: theme.fontFamily.primary,
     fontStyle: "italic",
-    lineHeight: "2em",
     fontWeight: 900,
-    marginBottom: "35px",
+    marginBottom: "30px",
     display: "inline-block",
     borderRadius: "2.5px",
     textShadow: `10px 5px ${theme.backgroundColor.tertiary}`,
   })),
+
   View2Content: styled("div")(({ theme }) => ({
-    fontSize: "1.1em",
+    fontSize: "1em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
     lineHeight: "1.75em",
@@ -111,10 +113,12 @@ const style = {
     display: "inline-block",
   })),
   MoreLink: styled("div")(({ theme }) => ({
-    fontSize: "0.85em",
+    fontSize: "0.8em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     letterSpacing: "1.5px",
+    borderBottom: "2.5px solid black",
+    paddingBottom: "5px",
   })),
 
   //
@@ -147,19 +151,20 @@ const style = {
   })),
 
   //
-  RoadmapComponent: styled("div")(({ theme }) => ({
+  SocietyComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.primary,
-    paddingTop: "10vh",
-    paddingBottom: "10vh",
+    paddingTop: "7.5vh",
+    paddingBottom: "7.5vh",
   })),
+  //
 
   //
   TeamComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.secondary,
-    paddingTop: "10vh",
-    paddingBottom: "10vh",
+    paddingTop: "7.5vh",
+    paddingBottom: "7.5vh",
   })),
   TeamContainer: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.primary,
@@ -182,11 +187,11 @@ const style = {
   })),
 
   //
-  NowComponent: styled("div")(({ theme }) => ({
+  LabsComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.secondary,
-    paddingTop: "10vh",
-    paddingBottom: "10vh",
+    paddingTop: "7.5vh",
+    paddingBottom: "7.5vh",
   })),
   //
   //

@@ -4,14 +4,11 @@ import { FC } from "react";
 import Style from "./style";
 
 // components
-import { Grid, GridSize } from "@mui/material";
+import { Grid } from "@mui/material";
 import Pastille from "../pastille";
 
 import Tooltip from "@mui/material/Tooltip";
 import Clickable from "../clickable";
-
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 type props = {
   title: string;

@@ -11,7 +11,7 @@ const style = {
     },
   })),
   Root: styled("div")(({ theme }) => ({})),
-  RootLink: styled(Link)(({ theme }) => ({
+  RootLink: styled("div")(({ theme }) => ({
     color: "black",
     textDecoration: "none",
   })),
