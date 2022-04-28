@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 // styles
 import Style from "./style";
 
-import af1x_exemple from "../_utils/assets/images/Punk_7804.png";
+import skateboard from "../_utils/assets/images/untitled.png";
 
 import ModelSkate from "./3dscenes/demo/skate";
 
@@ -119,7 +119,7 @@ const DripComponent: FC<props> = () => {
                       <Style.View3StepName>DRIP</Style.View3StepName>
                     </Grid>
                     <Grid item xs={12}>
-                      <img src={af1x_exemple} style={{ width: "100%" }} alt="" />
+                      <img src={skateboard} style={{ width: "100%" }} alt="" />
                     </Grid>
                   </Grid>
                 </Grid>
