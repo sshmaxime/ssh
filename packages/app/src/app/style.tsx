@@ -83,6 +83,7 @@ const style = {
   DripComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.primary,
+    paddingTop: "7.5vh",
     paddingBottom: "7.5vh",
   })),
   DripWarningContainer: styled("div")(({ theme }) => ({
@@ -188,14 +189,14 @@ const style = {
 
   //
   LabsComponent: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level1,
-    backgroundColor: theme.backgroundColor.secondary,
-    paddingTop: "5vh",
-    paddingBottom: "5vh",
+    backgroundColor: "black",
+    paddingTop: ".5vh",
+    paddingBottom: ".5vh",
   })),
   Sentence: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "1em",
+    color: theme.backgroundColor.primary,
+    fontSize: "1.25em",
     fontWeight: 900,
     textAlign: "center",
   })),
