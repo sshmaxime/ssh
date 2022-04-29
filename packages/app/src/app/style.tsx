@@ -190,8 +190,14 @@ const style = {
   LabsComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor: theme.backgroundColor.secondary,
-    paddingTop: "7.5vh",
-    paddingBottom: "7.5vh",
+    paddingTop: "5vh",
+    paddingBottom: "5vh",
+  })),
+  Sentence: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "1em",
+    fontWeight: 900,
+    textAlign: "center",
   })),
   //
   //
