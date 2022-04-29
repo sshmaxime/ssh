@@ -8,7 +8,6 @@ import Style from "./style";
 import skateboard from "../_utils/assets/images/untitled.png";
 
 import SceneSkate from "@/_3d/scenes/skate_0";
-import SceneRoom from "@/_3d/scenes/room_0";
 
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
@@ -23,7 +22,7 @@ const LandingScreenComponent: FC<props> = () => {
   return (
     <Style.LandingScreenComponent>
       <Style.Background>
-        <SceneRoom />
+        {/* <SceneRoom /> */}
         <Style.TitleContainer2>{/*  */}</Style.TitleContainer2>
         <Style.TitleContainer>
           <ArrowRightAltIcon
@@ -265,6 +264,18 @@ const SocietyComponent: FC<{}> = () => {
         you, <Sbu>keep it safe</Sbu>.
         <br /> <br />
       </Style.View2Content>
+      <Style.MoreLinkContainer>
+        <Clickable onClick={() => {}}>
+          <Grid container>
+            <Grid item alignSelf={"center"}>
+              <Style.MoreLink>DISCOVER</Style.MoreLink>
+            </Grid>
+            <Grid item alignSelf={"center"}>
+              <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
+            </Grid>
+          </Grid>
+        </Clickable>
+      </Style.MoreLinkContainer>
     </Style.SocietyComponent>
   );
 };
@@ -341,30 +352,7 @@ const LabsComponent: FC<props> = () => {
   return (
     <div>
       <Style.LabsComponent>
-        <Style.ViewTitle>/ LABS .</Style.ViewTitle>
-        <Style.View2Content>
-          The{" "}
-          <Sbu no_u>
-            <ColoredKw color="#F6EFB6">/ ssh labs .</ColoredKw>
-          </Sbu>{" "}
-          is the entity at the center of this project.
-          <br /> <br />
-          It's not only a <Sbu no_u>brand</Sbu>, a <Sbu no_u>company</Sbu> & a{" "}
-          <Sbu no_u>movement</Sbu>, it's a mean to bring the web3 world to a state of{" "}
-          <Sbu no_u>peace</Sbu>, <Sbu no_u>trust</Sbu> and <Sbu no_u>serenity</Sbu>. The web3 space
-          have seen enough of scams and dodgy projects. <Sbu>We need transparency</Sbu>.
-          <br /> <br />
-          The labs will operate on several layers and{" "}
-          <Sbu no_u>
-            <ColoredKw>/ ssh drip .</ColoredKw>
-          </Sbu>{" "}
-          is the first.
-          <br /> <br />
-          For the following ones you can start imagining several things, from a free{" "}
-          <Sbu>open-world metaverse</Sbu> to <Sbu>open-source software</Sbu> through{" "}
-          <Sbu>DeFi strategies</Sbu>. Please, keep in mind that nothing is promised and things will
-          most likely change in the future - however this is what we are aiming for at the moment.
-        </Style.View2Content>
+        <Style.Sentence>EXCLUSIVE . LIMITED . CUSTOMIZABLE</Style.Sentence>
       </Style.LabsComponent>
     </div>
   );
