@@ -6,6 +6,7 @@ import { Grid } from "@mui/material";
 import Style from "./style";
 
 import skateboard from "../_utils/assets/images/untitled.png";
+import key from "../_utils/assets/images/imgkey2.png";
 
 import SceneSkate from "@/_3d/scenes/skate_0";
 
@@ -15,6 +16,7 @@ import Clickable from "../_utils/components/stateless/clickable";
 
 import me from "../_utils/assets/images/me.png";
 import rems from "../_utils/assets/images/rems.png";
+import Marquee from "react-fast-marquee";
 
 type props = {};
 
@@ -250,7 +252,10 @@ const ColoredKw: FC<{ color?: string }> = ({ color = "black", children }) => {
 const SocietyComponent: FC<{}> = () => {
   return (
     <Style.SocietyComponent>
-      <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle>
+      <Grid container justifyContent="center">
+        <img src={key} style={{ width: "25%" }} alt="" />
+      </Grid>
+      {/* <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle> */}
       <Style.View2Content>
         When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It is
         precious so <Sbu>hold on to it</Sbu>.
@@ -348,11 +353,28 @@ const TeamComponent: FC<{
   );
 };
 
-const LabsComponent: FC<props> = () => {
+const LabsComponent: FC<{ word: string }> = ({ word }) => {
   return (
     <div>
       <Style.LabsComponent>
-        <Style.Sentence>EXCLUSIVE . LIMITED . CUSTOMIZABLE</Style.Sentence>
+        <Marquee gradient={false} speed={75}>
+          <Style.Sentence>
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </Style.Sentence>
+        </Marquee>
       </Style.LabsComponent>
     </div>
   );
@@ -401,9 +423,11 @@ const MainComponent: FC<props> = ({ children }) => {
   return (
     <Style.Root>
       <LandingScreenComponent />
+      <LabsComponent word="EXCLUSIVE" />
       <DripComponent />
-      <LabsComponent />
+      <LabsComponent word="LIMITED" />
       <SocietyComponent />
+      <LabsComponent word="CUSTOMIZABLE" />
       <TeamComponent
         people={[
           {

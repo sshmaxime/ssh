@@ -28,7 +28,6 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
 import ModelSkate from "@/_3d/scenes/skate_0";
-import ModelRoom from "@/_3d/models/room";
 
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Clickable from "../_utils/components/stateless/clickable";
@@ -148,24 +147,6 @@ export const My3DScene: FC = () => {
         enableRotate={false}
       />
     </Canvas>
-  );
-};
-
-export const My3DRoom: FC = () => {
-  return (
-    <>
-      <Canvas
-        flat={true}
-        linear={true}
-        camera={{ position: [0, 45, -75] }}
-        style={{ height: "100%", width: "100%" }}
-      >
-        {/*  */}
-        <ambientLight intensity={0.95} />
-        <ModelRoom position={[0, 45, 0]} />
-        <OrbitControls target={[0, 45, 0]} />
-      </Canvas>
-    </>
   );
 };
 
