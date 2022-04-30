@@ -92,16 +92,18 @@ const style = {
     backgroundColor: theme.backgroundColor.secondary,
     borderRadius: "5px",
   })),
-  ViewTitle: styled("div")(({ theme }) => ({
-    fontSize: "2em",
-    fontFamily: theme.fontFamily.primary,
-    fontStyle: "italic",
-    fontWeight: 900,
-    marginBottom: "30px",
-    display: "inline-block",
-    borderRadius: "2.5px",
-    textShadow: `10px 5px ${theme.backgroundColor.tertiary}`,
-  })),
+  ViewTitle: styled("div")<{ big?: boolean; shadow?: boolean }>(
+    ({ theme, big, shadow = true }) => ({
+      fontSize: big ? "3em" : "2em",
+      fontFamily: theme.fontFamily.primary,
+      fontStyle: "italic",
+      fontWeight: 900,
+      marginBottom: "30px",
+      display: "inline-block",
+      borderRadius: "2.5px",
+      textShadow: shadow ? `10px 5px ${theme.backgroundColor.tertiary}` : "",
+    })
+  ),
 
   View2Content: styled("div")(({ theme }) => ({
     fontSize: "1em",
@@ -157,6 +159,36 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     paddingTop: "7.5vh",
     paddingBottom: "7.5vh",
+  })),
+  Titlea: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    color: "black",
+    fontSize: "1.75em",
+    fontWeight: 900,
+    marginBottom: "35px",
+    letterSpacing: "-0.5px",
+    display: "inline-block",
+  })),
+  Button: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    backgroundColor: theme.backgroundColor.secondary,
+    color: "black",
+    borderRadius: "25px",
+    padding: "5px 15px 5px 15px",
+    fontSize: "0.75em",
+    fontWeight: 700,
+    letterSpacing: "1.5px",
+  })),
+  View2Content2: styled("div")(({ theme }) => ({
+    fontSize: "1em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 500,
+    lineHeight: "1.75em",
+  })),
+  Yessir: styled("div")(({ theme }) => ({
+    backgroundColor: theme.backgroundColor.secondary,
+    padding: "25px",
+    borderRadius: "10px",
   })),
   //
 
