@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import Style from "./style";
 
 import skateboard from "../_utils/assets/images/untitled.png";
-import key from "../_utils/assets/images/imgkey2.png";
+import key from "../_utils/assets/images/untitled5.png";
 
 import SceneSkate from "@/_3d/scenes/skate_0";
 
@@ -253,34 +253,47 @@ const SocietyComponent: FC<{}> = () => {
   return (
     <Style.SocietyComponent>
       <Grid container justifyContent="center">
-        <img src={key} style={{ width: "25%" }} alt="" />
-      </Grid>
-      {/* <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle> */}
-      <Style.View2Content>
-        When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It is
-        precious so <Sbu>hold on to it</Sbu>.
-        <br /> <br />
-        The <Sbu>SSH-KEY</Sbu> is a <Sbu>membership</Sbu> access to the{" "}
-        <Sbu no_u>
-          <ColoredKw color="#F6EFB6">/ ssh society .</ColoredKw>
-        </Sbu>
-        , whose benefits and offerings will increase over time. Your <Sbu>SSH-KEY</Sbu> will open{" "}
-        <Sbu no_u>undiscovered</Sbu> {"&"} <Sbu no_u>exclusive</Sbu> digital & physical doors for
-        you, <Sbu>keep it safe</Sbu>.
-        <br /> <br />
-      </Style.View2Content>
-      <Style.MoreLinkContainer>
-        <Clickable onClick={() => {}}>
-          <Grid container>
-            <Grid item alignSelf={"center"}>
-              <Style.MoreLink>DISCOVER</Style.MoreLink>
-            </Grid>
-            <Grid item alignSelf={"center"}>
-              <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
-            </Grid>
+        <Grid item xs={12}>
+          <Grid container justifyContent="center" style={{ marginBottom: "75px" }}>
+            <Style.ViewTitle big shadow={false}>
+              / THE SOCIETY .
+            </Style.ViewTitle>
           </Grid>
-        </Clickable>
-      </Style.MoreLinkContainer>
+        </Grid>
+      </Grid>
+      <Grid container justifyContent="center" spacing={10}>
+        <Grid item xs={6}>
+          <img src={key} style={{ width: "100%" }} alt="" />
+        </Grid>
+
+        <Grid item xs={6} alignSelf="center">
+          <Style.Titlea>/ ssh key .</Style.Titlea>
+          <Style.View2Content>
+            When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It
+            is precious so <Sbu>hold on to it</Sbu>.
+            <br /> <br />
+            The <Sbu>SSH-KEY</Sbu> is a <Sbu>membership</Sbu> access to the{" "}
+            <Sbu no_u>
+              <ColoredKw color="#F6EFB6">/ ssh society .</ColoredKw>
+            </Sbu>
+            , whose benefits and offerings will increase over time. Your <Sbu>SSH-KEY</Sbu> will
+            open <Sbu no_u>undiscovered</Sbu> {"&"} <Sbu no_u>exclusive</Sbu> digital & physical
+            doors for you, <Sbu>keep it safe</Sbu>.
+          </Style.View2Content>
+          <Style.MoreLinkContainer>
+            <Clickable onClick={() => {}}>
+              <Grid container>
+                <Grid item alignSelf={"center"}>
+                  <Style.MoreLink>DISCOVER</Style.MoreLink>
+                </Grid>
+                <Grid item alignSelf={"center"}>
+                  <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
+                </Grid>
+              </Grid>
+            </Clickable>
+          </Style.MoreLinkContainer>
+        </Grid>
+      </Grid>
     </Style.SocietyComponent>
   );
 };
