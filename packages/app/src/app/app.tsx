@@ -56,7 +56,7 @@ const DripComponent: FC<props> = () => {
     },
   ];
 
-  const deckTextures = ["/models/skate/Tex/Deck_Sublimes.png"];
+  const deckTextures = ["/models/skate/Tex/Deck_Sublimes2.png"];
 
   const placeholderTexures = [
     "/models/skate/Tex/imgForMiddle.png",
@@ -447,13 +447,6 @@ const MainComponent: FC<props> = ({ children }) => {
             name: "SSH",
             job: "FOUNDER",
             img: me,
-            bgColor: "#B4FFA5",
-            icons: [],
-          },
-          {
-            name: "REMS",
-            job: "CO-FOUNDER",
-            img: rems,
             bgColor: "#B4FFA5",
             icons: [],
           },
