@@ -179,17 +179,6 @@ const style = {
     fontWeight: 700,
     letterSpacing: "1.5px",
   })),
-  View2Content2: styled("div")(({ theme }) => ({
-    fontSize: "1em",
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: 500,
-    lineHeight: "1.75em",
-  })),
-  Yessir: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.secondary,
-    padding: "25px",
-    borderRadius: "10px",
-  })),
   //
 
   //
