@@ -262,11 +262,11 @@ const SocietyComponent: FC<{}> = () => {
         </Grid>
       </Grid>
       <Grid container justifyContent="center" spacing={10}>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <img src={key} style={{ width: "100%" }} alt="" />
         </Grid>
 
-        <Grid item xs={6} alignSelf="center">
+        <Grid item xs={7} alignSelf="center">
           <Style.Titlea>/ ssh key .</Style.Titlea>
           <Style.View2Content>
             When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It
@@ -447,6 +447,13 @@ const MainComponent: FC<props> = ({ children }) => {
             name: "SSH",
             job: "FOUNDER",
             img: me,
+            bgColor: "#B4FFA5",
+            icons: [],
+          },
+          {
+            name: "LE REMS",
+            job: "CO-FOUNDER",
+            img: rems,
             bgColor: "#B4FFA5",
             icons: [],
           },
