@@ -44,24 +44,24 @@ const DripComponent: FC<props> = () => {
   const demoSkateDrips = [
     {
       itemId: 825,
-      placeholderPath: "/models/skate/Tex/imgForMiddle.png",
+      placeholderPath: "/models/skate/textures/imgForMiddle.png",
     },
     {
       itemId: 397,
-      placeholderPath: "/models/skate/Tex/imgForMiddle1.png",
+      placeholderPath: "/models/skate/textures/imgForMiddle1.png",
     },
     {
       itemId: 527,
-      placeholderPath: "/models/skate/Tex/imgForMiddle2.png",
+      placeholderPath: "/models/skate/textures/imgForMiddle2.png",
     },
   ];
 
-  const deckTextures = ["/models/skate/Tex/Deck_Sublimes2.png"];
+  const deckTextures = ["/models/skate/textures/sublime-deck.png"];
 
   const placeholderTexures = [
-    "/models/skate/Tex/imgForMiddle.png",
-    "/models/skate/Tex/imgForMiddle1.png",
-    "/models/skate/Tex/imgForMiddle2.png",
+    "/models/skate/textures/imgForMiddle.png",
+    "/models/skate/textures/imgForMiddle1.png",
+    "/models/skate/textures/imgForMiddle2.png",
   ];
 
   //
