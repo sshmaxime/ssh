@@ -156,7 +156,7 @@ const style = {
   //
   SocietyComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.backgroundColor.secondary,
     paddingTop: "7.5vh",
     paddingBottom: "7.5vh",
   })),
@@ -180,7 +180,12 @@ const style = {
     letterSpacing: "1.5px",
   })),
   //
-
+  RoadmapComponent: styled("div")(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level1,
+    backgroundColor: theme.backgroundColor.primary,
+    paddingTop: "7.5vh",
+    paddingBottom: "7.5vh",
+  })),
   //
   TeamComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
@@ -221,7 +226,7 @@ const style = {
     fontWeight: 900,
     textAlign: "center",
   })),
-  //
+
   //
   ContractsComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,

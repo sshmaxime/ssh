@@ -81,7 +81,7 @@ declare module "@mui/material/styles" {
 export const theme = createTheme({
   backgroundColor: {
     primary: "#f9f9fb",
-    secondary: "#ededf3",
+    secondary: "#f1f1f5",
     tertiary: "#cbcbdc",
   },
 
