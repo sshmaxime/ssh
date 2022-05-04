@@ -298,6 +298,14 @@ const SocietyComponent: FC<{}> = () => {
   );
 };
 
+const RoadmapComponent: FC<props> = () => {
+  return (
+    <Style.RoadmapComponent>
+      <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
+    </Style.RoadmapComponent>
+  );
+};
+
 const TeamComponent: FC<{
   people: {
     name: string;
@@ -441,6 +449,8 @@ const MainComponent: FC<props> = ({ children }) => {
       <LabsComponent word="LIMITED" />
       <SocietyComponent />
       <LabsComponent word="CUSTOMIZABLE" />
+      <RoadmapComponent />
+      <LabsComponent word="REDEEMABLE" />
       <TeamComponent
         people={[
           {
