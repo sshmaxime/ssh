@@ -1,9 +1,17 @@
-import { FC, useEffect, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
 
 // styles
 import Style from "./style";
+
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 import skateboard from "../_utils/assets/images/untitled.png";
 import key from "../_utils/assets/images/untitled5.png";
@@ -13,10 +21,12 @@ import SceneSkate from "@/_3d/scenes/skate_0";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import Clickable from "../_utils/components/stateless/clickable";
+import { Slide } from "react-awesome-reveal";
 
 import me from "../_utils/assets/images/me.png";
 import rems from "../_utils/assets/images/rems.png";
 import Marquee from "react-fast-marquee";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
 
 type props = {};
 
@@ -298,14 +308,6 @@ const SocietyComponent: FC<{}> = () => {
   );
 };
 
-const RoadmapComponent: FC<props> = () => {
-  return (
-    <Style.RoadmapComponent>
-      <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
-    </Style.RoadmapComponent>
-  );
-};
-
 const TeamComponent: FC<{
   people: {
     name: string;
@@ -401,6 +403,98 @@ const LabsComponent: FC<{ word: string }> = ({ word }) => {
   );
 };
 
+type propsRoadmap = {
+  roadmapItems: {
+    step: string;
+    title: string;
+    description: any;
+    icon: any;
+    done: boolean;
+    type?: string;
+    colors: {
+      bg: string;
+      color: string;
+    };
+  }[];
+};
+
+const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
+  return (
+    <Style.RoadmapComponent>
+      <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
+      <Timeline position="alternate">
+        <TimelineItem style={{ display: "none" }}></TimelineItem>
+        {roadmapItems.map((roadmapItem, index) => {
+          const lineBetweenColor = roadmapItem.done ? roadmapItems[index].colors.bg : "";
+
+          return (
+            <TimelineItem key={index}>
+              <TimelineOppositeContent
+                style={{
+                  color: roadmapItem.colors.color,
+                  fontWeight: 900,
+                }}
+              >
+                <Style.RoadMapItemStep>{roadmapItem.step}</Style.RoadMapItemStep>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot
+                  style={{
+                    color: "white",
+                    boxShadow: "none",
+                    backgroundColor: "black",
+                  }}
+                />
+                {roadmapItems.length === index + 1 ? null : (
+                  <TimelineConnector
+                    style={{
+                      backgroundColor: lineBetweenColor,
+                      boxShadow: roadmapItem.done ? "1px 1px 2.5px grey, 0px 0px 0px #ffffff" : "",
+                      borderRadius: "25px",
+                      width: roadmapItem.done ? "5px" : "3px",
+                    }}
+                  />
+                )}
+              </TimelineSeparator>
+              <TimelineContent>
+                {index % 2 ? (
+                  <Slide direction="right" triggerOnce>
+                    <Style.RoadMapItem>
+                      <Grid container justifyContent={"space-between"}>
+                        <Style.RoadMapItemTitle>{roadmapItem.title}</Style.RoadMapItemTitle>
+                        {roadmapItem.type && (
+                          <div>
+                            <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
+                          </div>
+                        )}
+                      </Grid>
+                      <Style.RoadMapItemContent>{roadmapItem.description}</Style.RoadMapItemContent>
+                    </Style.RoadMapItem>
+                  </Slide>
+                ) : (
+                  <Slide direction="left" triggerOnce>
+                    <Style.RoadMapItem2>
+                      <Grid container justifyContent={"space-between"}>
+                        <Style.RoadMapItemTitle>{roadmapItem.title}</Style.RoadMapItemTitle>
+                        {roadmapItem.type && (
+                          <div>
+                            <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
+                          </div>
+                        )}
+                      </Grid>
+                      <Style.RoadMapItemContent>{roadmapItem.description}</Style.RoadMapItemContent>
+                    </Style.RoadMapItem2>
+                  </Slide>
+                )}
+              </TimelineContent>
+            </TimelineItem>
+          );
+        })}
+      </Timeline>
+    </Style.RoadmapComponent>
+  );
+};
+
 const ContractsComponent: FC<props> = () => {
   return (
     <Style.ContractsComponent>
@@ -449,7 +543,55 @@ const MainComponent: FC<props> = ({ children }) => {
       <LabsComponent word="LIMITED" />
       <SocietyComponent />
       <LabsComponent word="CUSTOMIZABLE" />
-      <RoadmapComponent />
+      <RoadmapComponent
+        roadmapItems={[
+          {
+            step: "February. 1st. 2022.",
+            title: "Drop #1",
+            icon: <FastfoodIcon />,
+            description: (
+              <Fragment>
+                After several months of work, SSH LABS will release the first of its many more to
+                come DROP.
+              </Fragment>
+            ),
+            done: true,
+            colors: {
+              bg: "black",
+              color: "#2AFE00",
+            },
+          },
+          {
+            step: "February. 28th. 2022.",
+            title: "Drop #1",
+            type: "END",
+            icon: <FastfoodIcon />,
+            description: <Fragment>All good things have an end.</Fragment>,
+            done: true,
+            colors: {
+              bg: "black",
+              color: "#2AFE00",
+            },
+          },
+          {
+            step: "TBD.",
+            title: "Drop #1",
+            type: "REDEEM",
+            icon: <FastfoodIcon />,
+            description: (
+              <Fragment>
+                This is when you'll be able to redeem your NFT in real life to rock it everywhere,
+                we cannot f*cking wait !
+              </Fragment>
+            ),
+            done: true,
+            colors: {
+              bg: "black",
+              color: "#2AFE00",
+            },
+          },
+        ]}
+      />
       <LabsComponent word="REDEEMABLE" />
       <TeamComponent
         people={[
