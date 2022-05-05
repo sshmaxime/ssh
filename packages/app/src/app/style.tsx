@@ -98,7 +98,7 @@ const style = {
       fontFamily: theme.fontFamily.primary,
       fontStyle: "italic",
       fontWeight: 900,
-      marginBottom: "30px",
+      marginBottom: "50px",
       display: "inline-block",
       borderRadius: "2.5px",
       textShadow: shadow ? `10px 5px ${theme.backgroundColor.tertiary}` : "",
@@ -276,7 +276,6 @@ const style = {
   })),
   RoadMapItemTitle: styled(Typography)(({ theme }) => ({
     paddingLeft: "10px",
-    textShadow: "2.5px 2.5px 0px #2AFE00",
     paddingRight: "10px",
     fontStyle: "italic",
     fontFamily: theme.fontFamily.primary,
