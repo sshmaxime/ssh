@@ -422,7 +422,7 @@ const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
   return (
     <Style.RoadmapComponent>
       <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
-      <Timeline position="alternate">
+      <Timeline position="alternate" style={{ padding: "0px" }}>
         <TimelineItem style={{ display: "none" }}></TimelineItem>
         {roadmapItems.map((roadmapItem, index) => {
           const lineBetweenColor = roadmapItem.done ? roadmapItems[index].colors.bg : "";
