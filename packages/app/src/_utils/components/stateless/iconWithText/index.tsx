@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 
 import { Grid } from "@mui/material";
 
