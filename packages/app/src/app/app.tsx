@@ -262,21 +262,12 @@ const ColoredKw: FC<{ color?: string }> = ({ color = "black", children }) => {
 const SocietyComponent: FC<{}> = () => {
   return (
     <Style.SocietyComponent>
-      <Grid container justifyContent="center">
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" style={{ marginBottom: "75px" }}>
-            <Style.ViewTitle big shadow={false}>
-              / THE SOCIETY .
-            </Style.ViewTitle>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid container justifyContent="center" spacing={10}>
-        <Grid item xs={5}>
+      <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle>
+      {/* <Grid container justifyContent="center" spacing={5}>
+        <Grid item xs={6}>
           <img src={key} style={{ width: "100%" }} alt="" />
         </Grid>
-
-        <Grid item xs={7} alignSelf="center">
+        <Grid item xs={6} alignSelf="center">
           <Style.Titlea>/ ssh key .</Style.Titlea>
           <Style.View2Content>
             When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It
@@ -303,7 +294,7 @@ const SocietyComponent: FC<{}> = () => {
             </Clickable>
           </Style.MoreLinkContainer>
         </Grid>
-      </Grid>
+      </Grid> */}
     </Style.SocietyComponent>
   );
 };
@@ -409,14 +400,20 @@ type propsRoadmap = {
     title: string;
     description: any;
     done: boolean;
-    type?: string;
+    type: string;
   }[];
 };
 
 const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
   return (
     <Style.RoadmapComponent>
-      <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
+      <Grid container justifyContent="center">
+        <Grid item xs={12}>
+          <Grid container justifyContent="center" style={{ marginBottom: "50px" }}>
+            <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
+          </Grid>
+        </Grid>
+      </Grid>
       <Timeline position="alternate" style={{ padding: "0px" }}>
         <TimelineItem style={{ display: "none" }}></TimelineItem>
         {roadmapItems.map((roadmapItem, index) => {
@@ -456,11 +453,9 @@ const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
                     <Style.RoadMapItem>
                       <Grid container justifyContent={"space-between"}>
                         <Style.RoadMapItemTitle>{roadmapItem.title}</Style.RoadMapItemTitle>
-                        {roadmapItem.type && (
-                          <div>
-                            <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
-                          </div>
-                        )}
+                        <div>
+                          <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
+                        </div>
                       </Grid>
                       <Style.RoadMapItemContent>{roadmapItem.description}</Style.RoadMapItemContent>
                     </Style.RoadMapItem>
@@ -470,11 +465,9 @@ const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
                     <Style.RoadMapItem2>
                       <Grid container justifyContent={"space-between"}>
                         <Style.RoadMapItemTitle>{roadmapItem.title}</Style.RoadMapItemTitle>
-                        {roadmapItem.type && (
-                          <div>
-                            <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
-                          </div>
-                        )}
+                        <div>
+                          <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
+                        </div>
                       </Grid>
                       <Style.RoadMapItemContent>{roadmapItem.description}</Style.RoadMapItemContent>
                     </Style.RoadMapItem2>
@@ -540,8 +533,8 @@ const MainComponent: FC<props> = ({ children }) => {
       <RoadmapComponent
         roadmapItems={[
           {
-            step: "February. 1st. 2022.",
-            title: "DROP #1",
+            title: "SKATEBOARD DECK",
+            step: "August. 1st. 2022.",
             type: "DROP #1",
             description: (
               <Fragment>
@@ -552,41 +545,17 @@ const MainComponent: FC<props> = ({ children }) => {
             done: false,
           },
           {
-            step: "February. 28th. 2022.",
-            title: "Drop #2",
-            type: "DROP",
-            description: (
-              <Fragment>
-                After several months of work, SSH LABS will release the first of its many more to
-                come DROP.
-              </Fragment>
-            ),
+            step: "",
+            title: "TBA.",
+            type: "DROP #2",
+            description: <Fragment>...</Fragment>,
             done: false,
           },
           {
             step: "",
-            title: "Drop #3",
-            type: "DROP",
-            description: (
-              <Fragment>
-                After several months of work, SSH LABS will release the first of its many more to
-                come DROP.
-              </Fragment>
-            ),
-            done: false,
-          },
-          {
-            step: "50%",
-            title: "Drop #3",
-            type: "EVENT",
-            description: <Fragment>Metaverse party with huge annoucement !</Fragment>,
-            done: false,
-          },
-          {
-            step: "100%",
-            title: "Drop #3",
-            type: "EVENT",
-            description: <Fragment>Secret ...</Fragment>,
+            title: "TBA.",
+            type: "DROP #3",
+            description: <Fragment>...</Fragment>,
             done: false,
           },
         ]}
