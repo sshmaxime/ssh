@@ -92,18 +92,16 @@ const style = {
     backgroundColor: theme.backgroundColor.secondary,
     borderRadius: "5px",
   })),
-  ViewTitle: styled("div")<{ big?: boolean; shadow?: boolean }>(
-    ({ theme, big, shadow = true }) => ({
-      fontSize: big ? "3em" : "2em",
-      fontFamily: theme.fontFamily.primary,
-      fontStyle: "italic",
-      fontWeight: 900,
-      marginBottom: "50px",
-      display: "inline-block",
-      borderRadius: "2.5px",
-      textShadow: shadow ? `10px 5px ${theme.backgroundColor.tertiary}` : "",
-    })
-  ),
+  ViewTitle: styled("div")<{ big?: boolean; shadow?: boolean }>(({ theme, shadow = true }) => ({
+    fontSize: "2.5em",
+    fontFamily: theme.fontFamily.primary,
+    fontStyle: "italic",
+    fontWeight: 900,
+    marginBottom: "50px",
+    display: "inline-block",
+    borderRadius: "2.5px",
+    textShadow: shadow ? `10px 5px ${theme.backgroundColor.tertiary}` : "",
+  })),
 
   View2Content: styled("div")(({ theme }) => ({
     fontSize: "1em",
@@ -257,7 +255,6 @@ const style = {
 
   RoadMapItemStep: styled(Typography)(({ theme }) => ({
     color: "black",
-    padding: "2.5px 5px 2.5px 5px",
     borderRadius: "5px",
     display: "inline-block",
     paddingLeft: "10px",
@@ -272,7 +269,7 @@ const style = {
     boxShadow: `10px 10px 2.5px ${theme.backgroundColor.secondary}`,
     backgroundColor: `white`,
     marginLeft: "10px",
-    marginBottom: "5px",
+    marginBottom: "35px",
   })),
   RoadMapItemTitle: styled(Typography)(({ theme }) => ({
     paddingLeft: "10px",
@@ -282,10 +279,10 @@ const style = {
     fontWeight: 900,
     fontSize: "1.1em",
     color: "black",
-    marginBottom: "10px",
+    marginBottom: "15px",
   })),
   RoadMapItemType: styled(Typography)(({ theme }) => ({
-    fontSize: "0.65em",
+    fontSize: "0.75em",
     padding: "2.5px",
     paddingLeft: "10px",
     paddingRight: "10px",
@@ -311,7 +308,7 @@ const style = {
     backgroundColor: `white`,
     textAlign: "start",
     marginRight: "10px",
-    marginBottom: "5px",
+    marginBottom: "35px",
   })),
 };
 
