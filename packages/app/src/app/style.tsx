@@ -269,7 +269,7 @@ const style = {
   RoadMapItem: styled("div")(({ theme }) => ({
     padding: "10px",
     borderRadius: "5px",
-    boxShadow: `25px -25px 2.5px ${theme.backgroundColor.primary}`,
+    boxShadow: `10px 10px 2.5px ${theme.backgroundColor.secondary}`,
     backgroundColor: `white`,
     marginLeft: "10px",
     marginBottom: "5px",
@@ -307,7 +307,7 @@ const style = {
   RoadMapItem2: styled("div")(({ theme }) => ({
     padding: "10px",
     borderRadius: "5px",
-    boxShadow: `-25px -25px 2.5px ${theme.backgroundColor.primary}`,
+    boxShadow: `-10px 10px 2.5px ${theme.backgroundColor.secondary}`,
     backgroundColor: `white`,
     textAlign: "start",
     marginRight: "10px",
