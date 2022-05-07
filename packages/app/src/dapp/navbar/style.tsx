@@ -95,7 +95,7 @@ const style = {
     color: "grey",
     fontSize: "0.8em",
   })),
-  WalletTypoCollection: styled(Typography)(({ theme }) => ({
+  WalletTypoCollection: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
     letterSpacing: "0.5px",

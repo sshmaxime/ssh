@@ -10,6 +10,8 @@ import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import OpenseaIcon from "../../_utils/assets/icons/opensea.svg";
+import { useDispatch, useSelector } from "../store/hooks";
+import { signIn } from "../store/actions/app.actions";
 
 const dripsOwned = [
   {
@@ -40,7 +42,8 @@ const dripsOwned = [
 ];
 
 export const NavbarComponent: FC = () => {
-  const [connected, setConnected] = useState(false);
+  const state = useSelector((state) => state.appState);
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -80,7 +83,7 @@ export const NavbarComponent: FC = () => {
                 alignItems="center"
               >
                 <Grid item>
-                  <Clickable activated={connected} onClick={handlePopoverOpen}>
+                  <Clickable activated={state.signedIn} onClick={handlePopoverOpen}>
                     <AccountBalanceWalletIcon
                       style={{
                         fontSize: "40px",
@@ -104,8 +107,8 @@ export const NavbarComponent: FC = () => {
                       <Style.WalletView>
                         {dripsOwned.length ? (
                           <Grid container>
-                            {dripsOwned.map((drip) => (
-                              <Grid item>
+                            {dripsOwned.map((drip, index) => (
+                              <Grid item key={index}>
                                 <Grid container>
                                   <Grid item xs={2}>
                                     <img src={drip.img} style={{ width: "100%" }} alt="" />
@@ -194,35 +197,33 @@ export const NavbarComponent: FC = () => {
                   </Popover>
                 </Grid>
                 <Grid item>
-                  {connected ? (
-                    <Clickable onClick={() => setConnected(false)}>
-                      <Style.Wallet container>
-                        <Grid
-                          item
-                          xs={1}
-                          style={{ display: "flex", justifyContent: "center", marginRight: "5px" }}
-                        >
-                          <img
-                            src="https://avatars.githubusercontent.com/u/96990732"
-                            alt=""
-                            style={{ width: "40px", borderRadius: "20px" }}
-                          />
-                        </Grid>
-                        <Grid item xs={1} />
-                        <Grid item xs={7}>
-                          <Grid container>
-                            <Grid item xs={12}>
-                              <Style.WalletENS>bonjour.eth</Style.WalletENS>
-                            </Grid>
-                            <Grid item xs={12}>
-                              <Style.WalletAddy>0x1234...5678</Style.WalletAddy>
-                            </Grid>
+                  {state.signedIn ? (
+                    <Style.Wallet container>
+                      <Grid
+                        item
+                        xs={1}
+                        style={{ display: "flex", justifyContent: "center", marginRight: "5px" }}
+                      >
+                        <img
+                          src="https://avatars.githubusercontent.com/u/96990732"
+                          alt=""
+                          style={{ width: "40px", borderRadius: "20px" }}
+                        />
+                      </Grid>
+                      <Grid item xs={1} />
+                      <Grid item xs={7}>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Style.WalletENS>bonjour.eth</Style.WalletENS>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Style.WalletAddy>0x1234...5678</Style.WalletAddy>
                           </Grid>
                         </Grid>
-                      </Style.Wallet>
-                    </Clickable>
+                      </Grid>
+                    </Style.Wallet>
                   ) : (
-                    <Clickable onClick={() => setConnected(true)}>
+                    <Clickable onClick={() => dispatch(signIn())}>
                       <Style.GoToAppButton>Connect Wallet</Style.GoToAppButton>
                     </Clickable>
                   )}
