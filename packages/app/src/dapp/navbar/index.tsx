@@ -4,10 +4,8 @@ import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
 import Clickable from "../../_utils/components/stateless/clickable";
-import ArrowLeftAltIcon from "@mui/icons-material/West";
 import Logo from "../../_utils/assets/images/logo.svg";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import VerifiedIcon from "@mui/icons-material/Verified";

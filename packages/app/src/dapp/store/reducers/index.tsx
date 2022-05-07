@@ -1,5 +1,4 @@
 import { combineReducers, Reducer } from "redux";
-
 import { appStateReducer, appState } from "./app.reducer";
 
 export interface IAppState {
