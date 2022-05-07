@@ -408,13 +408,8 @@ type propsRoadmap = {
     step: string;
     title: string;
     description: any;
-    icon: any;
     done: boolean;
     type?: string;
-    colors: {
-      bg: string;
-      color: string;
-    };
   }[];
 };
 
@@ -425,13 +420,10 @@ const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
       <Timeline position="alternate" style={{ padding: "0px" }}>
         <TimelineItem style={{ display: "none" }}></TimelineItem>
         {roadmapItems.map((roadmapItem, index) => {
-          const lineBetweenColor = roadmapItem.done ? roadmapItems[index].colors.bg : "";
-
           return (
             <TimelineItem key={index}>
               <TimelineOppositeContent
                 style={{
-                  color: roadmapItem.colors.color,
                   fontWeight: 900,
                 }}
               >
@@ -442,13 +434,15 @@ const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
                   style={{
                     color: "white",
                     boxShadow: "none",
+                    opacity: roadmapItem.done ? "0%" : "10%",
                     backgroundColor: "black",
                   }}
                 />
                 {roadmapItems.length === index + 1 ? null : (
                   <TimelineConnector
                     style={{
-                      backgroundColor: lineBetweenColor,
+                      backgroundColor: "black",
+                      opacity: roadmapItem.done ? "0%" : "10%",
                       boxShadow: roadmapItem.done ? "1px 1px 2.5px grey, 0px 0px 0px #ffffff" : "",
                       borderRadius: "25px",
                       width: roadmapItem.done ? "5px" : "3px",
@@ -547,48 +541,53 @@ const MainComponent: FC<props> = ({ children }) => {
         roadmapItems={[
           {
             step: "February. 1st. 2022.",
-            title: "Drop #1",
-            icon: <FastfoodIcon />,
+            title: "DROP #1",
+            type: "DROP #1",
             description: (
               <Fragment>
                 After several months of work, SSH LABS will release the first of its many more to
                 come DROP.
               </Fragment>
             ),
-            done: true,
-            colors: {
-              bg: "black",
-              color: "#2AFE00",
-            },
+            done: false,
           },
           {
             step: "February. 28th. 2022.",
-            title: "Drop #1",
-            type: "END",
-            icon: <FastfoodIcon />,
-            description: <Fragment>All good things have an end.</Fragment>,
-            done: true,
-            colors: {
-              bg: "black",
-              color: "#2AFE00",
-            },
-          },
-          {
-            step: "TBD.",
-            title: "Drop #1",
-            type: "REDEEM",
-            icon: <FastfoodIcon />,
+            title: "Drop #2",
+            type: "DROP",
             description: (
               <Fragment>
-                This is when you'll be able to redeem your NFT in real life to rock it everywhere,
-                we cannot f*cking wait !
+                After several months of work, SSH LABS will release the first of its many more to
+                come DROP.
               </Fragment>
             ),
-            done: true,
-            colors: {
-              bg: "black",
-              color: "#2AFE00",
-            },
+            done: false,
+          },
+          {
+            step: "",
+            title: "Drop #3",
+            type: "DROP",
+            description: (
+              <Fragment>
+                After several months of work, SSH LABS will release the first of its many more to
+                come DROP.
+              </Fragment>
+            ),
+            done: false,
+          },
+          {
+            step: "50%",
+            title: "Drop #3",
+            type: "EVENT",
+            description: <Fragment>Metaverse party with huge annoucement !</Fragment>,
+            done: false,
+          },
+          {
+            step: "100%",
+            title: "Drop #3",
+            type: "EVENT",
+            description: <Fragment>Secret ...</Fragment>,
+            done: false,
           },
         ]}
       />
