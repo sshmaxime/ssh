@@ -25,7 +25,6 @@ export const signIn = () => {
     try {
       await sdk.connect();
       const { address } = sdk.getInfo();
-      console.log(address);
 
       return dispatch(toDispatch({ signedIn: true, address: address }));
     } catch (e) {}

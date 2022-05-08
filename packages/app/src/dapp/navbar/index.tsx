@@ -13,34 +13,6 @@ import OpenseaIcon from "../../_utils/assets/icons/opensea.svg";
 import { useDispatch, useSelector } from "../store/hooks";
 import { signIn } from "../store/actions/app.actions";
 
-const dripsOwned = [
-  {
-    collection: "alpha",
-    id: 123,
-    img: "https://avatars.githubusercontent.com/u/96990732",
-  },
-  {
-    collection: "alpha",
-    id: 123,
-    img: "https://avatars.githubusercontent.com/u/96990732",
-  },
-  {
-    collection: "alpha",
-    id: 123,
-    img: "https://avatars.githubusercontent.com/u/96990732",
-  },
-  {
-    collection: "alpha",
-    id: 123,
-    img: "https://avatars.githubusercontent.com/u/96990732",
-  },
-  {
-    collection: "alpha",
-    id: 123,
-    img: "https://avatars.githubusercontent.com/u/96990732",
-  },
-];
-
 export const NavbarComponent: FC = () => {
   const state = useSelector((state) => state.appState);
   const dispatch = useDispatch();
@@ -105,9 +77,9 @@ export const NavbarComponent: FC = () => {
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
                       <Style.WalletView>
-                        {dripsOwned.length ? (
+                        {state.drips.length ? (
                           <Grid container>
-                            {dripsOwned.map((drip, index) => (
+                            {state.drips.map((drip, index) => (
                               <Grid item key={index}>
                                 <Grid container>
                                   <Grid item xs={2}>
@@ -217,7 +189,7 @@ export const NavbarComponent: FC = () => {
                             <Style.WalletENS>bonjour.eth</Style.WalletENS>
                           </Grid>
                           <Grid item xs={12}>
-                            <Style.WalletAddy>0x1234...5678</Style.WalletAddy>
+                            <Style.WalletAddy>{state.reducedAddress}</Style.WalletAddy>
                           </Grid>
                         </Grid>
                       </Grid>
