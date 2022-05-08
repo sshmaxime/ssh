@@ -17,6 +17,8 @@ export const NavbarComponent: FC = () => {
   const state = useSelector((state) => state.appState);
   const dispatch = useDispatch();
 
+  const drips = state.walletAssets.drips;
+
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -77,9 +79,9 @@ export const NavbarComponent: FC = () => {
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
                       <Style.WalletView>
-                        {state.drips.length ? (
+                        {drips.length ? (
                           <Grid container>
-                            {state.drips.map((drip, index) => (
+                            {drips.map((drip, index) => (
                               <Grid item key={index}>
                                 <Grid container>
                                   <Grid item xs={2}>

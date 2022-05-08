@@ -7,18 +7,20 @@ export type appState = {
   address: string;
   reducedAddress: string;
 
-  // drips owned
-  drips: {
-    collection: string;
-    id: number;
-    img: string;
-  }[];
+  walletAssets: {
+    //
+    drips: {
+      collection: string;
+      id: number;
+      img: string;
+    }[];
 
-  // nfts
-  nfts: {
-    collection: string;
-    list: { img: string; title: string; id: number }[];
-  }[];
+    //
+    nfts: {
+      collection: string;
+      list: { img: string; title: string; id: number }[];
+    }[];
+  };
 };
 
 const appStateReducer = (
@@ -28,10 +30,10 @@ const appStateReducer = (
     reducedAddress: "",
 
     //
-    drips: [],
-
-    //
-    nfts: [],
+    walletAssets: {
+      drips: [],
+      nfts: [],
+    },
   },
   action: AppActionTypes
 ): appState => {
