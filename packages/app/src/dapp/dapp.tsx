@@ -32,6 +32,7 @@ import ModelSkate from "@/_3d/scenes/skate_0";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Clickable from "../_utils/components/stateless/clickable";
 import { useSelector } from "./store/hooks";
+import SceneLoader from "@/_3d/scenes/skate_1";
 
 const pastilles = [
   {
@@ -52,38 +53,10 @@ const pastilles = [
   },
 ];
 
-const deckTextures = ["/models/skate/Tex/Deck_Sublimes.png"];
-const placeholderTextures = ["/models/skate/Tex/imgForMiddle.png"];
-export const My3DScene: FC = () => {
-  return (
-    <Canvas
-      flat={true}
-      linear={true}
-      camera={{ position: [0, 40, -60] }}
-      style={{ height: "100%", width: "100%" }}
-    >
-      {/*  */}
-      <ambientLight intensity={0.95} />
-      <ModelSkate
-        _id={0}
-        deckTextures={deckTextures}
-        deckIndex={0}
-        placeholderTextures={placeholderTextures}
-        placeholderIndex={0}
-      />
-      <OrbitControls
-        target={[0, 40, 0]}
-        autoRotate={true}
-        autoRotateSpeed={7.5}
-        enableZoom={false}
-        enableRotate={false}
-      />
-    </Canvas>
-  );
-};
-
 const Drop: FC = () => {
   const state = useSelector((state) => state.appState);
+
+  const nfts = state.walletAssets.nfts;
 
   const [currentItem, setItem] = React.useState(undefined as any);
   const [checked, setChecked] = React.useState(false);
@@ -96,15 +69,17 @@ const Drop: FC = () => {
     }
   };
 
+  const deckTexture = "/models/skate/textures/sublime-deck.png";
+  const placeholderTexture = "/models/skate/textures/imgForMiddle.png";
+
   //
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
         <Style.Header></Style.Header>
         <Style.Part1>
-          {/* 3D */}
-          {/* <Suspense fallback={null}>{<My3DScene />}</Suspense> */}
-
+          <SceneLoader deckTexture={deckTexture} placeholderTexture={placeholderTexture} _id={1} />
+          {/* <My3DScene /> */}
           <Style.LeftSide>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
               <Grid item xs={6}>
@@ -137,8 +112,8 @@ const Drop: FC = () => {
             <Style.BodyLeftSide>
               {/*  */}
               <Style.InnerLeftSide>
-                {state.nfts.length ? (
-                  state.nfts.map((list, index1) => (
+                {nfts.length ? (
+                  nfts.map((list, index1) => (
                     <div key={index1}>
                       <Style.CollectionName>{list.collection}</Style.CollectionName>
                       <ImageList cols={4} gap={4} style={{ marginBottom: "20px" }}>
@@ -173,8 +148,10 @@ const Drop: FC = () => {
                       </ImageList>
                     </div>
                   ))
-                ) : (
+                ) : state.signedIn ? (
                   <Style.InnerLeftSideNoNfts>You do not own any NFTs :'(</Style.InnerLeftSideNoNfts>
+                ) : (
+                  <Style.InnerLeftSideNoNfts>You are not connected :'(</Style.InnerLeftSideNoNfts>
                 )}
               </Style.InnerLeftSide>
             </Style.BodyLeftSide>
