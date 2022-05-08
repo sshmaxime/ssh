@@ -57,6 +57,13 @@ const style = {
   InnerLeftSide: styled("div")(({ theme }) => ({
     padding: "10px",
   })),
+  InnerLeftSideNoNfts: styled("div")(({ theme }) => ({
+    paddingTop: "25vh",
+    textAlign: "center",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 500,
+    fontSize: "0.8em",
+  })),
   HeaderLeftSide: styled(Grid)(({ theme }) => ({
     backgroundColor: "white",
     borderRadius: "5px",

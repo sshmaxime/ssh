@@ -31,75 +31,7 @@ import ModelSkate from "@/_3d/scenes/skate_0";
 
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Clickable from "../_utils/components/stateless/clickable";
-
-//
-const listItems = [
-  {
-    collection: "BAYC",
-    list: [{ img: af1x_exemple, title: "hello", id: 0 }],
-  },
-  {
-    collection: "CryptoPunks",
-    list: [
-      { img: af1x_exemple, title: "hello", id: 0 },
-      { img: af1x_exemple, title: "hello", id: 1 },
-      { img: af1x_exemple, title: "hello", id: 2 },
-      { img: af1x_exemple, title: "hello", id: 3 },
-      { img: af1x_exemple, title: "hello", id: 4 },
-      { img: af1x_exemple, title: "hello", id: 5 },
-      { img: af1x_exemple, title: "hello", id: 6 },
-      { img: af1x_exemple, title: "hello", id: 7 },
-    ],
-  },
-  {
-    collection: "Isotile",
-    list: [
-      {
-        img: "https://lh3.googleusercontent.com/BBj09xD7R4bBtg1lgnAAS9_TfoYXKwMtudlk-0fVljlURaK7BWcARCpkM-1LGNGTAcsGO6V1TgrtmQFvCo8uVYW_QEfASK-9j6Nr=s300",
-        title: "hello",
-        id: 0,
-      },
-      {
-        img: "https://lh3.googleusercontent.com/BBj09xD7R4bBtg1lgnAAS9_TfoYXKwMtudlk-0fVljlURaK7BWcARCpkM-1LGNGTAcsGO6V1TgrtmQFvCo8uVYW_QEfASK-9j6Nr=s300",
-        title: "hello",
-        id: 1,
-      },
-      {
-        img: "https://lh3.googleusercontent.com/BBj09xD7R4bBtg1lgnAAS9_TfoYXKwMtudlk-0fVljlURaK7BWcARCpkM-1LGNGTAcsGO6V1TgrtmQFvCo8uVYW_QEfASK-9j6Nr=s300",
-        title: "hello",
-        id: 2,
-      },
-      {
-        img: "https://lh3.googleusercontent.com/BBj09xD7R4bBtg1lgnAAS9_TfoYXKwMtudlk-0fVljlURaK7BWcARCpkM-1LGNGTAcsGO6V1TgrtmQFvCo8uVYW_QEfASK-9j6Nr=s300",
-        title: "hello",
-        id: 3,
-      },
-    ],
-  },
-  {
-    collection: "Cool Cats",
-    list: [
-      { img: af1x_exemple, title: "hello", id: 0 },
-      { img: af1x_exemple, title: "hello", id: 1 },
-      { img: af1x_exemple, title: "hello", id: 2 },
-      { img: af1x_exemple, title: "hello", id: 3 },
-      { img: af1x_exemple, title: "hello", id: 4 },
-      { img: af1x_exemple, title: "hello", id: 5 },
-      { img: af1x_exemple, title: "hello", id: 6 },
-      { img: af1x_exemple, title: "hello", id: 7 },
-      { img: af1x_exemple, title: "hello", id: 8 },
-    ],
-  },
-];
-
-const fakeDrop = {
-  id: "0",
-  collections: [
-    { name: "alpha", contract: "0x" },
-    { name: "alpha", contract: "0x" },
-    { name: "alpha", contract: "0x" },
-  ],
-};
+import { useSelector } from "./store/hooks";
 
 const pastilles = [
   {
@@ -151,12 +83,9 @@ export const My3DScene: FC = () => {
 };
 
 const Drop: FC = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  let params = useParams();
+  const state = useSelector((state) => state.appState);
 
   const [currentItem, setItem] = React.useState(undefined as any);
-
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
@@ -208,41 +137,45 @@ const Drop: FC = () => {
             <Style.BodyLeftSide>
               {/*  */}
               <Style.InnerLeftSide>
-                {listItems.map((list, index1) => (
-                  <div key={index1}>
-                    <Style.CollectionName>{list.collection}</Style.CollectionName>
-                    <ImageList cols={4} gap={4} style={{ marginBottom: "20px" }}>
-                      {list.list.map((item, index) => (
-                        <ImageListItem
-                          key={index}
-                          style={{
-                            border:
-                              currentItem &&
-                              currentItem.collection === list.collection &&
-                              currentItem.id === item.id
-                                ? "3px solid #2AFE00"
-                                : "3px solid white",
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            setItem({
-                              collection: list.collection,
-                              id: item.id,
-                              img: item.img,
-                            });
-                          }}
-                        >
-                          <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                          />
-                        </ImageListItem>
-                      ))}
-                    </ImageList>
-                  </div>
-                ))}
+                {state.nfts.length ? (
+                  state.nfts.map((list, index1) => (
+                    <div key={index1}>
+                      <Style.CollectionName>{list.collection}</Style.CollectionName>
+                      <ImageList cols={4} gap={4} style={{ marginBottom: "20px" }}>
+                        {list.list.map((item, index) => (
+                          <ImageListItem
+                            key={index}
+                            style={{
+                              border:
+                                currentItem &&
+                                currentItem.collection === list.collection &&
+                                currentItem.id === item.id
+                                  ? "3px solid #2AFE00"
+                                  : "3px solid white",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => {
+                              setItem({
+                                collection: list.collection,
+                                id: item.id,
+                                img: item.img,
+                              });
+                            }}
+                          >
+                            <img
+                              src={`${item.img}?w=248&fit=crop&auto=format`}
+                              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                              alt={item.title}
+                              loading="lazy"
+                            />
+                          </ImageListItem>
+                        ))}
+                      </ImageList>
+                    </div>
+                  ))
+                ) : (
+                  <Style.InnerLeftSideNoNfts>You do not own any NFTs :'(</Style.InnerLeftSideNoNfts>
+                )}
               </Style.InnerLeftSide>
             </Style.BodyLeftSide>
           </Style.LeftSide>
