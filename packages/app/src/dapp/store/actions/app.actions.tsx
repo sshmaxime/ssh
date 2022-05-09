@@ -1,4 +1,4 @@
-import { IAppState } from "../reducers/index";
+import { RootState } from "..";
 import { sdk } from "../../sdk";
 
 /////////////
@@ -21,13 +21,16 @@ export const signIn = () => {
     };
   };
 
-  return async (dispatch: any, getState: () => IAppState) => {
+  //
+  return async (dispatch: any, getState: () => RootState) => {
     try {
       await sdk.connect();
       const { address } = sdk.getInfo();
 
       return dispatch(toDispatch({ signedIn: true, address: address }));
-    } catch (e) {}
+    } catch (e) {
+      return dispatch(toDispatch({ signedIn: false, address: "" }));
+    }
   };
 };
 

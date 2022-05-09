@@ -41,11 +41,14 @@ const style = {
   })),
   InnerOverlay: styled(Grid)(({ theme }) => ({})),
   InnerOverlayCenter: styled(Grid)(({ theme }) => ({
-    color: "grey",
     fontFamily: theme.fontFamily.primary,
     fontSize: "0.75em",
   })),
-  InnerOverlayLeft: styled(Grid)(({ theme }) => ({})),
+  InnerOverlayLeft: styled(Grid)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.75em",
+    fontWeight: 900,
+  })),
   InnerOverlayRight: styled(Grid)(({ theme }) => ({})),
   LeftSide: styled("div")(({ theme }) => ({
     position: "absolute",
@@ -70,12 +73,12 @@ const style = {
     padding: "10px",
     height: "50px",
   })),
-  BodyLeftSide: styled("div")(({ theme }) => ({
+  BodyLeftSide: styled("div")<{ connected: boolean }>(({ theme, connected }) => ({
     backgroundColor: theme.backgroundColor.primary,
     borderRadius: "5px",
     overflowY: "scroll",
     height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 50px - ${sizeWidthLeft})`,
-    opacity: 0.25,
+    opacity: connected ? 0.25 : 1,
     transition: "all 1s",
     ":hover": {
       opacity: 1,

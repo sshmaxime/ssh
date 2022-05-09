@@ -1,10 +1,9 @@
-import { combineReducers, Reducer } from "redux";
-import { appStateReducer, appState } from "./app.reducer";
+import { appState, appStateReducer } from "./app.reducer";
 
 export interface IAppState {
   appState: appState;
 }
 
-export const reducers: Reducer<IAppState> = combineReducers<IAppState>({
+export const reducers = {
   appState: appStateReducer,
-});
+};

@@ -18,26 +18,21 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Fade } from "react-awesome-reveal";
-import { useParams } from "react-router-dom";
 
 import logoeth from "../_utils/assets/images/logoeth.svg";
 import af1x_exemple from "../_utils/assets/images/Punk_7804.png";
 import Pastille from "../_utils/components/stateless/pastille";
 
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-
-import ModelSkate from "@/_3d/scenes/skate_0";
-
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Clickable from "../_utils/components/stateless/clickable";
 import { useSelector } from "./store/hooks";
 import SceneLoader from "@/_3d/scenes/skate_1";
+import { useGetNFTsForDropByAddressQuery } from "./store/services/drop";
 
 const pastilles = [
   {
     title: "KEY",
-    description: "Minting this NFT gives your a free SSH Key.",
+    description: "Minting this NFT gives your a free SSH-KEY.",
   },
   {
     title: "IRL",
@@ -71,6 +66,10 @@ const Drop: FC = () => {
 
   const deckTexture = "/models/skate/textures/sublime-deck.png";
   const placeholderTexture = "/models/skate/textures/imgForMiddle.png";
+
+  const { data, error, isLoading } = useGetNFTsForDropByAddressQuery({ dropId: 0, address: "0x" });
+
+  console.log(data);
 
   //
   return (
@@ -109,7 +108,8 @@ const Drop: FC = () => {
                 </Style.SearchBar>
               </Grid>
             </Style.HeaderLeftSide>
-            <Style.BodyLeftSide>
+            {/*  */}
+            <Style.BodyLeftSide connected={state.signedIn}>
               {/*  */}
               <Style.InnerLeftSide>
                 {nfts.length ? (
