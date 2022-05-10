@@ -1,3 +1,10 @@
+export type NFT = {
+  contract: string;
+  img: string;
+  id: number;
+};
+export type NFTs = NFT[];
+export type NFTsByCollection = { [collectionName: string]: NFTs };
 export type Collection = {
   name: string;
   contract: string;
@@ -9,5 +16,3 @@ export type Drop = {
 };
 
 export type Drops = Drop[];
-
-export type NFTsForDropByAddress = { [collectionName: string]: { id: number; img: string }[] };

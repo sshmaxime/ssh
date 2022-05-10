@@ -3,12 +3,14 @@ import "dotenv/config";
 import express, { Application, Request, Response } from "express";
 import axios from "axios";
 import { env } from "process";
+import cors from "cors";
 
 // Env setup
 const apiKey = env["apiKey"];
 
 // Express server
 const app: Application = express();
+app.use(cors());
 const port = 3001;
 
 // Axios setup
@@ -20,11 +22,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../public"));
 
 type NFT = {
+  contract: string;
   img: string;
   id: number;
 };
 
-type NFTs = { [contract: string]: NFT[] };
+type NFTs = NFT[];
+
+type NFTsByCollection = { [collectionName: string]: NFTs };
 
 type Collection = {
   name: string;
@@ -57,7 +62,7 @@ app.get("/drop/:drop/:address", async (req: Request, res: Response): Promise<Res
   const drop = DROPS[req.params.drop as any as number];
   const address = req.params.address;
 
-  let nftsForDropByAddress: NFTs = {};
+  let nftsForDropByAddress: NFTsByCollection = {};
 
   for (let collection of drop.collections) {
     const resq = await axios.get(
@@ -67,12 +72,13 @@ app.get("/drop/:drop/:address", async (req: Request, res: Response): Promise<Res
     let nfts: NFT[] = [];
     for (let asset of resq.data.assets) {
       nfts.push({
+        contract: collection.contract,
         img: asset.image_url,
         id: asset.token_id,
       });
     }
 
-    nftsForDropByAddress[collection.contract] = nfts;
+    nftsForDropByAddress[collection.name] = nfts;
   }
 
   return res.status(200).send(nftsForDropByAddress);

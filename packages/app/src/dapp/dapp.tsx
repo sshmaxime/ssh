@@ -50,7 +50,7 @@ const pastilles = [
 
 const Drop: FC = () => {
   const state = useSelector((state) => state.appState);
-
+  const isConnected = state.signedIn;
   const nfts = state.walletAssets.nfts;
 
   const [currentItem, setItem] = React.useState(undefined as any);
@@ -67,7 +67,10 @@ const Drop: FC = () => {
   const deckTexture = "/models/skate/textures/sublime-deck.png";
   const placeholderTexture = "/models/skate/textures/imgForMiddle.png";
 
-  const { data, error, isLoading } = useGetNFTsForDropByAddressQuery({ dropId: 0, address: "0x" });
+  const { data, error, isLoading } = useGetNFTsForDropByAddressQuery({
+    dropId: 0,
+    address: "0xcadaA91596F3E2aFA69a37F47a5C70a4e3765c00",
+  });
 
   console.log(data);
 
