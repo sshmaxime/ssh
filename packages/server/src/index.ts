@@ -5,7 +5,7 @@ import axios from "axios";
 import { env } from "process";
 import cors from "cors";
 
-import { Collection, NFTsByCollection, NFT, AssetsOwned } from "@sshlabs/typings";
+import { Collection, NFT, AssetsOwned, Drops, DripsOwned, Drop } from "@sshlabs/typings";
 
 // Env setup
 const apiKey = env["apiKey"];
@@ -32,32 +32,61 @@ const COLLECTIONS: { [collectionName: string]: Collection } = {
     name: "Isotile",
     contract: "0x31eAa2E93D7AFd237F87F30c0Dbd3aDEB9934f1B",
   },
+  CryptoPunks: {
+    name: "CryptoPunks",
+    contract: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+  },
+  BAYC: {
+    name: "BAYC",
+    contract: "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d",
+  },
 };
 
-const DROPS = [
+const DROPS: Drops = [
   {
-    name: "#DROP 0",
-    collections: [COLLECTIONS.Sublimes],
+    id: 0,
+    collections: [
+      COLLECTIONS.Sublimes,
+      // COLLECTIONS.Isotile,
+      // COLLECTIONS.CryptoPunks
+      // COLLECTIONS.BAYC
+    ],
+    type: {
+      key: true,
+      irl: true,
+      threed: true,
+    },
   },
 ];
 
-app.get("/drop/:drop", async (req: Request, res: Response): Promise<Response> => {
-  const drop = DROPS[req.params.drop];
+// @getDrop
+//
+// return the drop associated with the dropId
+app.get("/drop/:dropId", async (req: Request, res: Response): Promise<Response> => {
+  const dropId = req.params.dropId;
+  const dataToReturn = DROPS[dropId];
 
-  return res.status(200).send({
-    ...drop,
-  });
+  return res.status(200).send(dataToReturn);
 });
 
-// return AssetsOwned
-app.get("/drop/:drop/:address", async (req: Request, res: Response): Promise<Response> => {
-  const drop = DROPS[req.params.drop as any as number];
+// @getDripsByAddress
+//
+// return the drips owned by an address
+app.get("/drip/:address", async (req: Request, res: Response): Promise<Response> => {
+  const address = req.params.address;
+  const dataToReturn: DripsOwned = [];
+
+  return res.status(200).send(dataToReturn);
+});
+
+// @getAssetsForDropByAddress
+//
+// return the elegible assets for the dropId of an address
+app.get("/drop/:dropId/:address", async (req: Request, res: Response): Promise<Response> => {
+  const drop = DROPS[req.params.dropId as any as number];
   const address = req.params.address;
 
-  const dataToReturn: AssetsOwned = {
-    nfts: [],
-    drips: [],
-  };
+  const dataToReturn: AssetsOwned = [];
 
   for (let collection of drop.collections) {
     const resq = await axios.get(
@@ -73,19 +102,13 @@ app.get("/drop/:drop/:address", async (req: Request, res: Response): Promise<Res
       });
     }
 
-    dataToReturn.nfts.push({
+    dataToReturn.push({
       collectionName: collection.name,
       assets: nfts,
     });
   }
 
   return res.status(200).send(dataToReturn);
-});
-
-app.get("/", async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200).send({
-    message: "Hello World!",
-  });
 });
 
 try {

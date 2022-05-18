@@ -18,8 +18,8 @@ const Index: FC = () => {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/*" element={<App />} />
-          <Route path="/app" element={<DApp />} />
+          <Route path="/" element={<App />} />
+          <Route path="/app/*" element={<DApp />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

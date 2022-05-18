@@ -28,6 +28,9 @@ import Clickable from "../_utils/components/stateless/clickable";
 import { useDispatch, useSelector } from "./store/hooks";
 import SceneLoader from "@/_3d/scenes/skate_1";
 import { getAssetsOwned } from "./store/actions/app.actions";
+import { Drop as DropType } from "@sshlabs/typings";
+import { useParams } from "react-router-dom";
+import { useGetDropQuery } from "./store/services";
 
 const pastilles = [
   {
@@ -48,7 +51,19 @@ const pastilles = [
   },
 ];
 
-const Drop: FC<{ dropId: number }> = ({ dropId }) => {
+const DropProxy: FC = () => {
+  const dropId = parseInt(useParams().dropId || "-1");
+
+  const { data, isLoading } = useGetDropQuery({ dropId: dropId });
+
+  if (!isLoading && data) {
+    return <Drop drop={data} />;
+  }
+
+  return <></>;
+};
+
+const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   // store
   const dispatch = useDispatch();
   const { auth, wallet } = useSelector((state) => state.appState);
@@ -60,12 +75,12 @@ const Drop: FC<{ dropId: number }> = ({ dropId }) => {
 
   useEffect(() => {
     if (auth.signedIn) {
-      dispatch(getAssetsOwned(dropId, auth.address));
+      dispatch(getAssetsOwned(drop.id, auth.address));
     }
   }, [auth.signedIn]);
 
-  const deckTexture = "/models/skate/textures/sublime-deck.png";
-  const placeholderTexture = "/models/skate/textures/imgForMiddle.png";
+  const deckTexture = "/models/skate/textures/isotile-deck.png";
+  const placeholderTexture = "/models/skate/textures/466.png";
 
   return (
     <Fade duration={1500} triggerOnce>
@@ -250,4 +265,4 @@ const Drop: FC<{ dropId: number }> = ({ dropId }) => {
   );
 };
 
-export default Drop;
+export default DropProxy;

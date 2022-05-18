@@ -32,17 +32,6 @@ const appStateReducer = (
         },
       };
 
-    case GET_ASSETS_OWNED:
-      console.log(action.payload);
-      return {
-        ...state,
-        wallet: {
-          ...state.wallet,
-          drips: action.payload.drips,
-          nfts: action.payload.nfts,
-        },
-      };
-
     default:
       return {
         ...state,

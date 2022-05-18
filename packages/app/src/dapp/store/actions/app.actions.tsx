@@ -29,7 +29,6 @@ export const getAssetsOwned = (dropId: number, address: string) => {
     try {
       const result = (await axios.get(`http://localhost:3001/drop/${dropId}/${address}`))
         .data as AssetsOwned;
-
       return dispatch(toDispatch(result));
     } catch (e) {}
   };

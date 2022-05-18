@@ -12,10 +12,8 @@ export type NFTsByCollection = { collectionName: string; assets: NFTs }[];
 /////////////////
 /// API Types ///
 /////////////////
-export type AssetsOwned = {
-  nfts: NFTsByCollection;
-  drips: NFTs;
-};
+export type AssetsOwned = NFTsByCollection;
+export type DripsOwned = NFT[];
 
 //
 //
@@ -28,8 +26,13 @@ export type Collection = {
 };
 
 export type Drop = {
-  name: string;
+  id: number;
   collections: Collection[];
+  type: {
+    key: boolean;
+    irl: boolean;
+    threed: boolean;
+  };
 };
 
 export type Drops = Drop[];
