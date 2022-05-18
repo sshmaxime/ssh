@@ -28,6 +28,10 @@ const COLLECTIONS: { [collectionName: string]: Collection } = {
     name: "Sublimes",
     contract: "0x116aebbad1c8226c80f9f0cb4e255540a0f7afd9",
   },
+  Isotile: {
+    name: "Isotile",
+    contract: "0x31eAa2E93D7AFd237F87F30c0Dbd3aDEB9934f1B",
+  },
 };
 
 const DROPS = [
