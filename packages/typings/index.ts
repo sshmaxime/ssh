@@ -9,8 +9,9 @@ export type NFT = {
 export type NFTs = NFT[];
 export type NFTsByCollection = { collectionName: string; assets: NFTs }[];
 
-// API Types
-
+/////////////////
+/// API Types ///
+/////////////////
 export type AssetsOwned = {
   nfts: NFTsByCollection;
   drips: NFTs;
