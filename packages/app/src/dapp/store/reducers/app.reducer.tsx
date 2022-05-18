@@ -1,39 +1,21 @@
-import { AppActionTypes } from "../actions/app.actions";
-import { SIGN_IN } from "../actions/app.actions";
+import { AppActionTypes, SIGN_IN, GET_ASSETS_OWNED } from "../actions/app.actions";
+import { NFTs, NFTsByCollection } from "@sshlabs/typings";
+
+const defaultAuthState = { signedIn: false, address: "", reducedAddress: "" };
+type authState = typeof defaultAuthState;
+
+const defaultWalletState: { nfts: NFTsByCollection; drips: NFTs } = { nfts: [], drips: [] };
+type walletState = typeof defaultWalletState;
 
 export type appState = {
-  // login info
-  signedIn: boolean;
-  address: string;
-  reducedAddress: string;
-
-  walletAssets: {
-    //
-    drips: {
-      collection: string;
-      id: number;
-      img: string;
-    }[];
-
-    //
-    nfts: {
-      collection: string;
-      list: { img: string; title: string; id: number }[];
-    }[];
-  };
+  auth: authState;
+  wallet: walletState;
 };
 
 const appStateReducer = (
   state: appState = {
-    signedIn: false,
-    address: "",
-    reducedAddress: "",
-
-    //
-    walletAssets: {
-      drips: [],
-      nfts: [],
-    },
+    auth: defaultAuthState,
+    wallet: defaultWalletState,
   },
   action: AppActionTypes
 ): appState => {
@@ -41,12 +23,26 @@ const appStateReducer = (
     case SIGN_IN:
       return {
         ...state,
-
-        signedIn: action.payload.signedIn,
-        address: action.payload.address,
-        reducedAddress:
-          action.payload.address.slice(0, 6) + "..." + action.payload.address.slice(-4),
+        auth: {
+          ...state.auth,
+          signedIn: action.payload.signedIn,
+          address: action.payload.address,
+          reducedAddress:
+            action.payload.address.slice(0, 6) + "..." + action.payload.address.slice(-4),
+        },
       };
+
+    case GET_ASSETS_OWNED:
+      console.log(action.payload);
+      return {
+        ...state,
+        wallet: {
+          ...state.wallet,
+          drips: action.payload.drips,
+          nfts: action.payload.nfts,
+        },
+      };
+
     default:
       return {
         ...state,

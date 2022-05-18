@@ -14,10 +14,8 @@ import { useDispatch, useSelector } from "../store/hooks";
 import { signIn } from "../store/actions/app.actions";
 
 export const NavbarComponent: FC = () => {
-  const state = useSelector((state) => state.appState);
+  const { auth, wallet } = useSelector((state) => state.appState);
   const dispatch = useDispatch();
-
-  const drips = state.walletAssets.drips;
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -57,7 +55,7 @@ export const NavbarComponent: FC = () => {
                 alignItems="center"
               >
                 <Grid item>
-                  <Clickable activated={state.signedIn} onClick={handlePopoverOpen}>
+                  <Clickable activated={auth.signedIn} onClick={handlePopoverOpen}>
                     <AccountBalanceWalletIcon
                       style={{
                         fontSize: "40px",
@@ -79,9 +77,9 @@ export const NavbarComponent: FC = () => {
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
                       <Style.WalletView>
-                        {drips.length ? (
+                        {wallet.drips.length ? (
                           <Grid container>
-                            {drips.map((drip, index) => (
+                            {wallet.drips.map((drip, index) => (
                               <Grid item key={index}>
                                 <Grid container>
                                   <Grid item xs={2}>
@@ -171,7 +169,7 @@ export const NavbarComponent: FC = () => {
                   </Popover>
                 </Grid>
                 <Grid item>
-                  {state.signedIn ? (
+                  {auth.signedIn ? (
                     <Style.Wallet container>
                       <Grid
                         item
@@ -191,7 +189,7 @@ export const NavbarComponent: FC = () => {
                             <Style.WalletENS>bonjour.eth</Style.WalletENS>
                           </Grid>
                           <Grid item xs={12}>
-                            <Style.WalletAddy>{state.reducedAddress}</Style.WalletAddy>
+                            <Style.WalletAddy>{auth.reducedAddress}</Style.WalletAddy>
                           </Grid>
                         </Grid>
                       </Grid>

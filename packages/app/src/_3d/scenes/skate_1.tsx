@@ -28,8 +28,10 @@ const Scene: FC<props> = (props) => {
       <OrbitControls
         autoRotate={true}
         autoRotateSpeed={7.5}
+        minPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 2}
         enableZoom={false}
-        enableRotate={false}
+        enableRotate={true}
         target={[0, 40, 0]}
       />
     </>

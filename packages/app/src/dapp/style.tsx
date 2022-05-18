@@ -25,12 +25,12 @@ const style = {
     width: "100vw",
     zIndex: 1,
   })),
-  Part1: styled("div")(({ theme }) => ({
+  Body: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.secondary,
     height: `calc(100vh - ${bottomOverlayHeight})`,
     position: "relative",
   })),
-  Overlay: styled("div")(({ theme }) => ({
+  Footer: styled("div")(({ theme }) => ({
     position: "absolute",
     height: bottomOverlayHeight,
     bottom: 0,
@@ -39,17 +39,7 @@ const style = {
     display: "flex",
     alignItems: "center",
   })),
-  InnerOverlay: styled(Grid)(({ theme }) => ({})),
-  InnerOverlayCenter: styled(Grid)(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    fontSize: "0.75em",
-  })),
-  InnerOverlayLeft: styled(Grid)(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    fontSize: "0.75em",
-    fontWeight: 900,
-  })),
-  InnerOverlayRight: styled(Grid)(({ theme }) => ({})),
+  //
   LeftSide: styled("div")(({ theme }) => ({
     position: "absolute",
     bottom: sizeWidthLeft,

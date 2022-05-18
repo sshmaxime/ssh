@@ -5,6 +5,8 @@ import axios from "axios";
 import { env } from "process";
 import cors from "cors";
 
+import { Collection, NFTsByCollection, NFT, AssetsOwned } from "@sshlabs/typings";
+
 // Env setup
 const apiKey = env["apiKey"];
 
@@ -20,21 +22,6 @@ axios.defaults.headers.common["X-API-KEY"] = apiKey;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../public"));
-
-type NFT = {
-  contract: string;
-  img: string;
-  id: number;
-};
-
-type NFTs = NFT[];
-
-type NFTsByCollection = { [collectionName: string]: NFTs };
-
-type Collection = {
-  name: string;
-  contract: string;
-};
 
 const COLLECTIONS: { [collectionName: string]: Collection } = {
   Sublimes: {
@@ -58,11 +45,15 @@ app.get("/drop/:drop", async (req: Request, res: Response): Promise<Response> =>
   });
 });
 
+// return AssetsOwned
 app.get("/drop/:drop/:address", async (req: Request, res: Response): Promise<Response> => {
   const drop = DROPS[req.params.drop as any as number];
   const address = req.params.address;
 
-  let nftsForDropByAddress: NFTsByCollection = {};
+  const dataToReturn: AssetsOwned = {
+    nfts: [],
+    drips: [],
+  };
 
   for (let collection of drop.collections) {
     const resq = await axios.get(
@@ -78,10 +69,13 @@ app.get("/drop/:drop/:address", async (req: Request, res: Response): Promise<Res
       });
     }
 
-    nftsForDropByAddress[collection.name] = nfts;
+    dataToReturn.nfts.push({
+      collectionName: collection.name,
+      assets: nfts,
+    });
   }
 
-  return res.status(200).send(nftsForDropByAddress);
+  return res.status(200).send(dataToReturn);
 });
 
 app.get("/", async (req: Request, res: Response): Promise<Response> => {
