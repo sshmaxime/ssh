@@ -12,7 +12,9 @@ const Index: FC<props> = ({ children }) => {
   return (
     <Provider store={store}>
       <Navbar />
-      <DApp />
+
+      {/*  */}
+      <DApp dropId={0} />
     </Provider>
   );
 };

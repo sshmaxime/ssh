@@ -25,9 +25,9 @@ import Pastille from "../_utils/components/stateless/pastille";
 
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Clickable from "../_utils/components/stateless/clickable";
-import { useSelector } from "./store/hooks";
+import { useDispatch, useSelector } from "./store/hooks";
 import SceneLoader from "@/_3d/scenes/skate_1";
-import { useGetNFTsForDropByAddressQuery } from "./store/services/drop";
+import { getAssetsOwned } from "./store/actions/app.actions";
 
 const pastilles = [
   {
@@ -48,40 +48,35 @@ const pastilles = [
   },
 ];
 
-const Drop: FC = () => {
-  const state = useSelector((state) => state.appState);
-  const isConnected = state.signedIn;
-  const nfts = state.walletAssets.nfts;
+const Drop: FC<{ dropId: number }> = ({ dropId }) => {
+  // store
+  const dispatch = useDispatch();
+  const { auth, wallet } = useSelector((state) => state.appState);
 
-  const [currentItem, setItem] = React.useState(undefined as any);
+  // fc state
+  const [currentItem, setItem] = React.useState<{ collection: string; id: number; img: string }>();
   const [checked, setChecked] = React.useState(false);
+  const handleChange = () => setChecked(!checked);
 
-  const handleChange = () => {
-    if (checked === false) {
-      setChecked(true);
-    } else {
-      setChecked(false);
+  useEffect(() => {
+    if (auth.signedIn) {
+      dispatch(getAssetsOwned(dropId, auth.address));
     }
-  };
+  }, [auth.signedIn]);
 
   const deckTexture = "/models/skate/textures/sublime-deck.png";
   const placeholderTexture = "/models/skate/textures/imgForMiddle.png";
 
-  const { data, error, isLoading } = useGetNFTsForDropByAddressQuery({
-    dropId: 0,
-    address: "0xcadaA91596F3E2aFA69a37F47a5C70a4e3765c00",
-  });
-
-  console.log(data);
-
-  //
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
         <Style.Header></Style.Header>
-        <Style.Part1>
-          <SceneLoader deckTexture={deckTexture} placeholderTexture={placeholderTexture} _id={1} />
-          {/* <My3DScene /> */}
+        <Style.Body>
+          <SceneLoader
+            deckTexture={deckTexture}
+            placeholderTexture={currentItem?.img || placeholderTexture}
+            _id={1}
+          />
           <Style.LeftSide>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
               <Grid item xs={6}>
@@ -112,21 +107,21 @@ const Drop: FC = () => {
               </Grid>
             </Style.HeaderLeftSide>
             {/*  */}
-            <Style.BodyLeftSide connected={state.signedIn}>
+            <Style.BodyLeftSide connected={auth.signedIn}>
               {/*  */}
               <Style.InnerLeftSide>
-                {nfts.length ? (
-                  nfts.map((list, index1) => (
+                {wallet.nfts.length ? (
+                  wallet.nfts.map((collection, index1) => (
                     <div key={index1}>
-                      <Style.CollectionName>{list.collection}</Style.CollectionName>
+                      <Style.CollectionName>{collection.collectionName}</Style.CollectionName>
                       <ImageList cols={4} gap={4} style={{ marginBottom: "20px" }}>
-                        {list.list.map((item, index) => (
+                        {collection.assets.map((item, index) => (
                           <ImageListItem
                             key={index}
                             style={{
                               border:
                                 currentItem &&
-                                currentItem.collection === list.collection &&
+                                currentItem.collection === collection.collectionName &&
                                 currentItem.id === item.id
                                   ? "3px solid #2AFE00"
                                   : "3px solid white",
@@ -134,7 +129,7 @@ const Drop: FC = () => {
                             }}
                             onClick={() => {
                               setItem({
-                                collection: list.collection,
+                                collection: collection.collectionName,
                                 id: item.id,
                                 img: item.img,
                               });
@@ -143,7 +138,7 @@ const Drop: FC = () => {
                             <img
                               src={`${item.img}?w=248&fit=crop&auto=format`}
                               srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                              alt={item.title}
+                              alt={"item.id"}
                               loading="lazy"
                             />
                           </ImageListItem>
@@ -151,7 +146,7 @@ const Drop: FC = () => {
                       </ImageList>
                     </div>
                   ))
-                ) : state.signedIn ? (
+                ) : auth.signedIn ? (
                   <Style.InnerLeftSideNoNfts>You do not own any NFTs :'(</Style.InnerLeftSideNoNfts>
                 ) : (
                   <Style.InnerLeftSideNoNfts>You are not connected :'(</Style.InnerLeftSideNoNfts>
@@ -248,14 +243,8 @@ const Drop: FC = () => {
               </Style.InnerContainerInfo>
             </Style.ContainerInfo>
           </ClickAwayListener>
-        </Style.Part1>
-        <Style.Overlay>
-          <Style.InnerOverlay container justifyContent="space-evenly">
-            <Style.InnerOverlayLeft item></Style.InnerOverlayLeft>
-            <Style.InnerOverlayCenter item></Style.InnerOverlayCenter>
-            <Style.InnerOverlayRight item></Style.InnerOverlayRight>
-          </Style.InnerOverlay>
-        </Style.Overlay>
+        </Style.Body>
+        <Style.Footer></Style.Footer>
       </Style.Root>
     </Fade>
   );
