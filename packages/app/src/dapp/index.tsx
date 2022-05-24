@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import Navbar from "./navbar";
-import DApp from "./dapp";
+import Drop from "./pages/drop";
 
 import { store } from "./store";
 import { Provider } from "react-redux";
@@ -16,7 +16,7 @@ const Index: FC<props> = ({ children }) => {
       <Navbar />
 
       <Routes>
-        <Route path="/drop/:dropId" element={<DApp />} />
+        <Route path="/drop/:dropId" element={<Drop />} />
       </Routes>
     </Provider>
   );

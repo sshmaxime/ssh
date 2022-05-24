@@ -11,11 +11,15 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import OpenseaIcon from "../../_utils/assets/icons/opensea.svg";
 import { useDispatch, useSelector } from "../store/hooks";
-import { signIn } from "../store/actions/app.actions";
+import { login } from "../store/services/web3";
+import { shortenAddress } from "../utils";
+import { useGetDripsByAddressQuery } from "../store/services";
 
 export const NavbarComponent: FC = () => {
-  const { auth, wallet } = useSelector((state) => state.appState);
+  const { auth, address } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
+
+  const { data: drips, isLoading } = useGetDripsByAddressQuery({ address }, { skip: !auth });
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -39,11 +43,6 @@ export const NavbarComponent: FC = () => {
                   </Clickable>
                 </Grid>
                 <Grid item xs={1} />
-                <Grid item>
-                  <Style.LinkButton active to="/app">
-                    LIVE
-                  </Style.LinkButton>
-                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={8} style={{ display: "flex", alignItems: "center" }}>
@@ -55,7 +54,7 @@ export const NavbarComponent: FC = () => {
                 alignItems="center"
               >
                 <Grid item>
-                  <Clickable activated={auth.signedIn} onClick={handlePopoverOpen}>
+                  <Clickable activated={auth} onClick={handlePopoverOpen}>
                     <AccountBalanceWalletIcon
                       style={{
                         fontSize: "40px",
@@ -77,9 +76,9 @@ export const NavbarComponent: FC = () => {
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
                       <Style.WalletView>
-                        {wallet.drips.length ? (
+                        {drips && drips.length ? (
                           <Grid container>
-                            {wallet.drips.map((drip, index) => (
+                            {drips.map((drip, index) => (
                               <Grid item key={index}>
                                 <Grid container>
                                   <Grid item xs={2}>
@@ -169,7 +168,7 @@ export const NavbarComponent: FC = () => {
                   </Popover>
                 </Grid>
                 <Grid item>
-                  {auth.signedIn ? (
+                  {auth ? (
                     <Style.Wallet container>
                       <Grid
                         item
@@ -189,13 +188,13 @@ export const NavbarComponent: FC = () => {
                             <Style.WalletENS>bonjour.eth</Style.WalletENS>
                           </Grid>
                           <Grid item xs={12}>
-                            <Style.WalletAddy>{auth.reducedAddress}</Style.WalletAddy>
+                            <Style.WalletAddy>{shortenAddress(address)}</Style.WalletAddy>
                           </Grid>
                         </Grid>
                       </Grid>
                     </Style.Wallet>
                   ) : (
-                    <Clickable onClick={() => dispatch(signIn())}>
+                    <Clickable onClick={() => dispatch(login())}>
                       <Style.GoToAppButton>Connect Wallet</Style.GoToAppButton>
                     </Clickable>
                   )}

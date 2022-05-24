@@ -1,16 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { IAppState, reducers } from "./reducers/index";
+import { reducers } from "./reducers/index";
 import { combineReducers } from "redux";
 import { dropApi } from "./services";
+import thunkMiddleware from "redux-thunk";
+import web3Reducer from "./services/web3";
 
-export const store = configureStore({
-  reducer: combineReducers({
-    [dropApi.reducerPath]: dropApi.reducer,
+const reducer = combineReducers({
+  [dropApi.reducerPath]: dropApi.reducer,
+  web3: web3Reducer,
 
-    ...reducers,
-  }),
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dropApi.middleware),
+  ...reducers,
 });
 
-export type RootState = IAppState;
+export const store = configureStore({
+  reducer,
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([dropApi.middleware, thunkMiddleware]),
+});
+
+//
+
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

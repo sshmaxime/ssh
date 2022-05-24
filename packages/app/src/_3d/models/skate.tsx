@@ -79,24 +79,26 @@ const Skate: FC<props & JSX.IntrinsicElements["group"]> = (props) => {
   materials.Placeholder.map = props.placeholderTexture;
 
   return (
-    <Center alignTop>
-      <group ref={group} rotation={[Math.PI / 2, Math.PI / 2, Math.PI]} dispose={null}>
-        <mesh
-          geometry={nodes.Deck.geometry}
-          material={materials.Deck}
-          rotation={[Math.PI / 2, 0, 0]}
-        />
-        <mesh
-          geometry={nodes.Placeholder.geometry}
-          material={materials.Placeholder}
-          rotation={[Math.PI / 2, 0, 0]}
-        />
-        <mesh position={[12.8, 6.75, 0]} rotation={[Math.PI / 2, 0, -Math.PI / -2]}>
-          <planeGeometry args={[10, 10, 10, 10]} />
-          <meshBasicMaterial transparent map={newMaterial} />
-        </mesh>
-      </group>
-    </Center>
+    <group ref={group} {...props}>
+      <Center alignTop>
+        <group rotation={[Math.PI, -Math.PI / 2, Math.PI / 2]} dispose={null}>
+          <mesh
+            geometry={nodes.Deck.geometry}
+            material={materials.Deck}
+            rotation={[Math.PI / 2, 0, 0]}
+          />
+          <mesh
+            geometry={nodes.Placeholder.geometry}
+            material={materials.Placeholder}
+            rotation={[Math.PI / 2, 0, 0]}
+          />
+          <mesh position={[12.8, 6.75, 0]} rotation={[Math.PI / 2, 0, -Math.PI / -2]}>
+            <planeGeometry args={[10, 10, 10, 10]} />
+            <meshBasicMaterial transparent map={newMaterial} />
+          </mesh>
+        </group>
+      </Center>
+    </group>
   );
 };
 

@@ -56,6 +56,7 @@ const DROPS: Drops = [
       irl: true,
       threed: true,
     },
+    price: 0.5,
   },
 ];
 
@@ -107,6 +108,8 @@ app.get("/drop/:dropId/:address", async (req: Request, res: Response): Promise<R
       assets: nfts,
     });
   }
+
+  console.log(dataToReturn);
 
   return res.status(200).send(dataToReturn);
 });

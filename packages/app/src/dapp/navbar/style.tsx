@@ -26,20 +26,6 @@ const style = {
     fontSize: "0.9em",
     color: "black",
   })),
-
-  LinkButton: styled(Link)<{ active?: boolean }>(({ theme, active }) => ({
-    fontSize: "0.75em",
-    color: active ? "black" : "black",
-    textDecoration: "none",
-    marginRight: "5px",
-    marginLeft: "5px",
-    letterSpacing: "1px",
-    padding: "10px 22.5px 10px 22.5px",
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: 700,
-    boxShadow: active ? "2.5px 2.5px 2px #afafb4, -2.5px -2.5px 2px #ffffff" : "",
-    borderRadius: "10px",
-  })),
   GoToAppButton: styled("div")(({ theme }) => ({
     fontSize: "0.85em",
     color: "white",

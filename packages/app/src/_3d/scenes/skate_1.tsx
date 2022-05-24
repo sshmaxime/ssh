@@ -26,7 +26,7 @@ const Scene: FC<props> = (props) => {
         _id={props._id}
       />
       <OrbitControls
-        autoRotate={true}
+        // autoRotate={true}
         autoRotateSpeed={7.5}
         minPolarAngle={Math.PI / 2}
         maxPolarAngle={Math.PI / 2}

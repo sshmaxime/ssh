@@ -20,9 +20,5 @@ export const dropApi = createApi({
   }),
 });
 
-export const {
-  useGetAssetsForDropByAddressQuery,
-  useGetDripsByAddressQuery,
-  useGetDropQuery,
-  useLazyGetDropQuery,
-} = dropApi;
+export const { useGetAssetsForDropByAddressQuery, useGetDripsByAddressQuery, useGetDropQuery } =
+  dropApi;

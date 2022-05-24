@@ -6,8 +6,9 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/lab": "^5.0.0-alpha.54",
-    "@mui/material": "^5.0.6",
-    "@mui/styled-engine-sc": "^5.0.4",
+    "@mui/material": "^5.8.0",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
+    "@mui/styled-engine-sc": "^5.8.0",
     "@react-three/fiber": "^7.0.24",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.11.4",
@@ -26,9 +27,9 @@
     "react-scripts": "4.0.3",
     "react-transition-group": "^4.4.2",
     "redux": "^4.2.0",
-    "styled-components": "^5.3.3",
+    "styled-components": "^5.3.5",
     "three": "^0.136.0",
-    "typescript": "^4.1.2",
+    "typescript": "^4.6.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -81,5 +82,8 @@
     "react-scroll": "^1.8.4",
     "react-slick": "^0.28.1",
     "react-spring": "^9.3.2"
+  },
+  "resolutions": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   }
 }
