@@ -12,6 +12,8 @@ const config: HardhatUserConfig = {
                 count: 10,
                 accountsBalance: '10000000000000000000000000000000000000000000000'
             },
+            gas: 'auto',
+            gasPrice: 'auto',
             allowUnlimitedContractSize: true
         }
     },
@@ -19,7 +21,7 @@ const config: HardhatUserConfig = {
     solidity: {
         compilers: [
             {
-                version: '0.8.9',
+                version: '0.8.14',
                 settings: {
                     optimizer: {
                         enabled: true,

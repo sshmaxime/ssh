@@ -26,7 +26,7 @@ import Pastille from "../../../_utils/components/stateless/pastille";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Clickable from "../../../_utils/components/stateless/clickable";
 import { useDispatch, useSelector } from "../../store/hooks";
-import SceneLoader from "@/_3d/scenes/skate_1";
+import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 import { Drop as DropType } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
 
@@ -54,6 +54,11 @@ const DropNotFound: FC = () => {
   return <>Nada</>;
 };
 
+const Deck: { [key: string]: string } = {
+  Sublimes: "/models/skate/textures/sublime-deck.png",
+  Isotile: "/models/skate/textures/isotile-deck.png",
+};
+
 const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const { auth, address } = useSelector((state) => state.web3);
 
@@ -69,19 +74,24 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const [checked, setChecked] = React.useState(false);
   const handleChange = () => setChecked(!checked);
 
-  const deckTexture = "/models/skate/textures/sublime-deck.png";
-  const placeholderTexture = "/models/skate/textures/imgForMiddle.png";
+  const sceneRef = React.useRef<sceneRef>(null!);
+
+  const updateItem = (newItem: any) => {
+    setItem(newItem);
+
+    sceneRef.current.changeTexturePlaceholder(newItem.img);
+
+    if (!currentItem || currentItem.collection !== newItem.collection) {
+      sceneRef.current.changeTextureDeck(Deck[newItem.collection]);
+    }
+  };
 
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
         <Style.Header></Style.Header>
         <Style.Body>
-          <SceneLoader
-            deckTexture={deckTexture}
-            placeholderTexture={currentItem?.img || placeholderTexture}
-            _id={1}
-          />
+          <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} />
           <Style.LeftSide>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
               <Grid item xs={6}>
@@ -134,7 +144,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                               cursor: "pointer",
                             }}
                             onClick={() => {
-                              setItem({
+                              updateItem({
                                 collection: collection.collectionName,
                                 id: item.id,
                                 img: item.img,

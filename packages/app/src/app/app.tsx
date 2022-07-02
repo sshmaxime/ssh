@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect, useState } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
 
@@ -16,7 +16,7 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import skateboard from "../_utils/assets/images/untitled.png";
 import key from "../_utils/assets/images/untitled5.png";
 
-import SceneSkate from "@/_3d/scenes/skate_0";
+import SceneSkate, { sceneRef } from "@/_3d/scenes/skate_0";
 
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
@@ -66,13 +66,7 @@ const DripComponent: FC<props> = () => {
     },
   ];
 
-  const deckTextures = ["/models/skate/textures/sublime-deck.png"];
-
-  const placeholderTexures = [
-    "/models/skate/textures/imgForMiddle.png",
-    "/models/skate/textures/imgForMiddle1.png",
-    "/models/skate/textures/imgForMiddle2.png",
-  ];
+  const sceneRef = React.useRef<sceneRef>(null!);
 
   //
   const [stateCounter, setStateCounter] = useState(0);
@@ -89,6 +83,7 @@ const DripComponent: FC<props> = () => {
       }
       setState(demoSkateDrips[innerStateCounter]);
       setStateCounter(innerStateCounter);
+      sceneRef.current.changeTexturePlaceholder(demoSkateDrips[innerStateCounter].placeholderPath);
     }, 2000);
 
     return () => clearInterval(interval);
@@ -175,7 +170,7 @@ const DripComponent: FC<props> = () => {
             </b>
             {" & "}
             <b>
-              <u>collectionable</u>
+              <u>collectable</u>
             </b>{" "}
             items on the <b>blockchain</b> and <b>IRL</b> .
             <br />
@@ -201,13 +196,7 @@ const DripComponent: FC<props> = () => {
         <Grid item xs={4}>
           <Grid container style={{ height: "100%", width: "100%" }}>
             <Grid item xs={12}>
-              <SceneSkate
-                deckTextures={deckTextures}
-                deckIndex={0}
-                placeholderTextures={placeholderTexures}
-                placeholderIndex={stateCounter}
-                _id={demoSkateDrips[stateCounter].itemId}
-              />
+              <SceneSkate ref={sceneRef} _id={demoSkateDrips[stateCounter].itemId} />
             </Grid>
             <Grid item xs={12}>
               <Style.View3StepName>
@@ -262,8 +251,14 @@ const ColoredKw: FC<{ color?: string }> = ({ color = "black", children }) => {
 const SocietyComponent: FC<{}> = () => {
   return (
     <Style.SocietyComponent>
-      <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle>
-      {/* <Grid container justifyContent="center" spacing={5}>
+      <Grid container justifyContent="center">
+        <Grid item xs={12}>
+          <Grid container justifyContent="center" style={{ marginBottom: "50px" }}>
+            <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid container justifyContent="center" spacing={5}>
         <Grid item xs={6}>
           <img src={key} style={{ width: "100%" }} alt="" />
         </Grid>
@@ -294,7 +289,7 @@ const SocietyComponent: FC<{}> = () => {
             </Clickable>
           </Style.MoreLinkContainer>
         </Grid>
-      </Grid> */}
+      </Grid>
     </Style.SocietyComponent>
   );
 };
@@ -548,13 +543,6 @@ const MainComponent: FC<props> = ({ children }) => {
             step: "",
             title: "TBA.",
             type: "DROP #2",
-            description: <Fragment>...</Fragment>,
-            done: false,
-          },
-          {
-            step: "",
-            title: "TBA.",
-            type: "DROP #3",
             description: <Fragment>...</Fragment>,
             done: false,
           },

@@ -1,32 +1,42 @@
-import { FC } from "react";
+import React, { FC, forwardRef, useImperativeHandle } from "react";
 
 import { OrbitControls } from "@react-three/drei";
 
 import ModelSkate from "@/_3d/models/skate";
 import LoaderScene from "@/_3d/utils/loaderScene";
-import useTexture from "@/_3d/utils/loaderTexture";
+import { loadTextureToObject } from "@/_3d/utils/loaderTexture";
 
 export type props = {
-  deckTextures: string[];
-  deckIndex: number;
-
-  placeholderTextures: string[];
-  placeholderIndex: number;
-
   _id: number;
 };
 
-const Scene: FC<props> = (props) => {
-  const deckTexs = useTexture(props.deckTextures);
-  const placeholderTexs = useTexture(props.placeholderTextures);
+export type sceneRef = ReturnType<typeof elem>;
+const elem = (props: props, deckRef: any, placeholderRef: any) => ({
+  changeTextureDeck(img: any) {
+    loadTextureToObject(img, deckRef);
+  },
+  changeTexturePlaceholder(img: any) {
+    loadTextureToObject(img, placeholderRef);
+  },
+});
 
+const SceneLoader = forwardRef<sceneRef, props>((props, ref) => {
+  const deckRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
+  const placeholderRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
+
+  useImperativeHandle(ref, () => elem(props, deckRef, placeholderRef));
+
+  return <Scene {...props} deckRef={deckRef} placeholderRef={placeholderRef} />;
+});
+
+const Scene: FC<props & { placeholderRef: any; deckRef: any }> = (props) => {
   return (
-    <>
+    <LoaderScene camera={[0, 40, -60]}>
       <ambientLight intensity={0.95} />
       <ModelSkate
         {...props}
-        deckTexture={deckTexs[props.deckIndex]}
-        placeholderTexture={placeholderTexs[props.placeholderIndex]}
+        deckRef={props.deckRef}
+        placeholderRef={props.placeholderRef}
         _id={props._id}
       />
       <OrbitControls
@@ -36,14 +46,6 @@ const Scene: FC<props> = (props) => {
         enableRotate={false}
         target={[0, 40, 0]}
       />
-    </>
-  );
-};
-
-const SceneLoader: FC<props> = (props) => {
-  return (
-    <LoaderScene camera={[0, 40, -60]}>
-      <Scene {...props} />
     </LoaderScene>
   );
 };

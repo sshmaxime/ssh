@@ -27,7 +27,7 @@ export const NavbarComponent: FC = () => {
                 alignItems="center"
               >
                 <Grid item>
-                  <Style.GoToAppButton to="/app">Enter App</Style.GoToAppButton>
+                  <Style.GoToAppButton to="/app/drop/0">Enter App</Style.GoToAppButton>
                 </Grid>
                 <div style={{ width: "25px" }} />
                 <Grid item>

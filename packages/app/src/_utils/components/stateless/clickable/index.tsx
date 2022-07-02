@@ -26,7 +26,7 @@ const Clickable: FC<props> = ({
     elem = <Style.RootLink>{children}</Style.RootLink>;
   }
 
-  return <Style.RealRoot activated={activated}>{elem}</Style.RealRoot>;
+  return <Style.RealRoot $activated={activated}>{elem}</Style.RealRoot>;
 };
 
 export default Clickable;
