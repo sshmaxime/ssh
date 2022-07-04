@@ -5,6 +5,7 @@
     "license": "MIT",
     "scripts": {
         "build": "hardhat compile",
+        "deploy": "hardhat deploy",
         "clean": "rm -rf artifacts cache typechain",
         "test": "hardhat test",
         "re": "yarn clean && yarn build"
@@ -25,6 +26,7 @@
         "ethereum-waffle": "^3.4.0",
         "ethers": "^5.5.1",
         "hardhat": "^2.6.7",
+        "hardhat-deploy": "^0.11.11",
         "hardhat-tracer": "^1.0.0-alpha.6",
         "hh-plugin-contracts": "^2.0.1",
         "prettier": "^2.4.1",

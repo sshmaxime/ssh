@@ -9,6 +9,7 @@ import { Collection, NFT, AssetsOwned, Drops, DripsOwned, Drop } from "@sshlabs/
 
 // Env setup
 const apiKey = env["apiKey"];
+const web3Endpoint = env["web3Endpoint"];
 
 // Express server
 const app: Application = express();

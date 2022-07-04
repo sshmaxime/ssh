@@ -1,6 +1,9 @@
 import '@typechain/hardhat';
 import '@nomiclabs/hardhat-waffle';
 import '@nomiclabs/hardhat-ethers';
+
+import 'hardhat-deploy';
+
 import('hardhat-tracer');
 
 import { HardhatUserConfig } from 'hardhat/config';
@@ -16,6 +19,10 @@ const config: HardhatUserConfig = {
             gasPrice: 'auto',
             allowUnlimitedContractSize: true
         }
+    },
+
+    namedAccounts: {
+        deployer: 0
     },
 
     solidity: {

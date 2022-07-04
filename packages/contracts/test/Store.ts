@@ -5,9 +5,9 @@ import { ethers } from 'hardhat';
 import { expect } from 'chai';
 import { BigNumber } from 'ethers';
 
-const { parseEther: toEth, formatBytes32String } = ethers.utils;
+const { parseEther: toEth } = ethers.utils;
 
-describe.only('SSHStore', () => {
+describe('SSHStore', () => {
     let ssh: SignerWithAddress;
     let normalUser: SignerWithAddress;
 
@@ -43,7 +43,7 @@ describe.only('SSHStore', () => {
         };
 
         let dropId = 0;
-        for (let maxSupply of [0, 1, 10]) {
+        for (let maxSupply of [0, 1, 10, 100, 1000, 100000]) {
             for (let price of [BigNumber.from(0), toEth('0.05'), toEth('0.1'), toEth('0.5'), toEth('2.5')]) {
                 context(`with dropId: ${dropId}, maxSupply: ${maxSupply}, price: ${price}`, () => {
                     createDrop(dropId, maxSupply, price);
