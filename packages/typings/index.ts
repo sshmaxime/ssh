@@ -33,7 +33,8 @@ export type Drop = {
     irl: boolean;
     threed: boolean;
   };
-  price: number;
+  price: string;
+  maxSupply: number;
 };
 
 export type Drops = Drop[];

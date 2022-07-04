@@ -11,9 +11,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         from: deployer,
         args: [],
         log: true,
-        autoMine: true,
-        deterministicDeployment: true
-        // 0x45cB5F5D2cAf1F3Bc6ddCDC6a73a92F88ad07b25
+        autoMine: true
+        // 0x5FbDB2315678afecb367f032d93F642f64180aa3
     });
 };
 

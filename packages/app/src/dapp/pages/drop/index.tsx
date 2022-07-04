@@ -33,6 +33,10 @@ import { useParams } from "react-router-dom";
 import { useGetDropQuery, useGetAssetsForDropByAddressQuery } from "../../store/services";
 import { login } from "../../store/services/web3";
 
+import { ethers } from "ethers";
+
+const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
+
 const DropProxy: FC = () => {
   const dispatch = useDispatch();
 
@@ -61,7 +65,7 @@ const Deck: { [key: string]: string } = {
 
 const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const { auth, address } = useSelector((state) => state.web3);
-
+  console.log(drop);
   // fetch data
   const { data: assets } = useGetAssetsForDropByAddressQuery(
     { dropId: drop.id, address: address },
@@ -196,7 +200,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                             <img src={logoeth} style={{ width: "90%" }} alt="" />
                           </Grid>
                           <Grid item>
-                            <Style.MintPrice>{drop.price}</Style.MintPrice>
+                            <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
                           </Grid>
                           {/* <Grid item>
                             <Style.MintPriceUsd>($200.87)</Style.MintPriceUsd>

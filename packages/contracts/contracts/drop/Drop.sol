@@ -34,10 +34,10 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     constructor(
         uint256 id,
         uint256 _maxSupply,
-        uint256 price
+        uint256 _price
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
         MAX_SUPPLY = _maxSupply;
-        PRICE = price;
+        PRICE = _price;
     }
 
     /**
@@ -45,6 +45,13 @@ contract SSHDrop is ERC721Enumerable, Ownable {
      */
     function maxSupply() public view returns (uint256) {
         return MAX_SUPPLY;
+    }
+
+    /**
+     * @dev Return the price of the mint.
+     */
+    function price() public view returns (uint256) {
+        return PRICE;
     }
 
     /**
