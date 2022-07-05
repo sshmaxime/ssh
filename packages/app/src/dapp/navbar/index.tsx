@@ -112,7 +112,9 @@ export const NavbarComponent: FC = () => {
                                             </Style.WalletTypoCollectionDrop>
                                           </Grid>
                                           <Grid item>
-                                            <Style.WalletTypoDripId>#1234</Style.WalletTypoDripId>
+                                            <Style.WalletTypoDripId>
+                                              #{drip.id}
+                                            </Style.WalletTypoDripId>
                                           </Grid>
                                         </Grid>
                                       </Grid>

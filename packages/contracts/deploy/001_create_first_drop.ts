@@ -9,8 +9,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const { deployments, getNamedAccounts } = hre;
     const { execute, read } = deployments;
 
-    const { deployer } = await getNamedAccounts();
+    const { deployer, user } = await getNamedAccounts();
     const deployerSigner = await ethers.getSigner(deployer);
+    const userSigner = await ethers.getSigner(user);
 
     await execute(
         'SSHStore',
@@ -25,7 +26,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     );
 
     const dropContractAddress = (await read('SSHStore', {}, 'getDrop', 0)) as string;
-    const dropContract = (await Contracts.SSHDrop.attach(dropContractAddress)).connect(deployerSigner);
+    const dropContract = (await Contracts.SSHDrop.attach(dropContractAddress)).connect(userSigner);
 
     await dropContract.mint({ value: toEth('0.2') });
 };

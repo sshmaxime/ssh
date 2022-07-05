@@ -42,7 +42,19 @@ app.get("/drop/:dropId", async (req: Request, res: Response): Promise<Response> 
 // return the drips owned by an address
 app.get("/drip/:address", async (req: Request, res: Response): Promise<Response> => {
   const address = req.params.address;
+  const rawDripsByAddress = await server.getDripsByAddress(address);
+
   const dataToReturn: DripsOwned = [];
+
+  for (const address in rawDripsByAddress) {
+    for (const itemId of rawDripsByAddress[address]) {
+      dataToReturn.push({
+        contract: address,
+        img: "https://cloud-01.isotile.com/basic/avatars/png/433.png", // TODO
+        id: itemId,
+      });
+    }
+  }
 
   return res.status(200).send(dataToReturn);
 });
@@ -82,7 +94,6 @@ app.get("/drop/:dropId/:address", async (req: Request, res: Response): Promise<R
 try {
   app.listen(port, async (): Promise<void> => {
     await server.init();
-    console.log(await server.getDripsByAddress("0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"));
     console.log(`Connected successfully on port ${port}`);
   });
 } catch (error) {

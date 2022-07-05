@@ -54,12 +54,6 @@ export class Server {
       this.db.DROPS.push({
         id: i.toNumber(),
         collections: [],
-        type: {
-          key: true,
-          irl: true,
-          threed: true,
-        },
-        //
         maxSupply: (await dropContract.maxSupply()).toNumber(),
         price: (await dropContract.price()).toString(),
       });
@@ -75,25 +69,20 @@ export class Server {
   };
 
   getDripsByAddress = async (address: string) => {
-    const dropSupply = await this.contracts.SSHStore.getSupply();
-    console.log(dropSupply);
+    const dropSupply = (await this.contracts.SSHStore.getSupply()).toNumber();
 
-    const dripsByDrop: BigNumber[][] = [];
-    for (let i = BigNumber.from(0); i.lt(dropSupply); i = i.add(1)) {
+    const dripsByDrop: { [dropAddress: string]: number[] } = {};
+    for (let i = 0; i < dropSupply; i++) {
       const dropContractAddress = await this.contracts.SSHStore.getDrop(i);
       const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
 
-      const balanceDripOfAddress = await dropContract.balanceOf(address);
-      const addressTokenIds: BigNumber[] = [];
-      for (
-        let dripIndex = BigNumber.from(0);
-        dripIndex.lt(balanceDripOfAddress);
-        dripIndex = dripIndex.add(1)
-      ) {
-        const tokenId = await dropContract.tokenOfOwnerByIndex(address, dripIndex);
+      const balanceDripOfAddress = (await dropContract.balanceOf(address)).toNumber();
+      const addressTokenIds: number[] = [];
+      for (let dripIndex = 0; dripIndex < balanceDripOfAddress; dripIndex++) {
+        const tokenId = (await dropContract.tokenOfOwnerByIndex(address, dripIndex)).toNumber();
         addressTokenIds.push(tokenId);
       }
-      dripsByDrop.push(addressTokenIds);
+      dripsByDrop[dropContractAddress] = addressTokenIds;
     }
 
     return dripsByDrop;

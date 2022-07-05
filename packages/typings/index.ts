@@ -28,12 +28,7 @@ export type Collection = {
 export type Drop = {
   id: number;
   collections: Collection[];
-  type: {
-    key: boolean;
-    irl: boolean;
-    threed: boolean;
-  };
-  price: string;
+  price: string; // wei
   maxSupply: number;
 };
 

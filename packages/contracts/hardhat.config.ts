@@ -22,7 +22,8 @@ const config: HardhatUserConfig = {
     },
 
     namedAccounts: {
-        deployer: 0
+        deployer: 0,
+        user: 1
     },
 
     solidity: {
