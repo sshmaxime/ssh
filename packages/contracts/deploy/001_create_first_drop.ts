@@ -22,7 +22,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         },
         'createDrop',
         10,
-        toEth('0.5')
+        toEth('0.5'),
+        ['0x116aebbad1c8226c80f9f0cb4e255540a0f7afd9', '0xd8682bfa6918b0174f287b888e765b9a1b4dc9c3']
     );
 
     const dropContractAddress = (await read('SSHStore', {}, 'getDrop', 0)) as string;

@@ -7,10 +7,12 @@ import 'hardhat-deploy';
 import('hardhat-tracer');
 
 import { HardhatUserConfig } from 'hardhat/config';
+import { forkConfig } from './hardhat.networks.config';
 
 const config: HardhatUserConfig = {
     networks: {
         hardhat: {
+            forking: forkConfig,
             accounts: {
                 count: 10,
                 accountsBalance: '10000000000000000000000000000000000000000000000'

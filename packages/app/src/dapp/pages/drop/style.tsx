@@ -191,7 +191,6 @@ const style = {
   })),
   SearchBar: styled("div")(({ theme }) => ({
     padding: "5px",
-    color: "grey",
     backgroundColor: "#F5F5F5",
     borderRadius: "25px",
     fontFamily: theme.fontFamily.primary,

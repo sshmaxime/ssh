@@ -89,13 +89,12 @@ const Deck: { [key: string]: string } = {
 
 const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const { auth, address } = useSelector((state) => state.web3);
-  console.log(drop);
+
   // fetch data
   const { data: assets } = useGetAssetsForDropByAddressQuery(
     { dropId: drop.id, address: address },
     { skip: !auth }
   );
-  //
 
   // fc state
   const [currentItem, setItem] = React.useState<{ collection: string; id: number; img: string }>();
@@ -126,11 +125,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                 <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
               </Grid>
 
-              {/* <Grid item xs={1}>
+              <Grid item xs={1}>
                 <FilterListIcon />
-              </Grid> */}
+              </Grid>
 
-              {/* <Grid item xs={5}>
+              <Grid item xs={5}>
                 <Style.SearchBar>
                   <Grid container alignItems="center">
                     <Grid item>
@@ -147,7 +146,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                     </Grid>
                   </Grid>
                 </Style.SearchBar>
-              </Grid> */}
+              </Grid>
             </Style.HeaderLeftSide>
             {/*  */}
             <Style.BodyLeftSide $connected={auth}>

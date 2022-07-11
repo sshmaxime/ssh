@@ -7,7 +7,7 @@ import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extension
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
 /**
- * @dev Define a DROP.
+ * @dev Define a DROP item.
  *
  * isMutable: Status of the DROP. Default: True
  */
@@ -26,7 +26,12 @@ contract SSHDrop is ERC721Enumerable, Ownable {
 
     // The maximum supply of the DROP
     uint256 immutable MAX_SUPPLY;
+
+    // The price to mint a DROP item
     uint256 immutable PRICE;
+
+    // List of the whitelisted addresses
+    address[] WHITELIST;
 
     // Mapping from token id to DROP item
     mapping(uint256 => DropItem) tokenIdToDropItem;
@@ -34,10 +39,12 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     constructor(
         uint256 id,
         uint256 _maxSupply,
-        uint256 _price
+        uint256 _price,
+        address[] memory _whitelist
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
+        WHITELIST = _whitelist;
     }
 
     /**
@@ -52,6 +59,13 @@ contract SSHDrop is ERC721Enumerable, Ownable {
      */
     function price() public view returns (uint256) {
         return PRICE;
+    }
+
+    /**
+     * @dev Return the whitelisted addresses.
+     */
+    function whitelist() public view returns (address[] memory) {
+        return WHITELIST;
     }
 
     /**

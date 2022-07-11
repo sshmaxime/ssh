@@ -34,10 +34,7 @@ app.get("/drop/:dropId", async (req: Request, res: Response): Promise<Response> 
   const dropId = req.params.dropId as any as number;
   const dataToReturn = server.getDropById(dropId);
 
-  if (dataToReturn) {
-    return res.status(200).send(dataToReturn);
-  }
-  return res.status(404);
+  return dataToReturn ? res.status(200).send(dataToReturn) : res.status(404);
 });
 
 // @getDripsByAddress
@@ -71,7 +68,7 @@ app.get("/drop/:dropId/:address", async (req: Request, res: Response): Promise<R
       nfts.push({
         contract: collection.contract,
         img: asset.image_url,
-        id: asset.token_id,
+        id: Number(asset.token_id),
       });
     }
 

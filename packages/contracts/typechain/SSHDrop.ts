@@ -53,6 +53,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "whitelist()": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -122,6 +123,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(functionFragment: "whitelist", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -181,6 +183,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "whitelist", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
@@ -353,6 +356,8 @@ export interface SSHDrop extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelist(overrides?: CallOverrides): Promise<[string[]]>;
   };
 
   approve(
@@ -452,6 +457,8 @@ export interface SSHDrop extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  whitelist(overrides?: CallOverrides): Promise<string[]>;
+
   callStatic: {
     approve(
       to: string,
@@ -545,6 +552,8 @@ export interface SSHDrop extends BaseContract {
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelist(overrides?: CallOverrides): Promise<string[]>;
   };
 
   filters: {
@@ -694,6 +703,8 @@ export interface SSHDrop extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelist(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -802,5 +813,7 @@ export interface SSHDrop extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    whitelist(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
