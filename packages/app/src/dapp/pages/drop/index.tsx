@@ -55,7 +55,31 @@ const DropProxy: FC = () => {
 };
 
 const DropNotFound: FC = () => {
-  return <>Nada</>;
+  return (
+    <Style.RootNotFound>
+      <Style.NotFound>
+        <Grid container>
+          <Grid item xs={12}>
+            Drop Not Found.
+          </Grid>
+          <Grid item xs={12}>
+            <Style.MoreLinkContainer>
+              <Clickable onClick={() => {}}>
+                <Grid container>
+                  <Grid item alignSelf={"center"}>
+                    <Style.MoreLink>HOME</Style.MoreLink>
+                  </Grid>
+                  <Grid item alignSelf={"center"}>
+                    <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
+                  </Grid>
+                </Grid>
+              </Clickable>
+            </Style.MoreLinkContainer>
+          </Grid>
+        </Grid>
+      </Style.NotFound>
+    </Style.RootNotFound>
+  );
 };
 
 const Deck: { [key: string]: string } = {
@@ -102,11 +126,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                 <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
               </Grid>
 
-              <Grid item xs={1}>
+              {/* <Grid item xs={1}>
                 <FilterListIcon />
-              </Grid>
+              </Grid> */}
 
-              <Grid item xs={5}>
+              {/* <Grid item xs={5}>
                 <Style.SearchBar>
                   <Grid container alignItems="center">
                     <Grid item>
@@ -119,11 +143,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                       />
                     </Grid>
                     <Grid item style={{ color: "grey", fontSize: "0.9em" }}>
-                      Search
+                      Search ...
                     </Grid>
                   </Grid>
                 </Style.SearchBar>
-              </Grid>
+              </Grid> */}
             </Style.HeaderLeftSide>
             {/*  */}
             <Style.BodyLeftSide $connected={auth}>

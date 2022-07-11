@@ -32,8 +32,8 @@ describe('SSHDrop', () => {
                     });
 
                     it('should be properly constructed', async () => {
-                        expect(await SSHDrop.name()).to.equal('SSH LABS DROPx' + id);
-                        expect(await SSHDrop.symbol()).to.equal('DROPx' + id);
+                        expect(await SSHDrop.name()).to.equal('SSH LABS DROP ' + id);
+                        expect(await SSHDrop.symbol()).to.equal('DROP ' + id);
                         expect(await SSHDrop.maxSupply()).to.equal(maxSupply);
                         expect(await SSHDrop.totalSupply()).to.equal(0);
                     });

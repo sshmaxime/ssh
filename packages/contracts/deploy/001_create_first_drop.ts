@@ -22,13 +22,15 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         },
         'createDrop',
         10,
-        toEth('0.2')
+        toEth('0.5')
     );
 
     const dropContractAddress = (await read('SSHStore', {}, 'getDrop', 0)) as string;
+
     const dropContract = (await Contracts.SSHDrop.attach(dropContractAddress)).connect(userSigner);
 
-    await dropContract.mint({ value: toEth('0.2') });
+    await dropContract.mint({ value: toEth('0.5') });
+    await dropContract.mint({ value: toEth('0.5') });
 };
 
 export default func;

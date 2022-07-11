@@ -93,7 +93,7 @@ export const NavbarComponent: FC = () => {
                                       <Grid item>
                                         <Style.WalletTypoCollection>
                                           <Grid container alignItems="center">
-                                            BAYC
+                                            {drip.isMutable ? "MUTABLE" : "BAYC"}
                                             <VerifiedIcon
                                               style={{
                                                 marginLeft: "2.5px",
@@ -108,7 +108,7 @@ export const NavbarComponent: FC = () => {
                                         <Grid container columnSpacing={1}>
                                           <Grid item>
                                             <Style.WalletTypoCollectionDrop>
-                                              DROP 1
+                                              {drip.collectionName}
                                             </Style.WalletTypoCollectionDrop>
                                           </Grid>
                                           <Grid item>

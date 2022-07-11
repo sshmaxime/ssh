@@ -191,6 +191,7 @@ const style = {
   })),
   SearchBar: styled("div")(({ theme }) => ({
     padding: "5px",
+    color: "grey",
     backgroundColor: "#F5F5F5",
     borderRadius: "25px",
     fontFamily: theme.fontFamily.primary,
@@ -221,6 +222,33 @@ const style = {
     boxShadow: `10px 15px 2px ${theme.backgroundColor.tertiary}`,
     backgroundColor: "white",
     transform: active ? "scale(1.1)" : "",
+  })),
+  //
+  RootNotFound: styled("div")(({ theme }) => ({
+    height: "100vh",
+    position: "relative",
+    backgroundColor: theme.backgroundColor.secondary,
+  })),
+  NotFound: styled("div")(({ theme }) => ({
+    position: "absolute",
+    left: "50%",
+    top: "45%",
+    transform: "translate(-50%, -50%)",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 600,
+    letterSpacing: "0.5px",
+  })),
+  MoreLinkContainer: styled("div")(({ theme }) => ({
+    marginTop: "35px",
+    display: "inline-block",
+  })),
+  MoreLink: styled("div")(({ theme }) => ({
+    fontSize: "0.8em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    letterSpacing: "1.5px",
+    borderBottom: "2.5px solid black",
+    paddingBottom: "5px",
   })),
 };
 

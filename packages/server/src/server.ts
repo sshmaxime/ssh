@@ -8,7 +8,7 @@ import {
   SSHDrop__factory,
 } from "@sshlabs/contracts/typechain";
 
-import { Drops } from "@sshlabs/typings";
+import { DRIP, Drops } from "@sshlabs/typings";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
@@ -65,13 +65,17 @@ export class Server {
   };
 
   getDropById = (dropId: number) => {
+    if (dropId > this.db.DROPS.length) {
+      return null;
+    }
+
     return this.db.DROPS[dropId];
   };
 
   getDripsByAddress = async (address: string) => {
     const dropSupply = (await this.contracts.SSHStore.getSupply()).toNumber();
 
-    const dripsByDrop: { [dropAddress: string]: number[] } = {};
+    const dripsByAddress: DRIP[] = [];
     for (let i = 0; i < dropSupply; i++) {
       const dropContractAddress = await this.contracts.SSHStore.getDrop(i);
       const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
@@ -80,11 +84,19 @@ export class Server {
       const addressTokenIds: number[] = [];
       for (let dripIndex = 0; dripIndex < balanceDripOfAddress; dripIndex++) {
         const tokenId = (await dropContract.tokenOfOwnerByIndex(address, dripIndex)).toNumber();
+        const drip = await dropContract.getDropItem(tokenId);
+
+        dripsByAddress.push({
+          isMutable: drip.isMutable,
+          collectionName: await dropContract.symbol(),
+          contract: dropContract.address,
+          img: "https://cloud-01.isotile.com/basic/avatars/png/433.png", // TODO
+          id: tokenId,
+        });
         addressTokenIds.push(tokenId);
       }
-      dripsByDrop[dropContractAddress] = addressTokenIds;
     }
 
-    return dripsByDrop;
+    return dripsByAddress;
   };
 }

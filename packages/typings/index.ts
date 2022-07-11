@@ -6,6 +6,15 @@ export type NFT = {
   img: string;
   id: number;
 };
+
+export type DRIP = {
+  isMutable: boolean;
+  collectionName: string;
+  contract: string;
+  img: string;
+  id: number;
+};
+
 export type NFTs = NFT[];
 export type NFTsByCollection = { collectionName: string; assets: NFTs }[];
 
@@ -13,7 +22,7 @@ export type NFTsByCollection = { collectionName: string; assets: NFTs }[];
 /// API Types ///
 /////////////////
 export type AssetsOwned = NFTsByCollection;
-export type DripsOwned = NFT[];
+export type DripsOwned = DRIP[];
 
 //
 //

@@ -21,8 +21,8 @@ struct DropItem {
  * @title SSHDrop
  */
 contract SSHDrop is ERC721Enumerable, Ownable {
-    string constant _name = "SSH LABS DROPx";
-    string constant _symbol = "DROPx";
+    string constant _name = "SSH LABS DROP ";
+    string constant _symbol = "DROP ";
 
     // The maximum supply of the DROP
     uint256 immutable MAX_SUPPLY;
