@@ -70,8 +70,9 @@ export class Server {
             contract: whitelistAddress,
           };
         }),
-        maxSupply: (await dropContract.maxSupply()).toNumber(),
         price: (await dropContract.price()).toString(),
+        maxSupply: (await dropContract.maxSupply()).toNumber(),
+        currentSupply: (await dropContract.totalSupply()).toNumber(),
       });
     }
   };

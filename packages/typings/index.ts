@@ -39,6 +39,7 @@ export type Drop = {
   collections: Collection[];
   price: string; // wei
   maxSupply: number;
+  currentSupply: number;
 };
 
 export type Drops = Drop[];

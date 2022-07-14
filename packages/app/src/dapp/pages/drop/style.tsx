@@ -8,7 +8,7 @@ const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "310px";
 
 const bottomOverlayHeight = "50px";
-const rightHeightReduced = "310px";
+const rightHeightReduced = "290px";
 
 const sizeWidthLeft = "20px";
 const sizeWidthRight = "20px";
@@ -57,6 +57,14 @@ const style = {
     fontWeight: 500,
     fontSize: "0.8em",
   })),
+  NoNfts: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 500,
+    marginTop: "7.5px",
+    fontSize: "0.8em",
+    color: "grey",
+    marginLeft: "7.5px",
+  })),
   HeaderLeftSide: styled(Grid)(({ theme }) => ({
     backgroundColor: "white",
     borderRadius: "5px",
@@ -82,15 +90,15 @@ const style = {
     bottom: sizeWidthLeft,
     right: $maxed ? sizeWidthLeft : sizeWidthRight,
     backgroundColor: $maxed ? theme.backgroundColor.primary : "",
-    height: $maxed
+    maxHeight: $maxed
       ? `calc(100vh - 1vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - ${headerHeight})`
       : rightHeightReduced,
     transition: "all 0.5s ease-in-out",
     boxShadow: $maxed ? `5px 5px 2px ${theme.backgroundColor.tertiary}` : "",
   })),
   InnerContainerInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    padding: $maxed ? "25px" : "0px",
-    transition: "all .5s ease-in-out",
+    padding: $maxed ? "25px 25px 0 25px" : "0px",
+    // transition: "all .5s ease-in-out",
   })),
   CloseContainerInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     display: $maxed ? "block" : "none",
@@ -104,12 +112,11 @@ const style = {
     fontWeight: 900,
   })),
   ContainerMoreInfoContent: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    marginTop: "25px",
-    height: $maxed
-      ? `calc(100vh - 2vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - ${headerHeight} - 152.5px)`
+    marginTop: "15px",
+    maxHeight: $maxed
+      ? `calc(100vh - 2vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - ${headerHeight} - 152.5px - 50px)`
       : "0px",
     overflowY: "scroll",
-    borderRadius: "5px",
     opacity: $maxed ? 1 : 0,
     transition: "all 1s",
     display: $maxed ? "block" : "none",
@@ -117,10 +124,49 @@ const style = {
   InnerContainerMoreInfoContent: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     padding: "15px",
     backgroundColor: theme.backgroundColor.secondary,
+    borderRadius: "10px",
+  })),
+  InnerContainerMoreInfoContentText: styled(Typography)(({ theme }) => ({
+    paddingLeft: "5px",
+    fontSize: "0.9em",
+  })),
+  InnerContainerMoreInfoContentTitle: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    paddingLeft: "5px",
+    marginBottom: "5px",
+    fontWeight: 800,
+    letterSpacing: "1px",
+    fontSize: "0.75em",
+  })),
+  PayContainerInfoOpen: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
+    display: $maxed ? "inline-block" : "none",
+    marginTop: "12.5px",
+    marginBottom: "12.5px",
+    float: "right",
+  })),
+  PayContainerInfoGrid: styled(Grid)(({ theme }) => ({
+    padding: "10px",
+    borderRadius: "10px",
+    backgroundColor: theme.backgroundColor.secondary,
+  })),
+  EligibleCollection: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
+    display: $maxed ? "block" : "none",
+    padding: "10px",
+    marginBottom: "15px",
+    backgroundColor: "white",
+    borderRadius: "10px",
+  })),
+  EligibleCollectionTitle: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    paddingLeft: "5px",
+    marginBottom: "5px",
+    fontWeight: 800,
+    letterSpacing: "1px",
+    fontSize: "0.75em",
   })),
   ContainerTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "3.5em",
+    fontSize: "2.5em",
     fontWeight: 900,
   })),
   ContainerMoreInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
@@ -153,6 +199,21 @@ const style = {
     color: "white",
     borderRadius: "10px",
     padding: "10px",
+  })),
+  MintInfo: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.7em",
+    height: "20px",
+    textAlign: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontWeight: 600,
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    backgroundColor: "white",
+    borderRadius: "20px",
+    boxShadow: "1.5px 1.5px 0px grey",
   })),
   MintPriceTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

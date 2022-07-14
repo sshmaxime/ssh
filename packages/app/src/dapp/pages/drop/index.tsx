@@ -46,7 +46,10 @@ const DropProxy: FC = () => {
 
   const dropId = parseInt(useParams().dropId || "-1");
 
-  const { data: drop } = useGetDropQuery({ dropId: dropId });
+  const { data: drop, isLoading } = useGetDropQuery({ dropId: dropId });
+  if (isLoading) {
+    return <>Loaading ...</>;
+  }
   if (drop === undefined) {
     return <DropNotFound />;
   }
@@ -91,7 +94,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const { auth, address } = useSelector((state) => state.web3);
 
   // fetch data
-  const { data: assets } = useGetAssetsForDropByAddressQuery(
+  const { data: assets, isLoading } = useGetAssetsForDropByAddressQuery(
     { dropId: drop.id, address: address },
     { skip: !auth }
   );
@@ -107,18 +110,30 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     setItem(newItem);
 
     sceneRef.current.changeTexturePlaceholder(newItem.img);
-
-    if (!currentItem || currentItem.collection !== newItem.collection) {
-      sceneRef.current.changeTextureDeck(Deck[newItem.collection]);
-    }
+    sceneRef.current.changeTextureDeck(Deck[newItem.collection]);
   };
+
+  const pastilles = [
+    {
+      title: "KEY",
+      description: "Minting this NFT gives you a free SSH Key.",
+    },
+    {
+      title: "IRL",
+      description: "This NFT holds a redeemable physical object.",
+    },
+    {
+      title: "3D",
+      description: "This NFT holds a 3D model.",
+    },
+  ];
 
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
         <Style.Header></Style.Header>
         <Style.Body>
-          <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} />
+          {/* <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} /> */}
           <Style.LeftSide>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
               <Grid item xs={6}>
@@ -155,42 +170,48 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               <Style.InnerLeftSide>
                 {assets && assets.length ? (
                   assets.map((collection, index1) => (
-                    <div key={index1}>
+                    <div key={index1} style={{ marginBottom: "20px" }}>
                       <Style.CollectionName>{collection.collectionName}</Style.CollectionName>
-                      <ImageList cols={4} gap={4} style={{ marginBottom: "20px" }}>
-                        {collection.assets.map((item, index) => (
-                          <ImageListItem
-                            key={index}
-                            style={{
-                              border:
-                                currentItem &&
-                                currentItem.collection === collection.collectionName &&
-                                currentItem.id === item.id
-                                  ? "3px solid #2AFE00"
-                                  : "3px solid white",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              updateItem({
-                                collection: collection.collectionName,
-                                id: item.id,
-                                img: item.img,
-                              });
-                            }}
-                          >
-                            <img
-                              src={`${item.img}?w=248&fit=crop&auto=format`}
-                              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                              alt={"item.id"}
-                              loading="lazy"
-                            />
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
+                      {collection.assets.length > 0 ? (
+                        <ImageList cols={4} gap={4}>
+                          {collection.assets.map((item, index) => (
+                            <ImageListItem
+                              key={index}
+                              style={{
+                                border:
+                                  currentItem &&
+                                  currentItem.collection === collection.collectionName &&
+                                  currentItem.id === item.id
+                                    ? "3px solid #2AFE00"
+                                    : "3px solid white",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                updateItem({
+                                  collection: collection.collectionName,
+                                  id: item.id,
+                                  img: item.img,
+                                });
+                              }}
+                            >
+                              <img
+                                src={`${item.img}?w=248&fit=crop&auto=format`}
+                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                alt={"item.id"}
+                                loading="lazy"
+                              />
+                            </ImageListItem>
+                          ))}
+                        </ImageList>
+                      ) : (
+                        <Style.NoNfts>You don't own any : '(</Style.NoNfts>
+                      )}
                     </div>
                   ))
                 ) : auth ? (
-                  <Style.InnerLeftSideNoNfts>You do not own any NFTs :'(</Style.InnerLeftSideNoNfts>
+                  <Style.InnerLeftSideNoNfts>
+                    {isLoading ? "Loading ..." : "You do not own any NFTs :("}
+                  </Style.InnerLeftSideNoNfts>
                 ) : (
                   <Style.InnerLeftSideNoNfts>You are not connected :'(</Style.InnerLeftSideNoNfts>
                 )}
@@ -201,7 +222,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
           <ClickAwayListener onClickAway={() => setChecked(false)}>
             <Style.ContainerInfo $maxed={checked}>
               <Style.InnerContainerInfo $maxed={checked}>
-                <Grid container justifyContent="space-between">
+                <Grid container justifyContent="space-between" style={{ paddingRight: "5px" }}>
                   <Grid item>
                     <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
                   </Grid>
@@ -211,23 +232,51 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                     </Clickable>
                   </Grid>
                 </Grid>
+
+                <Grid
+                  container
+                  spacing={1}
+                  alignContent={"center"}
+                  style={{ marginTop: "5px", paddingRight: "5px" }}
+                >
+                  {pastilles.map((pastille) => (
+                    <Grid key={pastille.title} item>
+                      <Tooltip arrow title={pastille.description} placement="top">
+                        <div>
+                          <Pastille title={pastille.title} />
+                        </div>
+                      </Tooltip>
+                    </Grid>
+                  ))}
+                  <Grid item flex={1} />
+                  <Grid item>
+                    <Tooltip arrow title={"Current Supply / Max Supply"} placement="top">
+                      <div>
+                        <Style.MintInfo>
+                          {drop.currentSupply} / {drop.maxSupply}
+                        </Style.MintInfo>
+                      </div>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+
                 <Style.ContainerPayment $maxed={checked}>
                   <Style.InnerContainerPayment>
-                    <Grid container alignItems="center" rowSpacing={2}>
-                      <Grid item xs={12}>
+                    <Grid container rowSpacing={2}>
+                      <Grid item xs={6}>
                         <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
                       </Grid>
                       <Grid item xs={12}>
                         <Grid container alignItems="baseline" columnSpacing={1}>
-                          <Grid item xs={1}>
-                            <img src={logoeth} style={{ width: "90%" }} alt="" />
+                          <Grid item>
+                            <img src={logoeth} style={{ width: "15px" }} alt="" />
                           </Grid>
                           <Grid item>
                             <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
                           </Grid>
-                          {/* <Grid item>
-                            <Style.MintPriceUsd>($200.87)</Style.MintPriceUsd>
-                          </Grid> */}
+                          <Grid item>
+                            <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
+                          </Grid>
                         </Grid>
                       </Grid>
                       <Grid item xs={12}>
@@ -238,6 +287,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                     </Grid>
                   </Style.InnerContainerPayment>
                 </Style.ContainerPayment>
+
                 <Clickable onClick={handleChange}>
                   <Style.ContainerMoreInfo $maxed={checked}>
                     <Style.DetailsContainer container alignItems="center" justifyContent="center">
@@ -251,9 +301,55 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
                 <Style.ContainerMoreInfoContent $maxed={checked}>
                   <Style.InnerContainerMoreInfoContent $maxed={checked}>
-                    Hello
+                    {/*  */}
+                    <Style.EligibleCollection $maxed={checked}>
+                      <Style.EligibleCollectionTitle>
+                        COLLECTIONS ELIGIBLE :
+                      </Style.EligibleCollectionTitle>
+                      <Grid container spacing={1} style={{ paddingLeft: "5px" }}>
+                        {assets &&
+                          assets.map((collection) => (
+                            <Grid item>
+                              <Style.CollectionName>
+                                {collection.collectionName}
+                              </Style.CollectionName>
+                            </Grid>
+                          ))}
+                      </Grid>
+                    </Style.EligibleCollection>
+                    <Style.InnerContainerMoreInfoContentTitle>
+                      PACKAGE :
+                    </Style.InnerContainerMoreInfoContentTitle>
+
+                    <Style.InnerContainerMoreInfoContentText>
+                      Hello so this is a text.
+                    </Style.InnerContainerMoreInfoContentText>
                   </Style.InnerContainerMoreInfoContent>
                 </Style.ContainerMoreInfoContent>
+
+                <Style.PayContainerInfoOpen $maxed={checked}>
+                  <Style.PayContainerInfoGrid container>
+                    <Grid item style={{ display: "flex", alignItems: "center" }}>
+                      <Grid container alignItems="baseline">
+                        <Grid item>
+                          <img src={logoeth} style={{ width: "15px" }} alt="" />
+                        </Grid>
+                        <Grid item style={{ paddingRight: "7.5px", paddingLeft: "7.5px" }}>
+                          <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
+                        </Grid>
+                        <Grid item>
+                          <Style.MintPriceUsd>($10000)</Style.MintPriceUsd>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "20px" }}>
+                      <Clickable onClick={() => {}}>
+                        <Style.MintButton>MINT</Style.MintButton>
+                      </Clickable>
+                    </Grid>
+                  </Style.PayContainerInfoGrid>
+                </Style.PayContainerInfoOpen>
+                {/*  */}
               </Style.InnerContainerInfo>
             </Style.ContainerInfo>
           </ClickAwayListener>
