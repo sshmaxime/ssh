@@ -7,7 +7,7 @@ const headerHeight = "125px";
 const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "310px";
 
-const bottomOverlayHeight = "50px";
+const bottomOverlayHeight = "35px";
 const rightHeightReduced = "290px";
 
 const sizeWidthLeft = "20px";
@@ -309,6 +309,19 @@ const style = {
     letterSpacing: "1.5px",
     borderBottom: "2.5px solid black",
     paddingBottom: "5px",
+  })),
+  BottomLinks: styled(Typography)(({ theme }) => ({
+    fontSize: "0.8em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 500,
+    lineHeight: "2em",
+  })),
+  Credentials: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.7em",
+    fontWeight: 900,
+    paddingLeft: sizeWidthLeft,
+    lineHeight: "2em",
   })),
 };
 

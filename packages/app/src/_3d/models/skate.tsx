@@ -49,7 +49,7 @@ export type props = {
   placeholderRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
 };
 
-const defaultDeckTexture = "/models/skate/textures/sublime-deck.png";
+const defaultDeckTexture = "/models/skate/textures/sublimes-deck.png";
 const defaultPlaceholderTexture = "/models/skate/textures/imgForMiddle.png";
 
 const Skate: FC<props & JSX.IntrinsicElements["group"]> = (props) => {

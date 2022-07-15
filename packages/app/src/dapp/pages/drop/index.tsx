@@ -20,7 +20,6 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { Fade } from "react-awesome-reveal";
 
 import logoeth from "../../../_utils/assets/images/logoeth.svg";
-import af1x_exemple from "../../../_utils/assets/images/Punk_7804.png";
 import Pastille from "../../../_utils/components/stateless/pastille";
 
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -29,6 +28,7 @@ import { useDispatch, useSelector } from "../../store/hooks";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 import { Drop as DropType } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
+import { CREDENTIALS } from "../../../_constants";
 
 import { useGetDropQuery, useGetAssetsForDropByAddressQuery } from "../../store/services";
 import { login } from "../../store/services/web3";
@@ -86,7 +86,7 @@ const DropNotFound: FC = () => {
 };
 
 const Deck: { [key: string]: string } = {
-  Sublimes: "/models/skate/textures/sublime-deck.png",
+  Sublimes: "/models/skate/textures/sublimes-deck.png",
   Isotile: "/models/skate/textures/isotile-deck.png",
 };
 
@@ -133,7 +133,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
       <Style.Root>
         <Style.Header></Style.Header>
         <Style.Body>
-          {/* <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} /> */}
+          <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} />
           <Style.LeftSide>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
               <Grid item xs={6}>
@@ -172,40 +172,36 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   assets.map((collection, index1) => (
                     <div key={index1} style={{ marginBottom: "20px" }}>
                       <Style.CollectionName>{collection.collectionName}</Style.CollectionName>
-                      {collection.assets.length > 0 ? (
-                        <ImageList cols={4} gap={4}>
-                          {collection.assets.map((item, index) => (
-                            <ImageListItem
-                              key={index}
-                              style={{
-                                border:
-                                  currentItem &&
-                                  currentItem.collection === collection.collectionName &&
-                                  currentItem.id === item.id
-                                    ? "3px solid #2AFE00"
-                                    : "3px solid white",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => {
-                                updateItem({
-                                  collection: collection.collectionName,
-                                  id: item.id,
-                                  img: item.img,
-                                });
-                              }}
-                            >
-                              <img
-                                src={`${item.img}?w=248&fit=crop&auto=format`}
-                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                alt={"item.id"}
-                                loading="lazy"
-                              />
-                            </ImageListItem>
-                          ))}
-                        </ImageList>
-                      ) : (
-                        <Style.NoNfts>You don't own any : '(</Style.NoNfts>
-                      )}
+                      <ImageList cols={4} gap={4}>
+                        {collection.assets.map((item, index) => (
+                          <ImageListItem
+                            key={index}
+                            style={{
+                              border:
+                                currentItem &&
+                                currentItem.collection === collection.collectionName &&
+                                currentItem.id === item.id
+                                  ? "3px solid #2AFE00"
+                                  : "3px solid white",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => {
+                              updateItem({
+                                collection: collection.collectionName,
+                                id: item.id,
+                                img: item.img,
+                              });
+                            }}
+                          >
+                            <img
+                              src={`${item.img}?w=248&fit=crop&auto=format`}
+                              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                              alt={"item.id"}
+                              loading="lazy"
+                            />
+                          </ImageListItem>
+                        ))}
+                      </ImageList>
                     </div>
                   ))
                 ) : auth ? (
@@ -354,7 +350,27 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
             </Style.ContainerInfo>
           </ClickAwayListener>
         </Style.Body>
-        <Style.Footer></Style.Footer>
+        <Style.Footer>
+          <Grid container justifyContent="space-between">
+            <Grid item>
+              <Style.Credentials>{CREDENTIALS}</Style.Credentials>
+            </Grid>
+            <Grid item>
+              <Grid container justifyContent="center" columnSpacing={6}>
+                <Grid item>
+                  <Style.BottomLinks>Docs</Style.BottomLinks>
+                </Grid>
+                <Grid item>
+                  <Style.BottomLinks>FAQs</Style.BottomLinks>
+                </Grid>
+                <Grid item>
+                  <Style.BottomLinks>OpenSea</Style.BottomLinks>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item />
+          </Grid>
+        </Style.Footer>
       </Style.Root>
     </Fade>
   );
