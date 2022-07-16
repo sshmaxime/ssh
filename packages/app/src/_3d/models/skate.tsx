@@ -49,10 +49,17 @@ export type props = {
   placeholderRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
 };
 
-const defaultDeckTexture = "/models/skate/textures/sublimes-deck.png";
-const defaultPlaceholderTexture = "/models/skate/textures/imgForMiddle.png";
+const defaultDeckTexture = "/models/skate/textures/default-deck.png";
+const defaultPlaceholderTexture = "/models/skate/textures/default-placeholder.png";
 
-const Skate: FC<props & JSX.IntrinsicElements["group"]> = (props) => {
+const Skate = forwardRef<{}, props & JSX.IntrinsicElements["group"]>(({ ...props }, ref) => {
+  useImperativeHandle(ref, () => ({
+    getAlert() {
+      loadTextureToObject(defaultDeckTexture, deckRef);
+      loadTextureToObject(defaultPlaceholderTexture, placeholderRef);
+    },
+  }));
+
   const group = useRef<THREE.Group>(null);
 
   // setup refs
@@ -117,7 +124,7 @@ const Skate: FC<props & JSX.IntrinsicElements["group"]> = (props) => {
       </Center>
     </group>
   );
-};
+});
 
 useGLTF.preload(modelPath);
 

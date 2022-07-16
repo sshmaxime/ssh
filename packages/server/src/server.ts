@@ -79,7 +79,7 @@ export class Server {
 
   // query
   getDropById = (dropId: number) => {
-    return dropId > this.db.DROPS.length ? null : this.db.DROPS[dropId];
+    return dropId >= this.db.DROPS.length ? null : this.db.DROPS[dropId];
   };
 
   getDripsByAddress = async (address: string) => {

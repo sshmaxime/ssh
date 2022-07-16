@@ -34,7 +34,7 @@ app.get("/drop/:dropId", async (req: Request, res: Response): Promise<Response> 
   const dropId = req.params.dropId as any as number;
   const dataToReturn = server.getDropById(dropId);
 
-  return dataToReturn ? res.status(200).send(dataToReturn) : res.status(404);
+  return dataToReturn !== null ? res.status(200).send(dataToReturn) : res.status(404).send();
 });
 
 // @getDripsByAddress

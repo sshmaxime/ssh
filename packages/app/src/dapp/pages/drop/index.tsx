@@ -18,6 +18,7 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { Fade } from "react-awesome-reveal";
+import Backdrop from "@mui/material/Backdrop";
 
 import logoeth from "../../../_utils/assets/images/logoeth.svg";
 import Pastille from "../../../_utils/components/stateless/pastille";
@@ -50,6 +51,7 @@ const DropProxy: FC = () => {
   if (isLoading) {
     return <>Loaading ...</>;
   }
+
   if (drop === undefined) {
     return <DropNotFound />;
   }
@@ -109,8 +111,12 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const updateItem = (newItem: any) => {
     setItem(newItem);
 
-    sceneRef.current.changeTexturePlaceholder(newItem.img);
-    sceneRef.current.changeTextureDeck(Deck[newItem.collection]);
+    if (Deck[newItem.collection]) {
+      sceneRef.current.changeTexturePlaceholder(newItem.img);
+      sceneRef.current.changeTextureDeck(Deck[newItem.collection]);
+    } else {
+      sceneRef.current.reset();
+    }
   };
 
   const pastilles = [
@@ -132,9 +138,13 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     <Fade duration={1500} triggerOnce>
       <Style.Root>
         <Style.Header></Style.Header>
+
         <Style.Body>
-          <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} />
+          {/* <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} /> */}
           <Style.LeftSide>
+            <Style.Explanation>
+              <Clickable onClick={() => {}}>How does that works ?</Clickable>
+            </Style.Explanation>
             <Style.HeaderLeftSide container spacing={0} alignItems="center">
               <Grid item xs={6}>
                 <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
@@ -313,13 +323,13 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                           ))}
                       </Grid>
                     </Style.EligibleCollection>
-                    <Style.InnerContainerMoreInfoContentTitle>
+                    {/* <Style.InnerContainerMoreInfoContentTitle>
                       PACKAGE :
                     </Style.InnerContainerMoreInfoContentTitle>
 
                     <Style.InnerContainerMoreInfoContentText>
                       Hello so this is a text.
-                    </Style.InnerContainerMoreInfoContentText>
+                    </Style.InnerContainerMoreInfoContentText> */}
                   </Style.InnerContainerMoreInfoContent>
                 </Style.ContainerMoreInfoContent>
 
@@ -352,23 +362,23 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         </Style.Body>
         <Style.Footer>
           <Grid container justifyContent="space-between">
-            <Grid item>
+            <Grid item xs={2}>
               <Style.Credentials>{CREDENTIALS}</Style.Credentials>
             </Grid>
-            <Grid item>
-              <Grid container justifyContent="center" columnSpacing={6}>
-                <Grid item>
+            <Grid item xs={8}>
+              <Grid container justifyContent="center" columnSpacing={1}>
+                <Grid item xs={1}>
                   <Style.BottomLinks>Docs</Style.BottomLinks>
                 </Grid>
-                <Grid item>
+                <Grid item xs={1}>
                   <Style.BottomLinks>FAQs</Style.BottomLinks>
                 </Grid>
-                <Grid item>
+                <Grid item xs={1}>
                   <Style.BottomLinks>OpenSea</Style.BottomLinks>
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item />
+            <Grid item xs={2}></Grid>
           </Grid>
         </Style.Footer>
       </Style.Root>

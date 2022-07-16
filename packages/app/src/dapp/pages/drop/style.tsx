@@ -47,6 +47,15 @@ const style = {
     width: leftDefaultWidth,
     height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - ${sizeWidthLeft})`,
   })),
+  Explanation: styled("div")(({ theme }) => ({
+    height: "20px",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 600,
+    display: "inline-block",
+    marginLeft: "5px",
+    color: "#ACACEC",
+    fontSize: "0.75em",
+  })),
   InnerLeftSide: styled("div")(({ theme }) => ({
     padding: "10px",
   })),
@@ -75,7 +84,7 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     borderRadius: "5px",
     overflowY: "scroll",
-    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 50px - ${sizeWidthLeft})`,
+    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 50px - ${sizeWidthLeft} - 20px)`,
     opacity: $connected ? 0.25 : 1,
     transition: "all 1s",
     ":hover": {
@@ -315,6 +324,7 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
     lineHeight: "2em",
+    textAlign: "center",
   })),
   Credentials: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

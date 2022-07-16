@@ -11,30 +11,35 @@ export type props = {
 };
 
 export type sceneRef = ReturnType<typeof elem>;
-const elem = (props: props, deckRef: any, placeholderRef: any) => ({
+const elem = (props: props, objRef: any, deckRef: any, placeholderRef: any) => ({
   changeTextureDeck(img: any) {
     loadTextureToObject(img, deckRef);
   },
   changeTexturePlaceholder(img: any) {
     loadTextureToObject(img, placeholderRef);
   },
+  reset() {
+    objRef.current.getAlert();
+  },
 });
 
 const SceneLoader = forwardRef<sceneRef, props>((props, ref) => {
+  const objRef = React.useRef();
   const deckRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
   const placeholderRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
 
-  useImperativeHandle(ref, () => elem(props, deckRef, placeholderRef));
+  useImperativeHandle(ref, () => elem(props, objRef, deckRef, placeholderRef));
 
-  return <Scene {...props} deckRef={deckRef} placeholderRef={placeholderRef} />;
+  return <Scene {...props} objRef={objRef} deckRef={deckRef} placeholderRef={placeholderRef} />;
 });
 
-const Scene: FC<props & { placeholderRef: any; deckRef: any }> = (props) => {
+const Scene: FC<props & { objRef: any; placeholderRef: any; deckRef: any }> = (props) => {
   return (
     <LoaderScene camera={[0, 40, -60]}>
       <ambientLight intensity={0.95} />
       <ModelSkate
         {...props}
+        ref={props.objRef}
         deckRef={props.deckRef}
         placeholderRef={props.placeholderRef}
         _id={props._id}
