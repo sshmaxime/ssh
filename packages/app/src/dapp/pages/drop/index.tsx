@@ -146,7 +146,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         <Style.Header></Style.Header>
 
         <Style.Body>
-          <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} />
+          {/* <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} /> */}
           <Style.LeftSide>
             <Style.RealHeader>
               <Grid container spacing={0} flexDirection="column">
