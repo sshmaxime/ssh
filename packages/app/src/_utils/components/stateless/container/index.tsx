@@ -12,10 +12,10 @@ const ContainerComponent: FC<ContainerProps> = ({
   children,
   title,
   subtitle,
-  bgcolor: bgColor = "primary",
+  bgcolor: bgcolor = "primary",
 }) => {
   return (
-    <Style.Root bgcolor={bgColor}>
+    <Style.Root bgcolor={bgcolor}>
       <Style.Title>{title}</Style.Title>
       <Style.Subtitle>{subtitle}</Style.Subtitle>
       {children}

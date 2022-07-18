@@ -34,7 +34,7 @@ describe('SSHStore', () => {
 
         const createDrop = async (dropId: number, maxSupply: number, price: BigNumber) => {
             it('should create drop', async () => {
-                await SSHStore.createDrop(maxSupply, price, []);
+                await SSHStore.createDrop(maxSupply, price);
             });
 
             it('total supply of drop should be updated', async () => {

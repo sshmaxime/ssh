@@ -5,12 +5,10 @@ import { Typography } from "@mui/material";
 const style = {
   Root: styled("div")<{
     bgcolor?: "primary" | "secondary";
-  }>(({ theme, bgcolor: bgColor }) => ({
+  }>(({ theme, bgcolor: bgcolor }) => ({
     ...theme.myBreakpoints(theme).level1,
     backgroundColor:
-      bgColor === "primary"
-        ? theme.backgroundColor.primary
-        : theme.backgroundColor.secondary,
+      bgcolor === "primary" ? theme.backgroundColor.primary : theme.backgroundColor.secondary,
     paddingTop: "7.5vh",
     paddingBottom: "7.5vh",
   })),

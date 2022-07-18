@@ -16,6 +16,7 @@ const Index: FC<props> = ({ children }) => {
       <Navbar />
 
       <Routes>
+        <Route path="/drop" element={<Drop />} />
         <Route path="/drop/:dropId" element={<Drop />} />
       </Routes>
     </Provider>

@@ -121,6 +121,12 @@ const style = {
     color: "#3366BB",
     borderRadius: "5px",
   })),
+  Title: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 600,
+    fontSize: "0.75em",
+    color: "black",
+  })),
 };
 
 export default style;

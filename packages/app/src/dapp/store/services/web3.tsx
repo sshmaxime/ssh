@@ -12,11 +12,18 @@ const initialState: Web3 = {
 };
 
 export const login = createAsyncThunk("web3/login", async () => {
-  await sdk.connect();
+  await sdk.init();
   const { address } = sdk.getInfo();
 
   return address;
 });
+
+export const mint = createAsyncThunk(
+  "web3/mint",
+  async (obj: { address: string; value: string }) => {
+    await sdk.mint(obj.address, obj.value);
+  }
+);
 
 const web3 = createSlice({
   name: "counter",
@@ -27,6 +34,7 @@ const web3 = createSlice({
       state.auth = true;
       state.address = action.payload;
     });
+    builder.addCase(mint.fulfilled, (state, action) => {});
   },
 });
 

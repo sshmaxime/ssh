@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "../store/hooks";
 import { login } from "../store/services/web3";
 import { shortenAddress } from "../utils";
 import { useGetDripsByAddressQuery } from "../store/services";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export const NavbarComponent: FC = () => {
   const { auth, address } = useSelector((state) => state.web3);
@@ -40,6 +41,20 @@ export const NavbarComponent: FC = () => {
                 <Grid item>
                   <Clickable address="/">
                     <img alt="" src={Logo} style={{ width: "40px" }} />
+                  </Clickable>
+                </Grid>
+                <Grid item style={{ marginLeft: "25px" }}>
+                  <Clickable onClick={() => {}}>
+                    <Grid container alignItems="center" justifyContent="center">
+                      <Grid item>
+                        <ArrowRightAltIcon
+                          style={{ fontSize: "2.5em", transform: "rotate(180deg)", color: "black" }}
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Style.Title>BACK TO ALL DROP</Style.Title>
+                      </Grid>
+                    </Grid>
                   </Clickable>
                 </Grid>
                 <Grid item xs={1} />
@@ -187,7 +202,7 @@ export const NavbarComponent: FC = () => {
                       <Grid item xs={7}>
                         <Grid container>
                           <Grid item xs={12}>
-                            <Style.WalletENS>bonjour.eth</Style.WalletENS>
+                            <Style.WalletENS>alpha.eth</Style.WalletENS>
                           </Grid>
                           <Grid item xs={12}>
                             <Style.WalletAddy>{shortenAddress(address)}</Style.WalletAddy>

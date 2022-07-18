@@ -299,7 +299,7 @@ const TeamComponent: FC<{
     name: string;
     job: string;
     img: string;
-    bgColor?: string;
+    bgcolor?: string;
     icons: { img: any | string; link: string }[];
   }[];
 }> = ({ children, people }) => {
@@ -555,14 +555,14 @@ const MainComponent: FC<props> = ({ children }) => {
             name: "SSH",
             job: "FOUNDER",
             img: me,
-            bgColor: "#B4FFA5",
+            bgcolor: "#B4FFA5",
             icons: [],
           },
           {
             name: "LE REMS",
             job: "CO-FOUNDER",
             img: rems,
-            bgColor: "#B4FFA5",
+            bgcolor: "#B4FFA5",
             icons: [],
           },
         ]}

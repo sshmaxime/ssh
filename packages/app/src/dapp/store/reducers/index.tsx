@@ -1,9 +1,3 @@
-import { appState, appStateReducer } from "./app.reducer";
+export interface IAppState {}
 
-export interface IAppState {
-  appState: appState;
-}
-
-export const reducers = {
-  appState: appStateReducer,
-};
+export const reducers = {};

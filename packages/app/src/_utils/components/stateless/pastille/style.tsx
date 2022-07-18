@@ -1,24 +1,25 @@
 import { styled } from "@mui/material/styles";
 
 const style = {
-  Root: styled("div")<{ secondary?: boolean; small?: boolean }>(
-    ({ theme, secondary, small }) => ({
+  Root: styled("div")<{ $secondary?: boolean; $small?: boolean; bgcolor?: string }>(
+    ({ theme, $secondary, $small, bgcolor }) => ({
       textAlign: "center",
       height: "20px",
-      fontSize: small ? "0.5em" : "0.7em",
-      backgroundColor: !secondary
-        ? theme.backgroundColor.primary
-        : theme.backgroundColor.secondary,
+      fontSize: $small ? "0.5em" : "0.7em",
+      backgroundColor: $secondary
+        ? bgcolor || theme.backgroundColor.tertiary
+        : bgcolor || theme.backgroundColor.primary,
       color: "black",
       borderRadius: "20px",
-      paddingLeft: "20px",
-      paddingRight: "20px",
+      paddingLeft: $secondary ? "15px" : "20px",
+      paddingRight: $secondary ? "15px" : "20px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       fontFamily: "montserrat",
-      fontWeight: 600,
-      boxShadow: "1.5px 1.5px 0px #2AFE00",
+      fontWeight: $secondary ? 700 : 600,
+      // opacity: $secondary ? "50%" : "",
+      boxShadow: $secondary ? "" : `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
     })
   ),
 };

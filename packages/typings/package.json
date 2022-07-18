@@ -1,6 +1,14 @@
 {
   "name": "@sshlabs/typings",
   "version": "1.0.0",
-  "main": "index.ts",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
 }

@@ -28,7 +28,7 @@ describe('SSHDrop', () => {
             for (let maxSupply of [0, 1, 10, 200, 100000]) {
                 context(`with id: ${id}, maxSupply: ${maxSupply}`, () => {
                     beforeEach(async () => {
-                        SSHDrop = await Contracts.SSHDrop.deploy(id, maxSupply, 0, []);
+                        SSHDrop = await Contracts.SSHDrop.deploy(id, maxSupply, 0);
                     });
 
                     it('should be properly constructed', async () => {
@@ -70,7 +70,7 @@ describe('SSHDrop', () => {
             for (let price of [BigNumber.from(0), toEth('0.05'), toEth('0.1'), toEth('0.5'), toEth('2.5')]) {
                 context(`with id: ${id}, maxSupply: ${maxSupply}`, () => {
                     before(async () => {
-                        SSHDrop = await Contracts.SSHDrop.deploy(id, maxSupply, price, []);
+                        SSHDrop = await Contracts.SSHDrop.deploy(id, maxSupply, price);
                     });
 
                     for (let tokenId = 0; tokenId !== maxSupply; tokenId++) {

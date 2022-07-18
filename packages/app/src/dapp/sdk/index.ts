@@ -1,7 +1,8 @@
 import { ethers, Signer } from "ethers";
+import { SSHDrop__factory } from "@sshlabs/contracts";
 
 class SDK {
-  private _signer: Signer | undefined;
+  private _signer!: Signer;
   private _address: string;
 
   constructor() {
@@ -20,12 +21,19 @@ class SDK {
     this._address = await newSigner.getAddress();
   };
 
-  //
-  connect = async () => {
+  init = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
     await provider.send("eth_requestAccounts", []);
-    await this._setSigner(provider.getSigner());
+    this._signer = provider.getSigner() as Signer;
+    this._address = await this._signer.getAddress();
+  };
+  //
+  //
+  //
+  mint = async (contractAddress: string, value: string) => {
+    const contract = SSHDrop__factory.connect(contractAddress, this._signer);
+    await contract.mint({ value: value });
   };
 }
 

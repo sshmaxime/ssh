@@ -3,11 +3,11 @@ import { FC } from "react";
 // styles
 import Style from "./style";
 
-type props = { title: string; secondary?: boolean; small?: boolean };
+type props = { title: string; secondary?: boolean; small?: boolean; bgcolor?: string };
 
-const Pastille: FC<props> = ({ title, secondary, small }) => {
+const Pastille: FC<props> = ({ title, secondary, small, bgcolor }) => {
   return (
-    <Style.Root secondary={secondary} small={small}>
+    <Style.Root $secondary={secondary} $small={small} bgcolor={bgcolor}>
       {title}
     </Style.Root>
   );

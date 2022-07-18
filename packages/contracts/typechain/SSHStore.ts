@@ -26,7 +26,7 @@ import type {
 
 export interface SSHStoreInterface extends ethers.utils.Interface {
   functions: {
-    "createDrop(uint256,uint256,address[])": FunctionFragment;
+    "createDrop(uint256,uint256)": FunctionFragment;
     "getDrop(uint256)": FunctionFragment;
     "getSupply()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -36,7 +36,7 @@ export interface SSHStoreInterface extends ethers.utils.Interface {
 
   encodeFunctionData(
     functionFragment: "createDrop",
-    values: [BigNumberish, BigNumberish, string[]]
+    values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "getDrop",
@@ -111,7 +111,6 @@ export interface SSHStore extends BaseContract {
     createDrop(
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
-      whitelist: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -134,7 +133,6 @@ export interface SSHStore extends BaseContract {
   createDrop(
     maxSupply: BigNumberish,
     mintPrice: BigNumberish,
-    whitelist: string[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -157,7 +155,6 @@ export interface SSHStore extends BaseContract {
     createDrop(
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
-      whitelist: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -190,7 +187,6 @@ export interface SSHStore extends BaseContract {
     createDrop(
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
-      whitelist: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -217,7 +213,6 @@ export interface SSHStore extends BaseContract {
     createDrop(
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
-      whitelist: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

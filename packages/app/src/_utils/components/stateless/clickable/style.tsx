@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 const style = {
   RealRoot: styled("div")<{ $activated?: boolean }>(({ theme, $activated }) => ({
     transition: "all .2s ease-in-out",
-    opacity: $activated ? "" : "25%",
+    opacity: $activated ? "" : "10%",
     ":hover": {
       transform: $activated ? "scale(1.01)" : "",
-      cursor: $activated ? "pointer" : "",
+      cursor: $activated ? "pointer" : "not-allowed",
     },
   })),
   Root: styled("div")(({ theme }) => ({})),

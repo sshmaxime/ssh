@@ -1,14 +1,9 @@
 import { env } from "process";
 
 import { BigNumber, ethers } from "ethers";
-import {
-  SSHStore,
-  SSHDrop,
-  SSHStore__factory,
-  SSHDrop__factory,
-} from "@sshlabs/contracts/typechain";
+import { SSHStore, SSHDrop, SSHStore__factory, SSHDrop__factory } from "@sshlabs/contracts";
 
-import { DRIP, Drops } from "@sshlabs/typings";
+import { DRIP, Drops, getStatus } from "@sshlabs/typings";
 import axios from "axios";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
@@ -63,6 +58,7 @@ export class Server {
       const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
 
       this.db.DROPS.push({
+        _address: dropContractAddress,
         id: i.toNumber(),
         collections: (await dropContract.whitelist()).map((whitelistAddress) => {
           return {
@@ -73,6 +69,7 @@ export class Server {
         price: (await dropContract.price()).toString(),
         maxSupply: (await dropContract.maxSupply()).toNumber(),
         currentSupply: (await dropContract.totalSupply()).toNumber(),
+        status: getStatus(await dropContract.status()),
       });
     }
   };
