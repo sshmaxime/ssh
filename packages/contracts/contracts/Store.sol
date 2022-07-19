@@ -13,6 +13,9 @@ contract SSHStore is Ownable {
     // Total supply of DROPs
     uint256 TOTAL_SUPPLY = 0;
 
+    // Event emitted when a DROP gets created
+    event DropCreated(uint256 indexed dropId);
+
     /**
      * @dev Return the DROP item matching the drop id.
      */
@@ -31,8 +34,10 @@ contract SSHStore is Ownable {
      * @dev Create a DROP.
      */
     function createDrop(uint256 maxSupply, uint256 mintPrice) public onlyOwner {
-        uint256 newDropID = TOTAL_SUPPLY;
-        _drops[newDropID] = new SSHDrop(newDropID, maxSupply, mintPrice);
+        uint256 dropId = TOTAL_SUPPLY;
+        _drops[dropId] = new SSHDrop(dropId, maxSupply, mintPrice);
         TOTAL_SUPPLY++;
+
+        emit DropCreated(dropId);
     }
 }

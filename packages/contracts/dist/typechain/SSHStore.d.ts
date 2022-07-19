@@ -25,10 +25,16 @@ export interface SSHStoreInterface extends ethers.utils.Interface {
     decodeFunctionResult(functionFragment: "renounceOwnership", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     events: {
+        "DropCreated(uint256)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
     };
+    getEvent(nameOrSignatureOrTopic: "DropCreated"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+export declare type DropCreatedEvent = TypedEvent<[BigNumber], {
+    dropId: BigNumber;
+}>;
+export declare type DropCreatedEventFilter = TypedEventFilter<DropCreatedEvent>;
 export declare type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
@@ -86,6 +92,8 @@ export interface SSHStore extends BaseContract {
         transferOwnership(newOwner: string, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
+        "DropCreated(uint256)"(dropId?: BigNumberish | null): DropCreatedEventFilter;
+        DropCreated(dropId?: BigNumberish | null): DropCreatedEventFilter;
         "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
         OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
     };

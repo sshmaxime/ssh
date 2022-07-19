@@ -63,10 +63,11 @@ export enum STATUS {
 export type Drop = {
   _address: string;
   id: number;
-  collections: Collection[];
-  price: string; // wei
   maxSupply: number;
+  price: string; // wei
+  //
   currentSupply: number;
+  collections: Collection[];
   status: STATUS;
 };
 

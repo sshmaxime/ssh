@@ -2,13 +2,13 @@
     "name": "@sshlabs/contracts",
     "version": "1.0.0",
     "license": "MIT",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "main": "dist/typechain/index.js",
+    "types": "dist/typechain/index.d.ts",
     "scripts": {
         "start": "FORK=MAINNET FORK_BN=15122522 yarn hardhat node",
         "build": "hardhat compile && yarn tsc",
         "deploy": "hardhat deploy",
-        "clean": "rm -rf artifacts cache typechain",
+        "clean": "rm -rf dist artifacts cache typechain",
         "test": "hardhat test",
         "re": "yarn clean && yarn build"
     },

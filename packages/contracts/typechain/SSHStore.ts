@@ -67,11 +67,17 @@ export interface SSHStoreInterface extends ethers.utils.Interface {
   ): Result;
 
   events: {
+    "DropCreated(uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "DropCreated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+
+export type DropCreatedEvent = TypedEvent<[BigNumber], { dropId: BigNumber }>;
+
+export type DropCreatedEventFilter = TypedEventFilter<DropCreatedEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -173,6 +179,11 @@ export interface SSHStore extends BaseContract {
   };
 
   filters: {
+    "DropCreated(uint256)"(
+      dropId?: BigNumberish | null
+    ): DropCreatedEventFilter;
+    DropCreated(dropId?: BigNumberish | null): DropCreatedEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
