@@ -54,6 +54,9 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     // Mapping from token id to DROP item
     mapping(uint256 => DropItem) tokenIdToDropItem;
 
+    //
+    event Minted(uint256 indexed tokenId);
+
     constructor(
         uint256 id,
         uint256 _maxSupply,
@@ -139,5 +142,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         if (tokenId == maxSupply_) {
             STATUS = e_STATUS.STANDBY;
         }
+
+        emit Minted(tokenId);
     }
 }

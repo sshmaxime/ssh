@@ -200,12 +200,14 @@ export interface SSHDropInterface extends ethers.utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
+    "Minted(uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -223,6 +225,10 @@ export type ApprovalForAllEvent = TypedEvent<
 >;
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
+
+export type MintedEvent = TypedEvent<[BigNumber], { tokenId: BigNumber }>;
+
+export type MintedEventFilter = TypedEventFilter<MintedEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -611,6 +617,9 @@ export interface SSHDrop extends BaseContract {
       operator?: string | null,
       approved?: null
     ): ApprovalForAllEventFilter;
+
+    "Minted(uint256)"(tokenId?: BigNumberish | null): MintedEventFilter;
+    Minted(tokenId?: BigNumberish | null): MintedEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,

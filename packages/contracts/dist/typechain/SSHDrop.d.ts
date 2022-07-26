@@ -90,11 +90,13 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     events: {
         "Approval(address,address,uint256)": EventFragment;
         "ApprovalForAll(address,address,bool)": EventFragment;
+        "Minted(uint256)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
         "Transfer(address,address,uint256)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -118,6 +120,10 @@ export declare type ApprovalForAllEvent = TypedEvent<[
     approved: boolean;
 }>;
 export declare type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
+export declare type MintedEvent = TypedEvent<[BigNumber], {
+    tokenId: BigNumber;
+}>;
+export declare type MintedEventFilter = TypedEventFilter<MintedEvent>;
 export declare type OwnershipTransferredEvent = TypedEvent<[
     string,
     string
@@ -273,6 +279,8 @@ export interface SSHDrop extends BaseContract {
         Approval(owner?: string | null, approved?: string | null, tokenId?: BigNumberish | null): ApprovalEventFilter;
         "ApprovalForAll(address,address,bool)"(owner?: string | null, operator?: string | null, approved?: null): ApprovalForAllEventFilter;
         ApprovalForAll(owner?: string | null, operator?: string | null, approved?: null): ApprovalForAllEventFilter;
+        "Minted(uint256)"(tokenId?: BigNumberish | null): MintedEventFilter;
+        Minted(tokenId?: BigNumberish | null): MintedEventFilter;
         "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
         OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
         "Transfer(address,address,uint256)"(from?: string | null, to?: string | null, tokenId?: BigNumberish | null): TransferEventFilter;

@@ -12,6 +12,6 @@
             "*": ["node_modules/*"]
         }
     },
-    "include": ["./typechain"],
+    "include": ["./deploy", "./components", "./test"],
     "files": ["hardhat.config.ts"]
 }

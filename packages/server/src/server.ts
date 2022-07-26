@@ -3,6 +3,7 @@ import http from "http";
 import express from "express";
 import { Server as SocketIoServer } from "socket.io";
 import app from "./express";
+import State from "./state";
 
 // https://github.com/sindresorhus/on-change
 
@@ -21,11 +22,21 @@ export class Server {
     this.io = new SocketIoServer(this.server);
   }
 
-  //
+  stateInit = async () => {
+    await State.init();
+  };
 
-  start = () => {
+  ioInit = async () => {
+    this.io.on("connection", (socket) => {
+      console.log("a user connected");
+    });
+  };
+
+  start = async () => {
     try {
       this.server.listen(this.PORT, async (): Promise<void> => {
+        await this.stateInit();
+
         console.log(`Connected successfully on port ${this.PORT}`);
       });
     } catch (error) {
