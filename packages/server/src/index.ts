@@ -1,9 +1,8 @@
 import "dotenv/config";
 
-import { Server } from "./server";
+import { App } from "./app";
 
 const PORT = 3001;
 
-const server = new Server(PORT);
-
-server.start();
+const app = new App();
+app.start(PORT);

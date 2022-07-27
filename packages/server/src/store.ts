@@ -5,6 +5,7 @@ import { SSHStore, SSHDrop, SSHStore__factory, SSHDrop__factory } from "@sshlabs
 
 import { DRIP, Drop, Drops, getStatus } from "@sshlabs/typings";
 import axios from "axios";
+import Server from "./server";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
@@ -22,7 +23,9 @@ export const ContractToCollectionName: { [contractAddress: string]: string } = {
   "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d": "BAYC",
 };
 
-export class State {
+const { server, io, app } = Server.get();
+
+export class Store {
   private SSHStore: SSHStore;
 
   private DROPS: Drops;
@@ -115,6 +118,7 @@ export class State {
 
       this.DROPS[dropId.toNumber()].currentSupply++;
       console.log(`from ${dropId} -> hello`);
+      io.emit("hello", { data: this.getState() });
     });
   };
 
@@ -127,4 +131,4 @@ export class State {
   };
 }
 
-export default new State();
+export default new Store();

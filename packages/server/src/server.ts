@@ -1,56 +1,64 @@
 import http from "http";
-
-import express from "express";
+import express, { Request, Response } from "express";
 import { Server as SocketIoServer } from "socket.io";
-import app from "./express";
-import State from "./state";
+import { env } from "process";
 
-// https://github.com/sindresorhus/on-change
+import cors from "cors";
+import axios from "axios";
 
 export class Server {
-  readonly PORT: number;
+  private server: http.Server;
+  private app: express.Express;
+  private io: SocketIoServer;
 
-  app: express.Express;
-  server: http.Server;
-  io: SocketIoServer;
+  constructor() {
+    this.app = this.createExpressApp();
+    this.server = this.createHttpServer();
+    this.io = this.createIoServer();
+  }
 
-  constructor(port: number) {
-    this.PORT = port;
+  get = () => {
+    return { server: this.server, app: this.app, io: this.io };
+  };
 
-    this.app = app;
-    this.server = http.createServer(this.app);
-    this.io = new SocketIoServer(this.server, {
+  private createExpressApp = () => {
+    // Env setup
+    const apiKey = env["apiKey"];
+
+    // Axios setup
+    axios.defaults.headers.common["X-API-KEY"] = apiKey;
+
+    // Express server
+    const app = express();
+    app.use(cors({ origin: "http://localhost:3000" }));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.static(__dirname + "/../public"));
+
+    return app;
+  };
+
+  private createHttpServer = () => {
+    return http.createServer(this.app);
+  };
+
+  private createIoServer = () => {
+    return new SocketIoServer(this.server, {
       cors: {
         origin: "http://localhost:3000",
       },
     });
-  }
-
-  stateInit = async () => {
-    await State.init();
   };
 
-  ioInit = async () => {
-    this.io.on("connection", (socket) => {
-      console.log("a user connected");
-
-      socket.on("updateme", () => {
-        console.log("ask for update");
-        socket.emit("hello", { data: State.getState() });
-      });
-    });
-  };
-
-  start = async () => {
+  start = async (PORT: number) => {
     try {
-      this.server.listen(this.PORT, async (): Promise<void> => {
-        await this.stateInit();
-        await this.ioInit();
-
-        console.log(`Connected successfully on port ${this.PORT}`);
+      this.server.listen(PORT, async (): Promise<void> => {
+        console.log(`Connected successfully on port ${PORT}`);
       });
     } catch (error) {
       console.error(`Error occured: ${error.message}`);
     }
   };
 }
+
+export default new Server();
