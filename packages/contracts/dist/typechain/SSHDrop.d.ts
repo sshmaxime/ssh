@@ -92,12 +92,14 @@ export interface SSHDropInterface extends ethers.utils.Interface {
         "ApprovalForAll(address,address,bool)": EventFragment;
         "Minted(uint256)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
+        "StatusUpdated(uint8)": EventFragment;
         "Transfer(address,address,uint256)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+    getEvent(nameOrSignatureOrTopic: "StatusUpdated"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 export declare type ApprovalEvent = TypedEvent<[
@@ -132,6 +134,10 @@ export declare type OwnershipTransferredEvent = TypedEvent<[
     newOwner: string;
 }>;
 export declare type OwnershipTransferredEventFilter = TypedEventFilter<OwnershipTransferredEvent>;
+export declare type StatusUpdatedEvent = TypedEvent<[number], {
+    status: number;
+}>;
+export declare type StatusUpdatedEventFilter = TypedEventFilter<StatusUpdatedEvent>;
 export declare type TransferEvent = TypedEvent<[
     string,
     string,
@@ -283,6 +289,8 @@ export interface SSHDrop extends BaseContract {
         Minted(tokenId?: BigNumberish | null): MintedEventFilter;
         "OwnershipTransferred(address,address)"(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
         OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
+        "StatusUpdated(uint8)"(status?: BigNumberish | null): StatusUpdatedEventFilter;
+        StatusUpdated(status?: BigNumberish | null): StatusUpdatedEventFilter;
         "Transfer(address,address,uint256)"(from?: string | null, to?: string | null, tokenId?: BigNumberish | null): TransferEventFilter;
         Transfer(from?: string | null, to?: string | null, tokenId?: BigNumberish | null): TransferEventFilter;
     };

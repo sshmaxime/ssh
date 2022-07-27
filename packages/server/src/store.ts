@@ -72,29 +72,30 @@ export class Store {
     };
   };
 
-  // // init blockchain websockets listeners
-  // private initBlockchainListeners = async () => {
-  //   // New drop is created
-  //   this.SSHStore.on(this.SSHStore.filters.DropCreated(null), async (dropId) => {
-  //     const dropContractAddress = await this.SSHStore.getDrop(dropId);
-  //     const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
+  // init blockchain websockets listeners
+  private initBlockchainListeners = async () => {
+    // New drop is created
+    this.SSHStore.on(this.SSHStore.filters.DropCreated(null), async (dropId) => {
+      const dropContractAddress = await this.SSHStore.getDrop(dropId);
+      const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
 
-  //     this.DROPS.push({
-  //       _address: dropContractAddress,
-  //       id: dropId.toNumber(),
-  //       collections: (await dropContract.whitelist()).map((whitelistAddress) => {
-  //         return {
-  //           name: ContractToCollectionName[whitelistAddress],
-  //           contract: whitelistAddress,
-  //         };
-  //       }),
-  //       price: (await dropContract.price()).toString(),
-  //       maxSupply: (await dropContract.maxSupply()).toNumber(),
-  //       currentSupply: (await dropContract.totalSupply()).toNumber(),
-  //       status: getStatus(await dropContract.status()),
-  //     });
-  //   });
-  // };
+      this.DROPS.push({
+        _address: dropContractAddress,
+        id: dropId.toNumber(),
+        collections: (await dropContract.whitelist()).map((whitelistAddress) => {
+          return {
+            name: ContractToCollectionName[whitelistAddress],
+            contract: whitelistAddress,
+          };
+        }),
+        price: (await dropContract.price()).toString(),
+        maxSupply: (await dropContract.maxSupply()).toNumber(),
+        currentSupply: (await dropContract.totalSupply()).toNumber(),
+        status: getStatus(await dropContract.status()),
+      });
+      io.emit("hello", { data: this.getState() });
+    });
+  };
 
   private initDropsListeners = async () => {
     const dropSupply = await this.SSHStore.getSupply();
@@ -117,7 +118,16 @@ export class Store {
       // do stuff
 
       this.DROPS[dropId.toNumber()].currentSupply++;
-      console.log(`from ${dropId} -> hello`);
+      io.emit("hello", { data: this.getState() });
+    });
+
+    // event Status
+    dropContract.on(dropContract.filters.StatusUpdated(null), async (...args) => {
+      const event = args[args.length - 1] as Event;
+      if (event.blockNumber <= startBlockNumber) return; // do not react to this event
+      // do stuff
+
+      this.DROPS[dropId.toNumber()].status = getStatus(args[0]);
       io.emit("hello", { data: this.getState() });
     });
   };

@@ -202,6 +202,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     "ApprovalForAll(address,address,bool)": EventFragment;
     "Minted(uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "StatusUpdated(uint8)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -209,6 +210,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "StatusUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -237,6 +239,10 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
+
+export type StatusUpdatedEvent = TypedEvent<[number], { status: number }>;
+
+export type StatusUpdatedEventFilter = TypedEventFilter<StatusUpdatedEvent>;
 
 export type TransferEvent = TypedEvent<
   [string, string, BigNumber],
@@ -629,6 +635,11 @@ export interface SSHDrop extends BaseContract {
       previousOwner?: string | null,
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
+
+    "StatusUpdated(uint8)"(
+      status?: BigNumberish | null
+    ): StatusUpdatedEventFilter;
+    StatusUpdated(status?: BigNumberish | null): StatusUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: string | null,

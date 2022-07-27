@@ -34,7 +34,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
             autoMine: true
         },
         'createDrop',
-        15,
+        1,
         toEth('0.2')
     );
 

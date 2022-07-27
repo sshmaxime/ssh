@@ -57,6 +57,8 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     //
     event Minted(uint256 indexed tokenId);
 
+    event StatusUpdated(e_STATUS indexed status);
+
     constructor(
         uint256 id,
         uint256 _maxSupply,
@@ -108,16 +110,23 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     /**
      * @dev Update the status of the DROP.
      */
+    function _updateStatus(e_STATUS newStatus) internal {
+        STATUS = newStatus;
+        emit StatusUpdated(newStatus);
+    }
+
+    /**
+     * @dev Update the status of the DROP.
+     */
     function updateStatus(e_STATUS newStatus) public onlyOwner {
-        if (STATUS == e_STATUS.CREATED && newStatus == e_STATUS.MINTABLE) {
-            STATUS = newStatus;
-        } else if (STATUS == e_STATUS.MINTABLE && newStatus == e_STATUS.STANDBY) {
-            STATUS = newStatus;
-        } else if (STATUS == e_STATUS.STANDBY && newStatus == e_STATUS.CUSTOMIZABLE) {
-            STATUS = newStatus;
-        } else {
-            revert("INVALID_STATUS_FOR_UPDATE");
+        if (
+            (STATUS == e_STATUS.CREATED && newStatus == e_STATUS.MINTABLE) ||
+            (STATUS == e_STATUS.MINTABLE && newStatus == e_STATUS.STANDBY) ||
+            (STATUS == e_STATUS.STANDBY && newStatus == e_STATUS.CUSTOMIZABLE)
+        ) {
+            return _updateStatus(newStatus);
         }
+        revert("INVALID_STATUS_FOR_UPDATE");
     }
 
     /**
@@ -139,8 +148,8 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         tokenIdToDropItem[tokenId] = DropItem({ isMutable: true });
 
         // If it's the very last item to be minted
-        if (tokenId == maxSupply_) {
-            STATUS = e_STATUS.STANDBY;
+        if (tokenId + 1 == maxSupply_) {
+            _updateStatus(e_STATUS.STANDBY);
         }
 
         emit Minted(tokenId);
