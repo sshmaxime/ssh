@@ -19,7 +19,11 @@ export class Server {
 
     this.app = app;
     this.server = http.createServer(this.app);
-    this.io = new SocketIoServer(this.server);
+    this.io = new SocketIoServer(this.server, {
+      cors: {
+        origin: "http://localhost:3000",
+      },
+    });
   }
 
   stateInit = async () => {
@@ -29,6 +33,11 @@ export class Server {
   ioInit = async () => {
     this.io.on("connection", (socket) => {
       console.log("a user connected");
+
+      socket.on("updateme", () => {
+        console.log("ask for update");
+        socket.emit("hello", { data: State.getState() });
+      });
     });
   };
 
@@ -36,6 +45,7 @@ export class Server {
     try {
       this.server.listen(this.PORT, async (): Promise<void> => {
         await this.stateInit();
+        await this.ioInit();
 
         console.log(`Connected successfully on port ${this.PORT}`);
       });

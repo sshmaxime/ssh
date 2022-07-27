@@ -34,6 +34,7 @@ import { useGetDropQuery, useGetAssetsForDropByAddressQuery } from "../../store/
 import { login, mint } from "../../store/services/web3";
 
 import { ethers } from "ethers";
+import { useGetMessagesQuery } from "@/dapp/store/services/socket";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
@@ -44,10 +45,11 @@ const DropProxy: FC = () => {
     dispatch(login());
   });
 
+  const { data: drop, isLoading, isFetching } = useGetMessagesQuery({});
+
   const dropId = parseInt(useParams().dropId || "-1");
 
-  const { data: drop, isLoading } = useGetDropQuery({ dropId: dropId });
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <>Loaading ...</>;
   }
 
@@ -55,7 +57,11 @@ const DropProxy: FC = () => {
     return <DropNotFound />;
   }
 
-  return <Drop drop={drop} />;
+  if (drop !== undefined && drop.length === 0) {
+    return <>Loaading ...</>;
+  }
+
+  return <Drop drop={drop[dropId]} />;
 };
 
 const DropNotFound: FC = () => {
