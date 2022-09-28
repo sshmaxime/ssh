@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 
 import { AppBar, Toolbar, Typography, Button, Card, Grid, SwipeableDrawer } from "@mui/material";
 
-const triangleHeight = "10vh";
+const triangleHeight = "7.5vh";
 
 const style = {
   Root: styled("div")(({ theme }) => ({})),
@@ -28,19 +28,67 @@ const style = {
     left: "50%",
     transform: "translate(-50%, -50%)",
   })),
+  GridTitle: styled(Grid)(({ theme }) => ({
+    height: "calc(100vh - 100px - 100px - 7.5vh)",
+  })),
   TitleContainer2: styled("div")(({ theme }) => ({
-    // ...theme.myBreakpoints(theme).level1,
     position: "absolute",
-    top: "30%",
-    width: "700px",
-    height: "100px",
-
-    //
+    top: "100px",
+    left: 0,
+    right: 0,
+    backgroundColor: theme.backgroundColor.secondary,
+    ...theme.myBreakpoints(theme).level1,
+  })),
+  Title: styled("p")(({ theme }) => ({
     fontSize: "2em",
+    letterSpacing: "1.5px",
     fontFamily: theme.fontFamily.primary,
-    fontStyle: "italic",
-    lineHeight: "2em",
     fontWeight: 900,
+    fontStyle: "italic",
+    marginBottom: "25px",
+    display: "inline-block",
+    paddingBottom: "10px",
+    borderBottom: "10px solid black",
+  })),
+  TitleKeywordPrefix: styled("span")(({ theme }) => ({
+    fontSize: "4.5em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 600,
+    padding: "1.5px 5px 1.5px 5px",
+    marginRight: "15px",
+    backgroundColor: theme.backgroundColor.tertiary,
+    color: "white",
+    borderRadius: "2.5px",
+  })),
+  TitleKeyword: styled("span")(({ theme }) => ({
+    fontSize: "4.5em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 700,
+    marginBottom: "100px",
+    padding: "1.5px 5px 1.5px 5px",
+    borderRadius: "2.5px",
+    backgroundColor: "black",
+    color: "white",
+  })),
+  TitleVertical: styled("span")(({ theme }) => ({
+    fontSize: "0.9em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 600,
+    backgroundColor: "black",
+    color: "white",
+    letterSpacing: "1.5px",
+    writingMode: "vertical-rl",
+    textOrientation: "mixed",
+    padding: "7.5px 1.5px 7.5px 1.5px",
+  })),
+  TitleVertical1: styled("span")(({ theme }) => ({
+    fontSize: "0.9em",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    writingMode: "vertical-rl",
+    textOrientation: "mixed",
+    fontStyle: "italic",
+    padding: "7.5px 1.5px 7.5px 1.5px",
   })),
   ProjectQuickPresentation: styled("div")(({ theme }) => ({
     display: "flex",
@@ -82,7 +130,7 @@ const style = {
   //
   DripComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    backgroundColor: theme.backgroundColor.primary,
+    // backgroundColor: theme.backgroundColor.primary,
     paddingTop: "7.5vh",
     paddingBottom: "7.5vh",
   })),

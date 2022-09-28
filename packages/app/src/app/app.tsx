@@ -15,6 +15,9 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 import skateboard from "../_utils/assets/images/untitled.png";
 import key from "../_utils/assets/images/untitled5.png";
+import alien from "../_utils/assets/images/aliendope.jpeg";
+import circle from "../_utils/assets/images/circleblack.png";
+import mouse from "../_utils/assets/images/mouse.png";
 
 import SceneSkate, { sceneRef } from "@/_3d/scenes/skate_0";
 
@@ -27,15 +30,82 @@ import me from "../_utils/assets/images/me.png";
 import rems from "../_utils/assets/images/rems.png";
 import Marquee from "react-fast-marquee";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
+import TextLoop from "react-text-loop";
 
 type props = {};
 
 const LandingScreenComponent: FC<props> = () => {
   return (
     <Style.LandingScreenComponent>
+      <Style.TitleContainer2>
+        <Style.GridTitle container alignContent="center" justifyContent="center">
+          <Grid item xs={7} style={{ display: "flex", alignItems: "center", position: "relative" }}>
+            <img
+              style={{ width: "125px", position: "absolute", top: "5%", right: "5%" }}
+              src={circle}
+              alt=""
+            />
+            <img
+              style={{
+                width: "20px",
+                position: "absolute",
+                top: "25%",
+                right: "5%",
+                zIndex: 1000,
+              }}
+              src={mouse}
+              alt=""
+            />
+            <div>
+              <div>
+                <Style.Title>WEAR YOUR</Style.Title>
+              </div>
+              {/* <Style.TitleKeywordPrefix>$</Style.TitleKeywordPrefix> */}
+              <TextLoop interval={2500}>
+                <Style.TitleKeyword>NFT</Style.TitleKeyword>
+                <Style.TitleKeyword>CRYPTOPUNKS</Style.TitleKeyword>
+                <Style.TitleKeyword>BAYC</Style.TitleKeyword>
+                <Style.TitleKeyword>SUBLIMES</Style.TitleKeyword>
+                <Style.TitleKeyword>MOONCATS</Style.TitleKeyword>
+              </TextLoop>
+            </div>
+          </Grid>
+          <Grid item xs={1}>
+            <Grid
+              container
+              flexDirection="column"
+              justifyContent="space-between"
+              style={{
+                height: "100%",
+                width: "50%",
+                padding: "5px",
+              }}
+            >
+              <Grid item>
+                <Grid item>
+                  <Style.TitleVertical1>&mdash; SSH LABS &mdash;</Style.TitleVertical1>
+                </Grid>
+              </Grid>
+              <Grid item>
+                <Grid item>
+                  <Style.TitleVertical>EXCLUSIVE</Style.TitleVertical>
+                </Grid>
+                <Grid item>
+                  <Style.TitleVertical>LIMITED</Style.TitleVertical>
+                </Grid>
+                <Grid item>
+                  <Style.TitleVertical>CUSTOMIZABLE</Style.TitleVertical>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs={4}>
+            <img src={alien} style={{ width: "100%", borderRadius: "100px" }} alt="" />
+          </Grid>
+        </Style.GridTitle>
+      </Style.TitleContainer2>
+
       <Style.Background>
-        {/* <SceneRoom /> */}
-        <Style.TitleContainer2>{/*  */}</Style.TitleContainer2>
         <Style.TitleContainer>
           <ArrowRightAltIcon
             style={{
@@ -523,8 +593,6 @@ const MainComponent: FC<props> = ({ children }) => {
       <LabsComponent word="EXCLUSIVE" />
       <DripComponent />
       <LabsComponent word="LIMITED" />
-      <SocietyComponent />
-      <LabsComponent word="CUSTOMIZABLE" />
       <RoadmapComponent
         roadmapItems={[
           {
@@ -548,20 +616,13 @@ const MainComponent: FC<props> = ({ children }) => {
           },
         ]}
       />
-      <LabsComponent word="REDEEMABLE" />
+      <LabsComponent word="CUSTOMIZABLE" />
       <TeamComponent
         people={[
           {
             name: "SSH",
             job: "FOUNDER",
             img: me,
-            bgcolor: "#B4FFA5",
-            icons: [],
-          },
-          {
-            name: "LE REMS",
-            job: "CO-FOUNDER",
-            img: rems,
             bgcolor: "#B4FFA5",
             icons: [],
           },

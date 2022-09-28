@@ -77,8 +77,10 @@ const Skate = forwardRef<{}, props & JSX.IntrinsicElements["group"]>(({ ...props
   materials.Placeholder.color = null as any;
   materials.Placeholder.toneMapped = false;
 
+  console.log(props._id);
+
   // itemId
-  const itemId = "#" + props._id.toFixed();
+  const itemId = "#" + "23";
 
   const canvas = document.createElement("canvas");
 

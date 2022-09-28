@@ -25,6 +25,7 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "6",
     "react-scripts": "4.0.3",
+    "react-text-loop": "^2.3.0",
     "react-transition-group": "^4.4.2",
     "redux": "^4.2.0",
     "socket.io-client": "^4.5.1",
@@ -82,7 +83,7 @@
     "react-router-hash-link": "^2.4.3",
     "react-scroll": "^1.8.4",
     "react-slick": "^0.28.1",
-    "react-spring": "^9.3.2"
+    "react-spring": "^9.5.5"
   },
   "resolutions": {
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"

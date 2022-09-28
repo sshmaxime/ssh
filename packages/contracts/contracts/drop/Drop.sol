@@ -68,6 +68,12 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         PRICE = _price;
         STATUS = e_STATUS.CREATED;
 
+        WHITELIST = [
+            0x116aeBbAD1C8226c80f9F0cB4e255540A0F7afD9,
+            0x31eAa2E93D7AFd237F87F30c0Dbd3aDEB9934f1B,
+            0xc3f733ca98E0daD0386979Eb96fb1722A1A05E69
+        ];
+
         // Making the owner of Store.sol the owner of the contract
         transferOwnership(tx.origin);
     }

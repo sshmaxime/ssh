@@ -95,6 +95,7 @@ const DropNotFound: FC = () => {
 const Deck: { [key: string]: string } = {
   Sublimes: "/models/skate/textures/sublimes-deck.png",
   Isotile: "/models/skate/textures/isotile-deck.png",
+  MoonCats: "/models/skate/textures/mooncats-deck.png",
 };
 
 const Drop: FC<{ drop: DropType }> = ({ drop }) => {
@@ -152,7 +153,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         <Style.Header></Style.Header>
 
         <Style.Body>
-          {/* <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} /> */}
+          <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} />
           <Style.LeftSide>
             <Style.RealHeader>
               <Grid container spacing={0} flexDirection="column">

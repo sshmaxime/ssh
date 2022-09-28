@@ -1,81 +1,52 @@
-import { createTheme } from "@mui/material";
+import { createTheme, Theme } from "@mui/material";
+
+interface MyTheme {
+  myBreakpoints: (param: Theme) => {
+    level0: any;
+    level1: any;
+    level2: any;
+    level3: any;
+    level4: any;
+  };
+  titles: (param: Theme) => {
+    primary: any;
+    secondary: any;
+  };
+
+  backgroundColor: {
+    primary: string;
+    secondary: string;
+    tertiary: string;
+    darker: string;
+  };
+  fontFamily: {
+    primary: string;
+    secondary: string;
+    tertiary: string;
+  };
+  cards: {
+    primary: {
+      boxShadow: string;
+      padding: string;
+      backgroundColor: string;
+      borderRadius: string;
+    };
+    secondary: {
+      boxShadow: string;
+      padding: string;
+      backgroundColor: string;
+      borderRadius: string;
+    };
+  };
+  button: {
+    cursor: string;
+  };
+}
 
 declare module "@mui/material/styles" {
-  interface Theme {
-    myBreakpoints: (param: Theme) => {
-      level0: any;
-      level1: any;
-      level2: any;
-      level3: any;
-      level4: any;
-    };
-    titles: (param: Theme) => {
-      primary: any;
-      secondary: any;
-    };
-
-    backgroundColor: {
-      primary: string;
-      secondary: string;
-      tertiary: string;
-    };
-    fontFamily: {
-      primary: string;
-      secondary: string;
-      tertiary: string;
-    };
-    cards: {
-      primary: {
-        boxShadow: string;
-        padding: string;
-        backgroundColor: string;
-        borderRadius: string;
-      };
-      secondary: {
-        boxShadow: string;
-        padding: string;
-        backgroundColor: string;
-        borderRadius: string;
-      };
-    };
-    button: {
-      cursor: string;
-    };
-  }
-
+  interface Theme extends MyTheme {}
   // allow configuration using `createTheme`
-  interface ThemeOptions {
-    myBreakpoints: Function;
-    titles: Function;
-
-    backgroundColor: {
-      primary: string;
-      secondary: string;
-      tertiary: string;
-    };
-    fontFamily: {
-      primary: string;
-      secondary: string;
-      tertiary: string;
-    };
-    cards: {
-      primary: {
-        boxShadow: string;
-        padding: string;
-        backgroundColor: string;
-        borderRadius: string;
-      };
-      secondary: {
-        boxShadow: string;
-        padding: string;
-        backgroundColor: string;
-        borderRadius: string;
-      };
-    };
-    button: {
-      cursor: string;
-    };
-  }
+  interface ThemeOptions extends MyTheme {}
 }
 
 export const theme = createTheme({
@@ -83,6 +54,7 @@ export const theme = createTheme({
     primary: "#f9f9fb",
     secondary: "#f1f1f5",
     tertiary: "#cbcbdc",
+    darker: "#55557F",
   },
 
   fontFamily: {
@@ -149,8 +121,8 @@ export const theme = createTheme({
       },
       level1: {
         [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "18vw",
-          paddingRight: "18vw",
+          paddingLeft: "12vw",
+          paddingRight: "12vw",
         },
         [themeObj.breakpoints.down("lg")]: {
           paddingLeft: "10vw",
