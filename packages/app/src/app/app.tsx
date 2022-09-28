@@ -18,6 +18,7 @@ import key from "../_utils/assets/images/untitled5.png";
 import alien from "../_utils/assets/images/aliendope.jpeg";
 import circle from "../_utils/assets/images/circleblack.png";
 import mouse from "../_utils/assets/images/mouse.png";
+import Typewriter from "typewriter-effect";
 
 import SceneSkate, { sceneRef } from "@/_3d/scenes/skate_0";
 
@@ -25,6 +26,9 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import Clickable from "../_utils/components/stateless/clickable";
 import { Slide } from "react-awesome-reveal";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import DiscordIcon from "../_utils/assets/icons/discord2.svg";
+import OpenSeaIcon from "../_utils/assets/icons/opensea.svg";
 
 import me from "../_utils/assets/images/me.png";
 import rems from "../_utils/assets/images/rems.png";
@@ -56,19 +60,65 @@ const LandingScreenComponent: FC<props> = () => {
               src={mouse}
               alt=""
             />
-            <div>
-              <div>
+            <Grid container>
+              <Grid item xs={12}>
                 <Style.Title>WEAR YOUR</Style.Title>
-              </div>
-              {/* <Style.TitleKeywordPrefix>$</Style.TitleKeywordPrefix> */}
-              <TextLoop interval={2500}>
-                <Style.TitleKeyword>NFT</Style.TitleKeyword>
-                <Style.TitleKeyword>CRYPTOPUNKS</Style.TitleKeyword>
-                <Style.TitleKeyword>BAYC</Style.TitleKeyword>
-                <Style.TitleKeyword>SUBLIMES</Style.TitleKeyword>
-                <Style.TitleKeyword>MOONCATS</Style.TitleKeyword>
-              </TextLoop>
-            </div>
+              </Grid>
+              <Grid item xs={12}>
+                <Style.TitleKeyword>
+                  <Typewriter
+                    options={{
+                      strings: ["NFTs", "PUNKS", "BAYC", "ENS", "SUBLIMES", "MOONCATS"],
+                      autoStart: true,
+                      loop: true,
+                    }}
+                  />
+                </Style.TitleKeyword>
+              </Grid>
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item xs={12} style={{ marginTop: "25px", marginBottom: "50px" }}>
+                    <Grid item xs={12}>
+                      <Grid container spacing={1} alignContent="center">
+                        <Grid item>
+                          <Clickable address="https://discord.gg/FRAWgJJz4f">
+                            <Style.ImgIcon style={{ color: "black" }} src={OpenSeaIcon} alt="" />
+                          </Clickable>
+                        </Grid>
+                        <Grid item>
+                          <Clickable address="https://discord.gg/FRAWgJJz4f">
+                            <Style.ImgIcon src={DiscordIcon} alt="" />
+                          </Clickable>
+                        </Grid>
+                        <Grid item>
+                          <Clickable address="https://twitter.com/sshlabs_">
+                            <TwitterIcon />
+                          </Clickable>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Style.TitleButton>
+                      {"admin@sshlabs > connection failed ..."}
+                      <br />
+                      {"admin@sshlabs > retrying ..."}
+                      <br />
+                      <br />
+                      <br />
+                      {"admin@sshlabs > connection succesful"}
+                      <br />
+                      <br />
+                      <br />
+                      {"admin@sshlabs > Hey there, how are you today ? :)"}
+                      <br />
+                      {"admin@sshlabs > "}
+                      <input style={{ padding: 0, margin: 0 }} type="text" placeholder={"..."} />
+                    </Style.TitleButton>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={1}>
             <Grid

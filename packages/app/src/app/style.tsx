@@ -50,7 +50,7 @@ const style = {
     paddingBottom: "10px",
     borderBottom: "10px solid black",
   })),
-  TitleKeywordPrefix: styled("span")(({ theme }) => ({
+  TitleKeywordPrefix: styled("p")(({ theme }) => ({
     fontSize: "4.5em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
@@ -60,15 +60,27 @@ const style = {
     color: "white",
     borderRadius: "2.5px",
   })),
-  TitleKeyword: styled("span")(({ theme }) => ({
-    fontSize: "4.5em",
+  TitleKeyword: styled("div")(({ theme }) => ({
+    fontSize: "4em",
+    display: "inline-block",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 700,
-    marginBottom: "100px",
-    padding: "1.5px 5px 1.5px 5px",
+    padding: "5px 15px 5px 15px",
     borderRadius: "2.5px",
     backgroundColor: "black",
     color: "white",
+    boxShadow: `5px 5px 0px ${theme.backgroundColor.tertiary}`,
+  })),
+  TitleButton: styled("p")(({ theme }) => ({
+    fontSize: "0.8em",
+    fontFamily: theme.fontFamily.secondary,
+    fontWeight: 500,
+    letterSpacing: "1.25px",
+    lineHeight: "17.5px",
+  })),
+  ImgIcon: styled("img")(({ theme }) => ({
+    width: "25px",
+    height: "25px",
   })),
   TitleVertical: styled("span")(({ theme }) => ({
     fontSize: "0.9em",
