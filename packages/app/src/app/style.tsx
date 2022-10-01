@@ -24,12 +24,28 @@ const style = {
   })),
   TitleContainer: styled("div")(({ theme }) => ({
     position: "absolute",
-    top: "85%",
+    bottom: "5%",
     left: "50%",
     transform: "translate(-50%, -50%)",
   })),
+  Subtitle: styled("p")(({ theme }) => ({
+    fontSize: "0.65em",
+    letterSpacing: "1.5px",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    marginTop: "5px",
+    // color: theme.backgroundColor.darker,
+  })),
   GridTitle: styled(Grid)(({ theme }) => ({
     height: "calc(100vh - 100px - 100px - 7.5vh)",
+  })),
+  ButtonCallToAction: styled(Grid)(({ theme }) => ({
+    fontSize: "0.9em",
+    backgroundColor: "black",
+    padding: "10px",
+    color: "white",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
   })),
   TitleContainer2: styled("div")(({ theme }) => ({
     position: "absolute",
@@ -45,10 +61,11 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     fontStyle: "italic",
-    marginBottom: "25px",
     display: "inline-block",
     paddingBottom: "10px",
+    marginBottom: "10px",
     borderBottom: "10px solid black",
+    textShadow: `5px 5px ${theme.backgroundColor.tertiary}`,
   })),
   TitleKeywordPrefix: styled("p")(({ theme }) => ({
     fontSize: "4.5em",
@@ -72,11 +89,11 @@ const style = {
     boxShadow: `5px 5px 0px ${theme.backgroundColor.tertiary}`,
   })),
   TitleButton: styled("p")(({ theme }) => ({
-    fontSize: "0.8em",
+    fontSize: "6px",
     fontFamily: theme.fontFamily.secondary,
     fontWeight: 500,
     letterSpacing: "1.25px",
-    lineHeight: "17.5px",
+    lineHeight: "13px",
   })),
   ImgIcon: styled("img")(({ theme }) => ({
     width: "25px",
@@ -142,9 +159,10 @@ const style = {
   //
   DripComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    // backgroundColor: theme.backgroundColor.primary,
-    paddingTop: "7.5vh",
+    paddingTop: "2.5vh",
     paddingBottom: "7.5vh",
+    // background: `r/gb(34,193,195)`,
+    background: `linear-gradient(0deg, ${theme.backgroundColor.secondary} 0%, ${theme.backgroundColor.primary} 50%)`,
   })),
   DripWarningContainer: styled("div")(({ theme }) => ({
     marginTop: "35px",
@@ -160,7 +178,7 @@ const style = {
     marginBottom: "50px",
     display: "inline-block",
     borderRadius: "2.5px",
-    textShadow: shadow ? `10px 5px ${theme.backgroundColor.tertiary}` : "",
+    // textShad ow: shadow ? `10px 5px ${theme.backgroundColor.tertiary}` : "",
   })),
 
   View2Content: styled("div")(({ theme }) => ({
@@ -288,9 +306,9 @@ const style = {
   //
   ContractsComponent: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    backgroundColor: theme.backgroundColor.primary,
-    paddingTop: "2.5vh",
-    paddingBottom: "2.5vh",
+    backgroundColor: theme.backgroundColor.secondary,
+    paddingTop: "7.5vh",
+    paddingBottom: "7.5vh",
   })),
   ContractsTitle: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -369,6 +387,14 @@ const style = {
     textAlign: "start",
     marginRight: "10px",
     marginBottom: "35px",
+  })),
+  FooterSplitContainer: styled("div")(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level1,
+    backgroundColor: theme.backgroundColor.secondary,
+  })),
+  FooterSplit: styled("div")(({ theme }) => ({
+    height: "2px",
+    backgroundColor: theme.backgroundColor.tertiary,
   })),
 };
 

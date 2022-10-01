@@ -54,7 +54,7 @@ export const theme = createTheme({
     primary: "#f9f9fb",
     secondary: "#f1f1f5",
     tertiary: "#cbcbdc",
-    darker: "#55557F",
+    darker: "#8B8BAD",
   },
 
   fontFamily: {

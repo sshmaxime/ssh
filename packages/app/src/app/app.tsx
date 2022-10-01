@@ -53,71 +53,69 @@ const LandingScreenComponent: FC<props> = () => {
               style={{
                 width: "20px",
                 position: "absolute",
-                top: "25%",
+                top: "150px",
                 right: "5%",
                 zIndex: 1000,
               }}
               src={mouse}
               alt=""
             />
+            <div
+              style={{
+                position: "absolute",
+                top: "0",
+                right: "25%",
+              }}
+            >
+              <Grid item xs={12} style={{ marginTop: "25px", marginBottom: "50px" }}>
+                <Style.Subtitle>Digitally living.</Style.Subtitle>
+              </Grid>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "5%",
+                right: "10%",
+              }}
+            >
+              <Grid container>
+                <Grid item xs={12}>
+                  <Style.TitleButton>
+                    {"admin@sshlabs > connection failed ..."}
+                    <br />
+                    {"admin@sshlabs > retrying ..."}
+                    <br />
+                    <br />
+                    {"admin@sshlabs > connection succesful"}
+                    <br />
+                    <br />
+                    {"admin@sshlabs > Hey there, how are you today ? :)"}
+                    <br />
+                    {"admin@sshlabs > "}
+                  </Style.TitleButton>
+                </Grid>
+              </Grid>
+            </div>
+
             <Grid container>
-              <Grid item xs={12}>
+              <Grid item xs={12} style={{ marginBottom: "15px" }}>
                 <Style.Title>WEAR YOUR</Style.Title>
               </Grid>
               <Grid item xs={12}>
                 <Style.TitleKeyword>
-                  <Typewriter
+                  NFTs
+                  {/* <Typewriter
                     options={{
                       strings: ["NFTs", "PUNKS", "BAYC", "ENS", "SUBLIMES", "MOONCATS"],
                       autoStart: true,
                       loop: true,
                     }}
-                  />
+                  /> */}
                 </Style.TitleKeyword>
               </Grid>
-              <Grid item xs={12}>
-                <Grid container>
-                  <Grid item xs={12} style={{ marginTop: "25px", marginBottom: "50px" }}>
-                    <Grid item xs={12}>
-                      <Grid container spacing={1} alignContent="center">
-                        <Grid item>
-                          <Clickable address="https://discord.gg/FRAWgJJz4f">
-                            <Style.ImgIcon style={{ color: "black" }} src={OpenSeaIcon} alt="" />
-                          </Clickable>
-                        </Grid>
-                        <Grid item>
-                          <Clickable address="https://discord.gg/FRAWgJJz4f">
-                            <Style.ImgIcon src={DiscordIcon} alt="" />
-                          </Clickable>
-                        </Grid>
-                        <Grid item>
-                          <Clickable address="https://twitter.com/sshlabs_">
-                            <TwitterIcon />
-                          </Clickable>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Style.TitleButton>
-                      {"admin@sshlabs > connection failed ..."}
-                      <br />
-                      {"admin@sshlabs > retrying ..."}
-                      <br />
-                      <br />
-                      <br />
-                      {"admin@sshlabs > connection succesful"}
-                      <br />
-                      <br />
-                      <br />
-                      {"admin@sshlabs > Hey there, how are you today ? :)"}
-                      <br />
-                      {"admin@sshlabs > "}
-                      <input style={{ padding: 0, margin: 0 }} type="text" placeholder={"..."} />
-                    </Style.TitleButton>
-                  </Grid>
-                </Grid>
-              </Grid>
+              {/* <Grid item xs={12} style={{ marginTop: "25px", marginBottom: "50px" }}>
+                UPCOMING DROPS
+              </Grid> */}
             </Grid>
           </Grid>
           <Grid item xs={1}>
@@ -157,12 +155,19 @@ const LandingScreenComponent: FC<props> = () => {
 
       <Style.Background>
         <Style.TitleContainer>
-          <ArrowRightAltIcon
-            style={{
-              fontSize: "2em",
-              animation: "bounce 2s infinite",
-            }}
-          />
+          <Grid container flexDirection="column">
+            <Grid item style={{ marginBottom: "15px" }}>
+              <Style.ButtonCallToAction>DISCOVER</Style.ButtonCallToAction>
+            </Grid>
+            <Grid item style={{ display: "grid", justifyContent: "center" }}>
+              <ArrowRightAltIcon
+                style={{
+                  fontSize: "2em",
+                  animation: "bounce 2s infinite",
+                }}
+              />
+            </Grid>
+          </Grid>
         </Style.TitleContainer>
         <Style.Triangle />
       </Style.Background>
@@ -175,14 +180,17 @@ const DripComponent: FC<props> = () => {
     {
       itemId: 825,
       placeholderPath: "/models/skate/textures/imgForMiddle.png",
+      deckPath: "/models/skate/textures/sublimes-deck.png",
     },
     {
       itemId: 397,
       placeholderPath: "/models/skate/textures/imgForMiddle1.png",
+      deckPath: "/models/skate/textures/sublimes-deck.png",
     },
     {
       itemId: 527,
       placeholderPath: "/models/skate/textures/imgForMiddle2.png",
+      deckPath: "/models/skate/textures/sublimes-deck.png",
     },
   ];
 
@@ -215,7 +223,7 @@ const DripComponent: FC<props> = () => {
         <Grid item xs={8}>
           <Style.ViewTitle>/ DRIP .</Style.ViewTitle>
           <Style.View2Content>
-            An{" "}
+            A <b>DRIP</b> is an{" "}
             <b>
               <u>exclusive</u>
             </b>
@@ -229,8 +237,8 @@ const DripComponent: FC<props> = () => {
               {" "}
               <u>customizable</u>{" "}
             </b>
-            piece of art that initially lives inside the blockchain as an <b>NFT</b> which is
-            brought to life in the metaverse by a <b>3D model</b> and backed IRL by a{" "}
+            piece of art that initially lives inside the blockchain as an <b>NFT</b> backed in the
+            metaverse by a <b>3D model</b> and in real life by a{" "}
             <b>
               <u>redeemable</u> physical object
             </b>
@@ -292,31 +300,19 @@ const DripComponent: FC<props> = () => {
             <b>
               <u>collectable</u>
             </b>{" "}
-            items on the <b>blockchain</b> and <b>IRL</b> .
+            items both on the <b>blockchain</b> and <b>IRL</b> .
             <br />
-            <Style.DripWarningContainer>
-              <div
-                style={{
-                  fontSize: "0.9em",
-                  fontWeight: 900,
-                  marginBottom: "10px",
-                  letterSpacing: "1px",
-                }}
-              >
-                WARNING :
-              </div>
-              <ul>
-                <li>
-                  &#8226; Your friends will be <b>jealous</b>.
-                </li>
-              </ul>
-            </Style.DripWarningContainer>
           </Style.View2Content>
         </Grid>
         <Grid item xs={4}>
           <Grid container style={{ height: "100%", width: "100%" }}>
             <Grid item xs={12}>
-              <SceneSkate ref={sceneRef} _id={demoSkateDrips[stateCounter].itemId} />
+              <SceneSkate
+                ref={sceneRef}
+                _id={demoSkateDrips[stateCounter].itemId}
+                placeholderInitialTexture={demoSkateDrips[stateCounter].placeholderPath}
+                deckInitialTexture={demoSkateDrips[stateCounter].deckPath}
+              />
             </Grid>
             <Grid item xs={12}>
               <Style.View3StepName>
@@ -326,25 +322,13 @@ const DripComponent: FC<props> = () => {
                     fontSize: "0.7em",
                   }}
                 >
-                  SUBLIME#825
+                  SUBLIME#{state.itemId}
                 </span>
               </Style.View3StepName>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Style.MoreLinkContainer>
-        <Clickable onClick={() => {}}>
-          <Grid container>
-            <Grid item alignSelf={"center"}>
-              <Style.MoreLink>DISCOVER</Style.MoreLink>
-            </Grid>
-            <Grid item alignSelf={"center"}>
-              <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
-            </Grid>
-          </Grid>
-        </Clickable>
-      </Style.MoreLinkContainer>
     </Style.DripComponent>
   );
 };
@@ -524,7 +508,7 @@ const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
     <Style.RoadmapComponent>
       <Grid container justifyContent="center">
         <Grid item xs={12}>
-          <Grid container justifyContent="center" style={{ marginBottom: "50px" }}>
+          <Grid container style={{ marginBottom: "50px" }}>
             <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
           </Grid>
         </Grid>
@@ -600,38 +584,8 @@ const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
 const ContractsComponent: FC<props> = () => {
   return (
     <Style.ContractsComponent>
-      <Style.ContractsTitle>CONTRACTS</Style.ContractsTitle>
-      <Grid container justifyContent="center" rowSpacing={1}>
-        <Grid item xs={12}>
-          <Grid container alignItems="baseline">
-            <Grid item>
-              <Style.ContractsName>DRIP:</Style.ContractsName>
-            </Grid>
-            <Grid item>
-              <Clickable>
-                <Style.ContractsAddy>
-                  0x00192fb10df37c9fb26829eb2cc623cd1bf599e8
-                </Style.ContractsAddy>
-              </Clickable>
-            </Grid>
-          </Grid>
-        </Grid>
-        {/*  */}
-        <Grid item xs={12}>
-          <Grid container alignItems="baseline">
-            <Grid item>
-              <Style.ContractsName>SSH-KEY:</Style.ContractsName>
-            </Grid>
-            <Grid item>
-              <Clickable>
-                <Style.ContractsAddy>
-                  0x00192fb10df37c9fb26829eb2cc623cd1bf599e8
-                </Style.ContractsAddy>
-              </Clickable>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+      <Style.ViewTitle>/ CONTRACTS .</Style.ViewTitle>
+      <Style.TeamContainer>To be added.</Style.TeamContainer>
     </Style.ContractsComponent>
   );
 };
@@ -640,10 +594,12 @@ const MainComponent: FC<props> = ({ children }) => {
   return (
     <Style.Root>
       <LandingScreenComponent />
-      <LabsComponent word="EXCLUSIVE" />
+      {/* <LabsComponent word="EXCLUSIVE" /> */}
       <DripComponent />
-      <LabsComponent word="LIMITED" />
-      <RoadmapComponent
+      <Style.FooterSplitContainer>
+        <Style.FooterSplit />
+      </Style.FooterSplitContainer>
+      {/* <RoadmapComponent
         roadmapItems={[
           {
             title: "SKATEBOARD DECK",
@@ -665,8 +621,7 @@ const MainComponent: FC<props> = ({ children }) => {
             done: false,
           },
         ]}
-      />
-      <LabsComponent word="CUSTOMIZABLE" />
+      /> */}
       <TeamComponent
         people={[
           {
@@ -678,7 +633,9 @@ const MainComponent: FC<props> = ({ children }) => {
           },
         ]}
       />
-      <ContractsComponent />
+      <Style.FooterSplitContainer>
+        <Style.FooterSplit />
+      </Style.FooterSplitContainer>
     </Style.Root>
   );
 };

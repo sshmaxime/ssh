@@ -30,23 +30,6 @@ export const NavbarComponent: FC = () => {
                   <Style.GoToAppButton to="/app/drop/0">Enter App</Style.GoToAppButton>
                 </Grid>
                 <div style={{ width: "25px" }} />
-                <Grid item>
-                  <Clickable address="/docs">
-                    <Style.ExtraMenuButton>
-                      <Grid container alignItems="center">
-                        <Grid item>Docs</Grid>
-                        <Grid item>
-                          <ArrowRightAltIcon
-                            style={{
-                              transform: "rotate(-45deg)",
-                              fontSize: "1.25em",
-                            }}
-                          />
-                        </Grid>
-                      </Grid>
-                    </Style.ExtraMenuButton>
-                  </Clickable>
-                </Grid>
               </Grid>
             </Grid>
           </Grid>

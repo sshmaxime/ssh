@@ -42,9 +42,13 @@ type GLTFResult = GLTF & {
 
 const modelPath = "/models/skate/skate-transformed.glb";
 
-export type props = {
+export type ModelSkatePublicProps = {
   _id: number;
-  //
+  deckInitialTexture?: string;
+  placeholderInitialTexture?: string;
+};
+
+export type ModelSkateProps = ModelSkatePublicProps & {
   deckRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
   placeholderRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
 };
@@ -52,14 +56,7 @@ export type props = {
 const defaultDeckTexture = "/models/skate/textures/default-deck.png";
 const defaultPlaceholderTexture = "/models/skate/textures/default-placeholder.png";
 
-const Skate = forwardRef<{}, props & JSX.IntrinsicElements["group"]>(({ ...props }, ref) => {
-  useImperativeHandle(ref, () => ({
-    getAlert() {
-      loadTextureToObject(defaultDeckTexture, deckRef);
-      loadTextureToObject(defaultPlaceholderTexture, placeholderRef);
-    },
-  }));
-
+const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
   const group = useRef<THREE.Group>(null);
 
   // setup refs
@@ -98,8 +95,11 @@ const Skate = forwardRef<{}, props & JSX.IntrinsicElements["group"]>(({ ...props
   const newMaterial = new THREE.CanvasTexture(canvas);
 
   useEffect(() => {
-    loadTextureToObject(defaultDeckTexture, deckRef);
-    loadTextureToObject(defaultPlaceholderTexture, placeholderRef);
+    loadTextureToObject(props.deckInitialTexture || defaultDeckTexture, deckRef);
+    loadTextureToObject(
+      props.placeholderInitialTexture || defaultPlaceholderTexture,
+      placeholderRef
+    );
   }, []);
 
   return (
@@ -126,7 +126,7 @@ const Skate = forwardRef<{}, props & JSX.IntrinsicElements["group"]>(({ ...props
       </Center>
     </group>
   );
-});
+};
 
 useGLTF.preload(modelPath);
 

@@ -2,16 +2,12 @@ import React, { FC, forwardRef, useImperativeHandle } from "react";
 
 import { OrbitControls } from "@react-three/drei";
 
-import ModelSkate from "@/_3d/models/skate";
+import ModelSkate, { ModelSkatePublicProps } from "@/_3d/models/skate";
 import LoaderScene from "@/_3d/utils/loaderScene";
 import { loadTextureToObject } from "@/_3d/utils/loaderTexture";
 
-export type props = {
-  _id: number;
-};
-
 export type sceneRef = ReturnType<typeof elem>;
-const elem = (props: props, deckRef: any, placeholderRef: any) => ({
+const elem = (props: ModelSkatePublicProps, deckRef: any, placeholderRef: any) => ({
   changeTextureDeck(img: any) {
     loadTextureToObject(img, deckRef);
   },
@@ -20,7 +16,7 @@ const elem = (props: props, deckRef: any, placeholderRef: any) => ({
   },
 });
 
-const SceneLoader = forwardRef<sceneRef, props>((props, ref) => {
+const SceneLoader = forwardRef<sceneRef, ModelSkatePublicProps>((props, ref) => {
   const deckRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
   const placeholderRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
 
@@ -29,7 +25,7 @@ const SceneLoader = forwardRef<sceneRef, props>((props, ref) => {
   return <Scene {...props} deckRef={deckRef} placeholderRef={placeholderRef} />;
 });
 
-const Scene: FC<props & { placeholderRef: any; deckRef: any }> = (props) => {
+const Scene: FC<ModelSkatePublicProps & { placeholderRef: any; deckRef: any }> = (props) => {
   return (
     <LoaderScene camera={[0, 40, -60]}>
       <ambientLight intensity={0.95} />
