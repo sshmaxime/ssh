@@ -10,8 +10,8 @@ const rightDefaultWidth = "310px";
 const bottomOverlayHeight = "35px";
 const rightHeightReduced = "320px";
 
-const sizeWidthLeft = "20px";
-const sizeWidthRight = "20px";
+const sizeWidthLeft = "35px";
+const sizeWidthRight = "35px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
@@ -82,12 +82,11 @@ const style = {
   })),
   RealHeader: styled(Grid)(({ theme }) => ({
     height: "125px",
-    marginBottom: "10px",
   })),
   HeaderFirstLeftSideTitle: styled(Grid)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "1.5em",
-    marginBottom: "25px",
+    fontSize: "1.75em",
+    marginBottom: "20px",
     fontWeight: 500,
   })),
   CommandsContainer: styled(Grid)(({ theme }) => ({
@@ -289,7 +288,7 @@ const style = {
   StepTitle: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 700,
-    letterSpacing: "0.5px",
+    letterSpacing: "0.4px",
     fontSize: "0.7em",
     display: "inline-block",
   })),
@@ -297,7 +296,7 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 700,
     letterSpacing: "0.5px",
-    fontSize: "0.7em",
+    fontSize: "0.9em",
     textAlign: "center",
     display: "block !important",
     padding: "0px 0px 35px 0px",

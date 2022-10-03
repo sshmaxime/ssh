@@ -116,7 +116,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   // fc state
   const [currentItem, setItem] = React.useState<{ collection: string; id: number; img: string }>();
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(true);
   const handleChange = () => setChecked(!checked);
 
   const sceneRef = React.useRef<sceneRef>(null!);
@@ -159,7 +159,8 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               <Grid container spacing={0} flexDirection="column">
                 <Grid item xs={12}>
                   <Style.HeaderFirstLeftSideTitle>
-                    Hello, <b style={{ borderBottom: "3px solid black" }}>alpha.eth</b> ☀️
+                    Hello
+                    <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>alpha.eth</b>
                   </Style.HeaderFirstLeftSideTitle>
                 </Grid>
                 {/*  */}
@@ -167,7 +168,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   <Style.CommandsContainer container>
                     <Grid item xs={12}>
                       <Style.CommandsText>
-                        <Style.StepTitle>QUICK COMMANDS:</Style.StepTitle>
+                        <Style.StepTitle>QUICK COMMANDS</Style.StepTitle>
                       </Style.CommandsText>
                     </Grid>
                     <Grid item>
@@ -175,13 +176,6 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                         <Style.CommandItem item bgcolor="#dfe7fd">
                           Hello
                         </Style.CommandItem>
-                        {/* 
-                      <Style.CommandItem item bgcolor="#e2ece9">
-                        Hello
-                      </Style.CommandItem>
-                      <Style.CommandItem $last item bgcolor="#fff1e6">
-                        Hello
-                      </Style.CommandItem> */}
                       </Style.Commands>
                     </Grid>
                   </Style.CommandsContainer>
@@ -440,7 +434,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                     {isStateCustomizable && (
                       <Style.EligibleCollection $maxed={checked}>
                         <Style.EligibleCollectionTitle>
-                          COLLECTIONS ELIGIBLE :
+                          ELIGIBLE COLLECTIONS:
                         </Style.EligibleCollectionTitle>
                         <Grid container spacing={1} style={{ paddingLeft: "5px" }}>
                           {assets &&
