@@ -102,20 +102,8 @@ const LandingScreenComponent: FC<props> = () => {
                 <Style.Title>WEAR YOUR</Style.Title>
               </Grid>
               <Grid item xs={12}>
-                <Style.TitleKeyword>
-                  NFTs
-                  {/* <Typewriter
-                    options={{
-                      strings: ["NFTs", "PUNKS", "BAYC", "ENS", "SUBLIMES", "MOONCATS"],
-                      autoStart: true,
-                      loop: true,
-                    }}
-                  /> */}
-                </Style.TitleKeyword>
+                <Style.TitleKeyword>NFTs</Style.TitleKeyword>
               </Grid>
-              {/* <Grid item xs={12} style={{ marginTop: "25px", marginBottom: "50px" }}>
-                UPCOMING DROPS
-              </Grid> */}
             </Grid>
           </Grid>
           <Grid item xs={1}>
@@ -131,7 +119,7 @@ const LandingScreenComponent: FC<props> = () => {
             >
               <Grid item>
                 <Grid item>
-                  <Style.TitleVertical1>&mdash; SSH LABS &mdash;</Style.TitleVertical1>
+                  <Style.TitleVertical1>&mdash; SSH DRIP &mdash;</Style.TitleVertical1>
                 </Grid>
               </Grid>
               <Grid item>
@@ -595,10 +583,7 @@ const MainComponent: FC<props> = ({ children }) => {
     <Style.Root>
       <LandingScreenComponent />
       {/* <LabsComponent word="EXCLUSIVE" /> */}
-      <DripComponent />
-      <Style.FooterSplitContainer>
-        <Style.FooterSplit />
-      </Style.FooterSplitContainer>
+      {/* <DripComponent /> */}
       {/* <RoadmapComponent
         roadmapItems={[
           {
@@ -622,7 +607,7 @@ const MainComponent: FC<props> = ({ children }) => {
           },
         ]}
       /> */}
-      <TeamComponent
+      {/* <TeamComponent
         people={[
           {
             name: "SSH",
@@ -632,8 +617,9 @@ const MainComponent: FC<props> = ({ children }) => {
             icons: [],
           },
         ]}
-      />
+      /> */}
       <Style.FooterSplitContainer>
+        <Style.FooterSplit />
         <Style.FooterSplit />
       </Style.FooterSplitContainer>
     </Style.Root>

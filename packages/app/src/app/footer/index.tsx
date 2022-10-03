@@ -29,29 +29,29 @@ export const FooterComponent: FC = () => {
             <Grid item xs={4}>
               <Style.TitleCategory>SSH LABS</Style.TitleCategory>
               <Style.ContentCategory>
-                <ul>
+                {/* <ul>
                   <li>About us</li>
-                </ul>
+                </ul> */}
               </Style.ContentCategory>
             </Grid>
             <Grid item xs={4}>
               <Style.TitleCategory>ABOUT</Style.TitleCategory>
               <Style.ContentCategory>
-                <ul>
+                {/* <ul>
                   <li>FAQ</li>
                   <li>Documentation</li>
                   <li>Discord</li>
-                </ul>
+                </ul> */}
               </Style.ContentCategory>
             </Grid>
             <Grid item xs={4}>
               <Style.TitleCategory>SUPPORT</Style.TitleCategory>
               <Style.ContentCategory>
-                <ul>
+                {/* <ul>
                   <li>Returns {"&"} Refunds</li>
                   <li>Ordering {"&"} Payment</li>
                   <li>Shipping {"&"} Delivery</li>
-                </ul>
+                </ul> */}
               </Style.ContentCategory>
             </Grid>
           </Grid>

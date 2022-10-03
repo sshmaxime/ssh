@@ -14,8 +14,11 @@ const style = {
     marginBottom: "5px",
   })),
   Subtitle: styled(Typography)(({ theme }) => ({
-    opacity: "50%",
+    fontSize: "0.65em",
+    letterSpacing: "1.5px",
     fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    marginTop: "5px",
   })),
   ImgIcon: styled("img")(({ theme }) => ({
     width: "25px",

@@ -34,7 +34,6 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     marginTop: "5px",
-    // color: theme.backgroundColor.darker,
   })),
   GridTitle: styled(Grid)(({ theme }) => ({
     height: "calc(100vh - 100px - 100px - 7.5vh)",
@@ -56,14 +55,14 @@ const style = {
     ...theme.myBreakpoints(theme).level1,
   })),
   Title: styled("p")(({ theme }) => ({
-    fontSize: "2em",
+    fontSize: "3em",
     letterSpacing: "1.5px",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     fontStyle: "italic",
     display: "inline-block",
     paddingBottom: "10px",
-    marginBottom: "10px",
+    marginBottom: "5px",
     borderBottom: "10px solid black",
     textShadow: `5px 5px ${theme.backgroundColor.tertiary}`,
   })),
@@ -78,7 +77,7 @@ const style = {
     borderRadius: "2.5px",
   })),
   TitleKeyword: styled("div")(({ theme }) => ({
-    fontSize: "4em",
+    fontSize: "6em",
     display: "inline-block",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 700,
@@ -89,7 +88,7 @@ const style = {
     boxShadow: `5px 5px 0px ${theme.backgroundColor.tertiary}`,
   })),
   TitleButton: styled("p")(({ theme }) => ({
-    fontSize: "6px",
+    fontSize: "8px",
     fontFamily: theme.fontFamily.secondary,
     fontWeight: 500,
     letterSpacing: "1.25px",
@@ -394,6 +393,7 @@ const style = {
   })),
   FooterSplit: styled("div")(({ theme }) => ({
     height: "2px",
+    opacity: "50%",
     backgroundColor: theme.backgroundColor.tertiary,
   })),
 };
