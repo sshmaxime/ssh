@@ -156,11 +156,10 @@ const style = {
   })),
 
   //
-  DripComponent: styled("div")(({ theme }) => ({
+  DripComponent: styled(Grid)(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
     paddingTop: "2.5vh",
     paddingBottom: "7.5vh",
-    // background: `r/gb(34,193,195)`,
     background: `linear-gradient(0deg, ${theme.backgroundColor.secondary} 0%, ${theme.backgroundColor.primary} 50%)`,
   })),
   DripWarningContainer: styled("div")(({ theme }) => ({
@@ -170,7 +169,7 @@ const style = {
     borderRadius: "5px",
   })),
   ViewTitle: styled("div")<{ big?: boolean; shadow?: boolean }>(({ theme, shadow = true }) => ({
-    fontSize: "2.5em",
+    fontSize: "3.5em",
     fontFamily: theme.fontFamily.primary,
     fontStyle: "italic",
     fontWeight: 900,
@@ -181,7 +180,7 @@ const style = {
   })),
 
   View2Content: styled("div")(({ theme }) => ({
-    fontSize: "1em",
+    fontSize: "1.05em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
     lineHeight: "1.75em",

@@ -206,114 +206,113 @@ const DripComponent: FC<props> = () => {
   }, [stateCounter]);
 
   return (
-    <Style.DripComponent>
-      <Grid container>
-        <Grid item xs={8}>
-          <Style.ViewTitle>/ DRIP .</Style.ViewTitle>
-          <Style.View2Content>
-            A <b>DRIP</b> is an{" "}
-            <b>
-              <u>exclusive</u>
-            </b>
-            ,{" "}
-            <b>
-              {" "}
-              <u>limited</u>
-            </b>{" "}
-            and
-            <b>
-              {" "}
-              <u>customizable</u>{" "}
-            </b>
-            piece of art that initially lives inside the blockchain as an <b>NFT</b> backed in the
-            metaverse by a <b>3D model</b> and in real life by a{" "}
-            <b>
-              <u>redeemable</u> physical object
-            </b>
-            .
-            <Style.View3Container>
-              <Grid container justifyContent="center">
-                <Grid item xs={4}>
-                  <Grid container rowSpacing={1}>
-                    <Grid item xs={12}>
-                      <Style.View3StepName>DRIP</Style.View3StepName>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <img src={skateboard} style={{ width: "100%" }} alt="" />
-                    </Grid>
+    <Style.DripComponent container>
+      <Grid item xs={8}>
+        {/*  */}
+        <Style.ViewTitle>DRIP .</Style.ViewTitle>
+        <Style.View2Content>
+          A <b>DRIP</b> is an{" "}
+          <b>
+            <u>exclusive</u>
+          </b>
+          ,{" "}
+          <b>
+            {" "}
+            <u>limited</u>
+          </b>{" "}
+          and
+          <b>
+            {" "}
+            <u>customizable</u>{" "}
+          </b>
+          piece of art that initially lives inside the blockchain as an <b>NFT</b> backed in the
+          metaverse by a <b>3D model</b> and in real life by a{" "}
+          <b>
+            <u>redeemable</u> physical object
+          </b>
+          .
+          <Style.View3Container>
+            <Grid container justifyContent="center">
+              <Grid item xs={4}>
+                <Grid container rowSpacing={1}>
+                  <Grid item xs={12}>
+                    <Style.View3StepName>DRIP</Style.View3StepName>
                   </Grid>
-                </Grid>
-                <Grid item xs={2} alignSelf="center">
-                  <Style.View3Char>+</Style.View3Char>
-                </Grid>
-                <Grid item xs={4}>
-                  <Grid container rowSpacing={1}>
-                    <Grid item xs={12}>
-                      <Style.View3StepName>
-                        NFT{" "}
-                        <span
-                          style={{
-                            fontSize: "0.7em",
-                          }}
-                        >
-                          (SUBLIME#{state.itemId})
-                        </span>
-                      </Style.View3StepName>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <img src={state.placeholderPath} style={{ width: "100%" }} alt="" />
-                    </Grid>
+                  <Grid item xs={12}>
+                    <img src={skateboard} style={{ width: "100%" }} alt="" />
                   </Grid>
-                </Grid>
-                <Grid item xs={2} alignSelf="center">
-                  <Style.View3Char>=</Style.View3Char>
                 </Grid>
               </Grid>
-            </Style.View3Container>
-            At the border between the{" "}
-            <b>
-              <u>metaverse</u>
-            </b>{" "}
-            and the{" "}
-            <b>
-              <u>real world</u>
-            </b>
-            , you can finally <b>wear</b>
-            {" & "}
-            <b>use your NFT</b> through{" "}
-            <b>
-              <u>exclusive</u>
-            </b>
-            {" & "}
-            <b>
-              <u>collectable</u>
-            </b>{" "}
-            items both on the <b>blockchain</b> and <b>IRL</b> .
-            <br />
-          </Style.View2Content>
-        </Grid>
-        <Grid item xs={4}>
-          <Grid container style={{ height: "100%", width: "100%" }}>
-            <Grid item xs={12}>
-              <SceneSkate
-                ref={sceneRef}
-                _id={demoSkateDrips[stateCounter].itemId}
-                placeholderInitialTexture={demoSkateDrips[stateCounter].placeholderPath}
-                deckInitialTexture={demoSkateDrips[stateCounter].deckPath}
-              />
+              <Grid item xs={2} alignSelf="center">
+                <Style.View3Char>+</Style.View3Char>
+              </Grid>
+              <Grid item xs={4}>
+                <Grid container rowSpacing={1}>
+                  <Grid item xs={12}>
+                    <Style.View3StepName>
+                      NFT{" "}
+                      <span
+                        style={{
+                          fontSize: "0.7em",
+                        }}
+                      >
+                        (SUBLIME#{state.itemId})
+                      </span>
+                    </Style.View3StepName>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <img src={state.placeholderPath} style={{ width: "100%" }} alt="" />
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={2} alignSelf="center">
+                <Style.View3Char>=</Style.View3Char>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Style.View3StepName>
-                DRIPx{" "}
-                <span
-                  style={{
-                    fontSize: "0.7em",
-                  }}
-                >
-                  SUBLIME#{state.itemId}
-                </span>
-              </Style.View3StepName>
-            </Grid>
+          </Style.View3Container>
+          At the border between the{" "}
+          <b>
+            <u>metaverse</u>
+          </b>{" "}
+          and the{" "}
+          <b>
+            <u>real world</u>
+          </b>
+          , you can finally <b>wear</b>
+          {" & "}
+          <b>use your NFT</b> through{" "}
+          <b>
+            <u>exclusive</u>
+          </b>
+          {" & "}
+          <b>
+            <u>collectable</u>
+          </b>{" "}
+          items both on the <b>blockchain</b> and <b>IRL</b> .
+          <br />
+        </Style.View2Content>
+      </Grid>
+      <Grid item xs={4}>
+        <Grid container style={{ height: "100%", width: "100%" }}>
+          <Grid item xs={12}>
+            <SceneSkate
+              ref={sceneRef}
+              _id={demoSkateDrips[stateCounter].itemId}
+              placeholderInitialTexture={demoSkateDrips[stateCounter].placeholderPath}
+              deckInitialTexture={demoSkateDrips[stateCounter].deckPath}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Style.View3StepName>
+              DRIPx{" "}
+              <span
+                style={{
+                  fontSize: "0.7em",
+                }}
+              >
+                SUBLIME#{state.itemId}
+              </span>
+            </Style.View3StepName>
           </Grid>
         </Grid>
       </Grid>
@@ -397,7 +396,7 @@ const TeamComponent: FC<{
 }> = ({ children, people }) => {
   return (
     <Style.TeamComponent>
-      <Style.ViewTitle>/ TEAM .</Style.ViewTitle>
+      <Style.ViewTitle>TEAM .</Style.ViewTitle>
       <Style.TeamContainer>
         <Grid container spacing={3}>
           {people.map((person) => (
@@ -582,32 +581,11 @@ const MainComponent: FC<props> = ({ children }) => {
   return (
     <Style.Root>
       <LandingScreenComponent />
-      {/* <LabsComponent word="EXCLUSIVE" /> */}
-      {/* <DripComponent /> */}
-      {/* <RoadmapComponent
-        roadmapItems={[
-          {
-            title: "SKATEBOARD DECK",
-            step: "August. 1st. 2022.",
-            type: "DROP #1",
-            description: (
-              <Fragment>
-                After several months of work, SSH LABS will release the first of its many more to
-                come DROP.
-              </Fragment>
-            ),
-            done: false,
-          },
-          {
-            step: "",
-            title: "TBA.",
-            type: "DROP #2",
-            description: <Fragment>...</Fragment>,
-            done: false,
-          },
-        ]}
-      /> */}
-      {/* <TeamComponent
+      <DripComponent />
+      <Style.FooterSplitContainer>
+        <Style.FooterSplit />
+      </Style.FooterSplitContainer>
+      <TeamComponent
         people={[
           {
             name: "SSH",
@@ -617,7 +595,7 @@ const MainComponent: FC<props> = ({ children }) => {
             icons: [],
           },
         ]}
-      /> */}
+      />
       <Style.FooterSplitContainer>
         <Style.FooterSplit />
         <Style.FooterSplit />
