@@ -42,7 +42,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     // The maximum supply of the DROP
     uint256 immutable MAX_SUPPLY;
 
-    // The price to mint a DROP item
+    // The price to mint the DROP item
     uint256 immutable PRICE;
 
     // List of the whitelisted addresses
@@ -67,12 +67,6 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
         STATUS = e_STATUS.CREATED;
-
-        WHITELIST = [
-            0x116aeBbAD1C8226c80f9F0cB4e255540A0F7afD9,
-            0x31eAa2E93D7AFd237F87F30c0Dbd3aDEB9934f1B,
-            0xc3f733ca98E0daD0386979Eb96fb1722A1A05E69
-        ];
 
         // Making the owner of Store.sol the owner of the contract
         transferOwnership(tx.origin);
