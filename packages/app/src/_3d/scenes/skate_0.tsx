@@ -7,36 +7,39 @@ import LoaderScene from "@/_3d/utils/loaderScene";
 import { loadTextureToObject } from "@/_3d/utils/loaderTexture";
 
 export type sceneRef = ReturnType<typeof elem>;
-const elem = (props: ModelSkatePublicProps, deckRef: any, placeholderRef: any) => ({
+const elem = (props: ModelSkatePublicProps, deckRef: any, placeholderRef: any, idRef: any) => ({
   changeTextureDeck(img: any) {
     loadTextureToObject(img, deckRef);
   },
   changeTexturePlaceholder(img: any) {
     loadTextureToObject(img, placeholderRef);
   },
+  changeId(newId: number) {
+    idRef.current = newId;
+  },
 });
 
-const SceneLoader = forwardRef<sceneRef, ModelSkatePublicProps>((props, ref) => {
-  const deckRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
-  const placeholderRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
+const SceneLoader = React.memo(
+  forwardRef<sceneRef, ModelSkatePublicProps>((props, ref) => {
+    const deckRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
+    const placeholderRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
+    const idRef = React.useRef<Number>(props.initialId || 0);
 
-  useImperativeHandle(ref, () => elem(props, deckRef, placeholderRef));
+    useImperativeHandle(ref, () => elem(props, deckRef, placeholderRef, idRef));
 
-  return <Scene {...props} deckRef={deckRef} placeholderRef={placeholderRef} />;
-});
+    return <Scene {...props} deckRef={deckRef} placeholderRef={placeholderRef} idRef={idRef} />;
+  })
+);
 
-const Scene: FC<ModelSkatePublicProps & { placeholderRef: any; deckRef: any }> = (props) => {
+const Scene: FC<ModelSkatePublicProps & { placeholderRef: any; deckRef: any; idRef: any }> = (
+  props
+) => {
   return (
     <LoaderScene camera={[0, 40, -60]}>
       <ambientLight intensity={0.95} />
-      <ModelSkate
-        {...props}
-        deckRef={props.deckRef}
-        placeholderRef={props.placeholderRef}
-        _id={props._id}
-      />
+      <ModelSkate {...props} />
       <OrbitControls
-        autoRotate={true}
+        autoRotate={false}
         autoRotateSpeed={7.5}
         enableZoom={false}
         enableRotate={false}

@@ -43,7 +43,7 @@ type GLTFResult = GLTF & {
 const modelPath = "/models/skate/skate-transformed.glb";
 
 export type ModelSkatePublicProps = {
-  _id: number;
+  initialId?: number;
   deckInitialTexture?: string;
   placeholderInitialTexture?: string;
 };
@@ -51,6 +51,7 @@ export type ModelSkatePublicProps = {
 export type ModelSkateProps = ModelSkatePublicProps & {
   deckRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
   placeholderRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
+  idRef: React.RefObject<number>;
 };
 
 const defaultDeckTexture = "/models/skate/textures/default-deck.png";
@@ -62,6 +63,7 @@ const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
   // setup refs
   const deckRef = props.deckRef;
   const placeholderRef = props.placeholderRef;
+  const idRef = props.idRef;
 
   // model
   const { nodes, materials } = useGLTF(modelPath) as GLTFResult;
@@ -74,10 +76,8 @@ const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
   materials.Placeholder.color = null as any;
   materials.Placeholder.toneMapped = false;
 
-  console.log(props._id);
-
   // itemId
-  const itemId = "#" + "23";
+  const itemId = "#" + idRef.current;
 
   const canvas = document.createElement("canvas");
 
@@ -102,6 +102,11 @@ const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
     );
   }, []);
 
+  useFrame((state, delta) => {
+    // (group as any).current.rotation.y += 0.01;
+    console.log(idRef.current);
+  });
+  console.log("ici");
   return (
     <group ref={group} {...props}>
       <Center alignTop>

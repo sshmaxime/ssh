@@ -200,6 +200,7 @@ const DripComponent: FC<props> = () => {
       setState(demoSkateDrips[innerStateCounter]);
       setStateCounter(innerStateCounter);
       sceneRef.current.changeTexturePlaceholder(demoSkateDrips[innerStateCounter].placeholderPath);
+      sceneRef.current.changeId(demoSkateDrips[innerStateCounter].itemId);
     }, 2000);
 
     return () => clearInterval(interval);
@@ -297,9 +298,9 @@ const DripComponent: FC<props> = () => {
           <Grid item xs={12}>
             <SceneSkate
               ref={sceneRef}
-              _id={demoSkateDrips[stateCounter].itemId}
-              placeholderInitialTexture={demoSkateDrips[stateCounter].placeholderPath}
-              deckInitialTexture={demoSkateDrips[stateCounter].deckPath}
+              initialId={demoSkateDrips[0].itemId}
+              placeholderInitialTexture={demoSkateDrips[0].placeholderPath}
+              deckInitialTexture={demoSkateDrips[0].deckPath}
             />
           </Grid>
           <Grid item xs={12}>

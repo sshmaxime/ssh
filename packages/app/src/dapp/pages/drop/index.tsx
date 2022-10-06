@@ -39,26 +39,15 @@ import { useGetMessagesQuery } from "@/dapp/store/services/socket";
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
 const DropProxy: FC = () => {
-  const dispatch = useDispatch();
+  const { data: drop, isLoading } = useGetMessagesQuery({});
+  const dropId = Number(useParams().dropId || "-1");
 
-  useEffect(() => {
-    dispatch(login());
-  });
-
-  const { data: drop, isLoading, isFetching } = useGetMessagesQuery({});
-
-  const dropId = parseInt(useParams().dropId || "-1");
-
-  if (isLoading || isFetching) {
-    return <>Loaading ...</>;
+  if (isLoading) {
+    return <></>; // TOD
   }
 
-  if (drop === undefined) {
+  if (isNaN(dropId) || drop === undefined || dropId >= drop.length) {
     return <DropNotFound />;
-  }
-
-  if (drop !== undefined && drop.length === 0) {
-    return <>Loaading ...</>;
   }
 
   return <Drop drop={drop[dropId]} />;
@@ -99,7 +88,7 @@ const Deck: { [key: string]: string } = {
 };
 
 const Drop: FC<{ drop: DropType }> = ({ drop }) => {
-  const { auth, address } = useSelector((state) => state.web3);
+  const { auth, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   // fetch data
@@ -134,10 +123,6 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const pastilles = [
     {
-      title: "KEY",
-      description: "Minting this NFT gives you a free SSH Key.",
-    },
-    {
       title: "IRL",
       description: "This NFT holds a redeemable physical object.",
     },
@@ -153,28 +138,49 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         <Style.Header></Style.Header>
 
         <Style.Body>
-          <SceneLoader ref={sceneRef} _id={currentItem ? currentItem.id : 0} />
+          <SceneLoader ref={sceneRef} />
           <Style.LeftSide>
             <Style.RealHeader>
               <Grid container spacing={0} flexDirection="column">
                 <Grid item xs={12}>
                   <Style.HeaderFirstLeftSideTitle>
                     Hello
-                    <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>alpha.eth</b>
+                    <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>{name}</b>
                   </Style.HeaderFirstLeftSideTitle>
                 </Grid>
                 {/*  */}
                 <Grid item xs={12}>
                   <Style.CommandsContainer container>
                     <Grid item xs={12}>
-                      <Style.CommandsText>
-                        <Style.StepTitle>QUICK COMMANDS</Style.StepTitle>
-                      </Style.CommandsText>
+                      <Grid container justifyContent="space-between">
+                        <Grid item>
+                          <Style.CommandsText>
+                            <Style.StepTitle>QUICK INFO</Style.StepTitle>
+                          </Style.CommandsText>
+                        </Grid>
+                        <Grid item>
+                          <Style.CommandsText>
+                            <Style.StepTitle3>DROP #{drop.id}</Style.StepTitle3>
+                          </Style.CommandsText>
+                        </Grid>
+                      </Grid>
                     </Grid>
                     <Grid item>
                       <Style.Commands container>
-                        <Style.CommandItem item bgcolor="#dfe7fd">
-                          Hello
+                        <Style.CommandItem item bgcolor="#BEE1E6">
+                          {drop.currentSupply} / {drop.maxSupply}
+                        </Style.CommandItem>
+                        <Style.CommandItem item bgcolor="#CDDAFD">
+                          <Grid container alignItems="baseline">
+                            <Grid item>
+                              <img
+                                src={logoeth}
+                                style={{ width: "5px", marginRight: "5px" }}
+                                alt=""
+                              />
+                            </Grid>
+                            <Grid item>{formatEther(drop.price)}</Grid>
+                          </Grid>
                         </Style.CommandItem>
                       </Style.Commands>
                     </Grid>
@@ -341,7 +347,20 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   >
                     <Grid item>
                       <Tooltip title="Status of the DROP.">
-                        <Pastille secondary bgcolor="#fad2e1" small title={drop.status} />
+                        <Pastille
+                          secondary
+                          bgcolor={
+                            drop.status === STATUS.CREATED
+                              ? "#F8E0CD"
+                              : drop.status === STATUS.MINTABLE
+                              ? "#DAF1EA"
+                              : drop.status === STATUS.STANDBY
+                              ? "#EDECE8"
+                              : "#E4ECFE"
+                          }
+                          small
+                          title={drop.status}
+                        />
                       </Tooltip>
                     </Grid>
                     <Grid item>
@@ -421,7 +440,9 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                 <Style.ContainerMoreInfo $maxed={checked}>
                   <Clickable onClick={handleChange}>
                     <Style.DetailsContainer container alignItems="center" justifyContent="center">
-                      <Grid item>DETAILS</Grid>
+                      <Grid item>
+                        <Style.DetailsButton>DETAILS</Style.DetailsButton>
+                      </Grid>
                       <Grid item>
                         <ArrowRightAltIcon style={{ fontSize: "2.5em" }} />
                       </Grid>

@@ -4,18 +4,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export interface Web3 {
   auth: boolean;
   address: string;
+  name: string | null;
 }
 
 const initialState: Web3 = {
   auth: false,
   address: "",
+  name: "",
 };
 
 export const login = createAsyncThunk("web3/login", async () => {
   await sdk.init();
-  const { address } = sdk.getInfo();
+  const { address, name } = sdk.getInfo();
 
-  return address;
+  return { address, name };
 });
 
 export const mint = createAsyncThunk(
@@ -32,7 +34,8 @@ const web3 = createSlice({
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       state.auth = true;
-      state.address = action.payload;
+      state.address = action.payload.address;
+      state.name = action.payload.name;
     });
     builder.addCase(mint.fulfilled, (state, action) => {});
   },

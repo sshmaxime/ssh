@@ -109,6 +109,8 @@ const style = {
     borderRadius: "10px",
     marginRight: $last ? "" : "5px",
     fontWeight: 600,
+    fontSize: "0.9em",
+    letterSpacing: "0.5px",
   })),
   BodyLeftSide: styled("div")<{ $connected: boolean }>(({ theme, $connected }) => ({
     backgroundColor: theme.backgroundColor.primary,
@@ -148,6 +150,9 @@ const style = {
     // minHeight: rightHeightReduced,
     transition: "all 0.5s ease-in-out",
     boxShadow: $maxed ? `5px 5px 2px ${theme.backgroundColor.tertiary}` : "",
+  })),
+  DetailsButton: styled("div")(({ theme }) => ({
+    letterSpacing: "2.5px",
   })),
   InnerContainerInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     padding: $maxed ? "25px 25px 0 25px" : "0px",
@@ -288,9 +293,18 @@ const style = {
   StepTitle: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 700,
-    letterSpacing: "0.4px",
+    letterSpacing: "0.2px",
     fontSize: "0.7em",
     display: "inline-block",
+  })),
+  StepTitle3: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 700,
+    fontSize: "0.7em",
+    display: "inline-block",
+    backgroundColor: theme.backgroundColor.secondary,
+    borderRadius: "5px",
+    padding: "1.5px 10px 1.5px 10px",
   })),
   StepTitle2: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

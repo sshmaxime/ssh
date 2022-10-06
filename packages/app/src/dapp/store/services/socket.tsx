@@ -5,10 +5,10 @@ import { io } from "socket.io-client";
 
 export const socketApi = createApi({
   reducerPath: "socketApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/" }),
   endpoints: (build) => ({
     getMessages: build.query<Drop[], any>({
-      queryFn: () => ({ data: [] }),
+      query: () => "drops",
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
         // create a websocket connection when the cache subscription starts
 
@@ -36,6 +36,7 @@ export const socketApi = createApi({
         } catch {
           // no-op in case `cacheEntryRemoved` resolves before `cacheDataLoaded`,
           // in which case `cacheDataLoaded` will throw
+          console.log("xx");
         }
         // cacheEntryRemoved will resolve when the cache subscription is no longer active
         await cacheEntryRemoved;

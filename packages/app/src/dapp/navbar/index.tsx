@@ -17,7 +17,7 @@ import { useGetDripsByAddressQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export const NavbarComponent: FC = () => {
-  const { auth, address } = useSelector((state) => state.web3);
+  const { auth, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   const { data: drips, isLoading } = useGetDripsByAddressQuery({ address }, { skip: !auth });
@@ -202,7 +202,7 @@ export const NavbarComponent: FC = () => {
                       <Grid item xs={7}>
                         <Grid container>
                           <Grid item xs={12}>
-                            <Style.WalletENS>alpha.eth</Style.WalletENS>
+                            <Style.WalletENS>{name}</Style.WalletENS>
                           </Grid>
                           <Grid item xs={12}>
                             <Style.WalletAddy>{shortenAddress(address)}</Style.WalletAddy>

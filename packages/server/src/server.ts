@@ -6,7 +6,7 @@ import Store from "./store";
 
 import cors from "cors";
 import axios from "axios";
-import { AssetsOwned, NFTs } from "@sshlabs/typings";
+import { AssetsOwned, Drops, NFTs } from "@sshlabs/typings";
 
 export class Server {
   private server: http.Server;
@@ -64,6 +64,15 @@ export class Server {
           assets: nfts,
         });
       }
+      console.log(dataToReturn);
+      return res.status(200).send(dataToReturn);
+    });
+
+    app.get("/drops", async (req: Request, res: Response): Promise<Response> => {
+      const drops = Store.getState();
+
+      const dataToReturn: Drops = drops;
+      console.log("heyy");
       console.log(dataToReturn);
       return res.status(200).send(dataToReturn);
     });
