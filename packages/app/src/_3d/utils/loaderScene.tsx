@@ -3,18 +3,13 @@ import { FC, Suspense } from "react";
 import { ThemeProvider } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-const LoaderScene: FC<{ camera?: Vector3 }> = ({ children, camera }) => {
+const LoaderScene: FC = ({ children }) => {
   const theme = useTheme();
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <Suspense fallback={null}>
-        <Canvas
-          flat={true}
-          linear={true}
-          camera={{ position: camera }}
-          style={{ height: "100%", width: "100%" }}
-        >
+        <Canvas flat={true} linear={true} style={{ height: "100%", width: "100%" }}>
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </Canvas>
       </Suspense>

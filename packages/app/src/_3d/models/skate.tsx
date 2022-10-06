@@ -60,7 +60,7 @@ const defaultId = 0;
 const defaultDeckTexture = "/models/skate/textures/default-deck.png";
 const defaultPlaceholderTexture = "/models/skate/textures/default-placeholder.png";
 
-const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
+const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = React.memo((props) => {
   const group = props.groupRef;
 
   // setup refs
@@ -129,7 +129,7 @@ const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
       </Center>
     </group>
   );
-};
+});
 
 useGLTF.preload(modelPath);
 

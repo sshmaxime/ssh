@@ -1,11 +1,13 @@
-import React, { FC, forwardRef, useEffect, useImperativeHandle } from "react";
+import React, { FC, forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 import { OrbitControls } from "@react-three/drei";
 
 import ModelSkate, { ModelSkatePublicProps } from "@/_3d/models/skate";
 import LoaderScene from "@/_3d/utils/loaderScene";
 import { loadTextureToObject, loadIdTexture } from "@/_3d/utils/loaderTexture";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
+import { Camera } from "three";
+import { useR3fState } from "../utils/hooks";
 
 export type sceneRef = ReturnType<typeof elem>;
 const elem = (
@@ -37,7 +39,7 @@ const SceneLoader = React.memo(
     useImperativeHandle(ref, () => elem(props, groupRef, deckRef, placeholderRef, idRef));
 
     return (
-      <Scene
+      <SceneWrapper
         {...props}
         groupRef={groupRef}
         deckRef={deckRef}
@@ -48,34 +50,40 @@ const SceneLoader = React.memo(
   })
 );
 
-const Scene: FC<
+const SceneWrapper: FC<
   ModelSkatePublicProps & { groupRef: any; placeholderRef: any; deckRef: any; idRef: any }
 > = (props) => {
   return (
-    <LoaderScene camera={[0, 40, -60]}>
-      <ambientLight intensity={0.95} />
-      <ModelSkate {...props} />
-      <OrbitControls
-        autoRotateSpeed={7.5}
-        minPolarAngle={Math.PI / 2}
-        maxPolarAngle={Math.PI / 2}
-        enableZoom={false}
-        enableRotate={false}
-        target={[0, 40, 0]}
-      />
-      {/*  */}
-      <Animation {...props} />
+    <LoaderScene>
+      <Scene {...props} />
     </LoaderScene>
   );
 };
 
-const Animation: FC<
+const Scene: FC<
   ModelSkatePublicProps & { groupRef: any; deckRef: any; placeholderRef: any; idRef: any }
 > = (props) => {
+  const { camera } = useThree();
+  const [isMouseOver, setMouseOver] = useR3fState(false);
+
+  camera.position.set(0, 40, -60);
+  camera.lookAt(0, 40, 0);
+
   useFrame((state, delta) => {
-    (props.groupRef as any).current.rotation.y += 0.01;
+    if (!isMouseOver.current) {
+      (props.groupRef as any).current.rotation.y += 0.0125;
+    }
   });
-  return <></>;
+  return (
+    <>
+      <ambientLight intensity={0.95} />
+      <ModelSkate
+        {...props}
+        onPointerEnter={() => setMouseOver(true)}
+        onPointerLeave={() => setMouseOver(false)}
+      />
+    </>
+  );
 };
 //
 

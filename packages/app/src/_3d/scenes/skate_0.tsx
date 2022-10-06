@@ -5,7 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 import ModelSkate, { ModelSkatePublicProps } from "@/_3d/models/skate";
 import LoaderScene from "@/_3d/utils/loaderScene";
 import { loadTextureToObject, loadIdTexture } from "@/_3d/utils/loaderTexture";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 
 export type sceneRef = ReturnType<typeof elem>;
 const elem = (
@@ -36,7 +36,7 @@ const SceneLoader = React.memo(
     useImperativeHandle(ref, () => elem(props, groupRef, deckRef, placeholderRef, idRef));
 
     return (
-      <Scene
+      <SceneWrapper
         {...props}
         groupRef={groupRef}
         deckRef={deckRef}
@@ -47,32 +47,32 @@ const SceneLoader = React.memo(
   })
 );
 
-const Scene: FC<
-  ModelSkatePublicProps & { groupRef: any; deckRef: any; placeholderRef: any; idRef: any }
+const SceneWrapper: FC<
+  ModelSkatePublicProps & { groupRef: any; placeholderRef: any; deckRef: any; idRef: any }
 > = (props) => {
   return (
-    <LoaderScene camera={[0, 40, -60]}>
-      <ambientLight intensity={0.95} />
-      <ModelSkate {...props} />
-      <OrbitControls
-        autoRotate={false}
-        autoRotateSpeed={7.5}
-        enableZoom={false}
-        enableRotate={false}
-        target={[0, 40, 0]}
-      />
-      {/*  */}
-      <Animation {...props} />
+    <LoaderScene>
+      <Scene {...props} />
     </LoaderScene>
   );
 };
 
-const Animation: FC<
+const Scene: FC<
   ModelSkatePublicProps & { groupRef: any; deckRef: any; placeholderRef: any; idRef: any }
 > = (props) => {
+  const { camera } = useThree();
+
+  camera.position.set(0, 40, -60);
+  camera.lookAt(0, 40, 0);
   useFrame((state, delta) => {
-    (props.groupRef as any).current.rotation.y += 0.01;
+    (props.groupRef as any).current.rotation.y += 0.02;
   });
-  return <></>;
+  return (
+    <>
+      <ambientLight intensity={0.95} />
+      <ModelSkate {...props} />
+    </>
+  );
 };
+
 export default SceneLoader;
