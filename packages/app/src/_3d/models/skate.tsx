@@ -49,16 +49,19 @@ export type ModelSkatePublicProps = {
 };
 
 export type ModelSkateProps = ModelSkatePublicProps & {
+  groupRef: React.RefObject<JSX.IntrinsicElements["group"]>;
+  //
   deckRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
   placeholderRef: React.RefObject<JSX.IntrinsicElements["mesh"]>;
-  idRef: React.RefObject<number>;
+  idRef: React.RefObject<JSX.IntrinsicElements["meshBasicMaterial"]>;
 };
 
+const defaultId = 0;
 const defaultDeckTexture = "/models/skate/textures/default-deck.png";
 const defaultPlaceholderTexture = "/models/skate/textures/default-placeholder.png";
 
 const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
-  const group = useRef<THREE.Group>(null);
+  const group = props.groupRef;
 
   // setup refs
   const deckRef = props.deckRef;
@@ -77,7 +80,7 @@ const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
   materials.Placeholder.toneMapped = false;
 
   // itemId
-  const itemId = "#" + idRef.current;
+  const itemId = "#" + props.initialId || defaultId;
 
   const canvas = document.createElement("canvas");
 
@@ -102,11 +105,6 @@ const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
     );
   }, []);
 
-  useFrame((state, delta) => {
-    // (group as any).current.rotation.y += 0.01;
-    console.log(idRef.current);
-  });
-  console.log("ici");
   return (
     <group ref={group} {...props}>
       <Center alignTop>
@@ -125,7 +123,7 @@ const Skate: FC<ModelSkateProps & JSX.IntrinsicElements["group"]> = (props) => {
           />
           <mesh position={[12.8, 6.75, 0]} rotation={[Math.PI / 2, 0, -Math.PI / -2]}>
             <planeGeometry args={[10, 10, 10, 10]} />
-            <meshBasicMaterial transparent map={newMaterial} />
+            <meshBasicMaterial ref={idRef} transparent map={newMaterial} />
           </mesh>
         </group>
       </Center>

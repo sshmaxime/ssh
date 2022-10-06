@@ -1,4 +1,4 @@
-import { TextureLoader } from "three";
+import { CanvasTexture, TextureLoader } from "three";
 import { useLoader } from "@react-three/fiber";
 
 function useTexture(texturesPath: string): THREE.Texture;
@@ -34,6 +34,36 @@ export const loadTextureToObject = (texturePath: string, ref: any) => {
     ref.current.material.map = t;
     ref.current.material.needsUpdate = true;
   });
+};
+
+const canvasTextureLoaderCache: { [key: number]: THREE.CanvasTexture } = {};
+export const loadIdTexture = (newId: number, ref: any) => {
+  const cachedTexture = canvasTextureLoaderCache[newId];
+  if (cachedTexture) {
+    ref.current.map = cachedTexture;
+    ref.current.map.needsUpdate = true;
+    return;
+  }
+
+  const itemId = "#" + newId;
+
+  const canvas = document.createElement("canvas");
+
+  const ctx = canvas.getContext("2d") as any;
+  ctx.canvas.width = 500;
+  ctx.canvas.height = 500;
+  ctx.fillStyle = "rgba(0, 0, 0, 0)";
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+  ctx.textAlign = "center";
+  ctx.font = "700 50px montserrat";
+  ctx.fillStyle = "black";
+  ctx.fillText(itemId, ctx.canvas.width / 2, ctx.canvas.height / 2);
+
+  const newMaterial = new CanvasTexture(canvas);
+
+  ref.current.map = newMaterial;
+  ref.current.map.needsUpdate = true;
 };
 
 export default useTexture;
