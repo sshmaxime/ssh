@@ -65,7 +65,7 @@ const Scene: FC<
   camera.position.set(0, 40, -60);
   camera.lookAt(0, 40, 0);
   useFrame((state, delta) => {
-    (props.groupRef as any).current.rotation.y += 0.02;
+    (props.groupRef as any).current.rotation.y += 0.01;
   });
   return (
     <>

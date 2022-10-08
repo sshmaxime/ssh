@@ -101,7 +101,7 @@ const style = {
   Commands: styled(Grid)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "0.8em",
-    paddingLeft: "10px",
+    paddingLeft: "5px",
   })),
   CommandItem: styled(Grid)<{ bgcolor: string; $last?: boolean }>(({ theme, bgcolor, $last }) => ({
     backgroundColor: bgcolor,

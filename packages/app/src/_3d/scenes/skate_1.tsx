@@ -71,12 +71,13 @@ const Scene: FC<
 
   useFrame((state, delta) => {
     if (!isMouseOver.current) {
-      (props.groupRef as any).current.rotation.y += 0.0125;
+      (props.groupRef as any).current.rotation.y += 0.01;
     }
   });
   return (
     <>
       <ambientLight intensity={0.95} />
+      <OrbitControls autoRotateSpeed={7.5} target={[0, 40, 0]} />
       <ModelSkate
         {...props}
         onPointerEnter={() => setMouseOver(true)}

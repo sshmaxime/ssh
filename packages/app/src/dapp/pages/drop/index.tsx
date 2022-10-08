@@ -165,23 +165,36 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                         </Grid>
                       </Grid>
                     </Grid>
-                    <Grid item>
-                      <Style.Commands container>
-                        <Style.CommandItem item bgcolor="#BEE1E6">
-                          {drop.currentSupply} / {drop.maxSupply}
-                        </Style.CommandItem>
-                        <Style.CommandItem item bgcolor="#CDDAFD">
-                          <Grid container alignItems="baseline">
+                    <Grid item xs={12}>
+                      <Style.Commands container justifyContent="space-between">
+                        <Grid item>
+                          <Grid container columnSpacing={0.5}>
                             <Grid item>
-                              <img
-                                src={logoeth}
-                                style={{ width: "5px", marginRight: "5px" }}
-                                alt=""
+                              <Pastille
+                                secondary
+                                bgcolor={
+                                  drop.status === STATUS.CREATED
+                                    ? "#F8E0CD"
+                                    : drop.status === STATUS.MINTABLE
+                                    ? "#DAF1EA"
+                                    : drop.status === STATUS.STANDBY
+                                    ? "#EDECE8"
+                                    : "#E4ECFE"
+                                }
+                                small
+                                title={drop.status}
                               />
                             </Grid>
-                            <Grid item>{formatEther(drop.price)}</Grid>
+                            <Grid item>
+                              <Pastille
+                                secondary
+                                bgcolor={"#CDDAFD"}
+                                small
+                                title={` ${drop.currentSupply} / ${drop.maxSupply}`}
+                              />
+                            </Grid>
                           </Grid>
-                        </Style.CommandItem>
+                        </Grid>
                       </Style.Commands>
                     </Grid>
                   </Style.CommandsContainer>
