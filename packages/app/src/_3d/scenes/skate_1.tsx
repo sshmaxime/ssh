@@ -27,59 +27,62 @@ const elem = (
     loadIdTexture(newId, idRef);
   },
   reset() {},
+  hello() {
+    alert("hello");
+  },
 });
 
-const SceneLoader = React.memo(
-  forwardRef<sceneRef, ModelSkatePublicProps>((props, ref) => {
-    const groupRef = React.useRef<THREE.Group>(null);
-    const deckRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
-    const placeholderRef = React.useRef<JSX.IntrinsicElements["mesh"]>(null!);
-    const idRef = React.useRef<Number>(props.initialId || 0);
+const useSkateRefsLoader = () => {
+  return {
+    groupRef: React.useRef<JSX.IntrinsicElements["group"]>(null),
+    deckRef: React.useRef<JSX.IntrinsicElements["mesh"]>(null),
+    placeholderRef: React.useRef<JSX.IntrinsicElements["mesh"]>(null),
+    idRef: React.useRef<JSX.IntrinsicElements["meshBasicMaterial"]>(null),
+  };
+};
 
-    useImperativeHandle(ref, () => elem(props, groupRef, deckRef, placeholderRef, idRef));
-
-    return (
-      <SceneWrapper
-        {...props}
-        groupRef={groupRef}
-        deckRef={deckRef}
-        placeholderRef={placeholderRef}
-        idRef={idRef}
-      />
-    );
-  })
-);
-
-const SceneWrapper: FC<
-  ModelSkatePublicProps & { groupRef: any; placeholderRef: any; deckRef: any; idRef: any }
-> = (props) => {
+const SceneLoader: FC<ModelSkatePublicProps & { innerRef: any }> = React.memo((props, ref) => {
   return (
     <LoaderScene>
       <Scene {...props} />
     </LoaderScene>
   );
-};
+});
+
+export type SceneFct = ReturnType<typeof sceneFct>;
+const sceneFct = () => ({});
 
 const Scene: FC<
-  ModelSkatePublicProps & { groupRef: any; deckRef: any; placeholderRef: any; idRef: any }
+  ModelSkatePublicProps & {
+    innerRef: any;
+  }
 > = (props) => {
+  const { groupRef, deckRef, placeholderRef, idRef } = useSkateRefsLoader();
+
   const { camera } = useThree();
   const [isMouseOver, setMouseOver] = useR3fState(false);
 
   camera.position.set(0, 40, -60);
   camera.lookAt(0, 40, 0);
 
+  useImperativeHandle(props.innerRef, () => elem(props, groupRef, deckRef, placeholderRef, idRef));
+
   useFrame((state, delta) => {
     if (!isMouseOver.current) {
-      (props.groupRef as any).current.rotation.y += 0.01;
+      (groupRef as any).current.rotation.y += 0.01;
     }
   });
+
   return (
     <>
       <ambientLight intensity={0.95} />
       <OrbitControls autoRotateSpeed={7.5} target={[0, 40, 0]} />
       <ModelSkate
         {...props}
+        groupRef={groupRef}
+        deckRef={deckRef}
+        placeholderRef={placeholderRef}
+        idRef={idRef}
         onPointerEnter={() => setMouseOver(true)}
         onPointerLeave={() => setMouseOver(false)}
       />

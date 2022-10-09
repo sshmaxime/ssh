@@ -138,8 +138,17 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         <Style.Header></Style.Header>
 
         <Style.Body>
-          <SceneLoader ref={sceneRef} />
+          <SceneLoader innerRef={sceneRef} />
+
           <Style.LeftSide>
+            <div
+              style={{ height: "10px", width: "10px" }}
+              onClick={() => {
+                sceneRef.current.hello();
+              }}
+            >
+              click me
+            </div>
             <Style.RealHeader>
               <Grid container spacing={0} flexDirection="column">
                 <Grid item xs={12}>
