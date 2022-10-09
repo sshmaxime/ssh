@@ -2,5 +2,8 @@
   "name": "ssh",
   "devDependencies": {
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "camera-controls": "^1.37.2"
   }
 }

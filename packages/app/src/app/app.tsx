@@ -297,7 +297,7 @@ const DripComponent: FC<props> = () => {
         <Grid container style={{ height: "100%", width: "100%" }}>
           <Grid item xs={12}>
             <SceneSkate
-              ref={sceneRef}
+              sceneRef={sceneRef}
               initialId={demoSkateDrips[0].itemId}
               placeholderInitialTexture={demoSkateDrips[0].placeholderPath}
               deckInitialTexture={demoSkateDrips[0].deckPath}

@@ -117,7 +117,6 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
       sceneRef.current.changeTexturePlaceholder(newItem.img);
       sceneRef.current.changeTextureDeck(Deck[newItem.collection]);
     } else {
-      sceneRef.current.reset();
     }
   };
 
@@ -138,17 +137,9 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         <Style.Header></Style.Header>
 
         <Style.Body>
-          <SceneLoader innerRef={sceneRef} />
+          <SceneLoader sceneRef={sceneRef} />
 
           <Style.LeftSide>
-            <div
-              style={{ height: "10px", width: "10px" }}
-              onClick={() => {
-                sceneRef.current.hello();
-              }}
-            >
-              click me
-            </div>
             <Style.RealHeader>
               <Grid container spacing={0} flexDirection="column">
                 <Grid item xs={12}>
@@ -356,6 +347,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               </>
             )}
           </Style.LeftSide>
+          <Style.LeftSideRightSide>
+            <Clickable onClick={() => sceneRef.current.reset3DView()}>
+              <Style.LeftSideRightSideInner>RESET 3D VIEW</Style.LeftSideRightSideInner>
+            </Clickable>
+          </Style.LeftSideRightSide>
 
           <ClickAwayListener onClickAway={() => setChecked(false)}>
             <Style.ContainerInfo $maxed={checked}>

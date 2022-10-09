@@ -2,46 +2,26 @@ import React, { FC, forwardRef, useEffect, useImperativeHandle, useState } from 
 
 import { OrbitControls } from "@react-three/drei";
 
-import ModelSkate, { ModelSkatePublicProps } from "@/_3d/models/skate";
+import ModelSkate, {
+  defaultSkateModelAnimation,
+  SkateRefs,
+  useSkateRefsLoader,
+} from "@/_3d/models/skate";
 import LoaderScene from "@/_3d/utils/loaderScene";
-import { loadTextureToObject, loadIdTexture } from "@/_3d/utils/loaderTexture";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Camera } from "three";
 import { useR3fState } from "../utils/hooks";
+import { CameraControls } from "../utils/cameraControls";
 
-export type sceneRef = ReturnType<typeof elem>;
-const elem = (
-  props: ModelSkatePublicProps,
-  groupRef: any,
-  deckRef: any,
-  placeholderRef: any,
-  idRef: any
-) => ({
-  changeTextureDeck(img: any) {
-    loadTextureToObject(img, deckRef);
-  },
-  changeTexturePlaceholder(img: any) {
-    loadTextureToObject(img, placeholderRef);
-  },
-  changeId(newId: number) {
-    loadIdTexture(newId, idRef);
-  },
-  reset() {},
-  hello() {
-    alert("hello");
+export type sceneRef = ReturnType<typeof sceneFunctions>;
+export type sceneRefType = React.MutableRefObject<sceneRef>;
+const sceneFunctions = (refs: SkateRefs, camera: React.MutableRefObject<CameraControls>) => ({
+  ...defaultSkateModelAnimation(refs),
+  reset3DView() {
+    camera.current?.setPosition(0, 40, -60, true);
   },
 });
 
-const useSkateRefsLoader = () => {
-  return {
-    groupRef: React.useRef<JSX.IntrinsicElements["group"]>(null),
-    deckRef: React.useRef<JSX.IntrinsicElements["mesh"]>(null),
-    placeholderRef: React.useRef<JSX.IntrinsicElements["mesh"]>(null),
-    idRef: React.useRef<JSX.IntrinsicElements["meshBasicMaterial"]>(null),
-  };
-};
-
-const SceneLoader: FC<ModelSkatePublicProps & { innerRef: any }> = React.memo((props, ref) => {
+const SceneLoader: FC<{ sceneRef: sceneRefType }> = React.memo((props, ref) => {
   return (
     <LoaderScene>
       <Scene {...props} />
@@ -49,46 +29,32 @@ const SceneLoader: FC<ModelSkatePublicProps & { innerRef: any }> = React.memo((p
   );
 });
 
-export type SceneFct = ReturnType<typeof sceneFct>;
-const sceneFct = () => ({});
+const Scene: FC<{ sceneRef: sceneRefType }> = (props) => {
+  const cameraControls = React.useRef<CameraControls>(null);
 
-const Scene: FC<
-  ModelSkatePublicProps & {
-    innerRef: any;
-  }
-> = (props) => {
-  const { groupRef, deckRef, placeholderRef, idRef } = useSkateRefsLoader();
+  const refs = useSkateRefsLoader();
+  useImperativeHandle(props.sceneRef, () => sceneFunctions(refs, cameraControls as any));
 
-  const { camera } = useThree();
   const [isMouseOver, setMouseOver] = useR3fState(false);
-
-  camera.position.set(0, 40, -60);
-  camera.lookAt(0, 40, 0);
-
-  useImperativeHandle(props.innerRef, () => elem(props, groupRef, deckRef, placeholderRef, idRef));
 
   useFrame((state, delta) => {
     if (!isMouseOver.current) {
-      (groupRef as any).current.rotation.y += 0.01;
+      (refs.groupRef as any).current.rotation.y += 0.01;
     }
   });
 
   return (
     <>
-      <ambientLight intensity={0.95} />
-      <OrbitControls autoRotateSpeed={7.5} target={[0, 40, 0]} />
+      <ambientLight intensity={0.975} />
+      <CameraControls ref={cameraControls} position={[0, 40, -60]} target={[0, 40, 0]} />
       <ModelSkate
         {...props}
-        groupRef={groupRef}
-        deckRef={deckRef}
-        placeholderRef={placeholderRef}
-        idRef={idRef}
+        refs={refs}
         onPointerEnter={() => setMouseOver(true)}
         onPointerLeave={() => setMouseOver(false)}
       />
     </>
   );
 };
-//
 
 export default SceneLoader;
