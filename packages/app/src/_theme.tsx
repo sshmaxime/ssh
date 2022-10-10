@@ -60,7 +60,7 @@ export const theme = createTheme({
   fontFamily: {
     primary: "montserrat",
     secondary: "sourcecode",
-    tertiary: "sourcesans",
+    tertiary: "futura",
   },
 
   cards: {
@@ -103,8 +103,8 @@ export const theme = createTheme({
     return {
       level0: {
         [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "25vw",
-          paddingRight: "25vw",
+          paddingLeft: "22.5vw",
+          paddingRight: "22.5vw",
         },
         [themeObj.breakpoints.down("lg")]: {
           paddingLeft: "15vw",
@@ -157,26 +157,26 @@ export const theme = createTheme({
       },
       level3: {
         [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "20vw",
-          paddingRight: "20vw",
+          paddingLeft: "5vw",
+          paddingRight: "5vw",
         },
         [themeObj.breakpoints.down("lg")]: {
-          paddingLeft: "15vw",
-          paddingRight: "15vw",
+          paddingLeft: "4vw",
+          paddingRight: "4vw",
         },
         [themeObj.breakpoints.down("md")]: {
-          paddingLeft: "12vw",
-          paddingRight: "12vw",
+          paddingLeft: "3vw",
+          paddingRight: "3vw",
         },
         [themeObj.breakpoints.down("sm")]: {
-          paddingLeft: "8vw",
-          paddingRight: "8vw",
+          paddingLeft: "2vw",
+          paddingRight: "2vw",
         },
       },
       level4: {
-        [themeObj.breakpoints.up("xs")]: {
-          paddingLeft: "35px",
-          paddingRight: "35px",
+        [themeObj.breakpoints.up("lg")]: {
+          paddingLeft: "30vw",
+          paddingRight: "30vw",
         },
       },
     };

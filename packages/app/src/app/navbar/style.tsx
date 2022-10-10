@@ -30,10 +30,11 @@ const style = {
     color: "black",
     textDecoration: "none",
     padding: "7px 20px 7px 20px",
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: 900,
-    boxShadow: `2.5px 2.5px 0px black`,
-    height: "20px",
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 700,
+    boxShadow: `0px 2.5px 0px black`,
+    fontSize: "1.25em",
+    fontStyle: "italic",
   })),
 };
 

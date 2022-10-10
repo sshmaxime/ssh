@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DiscordIcon from "../../_utils/assets/icons/discord2.svg";
 import Clickable from "../../_utils/components/stateless/clickable";
-import Logo from "../../_utils/assets/images/logo-07.svg";
+import Logo from "../../_utils/assets/images/logo2.svg";
 
 export const FooterComponent: FC = () => {
   return (
@@ -19,39 +19,33 @@ export const FooterComponent: FC = () => {
                 <img src={Logo} style={{ width: "250px" }} alt="" />
               </Clickable>
             </Grid>
-            <Grid item xs={12}>
-              <Style.Subtitle>- {HEADLINE}</Style.Subtitle>
-            </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={5} style={{ marginTop: "15px" }}>
           <Grid container>
             <Grid item xs={4}>
-              <Style.TitleCategory>SSH LABS</Style.TitleCategory>
               <Style.ContentCategory>
-                {/* <ul>
+                <ul>
                   <li>About us</li>
-                </ul> */}
+                </ul>
               </Style.ContentCategory>
             </Grid>
             <Grid item xs={4}>
-              <Style.TitleCategory>ABOUT</Style.TitleCategory>
               <Style.ContentCategory>
-                {/* <ul>
+                <ul>
                   <li>FAQ</li>
                   <li>Documentation</li>
                   <li>Discord</li>
-                </ul> */}
+                </ul>
               </Style.ContentCategory>
             </Grid>
             <Grid item xs={4}>
-              <Style.TitleCategory>SUPPORT</Style.TitleCategory>
               <Style.ContentCategory>
-                {/* <ul>
+                <ul>
                   <li>Returns {"&"} Refunds</li>
                   <li>Ordering {"&"} Payment</li>
                   <li>Shipping {"&"} Delivery</li>
-                </ul> */}
+                </ul>
               </Style.ContentCategory>
             </Grid>
           </Grid>
@@ -78,7 +72,7 @@ export const FooterComponent: FC = () => {
                   <Style.Credentials>{CREDENTIALS}</Style.Credentials>
                 </Grid>
                 <Grid item xs={12}>
-                  <Style.ExternalLink>{"SSH LABS, Terms & Conditions"}</Style.ExternalLink>
+                  <Style.ExternalLink>{"Terms & Conditions"}</Style.ExternalLink>
                 </Grid>
               </Grid>
             </Grid>

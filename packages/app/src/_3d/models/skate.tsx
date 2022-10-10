@@ -39,7 +39,7 @@ type GLTFResult = GLTF & {
 const modelPath = "/models/skate/skate-transformed.glb";
 
 const defaultId = 0;
-const defaultDeckTexture = "/models/skate/textures/deck2.png";
+const defaultDeckTexture = "/models/skate/textures/default-deck.png";
 const defaultPlaceholderTexture = "/models/skate/textures/default-placeholder.png";
 
 export type SkateRefs = ReturnType<typeof useSkateRefsLoader>;

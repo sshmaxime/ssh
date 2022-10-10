@@ -39,12 +39,14 @@ const style = {
     height: "calc(100vh - 100px - 100px - 7.5vh)",
   })),
   ButtonCallToAction: styled(Grid)(({ theme }) => ({
-    fontSize: "0.9em",
+    fontSize: "15px",
     backgroundColor: "black",
     padding: "10px",
+    lineHeight: "12px",
     color: "white",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
+    display: "inline-block",
   })),
   TitleContainer2: styled("div")(({ theme }) => ({
     position: "absolute",
@@ -157,10 +159,16 @@ const style = {
 
   //
   DripComponent: styled(Grid)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level1,
-    paddingTop: "2.5vh",
-    paddingBottom: "7.5vh",
     background: `linear-gradient(0deg, ${theme.backgroundColor.secondary} 0%, ${theme.backgroundColor.primary} 50%)`,
+  })),
+  DripComponentP2: styled(Grid)(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level0,
+  })),
+  DripComponentP3: styled(Grid)(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level2,
+  })),
+  DripComponentP4: styled(Grid)(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level4,
   })),
   DripWarningContainer: styled("div")(({ theme }) => ({
     marginTop: "35px",
@@ -169,18 +177,47 @@ const style = {
     borderRadius: "5px",
   })),
   ViewTitle: styled("div")<{ big?: boolean; shadow?: boolean }>(({ theme, shadow = true }) => ({
-    fontSize: "3.5em",
-    fontFamily: theme.fontFamily.primary,
+    fontSize: "2em",
+    letterSpacing: "1px",
+    fontFamily: theme.fontFamily.tertiary,
     fontStyle: "italic",
-    fontWeight: 900,
-    marginBottom: "50px",
+    fontWeight: 500,
+    marginBottom: "10px",
     display: "inline-block",
     borderRadius: "2.5px",
-    // textShad ow: shadow ? `10px 5px ${theme.backgroundColor.tertiary}` : "",
   })),
-
+  ViewTitle1: styled("div")(({ theme }) => ({
+    fontSize: "100px",
+    letterSpacing: "1px",
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 500,
+    fontStyle: "italic",
+    marginBottom: "100px",
+    display: "inline-block",
+  })),
+  ViewTitle2: styled("div")(({ theme }) => ({
+    fontSize: "1.25em",
+    letterSpacing: "1px",
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 500,
+    marginBottom: "25px",
+    display: "inline-block",
+    borderBottom: "1px solid red",
+  })),
+  Button2: styled("div")(({ theme }) => ({
+    fontSize: "1.25em",
+    letterSpacing: "0.5px",
+    fontFamily: theme.fontFamily.tertiary,
+    padding: "2.5px 15px 2.5px 15px",
+    borderRadius: "5px",
+    color: "white",
+    fontStyle: "italic",
+    fontWeight: 500,
+    backgroundColor: "black",
+    display: "inline-block",
+  })),
   View2Content: styled("div")(({ theme }) => ({
-    fontSize: "1.05em",
+    fontSize: "1.1em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
     lineHeight: "1.75em",
