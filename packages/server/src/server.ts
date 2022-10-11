@@ -39,31 +39,46 @@ export class Server {
 
     app.get("/drop/:dropId/:address", async (req: Request, res: Response): Promise<Response> => {
       const drop = Store.getDrop(req.params.dropId as any as number);
-      const address = req.params.address;
+      const address = "0xcadaa91596f3e2afa69a37f47a5c70a4e3765c00";
 
-      console.log(drop);
-
+      const preData: { [contractAddress: string]: NFTs } = {};
       const dataToReturn: AssetsOwned = [];
 
-      for (let collection of drop.collections) {
+      let isRequestDone = false;
+      let offset = 0;
+      let limit = 20;
+
+      while (!isRequestDone) {
         const resq = await axios.get(
-          `https://api.opensea.io/api/v1/assets?owner=${address}&asset_contract_address=${collection.contract}&order_direction=desc&offset=0&limit=20`
+          `https://api.opensea.io/api/v1/assets?owner=${address}&offset=${offset}&limit=${limit}`
         );
 
-        let nfts: NFTs = [];
         for (let asset of resq.data.assets) {
-          nfts.push({
-            contract: collection.contract,
+          const contractAddress = asset.asset_contract.address;
+          if (!preData[contractAddress]) preData[contractAddress] = [];
+
+          preData[contractAddress].push({
+            contract: asset.asset_contract.address,
             img: asset.image_url,
             id: asset.token_id,
+            name: asset.collection.name,
           });
         }
 
+        if (resq.data.assets.length !== 20) {
+          isRequestDone = true;
+        } else {
+          offset += limit;
+        }
+      }
+
+      for (const data in preData) {
         dataToReturn.push({
-          collectionName: collection.name,
-          assets: nfts,
+          collectionName: preData[data][0].name,
+          assets: preData[data],
         });
       }
+
       console.log(dataToReturn);
       return res.status(200).send(dataToReturn);
     });

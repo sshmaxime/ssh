@@ -3,7 +3,7 @@ import { env } from "process";
 import { BigNumber, BigNumberish, ethers, Event } from "ethers";
 import { SSHStore, SSHDrop, SSHStore__factory, SSHDrop__factory } from "@sshlabs/contracts";
 
-import { DRIP, Drop, Drops, getStatus } from "@sshlabs/typings";
+import { DRIP, Drop, Drops } from "@sshlabs/typings";
 import axios from "axios";
 import Server from "./server";
 
@@ -69,7 +69,6 @@ export class Store {
       price: (await dropContract.price()).toString(),
       maxSupply: (await dropContract.maxSupply()).toNumber(),
       currentSupply: (await dropContract.totalSupply()).toNumber(),
-      status: getStatus(await dropContract.status()),
     };
   };
 
@@ -92,7 +91,6 @@ export class Store {
         price: (await dropContract.price()).toString(),
         maxSupply: (await dropContract.maxSupply()).toNumber(),
         currentSupply: (await dropContract.totalSupply()).toNumber(),
-        status: getStatus(await dropContract.status()),
       });
       io.emit("hello", { data: this.getState() });
     });
@@ -123,14 +121,14 @@ export class Store {
     });
 
     // event Status
-    dropContract.on(dropContract.filters.StatusUpdated(null), async (...args) => {
-      const event = args[args.length - 1] as Event;
-      if (event.blockNumber <= startBlockNumber) return; // do not react to this event
-      // do stuff
+    // dropContract.on(dropContract.filters.StatusUpdated(null), async (...args) => {
+    //   const event = args[args.length - 1] as Event;
+    //   if (event.blockNumber <= startBlockNumber) return; // do not react to this event
+    //   // do stuff
 
-      this.DROPS[dropId.toNumber()].status = getStatus(args[0]);
-      io.emit("hello", { data: this.getState() });
-    });
+    //   this.DROPS[dropId.toNumber()].status = getStatus(args[0]);
+    //   io.emit("hello", { data: this.getState() });
+    // });
   };
 
   getState = () => {

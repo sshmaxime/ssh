@@ -4,7 +4,7 @@ import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
 import Clickable from "../../_utils/components/stateless/clickable";
-import Logo from "../../_utils/assets/images/logo.svg";
+import Logo from "../../_utils/assets/images/logo3.svg";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -40,7 +40,7 @@ export const NavbarComponent: FC = () => {
               <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
                 <Grid item>
                   <Clickable address="/">
-                    <img alt="" src={Logo} style={{ width: "40px" }} />
+                    <img alt="" src={Logo} style={{ width: "50px" }} />
                   </Clickable>
                 </Grid>
                 <Grid item style={{ marginLeft: "25px" }}>

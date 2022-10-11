@@ -109,18 +109,8 @@ const Skate: FC<ModelProps & JSX.IntrinsicElements["group"]> = React.memo((props
 
   const newMaterial = new THREE.CanvasTexture(canvas);
 
-  useEffect(() => {
-    loadTextureToObject(props.deckInitialTexture || defaultDeckTexture, deckRef);
-    loadTextureToObject(
-      props.placeholderInitialTexture || defaultPlaceholderTexture,
-      placeholderRef
-    );
-
-    console.log(deckRef.current?.material);
-
-    // (deckRef.current?.material as any).setColor("red");
-    // (deckRef.current?.material as any).needsUpdate = true;
-  }, []);
+  loadTextureToObject(props.deckInitialTexture || defaultDeckTexture, deckRef);
+  loadTextureToObject(props.placeholderInitialTexture || defaultPlaceholderTexture, placeholderRef);
 
   return (
     <group ref={group} {...props}>

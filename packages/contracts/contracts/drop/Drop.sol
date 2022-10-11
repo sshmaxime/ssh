@@ -16,21 +16,6 @@ struct DropItem {
 }
 
 /**
- * @dev Define the status of a DROP.
- *
- * CREATED: DROP has just been created.
- * MINTABLE: DROP open to mint.
- * STANDBY: DROP in standby in order to wait for the elections of eligible collections.
- * CUSTOMIZABLE: DROP open to customization.
- */
-enum e_STATUS {
-    CREATED,
-    MINTABLE,
-    STANDBY,
-    CUSTOMIZABLE
-}
-
-/**
  * @author Maxime Aubanel - @sshmaxime
  *
  * @title SSHDrop
@@ -48,16 +33,11 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     // List of the whitelisted addresses
     address[] WHITELIST;
 
-    // Status of the DROP
-    e_STATUS STATUS;
-
     // Mapping from token id to DROP item
     mapping(uint256 => DropItem) tokenIdToDropItem;
 
     //
     event Minted(uint256 indexed tokenId);
-
-    event StatusUpdated(e_STATUS indexed status);
 
     constructor(
         uint256 id,
@@ -66,9 +46,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
-        STATUS = e_STATUS.CREATED;
 
-        // Making the owner of Store.sol the owner of the contract
         transferOwnership(tx.origin);
     }
 
@@ -94,13 +72,6 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     }
 
     /**
-     * @dev Return the status of the DROP.
-     */
-    function status() public view returns (e_STATUS) {
-        return STATUS;
-    }
-
-    /**
      * @dev Return the DROP item matching the token id.
      */
     function getDropItem(uint256 tokenId) public view returns (DropItem memory) {
@@ -108,33 +79,9 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     }
 
     /**
-     * @dev Update the status of the DROP.
-     */
-    function _updateStatus(e_STATUS newStatus) internal {
-        STATUS = newStatus;
-        emit StatusUpdated(newStatus);
-    }
-
-    /**
-     * @dev Update the status of the DROP.
-     */
-    function updateStatus(e_STATUS newStatus) public onlyOwner {
-        if (
-            (STATUS == e_STATUS.CREATED && newStatus == e_STATUS.MINTABLE) ||
-            (STATUS == e_STATUS.MINTABLE && newStatus == e_STATUS.STANDBY) ||
-            (STATUS == e_STATUS.STANDBY && newStatus == e_STATUS.CUSTOMIZABLE)
-        ) {
-            return _updateStatus(newStatus);
-        }
-        revert("INVALID_STATUS_FOR_UPDATE");
-    }
-
-    /**
      * @dev Mint a DROP item.
      */
     function mint() public payable {
-        require(STATUS != e_STATUS.CREATED, "INVALID_STATUS");
-
         uint256 tokenId = totalSupply();
         uint256 maxSupply_ = maxSupply();
 
@@ -146,11 +93,6 @@ contract SSHDrop is ERC721Enumerable, Ownable {
 
         _safeMint(msg.sender, tokenId);
         tokenIdToDropItem[tokenId] = DropItem({ isMutable: true });
-
-        // If it's the very last item to be minted
-        if (tokenId + 1 == maxSupply_) {
-            _updateStatus(e_STATUS.STANDBY);
-        }
 
         emit Minted(tokenId);
     }

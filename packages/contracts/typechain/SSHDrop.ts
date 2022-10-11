@@ -45,7 +45,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "status()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenByIndex(uint256)": FunctionFragment;
@@ -54,7 +53,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateStatus(uint8)": FunctionFragment;
     "whitelist()": FunctionFragment;
   };
 
@@ -96,7 +94,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     functionFragment: "setApprovalForAll",
     values: [string, boolean]
   ): string;
-  encodeFunctionData(functionFragment: "status", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
@@ -125,10 +122,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateStatus",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "whitelist", values?: undefined): string;
 
@@ -164,7 +157,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     functionFragment: "setApprovalForAll",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "status", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
@@ -191,10 +183,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateStatus",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "whitelist", data: BytesLike): Result;
 
   events: {
@@ -202,7 +190,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     "ApprovalForAll(address,address,bool)": EventFragment;
     "Minted(uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "StatusUpdated(uint8)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -210,7 +197,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "StatusUpdated"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -239,10 +225,6 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
-
-export type StatusUpdatedEvent = TypedEvent<[number], { status: number }>;
-
-export type StatusUpdatedEventFilter = TypedEventFilter<StatusUpdatedEvent>;
 
 export type TransferEvent = TypedEvent<
   [string, string, BigNumber],
@@ -344,8 +326,6 @@ export interface SSHDrop extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    status(overrides?: CallOverrides): Promise<[number]>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -380,11 +360,6 @@ export interface SSHDrop extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    updateStatus(
-      newStatus: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -454,8 +429,6 @@ export interface SSHDrop extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  status(overrides?: CallOverrides): Promise<number>;
-
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -487,11 +460,6 @@ export interface SSHDrop extends BaseContract {
 
   transferOwnership(
     newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  updateStatus(
-    newStatus: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -557,8 +525,6 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    status(overrides?: CallOverrides): Promise<number>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -590,11 +556,6 @@ export interface SSHDrop extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updateStatus(
-      newStatus: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -635,11 +596,6 @@ export interface SSHDrop extends BaseContract {
       previousOwner?: string | null,
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
-
-    "StatusUpdated(uint8)"(
-      status?: BigNumberish | null
-    ): StatusUpdatedEventFilter;
-    StatusUpdated(status?: BigNumberish | null): StatusUpdatedEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: string | null,
@@ -720,8 +676,6 @@ export interface SSHDrop extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    status(overrides?: CallOverrides): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -756,11 +710,6 @@ export interface SSHDrop extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    updateStatus(
-      newStatus: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -837,8 +786,6 @@ export interface SSHDrop extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    status(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -873,11 +820,6 @@ export interface SSHDrop extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateStatus(
-      newStatus: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

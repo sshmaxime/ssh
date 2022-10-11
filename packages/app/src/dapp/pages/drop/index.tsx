@@ -26,7 +26,7 @@ import Clickable from "../../../_utils/components/stateless/clickable";
 import Tooltip from "../../../_utils/components/stateless/tooltip";
 import { useDispatch, useSelector } from "../../store/hooks";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
-import { Drop as DropType, STATUS } from "@sshlabs/typings";
+import { Drop as DropType } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
 import { CREDENTIALS } from "../../../_constants";
 
@@ -97,14 +97,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     { skip: !auth }
   );
 
-  const isMintable = drop.status === STATUS.MINTABLE && drop.currentSupply !== drop.maxSupply;
-  const isStateCustomizable = drop.status === STATUS.CUSTOMIZABLE;
-  const isStateCreated = drop.status === STATUS.CREATED;
-  const isStateMintable = drop.status === STATUS.MINTABLE;
-  const isStateStandBy = drop.status === STATUS.STANDBY;
+  const isMintable = drop.currentSupply !== drop.maxSupply;
 
   // fc state
   const [currentItem, setItem] = React.useState<{ collection: string; id: number; img: string }>();
+  const [currentVersion, setVersion] = React.useState(0);
   const [checked, setChecked] = React.useState(true);
   const handleChange = () => setChecked(!checked);
 
@@ -137,7 +134,9 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         <Style.Header></Style.Header>
 
         <Style.Body>
-          <SceneLoader sceneRef={sceneRef} />
+          <Style.BodyScene>
+            <SceneLoader sceneRef={sceneRef} />
+          </Style.BodyScene>
 
           <Style.LeftSide>
             <Style.RealHeader>
@@ -170,7 +169,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                         <Grid item>
                           <Grid container columnSpacing={0.5}>
                             <Grid item>
-                              <Pastille
+                              {/* <Pastille
                                 secondary
                                 bgcolor={
                                   drop.status === STATUS.CREATED
@@ -183,7 +182,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                                 }
                                 small
                                 title={drop.status}
-                              />
+                              /> */}
                             </Grid>
                             <Grid item>
                               <Pastille
@@ -202,7 +201,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               </Grid>
             </Style.RealHeader>
 
-            {isStateCreated && (
+            {/* {isStateCreated && (
               <Style.BodyLeftSideTextContainer>
                 <Style.BodyLeftSideTextContainerCenterer>
                   <Style.StepTitle2>INFORMATION</Style.StepTitle2>
@@ -263,89 +262,85 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   </Style.BodyLeftSideText>
                 </Style.BodyLeftSideTextContainerCenterer>
               </Style.BodyLeftSideTextContainer>
-            )}
+            )} */}
 
-            {isStateCustomizable && (
-              <>
-                <Style.HeaderLeftSide container spacing={0} alignItems="center">
-                  <Grid item xs={6}>
-                    <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
-                  </Grid>
+            <>
+              <Style.HeaderLeftSide container spacing={0} alignItems="center">
+                <Grid item xs={6}>
+                  <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
+                </Grid>
 
-                  <Grid item xs={1}>
-                    <FilterListIcon />
-                  </Grid>
+                <Grid item xs={1}>
+                  <FilterListIcon />
+                </Grid>
 
-                  <Grid item xs={5}>
-                    <Style.SearchBar>
-                      <Grid container alignItems="center">
-                        <Grid item>
-                          <SearchIcon
-                            style={{
-                              fontSize: "1.3em",
-                              marginLeft: "5px",
-                              marginRight: "10px",
-                            }}
-                          />
-                        </Grid>
-                        <Grid item style={{ color: "grey", fontSize: "0.9em" }}>
-                          Search ...
-                        </Grid>
+                <Grid item xs={5}>
+                  <Style.SearchBar>
+                    <Grid container alignItems="center">
+                      <Grid item>
+                        <SearchIcon
+                          style={{
+                            fontSize: "1.3em",
+                            marginLeft: "5px",
+                            marginRight: "10px",
+                          }}
+                        />
                       </Grid>
-                    </Style.SearchBar>
-                  </Grid>
-                </Style.HeaderLeftSide>
-                <Style.BodyLeftSide $connected={auth}>
-                  <Style.InnerLeftSide>
-                    {assets && assets.length ? (
-                      assets.map((collection, index1) => (
-                        <div key={index1} style={{ marginBottom: "20px" }}>
-                          <Style.CollectionName>{collection.collectionName}</Style.CollectionName>
-                          <ImageList cols={4} gap={4}>
-                            {collection.assets.map((item, index) => (
-                              <ImageListItem
-                                key={index}
-                                style={{
-                                  border:
-                                    currentItem &&
-                                    currentItem.collection === collection.collectionName &&
-                                    currentItem.id === item.id
-                                      ? "3px solid #2AFE00"
-                                      : "3px solid white",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                  updateItem({
-                                    collection: collection.collectionName,
-                                    id: item.id,
-                                    img: item.img,
-                                  });
-                                }}
-                              >
-                                <img
-                                  src={`${item.img}?w=248&fit=crop&auto=format`}
-                                  srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                  alt={"item.id"}
-                                  loading="lazy"
-                                />
-                              </ImageListItem>
-                            ))}
-                          </ImageList>
-                        </div>
-                      ))
-                    ) : auth ? (
-                      <Style.InnerLeftSideNoNfts>
-                        {isLoading ? "Loading ..." : "You do not own any NFTs :("}
-                      </Style.InnerLeftSideNoNfts>
-                    ) : (
-                      <Style.InnerLeftSideNoNfts>
-                        You are not connected :'(
-                      </Style.InnerLeftSideNoNfts>
-                    )}
-                  </Style.InnerLeftSide>
-                </Style.BodyLeftSide>
-              </>
-            )}
+                      <Grid item style={{ color: "grey", fontSize: "0.9em" }}>
+                        Search ...
+                      </Grid>
+                    </Grid>
+                  </Style.SearchBar>
+                </Grid>
+              </Style.HeaderLeftSide>
+              <Style.BodyLeftSide $connected={auth}>
+                <Style.InnerLeftSide>
+                  {assets && assets.length ? (
+                    assets.map((collection, index1) => (
+                      <div key={index1} style={{ marginBottom: "20px" }}>
+                        <Style.CollectionName>{collection.collectionName}</Style.CollectionName>
+                        <ImageList cols={4} gap={4}>
+                          {collection.assets.map((item, index) => (
+                            <ImageListItem
+                              key={index}
+                              style={{
+                                border:
+                                  currentItem &&
+                                  currentItem.collection === collection.collectionName &&
+                                  currentItem.id === item.id
+                                    ? "3px solid #2AFE00"
+                                    : "3px solid white",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                updateItem({
+                                  collection: collection.collectionName,
+                                  id: item.id,
+                                  img: item.img,
+                                });
+                              }}
+                            >
+                              <img
+                                src={`${item.img}?w=248&fit=crop&auto=format`}
+                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                alt={"item.id"}
+                                loading="lazy"
+                              />
+                            </ImageListItem>
+                          ))}
+                        </ImageList>
+                      </div>
+                    ))
+                  ) : auth ? (
+                    <Style.InnerLeftSideNoNfts>
+                      {isLoading ? "Loading ..." : "You do not own any NFTs :("}
+                    </Style.InnerLeftSideNoNfts>
+                  ) : (
+                    <Style.InnerLeftSideNoNfts>You are not connected :'(</Style.InnerLeftSideNoNfts>
+                  )}
+                </Style.InnerLeftSide>
+              </Style.BodyLeftSide>
+            </>
           </Style.LeftSide>
           <Style.LeftSideRightSide>
             <Clickable onClick={() => sceneRef.current.reset3DView()}>
@@ -356,7 +351,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
           <ClickAwayListener onClickAway={() => setChecked(false)}>
             <Style.ContainerInfo $maxed={checked}>
               <Style.InnerContainerInfo $maxed={checked}>
-                <div style={{ height: "30px" }}>
+                <div style={{ height: "50px" }}>
                   <Grid
                     container
                     spacing={0}
@@ -364,22 +359,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                     justifyContent="space-between"
                   >
                     <Grid item>
-                      <Tooltip title="Status of the DROP.">
-                        <Pastille
-                          secondary
-                          bgcolor={
-                            drop.status === STATUS.CREATED
-                              ? "#F8E0CD"
-                              : drop.status === STATUS.MINTABLE
-                              ? "#DAF1EA"
-                              : drop.status === STATUS.STANDBY
-                              ? "#EDECE8"
-                              : "#E4ECFE"
-                          }
-                          small
-                          title={drop.status}
-                        />
-                      </Tooltip>
+                      <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
                     </Grid>
                     <Grid item>
                       <Clickable onClick={handleChange}>
@@ -388,12 +368,6 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                     </Grid>
                   </Grid>
                 </div>
-
-                <Grid container justifyContent="space-between" style={{ paddingRight: "5px" }}>
-                  <Grid item>
-                    <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
-                  </Grid>
-                </Grid>
 
                 <Grid
                   container
@@ -470,23 +444,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
                 <Style.ContainerMoreInfoContent $maxed={checked}>
                   <Style.InnerContainerMoreInfoContent $maxed={checked}>
-                    {isStateCustomizable && (
-                      <Style.EligibleCollection $maxed={checked}>
-                        <Style.EligibleCollectionTitle>
-                          ELIGIBLE COLLECTIONS:
-                        </Style.EligibleCollectionTitle>
-                        <Grid container spacing={1} style={{ paddingLeft: "5px" }}>
-                          {assets &&
-                            assets.map((collection) => (
-                              <Grid item>
-                                <Style.CollectionName>
-                                  {collection.collectionName}
-                                </Style.CollectionName>
-                              </Grid>
-                            ))}
-                        </Grid>
-                      </Style.EligibleCollection>
-                    )}
+                    {"bla bla"}
                   </Style.InnerContainerMoreInfoContent>
                 </Style.ContainerMoreInfoContent>
 
@@ -521,7 +479,18 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               </Style.InnerContainerInfo>
             </Style.ContainerInfo>
           </ClickAwayListener>
+
+          <Style.BottomBar>
+            <Grid container justifyContent="center" alignItems="center" columnSpacing={1}>
+              {CircleSelect(0, currentVersion, "#FFF5D5", () => setVersion(0))}
+              {CircleSelect(1, currentVersion, "#A6FFDC", () => setVersion(1))}
+              {CircleSelect(2, currentVersion, "#FFEEF0", () => setVersion(2))}
+              {CircleSelect(3, currentVersion, "#B4FFF5", () => setVersion(3))}
+              {CircleSelect(4, currentVersion, "#F5E9FD", () => setVersion(4))}
+            </Grid>
+          </Style.BottomBar>
         </Style.Body>
+
         <Style.Footer>
           <Grid container justifyContent="space-between">
             <Grid item xs={2}>
@@ -531,22 +500,9 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={8}>
-              <Grid container justifyContent="center" columnSpacing={1}>
-                <Grid item xs={1}>
-                  <Style.BottomLinks>Docs</Style.BottomLinks>
-                </Grid>
-                <Grid item xs={1}>
-                  <Style.BottomLinks>FAQs</Style.BottomLinks>
-                </Grid>
-                <Grid item xs={1}>
-                  <Style.BottomLinks>OpenSea</Style.BottomLinks>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item xs={2}>
-              <Grid container flexDirection="row-reverse">
-                <Grid item xs={6}>
+            <Grid item xs={10}>
+              <Grid container flexDirection="row-reverse" columnSpacing={3}>
+                <Grid item>
                   <Style.Version>v1.0.0-beta</Style.Version>
                 </Grid>
               </Grid>
@@ -557,5 +513,18 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     </Fade>
   );
 };
+
+export const CircleSelect = (
+  version: number,
+  currentVersion: number,
+  color: string,
+  fct: Function
+) => (
+  <Grid item>
+    <Clickable onClick={() => fct()}>
+      <Style.Circle $selected={version === currentVersion} bgcolor={color} />
+    </Clickable>
+  </Grid>
+);
 
 export default DropProxy;

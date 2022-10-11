@@ -5,9 +5,11 @@ import { Typography, Grid, Stepper, StepLabel, StepContent } from "@mui/material
 const headerHeight = "125px";
 
 const leftDefaultWidth = "20vw";
-const rightDefaultWidth = "310px";
+const rightDefaultWidth = "350px";
 
-const bottomOverlayHeight = "35px";
+const footerHeight = "35px";
+const bottomBarHeight = "100px";
+const bottomHeight = `calc(${footerHeight} + ${bottomBarHeight})`;
 const rightHeightReduced = "320px";
 
 const sizeWidthLeft = "1.5vw";
@@ -27,12 +29,37 @@ const style = {
   })),
   Body: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.secondary,
-    height: `calc(100vh - ${bottomOverlayHeight})`,
+    height: `calc(100vh - ${footerHeight})`,
     position: "relative",
   })),
+  BodyScene: styled("div")(({ theme }) => ({
+    height: `calc(100% - ${bottomBarHeight})`,
+    position: "relative",
+  })),
+  BottomBar: styled("div")(({ theme }) => ({
+    height: bottomBarHeight,
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: theme.backgroundColor.secondary,
+  })),
+  Circle: styled("div")<{ bgcolor: string; $selected?: boolean }>(
+    ({ theme, bgcolor, $selected }) => ({
+      height: "25px",
+      width: "25px",
+      borderRadius: "50%",
+      backgroundColor: bgcolor,
+      opacity: $selected ? "100%" : "75%",
+      border: `2px solid ${$selected ? "black" : theme.backgroundColor.tertiary}`,
+      transition: "all 0.5s",
+    })
+  ),
+  //
   Footer: styled("div")(({ theme }) => ({
     position: "absolute",
-    height: bottomOverlayHeight,
+    height: footerHeight,
     bottom: 0,
     backgroundColor: theme.backgroundColor.primary,
     width: "100%",
@@ -42,16 +69,18 @@ const style = {
   //
   LeftSide: styled("div")(({ theme }) => ({
     position: "absolute",
-    bottom: bottom,
+    bottom: footerHeight,
     left: sizeWidthLeft,
     width: leftDefaultWidth,
-    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - ${sizeWidthLeft} - 50px)`,
+    height: `calc(100vh - ${headerHeight} - ${footerHeight} - ${sizeWidthLeft} - 50px)`,
+    zIndex: 1,
   })),
   LeftSideRightSide: styled("div")(({ theme }) => ({
     position: "absolute",
-    bottom: bottom,
+    bottom: footerHeight,
     left: `calc(${leftDefaultWidth} + ${sizeWidthLeft} + 10px)`,
     width: leftDefaultWidth,
+    zIndex: 1,
   })),
   LeftSideRightSideInner: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.primary,
@@ -135,7 +164,7 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     borderRadius: "5px",
     overflowY: "scroll",
-    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 50px - 125px - 10px - ${sizeWidthLeft} - 50px)`,
+    height: `calc(100vh - ${headerHeight} - ${footerHeight} - 50px - 125px - ${sizeWidthLeft} - 50px)`,
     opacity: $connected ? 0.25 : 1,
     transition: "all 1s",
     ":hover": {
@@ -146,7 +175,7 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     position: "relative",
     borderRadius: "5px",
-    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 125px - ${bottom} - 50px)`,
+    height: `calc(100vh - ${headerHeight} - ${footerHeight} - 125px - ${bottom} - 50px)`,
   })),
   BodyLeftSideText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -160,11 +189,11 @@ const style = {
     position: "absolute",
     borderRadius: "5px",
     width: $maxed ? "35vw" : rightDefaultWidth,
-    bottom: bottom,
+    bottom: `calc(${bottom} + 10px)`,
     right: $maxed ? sizeWidthLeft : sizeWidthRight,
     backgroundColor: $maxed ? theme.backgroundColor.primary : "",
     maxHeight: $maxed
-      ? `calc(100vh - 1vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - ${headerHeight})`
+      ? `calc(100vh - 1vh - ${footerHeight} - ${sizeWidthLeft} - ${headerHeight})`
       : rightHeightReduced,
     // minHeight: rightHeightReduced,
     transition: "all 0.5s ease-in-out",
@@ -192,7 +221,7 @@ const style = {
   ContainerMoreInfoContent: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     marginTop: "15px",
     maxHeight: $maxed
-      ? `calc(100vh - 2vh - ${bottomOverlayHeight} - ${sizeWidthLeft} - ${headerHeight} - 152.5px - 50px)`
+      ? `calc(100vh - 2vh - ${bottomHeight} - ${sizeWidthLeft} - ${headerHeight} - 152.5px - 50px)`
       : "0px",
     overflowY: "scroll",
     opacity: $maxed ? 1 : 0,
