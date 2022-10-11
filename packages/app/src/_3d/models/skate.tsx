@@ -39,8 +39,11 @@ type GLTFResult = GLTF & {
 const modelPath = "/models/skate/skate-transformed.glb";
 
 const defaultId = 0;
-const defaultDeckTexture = "/models/skate/textures/default-deck.png";
-const defaultPlaceholderTexture = "/models/skate/textures/default-placeholder.png";
+
+const texturePath = "/models/skate/textures/";
+
+const defaultDeckTexture = texturePath + "deck0.png";
+const defaultPlaceholderTexture = texturePath + "placeholder.png";
 
 export type SkateRefs = ReturnType<typeof useSkateRefsLoader>;
 export const useSkateRefsLoader = () => {
@@ -61,6 +64,9 @@ export const defaultSkateModelAnimation = (refs: SkateRefs) => ({
   },
   changeId(newId: number) {
     loadIdTexture(newId, refs.idRef);
+  },
+  changeVersion(newVersion: number) {
+    this.changeTextureDeck(texturePath + "deck" + newVersion + ".png");
   },
 });
 

@@ -8,6 +8,8 @@ import cors from "cors";
 import axios from "axios";
 import { AssetsOwned, Drops, NFTs } from "@sshlabs/typings";
 
+const userTestAddress = "0xB7C307C43Fd142a4a38C1563e4e25CDAeEb8C86d";
+
 export class Server {
   private server: http.Server;
   private app: express.Express;
@@ -39,7 +41,7 @@ export class Server {
 
     app.get("/drop/:dropId/:address", async (req: Request, res: Response): Promise<Response> => {
       const drop = Store.getDrop(req.params.dropId as any as number);
-      const address = "0xcadaa91596f3e2afa69a37f47a5c70a4e3765c00";
+      const address = req.params.address;
 
       const preData: { [contractAddress: string]: NFTs } = {};
       const dataToReturn: AssetsOwned = [];
@@ -47,6 +49,21 @@ export class Server {
       let isRequestDone = false;
       let offset = 0;
       let limit = 20;
+
+      if (address === userTestAddress) {
+        dataToReturn.push({
+          collectionName: "0x1",
+          assets: [
+            {
+              contract: "",
+              name: "string",
+              img: "https://picsum.photos/200/300?grayscale",
+              id: 0,
+            },
+          ],
+        });
+        return res.status(200).send(dataToReturn);
+      }
 
       while (!isRequestDone) {
         const resq = await axios.get(

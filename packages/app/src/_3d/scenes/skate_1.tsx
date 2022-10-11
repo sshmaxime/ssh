@@ -39,7 +39,7 @@ const Scene: FC<{ sceneRef: sceneRefType }> = (props) => {
 
   useFrame((state, delta) => {
     if (!isMouseOver.current) {
-      (refs.groupRef as any).current.rotation.y += 0.01;
+      // (refs.groupRef as any).current.rotation.y += 0.01;
     }
   });
 
