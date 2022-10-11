@@ -45,7 +45,7 @@ const Scene: FC<{ sceneRef: sceneRefType }> = (props) => {
 
   return (
     <>
-      <ambientLight intensity={0.975} />
+      <ambientLight intensity={0.95} />
       <CameraControls ref={cameraControls} position={[0, 40, -60]} target={[0, 40, 0]} />
       <ModelSkate
         {...props}

@@ -92,7 +92,7 @@ const Skate: FC<ModelProps & JSX.IntrinsicElements["group"]> = React.memo((props
   materials.Placeholder.toneMapped = false;
 
   // itemId
-  const itemId = "#" + props.initialId || defaultId;
+  const itemId = "#" + (props.initialId || defaultId);
 
   const canvas = document.createElement("canvas");
 
@@ -115,6 +115,11 @@ const Skate: FC<ModelProps & JSX.IntrinsicElements["group"]> = React.memo((props
       props.placeholderInitialTexture || defaultPlaceholderTexture,
       placeholderRef
     );
+
+    console.log(deckRef.current?.material);
+
+    // (deckRef.current?.material as any).setColor("red");
+    // (deckRef.current?.material as any).needsUpdate = true;
   }, []);
 
   return (
@@ -133,7 +138,7 @@ const Skate: FC<ModelProps & JSX.IntrinsicElements["group"]> = React.memo((props
             material={materials.Placeholder}
             rotation={[Math.PI / 2, 0, 0]}
           />
-          <mesh position={[12.8, 6.75, 0]} rotation={[Math.PI / 2, 0, -Math.PI / -2]}>
+          <mesh position={[10, 6.7, 0]} rotation={[Math.PI / 2, 0, -Math.PI / -2]}>
             <planeGeometry args={[10, 10, 10, 10]} />
             <meshBasicMaterial ref={idRef} transparent map={newMaterial} />
           </mesh>

@@ -10,8 +10,9 @@ const rightDefaultWidth = "310px";
 const bottomOverlayHeight = "35px";
 const rightHeightReduced = "320px";
 
-const sizeWidthLeft = "35px";
-const sizeWidthRight = "35px";
+const sizeWidthLeft = "1.5vw";
+const sizeWidthRight = "1.5vw";
+const bottom = "25px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
@@ -41,17 +42,16 @@ const style = {
   //
   LeftSide: styled("div")(({ theme }) => ({
     position: "absolute",
-    bottom: sizeWidthLeft,
+    bottom: bottom,
     left: sizeWidthLeft,
     width: leftDefaultWidth,
     height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - ${sizeWidthLeft} - 50px)`,
   })),
   LeftSideRightSide: styled("div")(({ theme }) => ({
     position: "absolute",
-    bottom: sizeWidthLeft,
-    left: `calc(${leftDefaultWidth} + ${sizeWidthLeft})`,
+    bottom: bottom,
+    left: `calc(${leftDefaultWidth} + ${sizeWidthLeft} + 10px)`,
     width: leftDefaultWidth,
-    padding: "10px",
   })),
   LeftSideRightSideInner: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.primary,
@@ -146,7 +146,7 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     position: "relative",
     borderRadius: "5px",
-    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 125px - 10px - ${sizeWidthLeft} - 50px)`,
+    height: `calc(100vh - ${headerHeight} - ${bottomOverlayHeight} - 125px - ${bottom} - 50px)`,
   })),
   BodyLeftSideText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -160,7 +160,7 @@ const style = {
     position: "absolute",
     borderRadius: "5px",
     width: $maxed ? "35vw" : rightDefaultWidth,
-    bottom: `calc(${sizeWidthLeft})`,
+    bottom: bottom,
     right: $maxed ? sizeWidthLeft : sizeWidthRight,
     backgroundColor: $maxed ? theme.backgroundColor.primary : "",
     maxHeight: $maxed

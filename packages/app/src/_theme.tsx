@@ -157,20 +157,8 @@ export const theme = createTheme({
       },
       level3: {
         [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "5vw",
-          paddingRight: "5vw",
-        },
-        [themeObj.breakpoints.down("lg")]: {
-          paddingLeft: "4vw",
-          paddingRight: "4vw",
-        },
-        [themeObj.breakpoints.down("md")]: {
-          paddingLeft: "3vw",
-          paddingRight: "3vw",
-        },
-        [themeObj.breakpoints.down("sm")]: {
-          paddingLeft: "2vw",
-          paddingRight: "2vw",
+          paddingLeft: "1.5vw",
+          paddingRight: "1.5vw",
         },
       },
       level4: {

@@ -204,7 +204,7 @@ const DripComponent: FC<props> = () => {
         <Grid item xs={4}>
           <Style.ViewTitle>because you can die tomorrow.</Style.ViewTitle>
           <br />
-          <Style.ViewTitle2>start now -</Style.ViewTitle2>
+          <Style.ViewTitle2>do your thing -</Style.ViewTitle2>
           <Style.View2Content>
             <Grid container justifyContent="center">
               <Grid item xs={12}>
