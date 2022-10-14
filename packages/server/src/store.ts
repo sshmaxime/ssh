@@ -1,9 +1,15 @@
 import { env } from "process";
 
 import { BigNumber, BigNumberish, ethers, Event } from "ethers";
-import { SSHStore, SSHDrop, SSHStore__factory, SSHDrop__factory } from "@sshlabs/contracts";
+import {
+  SSHStore,
+  SSHDrop,
+  SSHStore__factory,
+  SSHDrop__factory,
+  ERC721Enumerable__factory,
+} from "@sshlabs/contracts";
 
-import { DRIP, DripsOwned, Drop, Drops, VersionMetadata } from "@sshlabs/typings";
+import { DRIP, DripsOwned, Drop, Drops, NFTs, VersionMetadata } from "@sshlabs/typings";
 import axios from "axios";
 import Server from "./server";
 
@@ -82,6 +88,25 @@ export class Store {
       maxSupply: (await dropContract.maxSupply()).toNumber(),
       currentSupply: (await dropContract.totalSupply()).toNumber(),
     };
+  };
+
+  getOnChainAsset = async (addressContract: string, address: string) => {
+    const contract = ERC721Enumerable__factory.connect(addressContract, provider);
+
+    const nbAssets = (await contract.balanceOf(address)).toNumber();
+    const NFTs: NFTs = [];
+
+    for (let nb = 0; nb < nbAssets; nb++) {
+      const tokenId = (await contract.tokenOfOwnerByIndex(address, nb)).toNumber();
+
+      NFTs.push({
+        contract: addressContract,
+        img: "https://picsum.photos/200/300",
+        id: nb,
+        name: await contract.name(),
+      });
+    }
+    return NFTs;
   };
 
   // init blockchain websockets listeners

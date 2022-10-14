@@ -4,6 +4,7 @@ pragma solidity 0.8.14;
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import { IERC721 } from "@openzeppelin/contracts/interfaces/IERC721.sol";
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
 /**
@@ -46,6 +47,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
 
     //
     event Minted(uint256 indexed tokenId);
+    event Mutated(uint256 indexed tokenId);
 
     constructor(
         uint256 id,
@@ -84,6 +86,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
      * @dev Return the DROP item matching the token id.
      */
     function getDropItem(uint256 tokenId) public view returns (DropItem memory) {
+        require(tokenId < totalSupply(), "INCORRECT_TOKENID");
         return tokenIdToDropItem[tokenId];
     }
 
@@ -135,8 +138,20 @@ contract SSHDrop is ERC721Enumerable, Ownable {
      * @dev Mutate a DROP item.
      */
     function mutateDropItem(
-        uint256 tokenId,
-        address contractMutator,
+        uint256 tokenIdToMutate,
+        IERC721 contractMutator,
         uint256 tokenIdMutator
-    ) public {}
+    ) public {
+        DropItem storage dropItem = tokenIdToDropItem[tokenIdToMutate];
+
+        require(this.ownerOf(tokenIdToMutate) == tx.origin, "INVALID_OWNER");
+        require(contractMutator.ownerOf(tokenIdMutator) == tx.origin, "INVALID_OWNER");
+
+        dropItem.contractMutator = address(contractMutator);
+        dropItem.tokenIdMutator = tokenIdMutator;
+
+        dropItem.isMutable = false;
+
+        emit Mutated(tokenIdToMutate);
+    }
 }

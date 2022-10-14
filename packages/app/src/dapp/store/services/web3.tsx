@@ -27,6 +27,18 @@ export const mint = createAsyncThunk(
   }
 );
 
+export const mutate = createAsyncThunk(
+  "web3/mutate",
+  async (obj: {
+    contractAddress: string;
+    tokenId: number;
+    contractMutator: string;
+    tokenIdMutator: number;
+  }) => {
+    await sdk.mutate(obj.contractAddress, obj.tokenId, obj.contractMutator, obj.tokenIdMutator);
+  }
+);
+
 const web3 = createSlice({
   name: "counter",
   initialState,

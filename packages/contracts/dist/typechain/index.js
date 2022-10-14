@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SSHStore__factory = exports.SSHDrop__factory = exports.IERC165__factory = exports.ERC165__factory = exports.IERC721Receiver__factory = exports.IERC721__factory = exports.IERC721Metadata__factory = exports.IERC721Enumerable__factory = exports.ERC721Enumerable__factory = exports.ERC721__factory = exports.Ownable__factory = void 0;
+exports.FakeNft__factory = exports.SSHStore__factory = exports.SSHDrop__factory = exports.IERC165__factory = exports.ERC165__factory = exports.IERC721Receiver__factory = exports.IERC721__factory = exports.IERC721Metadata__factory = exports.IERC721Enumerable__factory = exports.ERC721Enumerable__factory = exports.ERC721__factory = exports.Ownable__factory = void 0;
 var Ownable__factory_1 = require("./factories/Ownable__factory");
 Object.defineProperty(exports, "Ownable__factory", { enumerable: true, get: function () { return Ownable__factory_1.Ownable__factory; } });
 var ERC721__factory_1 = require("./factories/ERC721__factory");
@@ -23,3 +23,5 @@ var SSHDrop__factory_1 = require("./factories/SSHDrop__factory");
 Object.defineProperty(exports, "SSHDrop__factory", { enumerable: true, get: function () { return SSHDrop__factory_1.SSHDrop__factory; } });
 var SSHStore__factory_1 = require("./factories/SSHStore__factory");
 Object.defineProperty(exports, "SSHStore__factory", { enumerable: true, get: function () { return SSHStore__factory_1.SSHStore__factory; } });
+var FakeNft__factory_1 = require("./factories/FakeNft__factory");
+Object.defineProperty(exports, "FakeNft__factory", { enumerable: true, get: function () { return FakeNft__factory_1.FakeNft__factory; } });

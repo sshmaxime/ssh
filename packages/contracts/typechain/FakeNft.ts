@@ -12,7 +12,6 @@ import {
   BaseContract,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   CallOverrides,
 } from "ethers";
 import { BytesLike } from "@ethersproject/bytes";
@@ -25,38 +24,15 @@ import type {
   OnEvent,
 } from "./common";
 
-export type DropItemStruct = {
-  isMutable: boolean;
-  versionId: BigNumberish;
-  contractMutator: string;
-  tokenIdMutator: BigNumberish;
-};
-
-export type DropItemStructOutput = [boolean, number, string, BigNumber] & {
-  isMutable: boolean;
-  versionId: number;
-  contractMutator: string;
-  tokenIdMutator: BigNumber;
-};
-
-export interface SSHDropInterface extends ethers.utils.Interface {
+export interface FakeNftInterface extends ethers.utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "dropId()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "getDropItem(uint256)": FunctionFragment;
-    "getMetadataVersion(uint8)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "loadMetadataForVersion(uint8,string)": FunctionFragment;
-    "maxSupply()": FunctionFragment;
-    "mint(uint8)": FunctionFragment;
-    "mutateDropItem(uint256,address,uint256)": FunctionFragment;
+    "mint(uint256)": FunctionFragment;
     "name()": FunctionFragment;
-    "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
-    "price()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
@@ -66,7 +42,6 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     "tokenURI(uint256)": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -74,43 +49,19 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(functionFragment: "dropId", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getApproved",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getDropItem",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getMetadataVersion",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
   ): string;
-  encodeFunctionData(
-    functionFragment: "loadMetadataForVersion",
-    values: [BigNumberish, string]
-  ): string;
-  encodeFunctionData(functionFragment: "maxSupply", values?: undefined): string;
   encodeFunctionData(functionFragment: "mint", values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: "mutateDropItem",
-    values: [BigNumberish, string, BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
     values: [BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "price", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom",
@@ -145,48 +96,20 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [string]
-  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "dropId", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getDropItem",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMetadataVersion",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "loadMetadataForVersion",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "maxSupply", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mutateDropItem",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "price", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom",
     data: BytesLike
@@ -217,25 +140,15 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     functionFragment: "transferFrom",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "Minted(uint256)": EventFragment;
-    "Mutated(uint256)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Mutated"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -253,22 +166,6 @@ export type ApprovalForAllEvent = TypedEvent<
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
-export type MintedEvent = TypedEvent<[BigNumber], { tokenId: BigNumber }>;
-
-export type MintedEventFilter = TypedEventFilter<MintedEvent>;
-
-export type MutatedEvent = TypedEvent<[BigNumber], { tokenId: BigNumber }>;
-
-export type MutatedEventFilter = TypedEventFilter<MutatedEvent>;
-
-export type OwnershipTransferredEvent = TypedEvent<
-  [string, string],
-  { previousOwner: string; newOwner: string }
->;
-
-export type OwnershipTransferredEventFilter =
-  TypedEventFilter<OwnershipTransferredEvent>;
-
 export type TransferEvent = TypedEvent<
   [string, string, BigNumber],
   { from: string; to: string; tokenId: BigNumber }
@@ -276,12 +173,12 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface SSHDrop extends BaseContract {
+export interface FakeNft extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SSHDropInterface;
+  interface: FakeNftInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -311,20 +208,8 @@ export interface SSHDrop extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    dropId(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     getApproved(
       tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    getDropItem(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[DropItemStructOutput]>;
-
-    getMetadataVersion(
-      versionId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -334,40 +219,17 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    loadMetadataForVersion(
-      versionId: BigNumberish,
-      metadataLink: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    maxSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     mint(
-      versionId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    mutateDropItem(
-      tokenIdToMutate: BigNumberish,
-      contractMutator: string,
-      tokenIdMutator: BigNumberish,
+      tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>;
-
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    price(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -421,11 +283,6 @@ export interface SSHDrop extends BaseContract {
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
   };
 
   approve(
@@ -436,20 +293,8 @@ export interface SSHDrop extends BaseContract {
 
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-  dropId(overrides?: CallOverrides): Promise<BigNumber>;
-
   getApproved(
     tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  getDropItem(
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<DropItemStructOutput>;
-
-  getMetadataVersion(
-    versionId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -459,37 +304,14 @@ export interface SSHDrop extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  loadMetadataForVersion(
-    versionId: BigNumberish,
-    metadataLink: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
   mint(
-    versionId: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  mutateDropItem(
-    tokenIdToMutate: BigNumberish,
-    contractMutator: string,
-    tokenIdMutator: BigNumberish,
+    tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   name(overrides?: CallOverrides): Promise<string>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
-
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  price(overrides?: CallOverrides): Promise<BigNumber>;
-
-  renounceOwnership(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: string,
@@ -541,11 +363,6 @@ export interface SSHDrop extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  transferOwnership(
-    newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     approve(
       to: string,
@@ -555,20 +372,8 @@ export interface SSHDrop extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    dropId(overrides?: CallOverrides): Promise<BigNumber>;
-
     getApproved(
       tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    getDropItem(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<DropItemStructOutput>;
-
-    getMetadataVersion(
-      versionId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -578,32 +383,11 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    loadMetadataForVersion(
-      versionId: BigNumberish,
-      metadataLink: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
-    mint(versionId: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    mutateDropItem(
-      tokenIdToMutate: BigNumberish,
-      contractMutator: string,
-      tokenIdMutator: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    mint(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
-    owner(overrides?: CallOverrides): Promise<string>;
-
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    price(overrides?: CallOverrides): Promise<BigNumber>;
-
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -654,11 +438,6 @@ export interface SSHDrop extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
   filters: {
@@ -684,21 +463,6 @@ export interface SSHDrop extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
-    "Minted(uint256)"(tokenId?: BigNumberish | null): MintedEventFilter;
-    Minted(tokenId?: BigNumberish | null): MintedEventFilter;
-
-    "Mutated(uint256)"(tokenId?: BigNumberish | null): MutatedEventFilter;
-    Mutated(tokenId?: BigNumberish | null): MutatedEventFilter;
-
-    "OwnershipTransferred(address,address)"(
-      previousOwner?: string | null,
-      newOwner?: string | null
-    ): OwnershipTransferredEventFilter;
-    OwnershipTransferred(
-      previousOwner?: string | null,
-      newOwner?: string | null
-    ): OwnershipTransferredEventFilter;
-
     "Transfer(address,address,uint256)"(
       from?: string | null,
       to?: string | null,
@@ -720,20 +484,8 @@ export interface SSHDrop extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    dropId(overrides?: CallOverrides): Promise<BigNumber>;
-
     getApproved(
       tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getDropItem(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getMetadataVersion(
-      versionId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -743,39 +495,16 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    loadMetadataForVersion(
-      versionId: BigNumberish,
-      metadataLink: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
     mint(
-      versionId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    mutateDropItem(
-      tokenIdToMutate: BigNumberish,
-      contractMutator: string,
-      tokenIdMutator: BigNumberish,
+      tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    price(overrides?: CallOverrides): Promise<BigNumber>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -830,11 +559,6 @@ export interface SSHDrop extends BaseContract {
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -849,20 +573,8 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    dropId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     getApproved(
       tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getDropItem(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getMetadataVersion(
-      versionId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -872,39 +584,16 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    loadMetadataForVersion(
-      versionId: BigNumberish,
-      metadataLink: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    maxSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     mint(
-      versionId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    mutateDropItem(
-      tokenIdToMutate: BigNumberish,
-      contractMutator: string,
-      tokenIdMutator: BigNumberish,
+      tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    price(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -957,11 +646,6 @@ export interface SSHDrop extends BaseContract {
       from: string,
       to: string,
       tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    transferOwnership(
-      newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

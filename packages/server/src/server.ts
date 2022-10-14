@@ -9,6 +9,7 @@ import axios from "axios";
 import { AssetsOwned, DRIP, DripsOwned, Drops, NFTs } from "@sshlabs/typings";
 
 const userTestAddress = "0xB7C307C43Fd142a4a38C1563e4e25CDAeEb8C86d";
+const FakeNftAddress = "0xd0C3016586C1337f6869cE68D25b08c946B121da";
 
 export class Server {
   private server: http.Server;
@@ -50,17 +51,12 @@ export class Server {
       let limit = 20;
 
       if (address === userTestAddress) {
+        const getTestData = await Store.getOnChainAsset(FakeNftAddress, userTestAddress);
         dataToReturn.push({
-          collectionName: "0x1",
-          assets: [
-            {
-              contract: "",
-              name: "string",
-              img: "https://images.squarespace-cdn.com/content/v1/57f3b496ebbd1a9da1d5e0bf/1595687861783-C6LYVOZW7IBQ2NGAK6D5/silverfineart-black-and-white-photography-gerald-berghammer-fort-auderdale-beach-florida-usa-01.jpg?format=2500w",
-              id: 0,
-            },
-          ],
+          collectionName: getTestData[0].name,
+          assets: getTestData,
         });
+
         return res.status(200).send(dataToReturn);
       }
 
@@ -110,9 +106,13 @@ export class Server {
       const dropId = Number(req.params.dropId);
       const tokenId = Number(req.params.tokenId);
 
-      const dataToReturn: DRIP = await Store.getDrip(dropId, tokenId);
-
-      return res.status(200).send(dataToReturn);
+      try {
+        const dataToReturn: DRIP = await Store.getDrip(dropId, tokenId);
+        return res.status(200).send(dataToReturn);
+      } catch {
+        console.log("laaa");
+        return res.status(400).send();
+      }
     });
 
     app.get("/drip/:address", async (req: Request, res: Response): Promise<Response> => {

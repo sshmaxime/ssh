@@ -56,6 +56,10 @@ declare module "hardhat/types/runtime" {
       name: "SSHStore",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SSHStore__factory>;
+    getContractFactory(
+      name: "FakeNft",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.FakeNft__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -112,6 +116,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.SSHStore>;
+    getContractAt(
+      name: "FakeNft",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.FakeNft>;
 
     // default types
     getContractFactory(

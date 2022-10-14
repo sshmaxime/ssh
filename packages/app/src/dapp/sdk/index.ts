@@ -45,6 +45,18 @@ class SDK {
     const contract = SSHDrop__factory.connect(contractAddress, this._signer);
     await contract.mint(versionId, { value: value });
   };
+  //
+  //
+  //
+  mutate = async (
+    contractAddress: string,
+    tokenId: number,
+    contractMutator: string,
+    tokenIdMutator: number
+  ) => {
+    const contract = SSHDrop__factory.connect(contractAddress, this._signer);
+    await contract.mutateDropItem(tokenId, contractMutator, tokenIdMutator);
+  };
 }
 
 export const sdk = new SDK();

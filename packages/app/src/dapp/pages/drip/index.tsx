@@ -31,11 +31,10 @@ import { useParams } from "react-router-dom";
 import { CREDENTIALS } from "../../../_constants";
 
 import { useGetAssetsQuery, useGetDripQuery } from "../../store/services";
-import { login, mint } from "../../store/services/web3";
+import { login, mutate } from "../../store/services/web3";
 
 import { ethers } from "ethers";
 import { useGetDropsQuery } from "@/dapp/store/services/socket";
-import { preLoadTexture } from "@/_3d/utils/loaderTexture";
 import NotFound from "../404";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
@@ -63,7 +62,7 @@ const DripProxy: FC = () => {
   const isQueryErrorDrip = !isSuccessDrip || isErrorDrip || drip === undefined;
 
   if (isLoadingDrops || isLoadingDrip) {
-    return <></>; // TODO
+    return <>iii</>; // TODO
   }
 
   if (isParamError || isQueryErrorDrops || isQueryErrorDrip) {
@@ -82,10 +81,12 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
   // fetch data
   const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
 
-  const [currentItem, setItem] = React.useState<{ collection: string; id: number; img: string }>();
+  const [currentItem, setItem] =
+    React.useState<{ contractAddress: string; collection: string; id: number; img: string }>();
 
   const updateItem = (newItem: any) => {
     setItem(newItem);
+    console.log(newItem);
     sceneRef.current.changeTexturePlaceholder(newItem.img);
   };
 
@@ -200,6 +201,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                                 onClick={() => {
                                   updateItem({
                                     collection: collection.collectionName,
+                                    contractAddress: item.contract,
                                     id: item.id,
                                     img: item.img,
                                   });
@@ -257,7 +259,20 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
               <Style.ContainerPayment>
                 <Grid container spacing={1}>
                   <Grid item xs={6}>
-                    <Clickable activated={isMutable} onClick={() => {}}>
+                    <Clickable
+                      activated={isMutable}
+                      onClick={() => {
+                        if (!currentItem) return;
+                        dispatch(
+                          mutate({
+                            contractAddress: drop._address,
+                            tokenId: drip.id,
+                            contractMutator: currentItem.contractAddress,
+                            tokenIdMutator: currentItem.id,
+                          })
+                        );
+                      }}
+                    >
                       <Style.MintButton>MUTATE</Style.MintButton>
                     </Clickable>
                   </Grid>

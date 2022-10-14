@@ -12,6 +12,7 @@ export type { ERC165 } from "./ERC165";
 export type { IERC165 } from "./IERC165";
 export type { SSHDrop } from "./SSHDrop";
 export type { SSHStore } from "./SSHStore";
+export type { FakeNft } from "./FakeNft";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { ERC721__factory } from "./factories/ERC721__factory";
@@ -24,3 +25,4 @@ export { ERC165__factory } from "./factories/ERC165__factory";
 export { IERC165__factory } from "./factories/IERC165__factory";
 export { SSHDrop__factory } from "./factories/SSHDrop__factory";
 export { SSHStore__factory } from "./factories/SSHStore__factory";
+export { FakeNft__factory } from "./factories/FakeNft__factory";

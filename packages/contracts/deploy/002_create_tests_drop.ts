@@ -57,6 +57,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     await dropContract.loadMetadataForVersion(2, JSON.stringify(matadata));
 
     await dropContract.connect(userSigner).mint(0, { value: toEth('0.1') });
+    await dropContract.connect(userSigner).mint(1, { value: toEth('0.1') });
+    await dropContract.connect(userSigner).mint(2, { value: toEth('0.1') });
 };
 
 export default func;
