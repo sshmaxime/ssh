@@ -18,11 +18,27 @@ function useTexture(texturesPath: string | string[]): THREE.Texture | THREE.Text
 
 const textureLoader = new TextureLoader();
 const textureLoaderCache: { [key: string]: THREE.Texture } = {};
+
+export const preLoadTexture = (texturePath: string) => {
+  const cachedTexture = textureLoaderCache[texturePath];
+  if (cachedTexture) {
+    return;
+  }
+
+  textureLoader.load(texturePath, (t) => {
+    t.flipY = false;
+    textureLoaderCache[texturePath] = t;
+  });
+};
+
 export const loadTextureToObject = (texturePath: string, ref: any) => {
   const cachedTexture = textureLoaderCache[texturePath];
   if (cachedTexture) {
-    ref.current.material.map = cachedTexture;
-    ref.current.material.needsUpdate = true;
+    if (ref.current) {
+      ref.current.material.map = cachedTexture;
+      ref.current.material.needsUpdate = true;
+      console.log("loading texture using cache");
+    }
     return;
   }
 
@@ -31,8 +47,10 @@ export const loadTextureToObject = (texturePath: string, ref: any) => {
 
     textureLoaderCache[texturePath] = t;
 
-    ref.current.material.map = t;
-    ref.current.material.needsUpdate = true;
+    if (ref.current) {
+      ref.current.material.map = t;
+      ref.current.material.needsUpdate = true;
+    }
   });
 };
 

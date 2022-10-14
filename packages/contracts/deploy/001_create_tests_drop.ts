@@ -2,6 +2,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 import { ethers } from 'hardhat';
 import Contracts from '../components/contracts';
+import { VersionMetadata } from '@sshlabs/typings';
 
 const { parseEther: toEth, formatBytes32String } = ethers.utils;
 
@@ -33,6 +34,29 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     };
 
     let dropContract = await getContract(0);
+
+    let matadata: VersionMetadata = {
+        imgUrl: 'http://localhost:3001/deck0.png',
+        versionColor: '#FFFFFF',
+        versionName: 'nicewhite'
+    };
+    await dropContract.loadMetadataForVersion(0, JSON.stringify(matadata));
+
+    matadata = {
+        imgUrl: 'http://localhost:3001/deck1.png',
+        versionColor: '#FFF5D5',
+        versionName: 'niceyellow'
+    };
+    await dropContract.loadMetadataForVersion(1, JSON.stringify(matadata));
+
+    matadata = {
+        imgUrl: 'http://localhost:3001/deck2.png',
+        versionColor: '#FFEEF0',
+        versionName: 'nicepink'
+    };
+    await dropContract.loadMetadataForVersion(2, JSON.stringify(matadata));
+
+    await dropContract.connect(userSigner).mint(0, { value: toEth('0.1') });
 };
 
 export default func;

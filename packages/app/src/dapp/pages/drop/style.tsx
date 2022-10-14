@@ -7,7 +7,7 @@ const headerHeight = "125px";
 const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "350px";
 
-const footerHeight = "35px";
+const footerHeight = "25px";
 const bottomBarHeight = "100px";
 const bottomHeight = `calc(${footerHeight} + ${bottomBarHeight})`;
 const rightHeightReduced = "320px";
@@ -56,6 +56,12 @@ const style = {
       transition: "all 0.5s",
     })
   ),
+  VersionName: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 500,
+    fontSize: "1.5em",
+    textAlign: "center",
+  })),
   //
   Footer: styled("div")(({ theme }) => ({
     position: "absolute",
@@ -294,6 +300,22 @@ const style = {
     color: "white",
     borderRadius: "10px",
     padding: "10px",
+  })),
+  InnerContainerInfo2: styled("div")(({ theme }) => ({
+    backgroundColor: theme.backgroundColor.primary,
+    padding: "25px",
+  })),
+  BottomBarContainer: styled(Grid)(({ theme }) => ({
+    height: "100%",
+    minWidth: "250px",
+    backgroundColor: theme.backgroundColor.primary,
+    opacity: "75%",
+    borderRadius: "5px",
+    color: "black",
+    transition: "all 0.5s",
+    ":hover": {
+      opacity: "100%",
+    },
   })),
   MintInfo: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

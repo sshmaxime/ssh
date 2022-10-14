@@ -5,14 +5,23 @@ export type NFT = {
   contract: string;
   img: string;
   id: number;
+  name: string;
 };
 
 export type DRIP = {
+  dropId: number;
   isMutable: boolean;
   collectionName: string;
+  versionId: number;
   contract: string;
   img: string;
   id: number;
+};
+
+export type VersionMetadata = {
+  imgUrl: string;
+  versionColor: string;
+  versionName: string;
 };
 
 export type NFTs = NFT[];
@@ -39,9 +48,8 @@ export type Drop = {
   id: number;
   maxSupply: number;
   price: string; // wei
-  //
+  versions: VersionMetadata[];
   currentSupply: number;
-  collections: Collection[];
 };
 
 export type Drops = Drop[];

@@ -7,7 +7,7 @@ export const socketApi = createApi({
   reducerPath: "socketApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/" }),
   endpoints: (build) => ({
-    getMessages: build.query<Drop[], any>({
+    getDrops: build.query<Drop[], any>({
       query: () => "drops",
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
         // create a websocket connection when the cache subscription starts
@@ -48,4 +48,4 @@ export const socketApi = createApi({
   }),
 });
 
-export const { useGetMessagesQuery } = socketApi;
+export const { useGetDropsQuery } = socketApi;

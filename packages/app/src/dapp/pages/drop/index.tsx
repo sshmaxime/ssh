@@ -30,61 +30,31 @@ import { Drop as DropType } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
 import { CREDENTIALS } from "../../../_constants";
 
-import { useGetDropQuery, useGetAssetsForDropByAddressQuery } from "../../store/services";
+import { useGetAssetsQuery } from "../../store/services";
 import { login, mint } from "../../store/services/web3";
 
 import { ethers } from "ethers";
-import { useGetMessagesQuery } from "@/dapp/store/services/socket";
+import { useGetDropsQuery } from "@/dapp/store/services/socket";
+import NotFound from "../404";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
 const DropProxy: FC = () => {
-  const { data: drop, isLoading } = useGetMessagesQuery({});
+  const { data: drop, isLoading, isError, isSuccess } = useGetDropsQuery({});
   const dropId = Number(useParams().dropId || "-1");
 
+  const isParamProblem = isNaN(dropId);
+  const isQueryProblem = !isSuccess || isError || drop === undefined;
+
   if (isLoading) {
-    return <></>; // TOD
+    return <></>; // TODO
   }
 
-  if (isNaN(dropId) || drop === undefined || dropId >= drop.length) {
-    return <DropNotFound />;
+  if (isParamProblem || isQueryProblem) {
+    return <NotFound />;
   }
 
   return <Drop drop={drop[dropId]} />;
-};
-
-const DropNotFound: FC = () => {
-  return (
-    <Style.RootNotFound>
-      <Style.NotFound>
-        <Grid container>
-          <Grid item xs={12}>
-            Drop Not Found.
-          </Grid>
-          <Grid item xs={12}>
-            <Style.MoreLinkContainer>
-              <Clickable onClick={() => {}}>
-                <Grid container>
-                  <Grid item alignSelf={"center"}>
-                    <Style.MoreLink>HOME</Style.MoreLink>
-                  </Grid>
-                  <Grid item alignSelf={"center"}>
-                    <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
-                  </Grid>
-                </Grid>
-              </Clickable>
-            </Style.MoreLinkContainer>
-          </Grid>
-        </Grid>
-      </Style.NotFound>
-    </Style.RootNotFound>
-  );
-};
-
-const Deck: { [key: string]: string } = {
-  Sublimes: "/models/skate/textures/sublimes-deck.png",
-  Isotile: "/models/skate/textures/isotile-deck.png",
-  MoonCats: "/models/skate/textures/mooncats-deck.png",
 };
 
 const Drop: FC<{ drop: DropType }> = ({ drop }) => {
@@ -92,10 +62,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const dispatch = useDispatch();
 
   // fetch data
-  const { data: assets, isLoading } = useGetAssetsForDropByAddressQuery(
-    { dropId: drop.id, address: address },
-    { skip: !auth }
-  );
+  const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
 
   const isMintable = drop.currentSupply !== drop.maxSupply;
 
@@ -109,7 +76,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const updateVersion = (version: number) => {
     setVersion(version);
-    sceneRef.current.changeVersion(version);
+    sceneRef.current.changeTextureDeck(drop.versions[version].imgUrl);
   };
 
   const updateItem = (newItem: any) => {
@@ -168,22 +135,6 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                       <Style.Commands container justifyContent="space-between">
                         <Grid item>
                           <Grid container columnSpacing={0.5}>
-                            <Grid item>
-                              {/* <Pastille
-                                secondary
-                                bgcolor={
-                                  drop.status === STATUS.CREATED
-                                    ? "#F8E0CD"
-                                    : drop.status === STATUS.MINTABLE
-                                    ? "#DAF1EA"
-                                    : drop.status === STATUS.STANDBY
-                                    ? "#EDECE8"
-                                    : "#E4ECFE"
-                                }
-                                small
-                                title={drop.status}
-                              /> */}
-                            </Grid>
                             <Grid item>
                               <Pastille
                                 secondary
@@ -349,7 +300,13 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                         <Clickable
                           activated={isMintable}
                           onClick={() => {
-                            dispatch(mint({ address: drop._address, value: drop.price }));
+                            dispatch(
+                              mint({
+                                address: drop._address,
+                                versionId: currentVersion,
+                                value: drop.price,
+                              })
+                            );
                           }}
                         >
                           <Style.MintButton>MINT</Style.MintButton>
@@ -397,7 +354,13 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                       <Clickable
                         activated={isMintable}
                         onClick={() => {
-                          dispatch(mint({ address: drop._address, value: drop.price }));
+                          dispatch(
+                            mint({
+                              address: drop._address,
+                              versionId: currentVersion,
+                              value: drop.price,
+                            })
+                          );
                         }}
                       >
                         <Style.MintButton>MINT</Style.MintButton>
@@ -411,13 +374,31 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
           </ClickAwayListener>
 
           <Style.BottomBar>
-            <Grid container justifyContent="center" alignItems="center" columnSpacing={1}>
-              {CircleSelect(0, currentVersion, "#FFFFFF", () => updateVersion(0))}
-              {CircleSelect(1, currentVersion, "#FFF5D5", () => updateVersion(1))}
-              {CircleSelect(2, currentVersion, "#FFEEF0", () => updateVersion(2))}
-              {CircleSelect(3, currentVersion, "#B4FFF5", () => updateVersion(3))}
-              {CircleSelect(4, currentVersion, "#F5E9FD", () => updateVersion(4))}
-              {CircleSelect(5, currentVersion, "#A6FFDC", () => updateVersion(5))}
+            <Grid container justifyContent="center" alignItems="center" style={{ height: "100%" }}>
+              <Grid item style={{ height: "100%", paddingTop: "10px", paddingBottom: "10px" }}>
+                <Style.BottomBarContainer
+                  container
+                  justifyContent="center"
+                  alignItems="center"
+                  columnSpacing={1}
+                >
+                  <Grid item xs={12}>
+                    <Style.VersionName>
+                      {drop.versions[currentVersion].versionName}
+                    </Style.VersionName>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Grid container justifyContent="center" alignItems="center" columnSpacing={1}>
+                      {drop.versions.map((versionMetadata, index) =>
+                        CircleSelect(index, currentVersion, versionMetadata.versionColor, () =>
+                          updateVersion(index)
+                        )
+                      )}
+                    </Grid>
+                  </Grid>
+                  {/*  */}
+                </Style.BottomBarContainer>
+              </Grid>
             </Grid>
           </Style.BottomBar>
         </Style.Body>
@@ -451,7 +432,7 @@ export const CircleSelect = (
   color: string,
   fct: Function
 ) => (
-  <Grid item>
+  <Grid item key={version}>
     <Clickable onClick={() => fct()}>
       <Style.Circle $selected={version === currentVersion} bgcolor={color} />
     </Clickable>

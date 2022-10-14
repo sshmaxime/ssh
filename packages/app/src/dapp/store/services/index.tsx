@@ -1,24 +1,27 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AssetsOwned, DripsOwned, Drop } from "@sshlabs/typings";
+import { AssetsOwned, DRIP, DripsOwned, Drop } from "@sshlabs/typings";
 
 export const dropApi = createApi({
   reducerPath: "dropApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/" }),
   endpoints: (builder) => ({
     //
-    getDrop: builder.query<Drop, { dropId: number }>({
-      query: ({ dropId }) => `drop/${dropId}`,
+    getDrops: builder.query<Drop, {}>({
+      query: ({}) => `drops/`,
     }),
     //
-    getAssetsForDropByAddress: builder.query<AssetsOwned, { dropId: number; address: string }>({
-      query: ({ dropId, address }) => `drop/${dropId}/${address}`,
+    getDrip: builder.query<DRIP, { dropId: number; tokenId: number }>({
+      query: ({ dropId, tokenId }) => `drip/${dropId}/${tokenId}`,
     }),
     //
-    getDripsByAddress: builder.query<DripsOwned, { address: string }>({
+    getAssets: builder.query<AssetsOwned, { address: string }>({
+      query: ({ address }) => `assets/${address}`,
+    }),
+    //
+    getDrips: builder.query<DripsOwned, { address: string }>({
       query: ({ address }) => `drip/${address}`,
     }),
   }),
 });
 
-export const { useGetAssetsForDropByAddressQuery, useGetDripsByAddressQuery, useGetDropQuery } =
-  dropApi;
+export const { useGetAssetsQuery, useGetDripQuery, useGetDripsQuery, useGetDropsQuery } = dropApi;

@@ -22,8 +22,8 @@ export const login = createAsyncThunk("web3/login", async () => {
 
 export const mint = createAsyncThunk(
   "web3/mint",
-  async (obj: { address: string; value: string }) => {
-    await sdk.mint(obj.address, obj.value);
+  async (obj: { address: string; versionId: number; value: string }) => {
+    await sdk.mint(obj.address, obj.versionId, obj.value);
   }
 );
 

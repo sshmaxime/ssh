@@ -13,14 +13,14 @@ import OpenseaIcon from "../../_utils/assets/icons/opensea.svg";
 import { useDispatch, useSelector } from "../store/hooks";
 import { login } from "../store/services/web3";
 import { shortenAddress } from "../utils";
-import { useGetDripsByAddressQuery } from "../store/services";
+import { useGetDripsQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export const NavbarComponent: FC = () => {
   const { auth, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
-  const { data: drips, isLoading } = useGetDripsByAddressQuery({ address }, { skip: !auth });
+  const { data: drips, isLoading } = useGetDripsQuery({ address }, { skip: !auth });
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -106,26 +106,21 @@ export const NavbarComponent: FC = () => {
                                   >
                                     <Grid container justifyContent="space-between">
                                       <Grid item>
-                                        <Style.WalletTypoCollection>
-                                          <Grid container alignItems="center">
-                                            {drip.isMutable ? "MUTABLE" : "BAYC"}
-                                            <VerifiedIcon
-                                              style={{
-                                                marginLeft: "2.5px",
-                                                fontSize: "15px",
-                                                marginBottom: "2.5px",
-                                              }}
-                                            />
-                                          </Grid>
-                                        </Style.WalletTypoCollection>
+                                        <Style.WalletTypoCollectionDrop>
+                                          {drip.collectionName}
+                                        </Style.WalletTypoCollectionDrop>
                                       </Grid>
                                       <Grid item>
                                         <Grid container columnSpacing={1}>
-                                          <Grid item>
-                                            <Style.WalletTypoCollectionDrop>
-                                              {drip.collectionName}
-                                            </Style.WalletTypoCollectionDrop>
-                                          </Grid>
+                                          {drip.isMutable ? (
+                                            <Grid item>
+                                              <Style.WalletTypoCollection>
+                                                MUTABLE
+                                              </Style.WalletTypoCollection>
+                                            </Grid>
+                                          ) : (
+                                            <></>
+                                          )}
                                           <Grid item>
                                             <Style.WalletTypoDripId>
                                               #{drip.id}
@@ -134,16 +129,29 @@ export const NavbarComponent: FC = () => {
                                         </Grid>
                                       </Grid>
                                     </Grid>
+
                                     <Grid
                                       container
                                       style={{ marginTop: "5px" }}
                                       justifyContent="space-between"
                                     >
                                       <Grid item>
-                                        <Style.WalletTypoDripAction>
-                                          View
-                                        </Style.WalletTypoDripAction>
+                                        <Grid container style={{ marginTop: "5px" }}>
+                                          <Grid item style={{ marginRight: "5px" }}>
+                                            <Clickable
+                                              hoverAnimation={false}
+                                              external={false}
+                                              address={`drop/${drip.dropId}/${drip.id}`}
+                                              onClick2={() => handlePopoverClose()}
+                                            >
+                                              <Style.WalletTypoDripAction>
+                                                View
+                                              </Style.WalletTypoDripAction>
+                                            </Clickable>
+                                          </Grid>
+                                        </Grid>
                                       </Grid>
+
                                       <Grid item>
                                         <Grid container>
                                           <Grid item>

@@ -41,9 +41,9 @@ class SDK {
   //
   //
   //
-  mint = async (contractAddress: string, value: string) => {
+  mint = async (contractAddress: string, versionId: number, value: string) => {
     const contract = SSHDrop__factory.connect(contractAddress, this._signer);
-    await contract.mint({ value: value });
+    await contract.mint(versionId, { value: value });
   };
 }
 

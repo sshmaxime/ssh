@@ -6,7 +6,7 @@ import Store from "./store";
 
 import cors from "cors";
 import axios from "axios";
-import { AssetsOwned, Drops, NFTs } from "@sshlabs/typings";
+import { AssetsOwned, DRIP, DripsOwned, Drops, NFTs } from "@sshlabs/typings";
 
 const userTestAddress = "0xB7C307C43Fd142a4a38C1563e4e25CDAeEb8C86d";
 
@@ -39,8 +39,7 @@ export class Server {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static(__dirname + "/../public"));
 
-    app.get("/drop/:dropId/:address", async (req: Request, res: Response): Promise<Response> => {
-      const drop = Store.getDrop(req.params.dropId as any as number);
+    app.get("/assets/:address", async (req: Request, res: Response): Promise<Response> => {
       const address = req.params.address;
 
       const preData: { [contractAddress: string]: NFTs } = {};
@@ -57,7 +56,7 @@ export class Server {
             {
               contract: "",
               name: "string",
-              img: "https://picsum.photos/200/300?grayscale",
+              img: "https://images.squarespace-cdn.com/content/v1/57f3b496ebbd1a9da1d5e0bf/1595687861783-C6LYVOZW7IBQ2NGAK6D5/silverfineart-black-and-white-photography-gerald-berghammer-fort-auderdale-beach-florida-usa-01.jpg?format=2500w",
               id: 0,
             },
           ],
@@ -104,8 +103,23 @@ export class Server {
       const drops = Store.getState();
 
       const dataToReturn: Drops = drops;
-      console.log("heyy");
-      console.log(dataToReturn);
+      return res.status(200).send(dataToReturn);
+    });
+
+    app.get("/drip/:dropId/:tokenId", async (req: Request, res: Response): Promise<Response> => {
+      const dropId = Number(req.params.dropId);
+      const tokenId = Number(req.params.tokenId);
+
+      const dataToReturn: DRIP = await Store.getDrip(dropId, tokenId);
+
+      return res.status(200).send(dataToReturn);
+    });
+
+    app.get("/drip/:address", async (req: Request, res: Response): Promise<Response> => {
+      const address = req.params.address;
+
+      const dataToReturn: DripsOwned = await Store.getDripOwnedByAddress(address);
+
       return res.status(200).send(dataToReturn);
     });
 

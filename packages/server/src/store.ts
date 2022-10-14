@@ -3,7 +3,7 @@ import { env } from "process";
 import { BigNumber, BigNumberish, ethers, Event } from "ethers";
 import { SSHStore, SSHDrop, SSHStore__factory, SSHDrop__factory } from "@sshlabs/contracts";
 
-import { DRIP, Drop, Drops } from "@sshlabs/typings";
+import { DRIP, DripsOwned, Drop, Drops, VersionMetadata } from "@sshlabs/typings";
 import axios from "axios";
 import Server from "./server";
 
@@ -57,44 +57,53 @@ export class Store {
     const dropContractAddress = await this.SSHStore.getDrop(dropId);
     const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
 
+    const versions: VersionMetadata[] = [];
+
+    let isRequestDone = false;
+    let version = 0;
+    while (!isRequestDone) {
+      const metadataAsString = await dropContract.getMetadataVersion(version);
+
+      if (metadataAsString === "") {
+        isRequestDone = true;
+        break;
+      }
+
+      const metadata = JSON.parse(metadataAsString) as VersionMetadata;
+      versions.push(metadata);
+      version++;
+    }
+
     return {
       _address: dropContractAddress,
       id: dropId.toNumber(),
-      collections: (await dropContract.whitelist()).map((whitelistAddress) => {
-        return {
-          name: ContractToCollectionName[whitelistAddress],
-          contract: whitelistAddress,
-        };
-      }),
       price: (await dropContract.price()).toString(),
+      versions: versions,
       maxSupply: (await dropContract.maxSupply()).toNumber(),
       currentSupply: (await dropContract.totalSupply()).toNumber(),
     };
   };
 
   // init blockchain websockets listeners
-  private initBlockchainListeners = async () => {
-    // New drop is created
-    this.SSHStore.on(this.SSHStore.filters.DropCreated(null), async (dropId) => {
-      const dropContractAddress = await this.SSHStore.getDrop(dropId);
-      const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
+  // private initBlockchainListeners = async () => {
+  //   // New drop is created
+  //   this.SSHStore.on(this.SSHStore.filters.DropCreated(null), async (dropId) => {
+  //     const dropContractAddress = await this.SSHStore.getDrop(dropId);
+  //     const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
 
-      this.DROPS.push({
-        _address: dropContractAddress,
-        id: dropId.toNumber(),
-        collections: (await dropContract.whitelist()).map((whitelistAddress) => {
-          return {
-            name: ContractToCollectionName[whitelistAddress],
-            contract: whitelistAddress,
-          };
-        }),
-        price: (await dropContract.price()).toString(),
-        maxSupply: (await dropContract.maxSupply()).toNumber(),
-        currentSupply: (await dropContract.totalSupply()).toNumber(),
-      });
-      io.emit("hello", { data: this.getState() });
-    });
-  };
+  //     const versions: VersionMetadata[] = [];
+
+  //     this.DROPS.push({
+  //       _address: dropContractAddress,
+  //       id: dropId.toNumber(),
+  //       price: (await dropContract.price()).toString(),
+  //       versions: versions,
+  //       maxSupply: (await dropContract.maxSupply()).toNumber(),
+  //       currentSupply: (await dropContract.totalSupply()).toNumber(),
+  //     });
+  //     io.emit("hello", { data: this.getState() });
+  //   });
+  // };
 
   private initDropsListeners = async () => {
     const dropSupply = await this.SSHStore.getSupply();
@@ -137,6 +146,53 @@ export class Store {
 
   getDrop = (dropId: number) => {
     return this.DROPS[dropId];
+  };
+
+  getDrip = async (dropId: number, tokenId: number): Promise<DRIP> => {
+    const dropContractAddress = await this.SSHStore.getDrop(dropId);
+    const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
+    const drip = await dropContract.getDropItem(tokenId);
+
+    return {
+      dropId: (await dropContract.dropId()).toNumber(),
+      collectionName: await dropContract.symbol(),
+      isMutable: drip.isMutable,
+      versionId: drip.versionId,
+      contract: dropContract.address,
+      img: "https://via.placeholder.com/150", // TODO
+      id: tokenId,
+    };
+  };
+
+  getDripOwnedByAddress = async (address: string) => {
+    const dropSupply = (await this.SSHStore.getSupply()).toNumber();
+
+    const dripsByAddress: DRIP[] = [];
+    for (let i = 0; i < dropSupply; i++) {
+      const dropContractAddress = await this.SSHStore.getDrop(i);
+      const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
+
+      const balanceDripOfAddress = (await dropContract.balanceOf(address)).toNumber();
+      const addressTokenIds: number[] = [];
+      for (let dripIndex = 0; dripIndex < balanceDripOfAddress; dripIndex++) {
+        const tokenId = (await dropContract.tokenOfOwnerByIndex(address, dripIndex)).toNumber();
+        const drip = await dropContract.getDropItem(tokenId);
+
+        const tokenURI = await dropContract.tokenURI(tokenId);
+
+        dripsByAddress.push({
+          dropId: (await dropContract.dropId()).toNumber(),
+          isMutable: drip.isMutable,
+          collectionName: await dropContract.symbol(),
+          versionId: drip.versionId,
+          contract: dropContract.address,
+          img: "https://via.placeholder.com/150", // TODO
+          id: tokenId,
+        });
+        addressTokenIds.push(tokenId);
+      }
+    }
+    return dripsByAddress;
   };
 }
 
