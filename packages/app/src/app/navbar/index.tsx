@@ -4,8 +4,8 @@ import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
 import Clickable from "../../_utils/components/stateless/clickable";
-import Logo from "../../_utils/assets/images/logo2.svg";
-import Logo2 from "../../_utils/assets/images/logo3.svg";
+import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
+import LogoTypo from "../../_utils/assets/images/logo-typo.svg";
 
 export const NavbarComponent: FC = () => {
   return (
@@ -15,7 +15,7 @@ export const NavbarComponent: FC = () => {
           <Grid container columnSpacing={0} rowSpacing={0} justifyContent="space-between">
             <Grid item xs={4} style={{ display: "flex", alignItems: "center" }}>
               <Clickable address="/">
-                <img src={Logo} style={{ width: "250px" }} alt="" />
+                <img src={LogoTypo} style={{ width: "200px" }} alt="" />
               </Clickable>
             </Grid>
             <Grid
@@ -24,7 +24,7 @@ export const NavbarComponent: FC = () => {
               style={{ justifyContent: "center", display: "flex", alignItems: "center" }}
             >
               <Clickable address="/">
-                <img src={Logo2} style={{ width: "35px" }} alt="" />
+                <img src={LogoIcon} style={{ width: "75px" }} alt="" />
               </Clickable>
             </Grid>
             <Grid item xs={4} style={{ display: "flex", alignItems: "center" }}>

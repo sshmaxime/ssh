@@ -4,7 +4,6 @@ import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
 import Clickable from "../../_utils/components/stateless/clickable";
-import Logo from "../../_utils/assets/images/logo3.svg";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -15,6 +14,8 @@ import { login } from "../store/services/web3";
 import { shortenAddress } from "../utils";
 import { useGetDripsQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+
+import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
 
 export const NavbarComponent: FC = () => {
   const { auth, address, name } = useSelector((state) => state.web3);
@@ -40,7 +41,7 @@ export const NavbarComponent: FC = () => {
               <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
                 <Grid item>
                   <Clickable address="/">
-                    <img alt="" src={Logo} style={{ width: "50px" }} />
+                    <img alt="" src={LogoIcon} style={{ width: "75px" }} />
                   </Clickable>
                 </Grid>
                 <Grid item style={{ marginLeft: "25px" }}>

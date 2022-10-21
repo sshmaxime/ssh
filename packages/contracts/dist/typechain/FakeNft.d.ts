@@ -16,7 +16,10 @@ export interface FakeNftInterface extends ethers.utils.Interface {
         "setApprovalForAll(address,bool)": FunctionFragment;
         "supportsInterface(bytes4)": FunctionFragment;
         "symbol()": FunctionFragment;
+        "tokenByIndex(uint256)": FunctionFragment;
+        "tokenOfOwnerByIndex(address,uint256)": FunctionFragment;
         "tokenURI(uint256)": FunctionFragment;
+        "totalSupply()": FunctionFragment;
         "transferFrom(address,address,uint256)": FunctionFragment;
     };
     encodeFunctionData(functionFragment: "approve", values: [string, BigNumberish]): string;
@@ -30,7 +33,10 @@ export interface FakeNftInterface extends ethers.utils.Interface {
     encodeFunctionData(functionFragment: "setApprovalForAll", values: [string, boolean]): string;
     encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
     encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+    encodeFunctionData(functionFragment: "tokenByIndex", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "tokenOfOwnerByIndex", values: [string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "tokenURI", values: [BigNumberish]): string;
+    encodeFunctionData(functionFragment: "totalSupply", values?: undefined): string;
     encodeFunctionData(functionFragment: "transferFrom", values: [string, string, BigNumberish]): string;
     decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -43,7 +49,10 @@ export interface FakeNftInterface extends ethers.utils.Interface {
     decodeFunctionResult(functionFragment: "setApprovalForAll", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "tokenByIndex", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "tokenOfOwnerByIndex", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "totalSupply", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferFrom", data: BytesLike): Result;
     events: {
         "Approval(address,address,uint256)": EventFragment;
@@ -121,7 +130,10 @@ export interface FakeNft extends BaseContract {
         }): Promise<ContractTransaction>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
         symbol(overrides?: CallOverrides): Promise<[string]>;
+        tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
+        tokenOfOwnerByIndex(owner: string, index: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
         tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+        totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
         transferFrom(from: string, to: string, tokenId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
@@ -148,7 +160,10 @@ export interface FakeNft extends BaseContract {
     }): Promise<ContractTransaction>;
     supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
     symbol(overrides?: CallOverrides): Promise<string>;
+    tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    tokenOfOwnerByIndex(owner: string, index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
     tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
     transferFrom(from: string, to: string, tokenId: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
@@ -165,7 +180,10 @@ export interface FakeNft extends BaseContract {
         setApprovalForAll(operator: string, approved: boolean, overrides?: CallOverrides): Promise<void>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
         symbol(overrides?: CallOverrides): Promise<string>;
+        tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        tokenOfOwnerByIndex(owner: string, index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+        totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
         transferFrom(from: string, to: string, tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
     };
     filters: {
@@ -199,7 +217,10 @@ export interface FakeNft extends BaseContract {
         }): Promise<BigNumber>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
         symbol(overrides?: CallOverrides): Promise<BigNumber>;
+        tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        tokenOfOwnerByIndex(owner: string, index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
         tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+        totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
         transferFrom(from: string, to: string, tokenId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
@@ -227,7 +248,10 @@ export interface FakeNft extends BaseContract {
         }): Promise<PopulatedTransaction>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        tokenOfOwnerByIndex(owner: string, index: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         transferFrom(from: string, to: string, tokenId: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;

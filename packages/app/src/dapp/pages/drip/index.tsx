@@ -1,4 +1,4 @@
-import React, { Suspense, Fragment, FC, useState, useEffect, useRef } from "react";
+import React, { Suspense, Fragment, FC, useState, useEffect, useRef, useCallback } from "react";
 
 import {
   AppBar,
@@ -51,7 +51,8 @@ const DripProxy: FC = () => {
     isError: isErrorDrops,
     isSuccess: isSuccessDrops,
   } = useGetDropsQuery({ skip: isParamError });
-  const isQueryErrorDrops = !isSuccessDrops || isErrorDrops || drop === undefined;
+  const isQueryErrorDrops =
+    !isSuccessDrops || isErrorDrops || drop === undefined || drop[dropId] === undefined;
 
   const {
     data: drip,
@@ -86,12 +87,11 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
 
   const updateItem = (newItem: any) => {
     setItem(newItem);
-    console.log(newItem);
     sceneRef.current.changeTexturePlaceholder(newItem.img);
   };
 
   const sceneRef = React.useRef<sceneRef>(null!);
-
+  console.log(drop);
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
@@ -99,7 +99,13 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
 
         <Style.Body>
           <Style.BodyScene>
-            <SceneLoader sceneRef={sceneRef} />
+            <SceneLoader
+              sceneRef={sceneRef}
+              model={drop.metadata.model}
+              initialDeckTexture={drop.metadata.versions[drip.versionId].texture}
+              initialPlaceholderTexture={""}
+              initialId={drip.id}
+            />
           </Style.BodyScene>
 
           <Style.LeftSide>
@@ -247,7 +253,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                 <Grid item xs={12}>
                   <Style.Explainer>Version</Style.Explainer>
                   <Style.ContainerTitle3>
-                    {drop.versions[drip.versionId].versionName} #{drip.versionId}
+                    {drop.metadata.versions[drip.versionId].name} #{drip.versionId}
                   </Style.ContainerTitle3>
                 </Grid>
                 <Grid item xs={12}>

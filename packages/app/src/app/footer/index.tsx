@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DiscordIcon from "../../_utils/assets/icons/discord2.svg";
 import Clickable from "../../_utils/components/stateless/clickable";
-import Logo from "../../_utils/assets/images/logo2.svg";
+import LogoFull from "../../_utils/assets/images/logo-full.svg";
 
 export const FooterComponent: FC = () => {
   return (
@@ -16,7 +16,7 @@ export const FooterComponent: FC = () => {
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Clickable address="/">
-                <img src={Logo} style={{ width: "250px" }} alt="" />
+                <img src={LogoFull} style={{ width: "250px" }} alt="" />
               </Clickable>
             </Grid>
           </Grid>

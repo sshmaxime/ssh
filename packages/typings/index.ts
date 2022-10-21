@@ -18,6 +18,12 @@ export type DRIP = {
   id: number;
 };
 
+export type DropMetadata = {
+  id: number;
+  model: string;
+  versions: { id: number; texture: string; color: string; name: string }[];
+};
+
 export type VersionMetadata = {
   imgUrl: string;
   versionColor: string;
@@ -48,8 +54,9 @@ export type Drop = {
   id: number;
   maxSupply: number;
   price: string; // wei
-  versions: VersionMetadata[];
   currentSupply: number;
+
+  metadata: DropMetadata;
 };
 
 export type Drops = Drop[];

@@ -8,6 +8,8 @@ import cors from "cors";
 import axios from "axios";
 import { AssetsOwned, DRIP, DripsOwned, Drops, NFTs } from "@sshlabs/typings";
 
+export const IPFS_GATEWAY = "http://127.0.0.1:8080" + "/ipfs/";
+
 const userTestAddress = "0xB7C307C43Fd142a4a38C1563e4e25CDAeEb8C86d";
 const FakeNftAddress = "0xd0C3016586C1337f6869cE68D25b08c946B121da";
 
@@ -110,7 +112,6 @@ export class Server {
         const dataToReturn: DRIP = await Store.getDrip(dropId, tokenId);
         return res.status(200).send(dataToReturn);
       } catch {
-        console.log("laaa");
         return res.status(400).send();
       }
     });

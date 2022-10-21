@@ -33,9 +33,13 @@ contract SSHStore is Ownable {
     /**
      * @dev Create a DROP.
      */
-    function createDrop(uint256 maxSupply, uint256 mintPrice) public onlyOwner {
+    function createDrop(
+        uint256 maxSupply,
+        uint256 mintPrice,
+        uint8 versions
+    ) public onlyOwner {
         uint256 dropId = TOTAL_SUPPLY;
-        _drops[dropId] = new SSHDrop(dropId, maxSupply, mintPrice);
+        _drops[dropId] = new SSHDrop(dropId, maxSupply, mintPrice, versions);
         TOTAL_SUPPLY++;
 
         emit DropCreated(dropId);

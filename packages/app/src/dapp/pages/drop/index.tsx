@@ -1,16 +1,6 @@
-import React, { Suspense, Fragment, FC, useState, useEffect, useRef } from "react";
+import React, { Fragment, FC, useState, useEffect, useRef } from "react";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Card,
-  Grid,
-  SwipeableDrawer,
-  ImageList,
-  ImageListItem,
-} from "@mui/material";
+import { Grid, ImageList, ImageListItem } from "@mui/material";
 
 import Style from "./style";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -44,7 +34,7 @@ const DropProxy: FC = () => {
   const dropId = Number(useParams().dropId || "-1");
 
   const isParamProblem = isNaN(dropId);
-  const isQueryProblem = !isSuccess || isError || drop === undefined;
+  const isQueryProblem = !isSuccess || isError || drop === undefined || drop[dropId] === undefined;
 
   if (isLoading) {
     return <></>; // TODO
@@ -76,7 +66,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const updateVersion = (version: number) => {
     setVersion(version);
-    sceneRef.current.changeTextureDeck(drop.versions[version].imgUrl);
+    sceneRef.current.changeTextureDeck(drop.metadata.versions[version].texture);
   };
 
   const updateItem = (newItem: any) => {
@@ -102,7 +92,13 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
         <Style.Body>
           <Style.BodyScene>
-            <SceneLoader sceneRef={sceneRef} />
+            <SceneLoader
+              sceneRef={sceneRef}
+              model={drop.metadata.model}
+              initialDeckTexture={drop.metadata.versions[0].texture}
+              initialPlaceholderTexture={""}
+              initialId={0}
+            />
           </Style.BodyScene>
 
           <Style.LeftSide>
@@ -381,16 +377,17 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   justifyContent="center"
                   alignItems="center"
                   columnSpacing={1}
+                  style={{ minWidth: "350px" }}
                 >
                   <Grid item xs={12}>
                     <Style.VersionName>
-                      {drop.versions[currentVersion].versionName}
+                      {drop.metadata.versions[currentVersion].name}
                     </Style.VersionName>
                   </Grid>
                   <Grid item xs={12}>
                     <Grid container justifyContent="center" alignItems="center" columnSpacing={1}>
-                      {drop.versions.map((versionMetadata, index) =>
-                        CircleSelect(index, currentVersion, versionMetadata.versionColor, () =>
+                      {drop.metadata.versions.map((versionMetadata, index) =>
+                        CircleSelect(index, currentVersion, versionMetadata.color, () =>
                           updateVersion(index)
                         )
                       )}

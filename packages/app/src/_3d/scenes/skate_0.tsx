@@ -5,7 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 import ModelSkate, {
   SkateRefs,
   useSkateRefsLoader,
-  ModelInitialProps,
+  ModelMetadataProps,
   defaultSkateModelAnimation,
 } from "@/_3d/models/skate";
 import LoaderScene from "@/_3d/utils/loaderScene";
@@ -17,15 +17,17 @@ const sceneFunctions = (refs: SkateRefs) => ({
   ...defaultSkateModelAnimation(refs),
 });
 
-const SceneLoader: FC<ModelInitialProps & { sceneRef: sceneRefType }> = React.memo((props, ref) => {
-  return (
-    <LoaderScene>
-      <Scene {...props} />
-    </LoaderScene>
-  );
-});
+const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo(
+  (props, ref) => {
+    return (
+      <LoaderScene>
+        <Scene {...props} />
+      </LoaderScene>
+    );
+  }
+);
 
-const Scene: FC<ModelInitialProps & { sceneRef: sceneRefType }> = (props) => {
+const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
   const refs = useSkateRefsLoader();
   useImperativeHandle(props.sceneRef, () => sceneFunctions(refs));
 

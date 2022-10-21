@@ -5,14 +5,14 @@ import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface SSHStoreInterface extends ethers.utils.Interface {
     functions: {
-        "createDrop(uint256,uint256)": FunctionFragment;
+        "createDrop(uint256,uint256,uint8)": FunctionFragment;
         "getDrop(uint256)": FunctionFragment;
         "getSupply()": FunctionFragment;
         "owner()": FunctionFragment;
         "renounceOwnership()": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
     };
-    encodeFunctionData(functionFragment: "createDrop", values: [BigNumberish, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "createDrop", values: [BigNumberish, BigNumberish, BigNumberish]): string;
     encodeFunctionData(functionFragment: "getDrop", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getSupply", values?: undefined): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -58,7 +58,7 @@ export interface SSHStore extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, overrides?: Overrides & {
+        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, versions: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
         getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
@@ -71,7 +71,7 @@ export interface SSHStore extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
     };
-    createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, overrides?: Overrides & {
+    createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, versions: BigNumberish, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<string>;
@@ -84,7 +84,7 @@ export interface SSHStore extends BaseContract {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, overrides?: CallOverrides): Promise<void>;
+        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, versions: BigNumberish, overrides?: CallOverrides): Promise<void>;
         getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<string>;
         getSupply(overrides?: CallOverrides): Promise<BigNumber>;
         owner(overrides?: CallOverrides): Promise<string>;
@@ -98,7 +98,7 @@ export interface SSHStore extends BaseContract {
         OwnershipTransferred(previousOwner?: string | null, newOwner?: string | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {
-        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, overrides?: Overrides & {
+        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, versions: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
         getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -112,7 +112,7 @@ export interface SSHStore extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, overrides?: Overrides & {
+        createDrop(maxSupply: BigNumberish, mintPrice: BigNumberish, versions: BigNumberish, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<PopulatedTransaction>;

@@ -13,6 +13,16 @@ export declare type DRIP = {
     img: string;
     id: number;
 };
+export declare type DropMetadata = {
+    id: number;
+    model: string;
+    versions: {
+        id: number;
+        texture: string;
+        color: string;
+        name: string;
+    }[];
+};
 export declare type VersionMetadata = {
     imgUrl: string;
     versionColor: string;
@@ -34,7 +44,7 @@ export declare type Drop = {
     id: number;
     maxSupply: number;
     price: string;
-    versions: VersionMetadata[];
     currentSupply: number;
+    metadata: DropMetadata;
 };
 export declare type Drops = Drop[];

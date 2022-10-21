@@ -17,8 +17,7 @@ import skateboard from "../_utils/assets/images/untitled.png";
 import img2 from "../_utils/assets/images/imgroom.jpg";
 import img3 from "../_utils/assets/images/wave.png";
 import img4 from "../_utils/assets/images/van.png";
-import key from "../_utils/assets/images/untitled5.png";
-import Logo from "../_utils/assets/images/logo2.svg";
+import LogoFull from "../_utils/assets/images/logo-full.svg";
 import alien from "../_utils/assets/images/aliendope.jpeg";
 import circle from "../_utils/assets/images/circleblack.png";
 import mouse from "../_utils/assets/images/mouse.png";
@@ -111,11 +110,11 @@ const DripComponent: FC<props> = () => {
   return (
     <Style.DripComponent container>
       <Style.DripComponentP2>
-        <Grid item xs={12} style={{ marginTop: "150px", marginBottom: "75px" }}>
+        <Grid item xs={12} style={{ marginTop: "50px", marginBottom: "75px" }}>
           <Style.View2Content>
             <Grid container justifyContent="center">
               <Grid item>
-                <img src={Logo} style={{ width: "500px" }} alt="" />
+                <img src={LogoFull} style={{ width: "500px" }} alt="" />
               </Grid>
             </Grid>
           </Style.View2Content>
@@ -305,120 +304,6 @@ const ColoredKw: FC<{ color?: string }> = ({ color = "black", children }) => {
   );
 };
 
-const SocietyComponent: FC<{}> = () => {
-  return (
-    <Style.SocietyComponent>
-      <Grid container justifyContent="center">
-        <Grid item xs={12}>
-          <Grid container justifyContent="center" style={{ marginBottom: "50px" }}>
-            <Style.ViewTitle>/ SOCIETY .</Style.ViewTitle>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid container justifyContent="center" spacing={5}>
-        <Grid item xs={6}>
-          <img src={key} style={{ width: "100%" }} alt="" />
-        </Grid>
-        <Grid item xs={6} alignSelf="center">
-          <Style.Titlea>/ ssh key .</Style.Titlea>
-          <Style.View2Content>
-            When you mint a DRIP, in addition of the latter, you will get an <Sbu>SSH-KEY</Sbu>. It
-            is precious so <Sbu>hold on to it</Sbu>.
-            <br /> <br />
-            The <Sbu>SSH-KEY</Sbu> is a <Sbu>membership</Sbu> access to the{" "}
-            <Sbu no_u>
-              <ColoredKw color="#F6EFB6">/ ssh society .</ColoredKw>
-            </Sbu>
-            , whose benefits and offerings will increase over time. Your <Sbu>SSH-KEY</Sbu> will
-            open <Sbu no_u>undiscovered</Sbu> {"&"} <Sbu no_u>exclusive</Sbu> digital & physical
-            doors for you, <Sbu>keep it safe</Sbu>.
-          </Style.View2Content>
-          <Style.MoreLinkContainer>
-            <Clickable onClick={() => {}}>
-              <Grid container>
-                <Grid item alignSelf={"center"}>
-                  <Style.MoreLink>DISCOVER</Style.MoreLink>
-                </Grid>
-                <Grid item alignSelf={"center"}>
-                  <ArrowRightAltIcon style={{ color: "black", fontSize: "1.8em" }} />
-                </Grid>
-              </Grid>
-            </Clickable>
-          </Style.MoreLinkContainer>
-        </Grid>
-      </Grid>
-    </Style.SocietyComponent>
-  );
-};
-
-const TeamComponent: FC<{
-  people: {
-    name: string;
-    job: string;
-    img: string;
-    bgcolor?: string;
-    icons: { img: any | string; link: string }[];
-  }[];
-}> = ({ children, people }) => {
-  return (
-    <Style.TeamComponent>
-      <Style.ViewTitle>TEAM .</Style.ViewTitle>
-      <Style.TeamContainer>
-        <Grid container spacing={3}>
-          {people.map((person) => (
-            <Grid key={person.name} item xs={3}>
-              <Grid container>
-                <Grid item xs={6}>
-                  <Grid container>
-                    <Grid item xs={12}>
-                      <Style.TeamName>{person.name}</Style.TeamName>
-                    </Grid>
-                    <Grid item>
-                      <Style.TeamNameTitle>{person.job}</Style.TeamNameTitle>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={6}>
-                  <Grid
-                    container
-                    spacing={1}
-                    style={{
-                      paddingRight: "5px",
-                    }}
-                    justifyContent="flex-end"
-                    alignItems="center"
-                  >
-                    {person.icons.map((icon, index) => {
-                      return (
-                        <Grid key={index} item>
-                          <Clickable address={icon.link}>
-                            {typeof icon.img === "string" ? (
-                              <img src={icon.img} alt="" />
-                            ) : (
-                              icon.img
-                            )}
-                          </Clickable>
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Grid item xs={12}>
-                    <Style.ImgTeam src={person.img} alt="" />
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          ))}
-        </Grid>
-      </Style.TeamContainer>
-    </Style.TeamComponent>
-  );
-};
-
 const LabsComponent: FC<{ word: string }> = ({ word }) => {
   return (
     <div>
@@ -443,103 +328,6 @@ const LabsComponent: FC<{ word: string }> = ({ word }) => {
         </Marquee>
       </Style.LabsComponent>
     </div>
-  );
-};
-
-type propsRoadmap = {
-  roadmapItems: {
-    step: string;
-    title: string;
-    description: any;
-    done: boolean;
-    type: string;
-  }[];
-};
-
-const RoadmapComponent: FC<propsRoadmap> = ({ roadmapItems }) => {
-  return (
-    <Style.RoadmapComponent>
-      <Grid container justifyContent="center">
-        <Grid item xs={12}>
-          <Grid container style={{ marginBottom: "50px" }}>
-            <Style.ViewTitle>/ ROADMAP .</Style.ViewTitle>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Timeline position="alternate" style={{ padding: "0px" }}>
-        <TimelineItem style={{ display: "none" }}></TimelineItem>
-        {roadmapItems.map((roadmapItem, index) => {
-          return (
-            <TimelineItem key={index}>
-              <TimelineOppositeContent
-                style={{
-                  fontWeight: 900,
-                }}
-              >
-                <Style.RoadMapItemStep>{roadmapItem.step}</Style.RoadMapItemStep>
-              </TimelineOppositeContent>
-              <TimelineSeparator>
-                <TimelineDot
-                  style={{
-                    color: "white",
-                    boxShadow: "none",
-                    opacity: roadmapItem.done ? "0%" : "10%",
-                    backgroundColor: "black",
-                  }}
-                />
-                {roadmapItems.length === index + 1 ? null : (
-                  <TimelineConnector
-                    style={{
-                      backgroundColor: "black",
-                      opacity: roadmapItem.done ? "0%" : "10%",
-                      boxShadow: roadmapItem.done ? "1px 1px 2.5px grey, 0px 0px 0px #ffffff" : "",
-                      borderRadius: "25px",
-                      width: roadmapItem.done ? "5px" : "3px",
-                    }}
-                  />
-                )}
-              </TimelineSeparator>
-              <TimelineContent>
-                {index % 2 ? (
-                  <Slide direction="right" triggerOnce>
-                    <Style.RoadMapItem>
-                      <Grid container justifyContent={"space-between"}>
-                        <Style.RoadMapItemTitle>{roadmapItem.title}</Style.RoadMapItemTitle>
-                        <div>
-                          <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
-                        </div>
-                      </Grid>
-                      <Style.RoadMapItemContent>{roadmapItem.description}</Style.RoadMapItemContent>
-                    </Style.RoadMapItem>
-                  </Slide>
-                ) : (
-                  <Slide direction="left" triggerOnce>
-                    <Style.RoadMapItem2>
-                      <Grid container justifyContent={"space-between"}>
-                        <Style.RoadMapItemTitle>{roadmapItem.title}</Style.RoadMapItemTitle>
-                        <div>
-                          <Style.RoadMapItemType>{roadmapItem.type}</Style.RoadMapItemType>
-                        </div>
-                      </Grid>
-                      <Style.RoadMapItemContent>{roadmapItem.description}</Style.RoadMapItemContent>
-                    </Style.RoadMapItem2>
-                  </Slide>
-                )}
-              </TimelineContent>
-            </TimelineItem>
-          );
-        })}
-      </Timeline>
-    </Style.RoadmapComponent>
-  );
-};
-
-const ContractsComponent: FC<props> = () => {
-  return (
-    <Style.ContractsComponent>
-      <Style.ViewTitle>/ CONTRACTS .</Style.ViewTitle>
-      <Style.TeamContainer>To be added.</Style.TeamContainer>
-    </Style.ContractsComponent>
   );
 };
 

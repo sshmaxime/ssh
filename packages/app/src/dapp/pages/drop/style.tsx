@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-import { Typography, Grid, Stepper, StepLabel, StepContent } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 
 const headerHeight = "125px";
 
@@ -33,9 +33,10 @@ const style = {
     position: "relative",
   })),
   BodyScene: styled("div")(({ theme }) => ({
-    height: `calc(100% - ${bottomBarHeight})`,
+    height: "100%",
     position: "relative",
   })),
+  //
   BottomBar: styled("div")(({ theme }) => ({
     height: bottomBarHeight,
     position: "absolute",
@@ -43,7 +44,7 @@ const style = {
     width: "100%",
     display: "flex",
     alignItems: "center",
-    backgroundColor: theme.backgroundColor.secondary,
+    // backgroundColor: theme.backgroundColor.secondary,
   })),
   Circle: styled("div")<{ bgcolor: string; $selected?: boolean }>(
     ({ theme, bgcolor, $selected }) => ({

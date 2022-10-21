@@ -1,3 +1,4 @@
+import { normalizeIPFSUrl } from "@/dapp/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Drop } from "@sshlabs/typings";
 
@@ -9,41 +10,59 @@ export const socketApi = createApi({
   endpoints: (build) => ({
     getDrops: build.query<Drop[], any>({
       query: () => "drops",
-      async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
-        // create a websocket connection when the cache subscription starts
+      transformResponse(baseQueryReturnValue, meta, arg) {
+        const drops = baseQueryReturnValue as Drop[];
 
-        const socket = io("ws://localhost:3001");
+        for (const drop of drops) {
+          const versions = drop.metadata.versions;
 
-        try {
-          // wait for the initial query to resolve before proceeding
-          await cacheDataLoaded;
+          for (const version of versions) {
+            version.texture = normalizeIPFSUrl(version.texture);
+          }
 
-          // when data is received from the socket connection to the server,
-          // if it is a message and for the appropriate channel,
-          // update our query result with the received message
-
-          socket.on("connect", () => {
-            socket.emit("updateme");
-          });
-
-          socket.on("hello", (event) => {
-            updateCachedData((draft) => {
-              draft.splice(0, draft.length, ...event.data);
-            });
-          });
-
-          //
-        } catch {
-          // no-op in case `cacheEntryRemoved` resolves before `cacheDataLoaded`,
-          // in which case `cacheDataLoaded` will throw
-          console.log("xx");
+          drop.metadata = {
+            ...drop.metadata,
+            model: normalizeIPFSUrl(drop.metadata.model),
+          };
         }
-        // cacheEntryRemoved will resolve when the cache subscription is no longer active
-        await cacheEntryRemoved;
-        // perform cleanup steps once the `cacheEntryRemoved` promise resolves
-        socket.close();
-        console.log("la");
+
+        return drops;
       },
+      // async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+      //   // create a websocket connection when the cache subscription starts
+
+      //   const socket = io("ws://localhost:3001");
+
+      //   try {
+      //     // wait for the initial query to resolve before proceeding
+      //     await cacheDataLoaded;
+
+      //     // when data is received from the socket connection to the server,
+      //     // if it is a message and for the appropriate channel,
+      //     // update our query result with the received message
+
+      //     socket.on("connect", () => {
+      //       socket.emit("updateme");
+      //     });
+
+      //     socket.on("hello", (event) => {
+      //       updateCachedData((draft) => {
+      //         draft.splice(0, draft.length, ...event.data);
+      //       });
+      //     });
+
+      //     //
+      //   } catch {
+      //     // no-op in case `cacheEntryRemoved` resolves before `cacheDataLoaded`,
+      //     // in which case `cacheDataLoaded` will throw
+      //     console.log("xx");
+      //   }
+      //   // cacheEntryRemoved will resolve when the cache subscription is no longer active
+      //   await cacheEntryRemoved;
+      //   // perform cleanup steps once the `cacheEntryRemoved` promise resolves
+      //   socket.close();
+      //   console.log("la");
+      // },
     }),
   }),
 });

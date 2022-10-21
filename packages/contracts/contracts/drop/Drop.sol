@@ -10,13 +10,16 @@ import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 /**
  * @dev Define a DROP item.
  *
- * isMutable: Status of the DROP. Default: True
  * versionId: The version of the DROP. Default: No default value
+ *
+ * isMutable: Status of the DROP. Default: True
+ * contractMutator: Contract address of the asset mutating the DROP item. Default: address(0)
+ * tokenIdMutator: Token id of the asset mutating the DROP item. Default: 0
  */
 struct DropItem {
-    bool isMutable;
     uint8 versionId;
     //
+    bool isMutable;
     address contractMutator;
     uint256 tokenIdMutator;
 }
@@ -30,7 +33,11 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     string constant _name = "SSH LABS DROP ";
     string constant _symbol = "DROP #";
 
-    // The id of the drop
+    string BASE_URI = "";
+
+    // Immutables
+
+    // The id of the DROP
     uint256 immutable DROP_ID;
 
     // The maximum supply of the DROP
@@ -39,24 +46,32 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     // The price to mint the DROP item
     uint256 immutable PRICE;
 
-    // Mapping from DROP version to metadata - metadata is JSON data as string
-    mapping(uint8 => string) versionIdToMetadata;
+    // The number of versions
+    uint8 immutable VERSIONS;
+
+    // Mappings
 
     // Mapping from token id to DROP item
     mapping(uint256 => DropItem) tokenIdToDropItem;
 
-    //
+    // Events
+
+    // Event triggered when an item is minted
     event Minted(uint256 indexed tokenId);
+
+    // Event triggered when an item is mutated
     event Mutated(uint256 indexed tokenId);
 
     constructor(
         uint256 id,
         uint256 _maxSupply,
-        uint256 _price
+        uint256 _price,
+        uint8 _versions
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
         DROP_ID = id;
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
+        VERSIONS = _versions;
 
         transferOwnership(tx.origin);
     }
@@ -91,17 +106,17 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     }
 
     /**
-     * @dev Return the metadata of a version of the DROP.
+     * @dev Return the URI of the metadata of the DROP.
      */
-    function getMetadataVersion(uint8 versionId) public view returns (string memory) {
-        return versionIdToMetadata[versionId];
+    function dropURI() public view returns (string memory) {
+        return BASE_URI;
     }
 
     /**
-     * @dev Load metadata for a defined version.
+     * @dev Load the metadata URI of the DROP.
      */
-    function loadMetadataForVersion(uint8 versionId, string memory metadataLink) public onlyOwner {
-        versionIdToMetadata[versionId] = metadataLink;
+    function setDropURI(string memory newURI) public onlyOwner {
+        BASE_URI = newURI;
     }
 
     /**
@@ -115,10 +130,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         require(tokenId < maxSupply_, "MAX_SUPPLY_REACHED");
 
         // Minter needs to mint a correct version of the DROP
-        require(
-            keccak256(abi.encodePacked(versionIdToMetadata[versionId])) != keccak256(abi.encodePacked("")),
-            "INCORRECT_VERSION"
-        );
+        require(versionId < VERSIONS);
 
         // Minter needs to pay with the correct amount needed
         require(msg.value == PRICE, "INCORRECT_FUNDS");

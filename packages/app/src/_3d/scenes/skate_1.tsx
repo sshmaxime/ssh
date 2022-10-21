@@ -4,6 +4,7 @@ import { OrbitControls } from "@react-three/drei";
 
 import ModelSkate, {
   defaultSkateModelAnimation,
+  ModelMetadataProps,
   SkateRefs,
   useSkateRefsLoader,
 } from "@/_3d/models/skate";
@@ -17,19 +18,21 @@ export type sceneRefType = React.MutableRefObject<sceneRef>;
 const sceneFunctions = (refs: SkateRefs, camera: React.MutableRefObject<CameraControls>) => ({
   ...defaultSkateModelAnimation(refs),
   reset3DView() {
-    camera.current?.setPosition(0, 40, -70, true);
+    camera.current?.setPosition(0, 40, -65, true);
   },
 });
 
-const SceneLoader: FC<{ sceneRef: sceneRefType }> = React.memo((props, ref) => {
-  return (
-    <LoaderScene>
-      <Scene {...props} />
-    </LoaderScene>
-  );
-});
+const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo(
+  (props, ref) => {
+    return (
+      <LoaderScene>
+        <Scene {...props} />
+      </LoaderScene>
+    );
+  }
+);
 
-const Scene: FC<{ sceneRef: sceneRefType }> = (props) => {
+const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
   const cameraControls = React.useRef<CameraControls>(null);
 
   const refs = useSkateRefsLoader();
@@ -39,14 +42,14 @@ const Scene: FC<{ sceneRef: sceneRefType }> = (props) => {
 
   useFrame((state, delta) => {
     if (!isMouseOver.current) {
-      (refs.groupRef as any).current.rotation.y += 0.01;
+      // (refs.groupRef as any).current.rotation.y += 0.01;
     }
   });
 
   return (
     <>
       <ambientLight intensity={0.975} />
-      <CameraControls ref={cameraControls} position={[0, 40, -70]} target={[0, 40, 0]} />
+      <CameraControls ref={cameraControls} position={[0, 40, -65]} target={[0, 40, 0]} />
       <ModelSkate
         {...props}
         refs={refs}

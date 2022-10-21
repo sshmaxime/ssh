@@ -9,9 +9,17 @@ import {
   ERC721Enumerable__factory,
 } from "@sshlabs/contracts";
 
-import { DRIP, DripsOwned, Drop, Drops, NFTs, VersionMetadata } from "@sshlabs/typings";
+import {
+  DRIP,
+  DripsOwned,
+  Drop,
+  DropMetadata,
+  Drops,
+  NFTs,
+  VersionMetadata,
+} from "@sshlabs/typings";
 import axios from "axios";
-import Server from "./server";
+import Server, { IPFS_GATEWAY } from "./server";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
@@ -20,6 +28,8 @@ const web3Endpoint = env["web3Endpoint"];
 const provider = new ethers.providers.JsonRpcProvider(web3Endpoint);
 
 const SSHStoreAddress = "0x248e0ea2e484d0372470f5b70415c31dbba37fe9";
+
+const IPFS_EXP = "ipfs://";
 
 export const ContractToCollectionName: { [contractAddress: string]: string } = {
   "0x116aeBbAD1C8226c80f9F0cB4e255540A0F7afD9": "Sublimes",
@@ -63,30 +73,16 @@ export class Store {
     const dropContractAddress = await this.SSHStore.getDrop(dropId);
     const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
 
-    const versions: VersionMetadata[] = [];
-
-    let isRequestDone = false;
-    let version = 0;
-    while (!isRequestDone) {
-      const metadataAsString = await dropContract.getMetadataVersion(version);
-
-      if (metadataAsString === "") {
-        isRequestDone = true;
-        break;
-      }
-
-      const metadata = JSON.parse(metadataAsString) as VersionMetadata;
-      versions.push(metadata);
-      version++;
-    }
+    const metadataUrl = (await dropContract.dropURI()).replace(IPFS_EXP, IPFS_GATEWAY);
+    const metadata = (await axios.get(metadataUrl)).data as DropMetadata;
 
     return {
       _address: dropContractAddress,
       id: dropId.toNumber(),
       price: (await dropContract.price()).toString(),
-      versions: versions,
       maxSupply: (await dropContract.maxSupply()).toNumber(),
       currentSupply: (await dropContract.totalSupply()).toNumber(),
+      metadata: metadata,
     };
   };
 
@@ -99,36 +95,17 @@ export class Store {
     for (let nb = 0; nb < nbAssets; nb++) {
       const tokenId = (await contract.tokenOfOwnerByIndex(address, nb)).toNumber();
 
+      const a = await axios.get("https://picsum.photos/200/300?grayscale");
+
       NFTs.push({
         contract: addressContract,
-        img: "https://picsum.photos/200/300",
-        id: nb,
+        img: a.request.res.req._redirectable._currentUrl,
+        id: tokenId,
         name: await contract.name(),
       });
     }
     return NFTs;
   };
-
-  // init blockchain websockets listeners
-  // private initBlockchainListeners = async () => {
-  //   // New drop is created
-  //   this.SSHStore.on(this.SSHStore.filters.DropCreated(null), async (dropId) => {
-  //     const dropContractAddress = await this.SSHStore.getDrop(dropId);
-  //     const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
-
-  //     const versions: VersionMetadata[] = [];
-
-  //     this.DROPS.push({
-  //       _address: dropContractAddress,
-  //       id: dropId.toNumber(),
-  //       price: (await dropContract.price()).toString(),
-  //       versions: versions,
-  //       maxSupply: (await dropContract.maxSupply()).toNumber(),
-  //       currentSupply: (await dropContract.totalSupply()).toNumber(),
-  //     });
-  //     io.emit("hello", { data: this.getState() });
-  //   });
-  // };
 
   private initDropsListeners = async () => {
     const dropSupply = await this.SSHStore.getSupply();
@@ -153,16 +130,6 @@ export class Store {
       this.DROPS[dropId.toNumber()].currentSupply++;
       io.emit("hello", { data: this.getState() });
     });
-
-    // event Status
-    // dropContract.on(dropContract.filters.StatusUpdated(null), async (...args) => {
-    //   const event = args[args.length - 1] as Event;
-    //   if (event.blockNumber <= startBlockNumber) return; // do not react to this event
-    //   // do stuff
-
-    //   this.DROPS[dropId.toNumber()].status = getStatus(args[0]);
-    //   io.emit("hello", { data: this.getState() });
-    // });
   };
 
   getState = () => {
