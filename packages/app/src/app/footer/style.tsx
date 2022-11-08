@@ -5,8 +5,8 @@ import { AppBar, Toolbar, Typography, Button, SwipeableDrawer } from "@mui/mater
 const style = {
   Root: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level1,
-    paddingTop: "7.5vh",
-    paddingBottom: "7.5vh",
+    paddingTop: "5vh",
+    paddingBottom: "5vh",
     backgroundColor: theme.backgroundColor.secondary,
   })),
   Title: styled(Typography)(({ theme }) => ({

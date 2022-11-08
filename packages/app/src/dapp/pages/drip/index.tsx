@@ -102,6 +102,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
             <SceneLoader
               sceneRef={sceneRef}
               model={drop.metadata.model}
+              initialVersion={drop.metadata.versions[drip.versionId].name}
               initialDeckTexture={drop.metadata.versions[drip.versionId].texture}
               initialPlaceholderTexture={""}
               initialId={drip.id}

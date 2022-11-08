@@ -43,6 +43,7 @@ export const useSkateRefsLoader = () => {
     deckRef: React.useRef<JSX.IntrinsicElements["mesh"]>(null),
     placeholderRef: React.useRef<JSX.IntrinsicElements["mesh"]>(null),
     idRef: React.useRef<JSX.IntrinsicElements["meshBasicMaterial"]>(null),
+    versionRef: React.useRef<JSX.IntrinsicElements["meshBasicMaterial"]>(null),
   };
 };
 
@@ -53,8 +54,8 @@ export const defaultSkateModelAnimation = (refs: SkateRefs) => ({
   changeTexturePlaceholder(img: any) {
     loadTextureToObject(img, refs.placeholderRef);
   },
-  changeId(newId: number) {
-    loadIdTexture(newId, refs.idRef);
+  changeId(newId: number, newVersionName: string) {
+    loadIdTexture(newId, newVersionName, refs.idRef);
   },
 });
 
@@ -62,6 +63,7 @@ export type ModelMetadataProps = {
   model: string;
   //
   initialId: number;
+  initialVersion: string;
   initialDeckTexture: string;
   initialPlaceholderTexture: string;
 };
@@ -89,6 +91,7 @@ const Skate: FC<ModelProps & JSX.IntrinsicElements["group"]> = React.memo((props
 
   // itemId
   const itemId = "#" + props.initialId;
+  const versionName = props.initialVersion;
 
   const canvas = document.createElement("canvas");
 
@@ -99,9 +102,15 @@ const Skate: FC<ModelProps & JSX.IntrinsicElements["group"]> = React.memo((props
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   ctx.textAlign = "center";
-  ctx.font = "700 50px montserrat";
   ctx.fillStyle = "black";
-  ctx.fillText(itemId, ctx.canvas.width / 2, ctx.canvas.height / 2);
+  ctx.font = "700 50px montserrat";
+  ctx.fillText(versionName, ctx.canvas.width / 2, ctx.canvas.height / 2);
+  ctx.font = "700 20px montserrat";
+  ctx.fillText(itemId, ctx.canvas.width / 2, ctx.canvas.height / 2 + 100);
+  ctx.font = "700 20px montserrat";
+  ctx.fillText("DROP #0", ctx.canvas.width / 2, ctx.canvas.height / 2 + 125);
+  ctx.font = "700 20px montserrat";
+  ctx.fillText("BAYC #23423", ctx.canvas.width / 2, ctx.canvas.height / 2 + 150);
 
   const newMaterial = new THREE.CanvasTexture(canvas);
 
@@ -124,7 +133,8 @@ const Skate: FC<ModelProps & JSX.IntrinsicElements["group"]> = React.memo((props
             material={materials.Placeholder}
             rotation={[Math.PI / 2, 0, 0]}
           />
-          <mesh position={[10, 6.7, 0]} rotation={[Math.PI / 2, 0, -Math.PI / -2]}>
+
+          <mesh position={[34.5, 8.2, 0]} rotation={[Math.PI / 2, 0.25, -Math.PI / -2]}>
             <planeGeometry args={[10, 10, 10, 10]} />
             <meshBasicMaterial ref={idRef} transparent map={newMaterial} />
           </mesh>

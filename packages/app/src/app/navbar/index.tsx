@@ -6,6 +6,7 @@ import Style from "./style";
 import Clickable from "../../_utils/components/stateless/clickable";
 import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
 import LogoTypo from "../../_utils/assets/images/logo-typo.svg";
+import LogoFull from "../../_utils/assets/images/logo-full.svg";
 
 export const NavbarComponent: FC = () => {
   return (
@@ -23,9 +24,7 @@ export const NavbarComponent: FC = () => {
               xs={4}
               style={{ justifyContent: "center", display: "flex", alignItems: "center" }}
             >
-              <Clickable address="/">
-                <img src={LogoIcon} style={{ width: "75px" }} alt="" />
-              </Clickable>
+              <Clickable address="/"></Clickable>
             </Grid>
             <Grid item xs={4} style={{ display: "flex", alignItems: "center" }}>
               <Grid
@@ -36,7 +35,7 @@ export const NavbarComponent: FC = () => {
                 alignItems="center"
               >
                 <Grid item style={{ display: "flex", alignItems: "center" }}>
-                  <Style.GoToAppButton to="/app/drop/0">Enter app.</Style.GoToAppButton>
+                  <Style.GoToAppButton to="/app/drop/0">ENTER APP</Style.GoToAppButton>
                 </Grid>
               </Grid>
             </Grid>

@@ -54,8 +54,8 @@ export const loadTextureToObject = (texturePath: string, ref: any) => {
   });
 };
 
-const canvasTextureLoaderCache: { [key: number]: THREE.CanvasTexture } = {};
-export const loadIdTexture = (newId: number, ref: any) => {
+const canvasTextureLoaderCache: { [key: number | string]: THREE.CanvasTexture } = {};
+export const loadIdTexture = (newId: number, newVersionName: string, ref: any) => {
   const cachedTexture = canvasTextureLoaderCache[newId];
   if (cachedTexture) {
     ref.current.map = cachedTexture;
@@ -74,9 +74,15 @@ export const loadIdTexture = (newId: number, ref: any) => {
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   ctx.textAlign = "center";
-  ctx.font = "700 50px montserrat";
   ctx.fillStyle = "black";
-  ctx.fillText(itemId, ctx.canvas.width / 2, ctx.canvas.height / 2);
+  ctx.font = "700 50px montserrat";
+  ctx.fillText(newVersionName, ctx.canvas.width / 2, ctx.canvas.height / 2);
+  ctx.font = "700 20px montserrat";
+  ctx.fillText(itemId, ctx.canvas.width / 2, ctx.canvas.height / 2 + 100);
+  ctx.font = "700 20px montserrat";
+  ctx.fillText("DROP #0", ctx.canvas.width / 2, ctx.canvas.height / 2 + 125);
+  ctx.font = "700 20px montserrat";
+  ctx.fillText("BAYC #23423", ctx.canvas.width / 2, ctx.canvas.height / 2 + 150);
 
   const newMaterial = new CanvasTexture(canvas);
 

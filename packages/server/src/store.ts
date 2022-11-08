@@ -95,7 +95,7 @@ export class Store {
     for (let nb = 0; nb < nbAssets; nb++) {
       const tokenId = (await contract.tokenOfOwnerByIndex(address, nb)).toNumber();
 
-      const a = await axios.get("https://picsum.photos/200/300?grayscale");
+      const a = await axios.get("https://picsum.photos/1000?grayscale");
 
       NFTs.push({
         contract: addressContract,

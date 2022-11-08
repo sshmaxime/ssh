@@ -67,6 +67,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const updateVersion = (version: number) => {
     setVersion(version);
     sceneRef.current.changeTextureDeck(drop.metadata.versions[version].texture);
+    sceneRef.current.changeId(0, drop.metadata.versions[version].name);
   };
 
   const updateItem = (newItem: any) => {
@@ -95,6 +96,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
             <SceneLoader
               sceneRef={sceneRef}
               model={drop.metadata.model}
+              initialVersion={drop.metadata.versions[0].name}
               initialDeckTexture={drop.metadata.versions[0].texture}
               initialPlaceholderTexture={""}
               initialId={0}

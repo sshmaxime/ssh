@@ -29,12 +29,12 @@ const style = {
   GoToAppButton: styled(Link)(({ theme }) => ({
     color: "black",
     textDecoration: "none",
-    padding: "7px 20px 7px 20px",
-    fontFamily: theme.fontFamily.tertiary,
-    fontWeight: 700,
-    boxShadow: `0px 2.5px 0px black`,
-    fontSize: "1.25em",
-    fontStyle: "italic",
+    padding: "5px 15px 5px 15px",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    border: "2.5px solid black",
+    letterSpacing: "-0.1px",
+    transform: "skew(-25deg)",
   })),
 };
 
