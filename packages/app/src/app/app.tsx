@@ -89,7 +89,7 @@ const DripComponent: FC<props> = () => {
 
   //
   const [stateCounter, setStateCounter] = useState(0);
-  const [state, setState] = useState(demoSkateDrips[stateCounter]);
+  // const [state, setState] = useState(demoSkateDrips[stateCounter]);
 
   useEffect(() => {
     // const interval = setInterval(() => {

@@ -79,6 +79,7 @@ export class Store {
     return {
       _address: dropContractAddress,
       id: dropId.toNumber(),
+      symbol: await dropContract.symbol(),
       price: (await dropContract.price()).toString(),
       maxSupply: (await dropContract.maxSupply()).toNumber(),
       currentSupply: (await dropContract.totalSupply()).toNumber(),
@@ -102,6 +103,7 @@ export class Store {
         img: a.request.res.req._redirectable._currentUrl,
         id: tokenId,
         name: await contract.name(),
+        symbol: await contract.symbol(),
       });
     }
     return NFTs;
@@ -145,13 +147,15 @@ export class Store {
     const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
     const drip = await dropContract.getDropItem(tokenId);
 
+    const a = await axios.get("https://picsum.photos/1000?grayscale");
+
     return {
       dropId: (await dropContract.dropId()).toNumber(),
       collectionName: await dropContract.symbol(),
       isMutable: drip.isMutable,
-      versionId: drip.versionId,
+      versionId: drip.versionId.toNumber(),
       contract: dropContract.address,
-      img: "https://via.placeholder.com/150", // TODO
+      img: a.request.res.req._redirectable._currentUrl, // TODO
       id: tokenId,
     };
   };
@@ -176,7 +180,7 @@ export class Store {
           dropId: (await dropContract.dropId()).toNumber(),
           isMutable: drip.isMutable,
           collectionName: await dropContract.symbol(),
-          versionId: drip.versionId,
+          versionId: drip.versionId.toNumber(),
           contract: dropContract.address,
           img: "https://via.placeholder.com/150", // TODO
           id: tokenId,

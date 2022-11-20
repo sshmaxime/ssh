@@ -34,7 +34,13 @@ const style = {
     fontWeight: 900,
     border: "2.5px solid black",
     letterSpacing: "-0.1px",
+    fontSize: "0.95em",
     transform: "skew(-25deg)",
+    transition: "0.25s",
+    "&:hover": {
+      backgroundColor: "black",
+      color: "white",
+    },
   })),
 };
 

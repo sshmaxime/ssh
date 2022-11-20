@@ -16,7 +16,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
     const deployResult = await deploy('FakeNft', {
         from: deployer,
-        args: ['myNft', 'nft'],
+        args: ['Bored Ape Fake Club', 'BAFC'],
         log: true,
         autoMine: true
     });

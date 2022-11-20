@@ -9,6 +9,7 @@ import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import OpenseaIcon from "../../_utils/assets/icons/opensea.svg";
+import EtherscanIcon from "../../_utils/assets/icons/etherscan.svg";
 import { useDispatch, useSelector } from "../store/hooks";
 import { login } from "../store/services/web3";
 import { shortenAddress } from "../utils";
@@ -95,14 +96,14 @@ export const NavbarComponent: FC = () => {
                         {drips && drips.length ? (
                           <Grid container>
                             {drips.map((drip, index) => (
-                              <Grid item key={index}>
+                              <Grid item key={index} xs={12}>
                                 <Grid container>
-                                  <Grid item xs={2}>
+                                  {/* <Grid item xs={2}>
                                     <img src={drip.img} style={{ width: "100%" }} alt="" />
-                                  </Grid>
+                                  </Grid> */}
                                   <Grid
                                     item
-                                    xs={10}
+                                    xs={12}
                                     style={{ padding: "1.5px", paddingLeft: "10px" }}
                                   >
                                     <Grid container justifyContent="space-between">
@@ -112,7 +113,7 @@ export const NavbarComponent: FC = () => {
                                         </Style.WalletTypoCollectionDrop>
                                       </Grid>
                                       <Grid item>
-                                        <Grid container columnSpacing={1}>
+                                        <Grid container columnSpacing={0.5}>
                                           {drip.isMutable ? (
                                             <Grid item>
                                               <Style.WalletTypoCollection>
@@ -127,15 +128,31 @@ export const NavbarComponent: FC = () => {
                                               #{drip.id}
                                             </Style.WalletTypoDripId>
                                           </Grid>
+                                          <Grid
+                                            item
+                                            style={{ display: "flex", alignContent: "center" }}
+                                          >
+                                            <img
+                                              style={{ width: "15px" }}
+                                              src={OpenseaIcon}
+                                              alt=""
+                                            />
+                                          </Grid>
+                                          <Grid
+                                            item
+                                            style={{ display: "flex", alignContent: "center" }}
+                                          >
+                                            <img
+                                              style={{ width: "15px" }}
+                                              src={EtherscanIcon}
+                                              alt=""
+                                            />
+                                          </Grid>
                                         </Grid>
                                       </Grid>
                                     </Grid>
 
-                                    <Grid
-                                      container
-                                      style={{ marginTop: "5px" }}
-                                      justifyContent="space-between"
-                                    >
+                                    <Grid container justifyContent="space-between">
                                       <Grid item>
                                         <Grid container style={{ marginTop: "5px" }}>
                                           <Grid item style={{ marginRight: "5px" }}>
@@ -149,18 +166,6 @@ export const NavbarComponent: FC = () => {
                                                 View
                                               </Style.WalletTypoDripAction>
                                             </Clickable>
-                                          </Grid>
-                                        </Grid>
-                                      </Grid>
-
-                                      <Grid item>
-                                        <Grid container>
-                                          <Grid item>
-                                            <img
-                                              style={{ width: "20px" }}
-                                              src={OpenseaIcon}
-                                              alt=""
-                                            />
                                           </Grid>
                                         </Grid>
                                       </Grid>

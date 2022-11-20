@@ -72,7 +72,7 @@ const style = {
   })),
   WalletView: styled("div")(({ theme }) => ({
     padding: "15px",
-    width: "300px",
+    width: "325px",
     maxHeight: "250px",
   })),
   WalletTypo1: styled(Typography)(({ theme }) => ({
@@ -99,14 +99,13 @@ const style = {
     letterSpacing: "-0.5px",
     fontSize: "0.75em",
     color: "black",
-    padding: "2.5px",
   })),
   WalletTypoDripId2: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontWeight: 600,
     letterSpacing: "0.5px",
     fontSize: "0.65em",
     padding: "2.5px",
+    fontWeight: 600,
     color: "black",
     borderRadius: "5px",
     backgroundColor: theme.backgroundColor.secondary,

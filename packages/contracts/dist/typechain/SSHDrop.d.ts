@@ -4,14 +4,14 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export declare type DropItemStruct = {
-    versionId: BigNumberish;
     isMutable: boolean;
+    versionId: BigNumberish;
     contractMutator: string;
     tokenIdMutator: BigNumberish;
 };
-export declare type DropItemStructOutput = [number, boolean, string, BigNumber] & {
-    versionId: number;
+export declare type DropItemStructOutput = [boolean, BigNumber, string, BigNumber] & {
     isMutable: boolean;
+    versionId: BigNumber;
     contractMutator: string;
     tokenIdMutator: BigNumber;
 };
@@ -25,7 +25,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
         "getDropItem(uint256)": FunctionFragment;
         "isApprovedForAll(address,address)": FunctionFragment;
         "maxSupply()": FunctionFragment;
-        "mint(uint8)": FunctionFragment;
+        "mint(uint256)": FunctionFragment;
         "mutateDropItem(uint256,address,uint256)": FunctionFragment;
         "name()": FunctionFragment;
         "owner()": FunctionFragment;
@@ -35,6 +35,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
         "safeTransferFrom(address,address,uint256)": FunctionFragment;
         "setApprovalForAll(address,bool)": FunctionFragment;
         "setDropURI(string)": FunctionFragment;
+        "setMutator(address,address)": FunctionFragment;
         "supportsInterface(bytes4)": FunctionFragment;
         "symbol()": FunctionFragment;
         "tokenByIndex(uint256)": FunctionFragment;
@@ -62,6 +63,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     encodeFunctionData(functionFragment: "safeTransferFrom", values: [string, string, BigNumberish]): string;
     encodeFunctionData(functionFragment: "setApprovalForAll", values: [string, boolean]): string;
     encodeFunctionData(functionFragment: "setDropURI", values: [string]): string;
+    encodeFunctionData(functionFragment: "setMutator", values: [string, string]): string;
     encodeFunctionData(functionFragment: "supportsInterface", values: [BytesLike]): string;
     encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
     encodeFunctionData(functionFragment: "tokenByIndex", values: [BigNumberish]): string;
@@ -88,6 +90,7 @@ export interface SSHDropInterface extends ethers.utils.Interface {
     decodeFunctionResult(functionFragment: "safeTransferFrom", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setApprovalForAll", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setDropURI", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setMutator", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "tokenByIndex", data: BytesLike): Result;
@@ -207,6 +210,9 @@ export interface SSHDrop extends BaseContract {
         setDropURI(newURI: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<ContractTransaction>;
+        setMutator(mutatorContract: string, _imutator: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<ContractTransaction>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<[boolean]>;
         symbol(overrides?: CallOverrides): Promise<[string]>;
         tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -255,6 +261,9 @@ export interface SSHDrop extends BaseContract {
     setDropURI(newURI: string, overrides?: Overrides & {
         from?: string | Promise<string>;
     }): Promise<ContractTransaction>;
+    setMutator(mutatorContract: string, _imutator: string, overrides?: Overrides & {
+        from?: string | Promise<string>;
+    }): Promise<ContractTransaction>;
     supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
     symbol(overrides?: CallOverrides): Promise<string>;
     tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -287,6 +296,7 @@ export interface SSHDrop extends BaseContract {
         "safeTransferFrom(address,address,uint256,bytes)"(from: string, to: string, tokenId: BigNumberish, _data: BytesLike, overrides?: CallOverrides): Promise<void>;
         setApprovalForAll(operator: string, approved: boolean, overrides?: CallOverrides): Promise<void>;
         setDropURI(newURI: string, overrides?: CallOverrides): Promise<void>;
+        setMutator(mutatorContract: string, _imutator: string, overrides?: CallOverrides): Promise<void>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<boolean>;
         symbol(overrides?: CallOverrides): Promise<string>;
         tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -346,6 +356,9 @@ export interface SSHDrop extends BaseContract {
         setDropURI(newURI: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<BigNumber>;
+        setMutator(mutatorContract: string, _imutator: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<BigNumber>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
         symbol(overrides?: CallOverrides): Promise<BigNumber>;
         tokenByIndex(index: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -393,6 +406,9 @@ export interface SSHDrop extends BaseContract {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         setDropURI(newURI: string, overrides?: Overrides & {
+            from?: string | Promise<string>;
+        }): Promise<PopulatedTransaction>;
+        setMutator(mutatorContract: string, _imutator: string, overrides?: Overrides & {
             from?: string | Promise<string>;
         }): Promise<PopulatedTransaction>;
         supportsInterface(interfaceId: BytesLike, overrides?: CallOverrides): Promise<PopulatedTransaction>;

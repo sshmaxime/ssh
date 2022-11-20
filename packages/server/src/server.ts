@@ -44,7 +44,6 @@ export class Server {
 
     app.get("/assets/:address", async (req: Request, res: Response): Promise<Response> => {
       const address = req.params.address;
-
       const preData: { [contractAddress: string]: NFTs } = {};
       const dataToReturn: AssetsOwned = [];
 
@@ -56,6 +55,7 @@ export class Server {
         const getTestData = await Store.getOnChainAsset(FakeNftAddress, userTestAddress);
         dataToReturn.push({
           collectionName: getTestData[0].name,
+          collectionSymbol: getTestData[0].symbol,
           assets: getTestData,
         });
 
@@ -76,6 +76,7 @@ export class Server {
             img: asset.image_url,
             id: asset.token_id,
             name: asset.collection.name,
+            symbol: asset.collection.symbol,
           });
         }
 
@@ -89,11 +90,11 @@ export class Server {
       for (const data in preData) {
         dataToReturn.push({
           collectionName: preData[data][0].name,
+          collectionSymbol: preData[data][0].symbol,
           assets: preData[data],
         });
       }
 
-      console.log(dataToReturn);
       return res.status(200).send(dataToReturn);
     });
 

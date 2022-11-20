@@ -25,7 +25,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         'createDrop',
         10,
         toEth('0.1'),
-        3
+        5
     );
 
     const getContract = async (int: number) => {
@@ -39,9 +39,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const address = await publishDropMetadataToIPFS(0);
     await dropContract.setDropURI(address);
 
-    await dropContract.connect(userSigner).mint(0, { value: toEth('0.1') });
-    await dropContract.connect(userSigner).mint(1, { value: toEth('0.1') });
-    await dropContract.connect(userSigner).mint(2, { value: toEth('0.1') });
+    // await dropContract.connect(userSigner).mint(0, { value: toEth('0.1') });
+    // await dropContract.connect(userSigner).mint(1, { value: toEth('0.1') });
+    // await dropContract.connect(userSigner).mint(2, { value: toEth('0.1') });
 };
 
 export default func;

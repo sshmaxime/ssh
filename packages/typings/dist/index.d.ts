@@ -3,6 +3,7 @@ export declare type NFT = {
     img: string;
     id: number;
     name: string;
+    symbol: string;
 };
 export declare type DRIP = {
     dropId: number;
@@ -31,6 +32,7 @@ export declare type VersionMetadata = {
 export declare type NFTs = NFT[];
 export declare type NFTsByCollection = {
     collectionName: string;
+    collectionSymbol: string;
     assets: NFTs;
 }[];
 export declare type AssetsOwned = NFTsByCollection;
@@ -41,6 +43,7 @@ export declare type Collection = {
 };
 export declare type Drop = {
     _address: string;
+    symbol: string;
     id: number;
     maxSupply: number;
     price: string;

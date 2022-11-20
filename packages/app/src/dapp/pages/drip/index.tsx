@@ -26,7 +26,7 @@ import Clickable from "../../../_utils/components/stateless/clickable";
 import Tooltip from "../../../_utils/components/stateless/tooltip";
 import { useDispatch, useSelector } from "../../store/hooks";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
-import { DRIP, Drop } from "@sshlabs/typings";
+import { DRIP, Drop, NFT } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
 import { CREDENTIALS } from "../../../_constants";
 
@@ -76,22 +76,25 @@ const DripProxy: FC = () => {
 const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
   const dispatch = useDispatch();
   const { auth, address, name } = useSelector((state) => state.web3);
-
   const isMutable = drip.isMutable;
 
   // fetch data
   const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
 
-  const [currentItem, setItem] =
-    React.useState<{ contractAddress: string; collection: string; id: number; img: string }>();
+  const [currentItem, setItem] = React.useState<NFT>();
 
-  const updateItem = (newItem: any) => {
+  const updateItem = (newItem: NFT) => {
     setItem(newItem);
-    sceneRef.current.changeTexturePlaceholder(newItem.img);
+    sceneRef.current.updateItem(
+      newItem.img,
+      0,
+      drop.metadata.versions[drip.versionId].name,
+      drop.symbol,
+      newItem.symbol + " #" + newItem.id
+    );
   };
 
   const sceneRef = React.useRef<sceneRef>(null!);
-  console.log(drop);
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
@@ -102,9 +105,11 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
             <SceneLoader
               sceneRef={sceneRef}
               model={drop.metadata.model}
-              initialVersion={drop.metadata.versions[drip.versionId].name}
-              initialDeckTexture={drop.metadata.versions[drip.versionId].texture}
-              initialPlaceholderTexture={""}
+              versions={drop.metadata.versions}
+              initialVersion={drip.versionId}
+              initialDropSymbol={drop.symbol}
+              initialTokenNameId={"BAYC #123"}
+              initialPlaceholderTexture={drip.img}
               initialId={drip.id}
             />
           </Style.BodyScene>
@@ -130,7 +135,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                         </Grid>
                         <Grid item>
                           <Style.CommandsText>
-                            <Style.StepTitle3>DROP #{drop.id}</Style.StepTitle3>
+                            <Style.StepTitle3>{drop.symbol}</Style.StepTitle3>
                           </Style.CommandsText>
                         </Grid>
                       </Grid>
@@ -199,19 +204,14 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                                 style={{
                                   border:
                                     currentItem &&
-                                    currentItem.collection === collection.collectionName &&
+                                    currentItem.name === collection.collectionName &&
                                     currentItem.id === item.id
                                       ? "3px solid #2AFE00"
                                       : "3px solid white",
                                   cursor: "pointer",
                                 }}
                                 onClick={() => {
-                                  updateItem({
-                                    collection: collection.collectionName,
-                                    contractAddress: item.contract,
-                                    id: item.id,
-                                    img: item.img,
-                                  });
+                                  updateItem(item);
                                 }}
                               >
                                 <img src={item.img} alt={"item.id"} loading="lazy" />
@@ -249,7 +249,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                 </Grid>
                 <Grid item xs={12}>
                   <Style.Explainer>Drop ID</Style.Explainer>
-                  <Style.ContainerTitle2>DROP #{drop.id}</Style.ContainerTitle2>
+                  <Style.ContainerTitle2>{drop.symbol}</Style.ContainerTitle2>
                 </Grid>
                 <Grid item xs={12}>
                   <Style.Explainer>Version</Style.Explainer>
@@ -274,7 +274,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                           mutate({
                             contractAddress: drop._address,
                             tokenId: drip.id,
-                            contractMutator: currentItem.contractAddress,
+                            contractMutator: currentItem.contract,
                             tokenIdMutator: currentItem.id,
                           })
                         );

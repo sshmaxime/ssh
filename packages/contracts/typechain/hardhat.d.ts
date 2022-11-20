@@ -53,6 +53,18 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SSHDrop__factory>;
     getContractFactory(
+      name: "CryptopunksMutator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CryptopunksMutator__factory>;
+    getContractFactory(
+      name: "ICryptopunks",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ICryptopunks__factory>;
+    getContractFactory(
+      name: "IMutator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IMutator__factory>;
+    getContractFactory(
       name: "SSHStore",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SSHStore__factory>;
@@ -60,6 +72,10 @@ declare module "hardhat/types/runtime" {
       name: "FakeNft",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.FakeNft__factory>;
+    getContractFactory(
+      name: "CryptoPunksMarket",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CryptoPunksMarket__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -112,6 +128,21 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SSHDrop>;
     getContractAt(
+      name: "CryptopunksMutator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CryptopunksMutator>;
+    getContractAt(
+      name: "ICryptopunks",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ICryptopunks>;
+    getContractAt(
+      name: "IMutator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IMutator>;
+    getContractAt(
       name: "SSHStore",
       address: string,
       signer?: ethers.Signer
@@ -121,6 +152,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.FakeNft>;
+    getContractAt(
+      name: "CryptoPunksMarket",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CryptoPunksMarket>;
 
     // default types
     getContractFactory(

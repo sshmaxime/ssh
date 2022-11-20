@@ -7,19 +7,20 @@ import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extension
 import { IERC721 } from "@openzeppelin/contracts/interfaces/IERC721.sol";
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
+import { IMutator } from "../mutators/interfaces/IMutator.sol";
+import "hardhat/console.sol";
+
 /**
  * @dev Define a DROP item.
  *
- * versionId: The version of the DROP. Default: No default value
- *
- * isMutable: Status of the DROP. Default: True
+ * isMutable: Status of the DROP item. Default: True
+ * versionId: The version id of the DROP item. Default: No default value
  * contractMutator: Contract address of the asset mutating the DROP item. Default: address(0)
  * tokenIdMutator: Token id of the asset mutating the DROP item. Default: 0
  */
 struct DropItem {
-    uint8 versionId;
-    //
     bool isMutable;
+    uint256 versionId;
     address contractMutator;
     uint256 tokenIdMutator;
 }
@@ -47,12 +48,15 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     uint256 immutable PRICE;
 
     // The number of versions
-    uint8 immutable VERSIONS;
+    uint256 immutable VERSIONS; // starts at version 0
 
     // Mappings
 
     // Mapping from token id to DROP item
     mapping(uint256 => DropItem) tokenIdToDropItem;
+
+    // Mapping from a mutator contract address to a IMutator interface
+    mapping(address => IMutator) mutatorAddressToIMutator;
 
     // Events
 
@@ -66,7 +70,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         uint256 id,
         uint256 _maxSupply,
         uint256 _price,
-        uint8 _versions
+        uint256 _versions
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
         DROP_ID = id;
         MAX_SUPPLY = _maxSupply;
@@ -120,9 +124,16 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     }
 
     /**
+     * @dev Load mutator interface.
+     */
+    function setMutator(address mutatorContract, IMutator _imutator) public onlyOwner {
+        mutatorAddressToIMutator[mutatorContract] = _imutator;
+    }
+
+    /**
      * @dev Mint a DROP item.
      */
-    function mint(uint8 versionId) public payable {
+    function mint(uint256 versionId) public payable {
         uint256 tokenId = totalSupply();
         uint256 maxSupply_ = maxSupply();
 
@@ -130,10 +141,12 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         require(tokenId < maxSupply_, "MAX_SUPPLY_REACHED");
 
         // Minter needs to mint a correct version of the DROP
-        require(versionId < VERSIONS);
+        require(versionId <= VERSIONS, "INCORRECT_VERSION");
 
         // Minter needs to pay with the correct amount needed
         require(msg.value == PRICE, "INCORRECT_FUNDS");
+
+        console.log(versionId);
 
         _safeMint(msg.sender, tokenId);
         tokenIdToDropItem[tokenId] = DropItem({
@@ -154,10 +167,23 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         IERC721 contractMutator,
         uint256 tokenIdMutator
     ) public {
-        DropItem storage dropItem = tokenIdToDropItem[tokenIdToMutate];
+        uint256 totalSupply_ = totalSupply();
 
+        require(tokenIdToMutate < totalSupply_, "TOKEN ID OUT OF BOUND");
         require(this.ownerOf(tokenIdToMutate) == tx.origin, "INVALID_OWNER");
-        require(contractMutator.ownerOf(tokenIdMutator) == tx.origin, "INVALID_OWNER");
+
+        // now that basics checks have been made we need to check if the contract mutator
+        // needs to be handled in a non IERC721 specific way
+        IMutator mutator = mutatorAddressToIMutator[address(contractMutator)];
+
+        // if contract mutator is common check the given contract or else check its mutator
+        if (address(mutator) == address(0)) {
+            require(contractMutator.ownerOf(tokenIdMutator) == tx.origin, "INVALID_OWNER");
+        } else {
+            require(mutator.ownerOf(tokenIdMutator) == tx.origin, "INVALID_OWNER");
+        }
+
+        DropItem storage dropItem = tokenIdToDropItem[tokenIdToMutate];
 
         dropItem.contractMutator = address(contractMutator);
         dropItem.tokenIdMutator = tokenIdMutator;

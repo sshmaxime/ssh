@@ -40,11 +40,10 @@ const style = {
   BottomBar: styled("div")(({ theme }) => ({
     height: bottomBarHeight,
     position: "absolute",
-    bottom: 0,
+    bottom: bottom,
     width: "100%",
     display: "flex",
     alignItems: "center",
-    // backgroundColor: theme.backgroundColor.secondary,
   })),
   Circle: styled("div")<{ bgcolor: string; $selected?: boolean }>(
     ({ theme, bgcolor, $selected }) => ({
@@ -172,7 +171,7 @@ const style = {
     borderRadius: "5px",
     overflowY: "scroll",
     height: `calc(100vh - ${headerHeight} - ${footerHeight} - 50px - 125px - ${sizeWidthLeft} - 50px)`,
-    opacity: $connected ? 0.25 : 1,
+    opacity: $connected ? 0.5 : 1,
     transition: "all 1s",
     ":hover": {
       opacity: 1,
@@ -196,12 +195,12 @@ const style = {
     position: "absolute",
     borderRadius: "5px",
     width: $maxed ? "35vw" : rightDefaultWidth,
-    bottom: `calc(${bottom} + 10px)`,
+    bottom: `calc(${bottom} + 0px)`,
     right: $maxed ? sizeWidthLeft : sizeWidthRight,
     backgroundColor: $maxed ? theme.backgroundColor.primary : "",
     maxHeight: $maxed
       ? `calc(100vh - 1vh - ${footerHeight} - ${sizeWidthLeft} - ${headerHeight})`
-      : rightHeightReduced,
+      : "",
     // minHeight: rightHeightReduced,
     transition: "all 0.5s ease-in-out",
     boxShadow: $maxed ? `5px 5px 2px ${theme.backgroundColor.tertiary}` : "",
@@ -240,11 +239,13 @@ const style = {
     backgroundColor: theme.backgroundColor.secondary,
     borderRadius: "10px",
   })),
-  PayContainerInfoOpen: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    display: $maxed ? "inline-block" : "none",
+  PayContainerInfoOpenContainer: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
+    display: $maxed ? "flex" : "none",
+    justifyContent: "end",
+  })),
+  PayContainerInfoOpen: styled("div")(({ theme }) => ({
     marginTop: "12.5px",
     marginBottom: "12.5px",
-    float: "right",
   })),
   PayContainerInfoGrid: styled(Grid)(({ theme }) => ({
     padding: "10px",
@@ -318,6 +319,16 @@ const style = {
       opacity: "100%",
     },
   })),
+  MintInfoTextContainer: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
+    display: $maxed ? "block" : "none",
+  })),
+  MintInfoText: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontSize: "1.1em",
+    letterSpacing: "0.1px",
+    lineHeight: "11.5px",
+  })),
+  //
   MintInfo: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "0.7em",

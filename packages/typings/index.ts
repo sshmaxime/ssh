@@ -6,6 +6,7 @@ export type NFT = {
   img: string;
   id: number;
   name: string;
+  symbol: string;
 };
 
 export type DRIP = {
@@ -31,7 +32,7 @@ export type VersionMetadata = {
 };
 
 export type NFTs = NFT[];
-export type NFTsByCollection = { collectionName: string; assets: NFTs }[];
+export type NFTsByCollection = { collectionName: string; collectionSymbol: string; assets: NFTs }[];
 
 /////////////////
 /// API Types ///
@@ -51,6 +52,7 @@ export type Collection = {
 
 export type Drop = {
   _address: string;
+  symbol: string;
   id: number;
   maxSupply: number;
   price: string; // wei

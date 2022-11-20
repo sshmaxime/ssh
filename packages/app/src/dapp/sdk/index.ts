@@ -1,6 +1,7 @@
-import { ethers, Signer } from "ethers";
+import { BigNumber, ethers, Signer } from "ethers";
 import { SSHDrop__factory } from "@sshlabs/contracts";
 import { info } from "../../info";
+import { NFT } from "@sshlabs/typings";
 
 class SDK {
   private provider!: ethers.providers.Web3Provider;
@@ -28,7 +29,7 @@ class SDK {
     if (info.isDev) {
       this._name = "foobar.eth";
     } else {
-      this._name = (await this.provider.lookupAddress(this._address)) || "user";
+      this._name = (await this.provider.lookupAddress(this._address)) || "cool human";
     }
   };
 
@@ -44,6 +45,19 @@ class SDK {
   mint = async (contractAddress: string, versionId: number, value: string) => {
     const contract = SSHDrop__factory.connect(contractAddress, this._signer);
     await contract.mint(versionId, { value: value });
+  };
+
+  mintAndMutate = async (contractAddress: string, versionId: number, value: string, nft: NFT) => {
+    const contract = SSHDrop__factory.connect(contractAddress, this._signer);
+    const tx = await contract.mint(versionId, { value: value });
+
+    const receipt = await tx.wait();
+
+    if (receipt.events) {
+      const mintedEvent = receipt.events[1];
+      const mintedTokenId = ((mintedEvent.args as any).tokenId as BigNumber).toNumber();
+      await contract.mutateDropItem(mintedTokenId, nft.contract, nft.id);
+    }
   };
   //
   //

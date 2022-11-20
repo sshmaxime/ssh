@@ -1,5 +1,6 @@
 import { sdk } from "@/dapp/sdk";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { NFT } from "@sshlabs/typings";
 
 export interface Web3 {
   auth: boolean;
@@ -22,8 +23,12 @@ export const login = createAsyncThunk("web3/login", async () => {
 
 export const mint = createAsyncThunk(
   "web3/mint",
-  async (obj: { address: string; versionId: number; value: string }) => {
-    await sdk.mint(obj.address, obj.versionId, obj.value);
+  async (obj: { address: string; versionId: number; value: string; nft?: NFT }) => {
+    if (obj.nft) {
+      await sdk.mintAndMutate(obj.address, obj.versionId, obj.value, obj.nft);
+    } else {
+      await sdk.mint(obj.address, obj.versionId, obj.value);
+    }
   }
 );
 

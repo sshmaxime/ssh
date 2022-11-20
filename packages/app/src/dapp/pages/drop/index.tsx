@@ -16,7 +16,7 @@ import Clickable from "../../../_utils/components/stateless/clickable";
 import Tooltip from "../../../_utils/components/stateless/tooltip";
 import { useDispatch, useSelector } from "../../store/hooks";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
-import { Drop as DropType } from "@sshlabs/typings";
+import { Drop as DropType, NFT } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
 import { CREDENTIALS } from "../../../_constants";
 
@@ -57,7 +57,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const isMintable = drop.currentSupply !== drop.maxSupply;
 
   // fc state
-  const [currentItem, setItem] = React.useState<{ collection: string; id: number; img: string }>();
+  const [currentItem, setItem] = React.useState<NFT>();
   const [currentVersion, setVersion] = React.useState(0);
   const [checked, setChecked] = React.useState(true);
   const handleChange = () => setChecked(!checked);
@@ -66,13 +66,18 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const updateVersion = (version: number) => {
     setVersion(version);
-    sceneRef.current.changeTextureDeck(drop.metadata.versions[version].texture);
-    sceneRef.current.changeId(0, drop.metadata.versions[version].name);
+    sceneRef.current.updateVersion(version);
   };
-
-  const updateItem = (newItem: any) => {
+  //
+  const updateItem = (newItem: NFT) => {
     setItem(newItem);
-    sceneRef.current.changeTexturePlaceholder(newItem.img);
+    sceneRef.current.updateItem(
+      newItem.img,
+      0,
+      drop.metadata.versions[currentVersion].name,
+      drop.symbol,
+      newItem.symbol + " #" + newItem.id
+    );
   };
 
   const pastilles = [
@@ -96,11 +101,14 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
             <SceneLoader
               sceneRef={sceneRef}
               model={drop.metadata.model}
-              initialVersion={drop.metadata.versions[0].name}
-              initialDeckTexture={drop.metadata.versions[0].texture}
+              versions={drop.metadata.versions}
+              initialVersion={0}
               initialPlaceholderTexture={""}
+              initialDropSymbol={drop.symbol}
+              initialTokenNameId={"-"}
               initialId={0}
             />
+            {/*  */}
           </Style.BodyScene>
 
           <Style.LeftSide>
@@ -191,18 +199,14 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                             style={{
                               border:
                                 currentItem &&
-                                currentItem.collection === collection.collectionName &&
+                                currentItem.name === collection.collectionName &&
                                 currentItem.id === item.id
                                   ? "3px solid #2AFE00"
                                   : "3px solid white",
                               cursor: "pointer",
                             }}
                             onClick={() => {
-                              updateItem({
-                                collection: collection.collectionName,
-                                id: item.id,
-                                img: item.img,
-                              });
+                              updateItem(item);
                             }}
                           >
                             <img src={item.img} alt={"item.id"} loading="lazy" />
@@ -303,11 +307,38 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                                 address: drop._address,
                                 versionId: currentVersion,
                                 value: drop.price,
+                                nft: currentItem,
                               })
                             );
                           }}
                         >
-                          <Style.MintButton>MINT</Style.MintButton>
+                          <Tooltip
+                            placement="left"
+                            title={
+                              <Style.MintInfoText>
+                                {currentItem ? (
+                                  <span>
+                                    *You are minting and mutating your DRIP with{" "}
+                                    <span
+                                      style={{
+                                        fontWeight: 600,
+                                      }}
+                                    >
+                                      {currentItem.symbol}#{currentItem.id}
+                                    </span>
+                                    . This action is irreversible.
+                                  </span>
+                                ) : (
+                                  <span>
+                                    *You are minting your DRIP without mutating it. Do not worry,
+                                    you will be able to mutate it later on.
+                                  </span>
+                                )}
+                              </Style.MintInfoText>
+                            }
+                          >
+                            <Style.MintButton>MINT</Style.MintButton>
+                          </Tooltip>
                         </Clickable>
                       </Grid>
                     </Grid>
@@ -333,39 +364,67 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   </Style.InnerContainerMoreInfoContent>
                 </Style.ContainerMoreInfoContent>
 
-                <Style.PayContainerInfoOpen $maxed={checked}>
-                  <Style.PayContainerInfoGrid container>
-                    <Grid item style={{ display: "flex", alignItems: "center" }}>
-                      <Grid container alignItems="baseline">
-                        <Grid item>
-                          <img src={logoeth} style={{ width: "15px" }} alt="" />
-                        </Grid>
-                        <Grid item style={{ paddingRight: "7.5px", paddingLeft: "7.5px" }}>
-                          <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
-                        </Grid>
-                        <Grid item>
-                          <Style.MintPriceUsd>($10000)</Style.MintPriceUsd>
+                <Style.PayContainerInfoOpenContainer $maxed={checked}>
+                  <Style.PayContainerInfoOpen>
+                    <Style.PayContainerInfoGrid container>
+                      <Grid item style={{ display: "flex", alignItems: "center" }}>
+                        <Grid container alignItems="baseline">
+                          <Grid item>
+                            <img src={logoeth} style={{ width: "15px" }} alt="" />
+                          </Grid>
+                          <Grid item style={{ paddingRight: "7.5px", paddingLeft: "7.5px" }}>
+                            <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
+                          </Grid>
+                          <Grid item>
+                            <Style.MintPriceUsd>($10000)</Style.MintPriceUsd>
+                          </Grid>
                         </Grid>
                       </Grid>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "20px" }}>
-                      <Clickable
-                        activated={isMintable}
-                        onClick={() => {
-                          dispatch(
-                            mint({
-                              address: drop._address,
-                              versionId: currentVersion,
-                              value: drop.price,
-                            })
-                          );
-                        }}
-                      >
-                        <Style.MintButton>MINT</Style.MintButton>
-                      </Clickable>
-                    </Grid>
-                  </Style.PayContainerInfoGrid>
-                </Style.PayContainerInfoOpen>
+                      <Grid item style={{ marginLeft: "20px" }}>
+                        <Clickable
+                          activated={isMintable}
+                          onClick={() => {
+                            dispatch(
+                              mint({
+                                address: drop._address,
+                                versionId: currentVersion,
+                                value: drop.price,
+                              })
+                            );
+                          }}
+                        >
+                          <Tooltip
+                            title={
+                              <Style.MintInfoText>
+                                {currentItem ? (
+                                  <span>
+                                    *You are minting and mutating your DRIP with{" "}
+                                    <span
+                                      style={{
+                                        fontWeight: 600,
+                                      }}
+                                    >
+                                      {currentItem.symbol}#{currentItem.id}
+                                    </span>
+                                    . This action is irreversible.
+                                  </span>
+                                ) : (
+                                  <span>
+                                    *You are minting your DRIP without mutating it. Do not worry,
+                                    you will be able to mutate it later on.
+                                  </span>
+                                )}
+                              </Style.MintInfoText>
+                            }
+                          >
+                            <Style.MintButton>MINT</Style.MintButton>
+                          </Tooltip>
+                        </Clickable>
+                      </Grid>
+                    </Style.PayContainerInfoGrid>
+                  </Style.PayContainerInfoOpen>
+                </Style.PayContainerInfoOpenContainer>
+
                 {/*  */}
               </Style.InnerContainerInfo>
             </Style.ContainerInfo>
@@ -373,7 +432,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
           <Style.BottomBar>
             <Grid container justifyContent="center" alignItems="center" style={{ height: "100%" }}>
-              <Grid item style={{ height: "100%", paddingTop: "10px", paddingBottom: "10px" }}>
+              <Grid item style={{ height: "100%" }}>
                 <Style.BottomBarContainer
                   container
                   justifyContent="center"

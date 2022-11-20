@@ -14,7 +14,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 export type sceneRef = ReturnType<typeof sceneFunctions>;
 export type sceneRefType = React.MutableRefObject<sceneRef>;
 const sceneFunctions = (refs: SkateRefs) => ({
-  ...defaultSkateModelAnimation(refs),
+  // ...defaultSkateModelAnimation(refs),
 });
 
 const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo(

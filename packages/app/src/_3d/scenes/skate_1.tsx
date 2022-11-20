@@ -1,4 +1,4 @@
-import React, { FC, forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, { FC, forwardRef, Suspense, useEffect, useImperativeHandle, useState } from "react";
 
 import { OrbitControls } from "@react-three/drei";
 
@@ -12,11 +12,16 @@ import LoaderScene from "@/_3d/utils/loaderScene";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useR3fState } from "../utils/hooks";
 import { CameraControls } from "../utils/cameraControls";
+import { Loader } from "../utils/loader";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
 export type sceneRefType = React.MutableRefObject<sceneRef>;
-const sceneFunctions = (refs: SkateRefs, camera: React.MutableRefObject<CameraControls>) => ({
-  ...defaultSkateModelAnimation(refs),
+const sceneFunctions = (
+  refs: SkateRefs,
+  camera: React.MutableRefObject<CameraControls>,
+  props: ModelMetadataProps
+) => ({
+  ...defaultSkateModelAnimation(refs, props),
   reset3DView() {
     camera.current?.setPosition(0, 40, -65, true);
   },
@@ -26,17 +31,19 @@ const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.m
   (props, ref) => {
     return (
       <LoaderScene>
-        <Scene {...props} />
+        <Suspense fallback={<Loader />}>
+          <Scene {...props} />
+        </Suspense>
       </LoaderScene>
     );
   }
 );
 
 const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
-  const cameraControls = React.useRef<CameraControls>(null);
+  const cameraControls = React.useRef<CameraControls>(null!);
 
   const refs = useSkateRefsLoader();
-  useImperativeHandle(props.sceneRef, () => sceneFunctions(refs, cameraControls as any));
+  useImperativeHandle(props.sceneRef, () => sceneFunctions(refs, cameraControls, props));
 
   const [isMouseOver, setMouseOver] = useR3fState(false);
 
@@ -48,8 +55,8 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
 
   return (
     <>
-      <ambientLight intensity={0.975} />
       <CameraControls ref={cameraControls} position={[0, 40, -65]} target={[0, 40, 0]} />
+      <ambientLight intensity={0.975} />
       <ModelSkate
         {...props}
         refs={refs}

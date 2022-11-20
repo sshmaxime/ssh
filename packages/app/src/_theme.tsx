@@ -50,6 +50,19 @@ declare module "@mui/material/styles" {
 }
 
 export const theme = createTheme({
+  components: {
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontFamily: "futura",
+          fontSize: "11.5px",
+          letterSpacing: "0.15px",
+          lineHeight: "14.5px",
+          fontWeight: 400,
+        },
+      },
+    },
+  },
   backgroundColor: {
     primary: "#f9f9fb",
     secondary: "#f1f1f5",
