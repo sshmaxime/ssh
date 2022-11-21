@@ -1,6 +1,4 @@
-import React, { FC, forwardRef, Suspense, useEffect, useImperativeHandle, useState } from "react";
-
-import { OrbitControls } from "@react-three/drei";
+import React, { FC, Suspense, useImperativeHandle } from "react";
 
 import ModelSkate, {
   defaultSkateModelAnimation,
@@ -9,9 +7,9 @@ import ModelSkate, {
   useSkateRefsLoader,
 } from "@/_3d/models/skate";
 import LoaderScene from "@/_3d/utils/loaderScene";
-import { useFrame, useThree } from "@react-three/fiber";
-import { useR3fState } from "../utils/hooks";
+import { useFrame } from "@react-three/fiber";
 import { CameraControls } from "../utils/cameraControls";
+import { useR3fState } from "../utils/hooks";
 import { Loader } from "../utils/loader";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
@@ -39,7 +37,7 @@ const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.m
   }
 );
 
-const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
+const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
   const cameraControls = React.useRef<CameraControls>(null!);
 
   const refs = useSkateRefsLoader();
@@ -65,6 +63,6 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
       />
     </>
   );
-};
+});
 
 export default SceneLoader;

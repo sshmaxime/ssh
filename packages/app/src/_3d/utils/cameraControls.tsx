@@ -1,20 +1,20 @@
 /* eslint-disable */
-import React, { forwardRef, ForwardedRef, MutableRefObject, useEffect, useRef } from "react";
+import { extend, ReactThreeFiber, useFrame, useThree } from "@react-three/fiber";
+import CameraControlsDefault from "camera-controls";
+import { ForwardedRef, forwardRef, MutableRefObject, useEffect, useRef } from "react";
 import {
+  Box3,
+  MathUtils,
+  Matrix4,
   MOUSE,
+  Quaternion,
+  Raycaster,
+  Sphere,
+  Spherical,
   Vector2,
   Vector3,
   Vector4,
-  Quaternion,
-  Matrix4,
-  Spherical,
-  Box3,
-  Sphere,
-  Raycaster,
-  MathUtils,
 } from "three";
-import { ReactThreeFiber, extend, useFrame, useThree } from "@react-three/fiber";
-import CameraControlsDefault from "camera-controls";
 
 declare global {
   namespace JSX {

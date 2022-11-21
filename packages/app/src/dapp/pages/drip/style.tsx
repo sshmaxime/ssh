@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-import { Typography, Grid, Stepper, StepLabel, StepContent } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const headerHeight = "125px";
 
@@ -10,7 +10,6 @@ const rightDefaultWidth = "350px";
 const footerHeight = "25px";
 const bottomBarHeight = "100px";
 const bottomHeight = `calc(${footerHeight} + ${bottomBarHeight})`;
-const rightHeightReduced = "320px";
 
 const sizeWidthLeft = "1.5vw";
 const sizeWidthRight = "1.5vw";

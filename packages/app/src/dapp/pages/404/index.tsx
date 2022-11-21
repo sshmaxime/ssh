@@ -1,9 +1,9 @@
-import React, { Suspense, Fragment, FC, useState, useEffect, useRef } from "react";
+import { FC } from "react";
 
 import Style from "./style";
 
-import { Grid } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { Grid } from "@mui/material";
 
 import Clickable from "../../../_utils/components/stateless/clickable";
 

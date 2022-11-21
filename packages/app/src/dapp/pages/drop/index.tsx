@@ -1,31 +1,29 @@
-import React, { Fragment, FC, useState, useEffect, useRef } from "react";
+import React, { FC } from "react";
 
 import { Grid, ImageList, ImageListItem } from "@mui/material";
 
-import Style from "./style";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import SearchIcon from "@mui/icons-material/Search";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import { Fade } from "react-awesome-reveal";
-
-import logoeth from "../../../_utils/assets/images/logoeth.svg";
-import Pastille from "../../../_utils/components/stateless/pastille";
-
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Clickable from "../../../_utils/components/stateless/clickable";
-import Tooltip from "../../../_utils/components/stateless/tooltip";
-import { useDispatch, useSelector } from "../../store/hooks";
+import { useGetDropsQuery } from "@/dapp/store/services/socket";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import SearchIcon from "@mui/icons-material/Search";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { Drop as DropType, NFT } from "@sshlabs/typings";
-import { useParams } from "react-router-dom";
-import { CREDENTIALS } from "../../../_constants";
-
-import { useGetAssetsQuery } from "../../store/services";
-import { login, mint } from "../../store/services/web3";
 
 import { ethers } from "ethers";
-import { useGetDropsQuery } from "@/dapp/store/services/socket";
+import { Fade } from "react-awesome-reveal";
+import { useParams } from "react-router-dom";
+
+import { CREDENTIALS } from "../../../_constants";
+import logoeth from "../../../_utils/assets/images/logoeth.svg";
+import Clickable from "../../../_utils/components/stateless/clickable";
+import Pastille from "../../../_utils/components/stateless/pastille";
+import Tooltip from "../../../_utils/components/stateless/tooltip";
+import { useDispatch, useSelector } from "../../store/hooks";
+import { useGetAssetsQuery } from "../../store/services";
+import { mint } from "../../store/services/web3";
 import NotFound from "../404";
+import Style from "./style";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 

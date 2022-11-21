@@ -1,23 +1,14 @@
 import { env } from "process";
 
-import { BigNumber, BigNumberish, ethers, Event } from "ethers";
 import {
-  SSHStore,
-  SSHDrop,
-  SSHStore__factory,
-  SSHDrop__factory,
   ERC721Enumerable__factory,
+  SSHDrop__factory,
+  SSHStore,
+  SSHStore__factory,
 } from "@sshlabs/contracts";
+import { BigNumber, ethers, Event } from "ethers";
 
-import {
-  DRIP,
-  DripsOwned,
-  Drop,
-  DropMetadata,
-  Drops,
-  NFTs,
-  VersionMetadata,
-} from "@sshlabs/typings";
+import { DRIP, Drop, DropMetadata, Drops, NFTs } from "@sshlabs/typings";
 import axios from "axios";
 import Server, { IPFS_GATEWAY } from "./server";
 

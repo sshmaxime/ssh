@@ -1,4 +1,4 @@
-import React, { Suspense, Fragment, FC, useState, useEffect, useRef } from "react";
+import { FC, useEffect } from "react";
 
 import Navbar from "./navbar";
 
@@ -8,10 +8,10 @@ import { login } from "./store/services/web3";
 import { Provider } from "react-redux";
 import { useDispatch } from "./store/hooks";
 
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import Drop from "./pages/drop";
 import Drip from "./pages/drip";
+import Drop from "./pages/drop";
 
 type props = {};
 

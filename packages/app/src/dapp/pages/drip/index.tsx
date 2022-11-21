@@ -1,40 +1,26 @@
-import React, { Suspense, Fragment, FC, useState, useEffect, useRef, useCallback } from "react";
+import React, { FC } from "react";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Card,
-  Grid,
-  SwipeableDrawer,
-  ImageList,
-  ImageListItem,
-} from "@mui/material";
+import { Grid, ImageList, ImageListItem } from "@mui/material";
 
-import Style from "./style";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import SearchIcon from "@mui/icons-material/Search";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import SearchIcon from "@mui/icons-material/Search";
 import { Fade } from "react-awesome-reveal";
+import Style from "./style";
 
-import logoeth from "../../../_utils/assets/images/logoeth.svg";
 import Pastille from "../../../_utils/components/stateless/pastille";
 
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Clickable from "../../../_utils/components/stateless/clickable";
-import Tooltip from "../../../_utils/components/stateless/tooltip";
-import { useDispatch, useSelector } from "../../store/hooks";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 import { DRIP, Drop, NFT } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
 import { CREDENTIALS } from "../../../_constants";
+import Clickable from "../../../_utils/components/stateless/clickable";
+import { useDispatch, useSelector } from "../../store/hooks";
 
 import { useGetAssetsQuery, useGetDripQuery } from "../../store/services";
-import { login, mutate } from "../../store/services/web3";
+import { mutate } from "../../store/services/web3";
 
-import { ethers } from "ethers";
 import { useGetDropsQuery } from "@/dapp/store/services/socket";
+import { ethers } from "ethers";
 import NotFound from "../404";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
