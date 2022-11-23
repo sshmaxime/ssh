@@ -28,6 +28,7 @@ export const loadTextureToObject = (texturePath: string, ref: any) => {
   const cachedTexture = textureLoaderCache[texturePath];
   if (cachedTexture) {
     if (ref.current) {
+      console.log("put tex");
       ref.current.material.map = cachedTexture;
       ref.current.material.needsUpdate = true;
     }
@@ -40,6 +41,8 @@ export const loadTextureToObject = (texturePath: string, ref: any) => {
     textureLoaderCache[texturePath] = t;
 
     if (ref.current) {
+      console.log("put tex");
+
       ref.current.material.map = t;
       ref.current.material.needsUpdate = true;
     }

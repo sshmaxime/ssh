@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 
-import { Typography, Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const headerHeight = "125px";
 
@@ -8,7 +8,7 @@ const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "350px";
 
 const footerHeight = "25px";
-const bottomBarHeight = "100px";
+const bottomBarHeight = "50px";
 const bottomHeight = `calc(${footerHeight} + ${bottomBarHeight})`;
 const rightHeightReduced = "320px";
 
@@ -59,8 +59,57 @@ const style = {
   VersionName: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 500,
-    fontSize: "1.5em",
-    textAlign: "center",
+    fontSize: "1.1em",
+    borderRadius: "5px",
+    marginBottom: "10px",
+    display: "inline-block",
+    float: "right",
+  })),
+  Mutator: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 600,
+    fontSize: "0.8em",
+    borderRadius: "5px",
+    marginBottom: "10px",
+    display: "inline-block",
+    padding: "2.5px",
+  })),
+  MutatorRemove: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 500,
+    fontSize: "0.8em",
+    letterSpacing: "1px",
+    borderRadius: "5px",
+    padding: "2.5px",
+    display: "inline-block",
+    marginLeft: "2.5px",
+    color: "grey",
+  })),
+  InfoDiv: styled("div")<{ $display: boolean }>(({ theme, $display }) => ({
+    opacity: $display ? 1 : 0,
+    position: "absolute",
+    top: headerHeight,
+    left: "65vw",
+    right: sizeWidthRight,
+    backgroundColor: theme.backgroundColor.primary,
+    padding: "10px",
+    borderRadius: "5px",
+    transition: "all 1s",
+  })),
+  InfoDivItemName: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 800,
+    fontSize: "1.3em",
+    marginTop: "5px",
+    marginBottom: "20px",
+  })),
+  InfoDivDescriptionContainer: styled("div")(({ theme }) => ({
+    padding: "5px",
+  })),
+  InfoDivDescriptionTitle: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 800,
+    fontSize: "0.9em",
   })),
   //
   Footer: styled("div")(({ theme }) => ({
@@ -271,6 +320,8 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontSize: "2.5em",
     fontWeight: 900,
+    marginBottom: "10px",
+    display: "inline-block",
   })),
   ContainerMoreInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -286,7 +337,6 @@ const style = {
   })),
   ContainerPayment: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     display: $maxed ? "none" : "inline-block",
-    marginTop: "20px",
     width: "100%",
   })),
   InnerContainerPayment: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
@@ -311,7 +361,7 @@ const style = {
     height: "100%",
     minWidth: "250px",
     backgroundColor: theme.backgroundColor.primary,
-    opacity: "75%",
+    opacity: "85%",
     borderRadius: "5px",
     color: "black",
     transition: "all 0.5s",
@@ -346,13 +396,13 @@ const style = {
   })),
   MintPriceTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "0.9em",
+    fontSize: "0.8em",
     fontWeight: 600,
     opacity: 0.3,
   })),
   MintPrice: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "1.75em",
+    fontSize: "1.5em",
     fontWeight: 600,
     letterSpacing: "1.5px",
   })),

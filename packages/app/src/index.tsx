@@ -16,12 +16,14 @@ import DApp from "./dapp";
 const Index: FC = () => {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/app/*" element={<DApp />} />
-        </Routes>
-      </ThemeProvider>
+      <React.StrictMode>
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/app/*" element={<DApp />} />
+          </Routes>
+        </ThemeProvider>
+      </React.StrictMode>
     </BrowserRouter>
   );
 };

@@ -11,6 +11,7 @@ import { useFrame } from "@react-three/fiber";
 import { CameraControls } from "../utils/cameraControls";
 import { useR3fState } from "../utils/hooks";
 import { Loader } from "../utils/loader";
+import { OrbitControls } from "@react-three/drei";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
 export type sceneRefType = React.MutableRefObject<sceneRef>;
@@ -43,24 +44,11 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((p
   const refs = useSkateRefsLoader();
   useImperativeHandle(props.sceneRef, () => sceneFunctions(refs, cameraControls, props));
 
-  const [isMouseOver, setMouseOver] = useR3fState(false);
-
-  useFrame((state, delta) => {
-    if (!isMouseOver.current) {
-      // (refs.groupRef as any).current.rotation.y += 0.01;
-    }
-  });
-
   return (
     <>
       <CameraControls ref={cameraControls} position={[0, 40, -65]} target={[0, 40, 0]} />
       <ambientLight intensity={0.975} />
-      <ModelSkate
-        {...props}
-        refs={refs}
-        onPointerEnter={() => setMouseOver(true)}
-        onPointerLeave={() => setMouseOver(false)}
-      />
+      <ModelSkate refs={refs} {...props} />
     </>
   );
 });
