@@ -24,6 +24,7 @@ import { mint } from "../../store/services/web3";
 import NotFound from "../404";
 import Style from "./style";
 import { useImagePreloader } from "@/_utils/hooks/imagePreloader";
+import { useR3fState } from "@/_3d/utils/hooks";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
@@ -55,28 +56,42 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const isMintable = drop.currentSupply !== drop.maxSupply;
 
   // fc state
-  const [currentItem, setItem] = React.useState<NFT>();
-  const [currentVersion, setVersion] = React.useState(0);
+  const [currentItem, setItem] = useR3fState<NFT | undefined>(undefined);
+  const [currentItem1, setItem1] = React.useState<NFT>();
+  const [currentVersion, setVersion] = useR3fState(0);
   const [checked, setChecked] = React.useState(false);
   const [displayInfoDiv, setDisplayInfoDiv] = React.useState(false);
   const [toDisplayInfoDiv, setToDisplayInfoDiv] = React.useState<{ img: string; title: string }>();
-  const [img, setImg] = React.useState(drop.metadata.versions[currentVersion].texture);
+  const [img, setImg] = React.useState(drop.metadata.versions[currentVersion.current].texture);
   const handleChange = () => setChecked(!checked);
 
   const sceneRef = React.useRef<sceneRef>(null!);
 
   const updateVersion = (version: number) => {
     setVersion(version);
+    if (toDisplayInfoDiv?.title === "Deck") {
+      setToDisplayInfoDiv({
+        title: toDisplayInfoDiv.title,
+        img: drop.metadata.versions[version].texture,
+      });
+    }
     setImg(drop.metadata.versions[version].texture);
     sceneRef.current.updateVersion(version);
   };
   //
   const updateItem = (newItem: NFT) => {
     setItem(newItem);
+    setItem1(newItem);
+    if (toDisplayInfoDiv?.title === "Placeholder") {
+      setToDisplayInfoDiv({
+        title: toDisplayInfoDiv.title,
+        img: newItem.img,
+      });
+    }
     sceneRef.current.updateItem(
       newItem.img,
       0,
-      drop.metadata.versions[currentVersion].name,
+      drop.metadata.versions[currentVersion.current].name,
       drop.symbol,
       newItem.symbol + " #" + newItem.id
     );
@@ -84,7 +99,8 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const resetItem = () => {
     setItem(undefined);
-    sceneRef.current.updateItem("", 0, drop.metadata.versions[currentVersion].name, "", "");
+    setItem1(undefined);
+    sceneRef.current.updateItem("", 0, drop.metadata.versions[currentVersion.current].name, "", "");
   };
 
   const pastilles = [
@@ -118,23 +134,33 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               initialId={0}
               three={{
                 deck: {
-                  onPointerOver: (e) => {
+                  onPointerMissed: (e) => {
                     e.stopPropagation();
-                    console.log("deck over");
+                    setDisplayInfoDiv(false);
                   },
-                  onPointerOut: (e) => {
+                  onClick: (e) => {
                     e.stopPropagation();
-                    console.log("deck out");
+                    setDisplayInfoDiv(true);
+
+                    setToDisplayInfoDiv({
+                      title: "Deck",
+                      img: drop.metadata.versions[currentVersion.current].texture,
+                    });
                   },
                 },
                 placeholder: {
-                  onPointerOver: (e) => {
+                  onPointerMissed: (e) => {
                     e.stopPropagation();
-                    console.log("placeholder over");
+                    setDisplayInfoDiv(false);
                   },
-                  onPointerOut: (e) => {
+                  onClick: (e) => {
                     e.stopPropagation();
-                    console.log("placeholder out");
+                    setDisplayInfoDiv(true);
+
+                    setToDisplayInfoDiv({
+                      title: "Placeholder",
+                      img: currentItem.current?.img || "", // TODO
+                    });
                   },
                 },
               }}
@@ -228,9 +254,9 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                             key={index}
                             style={{
                               border:
-                                currentItem &&
-                                currentItem.name === collection.collectionName &&
-                                currentItem.id === item.id
+                                currentItem.current &&
+                                currentItem.current.name === collection.collectionName &&
+                                currentItem.current.id === item.id
                                   ? "3px solid #2AFE00"
                                   : "3px solid white",
                               cursor: "pointer",
@@ -268,20 +294,22 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
                 <Style.VersionName
                   style={{
-                    backgroundColor: drop.metadata.versions[currentVersion].color,
+                    backgroundColor: drop.metadata.versions[currentVersion.current].color,
                     color: "black",
                     padding: "5px",
                   }}
                 >
-                  {drop.metadata.versions[currentVersion].name}
+                  {drop.metadata.versions[currentVersion.current].name}
                 </Style.VersionName>
 
                 <div style={{}}>
                   <Style.Mutator>
-                    {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
+                    {currentItem.current
+                      ? currentItem.current.symbol + " #" + currentItem.current.id
+                      : "#"}
                   </Style.Mutator>
 
-                  {currentItem ? (
+                  {currentItem.current ? (
                     <Style.MutatorRemove>
                       <Clickable onClick={() => resetItem()}>remove</Clickable>
                     </Style.MutatorRemove>
@@ -343,9 +371,9 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                             dispatch(
                               mint({
                                 address: drop._address,
-                                versionId: currentVersion,
+                                versionId: currentVersion.current,
                                 value: drop.price,
-                                nft: currentItem,
+                                nft: currentItem.current,
                               })
                             );
                           }}
@@ -354,7 +382,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                             placement="left"
                             title={
                               <Style.MintInfoText>
-                                {currentItem ? (
+                                {currentItem.current ? (
                                   <span>
                                     *You are minting and mutating your DRIP with{" "}
                                     <span
@@ -362,7 +390,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                                         fontWeight: 600,
                                       }}
                                     >
-                                      {currentItem.symbol}#{currentItem.id}
+                                      {currentItem.current.symbol}#{currentItem.current.id}
                                     </span>
                                     . This action is irreversible.
                                   </span>
@@ -401,7 +429,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   <Grid item xs={12}>
                     <Grid container justifyContent="center" alignItems="center" columnSpacing={1}>
                       {drop.metadata.versions.map((versionMetadata, index) =>
-                        CircleSelect(index, currentVersion, versionMetadata.color, () =>
+                        CircleSelect(index, currentVersion.current, versionMetadata.color, () =>
                           updateVersion(index)
                         )
                       )}
@@ -423,7 +451,12 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   <Grid item xs={4}>
                     {imagesPreloaded && (
                       <img
-                        style={{ width: "100%", objectFit: "none", objectPosition: "50% 11%" }}
+                        style={{
+                          width: "100%",
+                          objectFit: toDisplayInfoDiv?.title === "Deck" ? "none" : undefined,
+                          objectPosition:
+                            toDisplayInfoDiv?.title === "Deck" ? "50% 11%" : undefined,
+                        }}
                         src={toDisplayInfoDiv?.img}
                         alt=""
                       />
