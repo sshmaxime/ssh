@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 export function useR3fState<F>(defaultValue: F): [React.MutableRefObject<F>, Function] {
   const ref = useRef<F>(defaultValue);
@@ -8,4 +8,16 @@ export function useR3fState<F>(defaultValue: F): [React.MutableRefObject<F>, Fun
   };
 
   return [ref, updateRef];
+}
+
+export function useCState<F>(defaultValue: F): [F, React.MutableRefObject<F>, Function] {
+  const [state, setState] = React.useState(defaultValue);
+  const [refState, setRefState] = useR3fState(defaultValue);
+
+  const customSetState = (newValue: F) => {
+    setState(newValue);
+    setRefState(newValue);
+  };
+
+  return [state, refState, customSetState];
 }

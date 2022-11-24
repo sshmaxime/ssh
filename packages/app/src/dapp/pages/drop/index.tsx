@@ -24,7 +24,7 @@ import { mint } from "../../store/services/web3";
 import NotFound from "../404";
 import Style from "./style";
 import { useImagePreloader } from "@/_utils/hooks/imagePreloader";
-import { useR3fState } from "@/_3d/utils/hooks";
+import { useCState, useR3fState } from "@/_3d/utils/hooks";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
@@ -56,13 +56,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const isMintable = drop.currentSupply !== drop.maxSupply;
 
   // fc state
-  const [currentItem, setItem] = useR3fState<NFT | undefined>(undefined);
-  const [currentItem1, setItem1] = React.useState<NFT>();
-  const [currentVersion, setVersion] = useR3fState(0);
+  const [currentItem, currentItemRef, setItem] = useCState<NFT | undefined>(undefined);
+  const [currentVersion, currentVersionRef, setVersion] = useCState(0);
   const [checked, setChecked] = React.useState(false);
   const [displayInfoDiv, setDisplayInfoDiv] = React.useState(false);
   const [toDisplayInfoDiv, setToDisplayInfoDiv] = React.useState<{ img: string; title: string }>();
-  const [img, setImg] = React.useState(drop.metadata.versions[currentVersion.current].texture);
   const handleChange = () => setChecked(!checked);
 
   const sceneRef = React.useRef<sceneRef>(null!);
@@ -75,13 +73,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
         img: drop.metadata.versions[version].texture,
       });
     }
-    setImg(drop.metadata.versions[version].texture);
     sceneRef.current.updateVersion(version);
   };
   //
   const updateItem = (newItem: NFT) => {
     setItem(newItem);
-    setItem1(newItem);
     if (toDisplayInfoDiv?.title === "Placeholder") {
       setToDisplayInfoDiv({
         title: toDisplayInfoDiv.title,
@@ -91,7 +87,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     sceneRef.current.updateItem(
       newItem.img,
       0,
-      drop.metadata.versions[currentVersion.current].name,
+      drop.metadata.versions[currentVersion].name,
       drop.symbol,
       newItem.symbol + " #" + newItem.id
     );
@@ -99,8 +95,20 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const resetItem = () => {
     setItem(undefined);
-    setItem1(undefined);
-    sceneRef.current.updateItem("", 0, drop.metadata.versions[currentVersion.current].name, "", "");
+    if (toDisplayInfoDiv) {
+      setToDisplayInfoDiv({
+        title: toDisplayInfoDiv.title,
+        img: "",
+      });
+    }
+
+    sceneRef.current.updateItem(
+      drop.metadata.versions[currentVersion].texture,
+      0,
+      drop.metadata.versions[currentVersion].name,
+      "",
+      ""
+    );
   };
 
   const pastilles = [
@@ -144,7 +152,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
                     setToDisplayInfoDiv({
                       title: "Deck",
-                      img: drop.metadata.versions[currentVersion.current].texture,
+                      img: drop.metadata.versions[currentVersionRef.current].texture,
                     });
                   },
                 },
@@ -159,7 +167,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
                     setToDisplayInfoDiv({
                       title: "Placeholder",
-                      img: currentItem.current?.img || "", // TODO
+                      img: currentItemRef.current?.img || "", // TODO
                     });
                   },
                 },
@@ -254,9 +262,9 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                             key={index}
                             style={{
                               border:
-                                currentItem.current &&
-                                currentItem.current.name === collection.collectionName &&
-                                currentItem.current.id === item.id
+                                currentItem &&
+                                currentItem.name === collection.collectionName &&
+                                currentItem.id === item.id
                                   ? "3px solid #2AFE00"
                                   : "3px solid white",
                               cursor: "pointer",
@@ -287,134 +295,130 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
             </Clickable>
           </Style.LeftSideRightSide>
 
-          <ClickAwayListener onClickAway={() => setChecked(false)}>
-            <Style.ContainerInfo $maxed={checked}>
-              <Style.InnerContainerInfo $maxed={checked}>
-                <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
+          <Style.ContainerInfo $maxed={checked}>
+            <Style.InnerContainerInfo $maxed={checked}>
+              <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
 
-                <Style.VersionName
-                  style={{
-                    backgroundColor: drop.metadata.versions[currentVersion.current].color,
-                    color: "black",
-                    padding: "5px",
-                  }}
-                >
-                  {drop.metadata.versions[currentVersion.current].name}
-                </Style.VersionName>
+              <Style.VersionName
+                style={{
+                  backgroundColor: drop.metadata.versions[currentVersion].color,
+                  color: "black",
+                  padding: "5px",
+                }}
+              >
+                {drop.metadata.versions[currentVersion].name}
+              </Style.VersionName>
 
-                <div style={{}}>
-                  <Style.Mutator>
-                    {currentItem.current
-                      ? currentItem.current.symbol + " #" + currentItem.current.id
-                      : "#"}
-                  </Style.Mutator>
+              <div style={{}}>
+                <Style.Mutator>
+                  {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
+                </Style.Mutator>
 
-                  {currentItem.current ? (
-                    <Style.MutatorRemove>
-                      <Clickable onClick={() => resetItem()}>remove</Clickable>
-                    </Style.MutatorRemove>
-                  ) : null}
-                </div>
+                {currentItem ? (
+                  <Style.MutatorRemove>
+                    <Clickable onClick={() => resetItem()}>remove</Clickable>
+                  </Style.MutatorRemove>
+                ) : null}
+              </div>
 
-                <Grid
-                  container
-                  spacing={1}
-                  alignContent={"center"}
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                >
-                  {pastilles.map((pastille) => (
-                    <Grid key={pastille.title} item>
-                      <Tooltip title={pastille.description}>
-                        <div>
-                          <Pastille title={pastille.title} />
-                        </div>
-                      </Tooltip>
-                    </Grid>
-                  ))}
-                  <Grid item flex={1} />
-                  <Grid item>
-                    <Tooltip title={"Current Supply / Max Supply"}>
+              <Grid
+                container
+                spacing={1}
+                alignContent={"center"}
+                style={{
+                  marginBottom: "10px",
+                }}
+              >
+                {pastilles.map((pastille) => (
+                  <Grid key={pastille.title} item>
+                    <Tooltip title={pastille.description}>
                       <div>
-                        <Style.MintInfo>
-                          {drop.currentSupply} / {drop.maxSupply}
-                        </Style.MintInfo>
+                        <Pastille title={pastille.title} />
                       </div>
                     </Tooltip>
                   </Grid>
+                ))}
+                <Grid item flex={1} />
+                <Grid item>
+                  <Tooltip title={"Current Supply / Max Supply"}>
+                    <div>
+                      <Style.MintInfo>
+                        {drop.currentSupply} / {drop.maxSupply}
+                      </Style.MintInfo>
+                    </div>
+                  </Tooltip>
                 </Grid>
+              </Grid>
 
-                <Style.ContainerPayment $maxed={checked}>
-                  <Style.InnerContainerPayment>
-                    <Grid container rowSpacing={1}>
-                      <Grid item xs={6}>
-                        <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Grid container alignItems="baseline" columnSpacing={1}>
-                          <Grid item>
-                            <img src={logoeth} style={{ width: "12.5px" }} alt="" />
-                          </Grid>
-                          <Grid item>
-                            <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
-                          </Grid>
-                          <Grid item>
-                            <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
-                          </Grid>
+              <Style.ContainerPayment $maxed={checked}>
+                <Style.InnerContainerPayment>
+                  <Grid container rowSpacing={1}>
+                    <Grid item xs={6}>
+                      <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container alignItems="baseline" columnSpacing={1}>
+                        <Grid item>
+                          <img src={logoeth} style={{ width: "12.5px" }} alt="" />
+                        </Grid>
+                        <Grid item>
+                          <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
+                        </Grid>
+                        <Grid item>
+                          <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
                         </Grid>
                       </Grid>
-                      <Grid item xs={12}>
-                        <Clickable
-                          activated={isMintable}
-                          onClick={() => {
-                            dispatch(
-                              mint({
-                                address: drop._address,
-                                versionId: currentVersion.current,
-                                value: drop.price,
-                                nft: currentItem.current,
-                              })
-                            );
-                          }}
-                        >
-                          <Tooltip
-                            placement="left"
-                            title={
-                              <Style.MintInfoText>
-                                {currentItem.current ? (
-                                  <span>
-                                    *You are minting and mutating your DRIP with{" "}
-                                    <span
-                                      style={{
-                                        fontWeight: 600,
-                                      }}
-                                    >
-                                      {currentItem.current.symbol}#{currentItem.current.id}
-                                    </span>
-                                    . This action is irreversible.
-                                  </span>
-                                ) : (
-                                  <span>
-                                    *You are minting your DRIP without mutating it. Do not worry,
-                                    you will be able to mutate it later on.
-                                  </span>
-                                )}
-                              </Style.MintInfoText>
-                            }
-                          >
-                            <Style.MintButton>MINT</Style.MintButton>
-                          </Tooltip>
-                        </Clickable>
-                      </Grid>
                     </Grid>
-                  </Style.InnerContainerPayment>
-                </Style.ContainerPayment>
+                    <Grid item xs={12}>
+                      <Clickable
+                        activated={isMintable}
+                        onClick={() => {
+                          dispatch(
+                            mint({
+                              address: drop._address,
+                              versionId: currentVersion,
+                              value: drop.price,
+                              nft: currentItem,
+                            })
+                          );
+                        }}
+                      >
+                        <Tooltip
+                          placement="left"
+                          title={
+                            <Style.MintInfoText>
+                              {currentItem ? (
+                                <span>
+                                  *You are minting and mutating your DRIP with{" "}
+                                  <span
+                                    style={{
+                                      fontWeight: 600,
+                                    }}
+                                  >
+                                    {currentItem.symbol}#{currentItem.id}
+                                  </span>
+                                  . This action is irreversible.
+                                </span>
+                              ) : (
+                                <span>
+                                  *You are minting your DRIP without mutating it. Do not worry, you
+                                  will be able to mutate it later on.
+                                </span>
+                              )}
+                            </Style.MintInfoText>
+                          }
+                        >
+                          <Style.MintButton>MINT</Style.MintButton>
+                        </Tooltip>
+                      </Clickable>
+                    </Grid>
+                  </Grid>
+                </Style.InnerContainerPayment>
+              </Style.ContainerPayment>
 
-                {/*  */}
-              </Style.InnerContainerInfo>
-            </Style.ContainerInfo>
-          </ClickAwayListener>
+              {/*  */}
+            </Style.InnerContainerInfo>
+          </Style.ContainerInfo>
 
           <Style.BottomBar>
             <Grid container justifyContent="center" alignItems="center" style={{ height: "100%" }}>
@@ -429,7 +433,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   <Grid item xs={12}>
                     <Grid container justifyContent="center" alignItems="center" columnSpacing={1}>
                       {drop.metadata.versions.map((versionMetadata, index) =>
-                        CircleSelect(index, currentVersion.current, versionMetadata.color, () =>
+                        CircleSelect(index, currentVersion, versionMetadata.color, () =>
                           updateVersion(index)
                         )
                       )}

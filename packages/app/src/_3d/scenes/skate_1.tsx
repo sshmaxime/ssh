@@ -20,6 +20,7 @@ const sceneFunctions = (
   camera: React.MutableRefObject<CameraControls>,
   props: ModelMetadataProps
 ) => ({
+  ...refs,
   ...defaultSkateModelAnimation(refs, props),
   reset3DView() {
     camera.current?.setPosition(0, 40, -65, true);
