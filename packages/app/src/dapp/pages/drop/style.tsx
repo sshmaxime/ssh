@@ -243,58 +243,17 @@ const style = {
     padding: "0 30px 0 30px",
     lineHeight: "1.25em",
   })),
-  ContainerInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
+  ContainerInfo: styled("div")(({ theme }) => ({
     zIndex: 2,
     position: "absolute",
     borderRadius: "5px",
-    width: $maxed ? "35vw" : rightDefaultWidth,
+    width: rightDefaultWidth,
     bottom: `calc(${bottom} + 0px)`,
-    right: $maxed ? sizeWidthLeft : sizeWidthRight,
-    backgroundColor: $maxed ? theme.backgroundColor.primary : "",
-    maxHeight: $maxed
-      ? `calc(100vh - 1vh - ${footerHeight} - ${sizeWidthLeft} - ${headerHeight})`
-      : "",
-    // minHeight: rightHeightReduced,
+    right: sizeWidthRight,
     transition: "all 0.5s ease-in-out",
-    boxShadow: $maxed ? `5px 5px 2px ${theme.backgroundColor.tertiary}` : "",
   })),
   DetailsButton: styled("div")(({ theme }) => ({
     letterSpacing: "2.5px",
-  })),
-  InnerContainerInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    padding: $maxed ? "25px 25px 0 25px" : "0px",
-    transition: "all 0.5s ease-in-out",
-  })),
-  CloseContainerInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    transition: "all 0.5s ease-in-out",
-    display: $maxed ? "block" : "none",
-    opacity: 0.5,
-    backgroundColor: "#D6D6E4",
-    padding: "5px",
-    borderRadius: "5px",
-    fontFamily: theme.fontFamily.primary,
-    fontSize: "0.75em",
-    letterSpacing: "0.5px",
-    fontWeight: 900,
-  })),
-  ContainerMoreInfoContent: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    marginTop: "15px",
-    maxHeight: $maxed
-      ? `calc(100vh - 2vh - ${bottomHeight} - ${sizeWidthLeft} - ${headerHeight} - 152.5px - 50px)`
-      : "0px",
-    overflowY: "scroll",
-    opacity: $maxed ? 1 : 0,
-    transition: "all 1s",
-    display: $maxed ? "block" : "none",
-  })),
-  InnerContainerMoreInfoContent: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    padding: "15px",
-    backgroundColor: theme.backgroundColor.secondary,
-    borderRadius: "10px",
-  })),
-  PayContainerInfoOpenContainer: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    display: $maxed ? "flex" : "none",
-    justifyContent: "end",
   })),
   PayContainerInfoOpen: styled("div")(({ theme }) => ({
     marginTop: "12.5px",
@@ -305,21 +264,7 @@ const style = {
     borderRadius: "10px",
     backgroundColor: theme.backgroundColor.secondary,
   })),
-  EligibleCollection: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    display: $maxed ? "block" : "none",
-    padding: "10px",
-    marginBottom: "15px",
-    backgroundColor: "white",
-    borderRadius: "10px",
-  })),
-  EligibleCollectionTitle: styled(Typography)(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    paddingLeft: "5px",
-    marginBottom: "5px",
-    fontWeight: 800,
-    letterSpacing: "1px",
-    fontSize: "0.75em",
-  })),
+
   ContainerTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "2.5em",
@@ -327,23 +272,12 @@ const style = {
     marginBottom: "10px",
     display: "inline-block",
   })),
-  ContainerMoreInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    fontFamily: theme.fontFamily.primary,
-    fontSize: "0.85em",
-    letterSpacing: "2.5px",
-    display: $maxed ? "none" : "inline-block",
-    color: "#4C4C75",
-    opacity: 0.5,
-    borderRadius: "5px",
-    textAlign: "right",
-    fontWeight: 900,
-    marginTop: "20px",
-  })),
-  ContainerPayment: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    display: $maxed ? "none" : "inline-block",
+
+  ContainerPayment: styled("div")(({ theme }) => ({
+    display: "inline-block",
     width: "100%",
   })),
-  InnerContainerPayment: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
+  InnerContainerPayment: styled("div")(({ theme }) => ({
     padding: "15px",
     background: "white",
     borderRadius: "5px",
@@ -372,9 +306,6 @@ const style = {
     ":hover": {
       opacity: "100%",
     },
-  })),
-  MintInfoTextContainer: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
-    display: $maxed ? "block" : "none",
   })),
   MintInfoText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,

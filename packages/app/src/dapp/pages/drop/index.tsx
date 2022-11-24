@@ -55,59 +55,48 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const isMintable = drop.currentSupply !== drop.maxSupply;
 
+  const defaultItem: NFT = {
+    contract: "string",
+    img: "https://picsum.photos/seed/alpha/200/200",
+    id: 0,
+    name: "hello world",
+    symbol: "HW",
+  };
+
   // fc state
-  const [currentItem, currentItemRef, setItem] = useCState<NFT | undefined>(undefined);
+  const [currentItem, currentItemRef, setItem] = useCState<NFT>(defaultItem);
   const [currentVersion, currentVersionRef, setVersion] = useCState(0);
-  const [checked, setChecked] = React.useState(false);
   const [displayInfoDiv, setDisplayInfoDiv] = React.useState(false);
-  const [toDisplayInfoDiv, setToDisplayInfoDiv] = React.useState<{ img: string; title: string }>();
-  const handleChange = () => setChecked(!checked);
+  const [sectionToDisplayInfo, setSectionToDisplayInfo] = React.useState<"Deck" | "Placeholder">(
+    "Placeholder"
+  );
 
   const sceneRef = React.useRef<sceneRef>(null!);
 
   const updateVersion = (version: number) => {
     setVersion(version);
-    if (toDisplayInfoDiv?.title === "Deck") {
-      setToDisplayInfoDiv({
-        title: toDisplayInfoDiv.title,
-        img: drop.metadata.versions[version].texture,
-      });
-    }
     sceneRef.current.updateVersion(version);
   };
   //
   const updateItem = (newItem: NFT) => {
     setItem(newItem);
-    if (toDisplayInfoDiv?.title === "Placeholder") {
-      setToDisplayInfoDiv({
-        title: toDisplayInfoDiv.title,
-        img: newItem.img,
-      });
-    }
     sceneRef.current.updateItem(
       newItem.img,
-      0,
-      drop.metadata.versions[currentVersion].name,
-      drop.symbol,
+      newItem.id,
+      newItem.name,
+      newItem.symbol,
       newItem.symbol + " #" + newItem.id
     );
   };
 
   const resetItem = () => {
-    setItem(undefined);
-    if (toDisplayInfoDiv) {
-      setToDisplayInfoDiv({
-        title: toDisplayInfoDiv.title,
-        img: "",
-      });
-    }
-
+    setItem(defaultItem);
     sceneRef.current.updateItem(
-      drop.metadata.versions[currentVersion].texture,
-      0,
-      drop.metadata.versions[currentVersion].name,
-      "",
-      ""
+      defaultItem.img,
+      defaultItem.id,
+      defaultItem.name,
+      defaultItem.symbol,
+      defaultItem.symbol + " #" + defaultItem.id
     );
   };
 
@@ -136,10 +125,10 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               model={drop.metadata.model}
               versions={drop.metadata.versions}
               initialVersion={0}
-              initialPlaceholderTexture={""}
-              initialDropSymbol={drop.symbol}
-              initialTokenNameId={"-"}
-              initialId={0}
+              initialPlaceholderTexture={defaultItem.img}
+              initialDropSymbol={defaultItem.symbol}
+              initialTokenNameId={defaultItem.name}
+              initialId={defaultItem.id}
               three={{
                 deck: {
                   onPointerMissed: (e) => {
@@ -149,11 +138,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   onClick: (e) => {
                     e.stopPropagation();
                     setDisplayInfoDiv(true);
-
-                    setToDisplayInfoDiv({
-                      title: "Deck",
-                      img: drop.metadata.versions[currentVersionRef.current].texture,
-                    });
+                    setSectionToDisplayInfo("Deck");
                   },
                 },
                 placeholder: {
@@ -164,11 +149,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   onClick: (e) => {
                     e.stopPropagation();
                     setDisplayInfoDiv(true);
-
-                    setToDisplayInfoDiv({
-                      title: "Placeholder",
-                      img: currentItemRef.current?.img || "", // TODO
-                    });
+                    setSectionToDisplayInfo("Placeholder");
                   },
                 },
               }}
@@ -295,129 +276,127 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
             </Clickable>
           </Style.LeftSideRightSide>
 
-          <Style.ContainerInfo $maxed={checked}>
-            <Style.InnerContainerInfo $maxed={checked}>
-              <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
+          <Style.ContainerInfo>
+            <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
 
-              <Style.VersionName
-                style={{
-                  backgroundColor: drop.metadata.versions[currentVersion].color,
-                  color: "black",
-                  padding: "5px",
-                }}
-              >
-                {drop.metadata.versions[currentVersion].name}
-              </Style.VersionName>
+            <Style.VersionName
+              style={{
+                backgroundColor: drop.metadata.versions[currentVersion].color,
+                color: "black",
+                padding: "5px",
+              }}
+            >
+              {drop.metadata.versions[currentVersion].name}
+            </Style.VersionName>
 
-              <div style={{}}>
-                <Style.Mutator>
-                  {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
-                </Style.Mutator>
+            <div style={{}}>
+              <Style.Mutator>
+                {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
+              </Style.Mutator>
 
-                {currentItem ? (
-                  <Style.MutatorRemove>
-                    <Clickable onClick={() => resetItem()}>remove</Clickable>
-                  </Style.MutatorRemove>
-                ) : null}
-              </div>
+              {currentItem ? (
+                <Style.MutatorRemove>
+                  <Clickable onClick={() => resetItem()}>remove</Clickable>
+                </Style.MutatorRemove>
+              ) : null}
+            </div>
 
-              <Grid
-                container
-                spacing={1}
-                alignContent={"center"}
-                style={{
-                  marginBottom: "10px",
-                }}
-              >
-                {pastilles.map((pastille) => (
-                  <Grid key={pastille.title} item>
-                    <Tooltip title={pastille.description}>
-                      <div>
-                        <Pastille title={pastille.title} />
-                      </div>
-                    </Tooltip>
-                  </Grid>
-                ))}
-                <Grid item flex={1} />
-                <Grid item>
-                  <Tooltip title={"Current Supply / Max Supply"}>
+            <Grid
+              container
+              spacing={1}
+              alignContent={"center"}
+              style={{
+                marginBottom: "10px",
+              }}
+            >
+              {pastilles.map((pastille) => (
+                <Grid key={pastille.title} item>
+                  <Tooltip title={pastille.description}>
                     <div>
-                      <Style.MintInfo>
-                        {drop.currentSupply} / {drop.maxSupply}
-                      </Style.MintInfo>
+                      <Pastille title={pastille.title} />
                     </div>
                   </Tooltip>
                 </Grid>
+              ))}
+              <Grid item flex={1} />
+              <Grid item>
+                <Tooltip title={"Current Supply / Max Supply"}>
+                  <div>
+                    <Style.MintInfo>
+                      {drop.currentSupply} / {drop.maxSupply}
+                    </Style.MintInfo>
+                  </div>
+                </Tooltip>
               </Grid>
+            </Grid>
 
-              <Style.ContainerPayment $maxed={checked}>
-                <Style.InnerContainerPayment>
-                  <Grid container rowSpacing={1}>
-                    <Grid item xs={6}>
-                      <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Grid container alignItems="baseline" columnSpacing={1}>
-                        <Grid item>
-                          <img src={logoeth} style={{ width: "12.5px" }} alt="" />
-                        </Grid>
-                        <Grid item>
-                          <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
-                        </Grid>
-                        <Grid item>
-                          <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
-                        </Grid>
+            <Style.ContainerPayment>
+              <Style.InnerContainerPayment>
+                <Grid container rowSpacing={1}>
+                  <Grid item xs={6}>
+                    <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Grid container alignItems="baseline" columnSpacing={1}>
+                      <Grid item>
+                        <img src={logoeth} style={{ width: "12.5px" }} alt="" />
+                      </Grid>
+                      <Grid item>
+                        <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
+                      </Grid>
+                      <Grid item>
+                        <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
                       </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Clickable
-                        activated={isMintable}
-                        onClick={() => {
-                          dispatch(
-                            mint({
-                              address: drop._address,
-                              versionId: currentVersion,
-                              value: drop.price,
-                              nft: currentItem,
-                            })
-                          );
-                        }}
-                      >
-                        <Tooltip
-                          placement="left"
-                          title={
-                            <Style.MintInfoText>
-                              {currentItem ? (
-                                <span>
-                                  *You are minting and mutating your DRIP with{" "}
-                                  <span
-                                    style={{
-                                      fontWeight: 600,
-                                    }}
-                                  >
-                                    {currentItem.symbol}#{currentItem.id}
-                                  </span>
-                                  . This action is irreversible.
-                                </span>
-                              ) : (
-                                <span>
-                                  *You are minting your DRIP without mutating it. Do not worry, you
-                                  will be able to mutate it later on.
-                                </span>
-                              )}
-                            </Style.MintInfoText>
-                          }
-                        >
-                          <Style.MintButton>MINT</Style.MintButton>
-                        </Tooltip>
-                      </Clickable>
-                    </Grid>
                   </Grid>
-                </Style.InnerContainerPayment>
-              </Style.ContainerPayment>
+                  <Grid item xs={12}>
+                    <Clickable
+                      activated={isMintable}
+                      onClick={() => {
+                        dispatch(
+                          mint({
+                            address: drop._address,
+                            versionId: currentVersion,
+                            value: drop.price,
+                            nft: currentItem,
+                          })
+                        );
+                      }}
+                    >
+                      <Tooltip
+                        placement="left"
+                        title={
+                          <Style.MintInfoText>
+                            {currentItem ? (
+                              <span>
+                                *You are minting and mutating your DRIP with{" "}
+                                <span
+                                  style={{
+                                    fontWeight: 600,
+                                  }}
+                                >
+                                  {currentItem.symbol}#{currentItem.id}
+                                </span>
+                                . This action is irreversible.
+                              </span>
+                            ) : (
+                              <span>
+                                *You are minting your DRIP without mutating it. Do not worry, you
+                                will be able to mutate it later on.
+                              </span>
+                            )}
+                          </Style.MintInfoText>
+                        }
+                      >
+                        <Style.MintButton>MINT</Style.MintButton>
+                      </Tooltip>
+                    </Clickable>
+                  </Grid>
+                </Grid>
+              </Style.InnerContainerPayment>
+            </Style.ContainerPayment>
 
-              {/*  */}
-            </Style.InnerContainerInfo>
+            {/*  */}
           </Style.ContainerInfo>
 
           <Style.BottomBar>
@@ -445,36 +424,46 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
             </Grid>
           </Style.BottomBar>
 
-          <Style.InfoDiv $display={displayInfoDiv && toDisplayInfoDiv !== undefined}>
-            <Grid container>
-              <Grid item xs={12}>
-                <Style.InfoDivItemName>{toDisplayInfoDiv?.title}</Style.InfoDivItemName>
-              </Grid>
-              <Grid item xs={12}>
-                <Grid container columnSpacing={2}>
-                  <Grid item xs={4}>
-                    {imagesPreloaded && (
-                      <img
-                        style={{
-                          width: "100%",
-                          objectFit: toDisplayInfoDiv?.title === "Deck" ? "none" : undefined,
-                          objectPosition:
-                            toDisplayInfoDiv?.title === "Deck" ? "50% 11%" : undefined,
-                        }}
-                        src={toDisplayInfoDiv?.img}
-                        alt=""
-                      />
-                    )}
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Style.InfoDivDescriptionContainer>
-                      <Style.InfoDivDescriptionTitle>Description:</Style.InfoDivDescriptionTitle>
-                    </Style.InfoDivDescriptionContainer>
+          {["Deck", "Placeholder"].map((item) => (
+            <Style.InfoDiv $display={displayInfoDiv && item === sectionToDisplayInfo}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Style.InfoDivItemName>{item}</Style.InfoDivItemName>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container columnSpacing={2}>
+                    <Grid item xs={4}>
+                      {imagesPreloaded &&
+                        (item === "Deck" ? (
+                          <img
+                            style={{
+                              width: "100%",
+                              objectFit: "none",
+                              objectPosition: "50% 11%",
+                            }}
+                            src={drop.metadata.versions[currentVersion].texture}
+                            alt=""
+                          />
+                        ) : (
+                          <img
+                            style={{
+                              width: "100%",
+                            }}
+                            src={currentItem?.img}
+                            alt=""
+                          />
+                        ))}
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Style.InfoDivDescriptionContainer>
+                        <Style.InfoDivDescriptionTitle>Description:</Style.InfoDivDescriptionTitle>
+                      </Style.InfoDivDescriptionContainer>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </Style.InfoDiv>
+            </Style.InfoDiv>
+          ))}
         </Style.Body>
 
         <Style.Footer>
