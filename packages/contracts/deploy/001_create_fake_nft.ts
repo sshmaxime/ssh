@@ -2,7 +2,6 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 import { ethers } from 'hardhat';
 import Contracts from '../components/contracts';
-import { VersionMetadata } from '@sshlabs/typings';
 
 const { parseEther: toEth, formatBytes32String } = ethers.utils;
 
@@ -14,7 +13,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const deployerSigner = await ethers.getSigner(deployer);
     const userSigner = await ethers.getSigner(user);
 
-    const deployResult = await deploy('FakeNft', {
+    const deployResult = await deploy('TestERC721', {
         from: deployer,
         args: ['Bored Ape Fake Club', 'BAFC'],
         log: true,
@@ -22,10 +21,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     });
 
     const nftContractAddress = deployResult.address;
-    const fakeNft = (await Contracts.FakeNft.attach(nftContractAddress)).connect(userSigner);
+    const testERC721 = (await Contracts.TestERC721.attach(nftContractAddress)).connect(userSigner);
 
-    await fakeNft.mint(0);
-    await fakeNft.mint(1);
+    await testERC721.mint({ value: testERC721.price() });
+    await testERC721.mint({ value: testERC721.price() });
+    await testERC721.mint({ value: testERC721.price() });
+    await testERC721.mint({ value: testERC721.price() });
 };
 
 export default func;

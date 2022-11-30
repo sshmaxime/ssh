@@ -2,8 +2,8 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 import { ethers } from 'hardhat';
 import Contracts from '../components/contracts';
-import { VersionMetadata } from '@sshlabs/typings';
 import { publishDropMetadataToIPFS } from '../scripts';
+import { deployedAddy } from './002_create_default_nft';
 
 const { parseEther: toEth, formatBytes32String } = ethers.utils;
 
@@ -25,7 +25,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         'createDrop',
         10,
         toEth('0.1'),
-        5
+        5,
+        deployedAddy
     );
 
     const getContract = async (int: number) => {
@@ -38,10 +39,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     let dropContract = await getContract(0);
     const address = await publishDropMetadataToIPFS(0);
     await dropContract.setDropURI(address);
-
-    // await dropContract.connect(userSigner).mint(0, { value: toEth('0.1') });
-    // await dropContract.connect(userSigner).mint(1, { value: toEth('0.1') });
-    // await dropContract.connect(userSigner).mint(2, { value: toEth('0.1') });
 };
 
 export default func;

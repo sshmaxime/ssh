@@ -65,17 +65,21 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IMutator__factory>;
     getContractFactory(
+      name: "CryptoPunksMarket",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CryptoPunksMarket__factory>;
+    getContractFactory(
       name: "SSHStore",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SSHStore__factory>;
     getContractFactory(
-      name: "FakeNft",
+      name: "ITestERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.FakeNft__factory>;
+    ): Promise<Contracts.ITestERC721__factory>;
     getContractFactory(
-      name: "CryptoPunksMarket",
+      name: "TestERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.CryptoPunksMarket__factory>;
+    ): Promise<Contracts.TestERC721__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -143,20 +147,25 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IMutator>;
     getContractAt(
+      name: "CryptoPunksMarket",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CryptoPunksMarket>;
+    getContractAt(
       name: "SSHStore",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.SSHStore>;
     getContractAt(
-      name: "FakeNft",
+      name: "ITestERC721",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.FakeNft>;
+    ): Promise<Contracts.ITestERC721>;
     getContractAt(
-      name: "CryptoPunksMarket",
+      name: "TestERC721",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.CryptoPunksMarket>;
+    ): Promise<Contracts.TestERC721>;
 
     // default types
     getContractFactory(

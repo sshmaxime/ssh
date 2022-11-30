@@ -5,6 +5,7 @@ import {
   SSHDrop__factory,
   SSHStore,
   SSHStore__factory,
+  TestERC721__factory,
 } from "@sshlabs/contracts";
 import { BigNumber, ethers, Event } from "ethers";
 
@@ -67,6 +68,9 @@ export class Store {
     const metadataUrl = (await dropContract.dropURI()).replace(IPFS_EXP, IPFS_GATEWAY);
     const metadata = (await axios.get(metadataUrl)).data as DropMetadata;
 
+    const defaultCollectionAddress = await dropContract.defaultItem();
+    const defaultCollection = TestERC721__factory.connect(defaultCollectionAddress, provider);
+
     return {
       _address: dropContractAddress,
       id: dropId.toNumber(),
@@ -74,6 +78,13 @@ export class Store {
       price: (await dropContract.price()).toString(),
       maxSupply: (await dropContract.maxSupply()).toNumber(),
       currentSupply: (await dropContract.totalSupply()).toNumber(),
+      defaultItem: {
+        name: await defaultCollection.name(),
+        symbol: await defaultCollection.symbol(),
+        contract: defaultCollectionAddress,
+        img: "https://picsum.photos/seed/hoho/1000/1000?grayscale",
+        price: (await defaultCollection.price()).toString(),
+      },
       metadata: metadata,
     };
   };

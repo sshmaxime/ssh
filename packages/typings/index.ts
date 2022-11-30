@@ -47,7 +47,10 @@ export type DripsOwned = DRIP[];
 //
 export type Collection = {
   name: string;
+  symbol: string;
   contract: string;
+  img: string;
+  price: string;
 };
 
 export type Drop = {
@@ -57,6 +60,7 @@ export type Drop = {
   maxSupply: number;
   price: string; // wei
   currentSupply: number;
+  defaultItem: Collection;
 
   metadata: DropMetadata;
 };

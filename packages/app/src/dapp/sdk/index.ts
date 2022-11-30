@@ -1,5 +1,5 @@
 import { BigNumber, ethers, Signer } from "ethers";
-import { SSHDrop__factory } from "@sshlabs/contracts";
+import { TestERC721__factory, SSHDrop__factory } from "@sshlabs/contracts";
 import { info } from "../../info";
 import { NFT } from "@sshlabs/typings";
 
@@ -42,6 +42,18 @@ class SDK {
   //
   //
   //
+  mintDefault = async (contractAddress: string, value: string) => {
+    const contract = TestERC721__factory.connect(contractAddress, this._signer);
+    const tx = await contract.mint({ value: value });
+    const receipt = await tx.wait();
+    if (receipt.events) {
+      const mintedEvent = receipt.events[0];
+      const mintedTokenId = ((mintedEvent.args as any).tokenId as BigNumber).toNumber();
+      return mintedTokenId;
+    }
+    return -100;
+  };
+
   mint = async (contractAddress: string, versionId: number, value: string) => {
     const contract = SSHDrop__factory.connect(contractAddress, this._signer);
     await contract.mint(versionId, { value: value });
@@ -56,7 +68,7 @@ class SDK {
     if (receipt.events) {
       const mintedEvent = receipt.events[1];
       const mintedTokenId = ((mintedEvent.args as any).tokenId as BigNumber).toNumber();
-      await contract.mutateDropItem(mintedTokenId, nft.contract, nft.id);
+      await contract.mutate(mintedTokenId, nft.contract, nft.id);
     }
   };
   //
@@ -69,7 +81,7 @@ class SDK {
     tokenIdMutator: number
   ) => {
     const contract = SSHDrop__factory.connect(contractAddress, this._signer);
-    await contract.mutateDropItem(tokenId, contractMutator, tokenIdMutator);
+    await contract.mutate(tokenId, contractMutator, tokenIdMutator);
   };
 }
 

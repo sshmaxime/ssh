@@ -50,6 +50,9 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     // The number of versions
     uint256 immutable VERSIONS; // starts at version 0
 
+    // Drop Default Item
+    address immutable DEFAULT_ITEM;
+
     // Mappings
 
     // Mapping from token id to DROP item
@@ -70,12 +73,14 @@ contract SSHDrop is ERC721Enumerable, Ownable {
         uint256 id,
         uint256 _maxSupply,
         uint256 _price,
-        uint256 _versions
+        uint256 _versions,
+        address _defaultItem
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
         DROP_ID = id;
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
         VERSIONS = _versions;
+        DEFAULT_ITEM = _defaultItem;
 
         transferOwnership(tx.origin);
     }
@@ -99,6 +104,13 @@ contract SSHDrop is ERC721Enumerable, Ownable {
      */
     function price() public view returns (uint256) {
         return PRICE;
+    }
+
+    /**
+     * @dev Return the default item.
+     */
+    function defaultItem() public view returns (address) {
+        return DEFAULT_ITEM;
     }
 
     /**
@@ -133,7 +145,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     /**
      * @dev Mint a DROP item.
      */
-    function mint(uint256 versionId) public payable {
+    function mint(uint256 versionId) external payable {
         uint256 tokenId = totalSupply();
         uint256 maxSupply_ = maxSupply();
 
@@ -145,8 +157,6 @@ contract SSHDrop is ERC721Enumerable, Ownable {
 
         // Minter needs to pay with the correct amount needed
         require(msg.value == PRICE, "INCORRECT_FUNDS");
-
-        console.log(versionId);
 
         _safeMint(msg.sender, tokenId);
         tokenIdToDropItem[tokenId] = DropItem({
@@ -162,11 +172,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     /**
      * @dev Mutate a DROP item.
      */
-    function mutateDropItem(
-        uint256 tokenIdToMutate,
-        IERC721 contractMutator,
-        uint256 tokenIdMutator
-    ) public {
+    function mutate(uint256 tokenIdToMutate, IERC721 contractMutator, uint256 tokenIdMutator) external {
         uint256 totalSupply_ = totalSupply();
 
         require(tokenIdToMutate < totalSupply_, "TOKEN ID OUT OF BOUND");

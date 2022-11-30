@@ -61,13 +61,14 @@ export const defaultSkateModelAnimation = (refs: SkateRefs, props: ModelMetadata
     loadTextureTextToObject(id, versionName, dropSymbol, tokenNameId, refs.textRef);
   },
   //
-  updateVersion(version: number) {
-    console.log(props.versions[version].texture);
+  updateVersion(img: any, id: number, version: number, dropSymbol: string, tokenNameId: string) {
+    console.log(props.versions[version].name);
     this._changeTextureDeck(props.versions[version].texture);
+    this._changeTextureText(id, props.versions[version].name, dropSymbol, tokenNameId);
   },
-  updateItem(img: any, id: number, versionName: string, dropSymbol: string, tokenNameId: string) {
+  updateItem(img: any, id: number, version: number, dropSymbol: string, tokenNameId: string) {
     this._changeTexturePlaceholder(img);
-    this._changeTextureText(id, versionName, dropSymbol, tokenNameId);
+    this._changeTextureText(id, props.versions[version].name, dropSymbol, tokenNameId);
   },
 });
 

@@ -74,7 +74,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
     sceneRef.current.updateItem(
       newItem.img,
       0,
-      drop.metadata.versions[drip.versionId].name,
+      drip.versionId,
       drop.symbol,
       newItem.symbol + " #" + newItem.id
     );

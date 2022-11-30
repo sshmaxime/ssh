@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const style = {
   Root: styled("div")(({ theme }) => ({})),
   AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level1,
+    ...theme.myBreakpoints(theme).level2,
 
     padding: 0,
     backgroundColor: "transparent",
@@ -35,7 +35,7 @@ const style = {
     border: "2.5px solid black",
     letterSpacing: "-0.1px",
     fontSize: "0.95em",
-    transform: "skew(-25deg)",
+    transform: "skew(-20deg)",
     transition: "0.25s",
     "&:hover": {
       backgroundColor: "black",

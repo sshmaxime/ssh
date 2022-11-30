@@ -1,9 +1,8 @@
-import { ethers, Signer, BigNumber, BigNumberish, PopulatedTransaction, BaseContract, ContractTransaction, Overrides, CallOverrides } from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
+import { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PopulatedTransaction, Signer, utils } from "ethers";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
-export interface IERC721Interface extends ethers.utils.Interface {
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface IERC721Interface extends utils.Interface {
     functions: {
         "approve(address,uint256)": FunctionFragment;
         "balanceOf(address)": FunctionFragment;
@@ -42,7 +41,7 @@ export interface IERC721Interface extends ethers.utils.Interface {
     getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
-export declare type ApprovalEvent = TypedEvent<[
+export type ApprovalEvent = TypedEvent<[
     string,
     string,
     BigNumber
@@ -51,8 +50,8 @@ export declare type ApprovalEvent = TypedEvent<[
     approved: string;
     tokenId: BigNumber;
 }>;
-export declare type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
-export declare type ApprovalForAllEvent = TypedEvent<[
+export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
+export type ApprovalForAllEvent = TypedEvent<[
     string,
     string,
     boolean
@@ -61,8 +60,8 @@ export declare type ApprovalForAllEvent = TypedEvent<[
     operator: string;
     approved: boolean;
 }>;
-export declare type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
-export declare type TransferEvent = TypedEvent<[
+export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
+export type TransferEvent = TypedEvent<[
     string,
     string,
     BigNumber
@@ -71,7 +70,7 @@ export declare type TransferEvent = TypedEvent<[
     to: string;
     tokenId: BigNumber;
 }>;
-export declare type TransferEventFilter = TypedEventFilter<TransferEvent>;
+export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 export interface IERC721 extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;

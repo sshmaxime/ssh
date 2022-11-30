@@ -36,6 +36,7 @@ export interface SSHDropInterface extends utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "defaultItem()": FunctionFragment;
     "dropId()": FunctionFragment;
     "dropURI()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
@@ -43,7 +44,7 @@ export interface SSHDropInterface extends utils.Interface {
     "isApprovedForAll(address,address)": FunctionFragment;
     "maxSupply()": FunctionFragment;
     "mint(uint256)": FunctionFragment;
-    "mutateDropItem(uint256,address,uint256)": FunctionFragment;
+    "mutate(uint256,address,uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
@@ -68,6 +69,10 @@ export interface SSHDropInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "defaultItem",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "dropId", values?: undefined): string;
   encodeFunctionData(functionFragment: "dropURI", values?: undefined): string;
   encodeFunctionData(
@@ -85,7 +90,7 @@ export interface SSHDropInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "maxSupply", values?: undefined): string;
   encodeFunctionData(functionFragment: "mint", values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: "mutateDropItem",
+    functionFragment: "mutate",
     values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
@@ -144,6 +149,10 @@ export interface SSHDropInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "defaultItem",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "dropId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dropURI", data: BytesLike): Result;
   decodeFunctionResult(
@@ -160,10 +169,7 @@ export interface SSHDropInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "maxSupply", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "mutateDropItem",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "mutate", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
@@ -298,6 +304,8 @@ export interface SSHDrop extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    defaultItem(overrides?: CallOverrides): Promise<[string]>;
+
     dropId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     dropURI(overrides?: CallOverrides): Promise<[string]>;
@@ -325,7 +333,7 @@ export interface SSHDrop extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    mutateDropItem(
+    mutate(
       tokenIdToMutate: BigNumberish,
       contractMutator: string,
       tokenIdMutator: BigNumberish,
@@ -425,6 +433,8 @@ export interface SSHDrop extends BaseContract {
 
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  defaultItem(overrides?: CallOverrides): Promise<string>;
+
   dropId(overrides?: CallOverrides): Promise<BigNumber>;
 
   dropURI(overrides?: CallOverrides): Promise<string>;
@@ -452,7 +462,7 @@ export interface SSHDrop extends BaseContract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  mutateDropItem(
+  mutate(
     tokenIdToMutate: BigNumberish,
     contractMutator: string,
     tokenIdMutator: BigNumberish,
@@ -546,6 +556,8 @@ export interface SSHDrop extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    defaultItem(overrides?: CallOverrides): Promise<string>;
+
     dropId(overrides?: CallOverrides): Promise<BigNumber>;
 
     dropURI(overrides?: CallOverrides): Promise<string>;
@@ -570,7 +582,7 @@ export interface SSHDrop extends BaseContract {
 
     mint(versionId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
-    mutateDropItem(
+    mutate(
       tokenIdToMutate: BigNumberish,
       contractMutator: string,
       tokenIdMutator: BigNumberish,
@@ -710,6 +722,8 @@ export interface SSHDrop extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    defaultItem(overrides?: CallOverrides): Promise<BigNumber>;
+
     dropId(overrides?: CallOverrides): Promise<BigNumber>;
 
     dropURI(overrides?: CallOverrides): Promise<BigNumber>;
@@ -737,7 +751,7 @@ export interface SSHDrop extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    mutateDropItem(
+    mutate(
       tokenIdToMutate: BigNumberish,
       contractMutator: string,
       tokenIdMutator: BigNumberish,
@@ -841,6 +855,8 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    defaultItem(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     dropId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     dropURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -868,7 +884,7 @@ export interface SSHDrop extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    mutateDropItem(
+    mutate(
       tokenIdToMutate: BigNumberish,
       contractMutator: string,
       tokenIdMutator: BigNumberish,

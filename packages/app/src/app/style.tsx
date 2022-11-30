@@ -4,6 +4,8 @@ import { AppBar, Toolbar, Typography, Button, Card, Grid, SwipeableDrawer } from
 
 const triangleHeight = "7.5vh";
 
+const color = "#EDEDC0";
+
 const style = {
   Root: styled("div")(({ theme }) => ({})),
   //
@@ -22,7 +24,7 @@ const style = {
     },
     backgroundColor: theme.backgroundColor.secondary,
   })),
-  TitleContainer: styled("div")(({ theme }) => ({
+  HomepageBottomLink: styled("div")(({ theme }) => ({
     position: "absolute",
     bottom: "5%",
     left: "50%",
@@ -34,6 +36,13 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     marginTop: "5px",
+  })),
+  Header: styled("div")(({ theme }) => ({
+    paddingTop: "100px",
+    fontSize: "4em",
+    textAlign: "center",
+    letterSpacing: "1.5px",
+    fontFamily: theme.fontFamily.tertiary,
   })),
   GridTitle: styled(Grid)(({ theme }) => ({
     height: "calc(100vh - 100px - 100px - 7.5vh)",
@@ -156,10 +165,20 @@ const style = {
     margin: "0 auto",
     paddingBottom: `${triangleHeight}`,
   })),
+  LandingPageContentContainer: styled("div")(({ theme }) => ({
+    paddingTop: "100px",
+    height: "100vh",
+  })),
+  LandingPageContent: styled("div")(({ theme }) => ({
+    height: "100%",
+  })),
 
   //
-  DripComponent: styled(Grid)(({ theme }) => ({
+  DripComponent: styled("div")(({ theme }) => ({
     background: `linear-gradient(0deg, ${theme.backgroundColor.secondary} 0%, ${theme.backgroundColor.primary} 50%)`,
+  })),
+  DripComponentP1: styled(Grid)(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level1,
   })),
   DripComponentP2: styled(Grid)(({ theme }) => ({
     ...theme.myBreakpoints(theme).level0,
@@ -176,33 +195,38 @@ const style = {
     backgroundColor: theme.backgroundColor.secondary,
     borderRadius: "5px",
   })),
-  ViewTitle: styled("div")<{ big?: boolean; shadow?: boolean }>(({ theme, shadow = true }) => ({
-    fontSize: "2em",
-    letterSpacing: "1px",
-    fontFamily: theme.fontFamily.tertiary,
-    fontStyle: "italic",
-    fontWeight: 500,
-    marginBottom: "10px",
-    display: "inline-block",
-    borderRadius: "2.5px",
-  })),
+  ViewTitle: styled("div")<{ big?: boolean; shadow?: boolean; color?: string }>(
+    ({ theme, shadow = true, color = "#EDEDC0" }) => ({
+      fontSize: "2em",
+      letterSpacing: "1px",
+      fontFamily: theme.fontFamily.tertiary,
+      fontWeight: 300,
+      marginBottom: "10px",
+      display: "inline-block",
+      borderRadius: "2.5px",
+      background: `linear-gradient(${color}, ${color}) 0 95% / 100% 32.5% no-repeat`,
+    })
+  ),
   ViewTitle1: styled("div")(({ theme }) => ({
     fontSize: "100px",
     letterSpacing: "1px",
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 500,
+    display: "inline-block",
+    margin: "0 auto",
+    textAlign: "center",
     fontStyle: "italic",
     marginBottom: "100px",
-    display: "inline-block",
+    background: `linear-gradient(${color}, ${color}) 0 95% / 100% 32.5% no-repeat`,
   })),
-  ViewTitle2: styled("div")(({ theme }) => ({
-    fontSize: "1.25em",
+  ViewTitle2: styled("div")<{ color?: string }>(({ theme, color = "#EDEDC0" }) => ({
+    fontSize: "1.1em",
     letterSpacing: "1px",
     fontFamily: theme.fontFamily.tertiary,
-    fontWeight: 500,
+    fontWeight: 600,
     marginBottom: "25px",
     display: "inline-block",
-    borderBottom: "1px solid red",
+    fontStyle: "italic",
   })),
   Button2: styled("div")(({ theme }) => ({
     fontSize: "1.25em",
@@ -211,16 +235,30 @@ const style = {
     padding: "2.5px 15px 2.5px 15px",
     borderRadius: "5px",
     color: "white",
-    fontStyle: "italic",
+    fontStyle: "ita lic",
     fontWeight: 500,
     backgroundColor: "black",
     display: "inline-block",
   })),
+  Sbu: styled("span")<{ color?: string; bold?: any }>(
+    ({ theme, color = "#EDEDC0", bold = "bold" }) => ({
+      background: `linear-gradient(${color}, ${color}) 0 95% / 100% 32.5% no-repeat`,
+      fontWeight: bold,
+    })
+  ),
+  Premier: styled("span")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    letterSpacing: "-0.1px",
+    fontSize: "0.95em",
+    display: "inline-block",
+    transform: "skew(-20deg)",
+  })),
   View2Content: styled("div")(({ theme }) => ({
-    fontSize: "1.1em",
+    fontSize: "1.15em",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,
-    lineHeight: "1.75em",
+    lineHeight: "2em",
   })),
   MoreLinkContainer: styled("div")(({ theme }) => ({
     marginTop: "35px",

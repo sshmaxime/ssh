@@ -1,7 +1,7 @@
 import { Signer, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import type { CryptopunksMutator, CryptopunksMutatorInterface } from "../CryptopunksMutator";
-declare type CryptopunksMutatorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
+type CryptopunksMutatorConstructorParams = [signer?: Signer] | ConstructorParameters<typeof ContractFactory>;
 export declare class CryptopunksMutator__factory extends ContractFactory {
     constructor(...args: CryptopunksMutatorConstructorParams);
     deploy(_mutator: string, overrides?: Overrides & {

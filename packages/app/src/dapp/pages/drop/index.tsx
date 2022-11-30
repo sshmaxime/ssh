@@ -1,6 +1,9 @@
 import React, { FC, useEffect } from "react";
 
 import { Grid, ImageList, ImageListItem } from "@mui/material";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import OpenSeaIcon from "../../../_utils/assets/icons/opensea.svg";
+import EtherscanIcon from "../../../_utils/assets/icons/etherscan.svg";
 
 import { useGetDropsQuery } from "@/dapp/store/services/socket";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
@@ -55,27 +58,43 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const isMintable = drop.currentSupply !== drop.maxSupply;
 
-  const defaultItem: NFT = {
-    contract: "string",
-    img: "https://picsum.photos/seed/alpha/200/200",
+  const zeroItem: NFT = {
+    contract: "",
+    img: process.env.PUBLIC_URL + "/whiteSquare.jpeg",
     id: 0,
-    name: "hello world",
-    symbol: "HW",
+    name: "",
+    symbol: "",
+  };
+
+  const defaultItem: NFT = {
+    contract: drop.defaultItem.contract,
+    img: drop.defaultItem.img,
+    id: 0,
+    name: drop.defaultItem.name,
+    symbol: drop.defaultItem.symbol,
   };
 
   // fc state
-  const [currentItem, currentItemRef, setItem] = useCState<NFT>(defaultItem);
-  const [currentVersion, currentVersionRef, setVersion] = useCState(0);
-  const [displayInfoDiv, setDisplayInfoDiv] = React.useState(false);
+  const [currentItem, , setItem] = useCState<NFT>(defaultItem);
+  const [currentVersion, , setVersion] = useCState(0);
+  const [displayInfoDiv, setDisplayInfoDiv] = React.useState(true);
   const [sectionToDisplayInfo, setSectionToDisplayInfo] = React.useState<"Deck" | "Placeholder">(
     "Placeholder"
   );
+
+  const isDefaultItem = currentItem.contract === defaultItem.contract;
 
   const sceneRef = React.useRef<sceneRef>(null!);
 
   const updateVersion = (version: number) => {
     setVersion(version);
-    sceneRef.current.updateVersion(version);
+    sceneRef.current.updateVersion(
+      currentItem.img,
+      currentItem.id,
+      version,
+      drop.symbol,
+      currentItem.name + " #" + currentItem.id
+    );
   };
   //
   const updateItem = (newItem: NFT) => {
@@ -83,20 +102,22 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     sceneRef.current.updateItem(
       newItem.img,
       newItem.id,
-      newItem.name,
-      newItem.symbol,
-      newItem.symbol + " #" + newItem.id
+      currentVersion,
+      drop.symbol,
+      newItem.name + " #" + newItem.id
     );
   };
 
   const resetItem = () => {
-    setItem(defaultItem);
+    const resetToItem = isDefaultItem ? zeroItem : defaultItem;
+
+    setItem(resetToItem);
     sceneRef.current.updateItem(
-      defaultItem.img,
-      defaultItem.id,
-      defaultItem.name,
-      defaultItem.symbol,
-      defaultItem.symbol + " #" + defaultItem.id
+      resetToItem.img,
+      resetToItem.id,
+      currentVersion,
+      drop.symbol,
+      resetToItem.name + " #" + resetToItem.id
     );
   };
 
@@ -126,14 +147,14 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               versions={drop.metadata.versions}
               initialVersion={0}
               initialPlaceholderTexture={defaultItem.img}
-              initialDropSymbol={defaultItem.symbol}
-              initialTokenNameId={defaultItem.name}
+              initialDropSymbol={drop.symbol}
+              initialTokenNameId={defaultItem.name + " #" + defaultItem.id}
               initialId={defaultItem.id}
               three={{
                 deck: {
                   onPointerMissed: (e) => {
                     e.stopPropagation();
-                    setDisplayInfoDiv(false);
+                    // setDisplayInfoDiv(false);
                   },
                   onClick: (e) => {
                     e.stopPropagation();
@@ -144,7 +165,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                 placeholder: {
                   onPointerMissed: (e) => {
                     e.stopPropagation();
-                    setDisplayInfoDiv(false);
+                    // setDisplayInfoDiv(false);
                   },
                   onClick: (e) => {
                     e.stopPropagation();
@@ -208,7 +229,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                 <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
               </Grid>
 
-              <Grid item xs={1}>
+              {/* <Grid item xs={1}>
                 <FilterListIcon />
               </Grid>
 
@@ -229,7 +250,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                     </Grid>
                   </Grid>
                 </Style.SearchBar>
-              </Grid>
+              </Grid> */}
             </Style.HeaderLeftSide>
             <Style.BodyLeftSide $connected={auth}>
               <Style.InnerLeftSide>
@@ -289,16 +310,18 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
               {drop.metadata.versions[currentVersion].name}
             </Style.VersionName>
 
-            <div style={{}}>
+            <div>
               <Style.Mutator>
                 {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
               </Style.Mutator>
 
-              {currentItem ? (
+              {currentItem.contract !== "" ? (
                 <Style.MutatorRemove>
-                  <Clickable onClick={() => resetItem()}>remove</Clickable>
+                  <Clickable onClick={() => resetItem()}>REMOVE</Clickable>
                 </Style.MutatorRemove>
-              ) : null}
+              ) : (
+                <></>
+              )}
             </div>
 
             <Grid
@@ -359,6 +382,11 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                             versionId: currentVersion,
                             value: drop.price,
                             nft: currentItem,
+                            isDefault: isDefaultItem
+                              ? {
+                                  valueMint: drop.defaultItem.price,
+                                }
+                              : undefined,
                           })
                         );
                       }}
@@ -425,42 +453,64 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
           </Style.BottomBar>
 
           {["Deck", "Placeholder"].map((item) => (
-            <Style.InfoDiv $display={displayInfoDiv && item === sectionToDisplayInfo}>
+            <Style.InfoDiv key={item} $display={displayInfoDiv && item === sectionToDisplayInfo}>
               <Grid container>
                 <Grid item xs={12}>
                   <Style.InfoDivItemName>{item}</Style.InfoDivItemName>
                 </Grid>
                 <Grid item xs={12}>
-                  <Grid container columnSpacing={2}>
-                    <Grid item xs={4}>
-                      {imagesPreloaded &&
-                        (item === "Deck" ? (
-                          <img
-                            style={{
-                              width: "100%",
-                              objectFit: "none",
-                              objectPosition: "50% 11%",
-                            }}
-                            src={drop.metadata.versions[currentVersion].texture}
-                            alt=""
-                          />
-                        ) : (
-                          <img
-                            style={{
-                              width: "100%",
-                            }}
-                            src={currentItem?.img}
-                            alt=""
-                          />
-                        ))}
-                    </Grid>
-                    <Grid item xs={8}>
-                      <Style.InfoDivDescriptionContainer>
-                        <Style.InfoDivDescriptionTitle>Description:</Style.InfoDivDescriptionTitle>
-                      </Style.InfoDivDescriptionContainer>
-                    </Grid>
-                  </Grid>
+                  {imagesPreloaded &&
+                    (item === "Deck" ? (
+                      <img
+                        style={{
+                          width: "100%",
+                          objectFit: "none",
+                          objectPosition: "50% 11%",
+                        }}
+                        src={drop.metadata.versions[currentVersion].texture}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        style={{
+                          width: "100%",
+                        }}
+                        src={currentItem?.img}
+                        alt=""
+                      />
+                    ))}
                 </Grid>
+
+                {sectionToDisplayInfo === "Placeholder" ? (
+                  <>
+                    <Grid item xs={12}>
+                      <Style.MoreInfoSymbol>
+                        {currentItem.symbol} #{currentItem.id}
+                      </Style.MoreInfoSymbol>
+                      {isDefaultItem ? <Style.DefaultItem>DEFAULT</Style.DefaultItem> : null}
+                      {currentItem.contract === zeroItem.contract ? (
+                        <Style.DefaultItem>NONE</Style.DefaultItem>
+                      ) : null}
+                    </Grid>
+
+                    <Grid item xs={12} style={{ marginTop: "5px" }}>
+                      <Grid container spacing={1}>
+                        <Grid item>
+                          <Clickable address="https://twitter.com/sshlabs_">
+                            <img src={OpenSeaIcon} style={{ width: "20px" }} alt="" />
+                          </Clickable>
+                        </Grid>
+                        <Grid item>
+                          <Clickable address="https://twitter.com/sshlabs_">
+                            <img src={EtherscanIcon} style={{ width: "20px" }} alt="" />
+                          </Clickable>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </>
+                ) : (
+                  <></>
+                )}
               </Grid>
             </Style.InfoDiv>
           ))}

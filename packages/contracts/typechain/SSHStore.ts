@@ -19,7 +19,7 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
 export interface SSHStoreInterface extends utils.Interface {
   functions: {
-    "createDrop(uint256,uint256,uint8)": FunctionFragment;
+    "createDrop(uint256,uint256,uint8,address)": FunctionFragment;
     "getDrop(uint256)": FunctionFragment;
     "getSupply()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -29,7 +29,7 @@ export interface SSHStoreInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "createDrop",
-    values: [BigNumberish, BigNumberish, BigNumberish]
+    values: [BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "getDrop",
@@ -111,6 +111,7 @@ export interface SSHStore extends BaseContract {
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
       versions: BigNumberish,
+      defaultItem: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -134,6 +135,7 @@ export interface SSHStore extends BaseContract {
     maxSupply: BigNumberish,
     mintPrice: BigNumberish,
     versions: BigNumberish,
+    defaultItem: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -157,6 +159,7 @@ export interface SSHStore extends BaseContract {
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
       versions: BigNumberish,
+      defaultItem: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -195,6 +198,7 @@ export interface SSHStore extends BaseContract {
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
       versions: BigNumberish,
+      defaultItem: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -222,6 +226,7 @@ export interface SSHStore extends BaseContract {
       maxSupply: BigNumberish,
       mintPrice: BigNumberish,
       versions: BigNumberish,
+      defaultItem: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

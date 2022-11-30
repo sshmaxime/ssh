@@ -1,9 +1,8 @@
-import { ethers, Signer, BigNumber, BigNumberish, PopulatedTransaction, BaseContract, ContractTransaction, Overrides, PayableOverrides, CallOverrides } from "ethers";
-import { BytesLike } from "@ethersproject/bytes";
+import { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
-import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
-export interface CryptoPunksMarketInterface extends ethers.utils.Interface {
+import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
+export interface CryptoPunksMarketInterface extends utils.Interface {
     functions: {
         "name()": FunctionFragment;
         "punksOfferedForSale(uint256)": FunctionFragment;
@@ -106,15 +105,15 @@ export interface CryptoPunksMarketInterface extends ethers.utils.Interface {
     getEvent(nameOrSignatureOrTopic: "PunkBought"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "PunkNoLongerForSale"): EventFragment;
 }
-export declare type AssignEvent = TypedEvent<[
+export type AssignEvent = TypedEvent<[
     string,
     BigNumber
 ], {
     to: string;
     punkIndex: BigNumber;
 }>;
-export declare type AssignEventFilter = TypedEventFilter<AssignEvent>;
-export declare type TransferEvent = TypedEvent<[
+export type AssignEventFilter = TypedEventFilter<AssignEvent>;
+export type TransferEvent = TypedEvent<[
     string,
     string,
     BigNumber
@@ -123,8 +122,8 @@ export declare type TransferEvent = TypedEvent<[
     to: string;
     value: BigNumber;
 }>;
-export declare type TransferEventFilter = TypedEventFilter<TransferEvent>;
-export declare type PunkTransferEvent = TypedEvent<[
+export type TransferEventFilter = TypedEventFilter<TransferEvent>;
+export type PunkTransferEvent = TypedEvent<[
     string,
     string,
     BigNumber
@@ -133,8 +132,8 @@ export declare type PunkTransferEvent = TypedEvent<[
     to: string;
     punkIndex: BigNumber;
 }>;
-export declare type PunkTransferEventFilter = TypedEventFilter<PunkTransferEvent>;
-export declare type PunkOfferedEvent = TypedEvent<[
+export type PunkTransferEventFilter = TypedEventFilter<PunkTransferEvent>;
+export type PunkOfferedEvent = TypedEvent<[
     BigNumber,
     BigNumber,
     string
@@ -143,8 +142,8 @@ export declare type PunkOfferedEvent = TypedEvent<[
     minValue: BigNumber;
     toAddress: string;
 }>;
-export declare type PunkOfferedEventFilter = TypedEventFilter<PunkOfferedEvent>;
-export declare type PunkBidEnteredEvent = TypedEvent<[
+export type PunkOfferedEventFilter = TypedEventFilter<PunkOfferedEvent>;
+export type PunkBidEnteredEvent = TypedEvent<[
     BigNumber,
     BigNumber,
     string
@@ -153,8 +152,8 @@ export declare type PunkBidEnteredEvent = TypedEvent<[
     value: BigNumber;
     fromAddress: string;
 }>;
-export declare type PunkBidEnteredEventFilter = TypedEventFilter<PunkBidEnteredEvent>;
-export declare type PunkBidWithdrawnEvent = TypedEvent<[
+export type PunkBidEnteredEventFilter = TypedEventFilter<PunkBidEnteredEvent>;
+export type PunkBidWithdrawnEvent = TypedEvent<[
     BigNumber,
     BigNumber,
     string
@@ -163,8 +162,8 @@ export declare type PunkBidWithdrawnEvent = TypedEvent<[
     value: BigNumber;
     fromAddress: string;
 }>;
-export declare type PunkBidWithdrawnEventFilter = TypedEventFilter<PunkBidWithdrawnEvent>;
-export declare type PunkBoughtEvent = TypedEvent<[
+export type PunkBidWithdrawnEventFilter = TypedEventFilter<PunkBidWithdrawnEvent>;
+export type PunkBoughtEvent = TypedEvent<[
     BigNumber,
     BigNumber,
     string,
@@ -175,13 +174,13 @@ export declare type PunkBoughtEvent = TypedEvent<[
     fromAddress: string;
     toAddress: string;
 }>;
-export declare type PunkBoughtEventFilter = TypedEventFilter<PunkBoughtEvent>;
-export declare type PunkNoLongerForSaleEvent = TypedEvent<[
+export type PunkBoughtEventFilter = TypedEventFilter<PunkBoughtEvent>;
+export type PunkNoLongerForSaleEvent = TypedEvent<[
     BigNumber
 ], {
     punkIndex: BigNumber;
 }>;
-export declare type PunkNoLongerForSaleEventFilter = TypedEventFilter<PunkNoLongerForSaleEvent>;
+export type PunkNoLongerForSaleEventFilter = TypedEventFilter<PunkNoLongerForSaleEvent>;
 export interface CryptoPunksMarket extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
