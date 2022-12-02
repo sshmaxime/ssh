@@ -4,7 +4,7 @@ import Style from "./style";
 import { HEADLINE, CREDENTIALS } from "../../_constants";
 import { Grid } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import DiscordIcon from "../../_utils/assets/icons/discord2.svg";
+import DiscordIcon from "../../_utils/assets/icons/discord.svg";
 import Clickable from "../../_utils/components/stateless/clickable";
 import LogoTypo from "../../_utils/assets/images/logo-typo.svg";
 

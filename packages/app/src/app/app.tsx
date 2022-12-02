@@ -5,23 +5,17 @@ import { Grid } from "@mui/material";
 // styles
 import Style from "./style";
 
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-
 import skateboard from "../_utils/assets/images/untitled.png";
 import img2 from "../_utils/assets/images/imgroom.jpg";
 import img3 from "../_utils/assets/images/wave.png";
 import img4 from "../_utils/assets/images/van.png";
 import LogoFull from "../_utils/assets/images/logo-full.svg";
-import alien from "../_utils/assets/images/aliendope.jpeg";
-import circle from "../_utils/assets/images/circleblack.png";
-import mouse from "../_utils/assets/images/mouse.png";
-import Typewriter from "typewriter-effect";
+import { ReactComponent as LogoTypo } from "../_utils/assets/images/logo-typo.svg";
+import { ReactComponent as LogoIcon } from "../_utils/assets/images/logo-icon.svg";
+import { ReactComponent as Sun } from "../_utils/assets/icons/sun.svg";
+import { ReactComponent as Etherscan } from "../_utils/assets/icons/etherscan.svg";
+import { ReactComponent as Opensea } from "../_utils/assets/icons/opensea.svg";
+import { ReactComponent as Discord } from "../_utils/assets/icons/discord.svg";
 
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
@@ -30,6 +24,9 @@ import Marquee from "react-fast-marquee";
 type props = {};
 
 const LandingScreenComponent: FC<props> = () => {
+  const [hover, setHover] = useState(0);
+
+  const items = [img3, img3, img3, img3];
   return (
     <Style.LandingScreenComponent>
       <Style.Background>
@@ -38,31 +35,140 @@ const LandingScreenComponent: FC<props> = () => {
             <Style.LandingPageContent>
               <Style.Header>
                 <Grid container>
-                  <Grid item xs={12}>
-                    <Sbu>Exclusive</Sbu> . <Sbu>Limited</Sbu> . <Sbu>Customizable</Sbu>
+                  <Grid item xs={12} style={{ border: "1px solid black" }}>
+                    <Grid container justifyContent={"space-between"}>
+                      <Grid item xs={2}>
+                        <Grid container>
+                          <Style.CenteredGridItem
+                            xs={6}
+                            style={{ borderRight: "1px solid black", padding: "10px" }}
+                          >
+                            <Style.TextStyle>10:45 AM</Style.TextStyle>
+                          </Style.CenteredGridItem>
+                          <Style.CenteredGridItem
+                            xs={6}
+                            style={{ borderRight: "1px solid black", padding: "10px" }}
+                          >
+                            <Sun />
+                          </Style.CenteredGridItem>
+                        </Grid>
+                      </Grid>
+
+                      <Style.CenteredGridItem>
+                        <LogoIcon style={{ width: "50px", color: "black" }} />
+                      </Style.CenteredGridItem>
+
+                      <Grid item xs={2}>
+                        <Grid container>
+                          <Style.CenteredGridItem
+                            xs={6}
+                            style={{ borderLeft: "1px solid black", padding: "10px" }}
+                          >
+                            <Grid container justifyContent="space-evenly" alignItems="center">
+                              <Etherscan style={{ height: "20px", width: "20px" }} />
+                              <Discord style={{ height: "20px", width: "20px" }} />
+                              <Opensea style={{ height: "20px", width: "20px" }} />
+                            </Grid>
+                            {/*  */}
+                          </Style.CenteredGridItem>
+
+                          <Style.CenteredGridItem
+                            xs={6}
+                            style={{ borderLeft: "1px solid black", padding: "10px" }}
+                          >
+                            <Style.TextStyle>Worldwide</Style.TextStyle>
+                          </Style.CenteredGridItem>
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12}></Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{ borderLeft: "1px solid black", borderRight: "1px solid black" }}
+                  >
+                    <LabsComponent word="exclusive" />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{ borderLeft: "1px solid black", borderRight: "1px solid black" }}
+                  >
+                    <Style.TitleHeader>ICI</Style.TitleHeader>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      border: "1px solid black",
+                      borderBottom: "none",
+                    }}
+                  >
+                    <Grid container style={{ borderBottom: "1px solid black" }}>
+                      <Grid
+                        item
+                        xs={6}
+                        style={{ padding: "2.5px", borderRight: "1px solid black" }}
+                      >
+                        <Style.GalleryWrap>
+                          {items.map((item, index) => (
+                            <Style.GalleryItem
+                              key={index}
+                              onMouseEnter={() => setHover(index)}
+                              onMouseLeave={() => setHover(0)}
+                              $onHover={hover === index}
+                              img={item}
+                            />
+                          ))}
+                        </Style.GalleryWrap>
+                      </Grid>
+
+                      <Grid item xs={6} style={{ height: "50vh", padding: "2.5px" }}>
+                        <Grid container direction="column" style={{ height: "100%" }}>
+                          <Style.CenteredGridItem
+                            item
+                            xs={6}
+                            style={{
+                              borderBottom: "1px solid black",
+                              backgroundImage: `url(${img4})`,
+                              backgroundPosition: "center",
+                              backgroundSize: "cover",
+                              backgroundRepeat: "none",
+                            }}
+                          >
+                            <Style.ButtonCallToAction>SHOP</Style.ButtonCallToAction>
+                          </Style.CenteredGridItem>
+                          <Style.CenteredGridItem item xs={6}>
+                            <div style={{ fontSize: "15px", letterSpacing: "-0.01px" }}>
+                              Designed for the era of <Sbu>ownership</Sbu>,{" "}
+                              <Sbu>digitalization</Sbu> and <Sbu>fashion</Sbu>.
+                            </div>
+                          </Style.CenteredGridItem>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item xs={12} style={{ paddingTop: "2.5vh" }}>
+                    <Grid container flexDirection="column">
+                      <Grid item style={{ marginBottom: "15px" }}>
+                        <Style.ButtonCallToAction>DISCOVER</Style.ButtonCallToAction>
+                      </Grid>
+                      <Grid item style={{ display: "grid", justifyContent: "center" }}>
+                        <ArrowRightAltIcon
+                          style={{
+                            fontSize: "0.75em",
+                            animation: "bounce 2s infinite",
+                          }}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Style.Header>
             </Style.LandingPageContent>
           </Style.LandingPageContentContainer>
         </Style.DripComponentP3>
-
-        <Style.HomepageBottomLink>
-          <Grid container flexDirection="column">
-            <Grid item style={{ marginBottom: "15px" }}>
-              <Style.ButtonCallToAction>DISCOVER</Style.ButtonCallToAction>
-            </Grid>
-            <Grid item style={{ display: "grid", justifyContent: "center" }}>
-              <ArrowRightAltIcon
-                style={{
-                  fontSize: "2em",
-                  animation: "bounce 2s infinite",
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Style.HomepageBottomLink>
         <Style.Triangle />
       </Style.Background>
     </Style.LandingScreenComponent>
@@ -379,26 +485,17 @@ const Sbu: FC<{ no_u?: boolean; bold?: any }> = ({ children, no_u = true, bold }
   return <Style.Sbu bold={bold}>{no_u ? <>{children}</> : <u>{children}</u>}</Style.Sbu>;
 };
 
-const LabsComponent: FC<{ word: string }> = ({ word }) => {
+const LabsComponent: FC<{ word: any }> = ({ word }) => {
   return (
     <div>
       <Style.LabsComponent>
-        <Marquee gradient={false} speed={75}>
+        <Marquee gradient={false} speed={60}>
           <Style.Sentence>
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {[...Array(100)].map(() => (
+              <>
+                {word}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </>
+            ))}
           </Style.Sentence>
         </Marquee>
       </Style.LabsComponent>

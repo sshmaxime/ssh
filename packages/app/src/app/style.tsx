@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 
 import { AppBar, Toolbar, Typography, Button, Card, Grid, SwipeableDrawer } from "@mui/material";
 
-const triangleHeight = "7.5vh";
+const triangleHeight = "5vh";
 
 const color = "#EDEDC0";
 
@@ -14,21 +14,44 @@ const style = {
   })),
   Background: styled("div")(({ theme }) => ({
     height: "100%",
-    "&:before": {
-      content: `""`,
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-    },
+    // "&:before": {
+    //   content: `""`,
+    //   position: "absolute",
+    //   top: 0,
+    //   left: 0,
+    //   width: "100%",
+    //   height: "100%",
+    // },
     backgroundColor: theme.backgroundColor.secondary,
   })),
   HomepageBottomLink: styled("div")(({ theme }) => ({
     position: "absolute",
-    bottom: "5%",
+    bottom: "2.5%",
     left: "50%",
     transform: "translate(-50%, -50%)",
+  })),
+  GalleryWrap: styled("div")(({ theme }) => ({
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    height: "100%",
+    gap: "15px",
+  })),
+  TitleHeader: styled("div")(({ theme }) => ({
+    fontSize: "0.5em",
+    letterSpacing: "1.5px",
+    fontFamily: theme.fontFamily.secondary,
+    padding: "20px",
+  })),
+  GalleryItem: styled("div")<{ img: string; $onHover: boolean }>(({ theme, img, $onHover }) => ({
+    flex: $onHover ? 7 : 1,
+    height: "100%",
+    borderRadius: "2.5px",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "none",
+    transition: "flex 0.8s ease",
+    backgroundImage: `url(${img})`,
   })),
   Subtitle: styled("p")(({ theme }) => ({
     fontSize: "0.65em",
@@ -38,11 +61,11 @@ const style = {
     marginTop: "5px",
   })),
   Header: styled("div")(({ theme }) => ({
-    paddingTop: "100px",
-    fontSize: "4em",
+    paddingTop: "25px",
+    fontSize: "3em",
     textAlign: "center",
     letterSpacing: "1.5px",
-    fontFamily: theme.fontFamily.tertiary,
+    fontFamily: theme.fontFamily.primary,
   })),
   GridTitle: styled(Grid)(({ theme }) => ({
     height: "calc(100vh - 100px - 100px - 7.5vh)",
@@ -153,12 +176,18 @@ const style = {
     justifyItems: "center",
     alignItems: "center",
   })),
+  TextStyle: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.secondary,
+    fontSize: "0.3em",
+    letterSpacing: "-0.05em",
+    padding: "5px",
+  })),
   Triangle: styled("div")(({ theme }) => ({
     position: "absolute",
     bottom: 0,
     height: 0,
     width: 0,
-    borderTop: "125px solid transparent",
+    borderTop: "100px solid transparent",
     borderRight: `50vw solid  ${theme.backgroundColor.primary}`,
     borderLeft: `50vw solid ${theme.backgroundColor.primary}`,
     display: "table",
@@ -166,11 +195,13 @@ const style = {
     paddingBottom: `${triangleHeight}`,
   })),
   LandingPageContentContainer: styled("div")(({ theme }) => ({
-    paddingTop: "100px",
     height: "100vh",
+    width: "100%",
+    paddingTop: "100px",
   })),
   LandingPageContent: styled("div")(({ theme }) => ({
     height: "100%",
+    width: "100%",
   })),
 
   //
@@ -361,7 +392,11 @@ const style = {
     paddingLeft: "5px",
     marginBottom: "5px",
   })),
-
+  CenteredGridItem: styled(Grid)(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  })),
   //
   LabsComponent: styled("div")(({ theme }) => ({
     backgroundColor: "black",
@@ -371,7 +406,7 @@ const style = {
   Sentence: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     color: theme.backgroundColor.primary,
-    fontSize: "1.25em",
+    fontSize: "12.5px",
     fontWeight: 900,
     textAlign: "center",
   })),
