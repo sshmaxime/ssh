@@ -51,6 +51,14 @@ declare module "@mui/material/styles" {
 
 export const theme = createTheme({
   components: {
+    MuiGrid: {
+      styleOverrides: {
+        container: {
+          height: "100%",
+          width: "100%",
+        },
+      },
+    },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {

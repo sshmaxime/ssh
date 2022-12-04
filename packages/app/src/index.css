@@ -332,6 +332,10 @@ body,
   font-style: italic;
 }
 
+@font-face {
+  font-family: anton;
+  src: url(./_utils/assets/fonts/Anton-Regular.ttf);
+}
 /*  */
 
 @keyframes bounce {

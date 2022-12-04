@@ -9,7 +9,7 @@ type props = {};
 const Index: FC<props> = ({ children }) => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <App />
       <Footer />
     </>

@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 
 import { AppBar, Toolbar, Typography, Button, Card, Grid, SwipeableDrawer } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const triangleHeight = "5vh";
 
@@ -59,13 +60,6 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
     marginTop: "5px",
-  })),
-  Header: styled("div")(({ theme }) => ({
-    paddingTop: "25px",
-    fontSize: "3em",
-    textAlign: "center",
-    letterSpacing: "1.5px",
-    fontFamily: theme.fontFamily.primary,
   })),
   GridTitle: styled(Grid)(({ theme }) => ({
     height: "calc(100vh - 100px - 100px - 7.5vh)",
@@ -197,11 +191,26 @@ const style = {
   LandingPageContentContainer: styled("div")(({ theme }) => ({
     height: "100vh",
     width: "100%",
-    paddingTop: "100px",
   })),
   LandingPageContent: styled("div")(({ theme }) => ({
     height: "100%",
     width: "100%",
+  })),
+  GoToAppButton: styled(Link)(({ theme }) => ({
+    textDecoration: "none",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    letterSpacing: "-0.1px",
+    fontSize: "0.9em",
+    transform: "skew(-20deg)",
+    transition: "0.25s",
+    padding: "5px",
+    backgroundColor: "black",
+    color: "white",
+    "&:hover": {
+      color: "black",
+      backgroundColor: theme.backgroundColor.primary,
+    },
   })),
 
   //
@@ -392,23 +401,57 @@ const style = {
     paddingLeft: "5px",
     marginBottom: "5px",
   })),
-  CenteredGridItem: styled(Grid)(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  })),
-  //
-  LabsComponent: styled("div")(({ theme }) => ({
-    backgroundColor: "black",
-    paddingTop: ".5vh",
-    paddingBottom: ".5vh",
-  })),
-  Sentence: styled(Typography)(({ theme }) => ({
+  CenteredGridItem: styled(Grid)<{ justifyContent?: string }>(
+    ({ theme, justifyContent = "center" }) => ({
+      display: "flex",
+      alignItems: "center",
+      justifyContent: justifyContent,
+    })
+  ),
+  TitleCollection: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    color: theme.backgroundColor.primary,
-    fontSize: "12.5px",
+    fontSize: "15px",
+    padding: "10px",
     fontWeight: 900,
+    letterSpacing: "-0.5px",
+  })),
+  TitleDrip: styled("div")(({ theme }) => ({
+    fontFamily: "anton",
+    fontSize: "4em",
+    fontWeight: 900,
+    letterSpacing: "-0.5px",
+  })),
+  TextLinkHeader: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "13.5px",
+    fontWeight: 500,
+    letterSpacing: "-0.5px",
+  })),
+  TextHeader: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "5rem",
+    fontWeight: 600,
+    letterSpacing: "-0.5px",
+    padding: "10px",
+    textAlign: "right",
+    lineHeight: "1.1em",
+    // textShadow: `5px 5px ${theme.backgroundColor.tertiary}`,
+  })),
+  LabsComponent: styled("div")(({ theme }) => ({
+    paddingTop: ".75vh",
+    paddingBottom: ".75vh",
+    height: "100%",
+    width: "100%",
+  })),
+  Sentence: styled("div")<{ fontSize?: string }>(({ theme, fontSize = "17.5px" }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: fontSize,
+    color: "black",
+    fontWeight: 900,
+    paddingRight: "35px",
     textAlign: "center",
+    transform: "skew(-20deg)",
+    whiteSpace: "nowrap",
   })),
 
   //
