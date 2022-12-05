@@ -8,6 +8,7 @@ const style = {
     paddingTop: "5vh",
     paddingBottom: "5vh",
     backgroundColor: theme.backgroundColor.secondary,
+    borderTop: "1px solid lightgrey",
   })),
   Title: styled(Typography)(({ theme }) => ({
     ...theme.titles(theme).primary,

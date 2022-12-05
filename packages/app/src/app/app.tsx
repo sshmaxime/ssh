@@ -9,6 +9,7 @@ import skateboard from "../_utils/assets/images/untitled.png";
 import img2 from "../_utils/assets/images/imgroom.jpg";
 import img3 from "../_utils/assets/images/wave.png";
 import img4 from "../_utils/assets/images/van.png";
+import circle from "../_utils/assets/images/circleblack.png";
 import LogoFull from "../_utils/assets/images/logo-full.svg";
 import { ReactComponent as LogoTypo } from "../_utils/assets/images/logo-typo.svg";
 import { ReactComponent as LogoIcon } from "../_utils/assets/images/logo-icon.svg";
@@ -19,6 +20,7 @@ import { ReactComponent as Opensea } from "../_utils/assets/icons/opensea.svg";
 import { ReactComponent as Discord } from "../_utils/assets/icons/discord.svg";
 
 import { Textfit } from "react-textfit";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import Ticker from "react-ticker";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_0";
@@ -71,12 +73,9 @@ const LandingScreenComponent: FC<props> = () => {
                   </Grid>
 
                   <Style.CenteredGridItem flexGrow={1}>
-                    <Grid container justifyContent="space-evenly">
+                    {/* <Grid container justifyContent="space-evenly">
                       <Style.CenteredGridItem item>
                         <Style.TextLinkHeader>DRIP</Style.TextLinkHeader>
-                      </Style.CenteredGridItem>
-                      <Style.CenteredGridItem item>
-                        <Style.TextLinkHeader>SHOP</Style.TextLinkHeader>
                       </Style.CenteredGridItem>
                       <Style.CenteredGridItem item>
                         <Style.TextLinkHeader>ABOUT</Style.TextLinkHeader>
@@ -87,7 +86,7 @@ const LandingScreenComponent: FC<props> = () => {
                       <Style.CenteredGridItem item>
                         <Style.TextLinkHeader>TEAM</Style.TextLinkHeader>
                       </Style.CenteredGridItem>
-                    </Grid>
+                    </Grid> */}
                   </Style.CenteredGridItem>
 
                   <Grid item xs={2}>
@@ -176,21 +175,50 @@ const LandingScreenComponent: FC<props> = () => {
                                   </Grid>
                                 </Grid>
                               </Grid>
-                              <Grid item flexGrow={1} style={{ borderTop: "1px solid black" }}>
+                              <Grid
+                                item
+                                flexGrow={1}
+                                style={{ borderTop: "1px solid black", position: "relative" }}
+                              >
+                                <Style.DiscoverButton>
+                                  <Grid container alignItems="center">
+                                    <>DISCOVER</>
+                                    <ArrowRightAltIcon />
+                                  </Grid>
+                                </Style.DiscoverButton>
+
                                 <Grid
                                   container
                                   direction="column-reverse"
                                   style={{ height: "100%" }}
                                 >
-                                  <Style.TitleDrip
-                                    style={{
-                                      paddingBottom: "10px",
-                                      paddingLeft: "10px",
-                                      // borderTop: "1px solid black",
-                                    }}
-                                  >
-                                    DROP #0
-                                  </Style.TitleDrip>
+                                  <Grid item>
+                                    <Style.TitleDrip
+                                      style={{
+                                        paddingBottom: "10px",
+                                        paddingLeft: "10px",
+                                        // borderTop: "1px solid black",
+                                      }}
+                                    >
+                                      DROP #0
+                                    </Style.TitleDrip>
+                                  </Grid>
+
+                                  <Grid item>
+                                    <Style.DropLive>
+                                      <div
+                                        style={{
+                                          display: "inline-block",
+                                          width: "10px",
+                                          height: "10px",
+                                          marginRight: "5px",
+                                          backgroundColor: "#32CD32",
+                                          borderRadius: "5px",
+                                        }}
+                                      />
+                                      LIVE
+                                    </Style.DropLive>
+                                  </Grid>
                                 </Grid>
                               </Grid>
                             </Grid>
@@ -229,31 +257,44 @@ const LandingScreenComponent: FC<props> = () => {
                         <Grid container direction="column">
                           <Grid item flexGrow={1}>
                             <Grid container direction="column">
-                              <Grid item>
-                                <Style.TextHeader>
-                                  <Sbu>Web3</Sbu>
-                                  <br />
-                                  <Sbu>Fashion</Sbu>
-                                  <br />
-                                  <Sbu>Digitalization</Sbu>
-                                </Style.TextHeader>
-                                {/* Designed for the era of <Sbu>ownership</Sbu>,{" "}
-                                        <Sbu>digitalization</Sbu> and <Sbu>fashion</Sbu>. */}
-                              </Grid>
-                              <Grid flexGrow={1}>How does it works</Grid>
-                              <Style.CenteredGridItem
+                              <Grid
                                 item
-                                xs={3}
                                 style={{
-                                  width: "100%",
-                                  backgroundImage: `url(${img3})`,
-                                  backgroundPosition: "center",
-                                  backgroundSize: "cover",
-                                  backgroundRepeat: "none",
-                                  borderTop: "1px solid black",
+                                  borderBottom: "1px solid black",
+                                  backgroundColor: "#B9B9D0",
                                 }}
                               >
-                                <Style.ButtonCallToAction>SHOP</Style.ButtonCallToAction>
+                                <Style.TextHeader>
+                                  Designed for the era of ownership, digitalization and fashion.
+                                </Style.TextHeader>
+                              </Grid>
+                              <Style.CenteredGridItem flexGrow={1} style={{ position: "relative" }}>
+                                <img
+                                  src={circle}
+                                  style={{
+                                    position: "absolute",
+                                    width: "150px",
+                                    right: 15,
+                                    top: 15,
+                                  }}
+                                  alt=""
+                                />
+                                <Style.TextFun
+                                  style={{
+                                    position: "absolute",
+                                    left: 15,
+                                    top: 15,
+                                  }}
+                                >
+                                  <Style.Tri />
+                                  Welcome to PREMIER.
+                                  <br />
+                                  <br />
+                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae
+                                  pulvinar magna, vel sodales erat.
+                                  <br />
+                                </Style.TextFun>
+                                <img src={LogoFull} style={{ width: "100%" }} alt="" />
                               </Style.CenteredGridItem>
                             </Grid>
                           </Grid>
@@ -299,14 +340,10 @@ const DripComponent: FC<props> = () => {
         container
         style={{ height: "75vh", borderBottom: "1px solid black", borderTop: "1px solid black" }}
       >
-        <Style.CenteredGridItem item xs={6} style={{ borderRight: "1px solid black" }}>
-          <img src={LogoFull} style={{ width: "100%" }} alt="" />
-        </Style.CenteredGridItem>
-
-        <Style.CenteredGridItem item xs={6} style={{ marginBottom: "50px" }}>
+        <Style.CenteredGridItem item xs={5} style={{ position: "relative" }}>
           <Style.View2Content>
             <Grid container justifyContent="center">
-              <Grid item xs={12} style={{ textAlign: "center" }}>
+              <Grid item xs={10} style={{ textAlign: "left" }}>
                 Designed for the era of <Sbu>ownership</Sbu>, <Sbu>digitalization</Sbu> and{" "}
                 <Sbu>fashion</Sbu>.
                 <div style={{ height: "20px", width: "2px" }} />
@@ -320,270 +357,84 @@ const DripComponent: FC<props> = () => {
             </Grid>
           </Style.View2Content>
         </Style.CenteredGridItem>
+        <Style.CenteredGridItem item xs={7} style={{ borderLeft: "1px solid black" }}>
+          {/* <img src={LogoFull} style={{ width: "100%" }} alt="" /> */}
+        </Style.CenteredGridItem>
       </Grid>
-
-      <Grid container justifyContent="center">
-        <div
-          style={{
-            width: "25%",
-            height: "1px",
-            backgroundColor: "black",
-            marginBottom: "125px",
-            marginTop: "125px",
-            opacity: "25%",
-          }}
-        />
-      </Grid>
-
-      <Style.DripComponentP3 container spacing={1}>
-        <Grid item xs={4}>
-          <Style.ViewTitle>because everyone has a dream.</Style.ViewTitle>
-          <br />
-          <Style.ViewTitle2>and this is where mine started -</Style.ViewTitle2>
-          <Style.View2Content>
+      <Grid item xs={12} style={{ borderBottom: "1px solid black" }}>
+        <Grid container style={{}}>
+          <Grid item xs={6}>
             <Grid container justifyContent="center">
-              <Grid item xs={12}>
-                <img
-                  src={img2}
-                  style={{
-                    filter: "grayscale(100%)",
-                    width: "100%",
-                  }}
-                  alt=""
-                />
-              </Grid>
-            </Grid>
-          </Style.View2Content>
-        </Grid>
-
-        <Grid item xs={4}>
-          <Style.ViewTitle>because whatever you do.</Style.ViewTitle>
-          <br />
-          <Style.ViewTitle2>some people will never like it -</Style.ViewTitle2>
-          <Style.View2Content>
-            <Grid container justifyContent="center">
-              <Grid item xs={12}>
-                <img
-                  src={img2}
-                  style={{
-                    filter: "grayscale(100%)",
-                    width: "100%",
-                  }}
-                  alt=""
-                />
-              </Grid>
-            </Grid>
-          </Style.View2Content>
-        </Grid>
-
-        <Grid item xs={4}>
-          <Style.ViewTitle>because you can die tomorrow.</Style.ViewTitle>
-          <br />
-          <Style.ViewTitle2>do your own thing -</Style.ViewTitle2>
-          <Style.View2Content>
-            <Grid container justifyContent="center">
-              <Grid item xs={12}>
-                <img
-                  src={img2}
-                  style={{
-                    filter: "grayscale(100%)",
-                    width: "100%",
-                  }}
-                  alt=""
-                />
-              </Grid>
-            </Grid>
-          </Style.View2Content>
-        </Grid>
-      </Style.DripComponentP3>
-
-      {/* <Grid container justifyContent="center">
-        <div
-          style={{
-            width: "25%",
-            height: "1px",
-            backgroundColor: "black",
-            marginBottom: "125px",
-            marginTop: "125px",
-          }}
-        />
-      </Grid>
-
-      <Grid item xs={12} style={{ marginBottom: "25px" }}>
-        <Style.DripComponentP2>
-          <Grid item xs={12} style={{ paddingTop: "25px", marginBottom: "100px" }}>
-            <Grid container justifyContent="center">
-              <Style.View2Content>
-                <span style={{ fontSize: "3em" }}>
-                  <Sbu bold={900}>DRIP</Sbu>{" "}
-                </span>
-                <span style={{ fontSize: "1.25em" }}>
-                  by <Style.Premier>PREMIER</Style.Premier>
-                </span>
-              </Style.View2Content>
-            </Grid>
-          </Grid>
-
-          <Grid item xs={12} style={{ textAlign: "center" }}>
-            <Style.View2Content>
-              A <Sbu>DRIP</Sbu> is an <Sbu>exclusive</Sbu> and <Sbu>limited</Sbu> item{" "}
-              <Sbu>customizable</Sbu> with digital belongings.
-              <br />
-              <br />
-              Available on the <Sbu>ethereum</Sbu> blockchain through its smart-contract, a{" "}
-              <Sbu>DRIP</Sbu> is digitally represented by a <Sbu>3D model</Sbu>, fully ready to be
-              used in any <Sbu>game</Sbu> or <Sbu>digital world</Sbu> as well as backed by a{" "}
-              <Sbu>1/1 physical asset</Sbu> at any time <Sbu>redeemable</Sbu>.
-            </Style.View2Content>
-          </Grid>
-        </Style.DripComponentP2>
-      </Grid> */}
-      <Grid container justifyContent="center">
-        <div
-          style={{
-            width: "25%",
-            height: "1px",
-            backgroundColor: "black",
-            marginBottom: "125px",
-            marginTop: "125px",
-            opacity: "25%",
-          }}
-        />
-      </Grid>
-
-      <Style.DripComponentP3 item xs={12} style={{ marginBottom: "75px" }}>
-        <Grid container justifyContent="center">
-          <Grid item xs={4}>
-            <Grid container>
-              <Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
+              <Style.CenteredGridItem item xs={12}>
                 <Style.ViewTitle1>explore.</Style.ViewTitle1>
-              </Grid>
-              <Grid item xs={12}>
+              </Style.CenteredGridItem>
+
+              <Style.CenteredGridItem item xs={10}>
                 <Style.View2Content>
-                  <Grid container justifyContent="center">
+                  <Style.CenteredGridItem container>
                     <Grid item xs={12} style={{ textAlign: "center" }}>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit
                       vestibulum tincidunt. Fusce vehicula sit amet nisl ac faucibus. Nulla
                       facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada
                       fames ac turpis egestas.
                     </Grid>
-                  </Grid>
+                  </Style.CenteredGridItem>
                 </Style.View2Content>
-              </Grid>
+              </Style.CenteredGridItem>
             </Grid>
           </Grid>
 
-          <Grid item flexGrow={1} />
-
-          <Grid item xs={7}>
-            <Grid container justifyContent="center">
-              <Grid item xs={12}>
-                <img
-                  src={img4}
-                  style={{
-                    filter: "grayscale(100%)",
-                    width: "100%",
-                  }}
-                  alt=""
-                />
-              </Grid>
-            </Grid>
-          </Grid>
+          <Style.CenteredGridItem item xs={6} style={{ borderLeft: "1px solid black" }}>
+            <img
+              src={img3}
+              style={{
+                filter: "grayscale(100%)",
+                width: "100%",
+              }}
+              alt=""
+            />
+          </Style.CenteredGridItem>
         </Grid>
-      </Style.DripComponentP3>
+      </Grid>
 
-      <Style.DripComponentP3 item xs={12} style={{ marginBottom: "75px" }}>
-        <Grid container justifyContent="center">
-          <Grid item xs={7}>
-            <Grid container justifyContent="center">
-              <Grid item xs={12}>
-                <img
-                  src={img4}
-                  style={{
-                    filter: "grayscale(100%)",
-                    width: "100%",
-                  }}
-                  alt=""
-                />
-              </Grid>
-            </Grid>
-          </Grid>
+      <Grid item style={{ width: "100%", borderBottom: "1px solid black" }}>
+        <LabsComponent word="CUSTOM" />
+      </Grid>
 
-          <Grid item flexGrow={1} />
+      <Grid item xs={12} style={{ borderBottom: "1px solid black" }}>
+        <Grid container style={{}}>
+          <Style.CenteredGridItem item xs={8} style={{ borderLeft: "1px solid black" }}>
+            <img
+              src={img3}
+              style={{
+                filter: "grayscale(100%)",
+                // width: "100%",
+              }}
+              alt=""
+            />
+          </Style.CenteredGridItem>
 
           <Grid item xs={4}>
-            <Grid container>
-              <Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
-                <Style.ViewTitle1>thrive.</Style.ViewTitle1>
-              </Grid>
-              <Grid item xs={12}>
-                <Style.View2Content>
-                  <Grid container justifyContent="center">
-                    <Grid item xs={12} style={{ textAlign: "center" }}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit
-                      vestibulum tincidunt. Fusce vehicula sit amet nisl ac faucibus. Nulla
-                      facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada
-                      fames ac turpis egestas.
-                    </Grid>
-                  </Grid>
-                </Style.View2Content>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Style.DripComponentP3>
-
-      <Style.DripComponentP3 item xs={12} style={{ marginBottom: "75px" }}>
-        <Grid container justifyContent="center">
-          <Grid item xs={4}>
-            <Grid container>
-              <Grid item xs={12} style={{ display: "flex", justifyContent: "center" }}>
-                <Style.ViewTitle1>live.</Style.ViewTitle1>
-              </Grid>
-              <Grid item xs={12}>
-                <Style.View2Content>
-                  <Grid container justifyContent="center">
-                    <Grid item xs={12} style={{ textAlign: "center" }}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit
-                      vestibulum tincidunt. Fusce vehicula sit amet nisl ac faucibus. Nulla
-                      facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada
-                      fames ac turpis egestas.
-                    </Grid>
-                  </Grid>
-                </Style.View2Content>
-              </Grid>
-            </Grid>
-          </Grid>
-
-          <Grid item flexGrow={1} />
-
-          <Grid item xs={7}>
             <Grid container justifyContent="center">
-              <Grid item xs={12}>
-                <img
-                  src={img4}
-                  style={{
-                    filter: "grayscale(100%)",
-                    width: "100%",
-                  }}
-                  alt=""
-                />
-              </Grid>
+              <Style.CenteredGridItem item xs={12}>
+                <Style.ViewTitle1>explore.</Style.ViewTitle1>
+              </Style.CenteredGridItem>
+
+              <Style.CenteredGridItem item xs={10}>
+                <Style.View2Content>
+                  <Style.CenteredGridItem container>
+                    <Grid item xs={12} style={{ textAlign: "center" }}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc suscipit
+                      vestibulum tincidunt. Fusce vehicula sit amet nisl ac faucibus. Nulla
+                      facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada
+                      fames ac turpis egestas.
+                    </Grid>
+                  </Style.CenteredGridItem>
+                </Style.View2Content>
+              </Style.CenteredGridItem>
             </Grid>
           </Grid>
         </Grid>
-      </Style.DripComponentP3>
-
-      <Grid container justifyContent="center">
-        <div
-          style={{
-            width: "80%",
-            height: "1px",
-            backgroundColor: "black",
-            marginTop: "125px",
-            opacity: "25%",
-          }}
-        />
       </Grid>
     </Style.DripComponent>
   );
@@ -616,7 +467,7 @@ const MainComponent: FC<props> = ({ children }) => {
   return (
     <Style.Root>
       <LandingScreenComponent />
-      <DripComponent />
+      {/* <DripComponent /> */}
     </Style.Root>
   );
 };

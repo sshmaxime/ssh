@@ -257,7 +257,7 @@ const style = {
     textAlign: "center",
     fontStyle: "italic",
     marginBottom: "100px",
-    background: `linear-gradient(${color}, ${color}) 0 95% / 100% 32.5% no-repeat`,
+    // background: `linear-gradient(${color}, ${color}) 0 35% / 100% 22.5% no-repeat`,
   })),
   ViewTitle2: styled("div")<{ color?: string }>(({ theme, color = "#EDEDC0" }) => ({
     fontSize: "1.1em",
@@ -401,10 +401,10 @@ const style = {
     paddingLeft: "5px",
     marginBottom: "5px",
   })),
-  CenteredGridItem: styled(Grid)<{ justifyContent?: string }>(
-    ({ theme, justifyContent = "center" }) => ({
+  CenteredGridItem: styled(Grid)<{ justifyContent?: string; alignItems?: string }>(
+    ({ theme, justifyContent = "center", alignItems = "center" }) => ({
       display: "flex",
-      alignItems: "center",
+      alignItems: alignItems,
       justifyContent: justifyContent,
     })
   ),
@@ -429,13 +429,57 @@ const style = {
   })),
   TextHeader: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "5rem",
+    fontSize: "1.25rem",
     fontWeight: 600,
+    color: "#f9f9fb",
     letterSpacing: "-0.5px",
     padding: "10px",
-    textAlign: "right",
     lineHeight: "1.1em",
-    // textShadow: `5px 5px ${theme.backgroundColor.tertiary}`,
+  })),
+  DiscoverButton: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.65em",
+    fontWeight: 900,
+    letterSpacing: "1px",
+    position: "absolute",
+    top: "5%",
+    right: "5%",
+  })),
+  TextFun: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.secondary,
+    fontSize: "0.75em",
+    position: "relative",
+    letterSpacing: "-0.1px",
+    padding: "15px",
+    width: "350px",
+    overflow: "hidden",
+  })),
+  Tri: styled("div")(({ theme }) => ({
+    position: "absolute",
+    width: "12px",
+    height: "12px",
+    backgroundColor: "black",
+    top: "-6px",
+    left: "-6px",
+    transform: "rotate(50deg)",
+  })),
+  DropLive: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.75em",
+    fontWeight: 900,
+    letterSpacing: "-0.1px",
+    padding: "10px",
+    paddingBottom: "20px",
+    color: "grey",
+  })),
+  PartTitle: styled("div")(({ theme }) => ({
+    fontFamily: "Bungee Outline",
+    fontSize: "0.75em",
+    fontWeight: 900,
+    letterSpacing: "-0.1px",
+    padding: "10px",
+    paddingBottom: "20px",
+    color: "grey",
   })),
   LabsComponent: styled("div")(({ theme }) => ({
     paddingTop: ".75vh",
