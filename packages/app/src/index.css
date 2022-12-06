@@ -378,3 +378,18 @@ body,
     transform: rotate(360deg);
   }
 }
+
+.loaderMini {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid #fff;
+  border-bottom-color: #cbcbdc;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}

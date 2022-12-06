@@ -19,7 +19,7 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
 
 export const NavbarComponent: FC = () => {
-  const { auth, address, name } = useSelector((state) => state.web3);
+  const { auth, address, name, txPending } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   const { data: drips, isLoading } = useGetDripsQuery({ address }, { skip: !auth });
@@ -230,6 +230,11 @@ export const NavbarComponent: FC = () => {
                     </Clickable>
                   )}
                 </Grid>
+                {txPending && (
+                  <Grid item>
+                    <span className="loaderMini"></span>
+                  </Grid>
+                )}
               </Grid>
             </Grid>
           </Grid>

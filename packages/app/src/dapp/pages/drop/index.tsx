@@ -90,7 +90,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     setVersion(version);
     sceneRef.current.updateVersion(
       currentItem.img,
-      currentItem.id,
+      0,
       version,
       drop.symbol,
       currentItem.name + " #" + currentItem.id
@@ -101,7 +101,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     setItem(newItem);
     sceneRef.current.updateItem(
       newItem.img,
-      newItem.id,
+      0,
       currentVersion,
       drop.symbol,
       newItem.name + " #" + newItem.id
@@ -114,7 +114,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     setItem(resetToItem);
     sceneRef.current.updateItem(
       resetToItem.img,
-      resetToItem.id,
+      0,
       currentVersion,
       drop.symbol,
       resetToItem.name + " #" + resetToItem.id

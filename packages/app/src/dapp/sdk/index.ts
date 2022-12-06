@@ -56,7 +56,8 @@ class SDK {
 
   mint = async (contractAddress: string, versionId: number, value: string) => {
     const contract = SSHDrop__factory.connect(contractAddress, this._signer);
-    await contract.mint(versionId, { value: value });
+    const tx = await contract.mint(versionId, { value: value });
+    const receipt = await tx.wait();
   };
 
   mintAndMutate = async (contractAddress: string, versionId: number, value: string, nft: NFT) => {

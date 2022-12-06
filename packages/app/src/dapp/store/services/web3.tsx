@@ -6,12 +6,14 @@ export interface Web3 {
   auth: boolean;
   address: string;
   name: string | null;
+  txPending: boolean;
 }
 
 const initialState: Web3 = {
   auth: false,
   address: "",
   name: "",
+  txPending: false,
 };
 
 export const login = createAsyncThunk("web3/login", async () => {
@@ -35,9 +37,10 @@ export const mint = createAsyncThunk(
     if (obj.nft.contract !== "") {
       if (obj.isDefault) {
         obj.nft.id = await sdk.mintDefault(obj.nft.contract, obj.isDefault.valueMint);
-        await sdk.mintAndMutate(obj.address, obj.versionId, obj.value, obj.nft);
       }
+      await sdk.mintAndMutate(obj.address, obj.versionId, obj.value, obj.nft);
     } else {
+      console.log("la");
       await sdk.mint(obj.address, obj.versionId, obj.value);
     }
   }
@@ -65,7 +68,12 @@ const web3 = createSlice({
       state.address = action.payload.address;
       state.name = action.payload.name;
     });
-    builder.addCase(mint.fulfilled, (state, action) => {});
+    builder.addCase(mint.pending, (state, action) => {
+      state.txPending = true;
+    });
+    builder.addCase(mint.fulfilled, (state, action) => {
+      state.txPending = false;
+    });
   },
 });
 
