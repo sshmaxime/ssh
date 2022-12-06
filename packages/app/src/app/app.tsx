@@ -254,53 +254,56 @@ const LandingScreenComponent: FC<props> = () => {
                       </Grid>
 
                       <Grid item xs={6}>
-                        <Grid container direction="column">
-                          <Grid item flexGrow={1}>
-                            <Grid container direction="column">
-                              <Grid
-                                item
-                                style={{
-                                  borderBottom: "1px solid black",
-                                  backgroundColor: "#B9B9D0",
-                                }}
-                              >
-                                <Style.TextHeader>
-                                  Designed for the era of ownership, digitalization and fashion.
-                                </Style.TextHeader>
-                              </Grid>
-                              <Style.CenteredGridItem flexGrow={1} style={{ position: "relative" }}>
-                                <img
-                                  src={circle}
-                                  style={{
-                                    position: "absolute",
-                                    width: "150px",
-                                    right: 15,
-                                    top: 15,
-                                  }}
-                                  alt=""
-                                />
-                                <Style.TextFun
-                                  style={{
-                                    position: "absolute",
-                                    left: 15,
-                                    top: 15,
-                                  }}
-                                >
-                                  <Style.Tri />
-                                  Welcome to PREMIER.
-                                  <br />
-                                  <br />
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae
-                                  pulvinar magna, vel sodales erat.
-                                  <br />
-                                </Style.TextFun>
-                                <img src={LogoFull} style={{ width: "100%" }} alt="" />
-                              </Style.CenteredGridItem>
-                            </Grid>
+                        <Grid container flexDirection="column" style={{ height: "100%" }}>
+                          <Grid
+                            item
+                            style={{
+                              borderBottom: "1px solid black",
+                              backgroundColor: "#B9B9D0",
+                            }}
+                          >
+                            <Style.TextHeader>
+                              Designed for the era of ownership, digitalization and fashion.
+                            </Style.TextHeader>
                           </Grid>
-                          {/*  */}
 
-                          {/* <Style.GalleryWrap>
+                          <Style.CenteredGridItem
+                            item
+                            flexGrow={1}
+                            style={{ position: "relative" }}
+                          >
+                            <img
+                              src={circle}
+                              style={{
+                                position: "absolute",
+                                width: "150px",
+                                right: 15,
+                                top: 15,
+                              }}
+                              alt=""
+                            />
+                            <Style.TextFun
+                              style={{
+                                position: "absolute",
+                                left: 15,
+                                top: 15,
+                              }}
+                            >
+                              <Style.Tri />
+                              Welcome to PREMIER.
+                              <br />
+                              <br />
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae
+                              pulvinar magna, vel sodales erat.
+                              <br />
+                            </Style.TextFun>
+                            <img src={LogoFull} style={{ width: "100%" }} alt="" />
+                          </Style.CenteredGridItem>
+                        </Grid>
+                      </Grid>
+                      {/*  */}
+
+                      {/* <Style.GalleryWrap>
                                   {items.map((item, index) => (
                                     <Style.GalleryItem
                                       key={index}
@@ -314,9 +317,7 @@ const LandingScreenComponent: FC<props> = () => {
                                   ))}
                                 </Style.GalleryWrap> */}
 
-                          {/*  */}
-                        </Grid>
-                      </Grid>
+                      {/*  */}
                     </Grid>
                   </Grid>
                   <Grid item style={{ width: "100%" }}>

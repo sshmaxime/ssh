@@ -187,7 +187,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   </Style.HeaderFirstLeftSideTitle>
                 </Grid>
                 {/*  */}
-                <Grid item xs={12}>
+                <Grid item xs={12} style={{ backgroundColor: "yellow" }}>
                   <Style.CommandsContainer container>
                     <Grid item xs={12}>
                       <Grid container justifyContent="space-between">
