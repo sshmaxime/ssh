@@ -1,13 +1,16 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 
+export const STORE = 'STORE';
+
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const { deployments, getNamedAccounts } = hre;
     const { deploy } = deployments;
 
     const { deployer } = await getNamedAccounts();
 
-    await deploy('SSHStore', {
+    await deploy(STORE, {
+        contract: 'Store',
         from: deployer,
         args: [],
         log: true,
@@ -17,4 +20,4 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
 export default func;
 
-func.tags = ['SSHStore'];
+func.tags = [STORE];

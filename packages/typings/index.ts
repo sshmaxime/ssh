@@ -9,9 +9,20 @@ export type NFT = {
   symbol: string;
 };
 
+export enum DripStatus {
+  VIRGIN,
+  MUTATED,
+}
+
+export type DripMutation = {
+  mutator: string;
+  mutatorId: number;
+};
+
 export type DRIP = {
   dropId: number;
-  isMutable: boolean;
+  status: DripStatus;
+  mutation: DripMutation;
   collectionName: string;
   versionId: number;
   contract: string;

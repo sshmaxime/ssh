@@ -17,13 +17,13 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface SSHStoreInterface extends utils.Interface {
+export interface StoreInterface extends utils.Interface {
   functions: {
     "createDrop(uint256,uint256,uint8,address)": FunctionFragment;
-    "getDrop(uint256)": FunctionFragment;
-    "getSupply()": FunctionFragment;
+    "drop(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "totalSupply()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -31,14 +31,14 @@ export interface SSHStoreInterface extends utils.Interface {
     functionFragment: "createDrop",
     values: [BigNumberish, BigNumberish, BigNumberish, string]
   ): string;
-  encodeFunctionData(
-    functionFragment: "getDrop",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "getSupply", values?: undefined): string;
+  encodeFunctionData(functionFragment: "drop", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalSupply",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -47,11 +47,14 @@ export interface SSHStoreInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "createDrop", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getDrop", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getSupply", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "drop", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalSupply",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -80,12 +83,12 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export interface SSHStore extends BaseContract {
+export interface Store extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SSHStoreInterface;
+  interface: StoreInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -115,15 +118,15 @@ export interface SSHStore extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-
-    getSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
+    drop(dropId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transferOwnership(
       newOwner: string,
@@ -139,15 +142,15 @@ export interface SSHStore extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  getSupply(overrides?: CallOverrides): Promise<BigNumber>;
+  drop(dropId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferOwnership(
     newOwner: string,
@@ -163,13 +166,13 @@ export interface SSHStore extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getDrop(dropId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    getSupply(overrides?: CallOverrides): Promise<BigNumber>;
+    drop(dropId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -202,18 +205,15 @@ export interface SSHStore extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    getDrop(
-      dropId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getSupply(overrides?: CallOverrides): Promise<BigNumber>;
+    drop(dropId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -230,18 +230,18 @@ export interface SSHStore extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    getDrop(
+    drop(
       dropId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    getSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: string,

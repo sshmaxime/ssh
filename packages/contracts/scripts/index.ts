@@ -1,7 +1,9 @@
-import { create } from 'ipfs-http-client';
+import { create, IPFSHTTPClient } from 'ipfs-http-client';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { DropMetadata } from '@sshlabs/typings';
+import { ethers } from 'hardhat';
+import { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 const DROP_DIR = path.join(__dirname, '..', '_data', 'drop');
 const DROP_VERSIONS_DIR_NAME = 'versions';
@@ -9,7 +11,7 @@ const DROP_MODEL_FILE = 'model.glb';
 
 const IPFS_PREFIX = 'ipfs://';
 
-const node = create({ url: '/ip4/127.0.0.1/tcp/5001' });
+const node: IPFSHTTPClient = create({ url: '/ip4/127.0.0.1/tcp/5001' });
 
 const readFile = async (pathToFile: string) => {
     return await fs.readFile(pathToFile);
@@ -48,7 +50,7 @@ const generateDropMetadata = async (dropId: number): Promise<DropMetadata> => {
     };
 };
 
-export const publishDropMetadataToIPFS = async (dropId: number) => {
+export const publishDropMetadataToIPFS = async (hre: HardhatRuntimeEnvironment, dropId: number) => {
     const result = await generateDropMetadata(dropId);
 
     const file = await node.add({

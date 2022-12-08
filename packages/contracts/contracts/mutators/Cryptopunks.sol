@@ -7,7 +7,7 @@ import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extension
 import { IERC721 } from "@openzeppelin/contracts/interfaces/IERC721.sol";
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
-import { IMutator } from "./interfaces/IMutator.sol";
+import { IMutator } from "./IMutator.sol";
 
 /**
  * @author Maxime Aubanel - @sshmaxime

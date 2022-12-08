@@ -40,7 +40,6 @@ export const mint = createAsyncThunk(
       }
       await sdk.mintAndMutate(obj.address, obj.versionId, obj.value, obj.nft);
     } else {
-      console.log("la");
       await sdk.mint(obj.address, obj.versionId, obj.value);
     }
   }

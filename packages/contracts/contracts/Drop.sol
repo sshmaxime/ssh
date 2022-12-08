@@ -7,32 +7,42 @@ import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extension
 import { IERC721 } from "@openzeppelin/contracts/interfaces/IERC721.sol";
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
-import { IMutator } from "../mutators/interfaces/IMutator.sol";
-import "hardhat/console.sol";
+import { IMutator } from "./mutators/IMutator.sol";
 
 /**
- * @dev Define a DROP item.
- *
- * isMutable: Status of the DROP item. Default: True
- * versionId: The version id of the DROP item. Default: No default value
- * contractMutator: Contract address of the asset mutating the DROP item. Default: address(0)
- * tokenIdMutator: Token id of the asset mutating the DROP item. Default: 0
+ * @dev
  */
-struct DropItem {
-    bool isMutable;
+enum DripStatus {
+    VIRGIN,
+    MUTATED
+}
+
+/**
+ * @dev
+ */
+struct DripMutation {
+    address mutator;
+    uint256 mutatorId;
+}
+
+/**
+ * @dev
+ */
+struct Drip {
     uint256 versionId;
-    address contractMutator;
-    uint256 tokenIdMutator;
+    //
+    DripStatus status;
+    DripMutation mutation;
 }
 
 /**
  * @author Maxime Aubanel - @sshmaxime
  *
- * @title SSHDrop
+ * @title Drop
  */
-contract SSHDrop is ERC721Enumerable, Ownable {
-    string constant _name = "SSH LABS DROP ";
-    string constant _symbol = "DROP #";
+contract Drop is ERC721Enumerable, Ownable {
+    string constant _name = "DROP#";
+    string constant _symbol = "DROP#";
 
     string BASE_URI = "";
 
@@ -44,7 +54,7 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     // The maximum supply of the DROP
     uint256 immutable MAX_SUPPLY;
 
-    // The price to mint the DROP item
+    // The price to mint the Drip
     uint256 immutable PRICE;
 
     // The number of versions
@@ -55,18 +65,18 @@ contract SSHDrop is ERC721Enumerable, Ownable {
 
     // Mappings
 
-    // Mapping from token id to DROP item
-    mapping(uint256 => DropItem) tokenIdToDropItem;
+    // Mapping from token id to Drip
+    mapping(uint256 => Drip) tokenIdToDrip;
 
     // Mapping from a mutator contract address to a IMutator interface
     mapping(address => IMutator) mutatorAddressToIMutator;
 
     // Events
 
-    // Event triggered when an item is minted
+    // Event triggered when a Drip is minted
     event Minted(uint256 indexed tokenId);
 
-    // Event triggered when an item is mutated
+    // Event triggered when a Drip is mutated
     event Mutated(uint256 indexed tokenId);
 
     constructor(
@@ -114,56 +124,54 @@ contract SSHDrop is ERC721Enumerable, Ownable {
     }
 
     /**
-     * @dev Return the DROP item matching the token id.
+     * @dev Return the Drip matching the token id.
      */
-    function getDropItem(uint256 tokenId) public view returns (DropItem memory) {
+    function drip(uint256 tokenId) public view returns (Drip memory) {
         require(tokenId < totalSupply(), "INCORRECT_TOKENID");
-        return tokenIdToDropItem[tokenId];
+        return tokenIdToDrip[tokenId];
+    }
+
+    /**
+     * @dev Load mutator interface.
+     */
+    function setMutator(address mutatorContract, IMutator _IMutator) public onlyOwner {
+        mutatorAddressToIMutator[mutatorContract] = _IMutator;
     }
 
     /**
      * @dev Return the URI of the metadata of the DROP.
      */
-    function dropURI() public view returns (string memory) {
+    function URI() public view returns (string memory) {
         return BASE_URI;
     }
 
     /**
      * @dev Load the metadata URI of the DROP.
      */
-    function setDropURI(string memory newURI) public onlyOwner {
+    function setURI(string memory newURI) public onlyOwner {
         BASE_URI = newURI;
     }
 
     /**
-     * @dev Load mutator interface.
-     */
-    function setMutator(address mutatorContract, IMutator _imutator) public onlyOwner {
-        mutatorAddressToIMutator[mutatorContract] = _imutator;
-    }
-
-    /**
-     * @dev Mint a DROP item.
+     * @dev Mint a Drip.
      */
     function mint(uint256 versionId) external payable {
         uint256 tokenId = totalSupply();
-        uint256 maxSupply_ = maxSupply();
 
         // Token id to be minted needs to be below the max supply limit
-        require(tokenId < maxSupply_, "MAX_SUPPLY_REACHED");
+        require(tokenId < maxSupply(), "MAX_SUPPLY_REACHED");
 
         // Minter needs to mint a correct version of the DROP
         require(versionId <= VERSIONS, "INCORRECT_VERSION");
 
-        // Minter needs to pay with the correct amount needed
+        // Minter needs to provide the correct amount
         require(msg.value == PRICE, "INCORRECT_FUNDS");
 
         _safeMint(msg.sender, tokenId);
-        tokenIdToDropItem[tokenId] = DropItem({
-            isMutable: true,
+        tokenIdToDrip[tokenId] = Drip({
             versionId: versionId,
-            contractMutator: address(0),
-            tokenIdMutator: 0
+            status: DripStatus.VIRGIN,
+            mutation: DripMutation({ mutator: address(0), mutatorId: 0 })
         });
 
         emit Minted(tokenId);
@@ -173,10 +181,8 @@ contract SSHDrop is ERC721Enumerable, Ownable {
      * @dev Mutate a DROP item.
      */
     function mutate(uint256 tokenIdToMutate, IERC721 contractMutator, uint256 tokenIdMutator) external {
-        uint256 totalSupply_ = totalSupply();
-
-        require(tokenIdToMutate < totalSupply_, "TOKEN ID OUT OF BOUND");
-        require(this.ownerOf(tokenIdToMutate) == tx.origin, "INVALID_OWNER");
+        require(tokenIdToMutate < totalSupply(), "TOKEN ID OUT OF BOUND");
+        require(this.ownerOf(tokenIdToMutate) == msg.sender, "INVALID_OWNER");
 
         // now that basics checks have been made we need to check if the contract mutator
         // needs to be handled in a non IERC721 specific way
@@ -184,17 +190,16 @@ contract SSHDrop is ERC721Enumerable, Ownable {
 
         // if contract mutator is common check the given contract or else check its mutator
         if (address(mutator) == address(0)) {
-            require(contractMutator.ownerOf(tokenIdMutator) == tx.origin, "INVALID_OWNER");
+            require(contractMutator.ownerOf(tokenIdMutator) == msg.sender, "INVALID_OWNER");
         } else {
-            require(mutator.ownerOf(tokenIdMutator) == tx.origin, "INVALID_OWNER");
+            require(mutator.ownerOf(tokenIdMutator) == msg.sender, "INVALID_OWNER");
         }
 
-        DropItem storage dropItem = tokenIdToDropItem[tokenIdToMutate];
+        Drip storage _drip = tokenIdToDrip[tokenIdToMutate];
 
-        dropItem.contractMutator = address(contractMutator);
-        dropItem.tokenIdMutator = tokenIdMutator;
-
-        dropItem.isMutable = false;
+        _drip.status = DripStatus.MUTATED;
+        _drip.mutation.mutator = address(contractMutator);
+        _drip.mutation.mutatorId = tokenIdMutator;
 
         emit Mutated(tokenIdToMutate);
     }

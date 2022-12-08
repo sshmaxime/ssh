@@ -1,16 +1,18 @@
 /**
  *Submitted for verification at Etherscan.io on 2017-07-19
-*/
+ */
+
+// https://etherscan.io/token/0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb#code
 
 pragma solidity ^0.4.8;
-contract CryptoPunksMarket {
 
+contract CryptoPunksMarket {
     // You can use this hash to verify the image file containing all the punks
     string public imageHash = "ac39af4793119ee46bbff351d8cb6b5f23da60222126add4268e261199a2921b";
 
     address owner;
 
-    string public standard = 'CryptoPunks';
+    string public standard = "CryptoPunks";
     string public name;
     string public symbol;
     uint8 public decimals;
@@ -22,17 +24,17 @@ contract CryptoPunksMarket {
     uint public punksRemainingToAssign = 0;
 
     //mapping (address => uint) public addressToPunkIndex;
-    mapping (uint => address) public punkIndexToAddress;
+    mapping(uint => address) public punkIndexToAddress;
 
     /* This creates an array with all balances */
-    mapping (address => uint256) public balanceOf;
+    mapping(address => uint256) public balanceOf;
 
     struct Offer {
         bool isForSale;
         uint punkIndex;
         address seller;
-        uint minValue;          // in ether
-        address onlySellTo;     // specify to sell only to a specific person
+        uint minValue; // in ether
+        address onlySellTo; // specify to sell only to a specific person
     }
 
     struct Bid {
@@ -43,12 +45,12 @@ contract CryptoPunksMarket {
     }
 
     // A record of punks that are offered for sale at a specific minimum value, and perhaps to a specific person
-    mapping (uint => Offer) public punksOfferedForSale;
+    mapping(uint => Offer) public punksOfferedForSale;
 
     // A record of the highest punk bid
-    mapping (uint => Bid) public punkBids;
+    mapping(uint => Bid) public punkBids;
 
-    mapping (address => uint) public pendingWithdrawals;
+    mapping(address => uint) public pendingWithdrawals;
 
     event Assign(address indexed to, uint256 punkIndex);
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -63,11 +65,11 @@ contract CryptoPunksMarket {
     function CryptoPunksMarket() payable {
         //        balanceOf[msg.sender] = initialSupply;              // Give the creator all initial tokens
         owner = msg.sender;
-        totalSupply = 10000;                        // Update total supply
+        totalSupply = 10000; // Update total supply
         punksRemainingToAssign = totalSupply;
-        name = "CRYPTOPUNKS";                                   // Set the name for display purposes
-        symbol = "Ͼ";                               // Set the symbol for display purposes
-        decimals = 0;                                       // Amount of decimals for display purposes
+        name = "CRYPTOPUNKS"; // Set the name for display purposes
+        symbol = "Ͼ"; // Set the symbol for display purposes
+        decimals = 0; // Amount of decimals for display purposes
     }
 
     function setInitialOwner(address to, uint punkIndex) {
@@ -161,9 +163,9 @@ contract CryptoPunksMarket {
         if (!allPunksAssigned) throw;
         Offer offer = punksOfferedForSale[punkIndex];
         if (punkIndex >= 10000) throw;
-        if (!offer.isForSale) throw;                // punk not actually for sale
-        if (offer.onlySellTo != 0x0 && offer.onlySellTo != msg.sender) throw;  // punk not supposed to be sold to this user
-        if (msg.value < offer.minValue) throw;      // Didn't send enough ETH
+        if (!offer.isForSale) throw; // punk not actually for sale
+        if (offer.onlySellTo != 0x0 && offer.onlySellTo != msg.sender) throw; // punk not supposed to be sold to this user
+        if (msg.value < offer.minValue) throw; // Didn't send enough ETH
         if (offer.seller != punkIndexToAddress[punkIndex]) throw; // Seller no longer owner of punk
 
         address seller = offer.seller;
@@ -198,7 +200,7 @@ contract CryptoPunksMarket {
 
     function enterBidForPunk(uint punkIndex) payable {
         if (punkIndex >= 10000) throw;
-        if (!allPunksAssigned) throw;                
+        if (!allPunksAssigned) throw;
         if (punkIndexToAddress[punkIndex] == 0x0) throw;
         if (punkIndexToAddress[punkIndex] == msg.sender) throw;
         if (msg.value == 0) throw;
@@ -214,7 +216,7 @@ contract CryptoPunksMarket {
 
     function acceptBidForPunk(uint punkIndex, uint minPrice) {
         if (punkIndex >= 10000) throw;
-        if (!allPunksAssigned) throw;                
+        if (!allPunksAssigned) throw;
         if (punkIndexToAddress[punkIndex] != msg.sender) throw;
         address seller = msg.sender;
         Bid bid = punkBids[punkIndex];
@@ -235,7 +237,7 @@ contract CryptoPunksMarket {
 
     function withdrawBidForPunk(uint punkIndex) {
         if (punkIndex >= 10000) throw;
-        if (!allPunksAssigned) throw;                
+        if (!allPunksAssigned) throw;
         if (punkIndexToAddress[punkIndex] == 0x0) throw;
         if (punkIndexToAddress[punkIndex] == msg.sender) throw;
         Bid bid = punkBids[punkIndex];
@@ -246,5 +248,4 @@ contract CryptoPunksMarket {
         // Refund the bid money
         msg.sender.transfer(amount);
     }
-
 }

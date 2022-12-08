@@ -16,8 +16,6 @@ export type sceneRef = ReturnType<typeof sceneFunctions>;
 export type sceneRefType = React.MutableRefObject<sceneRef>;
 const sceneFunctions = (refs: SkateRefs, props: ModelMetadataProps) => ({
   ...defaultSkateModelAnimation(refs, props),
-
-  // ...defaultSkateModelAnimation(refs),
 });
 
 const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo(

@@ -2,9 +2,9 @@ import { env } from "process";
 
 import {
   ERC721Enumerable__factory,
-  SSHDrop__factory,
-  SSHStore,
-  SSHStore__factory,
+  Drop__factory,
+  Store,
+  Store__factory,
   TestERC721__factory,
 } from "@sshlabs/contracts";
 import { BigNumber, ethers, Event } from "ethers";
@@ -19,7 +19,7 @@ const web3Endpoint = env["web3Endpoint"];
 
 const provider = new ethers.providers.JsonRpcProvider(web3Endpoint);
 
-const SSHStoreAddress = "0x248e0ea2e484d0372470f5b70415c31dbba37fe9";
+const StoreAddress = "0x248e0ea2e484d0372470f5b70415c31dbba37fe9";
 
 const IPFS_EXP = "ipfs://";
 
@@ -34,13 +34,13 @@ export const ContractToCollectionName: { [contractAddress: string]: string } = {
 
 const { server, io, app } = Server.get();
 
-export class Store {
-  private SSHStore: SSHStore;
+export class StoreClass {
+  private Store: Store;
 
   private DROPS: Drops;
 
   constructor() {
-    this.SSHStore = SSHStore__factory.connect(SSHStoreAddress, provider);
+    this.Store = Store__factory.connect(StoreAddress, provider);
 
     this.DROPS = [];
   }
@@ -53,7 +53,7 @@ export class Store {
   };
 
   private snapshot = async () => {
-    const dropSupply = await this.SSHStore.getSupply();
+    const dropSupply = await this.Store.totalSupply();
 
     for (let i = BigNumber.from(0); i.lt(dropSupply); i = i.add(1)) {
       const drop = await this.snapshotDrop(i);
@@ -62,10 +62,10 @@ export class Store {
   };
 
   private snapshotDrop = async (dropId: BigNumber): Promise<Drop> => {
-    const dropContractAddress = await this.SSHStore.getDrop(dropId);
-    const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
+    const dropContractAddress = await this.Store.drop(dropId);
+    const dropContract = Drop__factory.connect(dropContractAddress, provider);
 
-    const metadataUrl = (await dropContract.dropURI()).replace(IPFS_EXP, IPFS_GATEWAY);
+    const metadataUrl = (await dropContract.URI()).replace(IPFS_EXP, IPFS_GATEWAY);
     const metadata = (await axios.get(metadataUrl)).data as DropMetadata;
 
     const defaultCollectionAddress = await dropContract.defaultItem();
@@ -112,7 +112,7 @@ export class Store {
   };
 
   private initDropsListeners = async () => {
-    const dropSupply = await this.SSHStore.getSupply();
+    const dropSupply = await this.Store.totalSupply();
 
     for (let i = BigNumber.from(0); i.lt(dropSupply); i = i.add(1)) {
       await this.initDropListeners(i);
@@ -122,8 +122,8 @@ export class Store {
   private initDropListeners = async (dropId: BigNumber) => {
     const startBlockNumber = await provider.getBlockNumber();
 
-    const dropContractAddress = await this.SSHStore.getDrop(dropId);
-    const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
+    const dropContractAddress = await this.Store.drop(dropId);
+    const dropContract = Drop__factory.connect(dropContractAddress, provider);
 
     // event Mint
     dropContract.on(dropContract.filters.Minted(null), async (...args) => {
@@ -145,16 +145,17 @@ export class Store {
   };
 
   getDrip = async (dropId: number, tokenId: number): Promise<DRIP> => {
-    const dropContractAddress = await this.SSHStore.getDrop(dropId);
-    const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
-    const drip = await dropContract.getDropItem(tokenId);
+    const dropContractAddress = await this.Store.drop(dropId);
+    const dropContract = Drop__factory.connect(dropContractAddress, provider);
+    const drip = await dropContract.drip(tokenId);
 
     const a = await axios.get("https://picsum.photos/1000?grayscale");
 
     return {
       dropId: (await dropContract.dropId()).toNumber(),
       collectionName: await dropContract.symbol(),
-      isMutable: drip.isMutable,
+      status: drip.status,
+      mutation: drip.mutation as any,
       versionId: drip.versionId.toNumber(),
       contract: dropContract.address,
       img: a.request.res.req._redirectable._currentUrl, // TODO
@@ -163,25 +164,26 @@ export class Store {
   };
 
   getDripOwnedByAddress = async (address: string) => {
-    const dropSupply = (await this.SSHStore.getSupply()).toNumber();
+    const dropSupply = (await this.Store.totalSupply()).toNumber();
 
     const dripsByAddress: DRIP[] = [];
     for (let i = 0; i < dropSupply; i++) {
-      const dropContractAddress = await this.SSHStore.getDrop(i);
-      const dropContract = SSHDrop__factory.connect(dropContractAddress, provider);
+      const dropContractAddress = await this.Store.drop(i);
+      const dropContract = Drop__factory.connect(dropContractAddress, provider);
 
       const balanceDripOfAddress = (await dropContract.balanceOf(address)).toNumber();
       const addressTokenIds: number[] = [];
       for (let dripIndex = 0; dripIndex < balanceDripOfAddress; dripIndex++) {
         const tokenId = (await dropContract.tokenOfOwnerByIndex(address, dripIndex)).toNumber();
-        const drip = await dropContract.getDropItem(tokenId);
+        const drip = await dropContract.drip(tokenId);
 
         const tokenURI = await dropContract.tokenURI(tokenId);
 
         dripsByAddress.push({
           dropId: (await dropContract.dropId()).toNumber(),
-          isMutable: drip.isMutable,
           collectionName: await dropContract.symbol(),
+          status: drip.status,
+          mutation: drip.mutation as any,
           versionId: drip.versionId.toNumber(),
           contract: dropContract.address,
           img: "https://via.placeholder.com/150", // TODO
@@ -194,4 +196,4 @@ export class Store {
   };
 }
 
-export default new Store();
+export default new StoreClass();

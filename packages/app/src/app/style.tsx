@@ -5,24 +5,25 @@ import { Link } from "react-router-dom";
 
 const triangleHeight = "5vh";
 
-const color = "#EDEDC0";
+const heightHeader = "60px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({})),
-  //
-  LandingScreenComponent: styled("div")(({ theme }) => ({
-    height: "100vh",
+  RootHeader: styled("div")(({ theme }) => ({
+    height: heightHeader,
+  })),
+  RootLandingPage: styled("div")(({ theme }) => ({
+    height: `calc(100vh - ${heightHeader})`,
+  })),
+  RootFooter: styled("div")(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level1,
+    paddingTop: "5vh",
+    paddingBottom: "5vh",
+    backgroundColor: theme.backgroundColor.secondary,
+    borderTop: "1px solid lightgrey",
   })),
   Background: styled("div")(({ theme }) => ({
     height: "100%",
-    // "&:before": {
-    //   content: `""`,
-    //   position: "absolute",
-    //   top: 0,
-    //   left: 0,
-    //   width: "100%",
-    //   height: "100%",
-    // },
     backgroundColor: theme.backgroundColor.secondary,
   })),
   HomepageBottomLink: styled("div")(({ theme }) => ({
@@ -401,13 +402,6 @@ const style = {
     paddingLeft: "5px",
     marginBottom: "5px",
   })),
-  CenteredGridItem: styled(Grid)<{ justifyContent?: string; alignItems?: string }>(
-    ({ theme, justifyContent = "center", alignItems = "center" }) => ({
-      display: "flex",
-      alignItems: alignItems,
-      justifyContent: justifyContent,
-    })
-  ),
   TitleCollection: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "15px",
@@ -591,6 +585,47 @@ const style = {
     height: "2px",
     opacity: "50%",
     backgroundColor: theme.backgroundColor.tertiary,
+  })),
+
+  Root2: styled("div")(({ theme }) => ({})),
+  Title2: styled(Typography)(({ theme }) => ({
+    ...theme.titles(theme).primary,
+    marginBottom: "5px",
+  })),
+  Subtitle2: styled(Typography)(({ theme }) => ({
+    fontSize: "0.65em",
+    letterSpacing: "1.5px",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    marginTop: "5px",
+  })),
+  ImgIcon2: styled("img")(({ theme }) => ({
+    width: "25px",
+    height: "25px",
+  })),
+  Credentials: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    textAlign: "right",
+    fontSize: "0.7em",
+    fontWeight: 900,
+  })),
+  ExternalLink: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    textAlign: "right",
+    fontSize: "0.8em",
+    fontWeight: 500,
+  })),
+  TitleCategory: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.9em",
+    fontWeight: 900,
+    marginBottom: "5px",
+  })),
+  ContentCategory: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.8em",
+    fontWeight: 500,
+    lineHeight: "2em",
   })),
 };
 

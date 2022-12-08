@@ -12,6 +12,6 @@
             "*": ["node_modules/*"]
         }
     },
-    "include": ["./deploy", "./components", "./test", "./scripts"],
+    "include": ["./deploy", "./components", "./test", "./scripts", "_tags.ts"],
     "files": ["hardhat.config.ts"]
 }

@@ -18,29 +18,34 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export type DropItemStruct = {
-  isMutable: boolean;
+export type DripMutationStruct = { mutator: string; mutatorId: BigNumberish };
+
+export type DripMutationStructOutput = [string, BigNumber] & {
+  mutator: string;
+  mutatorId: BigNumber;
+};
+
+export type DripStruct = {
   versionId: BigNumberish;
-  contractMutator: string;
-  tokenIdMutator: BigNumberish;
+  status: BigNumberish;
+  mutation: DripMutationStruct;
 };
 
-export type DropItemStructOutput = [boolean, BigNumber, string, BigNumber] & {
-  isMutable: boolean;
+export type DripStructOutput = [BigNumber, number, DripMutationStructOutput] & {
   versionId: BigNumber;
-  contractMutator: string;
-  tokenIdMutator: BigNumber;
+  status: number;
+  mutation: DripMutationStructOutput;
 };
 
-export interface SSHDropInterface extends utils.Interface {
+export interface DropInterface extends utils.Interface {
   functions: {
+    "URI()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "defaultItem()": FunctionFragment;
+    "drip(uint256)": FunctionFragment;
     "dropId()": FunctionFragment;
-    "dropURI()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "getDropItem(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "maxSupply()": FunctionFragment;
     "mint(uint256)": FunctionFragment;
@@ -52,8 +57,8 @@ export interface SSHDropInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setDropURI(string)": FunctionFragment;
     "setMutator(address,address)": FunctionFragment;
+    "setURI(string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenByIndex(uint256)": FunctionFragment;
@@ -64,6 +69,7 @@ export interface SSHDropInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: "URI", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "approve",
     values: [string, BigNumberish]
@@ -73,14 +79,10 @@ export interface SSHDropInterface extends utils.Interface {
     functionFragment: "defaultItem",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "drip", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "dropId", values?: undefined): string;
-  encodeFunctionData(functionFragment: "dropURI", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getApproved",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getDropItem",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -112,11 +114,11 @@ export interface SSHDropInterface extends utils.Interface {
     functionFragment: "setApprovalForAll",
     values: [string, boolean]
   ): string;
-  encodeFunctionData(functionFragment: "setDropURI", values: [string]): string;
   encodeFunctionData(
     functionFragment: "setMutator",
     values: [string, string]
   ): string;
+  encodeFunctionData(functionFragment: "setURI", values: [string]): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
@@ -147,20 +149,17 @@ export interface SSHDropInterface extends utils.Interface {
     values: [string]
   ): string;
 
+  decodeFunctionResult(functionFragment: "URI", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "defaultItem",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "drip", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dropId", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "dropURI", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getDropItem",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -186,8 +185,8 @@ export interface SSHDropInterface extends utils.Interface {
     functionFragment: "setApprovalForAll",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "setDropURI", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setMutator", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "setURI", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
@@ -269,12 +268,12 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface SSHDrop extends BaseContract {
+export interface Drop extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: SSHDropInterface;
+  interface: DropInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -296,6 +295,8 @@ export interface SSHDrop extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    URI(overrides?: CallOverrides): Promise<[string]>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -306,19 +307,17 @@ export interface SSHDrop extends BaseContract {
 
     defaultItem(overrides?: CallOverrides): Promise<[string]>;
 
-    dropId(overrides?: CallOverrides): Promise<[BigNumber]>;
+    drip(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[DripStructOutput]>;
 
-    dropURI(overrides?: CallOverrides): Promise<[string]>;
+    dropId(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    getDropItem(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[DropItemStructOutput]>;
 
     isApprovedForAll(
       owner: string,
@@ -376,14 +375,14 @@ export interface SSHDrop extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setDropURI(
-      newURI: string,
+    setMutator(
+      mutatorContract: string,
+      _IMutator: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setMutator(
-      mutatorContract: string,
-      _imutator: string,
+    setURI(
+      newURI: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -425,6 +424,8 @@ export interface SSHDrop extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  URI(overrides?: CallOverrides): Promise<string>;
+
   approve(
     to: string,
     tokenId: BigNumberish,
@@ -435,19 +436,17 @@ export interface SSHDrop extends BaseContract {
 
   defaultItem(overrides?: CallOverrides): Promise<string>;
 
-  dropId(overrides?: CallOverrides): Promise<BigNumber>;
+  drip(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<DripStructOutput>;
 
-  dropURI(overrides?: CallOverrides): Promise<string>;
+  dropId(overrides?: CallOverrides): Promise<BigNumber>;
 
   getApproved(
     tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  getDropItem(
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<DropItemStructOutput>;
 
   isApprovedForAll(
     owner: string,
@@ -502,14 +501,14 @@ export interface SSHDrop extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setDropURI(
-    newURI: string,
+  setMutator(
+    mutatorContract: string,
+    _IMutator: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setMutator(
-    mutatorContract: string,
-    _imutator: string,
+  setURI(
+    newURI: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -548,6 +547,8 @@ export interface SSHDrop extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    URI(overrides?: CallOverrides): Promise<string>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -558,19 +559,17 @@ export interface SSHDrop extends BaseContract {
 
     defaultItem(overrides?: CallOverrides): Promise<string>;
 
-    dropId(overrides?: CallOverrides): Promise<BigNumber>;
+    drip(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<DripStructOutput>;
 
-    dropURI(overrides?: CallOverrides): Promise<string>;
+    dropId(overrides?: CallOverrides): Promise<BigNumber>;
 
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    getDropItem(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<DropItemStructOutput>;
 
     isApprovedForAll(
       owner: string,
@@ -620,13 +619,13 @@ export interface SSHDrop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setDropURI(newURI: string, overrides?: CallOverrides): Promise<void>;
-
     setMutator(
       mutatorContract: string,
-      _imutator: string,
+      _IMutator: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    setURI(newURI: string, overrides?: CallOverrides): Promise<void>;
 
     supportsInterface(
       interfaceId: BytesLike,
@@ -714,6 +713,8 @@ export interface SSHDrop extends BaseContract {
   };
 
   estimateGas: {
+    URI(overrides?: CallOverrides): Promise<BigNumber>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -724,16 +725,11 @@ export interface SSHDrop extends BaseContract {
 
     defaultItem(overrides?: CallOverrides): Promise<BigNumber>;
 
+    drip(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
     dropId(overrides?: CallOverrides): Promise<BigNumber>;
 
-    dropURI(overrides?: CallOverrides): Promise<BigNumber>;
-
     getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getDropItem(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -794,14 +790,14 @@ export interface SSHDrop extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setDropURI(
-      newURI: string,
+    setMutator(
+      mutatorContract: string,
+      _IMutator: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setMutator(
-      mutatorContract: string,
-      _imutator: string,
+    setURI(
+      newURI: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -844,6 +840,8 @@ export interface SSHDrop extends BaseContract {
   };
 
   populateTransaction: {
+    URI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -857,16 +855,14 @@ export interface SSHDrop extends BaseContract {
 
     defaultItem(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    dropId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    dropURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    getApproved(
+    drip(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getDropItem(
+    dropId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -927,14 +923,14 @@ export interface SSHDrop extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setDropURI(
-      newURI: string,
+    setMutator(
+      mutatorContract: string,
+      _IMutator: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setMutator(
-      mutatorContract: string,
-      _imutator: string,
+    setURI(
+      newURI: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

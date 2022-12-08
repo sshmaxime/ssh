@@ -5,7 +5,7 @@
     "main": "dist/typechain/index.js",
     "types": "dist/typechain/index.d.ts",
     "scripts": {
-        "start": "FORK=MAINNET FORK_BN=15122522 yarn hardhat node",
+        "dev": "yarn hardhat node",
         "build": "hardhat compile && yarn tsc -p tsconfig.build.json",
         "deploy": "hardhat deploy",
         "clean": "rm -rf dist artifacts cache typechain",

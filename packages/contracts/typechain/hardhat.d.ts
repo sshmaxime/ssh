@@ -49,9 +49,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC165__factory>;
     getContractFactory(
-      name: "SSHDrop",
+      name: "Drop",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SSHDrop__factory>;
+    ): Promise<Contracts.Drop__factory>;
     getContractFactory(
       name: "CryptopunksMutator",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -69,9 +69,9 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CryptoPunksMarket__factory>;
     getContractFactory(
-      name: "SSHStore",
+      name: "Store",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SSHStore__factory>;
+    ): Promise<Contracts.Store__factory>;
     getContractFactory(
       name: "ITestERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -127,10 +127,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IERC165>;
     getContractAt(
-      name: "SSHDrop",
+      name: "Drop",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SSHDrop>;
+    ): Promise<Contracts.Drop>;
     getContractAt(
       name: "CryptopunksMutator",
       address: string,
@@ -152,10 +152,10 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.CryptoPunksMarket>;
     getContractAt(
-      name: "SSHStore",
+      name: "Store",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SSHStore>;
+    ): Promise<Contracts.Store>;
     getContractAt(
       name: "ITestERC721",
       address: string,
