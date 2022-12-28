@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
-import Clickable from "../../_utils/components/stateless/clickable";
+import Clickable from "../../_utils/components/clickable";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -17,9 +17,10 @@ import { useGetDripsQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
+import { DripStatus } from "@sshlabs/typings";
 
 export const NavbarComponent: FC = () => {
-  const { auth, address, name, txPending } = useSelector((state) => state.web3);
+  const { auth, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   const { data: drips, isLoading } = useGetDripsQuery({ address }, { skip: !auth });
@@ -48,14 +49,18 @@ export const NavbarComponent: FC = () => {
                 <Grid item style={{ marginLeft: "25px" }}>
                   <Clickable onClick={() => {}}>
                     <Grid container alignItems="center" justifyContent="center">
-                      <Grid item>
+                      {/* <Grid item>
                         <ArrowRightAltIcon
                           style={{ fontSize: "2.5em", transform: "rotate(180deg)", color: "black" }}
                         />
                       </Grid>
                       <Grid item>
                         <Style.Title>BACK TO ALL DROP</Style.Title>
-                      </Grid>
+                      </Grid> */}
+                      {/* <Style.HeaderFirstLeftSideTitle>
+                        Hello
+                        <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>{name}</b>
+                      </Style.HeaderFirstLeftSideTitle> */}
                     </Grid>
                   </Clickable>
                 </Grid>
@@ -109,12 +114,12 @@ export const NavbarComponent: FC = () => {
                                     <Grid container justifyContent="space-between">
                                       <Grid item>
                                         <Style.WalletTypoCollectionDrop>
-                                          {drip.collectionName}
+                                          {drip.drop.symbol}
                                         </Style.WalletTypoCollectionDrop>
                                       </Grid>
                                       <Grid item>
                                         <Grid container columnSpacing={0.5}>
-                                          {drip.isMutable ? (
+                                          {drip.status === DripStatus.MUTATED ? (
                                             <Grid item>
                                               <Style.WalletTypoCollection>
                                                 MUTABLE
@@ -159,7 +164,7 @@ export const NavbarComponent: FC = () => {
                                             <Clickable
                                               hoverAnimation={false}
                                               external={false}
-                                              address={`drop/${drip.dropId}/${drip.id}`}
+                                              address={`drop/${drip.drop.id}/${drip.id}`}
                                               onClick2={() => handlePopoverClose()}
                                             >
                                               <Style.WalletTypoDripAction>
@@ -230,11 +235,6 @@ export const NavbarComponent: FC = () => {
                     </Clickable>
                   )}
                 </Grid>
-                {txPending && (
-                  <Grid item>
-                    <span className="loaderMini"></span>
-                  </Grid>
-                )}
               </Grid>
             </Grid>
           </Grid>

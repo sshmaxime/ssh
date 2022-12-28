@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AssetsOwned, DRIP, DripsOwned, Drop } from "@sshlabs/typings";
+import { NFTsByCollection, Drip, Drips, Drop } from "@sshlabs/typings";
 
 export const dropApi = createApi({
   reducerPath: "dropApi",
@@ -10,15 +10,15 @@ export const dropApi = createApi({
       query: ({}) => `drops/`,
     }),
     //
-    getDrip: builder.query<DRIP, { dropId: number; tokenId: number }>({
+    getDrip: builder.query<Drip, { dropId: number; tokenId: number }>({
       query: ({ dropId, tokenId }) => `drip/${dropId}/${tokenId}`,
     }),
     //
-    getAssets: builder.query<AssetsOwned, { address: string }>({
+    getAssets: builder.query<NFTsByCollection, { address: string }>({
       query: ({ address }) => `assets/${address}`,
     }),
     //
-    getDrips: builder.query<DripsOwned, { address: string }>({
+    getDrips: builder.query<Drips, { address: string }>({
       query: ({ address }) => `drip/${address}`,
     }),
   }),

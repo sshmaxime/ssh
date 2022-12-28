@@ -1,33 +1,40 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 
-import { Grid, ImageList, ImageListItem } from "@mui/material";
+import { Box, Grid, ImageList, ImageListItem, Modal } from "@mui/material";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import OpenSeaIcon from "../../../_utils/assets/icons/opensea.svg";
 import EtherscanIcon from "../../../_utils/assets/icons/etherscan.svg";
-
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useGetDropsQuery } from "@/dapp/store/services/socket";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import SearchIcon from "@mui/icons-material/Search";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { Drop as DropType, NFT } from "@sshlabs/typings";
-
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { ethers } from "ethers";
 import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
 
 import { CREDENTIALS } from "../../../_constants";
 import logoeth from "../../../_utils/assets/images/logoeth.svg";
-import Clickable from "../../../_utils/components/stateless/clickable";
-import Pastille from "../../../_utils/components/stateless/pastille";
-import Tooltip from "../../../_utils/components/stateless/tooltip";
+import Clickable from "../../../_utils/components/clickable";
+import Pastille from "../../../_utils/components/pastille";
+import Tooltip from "../../../_utils/components/tooltip";
 import { useDispatch, useSelector } from "../../store/hooks";
 import { useGetAssetsQuery } from "../../store/services";
-import { mint } from "../../store/services/web3";
+import {
+  mint,
+  mintDefault,
+  mutate,
+  resetMintingProcess,
+  waitMintDefault,
+} from "../../store/services/web3";
 import NotFound from "../404";
 import Style from "./style";
 import { useImagePreloader } from "@/_utils/hooks/imagePreloader";
 import { useCState, useR3fState } from "@/_3d/utils/hooks";
+import CenterItem from "@/_utils/components/grid/centerItem";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 
@@ -50,7 +57,7 @@ const DropProxy: FC = () => {
 };
 
 const Drop: FC<{ drop: DropType }> = ({ drop }) => {
-  const { auth, address, name } = useSelector((state) => state.web3);
+  const { auth, address, name, txProcess } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   // fetch data
@@ -59,7 +66,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const isMintable = drop.currentSupply !== drop.maxSupply;
 
   const zeroItem: NFT = {
-    contract: "",
+    address: "",
     img: process.env.PUBLIC_URL + "/whiteSquare.jpeg",
     id: 0,
     name: "",
@@ -67,7 +74,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   };
 
   const defaultItem: NFT = {
-    contract: drop.defaultItem.contract,
+    address: drop.defaultItem.address,
     img: drop.defaultItem.img,
     id: 0,
     name: drop.defaultItem.name,
@@ -77,13 +84,8 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   // fc state
   const [currentItem, , setItem] = useCState<NFT>(defaultItem);
   const [currentVersion, , setVersion] = useCState(0);
-  const [displayInfoDiv, setDisplayInfoDiv] = React.useState(true);
-  const [sectionToDisplayInfo, setSectionToDisplayInfo] = React.useState<"Deck" | "Placeholder">(
-    "Placeholder"
-  );
 
-  const isDefaultItem = currentItem.contract === defaultItem.contract;
-
+  const isDefaultItem = currentItem.address === defaultItem.address;
   const sceneRef = React.useRef<sceneRef>(null!);
 
   const updateVersion = (version: number) => {
@@ -132,389 +134,602 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     },
   ];
 
+  const [hover, setHover] = useState(0);
   const { imagesPreloaded } = useImagePreloader(drop.metadata.versions.map((item) => item.texture));
+
+  const [open, setOpen] = React.useState(true);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // Default Item
+  const isDefaultMinted = txProcess.mintingDefault.id !== undefined;
+
+  // Drip
+  const isDripMinted = txProcess.mintingDrip.id !== undefined;
+
+  // Mutation
+  const isMutated = txProcess.mutating.done;
+
+  const isFreshStart = !isDefaultMinted && !isDripMinted && !isMutated;
+
+  const modalActions = [
+    {
+      isDisplay: true,
+      isMyTurn: !isDripMinted && !isDefaultMinted && !isMutated,
+      stepName: "MINT",
+      text: (
+        <Style.TextModal>
+          Let's mint your <b>Drip</b>.
+        </Style.TextModal>
+      ),
+      isLoading: txProcess.mintingDrip.loading,
+      isDone: txProcess.mintingDrip.done,
+      tx: txProcess.mintingDrip.tx,
+      price: formatEther(drop.price),
+      action: {
+        name: "MINT",
+        fct: () => {
+          dispatch(
+            mint({
+              address: drop.address,
+              versionId: currentVersion,
+              value: drop.price,
+              nft: currentItem,
+            })
+          );
+        },
+      },
+    },
+    ...(isDefaultItem
+      ? [
+          {
+            isDisplay: txProcess.mintingDrip.done,
+            isMyTurn: isDripMinted && !isDefaultMinted && !isMutated,
+            stepName: `DEFAULT ITEM`,
+            text: (
+              <Style.TextModal>
+                Now, let's mint your <b>default item</b>.
+              </Style.TextModal>
+            ),
+            isLoading: txProcess.mintingDefault.loading,
+            isDone: txProcess.mintingDefault.done,
+            tx: txProcess.mintingDefault.tx,
+            price: formatEther(drop.defaultItem.price),
+            action: {
+              name: "MINT DEFAULT ITEM",
+              fct: () => {
+                dispatch(
+                  mintDefault({
+                    address: drop.defaultItem.address,
+                    value: drop.defaultItem.price,
+                  })
+                );
+              },
+            },
+          },
+        ]
+      : []),
+    ...(currentItem.address !== zeroItem.address
+      ? [
+          {
+            isDisplay: isDefaultItem ? txProcess.mintingDefault.done : txProcess.mintingDrip.done,
+            isMyTurn: isDefaultItem
+              ? isDripMinted && isDefaultMinted && !isMutated
+              : isDripMinted && !isMutated,
+            stepName: "MUTATE",
+            text: (
+              <Style.TextModal>
+                You are almost there, let's mutate your <b>Drip</b>.
+              </Style.TextModal>
+            ),
+            isLoading: txProcess.mutating.loading,
+            isDone: txProcess.mutating.done,
+            tx: txProcess.mutating.tx,
+            price: "0.0",
+            action: {
+              name: "MUTATE",
+              fct: () => {
+                dispatch(
+                  mutate({
+                    address: drop.address,
+                    tokenId: txProcess.mintingDrip?.id as number,
+                    contractMutator: isDefaultItem ? defaultItem.address : currentItem.address,
+                    tokenIdMutator: isDefaultItem
+                      ? (txProcess.mintingDefault?.id as number)
+                      : currentItem.id,
+                  })
+                );
+              },
+            },
+          },
+        ]
+      : []),
+  ];
 
   return (
     <Fade duration={1500} triggerOnce>
       <Style.Root>
-        <Style.Header></Style.Header>
+        <Style.BodyScene>
+          <SceneLoader
+            sceneRef={sceneRef}
+            model={drop.metadata.model}
+            versions={drop.metadata.versions}
+            initialVersion={0}
+            initialPlaceholderTexture={defaultItem.img}
+            initialDropSymbol={drop.symbol}
+            initialTokenNameId={defaultItem.name + " #" + defaultItem.id}
+            initialId={defaultItem.id}
+          />
+        </Style.BodyScene>
 
-        <Style.Body>
-          <Style.BodyScene>
-            <SceneLoader
-              sceneRef={sceneRef}
-              model={drop.metadata.model}
-              versions={drop.metadata.versions}
-              initialVersion={0}
-              initialPlaceholderTexture={defaultItem.img}
-              initialDropSymbol={drop.symbol}
-              initialTokenNameId={defaultItem.name + " #" + defaultItem.id}
-              initialId={defaultItem.id}
-              three={{
-                deck: {
-                  onPointerMissed: (e) => {
-                    e.stopPropagation();
-                    // setDisplayInfoDiv(false);
-                  },
-                  onClick: (e) => {
-                    e.stopPropagation();
-                    setDisplayInfoDiv(true);
-                    setSectionToDisplayInfo("Deck");
-                  },
-                },
-                placeholder: {
-                  onPointerMissed: (e) => {
-                    e.stopPropagation();
-                    // setDisplayInfoDiv(false);
-                  },
-                  onClick: (e) => {
-                    e.stopPropagation();
-                    setDisplayInfoDiv(true);
-                    setSectionToDisplayInfo("Placeholder");
-                  },
-                },
-              }}
-            />
-          </Style.BodyScene>
-
-          <Style.LeftSide>
-            <Style.RealHeader>
-              <Grid container spacing={0} flexDirection="column">
-                <Grid item xs={12}>
-                  <Style.HeaderFirstLeftSideTitle>
-                    Hello
-                    <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>{name}</b>
-                  </Style.HeaderFirstLeftSideTitle>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          slotProps={{
+            backdrop: {
+              style: {
+                background: "rgba(0,0,0,0.7)",
+              },
+            },
+          }}
+        >
+          <Style.ModelBox>
+            <Grid container rowSpacing={0} flexWrap="wrap">
+              <Grid item xs={12}>
+                <Grid container>
+                  <Grid item flexGrow={1}>
+                    <Style.ModalTitle>DROP #{drop.id}</Style.ModalTitle>
+                  </Grid>
                 </Grid>
-                {/*  */}
-                <Grid item xs={12} style={{ backgroundColor: "yellow" }}>
-                  <Style.CommandsContainer container>
-                    <Grid item xs={12}>
-                      <Grid container justifyContent="space-between">
-                        <Grid item>
-                          <Style.CommandsText>
-                            <Style.StepTitle>QUICK INFO</Style.StepTitle>
-                          </Style.CommandsText>
-                        </Grid>
-                        <Grid item>
-                          <Style.CommandsText>
-                            <Style.StepTitle3>DROP #{drop.id}</Style.StepTitle3>
-                          </Style.CommandsText>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Style.Commands container justifyContent="space-between">
-                        <Grid item>
-                          <Grid container columnSpacing={0.5}>
-                            <Grid item>
-                              <Pastille
-                                secondary
-                                bgcolor={"#CDDAFD"}
-                                small
-                                title={` ${drop.currentSupply} / ${drop.maxSupply}`}
+              </Grid>
+
+              <Grid item xs={7}>
+                {modalActions.map(
+                  (step, index) =>
+                    step.isDisplay && (
+                      <Style.Step key={index} style={{ marginBottom: "10px" }}>
+                        <Grid
+                          container
+                          justifyContent="space-between"
+                          style={{ marginBottom: "15px" }}
+                        >
+                          <CenterItem item>
+                            <Style.TitleStepModal>{step.stepName}</Style.TitleStepModal>
+                          </CenterItem>
+                          <CenterItem item style={{ minHeight: "20px" }}>
+                            {step.isLoading && <span className="loaderMini2" />}
+                            {step.isDone && (
+                              <CheckCircleOutlineIcon
+                                style={{ color: "#1EC500", width: "17.5px", height: "17.5px" }}
                               />
-                            </Grid>
-                          </Grid>
+                            )}
+                          </CenterItem>
                         </Grid>
-                      </Style.Commands>
-                    </Grid>
-                  </Style.CommandsContainer>
-                </Grid>
-              </Grid>
-            </Style.RealHeader>
-
-            <Style.HeaderLeftSide container spacing={0} alignItems="center">
-              <Grid item xs={6}>
-                <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
-              </Grid>
-
-              {/* <Grid item xs={1}>
-                <FilterListIcon />
+                        <Grid container style={{ height: "15px" }}>
+                          <Grid item flexGrow={1}>
+                            {step.text}
+                          </Grid>
+                          {(step.isLoading || step.isDone) && (
+                            <Grid item>
+                              <Grid container columnSpacing={0.5}>
+                                <CenterItem item>
+                                  <Clickable
+                                    onClick={() => navigator.clipboard.writeText(step.tx as string)}
+                                  >
+                                    <ContentCopyIcon style={{ width: "14.5px" }} />
+                                  </Clickable>
+                                </CenterItem>
+                                <CenterItem item>
+                                  <Clickable address={`https://etherscan.io/tx/${step.tx}`}>
+                                    <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />
+                                  </Clickable>
+                                </CenterItem>
+                              </Grid>
+                            </Grid>
+                          )}
+                        </Grid>
+                      </Style.Step>
+                    )
+                )}
               </Grid>
 
               <Grid item xs={5}>
-                <Style.SearchBar>
-                  <Grid container alignItems="center">
-                    <Grid item>
-                      <SearchIcon
-                        style={{
-                          fontSize: "1.3em",
-                          marginLeft: "5px",
-                          marginRight: "10px",
-                        }}
-                      />
-                    </Grid>
-                    <Grid item style={{ color: "grey", fontSize: "0.9em" }}>
-                      Search ...
-                    </Grid>
-                  </Grid>
-                </Style.SearchBar>
-              </Grid> */}
-            </Style.HeaderLeftSide>
-            <Style.BodyLeftSide $connected={auth}>
-              <Style.InnerLeftSide>
-                {assets && assets.length ? (
-                  assets.map((collection, index1) => (
-                    <div key={index1} style={{ marginBottom: "20px" }}>
-                      <Style.CollectionName>{collection.collectionName}</Style.CollectionName>
-                      <ImageList cols={4} gap={4}>
-                        {collection.assets.map((item, index) => (
-                          <ImageListItem
-                            key={index}
-                            style={{
-                              border:
-                                currentItem &&
-                                currentItem.name === collection.collectionName &&
-                                currentItem.id === item.id
-                                  ? "3px solid #2AFE00"
-                                  : "3px solid white",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              updateItem(item);
-                            }}
-                          >
-                            <img src={item.img} alt={"item.id"} loading="lazy" />
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
-                    </div>
-                  ))
-                ) : auth ? (
-                  <Style.InnerLeftSideNoNfts>
-                    {isLoading ? "Loading ..." : "You do not own any NFTs :("}
-                  </Style.InnerLeftSideNoNfts>
-                ) : (
-                  <Style.InnerLeftSideNoNfts>You are not connected :'(</Style.InnerLeftSideNoNfts>
-                )}
-              </Style.InnerLeftSide>
-            </Style.BodyLeftSide>
-          </Style.LeftSide>
-          <Style.LeftSideRightSide>
-            <Clickable onClick={() => sceneRef.current.reset3DView()}>
-              <Style.LeftSideRightSideInner>RESET 3D VIEW</Style.LeftSideRightSideInner>
-            </Clickable>
-          </Style.LeftSideRightSide>
-
-          <Style.ContainerInfo>
-            <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
-
-            <Style.VersionName
-              style={{
-                backgroundColor: drop.metadata.versions[currentVersion].color,
-                color: "black",
-                padding: "5px",
-              }}
-            >
-              {drop.metadata.versions[currentVersion].name}
-            </Style.VersionName>
-
-            <div>
-              <Style.Mutator>
-                {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
-              </Style.Mutator>
-
-              {currentItem.contract !== "" ? (
-                <Style.MutatorRemove>
-                  <Clickable onClick={() => resetItem()}>REMOVE</Clickable>
-                </Style.MutatorRemove>
-              ) : (
-                <></>
-              )}
-            </div>
-
-            <Grid
-              container
-              spacing={1}
-              alignContent={"center"}
-              style={{
-                marginBottom: "10px",
-              }}
-            >
-              {pastilles.map((pastille) => (
-                <Grid key={pastille.title} item>
-                  <Tooltip title={pastille.description}>
-                    <div>
-                      <Pastille title={pastille.title} />
-                    </div>
-                  </Tooltip>
-                </Grid>
-              ))}
-              <Grid item flex={1} />
-              <Grid item>
-                <Tooltip title={"Current Supply / Max Supply"}>
-                  <div>
-                    <Style.MintInfo>
-                      {drop.currentSupply} / {drop.maxSupply}
-                    </Style.MintInfo>
-                  </div>
-                </Tooltip>
+                <img src={currentItem.img} style={{ width: "100%", borderRadius: "15px" }} alt="" />
               </Grid>
-            </Grid>
 
-            <Style.ContainerPayment>
-              <Style.InnerContainerPayment>
-                <Grid container rowSpacing={1}>
-                  <Grid item xs={6}>
-                    <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
+              <Style.GridPricePortal item style={{ marginRight: "10px" }} xs={2}>
+                <Grid container alignContent="space-around" style={{ height: "100%" }}>
+                  <Grid item xs={12}>
+                    <Style.MintPriceTitle>Price</Style.MintPriceTitle>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid container alignItems="baseline" columnSpacing={1}>
+                    <Grid container columnSpacing={1}>
                       <Grid item>
                         <img src={logoeth} style={{ width: "12.5px" }} alt="" />
                       </Grid>
                       <Grid item>
-                        <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
+                        <Style.MintPrice>
+                          {modalActions.map(
+                            (item, index) =>
+                              item.isMyTurn && (
+                                <React.Fragment key={index}>{item.price}</React.Fragment>
+                              )
+                          )}
+                        </Style.MintPrice>
                       </Grid>
-                      <Grid item>
-                        <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
-                      </Grid>
+                      {/* <Grid item>
+                            <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
+                          </Grid> */}
                     </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Clickable
-                      activated={isMintable}
-                      onClick={() => {
-                        dispatch(
-                          mint({
-                            address: drop._address,
-                            versionId: currentVersion,
-                            value: drop.price,
-                            nft: currentItem,
-                            isDefault: isDefaultItem
-                              ? {
-                                  valueMint: drop.defaultItem.price,
-                                }
-                              : undefined,
-                          })
-                        );
-                      }}
-                    >
-                      <Tooltip
-                        placement="left"
-                        title={
-                          <Style.MintInfoText>
-                            {currentItem ? (
-                              <span>
-                                *You are minting and mutating your DRIP with{" "}
-                                <span
-                                  style={{
-                                    fontWeight: 600,
-                                  }}
-                                >
-                                  {currentItem.symbol}#{currentItem.id}
-                                </span>
-                                . This action is irreversible.
-                              </span>
-                            ) : (
-                              <span>
-                                *You are minting your DRIP without mutating it. Do not worry, you
-                                will be able to mutate it later on.
-                              </span>
-                            )}
-                          </Style.MintInfoText>
-                        }
-                      >
-                        <Style.MintButton>MINT</Style.MintButton>
-                      </Tooltip>
-                    </Clickable>
                   </Grid>
                 </Grid>
-              </Style.InnerContainerPayment>
-            </Style.ContainerPayment>
+              </Style.GridPricePortal>
 
-            {/*  */}
-          </Style.ContainerInfo>
-
-          <Style.BottomBar>
-            <Grid container justifyContent="center" alignItems="center" style={{ height: "100%" }}>
-              <Grid item style={{ height: "100%" }}>
-                <Style.BottomBarContainer
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  columnSpacing={1}
-                  style={{ minWidth: "300px" }}
-                >
+              <Grid
+                item
+                flexGrow={1}
+                style={{
+                  display: "flex",
+                  flex: 1,
+                  alignItems: "end",
+                }}
+              >
+                <Grid container>
                   <Grid item xs={12}>
-                    <Grid container justifyContent="center" alignItems="center" columnSpacing={1}>
-                      {drop.metadata.versions.map((versionMetadata, index) =>
-                        CircleSelect(index, currentVersion, versionMetadata.color, () =>
-                          updateVersion(index)
-                        )
-                      )}
+                    <Grid container direction="row-reverse">
+                      <Grid item>
+                        <Clickable address={`${drop.id}/${txProcess.mintingDrip.id}`}>
+                          <Style.FinalStep2 $display={modalActions[modalActions.length - 1].isDone}>
+                            View
+                          </Style.FinalStep2>
+                        </Clickable>
+                      </Grid>
                     </Grid>
                   </Grid>
-                  {/*  */}
-                </Style.BottomBarContainer>
+
+                  <Grid item xs={12}>
+                    {modalActions.map(
+                      (item, index) =>
+                        item.isMyTurn && (
+                          <Clickable key={index} onClick={item.action.fct}>
+                            <Style.MintButton>{item.action.name}</Style.MintButton>
+                          </Clickable>
+                        )
+                    )}
+
+                    {modalActions[modalActions.length - 1].isDone && (
+                      <Style.FinalStep>All done ! Thanks for your support 🎉</Style.FinalStep>
+                    )}
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
-          </Style.BottomBar>
+          </Style.ModelBox>
+        </Modal>
 
-          {["Deck", "Placeholder"].map((item) => (
-            <Style.InfoDiv key={item} $display={displayInfoDiv && item === sectionToDisplayInfo}>
-              <Grid container>
-                <Grid item xs={12}>
-                  <Style.InfoDivItemName>{item}</Style.InfoDivItemName>
-                </Grid>
-                <Grid item xs={12}>
-                  {imagesPreloaded &&
-                    (item === "Deck" ? (
-                      <img
-                        style={{
-                          width: "100%",
-                          objectFit: "none",
-                          objectPosition: "50% 11%",
-                        }}
-                        src={drop.metadata.versions[currentVersion].texture}
-                        alt=""
-                      />
-                    ) : (
-                      <img
-                        style={{
-                          width: "100%",
-                        }}
-                        src={currentItem?.img}
-                        alt=""
-                      />
-                    ))}
+        <Style.Todo container justifyContent="space-between" columns={50}>
+          <Grid item xs={12} style={{ zIndex: 10, height: "100%" }}>
+            <Style.LeftSide>
+              <Grid container direction="column" style={{ height: "100%" }}>
+                <Grid item>
+                  <Style.HeaderFirstLeftSideTitle>
+                    Hello
+                    <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>{name}</b>,
+                  </Style.HeaderFirstLeftSideTitle>
                 </Grid>
 
-                {sectionToDisplayInfo === "Placeholder" ? (
-                  <>
+                <Grid item>
+                  <Style.HeaderLeftSide container alignItems="center">
+                    <Grid item flexGrow={1}>
+                      <Style.StepTitle>SELECT YOUR NFT</Style.StepTitle>
+                    </Grid>
+                  </Style.HeaderLeftSide>
+                </Grid>
+
+                <Grid item flexGrow={1}>
+                  <Style.BodyLeftSide $connected={auth}>
+                    <Style.InnerLeftSide>
+                      {assets && assets.length ? (
+                        assets.map((collection, index1) => (
+                          <div key={index1} style={{ marginBottom: "20px" }}>
+                            <Style.CollectionName>{collection.collectionName}</Style.CollectionName>
+                            <ImageList cols={4} gap={4}>
+                              {collection.assets.map((item, index) => (
+                                <ImageListItem
+                                  key={index}
+                                  style={{
+                                    border:
+                                      currentItem &&
+                                      currentItem.name === collection.collectionName &&
+                                      currentItem.id === item.id
+                                        ? "3px solid #2AFE00"
+                                        : "3px solid white",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => {
+                                    updateItem(item);
+                                  }}
+                                >
+                                  <img src={item.img} alt={"item.id"} loading="lazy" />
+                                </ImageListItem>
+                              ))}
+                            </ImageList>
+                          </div>
+                        ))
+                      ) : auth ? (
+                        <Style.InnerLeftSideNoNfts>
+                          {isLoading ? "Loading ..." : "You do not own any NFTs :("}
+                        </Style.InnerLeftSideNoNfts>
+                      ) : (
+                        <Style.InnerLeftSideNoNfts>
+                          You are not connected :'(
+                        </Style.InnerLeftSideNoNfts>
+                      )}
+                    </Style.InnerLeftSide>
+                  </Style.BodyLeftSide>
+                </Grid>
+              </Grid>
+            </Style.LeftSide>
+
+            {/* <Style.LeftSideRightSide>
+              <Clickable onClick={() => sceneRef.current.reset3DView()}>
+                <Style.LeftSideRightSideInner>RESET 3D VIEW</Style.LeftSideRightSideInner>
+              </Clickable>
+            </Style.LeftSideRightSide> */}
+          </Grid>
+          <Grid item xs={9} style={{ zIndex: 10 }}>
+            <Grid
+              container
+              direction="column"
+              style={{ height: "100%" }}
+              justifyContent="space-between"
+            >
+              <Grid item>
+                <Style.InfoDiv>
+                  <Grid container>
                     <Grid item xs={12}>
-                      <Style.MoreInfoSymbol>
-                        {currentItem.symbol} #{currentItem.id}
-                      </Style.MoreInfoSymbol>
-                      {isDefaultItem ? <Style.DefaultItem>DEFAULT</Style.DefaultItem> : null}
-                      {currentItem.contract === zeroItem.contract ? (
-                        <Style.DefaultItem>NONE</Style.DefaultItem>
-                      ) : null}
+                      <Style.InfoDivItemName>PLACEHOLDER</Style.InfoDivItemName>
+                    </Grid>
+                    <Grid item xs={12}>
+                      {imagesPreloaded && (
+                        <img
+                          style={{
+                            width: "100%",
+                            borderRadius: "15px",
+                          }}
+                          src={currentItem?.img}
+                          alt=""
+                        />
+                      )}
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Grid
+                        container
+                        alignItems="center"
+                        style={{
+                          marginTop: "5px",
+                        }}
+                      >
+                        <Grid item>
+                          {currentItem.address !== zeroItem.address && (
+                            <Style.MoreInfoSymbol>
+                              {currentItem.symbol} #{currentItem.id}
+                            </Style.MoreInfoSymbol>
+                          )}
+                        </Grid>
+
+                        <Grid item>
+                          {isDefaultItem ? <Style.DefaultItem>DEFAULT</Style.DefaultItem> : null}
+                        </Grid>
+
+                        <Grid item>
+                          {currentItem.address === zeroItem.address ? (
+                            <Style.DefaultItem>VIRGIN</Style.DefaultItem>
+                          ) : null}
+                        </Grid>
+
+                        <Grid item flexGrow={1}>
+                          <Grid container direction="row-reverse">
+                            <Grid item>
+                              {currentItem.address !== "" ? (
+                                <Style.MutatorRemove>
+                                  <Clickable onClick={() => resetItem()}>REMOVE</Clickable>
+                                </Style.MutatorRemove>
+                              ) : (
+                                <Style.MutatorRemove>
+                                  <Clickable onClick={() => resetItem()}>
+                                    RESET TO DEFAULT
+                                  </Clickable>
+                                </Style.MutatorRemove>
+                              )}
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Grid>
                     </Grid>
 
                     <Grid item xs={12} style={{ marginTop: "5px" }}>
-                      <Grid container spacing={1}>
+                      <Grid container spacing={0.5}>
                         <Grid item>
-                          <Clickable address="https://twitter.com/sshlabs_">
-                            <img src={OpenSeaIcon} style={{ width: "20px" }} alt="" />
+                          <Clickable
+                            activated={!(currentItem.address === zeroItem.address)}
+                            address="https://twitter.com/sshlabs_"
+                          >
+                            <img src={OpenSeaIcon} style={{ width: "16.5px" }} alt="" />
                           </Clickable>
                         </Grid>
                         <Grid item>
-                          <Clickable address="https://twitter.com/sshlabs_">
-                            <img src={EtherscanIcon} style={{ width: "20px" }} alt="" />
+                          <Clickable
+                            activated={!(currentItem.address === zeroItem.address)}
+                            address="https://twitter.com/sshlabs_"
+                          >
+                            <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />
                           </Clickable>
                         </Grid>
                       </Grid>
                     </Grid>
-                  </>
-                ) : (
-                  <></>
-                )}
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs={12}
+                    style={{
+                      marginTop: "15px",
+                      paddingTop: "15px",
+                      borderTop: "1.5px solid lightgrey",
+                    }}
+                  >
+                    <Style.InfoDivItemName>DECK</Style.InfoDivItemName>
+                  </Grid>
+
+                  <Grid item>
+                    <Style.BottomBar>
+                      <Style.BottomBarContainer
+                        container
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <Grid item xs={12}>
+                          <Style.GalleryWrap>
+                            {drop.metadata.versions.map((item, index) => (
+                              <Style.GalleryItem
+                                key={index}
+                                onMouseEnter={() => setHover(index)}
+                                onMouseLeave={() => setHover(currentVersion)}
+                                onClick={() => updateVersion(index)}
+                                $onHover={hover === index}
+                                color={item.texture}
+                                style={{
+                                  height: "50px",
+                                  borderRadius: "5px",
+                                }}
+                              />
+                            ))}
+                          </Style.GalleryWrap>
+                        </Grid>
+                      </Style.BottomBarContainer>
+                    </Style.BottomBar>
+                  </Grid>
+                </Style.InfoDiv>
               </Grid>
-            </Style.InfoDiv>
-          ))}
-        </Style.Body>
+
+              <Grid item>
+                <div
+                  style={{
+                    marginTop: "15px",
+                    paddingTop: "15px",
+                    borderTop: "1.5px solid lightgrey",
+                  }}
+                />
+                <Style.ContainerInfo>
+                  <Style.ContainerTitle>DROP #{drop.id}</Style.ContainerTitle>
+                  <Style.VersionName
+                    style={{
+                      backgroundColor: drop.metadata.versions[currentVersion].color,
+                      color: "black",
+                      padding: "5px",
+                    }}
+                  >
+                    {drop.metadata.versions[currentVersion].name}
+                  </Style.VersionName>
+
+                  {/* <Grid
+                    container
+                    alignItems="center"
+                    style={{
+                      marginBottom: "10px",
+                      padding: "2.5px",
+                    }}
+                  >
+                    <Grid item>
+                      <Style.Mutator>
+                        {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
+                      </Style.Mutator>
+                    </Grid>
+
+                    <Grid item>
+                      {currentItem.address !== "" ? (
+                        <Style.MutatorRemove>
+                          <Clickable onClick={() => resetItem()}>REMOVE</Clickable>
+                        </Style.MutatorRemove>
+                      ) : (
+                        <></>
+                      )}
+                    </Grid>
+                  </Grid> */}
+
+                  <Grid
+                    container
+                    spacing={1}
+                    alignContent={"center"}
+                    style={{
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {pastilles.map((pastille) => (
+                      <Grid key={pastille.title} item>
+                        <Tooltip title={pastille.description}>
+                          <div>
+                            <Pastille title={pastille.title} />
+                          </div>
+                        </Tooltip>
+                      </Grid>
+                    ))}
+                    <Grid item flex={1} />
+                    <Grid item>
+                      <Tooltip title={"Current Supply / Max Supply"}>
+                        <div>
+                          <Style.MintInfo>
+                            {drop.currentSupply} / {drop.maxSupply}
+                          </Style.MintInfo>
+                        </div>
+                      </Tooltip>
+                    </Grid>
+                  </Grid>
+
+                  <Style.ContainerPayment>
+                    <Style.InnerContainerPayment>
+                      <Grid container rowSpacing={1}>
+                        <Grid item xs={6}>
+                          <Style.MintPriceTitle>Mint price</Style.MintPriceTitle>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Grid container alignItems="baseline" columnSpacing={1}>
+                            <Grid item>
+                              <img src={logoeth} style={{ width: "12.5px" }} alt="" />
+                            </Grid>
+                            <Grid item>
+                              <Style.MintPrice>{formatEther(drop.price)}</Style.MintPrice>
+                            </Grid>
+                            {/* <Grid item>
+                              <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
+                            </Grid> */}
+                          </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Clickable
+                            activated={isMintable}
+                            onClick={() => {
+                              setOpen(true);
+                              dispatch(resetMintingProcess());
+                            }}
+                          >
+                            <Style.MintButton>MINT</Style.MintButton>
+                          </Clickable>
+                        </Grid>
+                      </Grid>
+                    </Style.InnerContainerPayment>
+                  </Style.ContainerPayment>
+                </Style.ContainerInfo>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Style.Todo>
 
         <Style.Footer>
           <Grid container justifyContent="space-between">
@@ -538,18 +753,5 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
     </Fade>
   );
 };
-
-export const CircleSelect = (
-  version: number,
-  currentVersion: number,
-  color: string,
-  fct: Function
-) => (
-  <Grid item key={version}>
-    <Clickable onClick={() => fct()}>
-      <Style.Circle $selected={version === currentVersion} bgcolor={color} />
-    </Clickable>
-  </Grid>
-);
 
 export default DropProxy;

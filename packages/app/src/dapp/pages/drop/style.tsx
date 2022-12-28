@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 
 import { Grid, Typography } from "@mui/material";
 
-const headerHeight = "125px";
+const headerHeight = "100px";
 
 const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "350px";
@@ -18,37 +18,31 @@ const bottom = "25px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
-    height: "100vh",
+    height: `calc(100vh)`,
     position: "relative",
-  })),
-  Header: styled("div")(({ theme }) => ({
-    position: "absolute",
-    top: 0,
-    height: headerHeight,
-    width: "100vw",
-  })),
-  Body: styled("div")(({ theme }) => ({
     backgroundColor: theme.backgroundColor.secondary,
-    height: `calc(100vh - ${footerHeight})`,
-    position: "relative",
   })),
   BodyScene: styled("div")(({ theme }) => ({
     height: "100%",
-    position: "relative",
+    width: "100%",
+    position: "absolute",
+  })),
+  Todo: styled(Grid)(({ theme }) => ({
+    ...theme.myBreakpoints(theme).level3,
+    width: "100%",
+    height: "100%",
+    paddingTop: "125px",
+    paddingBottom: `calc(${footerHeight} + 1.5vw)`,
   })),
   //
   BottomBar: styled("div")(({ theme }) => ({
-    height: bottomBarHeight,
-    position: "absolute",
-    bottom: bottom,
-    width: "100%",
     display: "flex",
     alignItems: "center",
   })),
   Circle: styled("div")<{ bgcolor: string; $selected?: boolean }>(
     ({ theme, bgcolor, $selected }) => ({
-      height: "25px",
-      width: "25px",
+      height: "22.5px",
+      width: "22.5px",
       borderRadius: "50%",
       backgroundColor: bgcolor,
       opacity: $selected ? "100%" : "75%",
@@ -70,24 +64,16 @@ const style = {
     fontWeight: 600,
     fontSize: "0.8em",
     borderRadius: "5px",
-    marginBottom: "10px",
     display: "inline-block",
-    padding: "2.5px",
   })),
   MutatorRemove: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 600,
-    fontSize: "9px",
+    fontSize: "0.65em",
     letterSpacing: "1px",
-    borderRadius: "5px",
-    padding: "2.5px",
-    paddingLeft: "5px",
-    paddingRight: "5px",
-    display: "inline-block",
-    marginLeft: "5px",
-    color: "grey",
-    backgroundColor: theme.backgroundColor.tertiary,
-    opacity: "60%",
+    padding: "4px",
+    paddingRight: "7.5px",
+    color: "#B9B9FF",
   })),
   DefaultItem: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
@@ -95,33 +81,21 @@ const style = {
     fontSize: "9px",
     letterSpacing: "1px",
     borderRadius: "5px",
-    padding: "2.5px",
-    paddingLeft: "5px",
-    paddingRight: "5px",
-    display: "inline-block",
-    marginLeft: "5px",
+    padding: "4px",
+    paddingLeft: "6px",
+    paddingRight: "6px",
     color: "grey",
     backgroundColor: theme.backgroundColor.tertiary,
-    opacity: "60%",
+    opacity: "50%",
   })),
 
-  InfoDiv: styled("div")<{ $display: boolean }>(({ theme, $display }) => ({
-    opacity: $display ? 1 : 0,
-    position: "absolute",
-    top: headerHeight,
-    right: sizeWidthRight,
-    width: rightDefaultWidth,
-    // boxShadow: `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
-    // backgroundColor: theme.backgroundColor.primary,
-    // padding: "15px",
-    borderRadius: "5px",
-    transition: "all 1s",
-  })),
+  InfoDiv: styled("div")(({ theme }) => ({})),
   InfoDivItemName: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontWeight: 800,
-    fontSize: "1.1em",
-    marginBottom: "10px",
+    fontWeight: 900,
+    fontSize: "0.95em",
+    letterSpacing: "1.25px",
+    marginBottom: "7.5px",
   })),
   InfoDivDescriptionContainer: styled("div")(({ theme }) => ({
     padding: "5px",
@@ -143,11 +117,10 @@ const style = {
     fontSize: "0.6em",
   })),
   MoreInfoSymbol: styled("div")(({ theme }) => ({
-    display: "inline-block",
     fontFamily: theme.fontFamily.primary,
     fontWeight: 800,
     fontSize: "0.7em",
-    marginTop: "5px",
+    marginRight: "5px",
   })),
   Footer: styled("div")(({ theme }) => ({
     position: "absolute",
@@ -160,12 +133,8 @@ const style = {
   })),
   //
   LeftSide: styled("div")(({ theme }) => ({
-    position: "absolute",
-    bottom: footerHeight,
-    left: sizeWidthLeft,
-    width: leftDefaultWidth,
-    height: `calc(100vh - ${headerHeight} - ${footerHeight} - ${sizeWidthLeft} - 50px)`,
     zIndex: 1,
+    height: "100%",
   })),
   LeftSideRightSide: styled("div")(({ theme }) => ({
     position: "absolute",
@@ -215,19 +184,37 @@ const style = {
   })),
 
   HeaderLeftSide: styled(Grid)(({ theme }) => ({
-    backgroundColor: "white",
     borderRadius: "5px",
     padding: "10px",
-    height: "50px",
+    backgroundColor: theme.backgroundColor.primary,
+    marginBottom: "5px",
   })),
-  RealHeader: styled(Grid)(({ theme }) => ({
-    height: "125px",
+  GalleryWrap: styled("div")(({ theme }) => ({
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    height: "100%",
+    gap: "1.5px",
   })),
-  HeaderFirstLeftSideTitle: styled(Grid)(({ theme }) => ({
+  GalleryItem: styled("div")<{ color: string; $onHover: boolean }>(
+    ({ theme, color, $onHover }) => ({
+      flex: $onHover ? 7 : 1,
+      backgroundPosition: "30% 10%",
+      imageRendering: "pixelated",
+      WebkitPrintColorAdjust: "exact",
+      width: "100%",
+      backgroundImage: `url(${color})`,
+      transition: "flex 0.8s ease",
+      objectFit: "none",
+      objectPosition: "30% 10%",
+      cursor: "pointer",
+    })
+  ),
+  HeaderFirstLeftSideTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "1.75em",
-    marginBottom: "20px",
     fontWeight: 500,
+    marginBottom: "25px",
   })),
   CommandsContainer: styled(Grid)(({ theme }) => ({
     backgroundColor: theme.backgroundColor.primary,
@@ -256,19 +243,16 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     borderRadius: "5px",
     overflowY: "scroll",
-    height: `calc(100vh - ${headerHeight} - ${footerHeight} - 50px - 125px - ${sizeWidthLeft} - 50px)`,
+    height: "0",
+    minHeight: "100%",
+    // height: `calc(100vh - ${headerHeight} - ${footerHeight} - 125px - ${sizeWidthLeft} - 50px)`,
     opacity: $connected ? 0.5 : 1,
     transition: "all 1s",
     ":hover": {
       opacity: 1,
     },
   })),
-  BodyLeftSideTextContainer: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
-    position: "relative",
-    borderRadius: "5px",
-    height: `calc(100vh - ${headerHeight} - ${footerHeight} - 125px - ${bottom} - 50px)`,
-  })),
+
   BodyLeftSideText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "0.8em",
@@ -278,12 +262,7 @@ const style = {
   })),
   ContainerInfo: styled("div")(({ theme }) => ({
     zIndex: 2,
-    position: "absolute",
     borderRadius: "5px",
-    width: rightDefaultWidth,
-    bottom: `calc(${bottom} + 0px)`,
-    right: sizeWidthRight,
-    transition: "all 0.5s ease-in-out",
   })),
   DetailsButton: styled("div")(({ theme }) => ({
     letterSpacing: "2.5px",
@@ -298,11 +277,91 @@ const style = {
     backgroundColor: theme.backgroundColor.secondary,
   })),
 
+  ModelBox: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "white",
+    outline: 0,
+    padding: "25px",
+    borderRadius: "10px ",
+    width: "45vw",
+  })),
+  TextModal: styled("div")(({ theme }) => ({
+    fontSize: "0.9em",
+  })),
+  TextModal2: styled("div")(({ theme }) => ({
+    fontSize: "0.9em",
+    textAlign: "center",
+    marginTop: "35px",
+  })),
+  ModalTitle: styled("div")(({ theme }) => ({
+    color: "black",
+    textShadow: `${theme.backgroundColor.tertiary} 2.5px 2.5px 0.5px`,
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "2.75em",
+    fontWeight: 900,
+    marginBottom: "25px",
+    paddingBottom: "10px",
+    borderBottom: `2.5px solid ${theme.backgroundColor.secondary}`,
+  })),
+
+  GridPricePortal: styled(Grid)(({ theme }) => ({
+    padding: "7.5px",
+    backgroundColor: theme.backgroundColor.primary,
+    borderRadius: "15pxpx",
+  })),
+
+  Step: styled("div")(({ theme }) => ({
+    padding: "12.5px",
+    borderRadius: "15px",
+    marginRight: "25px",
+    marginBottom: "10px",
+    backgroundColor: theme.backgroundColor.primary,
+  })),
+  FinalStep: styled("div")(({ theme }) => ({
+    fontSize: "0.9em",
+    fontFamily: theme.fontFamily.primary,
+    padding: "10px",
+    fontWeight: 500,
+    borderRadius: "15px",
+    textAlign: "center",
+    backgroundColor: theme.backgroundColor.secondary,
+    letterSpacing: "-0.25px",
+  })),
+  FinalStep2: styled("div")<{ $display: boolean }>(({ theme, $display }) => ({
+    visibility: $display ? "visible" : "hidden",
+    transition: "all 0.5s",
+    backgroundColor: "black",
+    color: "white",
+    fontFamily: theme.fontFamily.primary,
+    padding: "7.5px",
+    paddingLeft: "25px",
+    paddingRight: "25px",
+    marginTop: "1.5px",
+    marginBottom: "5px",
+    fontSize: "0.7em",
+    fontWeight: 700,
+    borderRadius: "15px",
+    // letterSpacing: "0.5px",
+  })),
+  TitleStepModal: styled("div")(({ theme }) => ({
+    fontSize: "0.85em",
+    fontWeight: 900,
+    display: "inline-block",
+  })),
+  ModelAlert: styled("div")(({ theme }) => ({
+    fontSize: "0.5em",
+    color: "red",
+  })),
+
   ContainerTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontSize: "2.5em",
     fontWeight: 900,
-    marginBottom: "10px",
+    marginBottom: "15px",
     display: "inline-block",
   })),
 
@@ -320,8 +379,9 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     textAlign: "center",
     fontWeight: 900,
+    fontSize: "0.9em",
     color: "white",
-    borderRadius: "10px",
+    borderRadius: "15px",
     padding: "10px",
   })),
   InnerContainerInfo2: styled("div")(({ theme }) => ({
@@ -331,7 +391,7 @@ const style = {
   BottomBarContainer: styled(Grid)(({ theme }) => ({
     height: "100%",
     minWidth: "250px",
-    backgroundColor: theme.backgroundColor.primary,
+    // backgroundColor: theme.backgroundColor.primary,
     opacity: "85%",
     borderRadius: "5px",
     color: "black",
@@ -372,7 +432,7 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontSize: "1.5em",
     fontWeight: 600,
-    letterSpacing: "1.5px",
+    letterSpacing: "0px",
   })),
   MintPriceUsd: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -395,7 +455,7 @@ const style = {
     fontWeight: 700,
     letterSpacing: "0.2px",
     fontSize: "0.7em",
-    display: "inline-block",
+    // display: "inline-block",
   })),
   StepTitle3: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -421,7 +481,7 @@ const style = {
     transform: "translate(0, -50%)",
     width: "100%",
   })),
-  SearchBar: styled("div")(({ theme }) => ({
+  SearchBar: styled(Grid)(({ theme }) => ({
     padding: "5px",
     backgroundColor: "#F5F5F5",
     borderRadius: "25px",
@@ -436,7 +496,7 @@ const style = {
     padding: "5px",
     paddingLeft: "5px",
     paddingRight: "5px",
-    marginBottom: "2.5px",
+    marginBottom: "10px",
     color: "black",
     backgroundColor: theme.backgroundColor.secondary,
     borderRadius: "5px",

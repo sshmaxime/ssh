@@ -410,10 +410,10 @@ const style = {
     letterSpacing: "-0.5px",
   })),
   TitleDrip: styled("div")(({ theme }) => ({
-    fontFamily: "anton",
-    fontSize: "4em",
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "3.25em",
     fontWeight: 900,
-    letterSpacing: "-0.5px",
+    letterSpacing: "-1.25px",
   })),
   TextLinkHeader: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

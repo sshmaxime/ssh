@@ -5,7 +5,7 @@ import Style from "./style";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { Grid } from "@mui/material";
 
-import Clickable from "../../../_utils/components/stateless/clickable";
+import Clickable from "../../../_utils/components/clickable";
 
 const NotFound: FC = () => {
   return (

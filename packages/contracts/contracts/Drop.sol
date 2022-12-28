@@ -58,7 +58,7 @@ contract Drop is ERC721Enumerable, Ownable {
     uint256 immutable PRICE;
 
     // The number of versions
-    uint256 immutable VERSIONS; // starts at version 0
+    uint256 immutable VERSIONS; // starts at version 1, cannot be 0
 
     // Drop Default Item
     address immutable DEFAULT_ITEM;
@@ -86,6 +86,8 @@ contract Drop is ERC721Enumerable, Ownable {
         uint256 _versions,
         address _defaultItem
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
+        require(_versions > 0, "INVALID_VERSIONS");
+
         DROP_ID = id;
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
@@ -117,6 +119,13 @@ contract Drop is ERC721Enumerable, Ownable {
     }
 
     /**
+     * @dev Return the versions of the mint.
+     */
+    function versions() public view returns (uint256) {
+        return VERSIONS;
+    }
+
+    /**
      * @dev Return the default item.
      */
     function defaultItem() public view returns (address) {
@@ -127,7 +136,7 @@ contract Drop is ERC721Enumerable, Ownable {
      * @dev Return the Drip matching the token id.
      */
     function drip(uint256 tokenId) public view returns (Drip memory) {
-        require(tokenId < totalSupply(), "INCORRECT_TOKENID");
+        require(tokenId < totalSupply(), "INVALID_TOKEN_ID");
         return tokenIdToDrip[tokenId];
     }
 
@@ -162,10 +171,10 @@ contract Drop is ERC721Enumerable, Ownable {
         require(tokenId < maxSupply(), "MAX_SUPPLY_REACHED");
 
         // Minter needs to mint a correct version of the DROP
-        require(versionId <= VERSIONS, "INCORRECT_VERSION");
+        require(versionId <= VERSIONS, "INVALID_VERSION");
 
         // Minter needs to provide the correct amount
-        require(msg.value == PRICE, "INCORRECT_FUNDS");
+        require(msg.value == PRICE, "INVALID_FUNDS");
 
         _safeMint(msg.sender, tokenId);
         tokenIdToDrip[tokenId] = Drip({
@@ -181,7 +190,7 @@ contract Drop is ERC721Enumerable, Ownable {
      * @dev Mutate a DROP item.
      */
     function mutate(uint256 tokenIdToMutate, IERC721 contractMutator, uint256 tokenIdMutator) external {
-        require(tokenIdToMutate < totalSupply(), "TOKEN ID OUT OF BOUND");
+        require(tokenIdToMutate < totalSupply(), "OUT_OF_BOUND");
         require(this.ownerOf(tokenIdToMutate) == msg.sender, "INVALID_OWNER");
 
         // now that basics checks have been made we need to check if the contract mutator

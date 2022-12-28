@@ -1,5 +1,5 @@
 import Contracts from '../components/contracts';
-import { SSHStore } from '../typechain';
+import { ERC721, Store } from '../typechain';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
@@ -7,48 +7,52 @@ import { BigNumber } from 'ethers';
 
 const { parseEther: toEth } = ethers.utils;
 
-describe('SSHStore', () => {
-    let ssh: SignerWithAddress;
-    let normalUser: SignerWithAddress;
+describe('Store', () => {
+    let admin, user: SignerWithAddress;
 
-    let SSHStore: SSHStore;
+    let Store: Store;
+
+    let defaultItem: ERC721;
 
     before(async () => {
-        [ssh, normalUser] = await ethers.getSigners();
+        [admin, user] = await ethers.getSigners();
+        defaultItem = await Contracts.TestERC721.deploy('Name', 'Symbol');
     });
 
     describe('construction', () => {
         beforeEach(async () => {
-            SSHStore = await Contracts.SSHStore.deploy();
+            Store = await Contracts.Store.deploy();
         });
 
         it('initial total supply should be properly initialized', async () => {
-            expect(await SSHStore.getSupply()).to.equal(0);
+            expect(await Store.totalSupply()).to.equal(0);
         });
     });
 
     describe('create drop', () => {
         before(async () => {
-            SSHStore = await Contracts.SSHStore.deploy();
+            Store = await Contracts.Store.deploy();
         });
 
-        const createDrop = async (dropId: number, maxSupply: number, price: BigNumber) => {
+        const createDrop = async (maxSupply: number, mintPrice: BigNumber, versionNb: number) => {
+            let snapshotDropTotalSupply: BigNumber;
             it('should create drop', async () => {
-                await SSHStore.createDrop(maxSupply, price);
+                snapshotDropTotalSupply = await Store.totalSupply();
+                await Store.createDrop(maxSupply, mintPrice, versionNb, defaultItem.address);
             });
 
             it('total supply of drop should be updated', async () => {
-                expect(await SSHStore.getSupply()).to.equal(dropId + 1);
+                expect(await Store.totalSupply()).to.equal(snapshotDropTotalSupply.add(1));
             });
         };
 
-        let dropId = 0;
-        for (let maxSupply of [0, 1, 10, 100, 1000, 100000]) {
-            for (let price of [BigNumber.from(0), toEth('0.05'), toEth('0.1'), toEth('0.5'), toEth('2.5')]) {
-                context(`with dropId: ${dropId}, maxSupply: ${maxSupply}, price: ${price}`, () => {
-                    createDrop(dropId, maxSupply, price);
-                    dropId++;
-                });
+        for (let maxSupply of [0, 5, 100]) {
+            for (let mintPrice of [toEth('0.05'), toEth('0.25'), toEth('2.5')]) {
+                for (let versionNb of [1, 5, 10]) {
+                    context(`with maxSupply: ${maxSupply}, mintPrice: ${mintPrice}`, () => {
+                        createDrop(maxSupply, mintPrice, versionNb);
+                    });
+                }
             }
         }
     });

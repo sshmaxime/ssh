@@ -1,8 +1,20 @@
 import "dotenv/config";
 
-import { App } from "./app";
+import store from "./store";
+import server from "./server";
 
-const PORT = 3001;
+import { PORT } from "./config";
 
-const app = new App();
-app.start(PORT);
+import "./http";
+import "./io";
+
+const start = async (PORT: number) => {
+  try {
+    await store.init();
+    await server.start(PORT);
+  } catch (error) {
+    console.error(`Error occured: ${error.message}`);
+  }
+};
+
+start(PORT);

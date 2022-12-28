@@ -19,14 +19,14 @@ import img3 from "../_utils/assets/images/wave.png";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_0";
-import Clickable from "@/_utils/components/stateless/clickable";
+import Clickable from "@/_utils/components/clickable";
 
 import { CREDENTIALS } from "@/_constants";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DiscordIcon from "../_utils/assets/icons/discord.svg";
 
-import Marquee from "../_utils/components/stateless/marquee";
-import CenterItem from "../_utils/components/stateless/grid/centerItem";
+import Marquee from "../_utils/components/marquee";
+import CenterItem from "../_utils/components/grid/centerItem";
 
 const HeaderComponent: FC = () => {
   return (
@@ -36,7 +36,6 @@ const HeaderComponent: FC = () => {
           item
           xs={12}
           style={{
-            borderTop: "1px solid black",
             borderBottom: "1px solid black",
             height: "60px",
           }}
@@ -295,18 +294,18 @@ const LandingScreenComponent: FC = () => {
                     {/*  */}
 
                     {/* <Style.GalleryWrap>
-                                  {items.map((item, index) => (
-                                    <Style.GalleryItem
-                                      key={index}
-                                      onMouseEnter={() => setHover(index)}
-                                      onMouseLeave={() => setHover(0)}
-                                      $onHover={hover === index}
-                                      img={item}
-                                    >
-                                      1
-                                    </Style.GalleryItem>
-                                  ))}
-                                </Style.GalleryWrap> */}
+                      {items.map((item, index) => (
+                        <Style.GalleryItem
+                          key={index}
+                          onMouseEnter={() => setHover(index)}
+                          onMouseLeave={() => setHover(0)}
+                          $onHover={hover === index}
+                          img={item}
+                        >
+                          1
+                        </Style.GalleryItem>
+                      ))}
+                    </Style.GalleryWrap> */}
 
                     {/*  */}
                   </Grid>

@@ -1,5 +1,5 @@
 import { BigNumber, ethers, Signer } from "ethers";
-import { TestERC721__factory, SSHDrop__factory } from "@sshlabs/contracts";
+import { TestERC721__factory, Drop__factory, ERC721__factory } from "@sshlabs/contracts";
 import { info } from "../../info";
 import { NFT } from "@sshlabs/typings";
 
@@ -39,50 +39,28 @@ class SDK {
     await this.provider.send("eth_requestAccounts", []);
     await this._setSigner(this.provider.getSigner() as Signer);
   };
-  //
-  //
-  //
+
   mintDefault = async (contractAddress: string, value: string) => {
     const contract = TestERC721__factory.connect(contractAddress, this._signer);
-    const tx = await contract.mint({ value: value });
-    const receipt = await tx.wait();
-    if (receipt.events) {
-      const mintedEvent = receipt.events[0];
-      const mintedTokenId = ((mintedEvent.args as any).tokenId as BigNumber).toNumber();
-      return mintedTokenId;
-    }
-    return -100;
+    const tx = await contract.mintTest({ value: value });
+    return tx;
   };
 
   mint = async (contractAddress: string, versionId: number, value: string) => {
-    const contract = SSHDrop__factory.connect(contractAddress, this._signer);
+    const contract = Drop__factory.connect(contractAddress, this._signer);
     const tx = await contract.mint(versionId, { value: value });
-    const receipt = await tx.wait();
+    return tx;
   };
 
-  mintAndMutate = async (contractAddress: string, versionId: number, value: string, nft: NFT) => {
-    const contract = SSHDrop__factory.connect(contractAddress, this._signer);
-    const tx = await contract.mint(versionId, { value: value });
-
-    const receipt = await tx.wait();
-
-    if (receipt.events) {
-      const mintedEvent = receipt.events[1];
-      const mintedTokenId = ((mintedEvent.args as any).tokenId as BigNumber).toNumber();
-      await contract.mutate(mintedTokenId, nft.contract, nft.id);
-    }
-  };
-  //
-  //
-  //
   mutate = async (
     contractAddress: string,
     tokenId: number,
     contractMutator: string,
     tokenIdMutator: number
   ) => {
-    const contract = SSHDrop__factory.connect(contractAddress, this._signer);
-    await contract.mutate(tokenId, contractMutator, tokenIdMutator);
+    const contract = Drop__factory.connect(contractAddress, this._signer);
+    const tx = await contract.mutate(tokenId, contractMutator, tokenIdMutator);
+    return tx;
   };
 }
 

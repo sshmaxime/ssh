@@ -7,13 +7,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Fade } from "react-awesome-reveal";
 import Style from "./style";
 
-import Pastille from "../../../_utils/components/stateless/pastille";
+import Pastille from "../../../_utils/components/pastille";
 
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
-import { DRIP, Drop, NFT } from "@sshlabs/typings";
+import { Drip as DripType, DripStatus, Drop, NFT } from "@sshlabs/typings";
 import { useParams } from "react-router-dom";
 import { CREDENTIALS } from "../../../_constants";
-import Clickable from "../../../_utils/components/stateless/clickable";
+import Clickable from "../../../_utils/components/clickable";
 import { useDispatch, useSelector } from "../../store/hooks";
 
 import { useGetAssetsQuery, useGetDripQuery } from "../../store/services";
@@ -59,10 +59,10 @@ const DripProxy: FC = () => {
   return <Drip drop={drop[dropId]} drip={drip} />;
 };
 
-const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
+const Drip: FC<{ drop: Drop; drip: DripType }> = ({ drop, drip }) => {
   const dispatch = useDispatch();
   const { auth, address, name } = useSelector((state) => state.web3);
-  const isMutable = drip.isMutable;
+  const isMutable = drip.status === DripStatus.VIRGIN;
 
   // fetch data
   const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
@@ -74,7 +74,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
     sceneRef.current.updateItem(
       newItem.img,
       0,
-      drip.versionId,
+      drip.version,
       drop.symbol,
       newItem.symbol + " #" + newItem.id
     );
@@ -92,7 +92,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
               sceneRef={sceneRef}
               model={drop.metadata.model}
               versions={drop.metadata.versions}
-              initialVersion={drip.versionId}
+              initialVersion={drip.version}
               initialDropSymbol={drop.symbol}
               initialTokenNameId={"BAYC #123"}
               initialPlaceholderTexture={drip.img}
@@ -240,7 +240,7 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                 <Grid item xs={12}>
                   <Style.Explainer>Version</Style.Explainer>
                   <Style.ContainerTitle3>
-                    {drop.metadata.versions[drip.versionId].name} #{drip.versionId}
+                    {drop.metadata.versions[drip.version].name} #{drip.version}
                   </Style.ContainerTitle3>
                 </Grid>
                 <Grid item xs={12}>
@@ -258,9 +258,9 @@ const Drip: FC<{ drop: Drop; drip: DRIP }> = ({ drop, drip }) => {
                         if (!currentItem) return;
                         dispatch(
                           mutate({
-                            contractAddress: drop._address,
+                            address: drop.address,
                             tokenId: drip.id,
-                            contractMutator: currentItem.contract,
+                            contractMutator: currentItem.address,
                             tokenIdMutator: currentItem.id,
                           })
                         );

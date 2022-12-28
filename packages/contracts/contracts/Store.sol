@@ -13,7 +13,7 @@ import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extension
  */
 contract Store is Ownable {
     // Mapping from drop id to drop contract
-    mapping(uint256 => Drop) private _drops;
+    mapping(uint256 => Drop) private dropIdToDrop;
 
     // Total supply of DROPs
     uint256 TOTAL_SUPPLY = 0;
@@ -25,7 +25,7 @@ contract Store is Ownable {
      * @dev Return the DROP item matching the drop id.
      */
     function drop(uint256 dropId) public view returns (Drop) {
-        return _drops[dropId];
+        return dropIdToDrop[dropId];
     }
 
     /**
@@ -40,7 +40,7 @@ contract Store is Ownable {
      */
     function createDrop(uint256 maxSupply, uint256 mintPrice, uint8 versions, address defaultItem) public onlyOwner {
         uint256 dropId = TOTAL_SUPPLY;
-        _drops[dropId] = new Drop(dropId, maxSupply, mintPrice, versions, defaultItem);
+        dropIdToDrop[dropId] = new Drop(dropId, maxSupply, mintPrice, versions, defaultItem);
         TOTAL_SUPPLY++;
 
         emit DropCreated(dropId);

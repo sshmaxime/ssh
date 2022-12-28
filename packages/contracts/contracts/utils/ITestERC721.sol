@@ -11,4 +11,6 @@ import { IERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extensio
  */
 interface ITestERC721 is IERC721, IERC721Enumerable {
     function mint() external payable;
+
+    function mintTest() external payable;
 }

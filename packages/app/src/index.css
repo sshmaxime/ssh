@@ -388,7 +388,20 @@ body,
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
 
+.loaderMini2 {
+  width: 12.5px;
+  height: 12.5px;
+  border: 2.5px solid black;
+  border-bottom-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
   visibility: visible;
   opacity: 1;
   transition: visibility 0s linear 0s, opacity 300ms;

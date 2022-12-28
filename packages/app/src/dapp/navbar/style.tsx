@@ -26,6 +26,14 @@ const style = {
     fontSize: "0.9em",
     color: "black",
   })),
+  HeaderFirstLeftSideTitle: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "1.25em",
+    fontWeight: 500,
+    marginTop: "25px",
+    marginBottom: "25px",
+    color: "black",
+  })),
   GoToAppButton: styled("div")(({ theme }) => ({
     fontSize: "0.85em",
     color: "white",

@@ -1,10 +1,3 @@
-export declare type NFT = {
-    contract: string;
-    img: string;
-    id: number;
-    name: string;
-    symbol: string;
-};
 export declare enum DripStatus {
     VIRGIN = 0,
     MUTATED = 1
@@ -13,15 +6,14 @@ export declare type DripMutation = {
     mutator: string;
     mutatorId: number;
 };
-export declare type DRIP = {
-    dropId: number;
+export declare type Drips = Drip[];
+export declare type Drip = {
+    drop: Drop;
+    id: number;
+    version: number;
+    img: string;
     status: DripStatus;
     mutation: DripMutation;
-    collectionName: string;
-    versionId: number;
-    contract: string;
-    img: string;
-    id: number;
 };
 export declare type DropMetadata = {
     id: number;
@@ -33,28 +25,9 @@ export declare type DropMetadata = {
         name: string;
     }[];
 };
-export declare type VersionMetadata = {
-    imgUrl: string;
-    versionColor: string;
-    versionName: string;
-};
-export declare type NFTs = NFT[];
-export declare type NFTsByCollection = {
-    collectionName: string;
-    collectionSymbol: string;
-    assets: NFTs;
-}[];
-export declare type AssetsOwned = NFTsByCollection;
-export declare type DripsOwned = DRIP[];
-export declare type Collection = {
-    name: string;
-    symbol: string;
-    contract: string;
-    img: string;
-    price: string;
-};
+export declare type Drops = Drop[];
 export declare type Drop = {
-    _address: string;
+    address: string;
     symbol: string;
     id: number;
     maxSupply: number;
@@ -63,4 +36,37 @@ export declare type Drop = {
     defaultItem: Collection;
     metadata: DropMetadata;
 };
-export declare type Drops = Drop[];
+export declare type NFTsByCollection = {
+    collectionName: string;
+    collectionSymbol: string;
+    assets: NFTs;
+}[];
+export declare type NFTs = NFT[];
+export declare type NFT = {
+    address: string;
+    name: string;
+    symbol: string;
+    img: string;
+    id: number;
+};
+export declare type Collection = {
+    address: string;
+    name: string;
+    symbol: string;
+    img: string;
+    price: string;
+};
+export declare type VersionMetadata = {
+    imgUrl: string;
+    versionColor: string;
+    versionName: string;
+};
+export declare const ListMockTokens: {
+    [name: string]: {
+        contract: string;
+        owner: string;
+        tokens: {
+            [tokenId: number]: string;
+        };
+    };
+};
