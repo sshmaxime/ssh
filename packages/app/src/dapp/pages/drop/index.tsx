@@ -67,7 +67,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
 
   const zeroItem: NFT = {
     address: "",
-    img: process.env.PUBLIC_URL + "/whiteSquare.jpeg",
+    img: process.env.PUBLIC_URL + "/zeroItem.png",
     id: 0,
     name: "",
     symbol: "",
@@ -137,7 +137,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
   const [hover, setHover] = useState(0);
   const { imagesPreloaded } = useImagePreloader(drop.metadata.versions.map((item) => item.texture));
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -229,7 +229,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
             isLoading: txProcess.mutating.loading,
             isDone: txProcess.mutating.done,
             tx: txProcess.mutating.tx,
-            price: "0.0",
+            price: "FREE",
             action: {
               name: "MUTATE",
               fct: () => {
@@ -341,33 +341,36 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                 <img src={currentItem.img} style={{ width: "100%", borderRadius: "15px" }} alt="" />
               </Grid>
 
-              <Style.GridPricePortal item style={{ marginRight: "10px" }} xs={2}>
-                <Grid container alignContent="space-around" style={{ height: "100%" }}>
-                  <Grid item xs={12}>
-                    <Style.MintPriceTitle>Price</Style.MintPriceTitle>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container columnSpacing={1}>
-                      <Grid item>
-                        <img src={logoeth} style={{ width: "12.5px" }} alt="" />
-                      </Grid>
-                      <Grid item>
-                        <Style.MintPrice>
-                          {modalActions.map(
-                            (item, index) =>
-                              item.isMyTurn && (
-                                <React.Fragment key={index}>{item.price}</React.Fragment>
-                              )
-                          )}
-                        </Style.MintPrice>
-                      </Grid>
-                      {/* <Grid item>
+              {!modalActions[modalActions.length - 1].isDone && (
+                <Style.GridPricePortal item style={{ marginRight: "10px" }} xs={2}>
+                  <Grid container alignContent="space-around" style={{ height: "100%" }}>
+                    {modalActions.map(
+                      (item, index) =>
+                        item.isMyTurn && (
+                          <React.Fragment key={index}>
+                            <Grid item xs={12}>
+                              <Style.MintPriceTitle>Price</Style.MintPriceTitle>
+                            </Grid>
+                            <Grid item xs={12}>
+                              <Grid container columnSpacing={1}>
+                                <Grid item>
+                                  <img src={logoeth} style={{ width: "12.5px" }} alt="" />
+                                </Grid>
+                                <Grid item>
+                                  <Style.MintPrice>{item.price}</Style.MintPrice>
+                                </Grid>
+                                {/* <Grid item>
                             <Style.MintPriceUsd>($0)</Style.MintPriceUsd>
                           </Grid> */}
-                    </Grid>
+                              </Grid>
+                            </Grid>
+                          </React.Fragment>
+                        )
+                    )}
+                    {modalActions[modalActions.length - 1].isDone && <>Thanks</>}
                   </Grid>
-                </Grid>
-              </Style.GridPricePortal>
+                </Style.GridPricePortal>
+              )}
 
               <Grid
                 item
@@ -376,6 +379,7 @@ const Drop: FC<{ drop: DropType }> = ({ drop }) => {
                   display: "flex",
                   flex: 1,
                   alignItems: "end",
+                  transition: "all .5s ease-in-out",
                 }}
               >
                 <Grid container>

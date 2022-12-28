@@ -7,10 +7,25 @@ import {
 } from "@sshlabs/contracts";
 import { BigNumber, ethers, Event } from "ethers";
 
-import { Drip, Drips, Drop, DropMetadata, Drops, NFTs, ListMockTokens } from "@sshlabs/typings";
+import {
+  Drip,
+  Drips,
+  Drop,
+  DropMetadata,
+  Drops,
+  NFTs,
+  ListMockTokens,
+  DripStatus,
+  NFT,
+} from "@sshlabs/typings";
 import axios from "axios";
-import { ADDRESS_STORE, IPFS_GATEWAY, WEB3_ENDPOINT } from "../config";
+import { axios as OpenSeaCli } from "../clients";
+import { ADDRESS_STORE, ENV, IPFS_GATEWAY, WEB3_ENDPOINT } from "../config";
 import { IPFS_EXP } from "../_constants";
+
+const defaultItemImg =
+  "https://i.seadn.io/gae/u318gzdW-M73Uwe9pg26cMZKb6LJItJB4-iCpMZQ8bfh7Kbo0dropDsYdwiiWKeEQ9eQVNTroC0KJeIDJ-hmo3Hm_55GZD_mvpKY?auto=format&w=1000";
+const defaultItemAddress = "0xd0C3016586C1337f6869cE68D25b08c946B121da";
 
 export class Store {
   private Provider: ethers.providers.JsonRpcProvider;
@@ -61,7 +76,7 @@ export class Store {
         address: defaultCollectionAddress,
         name: await defaultCollection.name(),
         symbol: await defaultCollection.symbol(),
-        img: "https://i.seadn.io/gae/u318gzdW-M73Uwe9pg26cMZKb6LJItJB4-iCpMZQ8bfh7Kbo0dropDsYdwiiWKeEQ9eQVNTroC0KJeIDJ-hmo3Hm_55GZD_mvpKY?auto=format&w=1000",
+        img: defaultItemImg,
         price: (await defaultCollection.price()).toString(),
       },
       metadata: metadata,
@@ -130,17 +145,58 @@ export class Store {
     const dropContractAddress = await this.Store.drop(dropId);
     const dropContract = Drop__factory.connect(dropContractAddress, this.Provider);
     const drip = await dropContract.drip(tokenId);
-
-    const a = await axios.get("https://picsum.photos/1000?grayscale");
-
+    const drop = this.getDrop(dropId);
     return {
-      drop: this.getDrop(dropId),
+      drop: drop,
       id: tokenId,
       version: drip.versionId.toNumber(),
-      img: a.request.res.req._redirectable._currentUrl, // TODO
+      img: "", // TODO
       status: drip.status,
-      mutation: drip.mutation as any,
+      nft:
+        drip.status === DripStatus.MUTATED
+          ? drip.mutation.mutator === defaultItemAddress
+            ? {
+                name: "Default NFT",
+                symbol: "DNFT",
+                address: drip.mutation.mutator,
+                id: drip.mutation.mutatorId.toNumber(),
+                img: defaultItemImg,
+              }
+            : await this.getNft(drip.mutation.mutator, drip.mutation.mutatorId.toNumber())
+          : undefined,
     };
+  };
+
+  getNft = async (contractAddress: string, tokenId: number): Promise<NFT> => {
+    if (ENV === "TEST") {
+      for (const listName in ListMockTokens) {
+        const list = ListMockTokens[listName];
+
+        if (list.contract === contractAddress) {
+          const contract = ERC721Enumerable__factory.connect(list.contract, this.Provider);
+          return {
+            address: list.contract,
+            img: list.tokens[tokenId],
+            id: tokenId,
+            name: await contract.name(),
+            symbol: await contract.symbol(),
+          };
+        }
+      }
+      return undefined;
+    }
+
+    const asset = (
+      await OpenSeaCli.get(`https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`)
+    ).data;
+    const nft: NFT = {
+      address: asset.asset_contract.address,
+      img: asset.image_url,
+      id: asset.token_id,
+      name: asset.collection.name,
+      symbol: asset.collection.symbol,
+    };
+    return nft;
   };
 
   getDripOwnedByAddress = async (address: string) => {

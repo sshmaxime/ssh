@@ -95,7 +95,7 @@ const Drip: FC<{ drop: Drop; drip: DripType }> = ({ drop, drip }) => {
               initialVersion={drip.version}
               initialDropSymbol={drop.symbol}
               initialTokenNameId={"BAYC #123"}
-              initialPlaceholderTexture={drip.img}
+              initialPlaceholderTexture={drip.nft?.img || process.env.PUBLIC_URL + "/zeroItem.png"}
               initialId={drip.id}
             />
           </Style.BodyScene>

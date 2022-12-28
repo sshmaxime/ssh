@@ -16,8 +16,7 @@ app.get("/assets/:address", async (req: Request, res: Response): Promise<Respons
   const dataToReturn: NFTsByCollection = [];
 
   if (ENV === "TEST") {
-    let getTestData = await store.getLocalAssetsTest(address);
-    getTestData = [...getTestData, ...getTestData, ...getTestData, ...getTestData];
+    const getTestData = await store.getLocalAssetsTest(address);
 
     dataToReturn.push({
       collectionName: getTestData[0].name,

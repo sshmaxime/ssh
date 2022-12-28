@@ -6,11 +6,6 @@ export enum DripStatus {
   MUTATED,
 }
 
-export type DripMutation = {
-  mutator: string;
-  mutatorId: number;
-};
-
 export type Drips = Drip[];
 export type Drip = {
   drop: Drop;
@@ -19,7 +14,7 @@ export type Drip = {
   version: number;
   img: string;
   status: DripStatus;
-  mutation: DripMutation;
+  nft?: NFT;
 };
 
 //////////////////

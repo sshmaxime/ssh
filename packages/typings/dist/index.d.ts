@@ -2,10 +2,6 @@ export declare enum DripStatus {
     VIRGIN = 0,
     MUTATED = 1
 }
-export declare type DripMutation = {
-    mutator: string;
-    mutatorId: number;
-};
 export declare type Drips = Drip[];
 export declare type Drip = {
     drop: Drop;
@@ -13,7 +9,7 @@ export declare type Drip = {
     version: number;
     img: string;
     status: DripStatus;
-    mutation: DripMutation;
+    nft?: NFT;
 };
 export declare type DropMetadata = {
     id: number;
