@@ -13,10 +13,21 @@ const style = {
       },
     })
   ),
+  RealRootSpan: styled("span")<{ $activated?: boolean; $hoverAnimation?: boolean }>(
+    ({ theme, $activated, $hoverAnimation }) => ({
+      width: "100%",
+      transition: "all .2s ease-in-out",
+      opacity: $activated ? "" : "10%",
+      ":hover": {
+        transform: $activated && $hoverAnimation ? "scale(1.01)" : "",
+        cursor: $activated ? "pointer" : "not-allowed",
+      },
+    })
+  ),
   Root: styled("div")(({ theme }) => ({
     width: "100%",
   })),
-  RootLink: styled("div")(({ theme }) => ({
+  RootLink: styled(Link)(({ theme }) => ({
     color: "black",
     textDecoration: "none",
     width: "100%",

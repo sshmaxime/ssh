@@ -61,7 +61,7 @@ export const defaultSkateModelAnimation = (refs: SkateRefs, props: ModelMetadata
     loadTextureTextToObject(id, versionName, dropSymbol, tokenNameId, refs.textRef);
   },
   //
-  updateVersion(img: any, id: number, version: number, dropSymbol: string, tokenNameId: string) {
+  updateVersion(id: number, version: number, dropSymbol: string, tokenNameId: string) {
     this._changeTextureDeck(props.versions[version].texture);
     this._changeTextureText(id, props.versions[version].name, dropSymbol, tokenNameId);
   },

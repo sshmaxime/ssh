@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 type props = {
   newPage?: boolean;
+  isSpan?: boolean;
   onClick?: Function;
   onClick2?: Function;
   address?: string;
@@ -14,14 +15,14 @@ type props = {
   activated?: boolean;
   hoverAnimation?: boolean;
 };
-
 const Clickable: FC<props> = ({
   newPage = false,
   children,
+  isSpan = false,
   onClick,
   onClick2,
   address = "https://google.com",
-  external = true,
+  external = false,
   activated = true,
   hoverAnimation = true,
 }) => {
@@ -29,31 +30,44 @@ const Clickable: FC<props> = ({
 
   let elem: any;
   if (onClick) {
-    elem = <Style.Root onClick={(e) => (activated ? onClick(e) : () => {})}>{children}</Style.Root>;
+    elem = activated ? (
+      <Style.Root onClick={(e) => (activated ? onClick(e) : () => {})}>{children}</Style.Root>
+    ) : (
+      <>{children}</>
+    );
   } else if (external) {
-    elem = (
+    elem = activated ? (
       <Style.RootHref target="_blank" href={address}>
         {children}
       </Style.RootHref>
+    ) : (
+      <>{children}</>
     );
   } else {
-    elem = (
-      <Style.RootLink
-        onClick={(e) => {
-          if (onClick2) onClick2(e);
-          navigate(address);
-        }}
-      >
-        {children}
-      </Style.RootLink>
-    );
+    elem = activated ? <Style.RootLink to={address}>{children}</Style.RootLink> : <>{children}</>;
   }
 
-  return (
-    <Style.RealRoot $activated={activated} $hoverAnimation={hoverAnimation}>
-      {elem}
-    </Style.RealRoot>
-  );
+  if (!isSpan) {
+    return (
+      <Style.RealRoot
+        $activated={activated}
+        $hoverAnimation={hoverAnimation}
+        onClick={(e) => (onClick2 ? onClick2(e) : {})}
+      >
+        {elem}
+      </Style.RealRoot>
+    );
+  } else {
+    return (
+      <Style.RealRootSpan
+        $activated={activated}
+        $hoverAnimation={hoverAnimation}
+        onClick={(e) => (onClick2 ? onClick2(e) : {})}
+      >
+        {elem}
+      </Style.RealRootSpan>
+    );
+  }
 };
 
 export default Clickable;

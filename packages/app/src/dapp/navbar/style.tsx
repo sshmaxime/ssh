@@ -108,6 +108,13 @@ const style = {
     fontSize: "0.75em",
     color: "black",
   })),
+  WalletTypoDripNft: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 800,
+    fontSize: "0.65em",
+    marginRight: "5px",
+    color: "black",
+  })),
   WalletTypoDripId2: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     letterSpacing: "0.5px",
@@ -137,7 +144,6 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
     fontSize: "0.65em",
-    padding: "2.5px",
     color: "#3366BB",
     borderRadius: "5px",
   })),

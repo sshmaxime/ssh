@@ -2,7 +2,7 @@
 ////// DRIP //////
 //////////////////
 export enum DripStatus {
-  VIRGIN,
+  DEFAULT,
   MUTATED,
 }
 

@@ -27,7 +27,7 @@ class SDK {
     this._address = await newSigner.getAddress();
 
     if (info.isDev) {
-      this._name = "foobar.eth";
+      this._name = "tester.eth";
     } else {
       this._name = (await this.provider.lookupAddress(this._address)) || "cool human";
     }

@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 
 import Navbar from "./navbar";
 
@@ -10,8 +10,8 @@ import { useDispatch } from "./store/hooks";
 
 import { Route, Routes } from "react-router-dom";
 
-import Drip from "./pages/drip";
 import Drop from "./pages/drop";
+import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 
 type props = {};
 
@@ -36,8 +36,7 @@ const Dapp: FC<props> = ({ children }) => {
 
       <Routes>
         <Route path="/drop" element={<>hi</>} />
-        <Route path="/drop/:dropId" element={<Drop />} />
-        <Route path="/drop/:dropId/:tokenId" element={<Drip />} />
+        <Route path="/drop/:dropId/*" element={<Drop />} />
       </Routes>
     </>
   );

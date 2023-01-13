@@ -2,7 +2,6 @@ import { create, IPFSHTTPClient } from 'ipfs-http-client';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { DropMetadata } from '@sshlabs/typings';
-import { ethers } from 'hardhat';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 const DROP_DIR = path.join(__dirname, '..', '_data', 'drop');

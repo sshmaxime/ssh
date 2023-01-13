@@ -26,6 +26,7 @@ const style = {
     height: "100%",
     width: "100%",
     position: "absolute",
+    top: 1,
   })),
   Todo: styled(Grid)(({ theme }) => ({
     ...theme.myBreakpoints(theme).level3,
@@ -252,6 +253,14 @@ const style = {
       opacity: 1,
     },
   })),
+  MadeBy: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 700,
+    fontSize: "0.65em",
+    letterSpacing: "1px",
+    padding: "4px",
+    paddingRight: "7.5px",
+  })),
 
   BodyLeftSideText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -279,15 +288,10 @@ const style = {
 
   ModelBox: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
     backgroundColor: "white",
     outline: 0,
     padding: "25px",
     borderRadius: "10px ",
-    width: "45vw",
   })),
   TextModal: styled("div")(({ theme }) => ({
     fontSize: "0.9em",
@@ -319,6 +323,7 @@ const style = {
     borderRadius: "15px",
     marginRight: "25px",
     marginBottom: "10px",
+    lineHeight: "20px",
     backgroundColor: theme.backgroundColor.primary,
   })),
   FinalStep: styled("div")(({ theme }) => ({

@@ -18,6 +18,7 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
 import { DripStatus } from "@sshlabs/typings";
+import CenterItem from "@/_utils/components/grid/centerItem";
 
 export const NavbarComponent: FC = () => {
   const { auth, address, name } = useSelector((state) => state.web3);
@@ -91,7 +92,7 @@ export const NavbarComponent: FC = () => {
                       vertical: "bottom",
                       horizontal: "left",
                     }}
-                    transformOrigin={{ horizontal: "left", vertical: -10 }}
+                    transformOrigin={{ horizontal: "left", vertical: -20 }}
                     disableRestoreFocus
                     style={{ zIndex: 2000 }}
                     elevation={0}
@@ -103,75 +104,101 @@ export const NavbarComponent: FC = () => {
                             {drips.map((drip, index) => (
                               <Grid item key={index} xs={12}>
                                 <Grid container>
-                                  {/* <Grid item xs={2}>
-                                    <img src={drip.img} style={{ width: "100%" }} alt="" />
-                                  </Grid> */}
+                                  <Grid item xs={2}>
+                                    <img
+                                      src={drip.img || drip.nft?.img || ""}
+                                      style={{ width: "100%" }}
+                                      alt=""
+                                    />
+                                  </Grid>
                                   <Grid
                                     item
-                                    xs={12}
+                                    xs={10}
                                     style={{ padding: "1.5px", paddingLeft: "10px" }}
                                   >
-                                    <Grid container justifyContent="space-between">
+                                    <Grid
+                                      container
+                                      direction="column"
+                                      justifyContent="space-between"
+                                      style={{ height: "100%", padding: "2.5px" }}
+                                    >
                                       <Grid item>
-                                        <Style.WalletTypoCollectionDrop>
-                                          {drip.drop.symbol}
-                                        </Style.WalletTypoCollectionDrop>
-                                      </Grid>
-                                      <Grid item>
-                                        <Grid container columnSpacing={0.5}>
-                                          {drip.status === DripStatus.MUTATED ? (
-                                            <Grid item>
-                                              <Style.WalletTypoCollection>
-                                                MUTABLE
-                                              </Style.WalletTypoCollection>
-                                            </Grid>
-                                          ) : (
-                                            <></>
-                                          )}
+                                        <Grid container justifyContent="space-between">
                                           <Grid item>
-                                            <Style.WalletTypoDripId>
-                                              #{drip.id}
-                                            </Style.WalletTypoDripId>
+                                            <Grid container columnSpacing={1}>
+                                              <CenterItem item>
+                                                <Style.WalletTypoCollectionDrop>
+                                                  {drip.drop.symbol}
+                                                </Style.WalletTypoCollectionDrop>
+                                              </CenterItem>
+                                              <Grid item>
+                                                <Style.WalletTypoDripId>
+                                                  #{drip.id}
+                                                </Style.WalletTypoDripId>
+                                              </Grid>
+                                            </Grid>
                                           </Grid>
-                                          <Grid
-                                            item
-                                            style={{ display: "flex", alignContent: "center" }}
-                                          >
-                                            <img
-                                              style={{ width: "15px" }}
-                                              src={OpenseaIcon}
-                                              alt=""
-                                            />
-                                          </Grid>
-                                          <Grid
-                                            item
-                                            style={{ display: "flex", alignContent: "center" }}
-                                          >
-                                            <img
-                                              style={{ width: "15px" }}
-                                              src={EtherscanIcon}
-                                              alt=""
-                                            />
+
+                                          <Grid item>
+                                            <Grid container columnSpacing={0.5}>
+                                              {drip.status !== DripStatus.MUTATED ? (
+                                                <Grid item>
+                                                  <Style.WalletTypoCollection>
+                                                    MUTABLE
+                                                  </Style.WalletTypoCollection>
+                                                </Grid>
+                                              ) : (
+                                                <></>
+                                              )}
+
+                                              <CenterItem
+                                                item
+                                                style={{ display: "flex", alignContent: "center" }}
+                                              >
+                                                <img
+                                                  style={{ width: "15px" }}
+                                                  src={OpenseaIcon}
+                                                  alt=""
+                                                />
+                                              </CenterItem>
+                                              <CenterItem
+                                                item
+                                                style={{ display: "flex", alignContent: "center" }}
+                                              >
+                                                <img
+                                                  style={{ width: "15px" }}
+                                                  src={EtherscanIcon}
+                                                  alt=""
+                                                />
+                                              </CenterItem>
+                                            </Grid>
                                           </Grid>
                                         </Grid>
                                       </Grid>
-                                    </Grid>
-
-                                    <Grid container justifyContent="space-between">
                                       <Grid item>
-                                        <Grid container style={{ marginTop: "5px" }}>
-                                          <Grid item style={{ marginRight: "5px" }}>
-                                            <Clickable
-                                              hoverAnimation={false}
-                                              external={false}
-                                              address={`drop/${drip.drop.id}/${drip.id}`}
-                                              onClick2={() => handlePopoverClose()}
-                                            >
-                                              <Style.WalletTypoDripAction>
-                                                View
-                                              </Style.WalletTypoDripAction>
-                                            </Clickable>
-                                          </Grid>
+                                        <Grid container justifyContent="space-between">
+                                          <CenterItem item>
+                                            <Grid container>
+                                              <Grid item>
+                                                <Clickable
+                                                  hoverAnimation={false}
+                                                  address={`/app/drop/${drip.drop.id}/${drip.id}`}
+                                                  onClick2={() => handlePopoverClose()}
+                                                >
+                                                  <Style.WalletTypoDripAction>
+                                                    View
+                                                  </Style.WalletTypoDripAction>
+                                                </Clickable>
+                                              </Grid>
+                                            </Grid>
+                                          </CenterItem>
+                                          {drip.nft && (
+                                            <Grid item>
+                                              <Style.WalletTypoDripNft>
+                                                {drip.nft.symbol} #{drip.nft.id}
+                                              </Style.WalletTypoDripNft>
+                                            </Grid>
+                                          )}
                                         </Grid>
                                       </Grid>
                                     </Grid>

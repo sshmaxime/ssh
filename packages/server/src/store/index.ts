@@ -25,7 +25,6 @@ import { IPFS_EXP } from "../_constants";
 
 const defaultItemImg =
   "https://i.seadn.io/gae/u318gzdW-M73Uwe9pg26cMZKb6LJItJB4-iCpMZQ8bfh7Kbo0dropDsYdwiiWKeEQ9eQVNTroC0KJeIDJ-hmo3Hm_55GZD_mvpKY?auto=format&w=1000";
-const defaultItemAddress = "0xd0C3016586C1337f6869cE68D25b08c946B121da";
 
 export class Store {
   private Provider: ethers.providers.JsonRpcProvider;
@@ -154,15 +153,7 @@ export class Store {
       status: drip.status,
       nft:
         drip.status === DripStatus.MUTATED
-          ? drip.mutation.mutator === defaultItemAddress
-            ? {
-                name: "Default NFT",
-                symbol: "DNFT",
-                address: drip.mutation.mutator,
-                id: drip.mutation.mutatorId.toNumber(),
-                img: defaultItemImg,
-              }
-            : await this.getNft(drip.mutation.mutator, drip.mutation.mutatorId.toNumber())
+          ? await this.getNft(drip.mutation.mutator, drip.mutation.mutatorId.toNumber())
           : undefined,
     };
   };

@@ -1,3 +1,4 @@
+import { normalizeIPFSUrl } from "@/dapp/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { NFTsByCollection, Drip, Drips, Drop } from "@sshlabs/typings";
 
@@ -10,8 +11,8 @@ export const dropApi = createApi({
       query: ({}) => `drops/`,
     }),
     //
-    getDrip: builder.query<Drip, { dropId: number; tokenId: number }>({
-      query: ({ dropId, tokenId }) => `drip/${dropId}/${tokenId}`,
+    getDrip: builder.query<Drip, { dropId: number; dripId: number }>({
+      query: ({ dropId, dripId }) => `drip/${dropId}/${dripId}`,
     }),
     //
     getAssets: builder.query<NFTsByCollection, { address: string }>({

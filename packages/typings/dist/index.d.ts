@@ -1,5 +1,5 @@
 export declare enum DripStatus {
-    VIRGIN = 0,
+    DEFAULT = 0,
     MUTATED = 1
 }
 export declare type Drips = Drip[];

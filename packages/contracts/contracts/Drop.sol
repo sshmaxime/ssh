@@ -13,7 +13,7 @@ import { IMutator } from "./mutators/IMutator.sol";
  * @dev
  */
 enum DripStatus {
-    VIRGIN,
+    DEFAULT,
     MUTATED
 }
 
@@ -179,7 +179,7 @@ contract Drop is ERC721Enumerable, Ownable {
         _safeMint(msg.sender, tokenId);
         tokenIdToDrip[tokenId] = Drip({
             versionId: versionId,
-            status: DripStatus.VIRGIN,
+            status: DripStatus.DEFAULT,
             mutation: DripMutation({ mutator: address(0), mutatorId: 0 })
         });
 
@@ -190,8 +190,11 @@ contract Drop is ERC721Enumerable, Ownable {
      * @dev Mutate a DROP item.
      */
     function mutate(uint256 tokenIdToMutate, IERC721 contractMutator, uint256 tokenIdMutator) external {
+        Drip storage _drip = tokenIdToDrip[tokenIdToMutate];
+
         require(tokenIdToMutate < totalSupply(), "OUT_OF_BOUND");
         require(this.ownerOf(tokenIdToMutate) == msg.sender, "INVALID_OWNER");
+        require(_drip.status == DripStatus.DEFAULT, "ALREADY_MUTATED");
 
         // now that basics checks have been made we need to check if the contract mutator
         // needs to be handled in a non IERC721 specific way
@@ -203,8 +206,6 @@ contract Drop is ERC721Enumerable, Ownable {
         } else {
             require(mutator.ownerOf(tokenIdMutator) == msg.sender, "INVALID_OWNER");
         }
-
-        Drip storage _drip = tokenIdToDrip[tokenIdToMutate];
 
         _drip.status = DripStatus.MUTATED;
         _drip.mutation.mutator = address(contractMutator);

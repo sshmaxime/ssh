@@ -7,7 +7,6 @@ import { axios } from "./clients";
 import store from "./store";
 import { NFTsByCollection, Drip, Drips, Drops, NFTs } from "@sshlabs/typings";
 import { ENV } from "./config";
-import { FakeNftAddress } from "./_constants";
 
 const { app } = server.get();
 
