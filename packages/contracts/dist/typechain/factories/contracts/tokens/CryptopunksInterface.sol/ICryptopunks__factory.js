@@ -16,7 +16,7 @@ const _abi = [
                 type: "string",
             },
         ],
-        stateMutability: "nonpayable",
+        stateMutability: "view",
         type: "function",
     },
     {
@@ -48,7 +48,7 @@ const _abi = [
                 type: "string",
             },
         ],
-        stateMutability: "nonpayable",
+        stateMutability: "view",
         type: "function",
     },
 ];

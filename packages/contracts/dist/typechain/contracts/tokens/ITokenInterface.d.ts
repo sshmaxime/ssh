@@ -4,11 +4,17 @@ import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
 export interface ITokenInterfaceInterface extends utils.Interface {
     functions: {
+        "name()": FunctionFragment;
         "ownerOf(uint256)": FunctionFragment;
+        "symbol()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "ownerOf"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "name" | "ownerOf" | "symbol"): FunctionFragment;
+    encodeFunctionData(functionFragment: "name", values?: undefined): string;
     encodeFunctionData(functionFragment: "ownerOf", values: [PromiseOrValue<BigNumberish>]): string;
+    encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
+    decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
     events: {};
 }
 export interface ITokenInterface extends BaseContract {
@@ -26,25 +32,35 @@ export interface ITokenInterface extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
+        name(overrides?: CallOverrides): Promise<[string]>;
         ownerOf(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
+        symbol(overrides?: CallOverrides): Promise<[string]>;
     };
+    name(overrides?: CallOverrides): Promise<string>;
     ownerOf(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
+    symbol(overrides?: CallOverrides): Promise<string>;
     callStatic: {
+        name(overrides?: CallOverrides): Promise<string>;
         ownerOf(arg0: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
+        symbol(overrides?: CallOverrides): Promise<string>;
     };
     filters: {};
     estimateGas: {
+        name(overrides?: CallOverrides): Promise<BigNumber>;
         ownerOf(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
+        symbol(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
+        name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         ownerOf(arg0: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
+        symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

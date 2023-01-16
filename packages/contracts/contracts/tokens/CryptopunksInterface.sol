@@ -17,9 +17,9 @@ import { ITokenInterface } from "./ITokenInterface.sol";
 interface ICryptopunks {
     function punkIndexToAddress(uint256 tokenId) external returns (address);
 
-    function name() external view returns (string calldata);
+    function name() external view returns (string memory);
 
-    function symbol() external view returns (string calldata);
+    function symbol() external view returns (string memory);
 }
 
 /**

@@ -32,25 +32,17 @@ export interface ICryptopunks extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        name(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
+        name(overrides?: CallOverrides): Promise<[string]>;
         punkIndexToAddress(tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        symbol(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
+        symbol(overrides?: CallOverrides): Promise<[string]>;
     };
-    name(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
+    name(overrides?: CallOverrides): Promise<string>;
     punkIndexToAddress(tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    symbol(overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
+    symbol(overrides?: CallOverrides): Promise<string>;
     callStatic: {
         name(overrides?: CallOverrides): Promise<string>;
         punkIndexToAddress(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
@@ -58,25 +50,17 @@ export interface ICryptopunks extends BaseContract {
     };
     filters: {};
     estimateGas: {
-        name(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
+        name(overrides?: CallOverrides): Promise<BigNumber>;
         punkIndexToAddress(tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        symbol(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
+        symbol(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
-        name(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
+        name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         punkIndexToAddress(tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        symbol(overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
+        symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }
