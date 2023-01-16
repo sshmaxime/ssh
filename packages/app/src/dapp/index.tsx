@@ -10,7 +10,7 @@ import { useDispatch } from "./store/hooks";
 
 import { Route, Routes } from "react-router-dom";
 
-import Drop from "./pages/drop";
+import Drop from "./routes/drop";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 
 type props = {};

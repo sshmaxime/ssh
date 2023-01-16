@@ -16,7 +16,7 @@ describe('Store', () => {
 
     before(async () => {
         [admin, user] = await ethers.getSigners();
-        defaultItem = await Contracts.TestERC721.deploy('Name', 'Symbol');
+        defaultItem = await Contracts.TestERC721.deploy('Name', 'Symbol', toEth('0'));
     });
 
     describe('construction', () => {

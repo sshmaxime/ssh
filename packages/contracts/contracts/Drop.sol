@@ -7,7 +7,7 @@ import { ERC721Enumerable } from "@openzeppelin/contracts/token/ERC721/extension
 import { IERC721 } from "@openzeppelin/contracts/interfaces/IERC721.sol";
 import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
-import { IMutator } from "./mutators/IMutator.sol";
+import { ITokenInterface } from "./tokens/ITokenInterface.sol";
 
 /**
  * @dev
@@ -21,8 +21,8 @@ enum DripStatus {
  * @dev
  */
 struct DripMutation {
-    address mutator;
-    uint256 mutatorId;
+    address token;
+    uint256 tokenId;
 }
 
 /**
@@ -68,8 +68,8 @@ contract Drop is ERC721Enumerable, Ownable {
     // Mapping from token id to Drip
     mapping(uint256 => Drip) tokenIdToDrip;
 
-    // Mapping from a mutator contract address to a IMutator interface
-    mapping(address => IMutator) mutatorAddressToIMutator;
+    // Mapping from a token contract address to ITokenInterface
+    mapping(address => ITokenInterface) tokenAddressToInterface;
 
     // Events
 
@@ -141,10 +141,17 @@ contract Drop is ERC721Enumerable, Ownable {
     }
 
     /**
-     * @dev Load mutator interface.
+     * @dev Load token interface.
      */
-    function setMutator(address mutatorContract, IMutator _IMutator) public onlyOwner {
-        mutatorAddressToIMutator[mutatorContract] = _IMutator;
+    function setTokenInterface(address tokenAddress, ITokenInterface _ITokenInterface) public onlyOwner {
+        tokenAddressToInterface[tokenAddress] = _ITokenInterface;
+    }
+
+    /**
+     * @dev Get token interface.
+     */
+    function getTokenInterface(address tokenAddress) public view returns (ITokenInterface) {
+        return tokenAddressToInterface[tokenAddress];
     }
 
     /**
@@ -180,37 +187,37 @@ contract Drop is ERC721Enumerable, Ownable {
         tokenIdToDrip[tokenId] = Drip({
             versionId: versionId,
             status: DripStatus.DEFAULT,
-            mutation: DripMutation({ mutator: address(0), mutatorId: 0 })
+            mutation: DripMutation({ token: address(0), tokenId: 0 })
         });
 
         emit Minted(tokenId);
     }
 
     /**
-     * @dev Mutate a DROP item.
+     * @dev Mutate a Drip.
      */
-    function mutate(uint256 tokenIdToMutate, IERC721 contractMutator, uint256 tokenIdMutator) external {
-        Drip storage _drip = tokenIdToDrip[tokenIdToMutate];
+    function mutate(uint256 dripToMutate, IERC721 token, uint256 tokenId) external {
+        Drip storage _drip = tokenIdToDrip[dripToMutate];
 
-        require(tokenIdToMutate < totalSupply(), "OUT_OF_BOUND");
-        require(this.ownerOf(tokenIdToMutate) == msg.sender, "INVALID_OWNER");
+        require(dripToMutate < totalSupply(), "OUT_OF_BOUND");
+        require(this.ownerOf(dripToMutate) == msg.sender, "INVALID_OWNER");
         require(_drip.status == DripStatus.DEFAULT, "ALREADY_MUTATED");
 
-        // now that basics checks have been made we need to check if the contract mutator
-        // needs to be handled in a non IERC721 specific way
-        IMutator mutator = mutatorAddressToIMutator[address(contractMutator)];
+        // now that basics checks have been made we need to check if the token mutating
+        // needs to be handled in a non IERC721 way
+        ITokenInterface tokenInterface = getTokenInterface(address(token));
 
-        // if contract mutator is common check the given contract or else check its mutator
-        if (address(mutator) == address(0)) {
-            require(contractMutator.ownerOf(tokenIdMutator) == msg.sender, "INVALID_OWNER");
+        // if token mutating is common, check the given contract or else check its interface
+        if (address(tokenInterface) == address(0)) {
+            require(token.ownerOf(tokenId) == msg.sender, "INVALID_OWNER");
         } else {
-            require(mutator.ownerOf(tokenIdMutator) == msg.sender, "INVALID_OWNER");
+            require(tokenInterface.ownerOf(tokenId) == msg.sender, "INVALID_OWNER");
         }
 
         _drip.status = DripStatus.MUTATED;
-        _drip.mutation.mutator = address(contractMutator);
-        _drip.mutation.mutatorId = tokenIdMutator;
+        _drip.mutation.token = address(token);
+        _drip.mutation.tokenId = tokenId;
 
-        emit Mutated(tokenIdToMutate);
+        emit Mutated(dripToMutate);
     }
 }

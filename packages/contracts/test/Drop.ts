@@ -1,5 +1,5 @@
 import Contracts from '../components/contracts';
-import { Drop, ERC721 } from '../typechain';
+import { CryptoPunksMarket, Drop, ERC721, ITokenInterface, TestERC721 } from '../typechain';
 import { DripStructOutput } from '../typechain/contracts/Drop';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { ethers } from 'hardhat';
@@ -28,7 +28,7 @@ describe('Drop', () => {
 
     before(async () => {
         [ssh, normalUser] = await ethers.getSigners();
-        defaultItem = await Contracts.TestERC721.deploy('Name', 'Symbol');
+        defaultItem = await Contracts.TestERC721.deploy('Name', 'Symbol', toEth('0'));
     });
 
     describe('construction', () => {
@@ -68,6 +68,55 @@ describe('Drop', () => {
         });
     });
 
+    describe('getter / setter', () => {
+        context('URI', () => {
+            const URI = 'https://google.com';
+            beforeEach(async () => {
+                Drop = await Contracts.Drop.deploy(0, 10, toEth('1'), 1, defaultItem.address);
+            });
+
+            it('should properly set URI variable', async () => {
+                await Drop.setURI(URI);
+                expect(await Drop.URI()).equal(URI);
+            });
+
+            context('permission', () => {
+                it('should throw when not allowed to set', async () => {
+                    await expect(Drop.connect(normalUser).setURI(URI)).to.revertedWith(
+                        'Ownable: caller is not the owner'
+                    );
+                });
+            });
+        });
+
+        context('tokenInterface', () => {
+            let nft: ERC721;
+            let fakeInterface: ERC721;
+
+            beforeEach(async () => {
+                nft = await Contracts.ERC721.deploy('SYMBOL', 'NAME');
+                fakeInterface = await Contracts.ERC721.deploy('SYMBOL', 'NAME');
+            });
+
+            it('should be nil at first', async () => {
+                expect(await Drop.getTokenInterface(nft.address)).to.equal(AddressZero);
+            });
+
+            it('should be set once added', async () => {
+                await Drop.setTokenInterface(nft.address, fakeInterface.address);
+                expect(await Drop.getTokenInterface(nft.address)).to.equal(fakeInterface.address);
+            });
+
+            context('permission', () => {
+                it('should throw when not allowed to set', async () => {
+                    await expect(
+                        Drop.connect(normalUser).setTokenInterface(nft.address, fakeInterface.address)
+                    ).to.revertedWith('Ownable: caller is not the owner');
+                });
+            });
+        });
+    });
+
     describe('drip', () => {
         beforeEach(async () => {
             Drop = await Contracts.Drop.deploy(0, 1, toEth('1'), 1, defaultItem.address);
@@ -81,18 +130,6 @@ describe('Drop', () => {
 
         it('accessing invalid drip should throw', async () => {
             await expect(Drop.drip(20)).revertedWith(INVALID_TOKEN_ID);
-        });
-    });
-
-    describe('URI', () => {
-        const URI = 'https://alpha.beta.sigma.com';
-        beforeEach(async () => {
-            Drop = await Contracts.Drop.deploy(0, 10, toEth('1'), 1, defaultItem.address);
-        });
-
-        it('should properly set URI variable', async () => {
-            await Drop.setURI(URI);
-            expect(await Drop.URI()).equal(URI);
         });
     });
 
@@ -114,10 +151,10 @@ describe('Drop', () => {
 
             it('minted item should be properly initialized', async () => {
                 const drip = await Drop.drip(tokenId);
-                expect(drip.status).equal(DripStatus.VIRGIN);
+                expect(drip.status).equal(DripStatus.DEFAULT);
                 expect(drip.versionId).equal(versionId);
-                expect(drip.mutation.mutator).equal(AddressZero);
-                expect(drip.mutation.mutatorId).equal(0);
+                expect(drip.mutation.token).equal(AddressZero);
+                expect(drip.mutation.tokenId).equal(0);
             });
         };
 
@@ -157,8 +194,88 @@ describe('Drop', () => {
             await expect(Drop.mint(0)).revertedWith(INVALID_FUNDS);
         });
 
-        describe('mutating', () => {});
+        describe('mutating', () => {
+            let tokenMutating: TestERC721;
+
+            beforeEach(async () => {
+                tokenMutating = await Contracts.TestERC721.deploy('SYMBOL', 'NAME', '0');
+                tokenMutating = tokenMutating.connect(normalUser);
+
+                await tokenMutating.mint();
+
+                Drop = await Contracts.Drop.deploy(0, 1, toEth('1'), 1, defaultItem.address);
+                Drop = Drop.connect(normalUser);
+            });
+
+            it("shouldn't mutate if token to mutate is out of bound", async () => {
+                await expect(Drop.mutate(10, tokenMutating.address, 0)).to.revertedWith('OUT_OF_BOUND');
+            });
+
+            it("shouldn't mutate if user is not holder of the drip", async () => {
+                await Drop.connect(ssh).mint(1, { value: toEth('1') });
+
+                await expect(Drop.mutate(0, tokenMutating.address, 0)).to.revertedWith('INVALID_OWNER');
+            });
+
+            it("shouldn't mutate if already mutated", async () => {
+                await Drop.mint(1, { value: toEth('1') });
+                await Drop.mutate(0, tokenMutating.address, 0);
+
+                await expect(Drop.mutate(0, tokenMutating.address, 0)).to.revertedWith('ALREADY_MUTATED');
+            });
+
+            it('should mutate if done properly', async () => {
+                await Drop.mint(1, { value: toEth('1') });
+
+                await Drop.mutate(0, tokenMutating.address, 0);
+
+                const drip = await Drop.drip(0);
+
+                expect(drip.status).to.equal(DripStatus.MUTATED);
+                expect(drip.mutation.token).to.equal(tokenMutating.address);
+                expect(drip.mutation.tokenId).to.equal(0);
+            });
+        });
+
+        describe('mutation interfaces', () => {
+            context('CryptoPunks', () => {
+                let cryptoPunksMarket: CryptoPunksMarket;
+                beforeEach(async () => {
+                    Drop = await Contracts.Drop.deploy(0, 1, toEth('1'), 1, defaultItem.address);
+                    Drop = Drop.connect(normalUser);
+
+                    cryptoPunksMarket = await Contracts.CryptoPunksMarket.deploy();
+
+                    await cryptoPunksMarket.setInitialOwner(normalUser.address, 10);
+                });
+
+                it('should throw when no interface has been set', async () => {
+                    await Drop.mint(1, { value: toEth('1') });
+                    await expect(Drop.mutate(0, cryptoPunksMarket.address, 10)).to.reverted;
+                });
+
+                it('should throw when interface returns invalid owner', async () => {
+                    const cryptoPunksInterface = await Contracts.CryptopunksInterface.deploy(cryptoPunksMarket.address);
+                    await Drop.connect(ssh).setTokenInterface(cryptoPunksMarket.address, cryptoPunksInterface.address);
+
+                    await Drop.mint(1, { value: toEth('1') });
+                    await expect(Drop.mutate(0, cryptoPunksMarket.address, 11)).to.be.revertedWith('INVALID_OWNER');
+                });
+
+                it('should not throw when interface has been set', async () => {
+                    const cryptoPunksInterface = await Contracts.CryptopunksInterface.deploy(cryptoPunksMarket.address);
+
+                    await Drop.connect(ssh).setTokenInterface(cryptoPunksMarket.address, cryptoPunksInterface.address);
+                    await Drop.mint(1, { value: toEth('1') });
+                    await Drop.mutate(0, cryptoPunksMarket.address, 10);
+
+                    const drip = await Drop.drip(0);
+
+                    expect(drip.status).to.equal(DripStatus.MUTATED);
+                    expect(drip.mutation.token).to.equal(cryptoPunksMarket.address);
+                    expect(drip.mutation.tokenId).to.equal(10);
+                });
+            });
+        });
     });
 });
-
-// TODO mutating

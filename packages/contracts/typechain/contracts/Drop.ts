@@ -29,13 +29,13 @@ import type {
 } from "../common";
 
 export type DripMutationStruct = {
-  mutator: PromiseOrValue<string>;
-  mutatorId: PromiseOrValue<BigNumberish>;
+  token: PromiseOrValue<string>;
+  tokenId: PromiseOrValue<BigNumberish>;
 };
 
 export type DripMutationStructOutput = [string, BigNumber] & {
-  mutator: string;
-  mutatorId: BigNumber;
+  token: string;
+  tokenId: BigNumber;
 };
 
 export type DripStruct = {
@@ -59,6 +59,7 @@ export interface DropInterface extends utils.Interface {
     "drip(uint256)": FunctionFragment;
     "dropId()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getTokenInterface(address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "maxSupply()": FunctionFragment;
     "mint(uint256)": FunctionFragment;
@@ -71,7 +72,7 @@ export interface DropInterface extends utils.Interface {
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setMutator(address,address)": FunctionFragment;
+    "setTokenInterface(address,address)": FunctionFragment;
     "setURI(string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -93,6 +94,7 @@ export interface DropInterface extends utils.Interface {
       | "drip"
       | "dropId"
       | "getApproved"
+      | "getTokenInterface"
       | "isApprovedForAll"
       | "maxSupply"
       | "mint"
@@ -105,7 +107,7 @@ export interface DropInterface extends utils.Interface {
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
-      | "setMutator"
+      | "setTokenInterface"
       | "setURI"
       | "supportsInterface"
       | "symbol"
@@ -139,6 +141,10 @@ export interface DropInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getTokenInterface",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
@@ -190,7 +196,7 @@ export interface DropInterface extends utils.Interface {
     values: [PromiseOrValue<string>, PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMutator",
+    functionFragment: "setTokenInterface",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
@@ -246,6 +252,10 @@ export interface DropInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getTokenInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
@@ -272,7 +282,10 @@ export interface DropInterface extends utils.Interface {
     functionFragment: "setApprovalForAll",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "setMutator", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setTokenInterface",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setURI", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
@@ -435,6 +448,11 @@ export interface Drop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -449,9 +467,9 @@ export interface Drop extends BaseContract {
     ): Promise<ContractTransaction>;
 
     mutate(
-      tokenIdToMutate: PromiseOrValue<BigNumberish>,
-      contractMutator: PromiseOrValue<string>,
-      tokenIdMutator: PromiseOrValue<BigNumberish>,
+      dripToMutate: PromiseOrValue<BigNumberish>,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -491,9 +509,9 @@ export interface Drop extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    setMutator(
-      mutatorContract: PromiseOrValue<string>,
-      _IMutator: PromiseOrValue<string>,
+    setTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      _ITokenInterface: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -569,6 +587,11 @@ export interface Drop extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getTokenInterface(
+    tokenAddress: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   isApprovedForAll(
     owner: PromiseOrValue<string>,
     operator: PromiseOrValue<string>,
@@ -583,9 +606,9 @@ export interface Drop extends BaseContract {
   ): Promise<ContractTransaction>;
 
   mutate(
-    tokenIdToMutate: PromiseOrValue<BigNumberish>,
-    contractMutator: PromiseOrValue<string>,
-    tokenIdMutator: PromiseOrValue<BigNumberish>,
+    dripToMutate: PromiseOrValue<BigNumberish>,
+    token: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -625,9 +648,9 @@ export interface Drop extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  setMutator(
-    mutatorContract: PromiseOrValue<string>,
-    _IMutator: PromiseOrValue<string>,
+  setTokenInterface(
+    tokenAddress: PromiseOrValue<string>,
+    _ITokenInterface: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -703,6 +726,11 @@ export interface Drop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    getTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -717,9 +745,9 @@ export interface Drop extends BaseContract {
     ): Promise<void>;
 
     mutate(
-      tokenIdToMutate: PromiseOrValue<BigNumberish>,
-      contractMutator: PromiseOrValue<string>,
-      tokenIdMutator: PromiseOrValue<BigNumberish>,
+      dripToMutate: PromiseOrValue<BigNumberish>,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -757,9 +785,9 @@ export interface Drop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setMutator(
-      mutatorContract: PromiseOrValue<string>,
-      _IMutator: PromiseOrValue<string>,
+    setTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      _ITokenInterface: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -890,6 +918,11 @@ export interface Drop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -904,9 +937,9 @@ export interface Drop extends BaseContract {
     ): Promise<BigNumber>;
 
     mutate(
-      tokenIdToMutate: PromiseOrValue<BigNumberish>,
-      contractMutator: PromiseOrValue<string>,
-      tokenIdMutator: PromiseOrValue<BigNumberish>,
+      dripToMutate: PromiseOrValue<BigNumberish>,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -946,9 +979,9 @@ export interface Drop extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    setMutator(
-      mutatorContract: PromiseOrValue<string>,
-      _IMutator: PromiseOrValue<string>,
+    setTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      _ITokenInterface: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1025,6 +1058,11 @@ export interface Drop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     isApprovedForAll(
       owner: PromiseOrValue<string>,
       operator: PromiseOrValue<string>,
@@ -1039,9 +1077,9 @@ export interface Drop extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     mutate(
-      tokenIdToMutate: PromiseOrValue<BigNumberish>,
-      contractMutator: PromiseOrValue<string>,
-      tokenIdMutator: PromiseOrValue<BigNumberish>,
+      dripToMutate: PromiseOrValue<BigNumberish>,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1081,9 +1119,9 @@ export interface Drop extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    setMutator(
-      mutatorContract: PromiseOrValue<string>,
-      _IMutator: PromiseOrValue<string>,
+    setTokenInterface(
+      tokenAddress: PromiseOrValue<string>,
+      _ITokenInterface: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
