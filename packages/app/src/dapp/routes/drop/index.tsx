@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 
 import { useGetDropsQuery } from "@/dapp/store/services/socket";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
@@ -37,12 +37,27 @@ const DropRouteProxy: FC = () => {
   return <DropRoute drop={drop[dropId]} />;
 };
 
-const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {
-  const sceneRef = React.useRef<sceneRef>(null!);
+const DScene: FC<{ sceneRef: sceneRef }> = ({ sceneRef }) => {
+  const [lolo, lili] = useState(false);
 
   return (
-    <Style.Root>
-      <Style.BodyScene style={{ zIndex: 2 }}>
+    <>
+      <div
+        style={{
+          position: "absolute",
+          height: "100px",
+          width: "100px",
+          zIndex: "10000",
+          backgroundColor: "red",
+        }}
+        onClick={() => {
+          console.log("la");
+          lili(!lolo);
+        }}
+      >
+        hello
+      </div>
+      <Style.BodyScene style={{ zIndex: 2, display: lolo ? "none" : "block" }}>
         <SceneLoader
           sceneRef={sceneRef}
           model={drop.metadata.model}
@@ -54,7 +69,15 @@ const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {
           initialId={0}
         />
       </Style.BodyScene>
+    </>
+  );
+};
 
+const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {
+  const sceneRef = React.useRef<sceneRef>(null!);
+
+  return (
+    <Style.Root>
       <Routes>
         <Route
           path=":dripId"

@@ -153,7 +153,7 @@ export class Store {
       status: drip.status,
       nft:
         drip.status === DripStatus.MUTATED
-          ? await this.getNft(drip.mutation.mutator, drip.mutation.mutatorId.toNumber())
+          ? await this.getNft(drip.mutation.token, drip.mutation.tokenId.toNumber())
           : undefined,
     };
   };
