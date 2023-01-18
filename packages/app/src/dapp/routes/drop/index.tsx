@@ -12,9 +12,12 @@ import NotFound from "../404";
 import DropApp from "./drop";
 import DripApp from "./drip";
 import Style from "./style";
+import { Scene } from "./_3dScene/scene";
+import { SceneProvider, useDisplaySceneContext } from "./_3dScene/hook";
 
 const DropRouteProxy: FC = () => {
   const dropId = Number(useParams().dropId);
+  const dripId = Number(useParams().dripId);
 
   const isDropParamError = isNaN(dropId);
   const {
@@ -26,6 +29,16 @@ const DropRouteProxy: FC = () => {
   const isDropQueryError =
     !isSuccessDrops || isErrorDrops || drop === undefined || drop[dropId] === undefined;
 
+  const isDripParamError = isNaN(dripId);
+  const {
+    data: drip,
+    isLoading: isLoadingDrip,
+    isError: isErrorDrip,
+    isSuccess: isSuccessDrip,
+  } = useGetDripQuery({ dropId, dripId }, { skip: isDripParamError });
+  const isDripQueryError = !isSuccessDrip || isErrorDrip || drip === undefined;
+
+  // Handle errors Drop
   if (isLoadingDrops) {
     return <>iii</>; // TODO
   }
@@ -34,87 +47,65 @@ const DropRouteProxy: FC = () => {
     return <NotFound />;
   }
 
-  return <DropRoute drop={drop[dropId]} />;
+  // Handle errors Drip
+  if (isLoadingDrip) {
+    return <>iii</>; // TODO
+  }
+
+  if (isDripQueryError && !isDripParamError) {
+    return <NotFound />;
+  }
+
+  return <DropRoute drop={drop[dropId]} drip={drip} />;
 };
 
-const DScene: FC<{ sceneRef: sceneRef }> = ({ sceneRef }) => {
-  const [lolo, lili] = useState(false);
-
-  return (
-    <>
-      <div
-        style={{
-          position: "absolute",
-          height: "100px",
-          width: "100px",
-          zIndex: "10000",
-          backgroundColor: "red",
-        }}
-        onClick={() => {
-          console.log("la");
-          lili(!lolo);
-        }}
-      >
-        hello
-      </div>
-      <Style.BodyScene style={{ zIndex: 2, display: lolo ? "none" : "block" }}>
-        <SceneLoader
-          sceneRef={sceneRef}
-          model={drop.metadata.model}
-          versions={drop.metadata.versions}
-          initialVersion={0}
-          initialPlaceholderTexture={drop.defaultItem.img}
-          initialDropSymbol={drop.symbol}
-          initialTokenNameId={"1" + " #" + 0}
-          initialId={0}
-        />
-      </Style.BodyScene>
-    </>
-  );
-};
-
-const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {
+const DropRoute: FC<{ drop: DropType; drip?: Drip }> = ({ drop, drip }) => {
   const sceneRef = React.useRef<sceneRef>(null!);
 
   return (
     <Style.Root>
-      <Routes>
-        <Route
-          path=":dripId"
-          element={
-            <Style.RootChild>
-              <DripApp drop={drop} sceneRef={sceneRef} />
-            </Style.RootChild>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <Style.RootChild>
-              <DropApp drop={drop} sceneRef={sceneRef} />
-            </Style.RootChild>
-          }
-        />
-      </Routes>
+      <SceneProvider>
+        <Scene sceneRef={sceneRef} drop={drop} />
 
-      <Style.Footer>
-        <Grid container justifyContent="space-between">
-          <Grid item xs={2}>
-            <Grid container>
-              <Grid item xs={6}>
-                <Style.Credentials>{CREDENTIALS}</Style.Credentials>
+        <Routes>
+          <Route
+            path=":dripId"
+            element={
+              <Style.RootChild>
+                <DripApp drop={drop} sceneRef={sceneRef} />
+              </Style.RootChild>
+            }
+          />
+
+          <Route
+            path="*"
+            element={
+              <Style.RootChild>
+                <DropApp drop={drop} sceneRef={sceneRef} />
+              </Style.RootChild>
+            }
+          />
+        </Routes>
+
+        <Style.Footer>
+          <Grid container justifyContent="space-between">
+            <Grid item xs={2}>
+              <Grid container>
+                <Grid item xs={6}>
+                  <Style.Credentials>{CREDENTIALS}</Style.Credentials>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={10}>
+              <Grid container flexDirection="row-reverse" columnSpacing={3}>
+                <Grid item>
+                  <Style.Version>v1.0.0-beta</Style.Version>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={10}>
-            <Grid container flexDirection="row-reverse" columnSpacing={3}>
-              <Grid item>
-                <Style.Version>v1.0.0-beta</Style.Version>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Style.Footer>
+        </Style.Footer>
+      </SceneProvider>
     </Style.Root>
   );
 };

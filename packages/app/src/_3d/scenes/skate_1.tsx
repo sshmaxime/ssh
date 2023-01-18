@@ -1,4 +1,4 @@
-import React, { FC, Suspense, useImperativeHandle } from "react";
+import React, { FC, Suspense, useEffect, useImperativeHandle } from "react";
 
 import ModelSkate, {
   defaultSkateModelAnimation,
@@ -12,6 +12,7 @@ import { CameraControls } from "../utils/cameraControls";
 import { useR3fState } from "../utils/hooks";
 import { Loader } from "../utils/loader";
 import { OrbitControls } from "@react-three/drei";
+import { useDisplaySceneContext } from "@/dapp/routes/drop/_3dScene/hook";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
 export type sceneRefType = React.MutableRefObject<sceneRef>;
@@ -40,6 +41,14 @@ const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.m
 );
 
 const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
+  const { sceneReady, setReady } = useDisplaySceneContext();
+
+  // console.log(sceneReady);
+
+  // useEffect(() => {
+  //   setReady(true);
+  // });
+
   const cameraControls = React.useRef<CameraControls>(null!);
 
   const refs = useSkateRefsLoader();
