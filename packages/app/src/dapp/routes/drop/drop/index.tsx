@@ -22,19 +22,13 @@ import { useDispatch, useSelector } from "@/dapp/store/hooks";
 import { useGetAssetsQuery } from "@/dapp/store/services";
 import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/services/web3";
 import Style from "./style";
-import { useDisplaySceneContext } from "../_3dScene/hook";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 const { AddressZero } = ethers.constants;
 
 const Drop: FC<{ drop: DropType; sceneRef: sceneRefType }> = ({ drop, sceneRef }) => {
-  const { setDisplay } = useDisplaySceneContext();
   const { auth, address, name, txProcess } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setDisplay(true);
-  });
 
   // fetch data
   const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });

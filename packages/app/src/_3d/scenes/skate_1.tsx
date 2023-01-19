@@ -12,7 +12,7 @@ import { CameraControls } from "../utils/cameraControls";
 import { useR3fState } from "../utils/hooks";
 import { Loader } from "../utils/loader";
 import { OrbitControls } from "@react-three/drei";
-import { useDisplaySceneContext } from "@/dapp/routes/drop/_3dScene/hook";
+import { useSceneStore } from "@/dapp/routes/drop/_3dScene/hook";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
 export type sceneRefType = React.MutableRefObject<sceneRef>;
@@ -41,13 +41,11 @@ const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.m
 );
 
 const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
-  const { sceneReady, setReady } = useDisplaySceneContext();
+  const { setLoaded } = useSceneStore();
 
-  // console.log(sceneReady);
-
-  // useEffect(() => {
-  //   setReady(true);
-  // });
+  useEffect(() => {
+    setLoaded(true);
+  });
 
   const cameraControls = React.useRef<CameraControls>(null!);
 

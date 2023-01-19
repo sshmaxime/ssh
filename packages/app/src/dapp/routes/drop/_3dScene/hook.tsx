@@ -1,13 +1,11 @@
-import { useState } from "react";
-import constate from "constate";
+import { create } from "zustand";
 
-export const useScene = () => {
-  const [displayScene, _setDisplay] = useState(false);
-  const [sceneReady, _setReady] = useState(false);
+interface SceneStore {
+  isLoaded: boolean;
+  setLoaded: (bool: boolean) => void;
+}
 
-  const setDisplay = (value: boolean) => _setDisplay(value);
-  const setReady = (value: boolean) => _setReady(value);
-  return { displayScene, setDisplay, sceneReady, setReady };
-};
-
-export const [SceneProvider, useDisplaySceneContext] = constate(useScene);
+export const useSceneStore = create<SceneStore>((set) => ({
+  isLoaded: false,
+  setLoaded: (bool) => set((state) => ({ isLoaded: bool })),
+}));
