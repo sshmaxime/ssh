@@ -2,6 +2,10 @@ import { normalizeIPFSUrl } from "@/dapp/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { NFTsByCollection, Drip, Drips, Drop } from "@sshlabs/typings";
 
+import { io } from "socket.io-client";
+
+export const socket = io("ws://localhost:3001");
+
 // Transform functions
 const getDropTransformResponse = (drop: Drop) => {
   for (const version of drop.metadata.versions) {
@@ -12,6 +16,8 @@ const getDropTransformResponse = (drop: Drop) => {
     ...drop.metadata,
     model: normalizeIPFSUrl(drop.metadata.model),
   };
+
+  return drop;
 };
 
 export const dropApi = createApi({
@@ -23,6 +29,19 @@ export const dropApi = createApi({
       query: ({ dropId }) => `drop/${dropId}`,
       transformResponse(baseQueryReturnValue, meta, arg) {
         return getDropTransformResponse(baseQueryReturnValue as Drop);
+      },
+      async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+        try {
+          await cacheDataLoaded;
+
+          socket.on(`update_drop_${arg.dropId}`, (event: { data: Drop }) => {
+            const data = getDropTransformResponse(event.data);
+            updateCachedData((draft) => {
+              return data;
+            });
+          });
+        } catch {}
+        await cacheEntryRemoved;
       },
     }),
     //
@@ -36,6 +55,19 @@ export const dropApi = createApi({
     //
     getDrips: builder.query<Drips, { address: string }>({
       query: ({ address }) => `drip/${address}`,
+      async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+        try {
+          await cacheDataLoaded;
+
+          socket.on(`update_drips_${arg.address}`, (event: { data: Drip[] }) => {
+            const data = event.data;
+            updateCachedData((draft) => {
+              draft.splice(0, draft.length, ...data);
+            });
+          });
+        } catch {}
+        await cacheEntryRemoved;
+      },
     }),
   }),
 });

@@ -1,13 +1,12 @@
 import React, { FC, useState } from "react";
 
-import { useGetDropsQuery } from "@/dapp/store/services/socket";
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 import { Grid } from "@mui/material";
 import { Drip, Drop as DropType } from "@sshlabs/typings";
 import { Route, Routes, useParams } from "react-router-dom";
 
 import { CREDENTIALS } from "../../../_constants";
-import { useGetDripQuery } from "../../store/services";
+import { useGetDripQuery, useGetDropQuery } from "../../store/services";
 import NotFound from "../404";
 import DropApp from "./drop";
 import DripApp from "./drip";
@@ -18,13 +17,12 @@ const DropRouteProxy: FC = () => {
 
   const isDropParamError = isNaN(dropId);
   const {
-    data: drops,
+    data: drop,
     isLoading: isLoadingDrops,
     isError: isErrorDrops,
     isSuccess: isSuccessDrops,
-  } = useGetDropsQuery({ skip: isDropParamError });
-  const isDropQueryError =
-    !isSuccessDrops || isErrorDrops || drop === undefined || drop[dropId] === undefined;
+  } = useGetDropQuery({ dropId }, { skip: isDropParamError });
+  const isDropQueryError = !isSuccessDrops || isErrorDrops || drop === undefined;
 
   if (isLoadingDrops) {
     return <>iii</>; // TODO
@@ -34,7 +32,7 @@ const DropRouteProxy: FC = () => {
     return <NotFound />;
   }
 
-  return <DropRoute drop={drops[dropId]} />;
+  return <DropRoute drop={drop} />;
 };
 
 const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {

@@ -5,7 +5,7 @@ import server from "./server";
 import { axios } from "./clients";
 
 import store from "./store";
-import { NFTsByCollection, Drip, Drips, Drops, NFTs } from "@sshlabs/typings";
+import { NFTsByCollection, Drip, Drips, Drops, NFTs, Drop } from "@sshlabs/typings";
 import { ENV } from "./config";
 
 const { app } = server.get();
@@ -66,10 +66,11 @@ app.get("/assets/:address", async (req: Request, res: Response): Promise<Respons
   return res.status(200).send(dataToReturn);
 });
 
-app.get("/drops", async (req: Request, res: Response): Promise<Response> => {
+app.get("/drop/:dropId", async (req: Request, res: Response): Promise<Response> => {
+  const dropId = Number(req.params.dropId);
   const drops = store.getState();
 
-  const dataToReturn: Drops = drops;
+  const dataToReturn: Drop = drops[dropId];
   return res.status(200).send(dataToReturn);
 });
 

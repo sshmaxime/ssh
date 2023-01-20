@@ -22,6 +22,7 @@ import axios from "axios";
 import { axios as OpenSeaCli } from "../clients";
 import { ADDRESS_STORE, ENV, IPFS_GATEWAY, WEB3_ENDPOINT } from "../config";
 import { IPFS_EXP } from "../_constants";
+import io from "../server/io";
 
 const defaultItemImg =
   "https://i.seadn.io/gae/u318gzdW-M73Uwe9pg26cMZKb6LJItJB4-iCpMZQ8bfh7Kbo0dropDsYdwiiWKeEQ9eQVNTroC0KJeIDJ-hmo3Hm_55GZD_mvpKY?auto=format&w=1000";
@@ -115,7 +116,9 @@ export class Store {
     }
   };
 
-  private initDropListeners = async (dropId: BigNumber) => {
+  private initDropListeners = async (dropIdAsBn: BigNumber) => {
+    const dropId = dropIdAsBn.toNumber();
+
     const startBlockNumber = await this.Provider.getBlockNumber();
 
     const dropContractAddress = await this.Store.drop(dropId);
@@ -127,8 +130,14 @@ export class Store {
       if (event.blockNumber <= startBlockNumber) return; // do not react to this event
       // do stuff
 
-      this.DROPS[dropId.toNumber()].currentSupply++;
-      // io.emit("hello", { data: this.getState() });
+      const tokenId = (event.args.tokenId as BigNumber).toNumber();
+      const user = await dropContract.ownerOf(tokenId);
+
+      const dripsOwnedByUser = await this.getDripOwnedByAddress(user);
+
+      this.DROPS[dropId].currentSupply++;
+      io.emit(`update_drop_${dropId}`, { data: this.getState()[dropId] });
+      io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
     });
   };
 

@@ -81,7 +81,7 @@ const style = {
   WalletView: styled("div")(({ theme }) => ({
     padding: "15px",
     width: "325px",
-    maxHeight: "250px",
+    maxHeight: "calc(70vh)",
   })),
   WalletTypo1: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
