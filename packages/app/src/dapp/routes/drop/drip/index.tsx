@@ -87,7 +87,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   };
 
   // fc state
-  const [currentItem, setItem] = useState<NFT>(drip.nft || zeroItem);
+  const [currentItem, setItem] = useState<NFT>(drip.nft || defaultItem);
   const [currentVersion, setVersion] = useState(drip.version || 0);
 
   const isDefaultItem = currentItem.address === defaultItem.address;
@@ -120,7 +120,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
 
   useEffect(() => {
     if (isLoaded) {
-      updateItem(drip.nft || zeroItem);
+      updateItem(drip.nft || defaultItem);
       updateVersion(drip.version);
     }
   }, [isLoaded, drip]);
