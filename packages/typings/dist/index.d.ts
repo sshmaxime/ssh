@@ -2,6 +2,7 @@ export declare enum DripStatus {
     DEFAULT = 0,
     MUTATED = 1
 }
+export declare const dripStatus: (dripStatus: DripStatus) => "DEFAULT" | "MUTATED" | "ERROR";
 export declare type Drips = Drip[];
 export declare type Drip = {
     drop: Drop;
@@ -9,6 +10,7 @@ export declare type Drip = {
     version: number;
     img: string;
     status: DripStatus;
+    owner: string;
     nft?: NFT;
 };
 export declare type DropMetadata = {

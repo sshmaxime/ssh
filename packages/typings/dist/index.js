@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ListMockTokens = exports.DripStatus = void 0;
+exports.ListMockTokens = exports.dripStatus = exports.DripStatus = void 0;
 //////////////////
 ////// DRIP //////
 //////////////////
@@ -9,6 +9,17 @@ var DripStatus;
     DripStatus[DripStatus["DEFAULT"] = 0] = "DEFAULT";
     DripStatus[DripStatus["MUTATED"] = 1] = "MUTATED";
 })(DripStatus = exports.DripStatus || (exports.DripStatus = {}));
+var dripStatus = function (dripStatus) {
+    switch (dripStatus) {
+        case DripStatus.DEFAULT:
+            return "DEFAULT";
+        case DripStatus.MUTATED:
+            return "MUTATED";
+        default:
+            return "ERROR";
+    }
+};
+exports.dripStatus = dripStatus;
 ////////////////////////////////
 ////////////////////////////////
 ////////////////////////////////

@@ -10,8 +10,7 @@ import { useDispatch } from "./store/hooks";
 
 import { Route, Routes } from "react-router-dom";
 
-import Drop from "./routes/drop";
-import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
+import DropRoutes from "./routes/drop";
 
 type props = {};
 
@@ -35,8 +34,7 @@ const Dapp: FC<props> = ({ children }) => {
       <Navbar />
 
       <Routes>
-        <Route path="/drop" element={<>hi</>} />
-        <Route path="/drop/:dropId/*" element={<Drop />} />
+        <Route path="/drop/*" element={<DropRoutes />} />
       </Routes>
     </>
   );

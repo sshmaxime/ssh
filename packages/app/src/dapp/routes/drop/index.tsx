@@ -2,17 +2,26 @@ import React, { FC, useState } from "react";
 
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 import { Grid } from "@mui/material";
-import { Drip, Drop as DropType } from "@sshlabs/typings";
+import { Drop } from "@sshlabs/typings";
 import { Route, Routes, useParams } from "react-router-dom";
 
 import { CREDENTIALS } from "../../../_constants";
-import { useGetDripQuery, useGetDropQuery } from "../../store/services";
+import { useGetDropQuery } from "../../store/services";
 import NotFound from "../404";
-import DropApp from "./drop";
-import DripApp from "./drip";
 import Style from "./style";
+import DropComponent from "./drop";
+import DripComponent from "./drip";
 
-const DropRouteProxy: FC = () => {
+const DropRoutes: FC = ({}) => {
+  return (
+    <Routes>
+      <Route path="/:dropId/*" element={<DropAppRoutesProxy />} />
+      <Route path="*" element={<>Home</>} />
+    </Routes>
+  );
+};
+
+const DropAppRoutesProxy: FC = () => {
   const dropId = Number(useParams().dropId);
 
   const isDropParamError = isNaN(dropId);
@@ -32,10 +41,10 @@ const DropRouteProxy: FC = () => {
     return <NotFound />;
   }
 
-  return <DropRoute drop={drop} />;
+  return <DropApp drop={drop} />;
 };
 
-const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {
+const DropApp: FC<{ drop: Drop }> = ({ drop }) => {
   const sceneRef = React.useRef<sceneRef>(null!);
 
   return (
@@ -53,25 +62,12 @@ const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {
         />
       </Style.BodyScene>
 
-      <Routes>
-        <Route
-          path=":dripId"
-          element={
-            <Style.RootChild>
-              <DripApp drop={drop} sceneRef={sceneRef} />
-            </Style.RootChild>
-          }
-        />
-
-        <Route
-          path="*"
-          element={
-            <Style.RootChild>
-              <DropApp drop={drop} sceneRef={sceneRef} />
-            </Style.RootChild>
-          }
-        />
-      </Routes>
+      <Style.RootChild>
+        <Routes>
+          <Route path="/:dripId" element={<DripComponent drop={drop} sceneRef={sceneRef} />} />
+          <Route path="*" element={<DropComponent drop={drop} sceneRef={sceneRef} />} />
+        </Routes>
+      </Style.RootChild>
 
       <Style.Footer>
         <Grid container justifyContent="space-between">
@@ -95,4 +91,4 @@ const DropRoute: FC<{ drop: DropType }> = ({ drop }) => {
   );
 };
 
-export default DropRouteProxy;
+export default DropRoutes;

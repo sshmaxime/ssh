@@ -20,6 +20,8 @@ import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
 import { DripStatus } from "@sshlabs/typings";
 import CenterItem from "@/_utils/components/grid/centerItem";
 
+import { Link } from "react-router-dom";
+
 export const NavbarComponent: FC = () => {
   const { auth, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
@@ -94,8 +96,11 @@ export const NavbarComponent: FC = () => {
                     }}
                     transformOrigin={{ horizontal: "left", vertical: -20 }}
                     disableRestoreFocus
-                    style={{ zIndex: 2000 }}
-                    elevation={0}
+                    style={{
+                      zIndex: 2000,
+                      boxShadow: "2.5px 2.5px 5px #afafb4, -2.5px -2.5px 5px #ffffff",
+                    }}
+                    elevation={10}
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
                       <Style.WalletView>

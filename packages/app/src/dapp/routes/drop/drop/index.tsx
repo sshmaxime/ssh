@@ -4,7 +4,7 @@ import { sceneRefType } from "@/_3d/scenes/skate_1";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Grid, ImageList, ImageListItem, Modal } from "@mui/material";
-import { Drop as DropType, NFT } from "@sshlabs/typings";
+import { Drip, Drop, NFT } from "@sshlabs/typings";
 import { ethers } from "ethers";
 
 import EtherscanIcon from "@/_utils/assets/icons/etherscan.svg";
@@ -19,14 +19,16 @@ import Pastille from "@/_utils/components/pastille";
 import Tooltip from "@/_utils/components/tooltip";
 
 import { useDispatch, useSelector } from "@/dapp/store/hooks";
-import { useGetAssetsQuery } from "@/dapp/store/services";
+import { useGetAssetsQuery, useGetDripQuery } from "@/dapp/store/services";
 import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/services/web3";
 import Style from "./style";
+import { useParams } from "react-router-dom";
+import { useSceneStore } from "../_3dScene/hook";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 const { AddressZero } = ethers.constants;
 
-const Drop: FC<{ drop: DropType; sceneRef: sceneRefType }> = ({ drop, sceneRef }) => {
+const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, sceneRef }) => {
   const { auth, address, name, txProcess } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
@@ -58,7 +60,14 @@ const Drop: FC<{ drop: DropType; sceneRef: sceneRefType }> = ({ drop, sceneRef }
   const isDefaultItem = currentItem.address === defaultItem.address;
   const isZeroItem = currentItem.address === zeroItem.address;
 
-  useEffect(() => {}, [isDefaultItem, isZeroItem, txProcess]);
+  const { isLoaded } = useSceneStore();
+
+  useEffect(() => {
+    if (isLoaded) {
+      updateItem(defaultItem);
+      updateVersion(0);
+    }
+  }, [isLoaded]);
 
   const updateVersion = (version: number) => {
     setVersion(version);
@@ -598,31 +607,6 @@ const Drop: FC<{ drop: DropType; sceneRef: sceneRefType }> = ({ drop, sceneRef }
                   {drop.metadata.versions[currentVersion].name}
                 </Style.VersionName>
 
-                {/* <Grid
-                    container
-                    alignItems="center"
-                    style={{
-                      marginBottom: "10px",
-                      padding: "2.5px",
-                    }}
-                  >
-                    <Grid item>
-                      <Style.Mutator>
-                        {currentItem ? currentItem.symbol + " #" + currentItem.id : "#"}
-                      </Style.Mutator>
-                    </Grid>
-
-                    <Grid item>
-                      {currentItem.address !== "" ? (
-                        <Style.MutatorRemove>
-                          <Clickable onClick={() => resetItem()}>REMOVE</Clickable>
-                        </Style.MutatorRemove>
-                      ) : (
-                        <></>
-                      )}
-                    </Grid>
-                  </Grid> */}
-
                 <Grid
                   container
                   spacing={1}
@@ -694,4 +678,4 @@ const Drop: FC<{ drop: DropType; sceneRef: sceneRefType }> = ({ drop, sceneRef }
   );
 };
 
-export default Drop;
+export default DropComponent;

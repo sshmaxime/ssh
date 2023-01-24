@@ -128,7 +128,6 @@ export class Store {
     dropContract.on(dropContract.filters.Minted(null), async (...args) => {
       const event = args[args.length - 1] as Event;
       if (event.blockNumber <= startBlockNumber) return; // do not react to this event
-      // do stuff
 
       const tokenId = (event.args.tokenId as BigNumber).toNumber();
       const user = await dropContract.ownerOf(tokenId);
@@ -137,6 +136,19 @@ export class Store {
 
       this.DROPS[dropId].currentSupply++;
       io.emit(`update_drop_${dropId}`, { data: this.getState()[dropId] });
+      io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
+    });
+
+    dropContract.on(dropContract.filters.Mutated(null), async (...args) => {
+      const event = args[args.length - 1] as Event;
+      if (event.blockNumber <= startBlockNumber) return; // do not react to this event
+
+      const tokenId = (event.args.tokenId as BigNumber).toNumber();
+      const user = await dropContract.ownerOf(tokenId);
+
+      const dripsOwnedByUser = await this.getDripOwnedByAddress(user);
+
+      this.DROPS[dropId].currentSupply++;
       io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
     });
   };
@@ -160,6 +172,7 @@ export class Store {
       version: drip.versionId.toNumber(),
       img: "", // TODO
       status: drip.status,
+      owner: await dropContract.ownerOf(tokenId),
       nft:
         drip.status === DripStatus.MUTATED
           ? await this.getNft(drip.mutation.token, drip.mutation.tokenId.toNumber())

@@ -82,7 +82,9 @@ const style = {
     padding: "15px",
     width: "325px",
     maxHeight: "calc(70vh)",
+    boxShadow: "2.5px 2.5px 5px #afafb4, -2.5px -2.5px 5px #ffffff",
   })),
+  //
   WalletTypo1: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 500,

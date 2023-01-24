@@ -6,6 +6,17 @@ export enum DripStatus {
   MUTATED,
 }
 
+export const dripStatus = (dripStatus: DripStatus) => {
+  switch (dripStatus) {
+    case DripStatus.DEFAULT:
+      return "DEFAULT";
+    case DripStatus.MUTATED:
+      return "MUTATED";
+    default:
+      return "ERROR";
+  }
+};
+
 export type Drips = Drip[];
 export type Drip = {
   drop: Drop;
@@ -14,6 +25,7 @@ export type Drip = {
   version: number;
   img: string;
   status: DripStatus;
+  owner: string;
   nft?: NFT;
 };
 

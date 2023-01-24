@@ -45,7 +45,7 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((p
 
   useEffect(() => {
     setLoaded(true);
-  });
+  }, []);
 
   const cameraControls = React.useRef<CameraControls>(null!);
 
