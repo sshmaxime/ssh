@@ -132,7 +132,15 @@ export const NavbarComponent: FC = () => {
                                           <Grid item>
                                             <Grid container columnSpacing={1}>
                                               <CenterItem item>
-                                                <Style.WalletTypoCollectionDrop>
+                                                <Style.WalletTypoCollectionDrop
+                                                  style={{
+                                                    borderBottom: `3px solid black`,
+                                                    borderImage: `linear-gradient(to right, ${
+                                                      drip.drop.metadata.versions[drip.version]
+                                                        .color
+                                                    } 50%, transparent 50%) 100% 1`,
+                                                  }}
+                                                >
                                                   {drip.drop.symbol}
                                                 </Style.WalletTypoCollectionDrop>
                                               </CenterItem>

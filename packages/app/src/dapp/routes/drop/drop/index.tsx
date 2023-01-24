@@ -70,6 +70,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
   }, [isLoaded]);
 
   const updateVersion = (version: number) => {
+    if (!sceneRef.current) return;
     setVersion(version);
     sceneRef.current.updateVersion(
       0,
@@ -80,6 +81,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
   };
   //
   const updateItem = (newItem: NFT) => {
+    if (!sceneRef.current) return;
     setItem(newItem);
     sceneRef.current.updateItem(
       newItem.img,
