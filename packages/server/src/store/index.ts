@@ -166,6 +166,22 @@ export class Store {
     const dropContract = Drop__factory.connect(dropContractAddress, this.Provider);
     const drip = await dropContract.drip(tokenId);
     const drop = this.getDrop(dropId);
+
+    const nft = (async () => {
+      if (drip.status === DripStatus.MUTATED) {
+        // If mutated by default item
+        if (drip.mutation.token === drop.defaultItem.address) {
+          return {
+            ...drop.defaultItem,
+            id: drip.mutation.tokenId.toNumber(),
+          };
+        } else {
+          return await this.getNft(drip.mutation.token, drip.mutation.tokenId.toNumber());
+        }
+      }
+      return undefined;
+    })();
+
     return {
       drop: drop,
       id: tokenId,
@@ -173,10 +189,7 @@ export class Store {
       img: "", // TODO
       status: drip.status,
       owner: await dropContract.ownerOf(tokenId),
-      nft:
-        drip.status === DripStatus.MUTATED
-          ? await this.getNft(drip.mutation.token, drip.mutation.tokenId.toNumber())
-          : undefined,
+      nft: await nft,
     };
   };
 
@@ -196,6 +209,7 @@ export class Store {
           };
         }
       }
+
       return undefined;
     }
 
