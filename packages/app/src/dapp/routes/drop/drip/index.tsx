@@ -70,8 +70,6 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   // fetch data
   const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
 
-  const isMintable = drop.currentSupply !== drop.maxSupply;
-
   const zeroItem: NFT = {
     address: AddressZero,
     img: "/zeroItem.png",
@@ -89,15 +87,16 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   };
 
   // fc state
-  const [currentItem, , setItem] = useCState<NFT>(drip.nft || zeroItem);
-  const [currentVersion, , setVersion] = useCState(drip.version);
+  const [currentItem, setItem] = useState<NFT>(drip.nft || zeroItem);
+  const [currentVersion, setVersion] = useState(drip.version || 0);
 
   const isDefaultItem = currentItem.address === defaultItem.address;
   const isZeroItem = currentItem.address === zeroItem.address;
   const isNormalItem = !isZeroItem && !isDefaultItem;
   const isMintableItem = isNormalItem || isDefaultItem;
 
-  //
+  const { isLoaded } = useSceneStore();
+
   const updateItem = (newItem: NFT) => {
     setItem(newItem);
     sceneRef.current.updateItem(
@@ -109,11 +108,22 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
     );
   };
 
-  const { isLoaded } = useSceneStore();
+  const updateVersion = (version: number) => {
+    setVersion(version);
+    sceneRef.current.updateVersion(
+      0,
+      version,
+      drop.symbol,
+      currentItem.name + " #" + currentItem.id
+    );
+  };
 
-  if (isLoaded) {
-    updateItem(currentItem);
-  }
+  useEffect(() => {
+    if (isLoaded) {
+      updateItem(drip.nft || zeroItem);
+      updateVersion(drip.version);
+    }
+  }, [isLoaded, drip]);
 
   const resetItem = () => {
     const resetToItem = isDefaultItem ? zeroItem : defaultItem;
