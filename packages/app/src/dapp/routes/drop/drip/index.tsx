@@ -392,7 +392,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
           style={{
             zIndex: 10,
             height: "100%",
-            visibility: isDripMutated && drip.owner === address ? "hidden" : "visible",
+            visibility: isDripMutated || drip.owner !== address ? "hidden" : "visible",
           }}
         >
           <Style.LeftSide>

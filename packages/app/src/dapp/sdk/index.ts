@@ -2,6 +2,7 @@ import { BigNumber, ethers, Signer } from "ethers";
 import { TestERC721__factory, Drop__factory, ERC721__factory } from "@sshlabs/contracts";
 import { info } from "../../info";
 import { NFT } from "@sshlabs/typings";
+import { login } from "../store/services/web3";
 
 class SDK {
   private provider!: ethers.providers.Web3Provider;
@@ -31,13 +32,21 @@ class SDK {
     } else {
       this._name = (await this.provider.lookupAddress(this._address)) || "cool human";
     }
+    console.log(await newSigner.getAddress());
   };
 
-  init = async () => {
+  init = async (dispatch: Function) => {
     this.provider = new ethers.providers.Web3Provider(window.ethereum);
 
     await this.provider.send("eth_requestAccounts", []);
     await this._setSigner(this.provider.getSigner() as Signer);
+
+    window.ethereum.on("chainChanged", () => {
+      console.log("hey");
+    });
+    window.ethereum.on("accountsChanged", async () => {
+      dispatch(login());
+    });
   };
 
   mintDefault = async (contractAddress: string, value: string) => {

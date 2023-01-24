@@ -49,8 +49,8 @@ const initialState: Web3 = {
   },
 };
 
-export const login = createAsyncThunk("web3/login", async () => {
-  await sdk.init();
+export const login = createAsyncThunk("web3/login", async (_, { dispatch }) => {
+  await sdk.init(dispatch);
   const { address, name } = sdk.getInfo();
 
   return { address, name };

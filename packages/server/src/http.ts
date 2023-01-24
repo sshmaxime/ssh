@@ -17,6 +17,8 @@ app.get("/assets/:address", async (req: Request, res: Response): Promise<Respons
   if (ENV === "TEST") {
     const getTestData = await store.getLocalAssetsTest(address);
 
+    if (getTestData.length === 0) return res.status(200).send([]);
+
     dataToReturn.push({
       collectionName: getTestData[0].name,
       collectionSymbol: getTestData[0].symbol,
