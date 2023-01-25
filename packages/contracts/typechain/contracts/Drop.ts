@@ -54,7 +54,6 @@ export interface DropInterface extends utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "defaultItem()": FunctionFragment;
     "drip(uint256)": FunctionFragment;
     "dropId()": FunctionFragment;
     "dropURI()": FunctionFragment;
@@ -90,7 +89,6 @@ export interface DropInterface extends utils.Interface {
     nameOrSignatureOrTopic:
       | "approve"
       | "balanceOf"
-      | "defaultItem"
       | "drip"
       | "dropId"
       | "dropURI"
@@ -129,10 +127,6 @@ export interface DropInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "defaultItem",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "drip",
@@ -246,10 +240,6 @@ export interface DropInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "defaultItem",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "drip", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dropId", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "dropURI", data: BytesLike): Result;
@@ -442,8 +432,6 @@ export interface Drop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    defaultItem(overrides?: CallOverrides): Promise<[string]>;
-
     drip(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -586,8 +574,6 @@ export interface Drop extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  defaultItem(overrides?: CallOverrides): Promise<string>;
-
   drip(
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -729,8 +715,6 @@ export interface Drop extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    defaultItem(overrides?: CallOverrides): Promise<string>;
 
     drip(
       tokenId: PromiseOrValue<BigNumberish>,
@@ -927,8 +911,6 @@ export interface Drop extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    defaultItem(overrides?: CallOverrides): Promise<BigNumber>;
-
     drip(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1071,8 +1053,6 @@ export interface Drop extends BaseContract {
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    defaultItem(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     drip(
       tokenId: PromiseOrValue<BigNumberish>,

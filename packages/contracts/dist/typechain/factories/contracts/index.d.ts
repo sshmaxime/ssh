@@ -1,4 +1,3 @@
-export * as collectibles from "./collectibles";
 export * as tokens from "./tokens";
 export * as utils from "./utils";
 export { Drop__factory } from "./Drop__factory";

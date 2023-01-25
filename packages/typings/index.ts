@@ -46,7 +46,6 @@ export type Drop = {
   maxSupply: number;
   price: string; // wei
   currentSupply: number;
-  defaultItem: Collection;
   metadata: DropMetadata;
 };
 

@@ -24,9 +24,6 @@ import { ADDRESS_STORE, ENV, IPFS_GATEWAY, WEB3_ENDPOINT } from "../config";
 import { IPFS_EXP } from "../_constants";
 import io from "../server/io";
 
-const defaultItemImg =
-  "https://i.seadn.io/gae/u318gzdW-M73Uwe9pg26cMZKb6LJItJB4-iCpMZQ8bfh7Kbo0dropDsYdwiiWKeEQ9eQVNTroC0KJeIDJ-hmo3Hm_55GZD_mvpKY?auto=format&w=1000";
-
 export class Store {
   private Provider: ethers.providers.JsonRpcProvider;
 
@@ -62,9 +59,6 @@ export class Store {
     const metadataUrl = (await dropContract.dropURI()).replace(IPFS_EXP, IPFS_GATEWAY);
     const metadata = (await axios.get(metadataUrl)).data as DropMetadata;
 
-    const defaultCollectionAddress = await dropContract.defaultItem();
-    const defaultCollection = TestERC721__factory.connect(defaultCollectionAddress, this.Provider);
-
     return {
       address: dropContractAddress,
       id: dropId.toNumber(),
@@ -72,13 +66,6 @@ export class Store {
       price: (await dropContract.price()).toString(),
       maxSupply: (await dropContract.maxSupply()).toNumber(),
       currentSupply: (await dropContract.totalSupply()).toNumber(),
-      defaultItem: {
-        address: defaultCollectionAddress,
-        name: await defaultCollection.name(),
-        symbol: await defaultCollection.symbol(),
-        img: defaultItemImg,
-        price: (await defaultCollection.price()).toString(),
-      },
       metadata: metadata,
     };
   };
@@ -169,15 +156,7 @@ export class Store {
 
     const nft = (async () => {
       if (drip.status === DripStatus.MUTATED) {
-        // If mutated by default item
-        if (drip.mutation.token === drop.defaultItem.address) {
-          return {
-            ...drop.defaultItem,
-            id: drip.mutation.tokenId.toNumber(),
-          };
-        } else {
-          return await this.getNft(drip.mutation.token, drip.mutation.tokenId.toNumber());
-        }
+        return await this.getNft(drip.mutation.token, drip.mutation.tokenId.toNumber());
       }
       return undefined;
     })();

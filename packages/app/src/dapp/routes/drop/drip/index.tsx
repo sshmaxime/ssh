@@ -78,22 +78,22 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
     symbol: "",
   };
 
-  const defaultItem: NFT = {
-    address: drop.defaultItem.address,
-    img: drop.defaultItem.img,
+  const exempleItem: NFT = {
+    address: "TODO",
+    img: "TODO",
     id: 0,
-    name: drop.defaultItem.name,
-    symbol: drop.defaultItem.symbol,
+    name: "TODO",
+    symbol: "TODO",
   };
 
   // fc state
   const [currentItem, setItem] = useState<NFT>(drip.nft || zeroItem);
   const [currentVersion, setVersion] = useState(drip.version || 0);
 
-  const isDefaultItem = currentItem.address === defaultItem.address;
+  const isExempleItem = currentItem.address === exempleItem.address;
   const isZeroItem = currentItem.address === zeroItem.address;
-  const isNormalItem = !isZeroItem && !isDefaultItem;
-  const isMintableItem = isNormalItem || isDefaultItem;
+  const isNormalItem = !isZeroItem && !isExempleItem;
+  const isMintableItem = isNormalItem || isExempleItem;
 
   const { isLoaded } = useSceneStore();
 
@@ -126,7 +126,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   }, [isLoaded, drip]);
 
   const resetItem = () => {
-    const resetToItem = isDefaultItem ? zeroItem : defaultItem;
+    const resetToItem = isExempleItem ? zeroItem : exempleItem;
 
     setItem(resetToItem);
     sceneRef.current.updateItem(
@@ -149,54 +149,19 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
     setOpen(false);
   };
 
-  // Drip
-  const isDripMinted = txProcess.mintingDrip.id !== undefined;
-
-  const isDefaultMinted = txProcess.mintingDefault.done;
-
   // Mutation
   const isMutated = txProcess.mutating.done;
 
   const modalActions = [
-    ...(isDefaultItem
-      ? [
-          {
-            isDisplay: true,
-            isMyTurn: !isDefaultMinted,
-            stepName: "DEFAULT ITEM",
-            text: (
-              <Style.TextModal>
-                Let's mint your <b>{defaultItem.symbol}</b>.
-              </Style.TextModal>
-            ),
-            isLoading: txProcess.mintingDefault.loading,
-            isDone: txProcess.mintingDefault.done,
-            tx: txProcess.mintingDefault.tx,
-            price: drop.defaultItem.price,
-            action: {
-              name: "MINT DEFAULT ITEM",
-              fct: () => {
-                dispatch(
-                  mintDefault({
-                    address: drop.defaultItem.address,
-                    value: drop.defaultItem.price,
-                  })
-                );
-              },
-            },
-          },
-        ]
-      : []),
-
     {
-      isDisplay: isDefaultItem ? txProcess.mintingDefault.done : isMintableItem ? true : false,
-      isMyTurn: isDefaultItem ? isDefaultMinted && !isMutated : !isMutated,
+      isDisplay: true,
+      isMyTurn: !isMutated,
       stepName: "MUTATE",
       text: (
         <Style.TextModal>
           Ah, finally ! Let's mutate your <b>Drip</b> with your{" "}
           <b>
-            {currentItem.symbol}#{isDefaultItem ? txProcess.mintingDefault?.id : currentItem.id}
+            {currentItem.symbol}#{isExempleItem ? txProcess.mintingDefault?.id : currentItem.id}
           </b>{" "}
           !
         </Style.TextModal>
@@ -212,8 +177,8 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
             mutate({
               address: drop.address,
               tokenId: drip.id,
-              contractMutator: isDefaultItem ? defaultItem.address : currentItem.address,
-              tokenIdMutator: isDefaultItem
+              contractMutator: isExempleItem ? exempleItem.address : currentItem.address,
+              tokenIdMutator: isExempleItem
                 ? (txProcess.mintingDefault?.id as number)
                 : currentItem.id,
             })
@@ -511,14 +476,18 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       </Grid>
 
                       <Grid item>
-                        {isDefaultItem ? <Style.DefaultItem>DEFAULT</Style.DefaultItem> : null}
-                        {isZeroItem ? <Style.DefaultItem>NONE</Style.DefaultItem> : null}
+                        {isExempleItem ? (
+                          <Style.ItemDescriptionMode>EXEMPLE</Style.ItemDescriptionMode>
+                        ) : null}
+                        {isZeroItem ? (
+                          <Style.ItemDescriptionMode>NONE</Style.ItemDescriptionMode>
+                        ) : null}
                       </Grid>
 
                       {!isDripMutated && (
                         <Grid item flexGrow={1} style={{ height: "20px" }}>
                           <Grid container direction="row-reverse">
-                            {currentItem.address !== defaultItem.address ? (
+                            {currentItem.address !== exempleItem.address ? (
                               <Grid item>
                                 <Style.MutatorRemove>
                                   <Clickable onClick={() => resetItem()}>BACK TO DEFAULT</Clickable>
@@ -541,7 +510,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                     <Grid container spacing={0.5}>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === defaultItem.address)}
+                          activated={!(currentItem.address === exempleItem.address)}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={OpenSeaIcon} style={{ width: "16.5px" }} alt="" />
@@ -549,7 +518,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       </Grid>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === defaultItem.address)}
+                          activated={!(currentItem.address === exempleItem.address)}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />
@@ -671,7 +640,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                     ) : (
                       <Grid item xs={7}>
                         <Clickable
-                          activated={address === drip.owner && (isNormalItem || isDefaultItem)}
+                          activated={address === drip.owner && (isNormalItem || isExempleItem)}
                           onClick={() => {
                             setOpen(true);
                             dispatch(resetMintingProcess());

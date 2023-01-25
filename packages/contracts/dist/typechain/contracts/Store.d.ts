@@ -4,7 +4,7 @@ import type { Listener, Provider } from "@ethersproject/providers";
 import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
 export interface StoreInterface extends utils.Interface {
     functions: {
-        "createDrop(uint256,uint256,uint8,address)": FunctionFragment;
+        "createDrop(uint256,uint256,uint8)": FunctionFragment;
         "drop(uint256)": FunctionFragment;
         "owner()": FunctionFragment;
         "renounceOwnership()": FunctionFragment;
@@ -15,8 +15,7 @@ export interface StoreInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "createDrop", values: [
         PromiseOrValue<BigNumberish>,
         PromiseOrValue<BigNumberish>,
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>
+        PromiseOrValue<BigNumberish>
     ]): string;
     encodeFunctionData(functionFragment: "drop", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -65,7 +64,7 @@ export interface Store extends BaseContract {
     once: OnEvent<this>;
     removeListener: OnEvent<this>;
     functions: {
-        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, defaultItem: PromiseOrValue<string>, overrides?: Overrides & {
+        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         drop(dropId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
@@ -78,7 +77,7 @@ export interface Store extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
     };
-    createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, defaultItem: PromiseOrValue<string>, overrides?: Overrides & {
+    createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     drop(dropId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
@@ -91,7 +90,7 @@ export interface Store extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     callStatic: {
-        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, defaultItem: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         drop(dropId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
         renounceOwnership(overrides?: CallOverrides): Promise<void>;
@@ -105,7 +104,7 @@ export interface Store extends BaseContract {
         OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
     };
     estimateGas: {
-        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, defaultItem: PromiseOrValue<string>, overrides?: Overrides & {
+        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         drop(dropId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
@@ -119,7 +118,7 @@ export interface Store extends BaseContract {
         }): Promise<BigNumber>;
     };
     populateTransaction: {
-        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, defaultItem: PromiseOrValue<string>, overrides?: Overrides & {
+        createDrop(maxSupply: PromiseOrValue<BigNumberish>, mintPrice: PromiseOrValue<BigNumberish>, versions: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         drop(dropId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;

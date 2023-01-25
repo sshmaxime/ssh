@@ -24,7 +24,6 @@ export interface DropInterface extends utils.Interface {
     functions: {
         "approve(address,uint256)": FunctionFragment;
         "balanceOf(address)": FunctionFragment;
-        "defaultItem()": FunctionFragment;
         "drip(uint256)": FunctionFragment;
         "dropId()": FunctionFragment;
         "dropURI()": FunctionFragment;
@@ -55,10 +54,9 @@ export interface DropInterface extends utils.Interface {
         "transferOwnership(address)": FunctionFragment;
         "versions()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "approve" | "balanceOf" | "defaultItem" | "drip" | "dropId" | "dropURI" | "getApproved" | "getTokenInterface" | "isApprovedForAll" | "maxSupply" | "mint" | "mutate" | "name" | "owner" | "ownerOf" | "price" | "renounceOwnership" | "safeTransferFrom(address,address,uint256)" | "safeTransferFrom(address,address,uint256,bytes)" | "setApprovalForAll" | "setBaseTokenURI" | "setDropURI" | "setTokenInterface" | "supportsInterface" | "symbol" | "tokenByIndex" | "tokenOfOwnerByIndex" | "tokenURI" | "totalSupply" | "transferFrom" | "transferOwnership" | "versions"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "approve" | "balanceOf" | "drip" | "dropId" | "dropURI" | "getApproved" | "getTokenInterface" | "isApprovedForAll" | "maxSupply" | "mint" | "mutate" | "name" | "owner" | "ownerOf" | "price" | "renounceOwnership" | "safeTransferFrom(address,address,uint256)" | "safeTransferFrom(address,address,uint256,bytes)" | "setApprovalForAll" | "setBaseTokenURI" | "setDropURI" | "setTokenInterface" | "supportsInterface" | "symbol" | "tokenByIndex" | "tokenOfOwnerByIndex" | "tokenURI" | "totalSupply" | "transferFrom" | "transferOwnership" | "versions"): FunctionFragment;
     encodeFunctionData(functionFragment: "approve", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "balanceOf", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "defaultItem", values?: undefined): string;
     encodeFunctionData(functionFragment: "drip", values: [PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "dropId", values?: undefined): string;
     encodeFunctionData(functionFragment: "dropURI", values?: undefined): string;
@@ -107,7 +105,6 @@ export interface DropInterface extends utils.Interface {
     encodeFunctionData(functionFragment: "versions", values?: undefined): string;
     decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "defaultItem", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "drip", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "dropId", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "dropURI", data: BytesLike): Result;
@@ -223,7 +220,6 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
-        defaultItem(overrides?: CallOverrides): Promise<[string]>;
         drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[DripStructOutput]>;
         dropId(overrides?: CallOverrides): Promise<[BigNumber]>;
         dropURI(overrides?: CallOverrides): Promise<[string]>;
@@ -280,7 +276,6 @@ export interface Drop extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-    defaultItem(overrides?: CallOverrides): Promise<string>;
     drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<DripStructOutput>;
     dropId(overrides?: CallOverrides): Promise<BigNumber>;
     dropURI(overrides?: CallOverrides): Promise<string>;
@@ -335,7 +330,6 @@ export interface Drop extends BaseContract {
     callStatic: {
         approve(to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        defaultItem(overrides?: CallOverrides): Promise<string>;
         drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<DripStructOutput>;
         dropId(overrides?: CallOverrides): Promise<BigNumber>;
         dropURI(overrides?: CallOverrides): Promise<string>;
@@ -385,7 +379,6 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        defaultItem(overrides?: CallOverrides): Promise<BigNumber>;
         drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
         dropId(overrides?: CallOverrides): Promise<BigNumber>;
         dropURI(overrides?: CallOverrides): Promise<BigNumber>;
@@ -443,7 +436,6 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        defaultItem(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         dropId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         dropURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;

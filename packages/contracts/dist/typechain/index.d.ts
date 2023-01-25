@@ -21,8 +21,6 @@ export type { ERC165 } from "./@openzeppelin/contracts/utils/introspection/ERC16
 export { ERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/ERC165__factory";
 export type { IERC165 } from "./@openzeppelin/contracts/utils/introspection/IERC165";
 export { IERC165__factory } from "./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory";
-export type { PREMIERCollectible } from "./contracts/collectibles/PREMIERCollectible";
-export { PREMIERCollectible__factory } from "./factories/contracts/collectibles/PREMIERCollectible__factory";
 export type { Drop } from "./contracts/Drop";
 export { Drop__factory } from "./factories/contracts/Drop__factory";
 export type { Store } from "./contracts/Store";

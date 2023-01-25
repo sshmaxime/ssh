@@ -31,7 +31,6 @@ export declare type Drop = {
     maxSupply: number;
     price: string;
     currentSupply: number;
-    defaultItem: Collection;
     metadata: DropMetadata;
 };
 export declare type NFTsByCollection = {

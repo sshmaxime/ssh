@@ -64,9 +64,6 @@ contract Drop is ERC721Enumerable, Ownable {
     // The number of versions
     uint256 immutable VERSIONS; // starts at version 1, cannot be 0
 
-    // Drop Default Item
-    address immutable DEFAULT_ITEM;
-
     // Mappings
 
     // Mapping from token id to Drip
@@ -87,8 +84,7 @@ contract Drop is ERC721Enumerable, Ownable {
         uint256 id,
         uint256 _maxSupply,
         uint256 _price,
-        uint256 _versions,
-        address _defaultItem
+        uint256 _versions
     ) ERC721(string.concat(_name, Strings.toString(id)), string.concat(_symbol, Strings.toString(id))) {
         require(_versions > 0, "INVALID_VERSIONS");
 
@@ -96,7 +92,6 @@ contract Drop is ERC721Enumerable, Ownable {
         MAX_SUPPLY = _maxSupply;
         PRICE = _price;
         VERSIONS = _versions;
-        DEFAULT_ITEM = _defaultItem;
 
         transferOwnership(tx.origin);
     }
@@ -127,13 +122,6 @@ contract Drop is ERC721Enumerable, Ownable {
      */
     function versions() public view returns (uint256) {
         return VERSIONS;
-    }
-
-    /**
-     * @dev Return the default item.
-     */
-    function defaultItem() public view returns (address) {
-        return DEFAULT_ITEM;
     }
 
     /**

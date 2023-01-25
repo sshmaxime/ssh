@@ -29,7 +29,7 @@ import type {
 
 export interface StoreInterface extends utils.Interface {
   functions: {
-    "createDrop(uint256,uint256,uint8,address)": FunctionFragment;
+    "createDrop(uint256,uint256,uint8)": FunctionFragment;
     "drop(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
@@ -52,8 +52,7 @@ export interface StoreInterface extends utils.Interface {
     values: [
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
@@ -149,7 +148,6 @@ export interface Store extends BaseContract {
       maxSupply: PromiseOrValue<BigNumberish>,
       mintPrice: PromiseOrValue<BigNumberish>,
       versions: PromiseOrValue<BigNumberish>,
-      defaultItem: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -176,7 +174,6 @@ export interface Store extends BaseContract {
     maxSupply: PromiseOrValue<BigNumberish>,
     mintPrice: PromiseOrValue<BigNumberish>,
     versions: PromiseOrValue<BigNumberish>,
-    defaultItem: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -203,7 +200,6 @@ export interface Store extends BaseContract {
       maxSupply: PromiseOrValue<BigNumberish>,
       mintPrice: PromiseOrValue<BigNumberish>,
       versions: PromiseOrValue<BigNumberish>,
-      defaultItem: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -247,7 +243,6 @@ export interface Store extends BaseContract {
       maxSupply: PromiseOrValue<BigNumberish>,
       mintPrice: PromiseOrValue<BigNumberish>,
       versions: PromiseOrValue<BigNumberish>,
-      defaultItem: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -275,7 +270,6 @@ export interface Store extends BaseContract {
       maxSupply: PromiseOrValue<BigNumberish>,
       mintPrice: PromiseOrValue<BigNumberish>,
       versions: PromiseOrValue<BigNumberish>,
-      defaultItem: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

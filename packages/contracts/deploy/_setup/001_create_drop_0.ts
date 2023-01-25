@@ -1,10 +1,9 @@
 import { DeployFunction } from 'hardhat-deploy/types';
 import { ethers } from 'hardhat';
 import Contracts from '../../components/contracts';
-import { publishDropMetadataToIPFS } from '../../scripts/drop';
+import { publishDropMetadataToIPFS } from '../../scripts';
 
 import { STORE } from '../_default/000_deploy_store';
-import { DEFAULT_NFT } from './001_create_default_0';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 const { parseEther: toEth, formatBytes32String } = ethers.utils;
@@ -18,8 +17,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const { deployer } = await getNamedAccounts();
     const deployerSigner = await ethers.getSigner(deployer);
 
-    const defaultNftAddress = (await deployments.get(DEFAULT_NFT)).address;
-
     await execute(
         STORE,
         {
@@ -30,8 +27,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         'createDrop',
         100,
         toEth('0.1'),
-        5,
-        defaultNftAddress
+        5
     );
 
     const getContract = async (int: number) => {

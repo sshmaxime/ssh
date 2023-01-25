@@ -38,9 +38,9 @@ contract Store is Ownable {
     /**
      * @dev Create a DROP.
      */
-    function createDrop(uint256 maxSupply, uint256 mintPrice, uint8 versions, address defaultItem) public onlyOwner {
+    function createDrop(uint256 maxSupply, uint256 mintPrice, uint8 versions) public onlyOwner {
         uint256 dropId = TOTAL_SUPPLY;
-        dropIdToDrop[dropId] = new Drop(dropId, maxSupply, mintPrice, versions, defaultItem);
+        dropIdToDrop[dropId] = new Drop(dropId, maxSupply, mintPrice, versions);
         TOTAL_SUPPLY++;
 
         emit DropCreated(dropId);

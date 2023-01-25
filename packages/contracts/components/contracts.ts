@@ -5,7 +5,6 @@ import {
     TestERC721__factory,
     Drop__factory,
     Store__factory,
-    PREMIERCollectible__factory,
     ERC721__factory,
     CryptoPunksMarket__factory,
     CryptopunksInterface__factory
@@ -17,8 +16,6 @@ export default buildContracts((signer?: Signer) => {
     return {
         Drop: deployOrAttach('Drop', Drop__factory, signer),
         Store: deployOrAttach('Store', Store__factory, signer),
-        //
-        PREMIERCollectible: deployOrAttach('PREMIERCollectible', PREMIERCollectible__factory, signer),
         //
         CryptoPunksMarket: deployOrAttach('CryptoPunksMarket', CryptoPunksMarket__factory, signer),
         CryptopunksInterface: deployOrAttach('CryptopunksInterface', CryptopunksInterface__factory, signer),
