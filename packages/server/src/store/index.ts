@@ -59,7 +59,7 @@ export class Store {
     const dropContractAddress = await this.Store.drop(dropId);
     const dropContract = Drop__factory.connect(dropContractAddress, this.Provider);
 
-    const metadataUrl = (await dropContract.URI()).replace(IPFS_EXP, IPFS_GATEWAY);
+    const metadataUrl = (await dropContract.dropURI()).replace(IPFS_EXP, IPFS_GATEWAY);
     const metadata = (await axios.get(metadataUrl)).data as DropMetadata;
 
     const defaultCollectionAddress = await dropContract.defaultItem();

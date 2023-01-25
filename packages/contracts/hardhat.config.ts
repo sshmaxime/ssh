@@ -37,6 +37,11 @@ const config: HardhatUserConfig = {
         mainnet: {
             url: env['MAINNET'],
             deploy: [DEFAULT_DEPLOY_DIR, './deploy/mainnet']
+        },
+        goerli: {
+            url: env['GOERLI'],
+            deploy: [DEFAULT_DEPLOY_DIR, './deploy/goerli'],
+            accounts: [env['HARDHAT_DEPLOYER']]
         }
     },
 

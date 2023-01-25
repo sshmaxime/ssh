@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TestERC721__factory = exports.ITestERC721__factory = exports.CryptoPunksMarket__factory = exports.ITokenInterface__factory = exports.ICryptopunks__factory = exports.CryptopunksInterface__factory = exports.Store__factory = exports.Drop__factory = exports.IERC165__factory = exports.ERC165__factory = exports.IERC721Receiver__factory = exports.IERC721__factory = exports.IERC721Metadata__factory = exports.IERC721Enumerable__factory = exports.ERC721Enumerable__factory = exports.ERC721__factory = exports.Ownable__factory = exports.factories = void 0;
+exports.TestERC721__factory = exports.ITestERC721__factory = exports.CryptoPunksMarket__factory = exports.ITokenInterface__factory = exports.ICryptopunks__factory = exports.CryptopunksInterface__factory = exports.Store__factory = exports.Drop__factory = exports.PREMIERCollectible__factory = exports.IERC165__factory = exports.ERC165__factory = exports.IERC721Receiver__factory = exports.IERC721__factory = exports.IERC721Metadata__factory = exports.IERC721Enumerable__factory = exports.ERC721Enumerable__factory = exports.ERC721__factory = exports.Ownable__factory = exports.factories = void 0;
 exports.factories = __importStar(require("./factories"));
 var Ownable__factory_1 = require("./factories/@openzeppelin/contracts/access/Ownable__factory");
 Object.defineProperty(exports, "Ownable__factory", { enumerable: true, get: function () { return Ownable__factory_1.Ownable__factory; } });
@@ -43,6 +43,8 @@ var ERC165__factory_1 = require("./factories/@openzeppelin/contracts/utils/intro
 Object.defineProperty(exports, "ERC165__factory", { enumerable: true, get: function () { return ERC165__factory_1.ERC165__factory; } });
 var IERC165__factory_1 = require("./factories/@openzeppelin/contracts/utils/introspection/IERC165__factory");
 Object.defineProperty(exports, "IERC165__factory", { enumerable: true, get: function () { return IERC165__factory_1.IERC165__factory; } });
+var PREMIERCollectible__factory_1 = require("./factories/contracts/collectibles/PREMIERCollectible__factory");
+Object.defineProperty(exports, "PREMIERCollectible__factory", { enumerable: true, get: function () { return PREMIERCollectible__factory_1.PREMIERCollectible__factory; } });
 var Drop__factory_1 = require("./factories/contracts/Drop__factory");
 Object.defineProperty(exports, "Drop__factory", { enumerable: true, get: function () { return Drop__factory_1.Drop__factory; } });
 var Store__factory_1 = require("./factories/contracts/Store__factory");

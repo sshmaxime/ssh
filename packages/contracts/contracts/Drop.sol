@@ -44,7 +44,11 @@ contract Drop is ERC721Enumerable, Ownable {
     string constant _name = "DROP#";
     string constant _symbol = "DROP#";
 
-    string BASE_URI = "";
+    // URI of the drop
+    string DROP_URI = "";
+
+    // Base URI of the drips
+    string BASE_TOKEN_URI = "";
 
     // Immutables
 
@@ -157,15 +161,29 @@ contract Drop is ERC721Enumerable, Ownable {
     /**
      * @dev Return the URI of the metadata of the DROP.
      */
-    function URI() public view returns (string memory) {
-        return BASE_URI;
+    function dropURI() public view returns (string memory) {
+        return DROP_URI;
     }
 
     /**
-     * @dev Load the metadata URI of the DROP.
+     * @dev Load the baseURI of the metadata of the DROP.
      */
-    function setURI(string memory newURI) public onlyOwner {
-        BASE_URI = newURI;
+    function setDropURI(string memory newURI) public onlyOwner {
+        DROP_URI = newURI;
+    }
+
+    /**
+     * @dev Load the baseURI of the Drips.
+     */
+    function setBaseTokenURI(string memory newURI) public onlyOwner {
+        BASE_TOKEN_URI = newURI;
+    }
+
+    /**
+     * @dev Return the baseURI of the Drips.
+     */
+    function _baseURI() internal view override returns (string memory) {
+        return BASE_TOKEN_URI;
     }
 
     /**

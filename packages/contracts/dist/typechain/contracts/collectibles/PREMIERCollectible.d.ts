@@ -1,39 +1,15 @@
 import type { BaseContract, BigNumber, BigNumberish, BytesLike, CallOverrides, ContractTransaction, Overrides, PayableOverrides, PopulatedTransaction, Signer, utils } from "ethers";
 import type { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
-import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../common";
-export type DripMutationStruct = {
-    token: PromiseOrValue<string>;
-    tokenId: PromiseOrValue<BigNumberish>;
-};
-export type DripMutationStructOutput = [string, BigNumber] & {
-    token: string;
-    tokenId: BigNumber;
-};
-export type DripStruct = {
-    versionId: PromiseOrValue<BigNumberish>;
-    status: PromiseOrValue<BigNumberish>;
-    mutation: DripMutationStruct;
-};
-export type DripStructOutput = [BigNumber, number, DripMutationStructOutput] & {
-    versionId: BigNumber;
-    status: number;
-    mutation: DripMutationStructOutput;
-};
-export interface DropInterface extends utils.Interface {
+import type { TypedEventFilter, TypedEvent, TypedListener, OnEvent, PromiseOrValue } from "../../common";
+export interface PREMIERCollectibleInterface extends utils.Interface {
     functions: {
         "approve(address,uint256)": FunctionFragment;
         "balanceOf(address)": FunctionFragment;
-        "defaultItem()": FunctionFragment;
-        "drip(uint256)": FunctionFragment;
-        "dropId()": FunctionFragment;
-        "dropURI()": FunctionFragment;
+        "contractURI()": FunctionFragment;
         "getApproved(uint256)": FunctionFragment;
-        "getTokenInterface(address)": FunctionFragment;
         "isApprovedForAll(address,address)": FunctionFragment;
-        "maxSupply()": FunctionFragment;
-        "mint(uint256)": FunctionFragment;
-        "mutate(uint256,address,uint256)": FunctionFragment;
+        "mint()": FunctionFragment;
         "name()": FunctionFragment;
         "owner()": FunctionFragment;
         "ownerOf(uint256)": FunctionFragment;
@@ -42,9 +18,8 @@ export interface DropInterface extends utils.Interface {
         "safeTransferFrom(address,address,uint256)": FunctionFragment;
         "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
         "setApprovalForAll(address,bool)": FunctionFragment;
-        "setBaseTokenURI(string)": FunctionFragment;
-        "setDropURI(string)": FunctionFragment;
-        "setTokenInterface(address,address)": FunctionFragment;
+        "setBaseURI(string)": FunctionFragment;
+        "setContractURI(string)": FunctionFragment;
         "supportsInterface(bytes4)": FunctionFragment;
         "symbol()": FunctionFragment;
         "tokenByIndex(uint256)": FunctionFragment;
@@ -53,25 +28,14 @@ export interface DropInterface extends utils.Interface {
         "totalSupply()": FunctionFragment;
         "transferFrom(address,address,uint256)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
-        "versions()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "approve" | "balanceOf" | "defaultItem" | "drip" | "dropId" | "dropURI" | "getApproved" | "getTokenInterface" | "isApprovedForAll" | "maxSupply" | "mint" | "mutate" | "name" | "owner" | "ownerOf" | "price" | "renounceOwnership" | "safeTransferFrom(address,address,uint256)" | "safeTransferFrom(address,address,uint256,bytes)" | "setApprovalForAll" | "setBaseTokenURI" | "setDropURI" | "setTokenInterface" | "supportsInterface" | "symbol" | "tokenByIndex" | "tokenOfOwnerByIndex" | "tokenURI" | "totalSupply" | "transferFrom" | "transferOwnership" | "versions"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "approve" | "balanceOf" | "contractURI" | "getApproved" | "isApprovedForAll" | "mint" | "name" | "owner" | "ownerOf" | "price" | "renounceOwnership" | "safeTransferFrom(address,address,uint256)" | "safeTransferFrom(address,address,uint256,bytes)" | "setApprovalForAll" | "setBaseURI" | "setContractURI" | "supportsInterface" | "symbol" | "tokenByIndex" | "tokenOfOwnerByIndex" | "tokenURI" | "totalSupply" | "transferFrom" | "transferOwnership"): FunctionFragment;
     encodeFunctionData(functionFragment: "approve", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "balanceOf", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "defaultItem", values?: undefined): string;
-    encodeFunctionData(functionFragment: "drip", values: [PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "dropId", values?: undefined): string;
-    encodeFunctionData(functionFragment: "dropURI", values?: undefined): string;
+    encodeFunctionData(functionFragment: "contractURI", values?: undefined): string;
     encodeFunctionData(functionFragment: "getApproved", values: [PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "getTokenInterface", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "isApprovedForAll", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "maxSupply", values?: undefined): string;
-    encodeFunctionData(functionFragment: "mint", values: [PromiseOrValue<BigNumberish>]): string;
-    encodeFunctionData(functionFragment: "mutate", values: [
-        PromiseOrValue<BigNumberish>,
-        PromiseOrValue<string>,
-        PromiseOrValue<BigNumberish>
-    ]): string;
+    encodeFunctionData(functionFragment: "mint", values?: undefined): string;
     encodeFunctionData(functionFragment: "name", values?: undefined): string;
     encodeFunctionData(functionFragment: "owner", values?: undefined): string;
     encodeFunctionData(functionFragment: "ownerOf", values: [PromiseOrValue<BigNumberish>]): string;
@@ -89,9 +53,8 @@ export interface DropInterface extends utils.Interface {
         PromiseOrValue<BytesLike>
     ]): string;
     encodeFunctionData(functionFragment: "setApprovalForAll", values: [PromiseOrValue<string>, PromiseOrValue<boolean>]): string;
-    encodeFunctionData(functionFragment: "setBaseTokenURI", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "setDropURI", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "setTokenInterface", values: [PromiseOrValue<string>, PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setBaseURI", values: [PromiseOrValue<string>]): string;
+    encodeFunctionData(functionFragment: "setContractURI", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "supportsInterface", values: [PromiseOrValue<BytesLike>]): string;
     encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
     encodeFunctionData(functionFragment: "tokenByIndex", values: [PromiseOrValue<BigNumberish>]): string;
@@ -104,19 +67,12 @@ export interface DropInterface extends utils.Interface {
         PromiseOrValue<BigNumberish>
     ]): string;
     encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
-    encodeFunctionData(functionFragment: "versions", values?: undefined): string;
     decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "defaultItem", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "drip", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "dropId", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "dropURI", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "contractURI", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "getApproved", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "getTokenInterface", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "isApprovedForAll", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "maxSupply", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "mutate", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
@@ -125,9 +81,8 @@ export interface DropInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "safeTransferFrom(address,address,uint256)", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "safeTransferFrom(address,address,uint256,bytes)", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "setApprovalForAll", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setBaseTokenURI", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setDropURI", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "setTokenInterface", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setBaseURI", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "setContractURI", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "supportsInterface", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "tokenByIndex", data: BytesLike): Result;
@@ -136,19 +91,16 @@ export interface DropInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "totalSupply", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferFrom", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
-    decodeFunctionResult(functionFragment: "versions", data: BytesLike): Result;
     events: {
         "Approval(address,address,uint256)": EventFragment;
         "ApprovalForAll(address,address,bool)": EventFragment;
         "Minted(uint256)": EventFragment;
-        "Mutated(uint256)": EventFragment;
         "OwnershipTransferred(address,address)": EventFragment;
         "Transfer(address,address,uint256)": EventFragment;
     };
     getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
-    getEvent(nameOrSignatureOrTopic: "Mutated"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
     getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -179,11 +131,6 @@ export interface MintedEventObject {
 }
 export type MintedEvent = TypedEvent<[BigNumber], MintedEventObject>;
 export type MintedEventFilter = TypedEventFilter<MintedEvent>;
-export interface MutatedEventObject {
-    tokenId: BigNumber;
-}
-export type MutatedEvent = TypedEvent<[BigNumber], MutatedEventObject>;
-export type MutatedEventFilter = TypedEventFilter<MutatedEvent>;
 export interface OwnershipTransferredEventObject {
     previousOwner: string;
     newOwner: string;
@@ -204,11 +151,11 @@ export type TransferEvent = TypedEvent<[
     BigNumber
 ], TransferEventObject>;
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
-export interface Drop extends BaseContract {
+export interface PREMIERCollectible extends BaseContract {
     connect(signerOrProvider: Signer | Provider | string): this;
     attach(addressOrName: string): this;
     deployed(): Promise<this>;
-    interface: DropInterface;
+    interface: PREMIERCollectibleInterface;
     queryFilter<TEvent extends TypedEvent>(event: TypedEventFilter<TEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TEvent>>;
     listeners<TEvent extends TypedEvent>(eventFilter?: TypedEventFilter<TEvent>): Array<TypedListener<TEvent>>;
     listeners(eventName?: string): Array<Listener>;
@@ -223,18 +170,10 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[BigNumber]>;
-        defaultItem(overrides?: CallOverrides): Promise<[string]>;
-        drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[DripStructOutput]>;
-        dropId(overrides?: CallOverrides): Promise<[BigNumber]>;
-        dropURI(overrides?: CallOverrides): Promise<[string]>;
+        contractURI(overrides?: CallOverrides): Promise<[string]>;
         getApproved(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<[string]>;
-        getTokenInterface(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[string]>;
         isApprovedForAll(owner: PromiseOrValue<string>, operator: PromiseOrValue<string>, overrides?: CallOverrides): Promise<[boolean]>;
-        maxSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-        mint(versionId: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
-        mutate(dripToMutate: PromiseOrValue<BigNumberish>, token: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        mint(overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         name(overrides?: CallOverrides): Promise<[string]>;
@@ -253,13 +192,10 @@ export interface Drop extends BaseContract {
         setApprovalForAll(operator: PromiseOrValue<string>, approved: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setBaseTokenURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
+        setBaseURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        setDropURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<ContractTransaction>;
-        setTokenInterface(tokenAddress: PromiseOrValue<string>, _ITokenInterface: PromiseOrValue<string>, overrides?: Overrides & {
+        setContractURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<[boolean]>;
@@ -274,24 +210,15 @@ export interface Drop extends BaseContract {
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
-        versions(overrides?: CallOverrides): Promise<[BigNumber]>;
     };
     approve(to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-    defaultItem(overrides?: CallOverrides): Promise<string>;
-    drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<DripStructOutput>;
-    dropId(overrides?: CallOverrides): Promise<BigNumber>;
-    dropURI(overrides?: CallOverrides): Promise<string>;
+    contractURI(overrides?: CallOverrides): Promise<string>;
     getApproved(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
-    getTokenInterface(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
     isApprovedForAll(owner: PromiseOrValue<string>, operator: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
-    maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
-    mint(versionId: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
-    mutate(dripToMutate: PromiseOrValue<BigNumberish>, token: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+    mint(overrides?: PayableOverrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     name(overrides?: CallOverrides): Promise<string>;
@@ -310,13 +237,10 @@ export interface Drop extends BaseContract {
     setApprovalForAll(operator: PromiseOrValue<string>, approved: PromiseOrValue<boolean>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setBaseTokenURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
+    setBaseURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    setDropURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
-        from?: PromiseOrValue<string>;
-    }): Promise<ContractTransaction>;
-    setTokenInterface(tokenAddress: PromiseOrValue<string>, _ITokenInterface: PromiseOrValue<string>, overrides?: Overrides & {
+    setContractURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
@@ -331,20 +255,13 @@ export interface Drop extends BaseContract {
     transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
-    versions(overrides?: CallOverrides): Promise<BigNumber>;
     callStatic: {
         approve(to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        defaultItem(overrides?: CallOverrides): Promise<string>;
-        drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<DripStructOutput>;
-        dropId(overrides?: CallOverrides): Promise<BigNumber>;
-        dropURI(overrides?: CallOverrides): Promise<string>;
+        contractURI(overrides?: CallOverrides): Promise<string>;
         getApproved(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
-        getTokenInterface(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<string>;
         isApprovedForAll(owner: PromiseOrValue<string>, operator: PromiseOrValue<string>, overrides?: CallOverrides): Promise<boolean>;
-        maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        mint(versionId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
-        mutate(dripToMutate: PromiseOrValue<BigNumberish>, token: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
+        mint(overrides?: CallOverrides): Promise<void>;
         name(overrides?: CallOverrides): Promise<string>;
         owner(overrides?: CallOverrides): Promise<string>;
         ownerOf(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<string>;
@@ -353,9 +270,8 @@ export interface Drop extends BaseContract {
         "safeTransferFrom(address,address,uint256)"(from: PromiseOrValue<string>, to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         "safeTransferFrom(address,address,uint256,bytes)"(from: PromiseOrValue<string>, to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, data: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<void>;
         setApprovalForAll(operator: PromiseOrValue<string>, approved: PromiseOrValue<boolean>, overrides?: CallOverrides): Promise<void>;
-        setBaseTokenURI(newURI: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        setDropURI(newURI: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        setTokenInterface(tokenAddress: PromiseOrValue<string>, _ITokenInterface: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setBaseURI(newURI: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
+        setContractURI(newURI: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<boolean>;
         symbol(overrides?: CallOverrides): Promise<string>;
         tokenByIndex(index: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
@@ -364,7 +280,6 @@ export interface Drop extends BaseContract {
         totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
         transferFrom(from: PromiseOrValue<string>, to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
-        versions(overrides?: CallOverrides): Promise<BigNumber>;
     };
     filters: {
         "Approval(address,address,uint256)"(owner?: PromiseOrValue<string> | null, approved?: PromiseOrValue<string> | null, tokenId?: PromiseOrValue<BigNumberish> | null): ApprovalEventFilter;
@@ -373,8 +288,6 @@ export interface Drop extends BaseContract {
         ApprovalForAll(owner?: PromiseOrValue<string> | null, operator?: PromiseOrValue<string> | null, approved?: null): ApprovalForAllEventFilter;
         "Minted(uint256)"(tokenId?: PromiseOrValue<BigNumberish> | null): MintedEventFilter;
         Minted(tokenId?: PromiseOrValue<BigNumberish> | null): MintedEventFilter;
-        "Mutated(uint256)"(tokenId?: PromiseOrValue<BigNumberish> | null): MutatedEventFilter;
-        Mutated(tokenId?: PromiseOrValue<BigNumberish> | null): MutatedEventFilter;
         "OwnershipTransferred(address,address)"(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
         OwnershipTransferred(previousOwner?: PromiseOrValue<string> | null, newOwner?: PromiseOrValue<string> | null): OwnershipTransferredEventFilter;
         "Transfer(address,address,uint256)"(from?: PromiseOrValue<string> | null, to?: PromiseOrValue<string> | null, tokenId?: PromiseOrValue<BigNumberish> | null): TransferEventFilter;
@@ -385,18 +298,10 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        defaultItem(overrides?: CallOverrides): Promise<BigNumber>;
-        drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        dropId(overrides?: CallOverrides): Promise<BigNumber>;
-        dropURI(overrides?: CallOverrides): Promise<BigNumber>;
+        contractURI(overrides?: CallOverrides): Promise<BigNumber>;
         getApproved(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<BigNumber>;
-        getTokenInterface(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
         isApprovedForAll(owner: PromiseOrValue<string>, operator: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
-        maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
-        mint(versionId: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
-        mutate(dripToMutate: PromiseOrValue<BigNumberish>, token: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        mint(overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         name(overrides?: CallOverrides): Promise<BigNumber>;
@@ -415,13 +320,10 @@ export interface Drop extends BaseContract {
         setApprovalForAll(operator: PromiseOrValue<string>, approved: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setBaseTokenURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
+        setBaseURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        setDropURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<BigNumber>;
-        setTokenInterface(tokenAddress: PromiseOrValue<string>, _ITokenInterface: PromiseOrValue<string>, overrides?: Overrides & {
+        setContractURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<BigNumber>;
@@ -436,25 +338,16 @@ export interface Drop extends BaseContract {
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
-        versions(overrides?: CallOverrides): Promise<BigNumber>;
     };
     populateTransaction: {
         approve(to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        defaultItem(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        drip(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        dropId(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        dropURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        contractURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
         getApproved(tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        getTokenInterface(tokenAddress: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
         isApprovedForAll(owner: PromiseOrValue<string>, operator: PromiseOrValue<string>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        maxSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-        mint(versionId: PromiseOrValue<BigNumberish>, overrides?: PayableOverrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        mutate(dripToMutate: PromiseOrValue<BigNumberish>, token: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
+        mint(overrides?: PayableOverrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -473,13 +366,10 @@ export interface Drop extends BaseContract {
         setApprovalForAll(operator: PromiseOrValue<string>, approved: PromiseOrValue<boolean>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setBaseTokenURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
+        setBaseURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        setDropURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
-            from?: PromiseOrValue<string>;
-        }): Promise<PopulatedTransaction>;
-        setTokenInterface(tokenAddress: PromiseOrValue<string>, _ITokenInterface: PromiseOrValue<string>, overrides?: Overrides & {
+        setContractURI(newURI: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         supportsInterface(interfaceId: PromiseOrValue<BytesLike>, overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -494,6 +384,5 @@ export interface Drop extends BaseContract {
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: Overrides & {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
-        versions(overrides?: CallOverrides): Promise<PopulatedTransaction>;
     };
 }

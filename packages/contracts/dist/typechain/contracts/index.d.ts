@@ -1,3 +1,5 @@
+import type * as collectibles from "./collectibles";
+export type { collectibles };
 import type * as tokens from "./tokens";
 export type { tokens };
 import type * as utils from "./utils";

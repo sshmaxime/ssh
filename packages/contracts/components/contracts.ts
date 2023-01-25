@@ -5,6 +5,7 @@ import {
     TestERC721__factory,
     Drop__factory,
     Store__factory,
+    PREMIERCollectible__factory,
     ERC721__factory,
     CryptoPunksMarket__factory,
     CryptopunksInterface__factory
@@ -14,12 +15,17 @@ const { deployOrAttach, attachOnly } = initDeployOrAttach(ethers);
 
 export default buildContracts((signer?: Signer) => {
     return {
-        ERC721: deployOrAttach('ERC721', ERC721__factory, signer),
-        TestERC721: deployOrAttach('TestERC721', TestERC721__factory, signer),
         Drop: deployOrAttach('Drop', Drop__factory, signer),
         Store: deployOrAttach('Store', Store__factory, signer),
         //
+        PREMIERCollectible: deployOrAttach('PREMIERCollectible', PREMIERCollectible__factory, signer),
+        //
         CryptoPunksMarket: deployOrAttach('CryptoPunksMarket', CryptoPunksMarket__factory, signer),
-        CryptopunksInterface: deployOrAttach('CryptopunksInterface', CryptopunksInterface__factory, signer)
+        CryptopunksInterface: deployOrAttach('CryptopunksInterface', CryptopunksInterface__factory, signer),
+        //
+        //
+        //
+        ERC721: deployOrAttach('ERC721', ERC721__factory, signer),
+        TestERC721: deployOrAttach('TestERC721', TestERC721__factory, signer)
     };
 });

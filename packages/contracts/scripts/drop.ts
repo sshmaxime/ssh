@@ -49,7 +49,7 @@ const generateDropMetadata = async (dropId: number): Promise<DropMetadata> => {
     };
 };
 
-export const publishDropMetadataToIPFS = async (hre: HardhatRuntimeEnvironment, dropId: number) => {
+export const publishDropMetadataToIPFS = async (dropId: number) => {
     const result = await generateDropMetadata(dropId);
 
     const file = await node.add({

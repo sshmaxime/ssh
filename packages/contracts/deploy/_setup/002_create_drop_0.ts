@@ -1,10 +1,10 @@
 import { DeployFunction } from 'hardhat-deploy/types';
 import { ethers } from 'hardhat';
 import Contracts from '../../components/contracts';
-import { publishDropMetadataToIPFS } from '../../scripts';
+import { publishDropMetadataToIPFS } from '../../scripts/drop';
 
 import { STORE } from '../_default/000_deploy_store';
-import { DEFAULT_NFT } from './001_create_default_nft';
+import { DEFAULT_NFT } from './001_create_default_0';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 
 const { parseEther: toEth, formatBytes32String } = ethers.utils;
@@ -42,8 +42,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     };
 
     let dropContract = await getContract(DROP_ID);
-    const address = await publishDropMetadataToIPFS(hre, DROP_ID);
-    await dropContract.setURI(address);
+    const address = await publishDropMetadataToIPFS(DROP_ID);
+    await dropContract.setDropURI(address);
 };
 
 export default func;

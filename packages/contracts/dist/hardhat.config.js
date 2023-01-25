@@ -16,14 +16,14 @@ const config = {
     networks: {
         hardhat: {
             forking: hardhat_fork_config_1.forkConfig,
-            chainId: 1001,
+            chainId: 1337,
             accounts: [
                 {
-                    privateKey: 'b732fed7801e4b3ea5b633035cc67d250e0ef798bbfa5ab33c00ff944406a30c',
+                    privateKey: env['HARDHAT_DEPLOYER'],
                     balance: '10000000000000000000000000000000000000000000000'
                 },
                 {
-                    privateKey: '6f9b1c4b34934ee64d02037344bf809f1a035145a2103a48bb425b64787af290',
+                    privateKey: env['HARDHAT_USER'],
                     balance: '10000000000000000000000000000000000000000000000'
                 }
             ],
@@ -33,15 +33,14 @@ const config = {
         localhost: {
             deploy: [DEFAULT_DEPLOY_DIR]
         },
-        sepolia: {
-            url: 'https://rpc2.sepolia.org',
-            chainId: 11155111,
-            accounts: [env.DEPLOYER, '6f9b1c4b34934ee64d02037344bf809f1a035145a2103a48bb425b64787af290'],
-            deploy: [DEFAULT_DEPLOY_DIR, DEFAULT_SETUP_TEST_DIR, 'deploy/testnet']
-        },
         mainnet: {
-            url: '',
-            deploy: [DEFAULT_DEPLOY_DIR, 'deploy/mainnet']
+            url: env['MAINNET'],
+            deploy: [DEFAULT_DEPLOY_DIR, './deploy/mainnet']
+        },
+        goerli: {
+            url: env['GOERLI'],
+            deploy: [DEFAULT_DEPLOY_DIR, './deploy/goerli'],
+            accounts: [env['HARDHAT_DEPLOYER']]
         }
     },
     namedAccounts: {
