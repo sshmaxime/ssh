@@ -62,7 +62,7 @@ const style = {
     paddingRight: "7.5px",
     color: "#B9B9FF",
   })),
-  DefaultItem: styled("div")(({ theme }) => ({
+  ExempleItem: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 600,
     fontSize: "9px",

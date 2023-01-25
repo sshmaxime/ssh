@@ -45,26 +45,26 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
     symbol: "",
   };
 
-  const defaultItem: NFT = {
-    address: drop.defaultItem.address,
-    img: drop.defaultItem.img,
+  const exempleItem: NFT = {
+    address: "TODO",
+    img: "TODO",
     id: 0,
-    name: drop.defaultItem.name,
-    symbol: drop.defaultItem.symbol,
+    name: "TODO",
+    symbol: "TODO",
   };
 
   // fc state
-  const [currentItem, , setItem] = useCState<NFT>(defaultItem);
+  const [currentItem, , setItem] = useCState<NFT>(exempleItem);
   const [currentVersion, , setVersion] = useCState(0);
 
-  const isDefaultItem = currentItem.address === defaultItem.address;
+  const isDefaultItem = currentItem.address === exempleItem.address;
   const isZeroItem = currentItem.address === zeroItem.address;
 
   const { isLoaded } = useSceneStore();
 
   useEffect(() => {
     if (isLoaded) {
-      updateItem(defaultItem);
+      updateItem(exempleItem);
       updateVersion(0);
     }
   }, [isLoaded]);
@@ -93,7 +93,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
   };
 
   const resetItem = () => {
-    const resetToItem = isDefaultItem ? zeroItem : defaultItem;
+    const resetToItem = isDefaultItem ? zeroItem : exempleItem;
 
     setItem(resetToItem);
     sceneRef.current.updateItem(
@@ -172,7 +172,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
             stepName: "DEFAULT ITEM",
             text: (
               <Style.TextModal>
-                You are almost there, now let's mint your <b>{defaultItem.symbol}</b>.
+                You are almost there, now let's mint your <b>{exempleItem.symbol}</b>.
               </Style.TextModal>
             ),
             isLoading: txProcess.mintingDefault.loading,
@@ -223,7 +223,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                   mutate({
                     address: drop.address,
                     tokenId: txProcess.mintingDrip?.id as number,
-                    contractMutator: isDefaultItem ? defaultItem.address : currentItem.address,
+                    contractMutator: isDefaultItem ? exempleItem.address : currentItem.address,
                     tokenIdMutator: isDefaultItem
                       ? (txProcess.mintingDefault?.id as number)
                       : currentItem.id,
@@ -504,13 +504,13 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                       </Grid>
 
                       <Grid item>
-                        {isDefaultItem ? <Style.DefaultItem>DEFAULT</Style.DefaultItem> : null}
-                        {isZeroItem ? <Style.DefaultItem>NONE</Style.DefaultItem> : null}
+                        {isDefaultItem ? <Style.ExempleItem>DEFAULT</Style.ExempleItem> : null}
+                        {isZeroItem ? <Style.ExempleItem>NONE</Style.ExempleItem> : null}
                       </Grid>
 
                       <Grid item flexGrow={1} style={{ height: "20px" }}>
                         <Grid container direction="row-reverse">
-                          {currentItem.address !== defaultItem.address ? (
+                          {currentItem.address !== exempleItem.address ? (
                             <Grid item>
                               <Style.MutatorRemove>
                                 <Clickable onClick={() => resetItem()}>BACK TO DEFAULT</Clickable>
@@ -532,7 +532,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                     <Grid container spacing={0.5}>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === defaultItem.address)}
+                          activated={!(currentItem.address === exempleItem.address)}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={OpenSeaIcon} style={{ width: "16.5px" }} alt="" />
@@ -540,7 +540,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                       </Grid>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === defaultItem.address)}
+                          activated={!(currentItem.address === exempleItem.address)}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />
