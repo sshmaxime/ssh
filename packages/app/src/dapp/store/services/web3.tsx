@@ -65,7 +65,6 @@ export const login = createAsyncThunk("web3/login", async (_, { dispatch }) => {
 export const setRoute = createAsyncThunk(
   "web3/route",
   async (obj: { dropId?: number; dripId?: number }, { dispatch }) => {
-    console.log("hey");
     return { dropId: obj.dropId, dripId: obj.dripId };
   }
 );
