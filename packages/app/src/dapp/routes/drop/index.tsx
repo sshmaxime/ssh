@@ -55,7 +55,7 @@ const DropApp: FC<{ drop: Drop }> = ({ drop }) => {
           model={drop.metadata.model}
           versions={drop.metadata.versions}
           initialVersion={0}
-          initialPlaceholderTexture={"TODO"}
+          initialPlaceholderTexture={"/placeholder.png"}
           initialDropSymbol={drop.symbol}
           initialTokenNameId={"1" + " #" + 0}
           initialId={0}

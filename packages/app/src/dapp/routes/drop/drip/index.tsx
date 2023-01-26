@@ -80,7 +80,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
 
   const exempleItem: NFT = {
     address: "TODO",
-    img: "TODO",
+    img: "/zeroItem.png",
     id: 0,
     name: "TODO",
     symbol: "TODO",

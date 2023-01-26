@@ -35,36 +35,26 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
   // fetch data
   const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
 
-  const isMintable = drop.currentSupply !== drop.maxSupply;
-
-  const zeroItem: NFT = {
+  const placeholderItem: NFT = {
     address: AddressZero,
-    img: "/zeroItem.png",
+    img: "/placeholder.png",
     id: 0,
     name: "",
     symbol: "",
   };
 
-  const exempleItem: NFT = {
-    address: "TODO",
-    img: "TODO",
-    id: 0,
-    name: "TODO",
-    symbol: "TODO",
-  };
-
   // fc state
-  const [currentItem, , setItem] = useCState<NFT>(exempleItem);
+  const [currentItem, , setItem] = useCState<NFT>(placeholderItem);
   const [currentVersion, , setVersion] = useCState(0);
 
-  const isDefaultItem = currentItem.address === exempleItem.address;
-  const isZeroItem = currentItem.address === zeroItem.address;
+  const isPlaceholderItem = currentItem.address === placeholderItem.address;
+  const isMintable = drop.currentSupply !== drop.maxSupply;
 
   const { isLoaded } = useSceneStore();
 
   useEffect(() => {
     if (isLoaded) {
-      updateItem(exempleItem);
+      updateItem(placeholderItem);
       updateVersion(0);
     }
   }, [isLoaded]);
@@ -93,7 +83,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
   };
 
   const resetItem = () => {
-    const resetToItem = isDefaultItem ? zeroItem : exempleItem;
+    const resetToItem = placeholderItem;
 
     setItem(resetToItem);
     sceneRef.current.updateItem(
@@ -130,8 +120,6 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
   // Drip
   const isDripMinted = txProcess.mintingDrip.id !== undefined;
 
-  const isDefaultMinted = txProcess.mintingDefault.done;
-
   // Mutation
   const isMutated = txProcess.mutating.done;
 
@@ -164,50 +152,19 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
       },
     },
 
-    ...(isDefaultItem
+    ...(!isPlaceholderItem
       ? [
           {
-            isDisplay: txProcess.mintingDrip.done,
-            isMyTurn: isDripMinted && !isDefaultMinted && !isMutated,
-            stepName: "DEFAULT ITEM",
-            text: (
-              <Style.TextModal>
-                You are almost there, now let's mint your <b>{exempleItem.symbol}</b>.
-              </Style.TextModal>
-            ),
-            isLoading: txProcess.mintingDefault.loading,
-            isDone: txProcess.mintingDefault.done,
-            tx: txProcess.mintingDefault.tx,
-            price: drop.defaultItem.price,
-            action: {
-              name: "MINT DEFAULT ITEM",
-              fct: () => {
-                dispatch(
-                  mintDefault({
-                    address: drop.defaultItem.address,
-                    value: drop.defaultItem.price,
-                  })
-                );
-              },
-            },
-          },
-        ]
-      : []),
-
-    ...(!isZeroItem
-      ? [
-          {
-            isDisplay: isDefaultItem ? txProcess.mintingDefault.done : txProcess.mintingDrip.done,
-            isMyTurn: isDefaultItem
-              ? isDripMinted && isDefaultMinted && !isMutated
-              : isDripMinted && !isMutated,
+            isDisplay: isPlaceholderItem
+              ? txProcess.mintingDefault.done
+              : txProcess.mintingDrip.done,
+            isMyTurn: isDripMinted && !isMutated,
             stepName: "MUTATE",
             text: (
               <Style.TextModal>
                 Last step, mutating your <b>Drip</b> with your{" "}
                 <b>
-                  {currentItem.symbol}#
-                  {isDefaultItem ? txProcess.mintingDefault?.id : currentItem.id}
+                  {currentItem.symbol}#{currentItem.id}
                 </b>{" "}
                 !
               </Style.TextModal>
@@ -223,10 +180,8 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                   mutate({
                     address: drop.address,
                     tokenId: txProcess.mintingDrip?.id as number,
-                    contractMutator: isDefaultItem ? exempleItem.address : currentItem.address,
-                    tokenIdMutator: isDefaultItem
-                      ? (txProcess.mintingDefault?.id as number)
-                      : currentItem.id,
+                    contractMutator: currentItem.address,
+                    tokenIdMutator: currentItem.id,
                   })
                 );
               },
@@ -504,25 +459,26 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                       </Grid>
 
                       <Grid item>
-                        {isDefaultItem ? <Style.ExempleItem>DEFAULT</Style.ExempleItem> : null}
-                        {isZeroItem ? <Style.ExempleItem>NONE</Style.ExempleItem> : null}
+                        {isPlaceholderItem ? (
+                          <Style.ExempleItem>PLACEHOLDER</Style.ExempleItem>
+                        ) : null}
                       </Grid>
 
                       <Grid item flexGrow={1} style={{ height: "20px" }}>
                         <Grid container direction="row-reverse">
-                          {currentItem.address !== exempleItem.address ? (
+                          {!isPlaceholderItem ? (
                             <Grid item>
                               <Style.MutatorRemove>
-                                <Clickable onClick={() => resetItem()}>BACK TO DEFAULT</Clickable>
+                                <Clickable onClick={() => resetItem()}>
+                                  BACK TO PLACEHOLDER
+                                </Clickable>
                               </Style.MutatorRemove>
                             </Grid>
-                          ) : currentItem.address !== zeroItem.address ? (
+                          ) : (
                             <Grid item>
-                              <Style.MutatorRemove>
-                                <Clickable onClick={() => resetItem()}>REMOVE DEFAULT</Clickable>
-                              </Style.MutatorRemove>
+                              <Style.MutatorRemove>&nbsp;</Style.MutatorRemove>
                             </Grid>
-                          ) : null}
+                          )}
                         </Grid>
                       </Grid>
                     </Grid>
@@ -532,7 +488,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                     <Grid container spacing={0.5}>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === exempleItem.address)}
+                          activated={!isPlaceholderItem}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={OpenSeaIcon} style={{ width: "16.5px" }} alt="" />
@@ -540,7 +496,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                       </Grid>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === exempleItem.address)}
+                          activated={!isPlaceholderItem}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />

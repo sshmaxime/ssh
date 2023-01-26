@@ -32,7 +32,6 @@ class SDK {
     } else {
       this._name = (await this.provider.lookupAddress(this._address)) || "cool human";
     }
-    console.log(await newSigner.getAddress());
   };
 
   init = async (dispatch: Function) => {
@@ -41,9 +40,7 @@ class SDK {
     await this.provider.send("eth_requestAccounts", []);
     await this._setSigner(this.provider.getSigner() as Signer);
 
-    window.ethereum.on("chainChanged", () => {
-      console.log("hey");
-    });
+    window.ethereum.on("chainChanged", () => {});
     window.ethereum.on("accountsChanged", async () => {
       dispatch(login());
     });

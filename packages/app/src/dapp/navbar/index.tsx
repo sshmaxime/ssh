@@ -16,7 +16,7 @@ import { shortenAddress } from "../utils";
 import { useGetDripsQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-import LogoIcon from "../../_utils/assets/images/logo-icon.svg";
+import LogoIcon from "../../_utils/assets/images/logo-typo.svg";
 import { DripStatus } from "@sshlabs/typings";
 import CenterItem from "@/_utils/components/grid/centerItem";
 
@@ -46,7 +46,7 @@ export const NavbarComponent: FC = () => {
               <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
                 <Grid item>
                   <Clickable address="/">
-                    <img alt="" src={LogoIcon} style={{ width: "75px" }} />
+                    <img alt="" src={LogoIcon} style={{ width: "200px" }} />
                   </Clickable>
                 </Grid>
                 <Grid item style={{ marginLeft: "25px" }}>
@@ -134,7 +134,7 @@ export const NavbarComponent: FC = () => {
                                               <CenterItem item>
                                                 <Style.WalletTypoCollectionDrop
                                                   style={{
-                                                    borderBottom: `3px solid black`,
+                                                    borderBottom: `5px solid black`,
                                                     borderImage: `linear-gradient(to right, ${
                                                       drip.drop.metadata.versions[drip.version]
                                                         .color
