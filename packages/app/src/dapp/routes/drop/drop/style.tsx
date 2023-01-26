@@ -199,7 +199,7 @@ const style = {
   ),
   HeaderFirstLeftSideTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontSize: "1.75em",
+    fontSize: "1.5em",
     fontWeight: 500,
     marginBottom: "25px",
   })),

@@ -29,6 +29,7 @@ const style = {
   })),
   Footer: styled("div")(({ theme }) => ({
     position: "absolute",
+    zIndex: 100,
     height: footerHeight,
     bottom: 0,
     backgroundColor: theme.backgroundColor.primary,

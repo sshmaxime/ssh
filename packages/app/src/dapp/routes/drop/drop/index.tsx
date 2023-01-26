@@ -20,7 +20,13 @@ import Tooltip from "@/_utils/components/tooltip";
 
 import { useDispatch, useSelector } from "@/dapp/store/hooks";
 import { useGetAssetsQuery, useGetDripQuery } from "@/dapp/store/services";
-import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/services/web3";
+import {
+  mint,
+  mintDefault,
+  mutate,
+  resetMintingProcess,
+  setRoute,
+} from "@/dapp/store/services/web3";
 import Style from "./style";
 import { useParams } from "react-router-dom";
 import { useSceneStore } from "../_3dScene/hook";
@@ -58,6 +64,10 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
       updateVersion(0);
     }
   }, [isLoaded]);
+
+  useEffect(() => {
+    dispatch(setRoute({ dropId: drop.id }));
+  }, [drop]);
 
   const updateVersion = (version: number) => {
     if (!sceneRef.current) return;
@@ -353,7 +363,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
         <Grid item xs={12} style={{ zIndex: 10, height: "100%" }}>
           <Style.LeftSide>
             <Grid container direction="column" style={{ height: "100%" }}>
-              <Grid item>
+              <Grid item xs={1} style={{ display: "flex", alignItems: "end" }}>
                 <Style.HeaderFirstLeftSideTitle>
                   Hello
                   <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>{name}</b>,
