@@ -154,16 +154,6 @@ export const NavbarComponent: FC = () => {
 
                                           <Grid item>
                                             <Grid container columnSpacing={0.5}>
-                                              {drip.status !== DripStatus.MUTATED ? (
-                                                <Grid item>
-                                                  <Style.WalletTypoCollection>
-                                                    MUTABLE
-                                                  </Style.WalletTypoCollection>
-                                                </Grid>
-                                              ) : (
-                                                <></>
-                                              )}
-
                                               <CenterItem
                                                 item
                                                 style={{ display: "flex", alignContent: "center" }}
@@ -205,11 +195,17 @@ export const NavbarComponent: FC = () => {
                                               </Grid>
                                             </Grid>
                                           </CenterItem>
-                                          {drip.nft && (
+                                          {drip.status === DripStatus.MUTATED ? (
                                             <Grid item>
                                               <Style.WalletTypoDripNft>
                                                 {drip.nft.symbol} #{drip.nft.id}
                                               </Style.WalletTypoDripNft>
+                                            </Grid>
+                                          ) : (
+                                            <Grid item>
+                                              <Style.WalletTypoCollection>
+                                                MUTABLE
+                                              </Style.WalletTypoCollection>
                                             </Grid>
                                           )}
                                         </Grid>

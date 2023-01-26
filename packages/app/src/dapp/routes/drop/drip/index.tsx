@@ -454,6 +454,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       alignItems="center"
                       style={{
                         marginTop: "5px",
+                        height: "20px",
                       }}
                     >
                       <Grid item>
@@ -469,7 +470,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       </Grid>
 
                       {!isDripMutated && (
-                        <Grid item flexGrow={1} style={{ height: "20px" }}>
+                        <Grid item flexGrow={1}>
                           <Grid container direction="row-reverse">
                             {!isPlaceholderItem ? (
                               <Grid item>

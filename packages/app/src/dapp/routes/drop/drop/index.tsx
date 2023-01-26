@@ -450,6 +450,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                       alignItems="center"
                       style={{
                         marginTop: "5px",
+                        height: "20px",
                       }}
                     >
                       <Grid item>
@@ -464,7 +465,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                         ) : null}
                       </Grid>
 
-                      <Grid item flexGrow={1} style={{ height: "20px" }}>
+                      <Grid item flexGrow={1}>
                         <Grid container direction="row-reverse">
                           {!isPlaceholderItem ? (
                             <Grid item>

@@ -47,6 +47,19 @@ export const dropApi = createApi({
     //
     getDrip: builder.query<Drip, { dropId: number; dripId: number }>({
       query: ({ dropId, dripId }) => `drip/${dropId}/${dripId}`,
+      async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+        try {
+          await cacheDataLoaded;
+
+          socket.on(`update_drop_${arg.dropId}_drip_${arg.dripId}`, (event: { data: Drip }) => {
+            const data = event.data;
+            updateCachedData((draft) => {
+              return data;
+            });
+          });
+        } catch {}
+        await cacheEntryRemoved;
+      },
     }),
     //
     getAssets: builder.query<NFTsByCollection, { address: string }>({
