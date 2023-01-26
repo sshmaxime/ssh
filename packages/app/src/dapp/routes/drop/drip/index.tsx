@@ -122,7 +122,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
       updateItem(drip.nft || placeholderItem);
       updateVersion(drip.version);
     }
-  }, [isLoaded, drip]);
+  }, [isLoaded, drip, currentItem]);
 
   const resetItem = () => {
     const resetToItem = placeholderItem;
