@@ -474,11 +474,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
                                 </Clickable>
                               </Style.MutatorRemove>
                             </Grid>
-                          ) : (
-                            <Grid item>
-                              <Style.MutatorRemove>&nbsp;</Style.MutatorRemove>
-                            </Grid>
-                          )}
+                          ) : null}
                         </Grid>
                       </Grid>
                     </Grid>
