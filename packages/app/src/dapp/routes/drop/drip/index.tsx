@@ -107,22 +107,24 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
     );
   };
 
-  const updateVersion = (version: number) => {
+  const updateVersion = (version: number, item?: NFT) => {
     setVersion(version);
     sceneRef.current.updateVersion(
       0,
       version,
       drop.symbol,
-      currentItem.name + " #" + currentItem.id
+      (item?.name === undefined ? currentItem.name : item?.name) +
+        " #" +
+        (item?.id === undefined ? currentItem.id : item?.id)
     );
   };
 
   useEffect(() => {
     if (isLoaded) {
       updateItem(drip.nft || placeholderItem);
-      updateVersion(drip.version);
+      updateVersion(drip.version, drip.nft || placeholderItem);
     }
-  }, [isLoaded, drip, currentItem]);
+  }, [isLoaded, drip]);
 
   const resetItem = () => {
     const resetToItem = placeholderItem;

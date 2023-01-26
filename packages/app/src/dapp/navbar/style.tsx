@@ -152,7 +152,7 @@ const style = {
   })),
   Title: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    fontWeight: 600,
+    fontWeight: 700,
     fontSize: "0.9em",
     letterSpacing: "0.5px",
     color: "black",
@@ -160,6 +160,13 @@ const style = {
   Title2: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
+    fontSize: "0.9em",
+    letterSpacing: "0.5px",
+    color: "black",
+  })),
+  Title3: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 400,
     fontSize: "0.9em",
     letterSpacing: "0.5px",
     color: "black",

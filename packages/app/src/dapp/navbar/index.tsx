@@ -53,15 +53,15 @@ export const NavbarComponent: FC = () => {
                 {route.dropId !== undefined && (
                   <>
                     <Grid item style={{ marginLeft: "15px" }}>
-                      <Style.Title>{`>`}</Style.Title>
+                      <Style.Title3>{`>`}</Style.Title3>
                     </Grid>
-                    <Grid item style={{ marginLeft: "15px" }}>
+                    <Grid item style={{ marginLeft: "5px" }}>
                       <Style.Title>{`DROP`}</Style.Title>
                     </Grid>
-                    <Grid item style={{ marginLeft: "15px" }}>
-                      <Style.Title>{`>`}</Style.Title>
+                    <Grid item style={{ marginLeft: "5px" }}>
+                      <Style.Title3>{`>`}</Style.Title3>
                     </Grid>
-                    <Grid item style={{ marginLeft: "15px" }}>
+                    <Grid item style={{ marginLeft: "5px" }}>
                       <Style.Title2>{route.dropId}</Style.Title2>
                     </Grid>
                   </>
@@ -70,15 +70,15 @@ export const NavbarComponent: FC = () => {
                 {route.dripId !== undefined && (
                   <>
                     <Grid item style={{ marginLeft: "15px" }}>
-                      <Style.Title>{`>`}</Style.Title>
+                      <Style.Title3>{`>`}</Style.Title3>
                     </Grid>
-                    <Grid item style={{ marginLeft: "15px" }}>
+                    <Grid item style={{ marginLeft: "5px" }}>
                       <Style.Title>{`DRIP`}</Style.Title>
                     </Grid>
-                    <Grid item style={{ marginLeft: "15px" }}>
-                      <Style.Title>{`>`}</Style.Title>
+                    <Grid item style={{ marginLeft: "5px" }}>
+                      <Style.Title3>{`>`}</Style.Title3>
                     </Grid>
-                    <Grid item style={{ marginLeft: "15px" }}>
+                    <Grid item style={{ marginLeft: "5px" }}>
                       <Style.Title2>{route.dripId}</Style.Title2>
                     </Grid>
                   </>
