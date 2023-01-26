@@ -70,30 +70,19 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   // fetch data
   const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
 
-  const zeroItem: NFT = {
+  const placeholderItem: NFT = {
     address: AddressZero,
-    img: "/zeroItem.png",
+    img: "/placeholder.png",
     id: 0,
     name: "",
     symbol: "",
   };
 
-  const exempleItem: NFT = {
-    address: "TODO",
-    img: "/zeroItem.png",
-    id: 0,
-    name: "TODO",
-    symbol: "TODO",
-  };
-
   // fc state
-  const [currentItem, setItem] = useState<NFT>(drip.nft || zeroItem);
+  const [currentItem, setItem] = useState<NFT>(drip.nft || placeholderItem);
   const [currentVersion, setVersion] = useState(drip.version || 0);
 
-  const isExempleItem = currentItem.address === exempleItem.address;
-  const isZeroItem = currentItem.address === zeroItem.address;
-  const isNormalItem = !isZeroItem && !isExempleItem;
-  const isMintableItem = isNormalItem || isExempleItem;
+  const isPlaceholderItem = currentItem.address === placeholderItem.address;
 
   const { isLoaded } = useSceneStore();
 
@@ -120,13 +109,13 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
 
   useEffect(() => {
     if (isLoaded) {
-      updateItem(drip.nft || zeroItem);
+      updateItem(drip.nft || placeholderItem);
       updateVersion(drip.version);
     }
   }, [isLoaded, drip]);
 
   const resetItem = () => {
-    const resetToItem = isExempleItem ? zeroItem : exempleItem;
+    const resetToItem = placeholderItem;
 
     setItem(resetToItem);
     sceneRef.current.updateItem(
@@ -161,7 +150,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
         <Style.TextModal>
           Ah, finally ! Let's mutate your <b>Drip</b> with your{" "}
           <b>
-            {currentItem.symbol}#{isExempleItem ? txProcess.mintingDefault?.id : currentItem.id}
+            {currentItem.symbol}#{currentItem.id}
           </b>{" "}
           !
         </Style.TextModal>
@@ -177,10 +166,8 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
             mutate({
               address: drop.address,
               tokenId: drip.id,
-              contractMutator: isExempleItem ? exempleItem.address : currentItem.address,
-              tokenIdMutator: isExempleItem
-                ? (txProcess.mintingDefault?.id as number)
-                : currentItem.id,
+              contractMutator: currentItem.address,
+              tokenIdMutator: currentItem.id,
             })
           );
         },
@@ -476,27 +463,20 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       </Grid>
 
                       <Grid item>
-                        {isExempleItem ? (
-                          <Style.ItemDescriptionMode>EXEMPLE</Style.ItemDescriptionMode>
-                        ) : null}
-                        {isZeroItem ? (
-                          <Style.ItemDescriptionMode>NONE</Style.ItemDescriptionMode>
+                        {isPlaceholderItem ? (
+                          <Style.ItemDescriptionMode>PLACEHOLDER</Style.ItemDescriptionMode>
                         ) : null}
                       </Grid>
 
                       {!isDripMutated && (
                         <Grid item flexGrow={1} style={{ height: "20px" }}>
                           <Grid container direction="row-reverse">
-                            {currentItem.address !== exempleItem.address ? (
+                            {!isPlaceholderItem ? (
                               <Grid item>
                                 <Style.MutatorRemove>
-                                  <Clickable onClick={() => resetItem()}>BACK TO DEFAULT</Clickable>
-                                </Style.MutatorRemove>
-                              </Grid>
-                            ) : currentItem.address !== zeroItem.address ? (
-                              <Grid item>
-                                <Style.MutatorRemove>
-                                  <Clickable onClick={() => resetItem()}>REMOVE DEFAULT</Clickable>
+                                  <Clickable onClick={() => resetItem()}>
+                                    BACK TO PLACEHOLDER
+                                  </Clickable>
                                 </Style.MutatorRemove>
                               </Grid>
                             ) : null}
@@ -510,7 +490,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                     <Grid container spacing={0.5}>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === exempleItem.address)}
+                          activated={!isPlaceholderItem}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={OpenSeaIcon} style={{ width: "16.5px" }} alt="" />
@@ -518,7 +498,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       </Grid>
                       <Grid item>
                         <Clickable
-                          activated={!(currentItem.address === exempleItem.address)}
+                          activated={!isPlaceholderItem}
                           address="https://twitter.com/sshlabs_"
                         >
                           <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />
@@ -640,7 +620,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                     ) : (
                       <Grid item xs={7}>
                         <Clickable
-                          activated={address === drip.owner && (isNormalItem || isExempleItem)}
+                          activated={!isPlaceholderItem && address === drip.owner}
                           onClick={() => {
                             setOpen(true);
                             dispatch(resetMintingProcess());
