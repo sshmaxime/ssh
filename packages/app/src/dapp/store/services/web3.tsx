@@ -27,6 +27,11 @@ export interface Web3 {
       tx?: string;
     };
   };
+
+  route: {
+    dropId?: number;
+    dripId?: number;
+  };
 }
 
 const initialState: Web3 = {
@@ -47,6 +52,7 @@ const initialState: Web3 = {
       done: false,
     },
   },
+  route: {},
 };
 
 export const login = createAsyncThunk("web3/login", async (_, { dispatch }) => {
@@ -55,6 +61,14 @@ export const login = createAsyncThunk("web3/login", async (_, { dispatch }) => {
 
   return { address, name };
 });
+
+export const setRoute = createAsyncThunk(
+  "web3/route",
+  async (obj: { dropId?: number; dripId?: number }, { dispatch }) => {
+    console.log("hey");
+    return { dropId: obj.dropId, dripId: obj.dripId };
+  }
+);
 
 // MINT DEFAULT
 export const mintDefault = createAsyncThunk(
@@ -193,6 +207,12 @@ const web3 = createSlice({
     builder.addCase(waitMutate.fulfilled, (state, action) => {
       state.txProcess.mutating.loading = false;
       state.txProcess.mutating.done = true;
+    });
+
+    //
+    builder.addCase(setRoute.fulfilled, (state, action) => {
+      state.route.dropId = action.payload.dropId;
+      state.route.dripId = action.payload.dripId;
     });
   },
 });

@@ -115,6 +115,8 @@ const style = {
     fontSize: "0.65em",
     marginRight: "5px",
     color: "black",
+    paddingTop: "5px",
+    paddingBottom: "5px",
   })),
   WalletTypoDripId2: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -151,7 +153,15 @@ const style = {
   Title: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 600,
-    fontSize: "0.75em",
+    fontSize: "0.9em",
+    letterSpacing: "0.5px",
+    color: "black",
+  })),
+  Title2: styled(Typography)(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    fontSize: "0.9em",
+    letterSpacing: "0.5px",
     color: "black",
   })),
 };

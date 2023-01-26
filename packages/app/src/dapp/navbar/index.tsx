@@ -20,10 +20,10 @@ import LogoIcon from "../../_utils/assets/images/logo-typo.svg";
 import { DripStatus } from "@sshlabs/typings";
 import CenterItem from "@/_utils/components/grid/centerItem";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const NavbarComponent: FC = () => {
-  const { auth, address, name } = useSelector((state) => state.web3);
+  const { auth, address, name, route } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   const { data: drips, isLoading } = useGetDripsQuery({ address }, { skip: !auth });
@@ -49,25 +49,40 @@ export const NavbarComponent: FC = () => {
                     <img alt="" src={LogoIcon} style={{ width: "200px" }} />
                   </Clickable>
                 </Grid>
-                <Grid item style={{ marginLeft: "25px" }}>
-                  <Clickable onClick={() => {}}>
-                    <Grid container alignItems="center" justifyContent="center">
-                      {/* <Grid item>
-                        <ArrowRightAltIcon
-                          style={{ fontSize: "2.5em", transform: "rotate(180deg)", color: "black" }}
-                        />
-                      </Grid>
-                      <Grid item>
-                        <Style.Title>BACK TO ALL DROP</Style.Title>
-                      </Grid> */}
-                      {/* <Style.HeaderFirstLeftSideTitle>
-                        Hello
-                        <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>{name}</b>
-                      </Style.HeaderFirstLeftSideTitle> */}
+
+                {route.dropId !== undefined && (
+                  <>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title>{`>`}</Style.Title>
                     </Grid>
-                  </Clickable>
-                </Grid>
-                <Grid item xs={1} />
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title>{`DROP`}</Style.Title>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title>{`>`}</Style.Title>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title2>{route.dropId}</Style.Title2>
+                    </Grid>
+                  </>
+                )}
+
+                {route.dripId !== undefined && (
+                  <>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title>{`>`}</Style.Title>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title>{`DRIP`}</Style.Title>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title>{`>`}</Style.Title>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title2>{route.dripId}</Style.Title2>
+                    </Grid>
+                  </>
+                )}
               </Grid>
             </Grid>
             <Grid item xs={8} style={{ display: "flex", alignItems: "center" }}>
@@ -111,7 +126,7 @@ export const NavbarComponent: FC = () => {
                                 <Grid container>
                                   <Grid item xs={2}>
                                     <img
-                                      src={drip.img || drip.nft?.img || ""}
+                                      src={drip.img || drip.nft?.img || "/placeholder.png"}
                                       style={{ width: "100%" }}
                                       alt=""
                                     />
@@ -198,7 +213,7 @@ export const NavbarComponent: FC = () => {
                                           {drip.status === DripStatus.MUTATED ? (
                                             <Grid item>
                                               <Style.WalletTypoDripNft>
-                                                {drip.nft.symbol} #{drip.nft.id}
+                                                {drip.nft?.symbol} #{drip.nft?.id}
                                               </Style.WalletTypoDripNft>
                                             </Grid>
                                           ) : (
