@@ -97,6 +97,8 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   const { isLoaded } = useSceneStore();
 
   const updateItem = (newItem: NFT) => {
+    if (!sceneRef.current) return;
+
     setItem(newItem);
     sceneRef.current.updateItem(
       newItem.img,
@@ -108,6 +110,8 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   };
 
   const updateVersion = (version: number, item?: NFT) => {
+    if (!sceneRef.current) return;
+
     setVersion(version);
     sceneRef.current.updateVersion(
       0,

@@ -59,37 +59,20 @@ export const NavbarComponent: FC = () => {
                 </Grid>
 
                 {route.dropId !== undefined ? (
-                  route.dripId !== undefined ? (
-                    <>
-                      <Grid item style={{ marginLeft: "15px" }}>
-                        <Style.Title3>{`>`}</Style.Title3>
-                      </Grid>
-                      <Grid item style={{ marginLeft: "7.5px" }}>
-                        <Style.Title>{`DRIP`}</Style.Title>
-                      </Grid>
-                      <Grid item style={{ marginLeft: "7.5px" }}>
-                        <Style.Title3>{`>`}</Style.Title3>
-                      </Grid>
-                      <Grid item style={{ marginLeft: "7.5px" }}>
-                        <Style.Title2>{route.dripId}</Style.Title2>
-                      </Grid>
-                    </>
-                  ) : (
-                    <>
-                      <Grid item style={{ marginLeft: "15px" }}>
-                        <Style.Title3>{`>`}</Style.Title3>
-                      </Grid>
-                      <Grid item style={{ marginLeft: "7.5px" }}>
-                        <Style.Title>{`DROP`}</Style.Title>
-                      </Grid>
-                      <Grid item style={{ marginLeft: "7.5px" }}>
-                        <Style.Title3>{`>`}</Style.Title3>
-                      </Grid>
-                      <Grid item style={{ marginLeft: "7.5px" }}>
-                        <Style.Title2>{route.dropId}</Style.Title2>
-                      </Grid>
-                    </>
-                  )
+                  <>
+                    <Grid item style={{ marginLeft: "15px" }}>
+                      <Style.Title3>{`>`}</Style.Title3>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "7.5px" }}>
+                      <Style.Title>{`DROP`}</Style.Title>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "7.5px" }}>
+                      <Style.Title3>{`>`}</Style.Title3>
+                    </Grid>
+                    <Grid item style={{ marginLeft: "7.5px" }}>
+                      <Style.Title2>{route.dropId}</Style.Title2>
+                    </Grid>
+                  </>
                 ) : null}
               </Grid>
             </Grid>
@@ -119,7 +102,7 @@ export const NavbarComponent: FC = () => {
                   <NavBarButton text="DROPS" />
                 </Style.LinkNavbar>
                 <Style.LinkNavbar item>
-                  <NavBarButton text="HELP" />
+                  <NavBarButton text="DOCS" />
                 </Style.LinkNavbar>
               </Grid>
             </Grid>

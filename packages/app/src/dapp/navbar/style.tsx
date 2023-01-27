@@ -154,7 +154,10 @@ const style = {
     fontFamily: theme.fontFamily.primary,
     fontWeight: 800,
     fontSize: "0.7em",
-    color: "black",
+    color: "white",
+    backgroundColor: "red",
+    paddingLeft: "5px",
+    paddingRight: "5px",
   })),
   Title2: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
