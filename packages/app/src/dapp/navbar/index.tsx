@@ -22,6 +22,14 @@ import CenterItem from "@/_utils/components/grid/centerItem";
 
 import { Link, useParams } from "react-router-dom";
 
+const NavBarButton: FC<{ text: string }> = ({ text }) => {
+  return (
+    <Clickable hoverAnimation={false}>
+      <Style.LinkBarText>{text}</Style.LinkBarText>
+    </Clickable>
+  );
+};
+
 export const NavbarComponent: FC = () => {
   const { auth, address, name, route } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
@@ -42,7 +50,7 @@ export const NavbarComponent: FC = () => {
       <Style.AppBar position="absolute">
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
-            <Grid item flexGrow={1} style={{ display: "flex", alignItems: "center" }}>
+            <Grid item xs={2} style={{ display: "flex", alignItems: "center" }}>
               <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
                 <Grid item>
                   <Clickable address="/">
@@ -50,42 +58,72 @@ export const NavbarComponent: FC = () => {
                   </Clickable>
                 </Grid>
 
-                {route.dropId !== undefined && (
-                  <>
-                    <Grid item style={{ marginLeft: "15px" }}>
-                      <Style.Title3>{`>`}</Style.Title3>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "5px" }}>
-                      <Style.Title>{`DROP`}</Style.Title>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "5px" }}>
-                      <Style.Title3>{`>`}</Style.Title3>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "5px" }}>
-                      <Style.Title2>{route.dropId}</Style.Title2>
-                    </Grid>
-                  </>
-                )}
-
-                {route.dripId !== undefined && (
-                  <>
-                    <Grid item style={{ marginLeft: "15px" }}>
-                      <Style.Title3>{`>`}</Style.Title3>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "5px" }}>
-                      <Style.Title>{`DRIP`}</Style.Title>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "5px" }}>
-                      <Style.Title3>{`>`}</Style.Title3>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "5px" }}>
-                      <Style.Title2>{route.dripId}</Style.Title2>
-                    </Grid>
-                  </>
-                )}
+                {route.dropId !== undefined ? (
+                  route.dripId !== undefined ? (
+                    <>
+                      <Grid item style={{ marginLeft: "15px" }}>
+                        <Style.Title3>{`>`}</Style.Title3>
+                      </Grid>
+                      <Grid item style={{ marginLeft: "7.5px" }}>
+                        <Style.Title>{`DRIP`}</Style.Title>
+                      </Grid>
+                      <Grid item style={{ marginLeft: "7.5px" }}>
+                        <Style.Title3>{`>`}</Style.Title3>
+                      </Grid>
+                      <Grid item style={{ marginLeft: "7.5px" }}>
+                        <Style.Title2>{route.dripId}</Style.Title2>
+                      </Grid>
+                    </>
+                  ) : (
+                    <>
+                      <Grid item style={{ marginLeft: "15px" }}>
+                        <Style.Title3>{`>`}</Style.Title3>
+                      </Grid>
+                      <Grid item style={{ marginLeft: "7.5px" }}>
+                        <Style.Title>{`DROP`}</Style.Title>
+                      </Grid>
+                      <Grid item style={{ marginLeft: "7.5px" }}>
+                        <Style.Title3>{`>`}</Style.Title3>
+                      </Grid>
+                      <Grid item style={{ marginLeft: "7.5px" }}>
+                        <Style.Title2>{route.dropId}</Style.Title2>
+                      </Grid>
+                    </>
+                  )
+                ) : null}
               </Grid>
             </Grid>
-            <Grid item xs={8} style={{ display: "flex", alignItems: "center" }}>
+            <Grid item xs={1}>
+              <Grid
+                container
+                justifyContent={"center"}
+                alignItems="center"
+                columnSpacing={4}
+                style={{ height: "100%", color: "black", fontSize: "2em" }}
+              >
+                |
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid
+                container
+                justifyContent={"center"}
+                alignItems="center"
+                columnSpacing={4}
+                style={{ height: "100%" }}
+              >
+                <Style.LinkNavbar item>
+                  <NavBarButton text="HOME" />
+                </Style.LinkNavbar>
+                <Style.LinkNavbar item>
+                  <NavBarButton text="DROPS" />
+                </Style.LinkNavbar>
+                <Style.LinkNavbar item>
+                  <NavBarButton text="HELP" />
+                </Style.LinkNavbar>
+              </Grid>
+            </Grid>
+            <Grid item flexGrow={1} style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
                 columnSpacing={2}

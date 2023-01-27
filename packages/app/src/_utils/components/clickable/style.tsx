@@ -8,7 +8,7 @@ const style = {
       transition: "all .2s ease-in-out",
       opacity: $activated ? "" : "10%",
       ":hover": {
-        transform: $activated && $hoverAnimation ? "scale(1.01)" : "",
+        transform: $activated && $hoverAnimation ? "scale(1.02)" : "",
         cursor: $activated ? "pointer" : "not-allowed",
       },
     })
@@ -19,7 +19,7 @@ const style = {
       transition: "all .2s ease-in-out",
       opacity: $activated ? "" : "10%",
       ":hover": {
-        transform: $activated && $hoverAnimation ? "scale(1.01)" : "",
+        transform: $activated && $hoverAnimation ? "scale(1.02)" : "",
         cursor: $activated ? "pointer" : "not-allowed",
       },
     })

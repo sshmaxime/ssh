@@ -3,8 +3,6 @@ import { FC } from "react";
 // styles
 import Style from "./style";
 
-import { useNavigate } from "react-router-dom";
-
 type props = {
   newPage?: boolean;
   isSpan?: boolean;
@@ -26,8 +24,6 @@ const Clickable: FC<props> = ({
   activated = true,
   hoverAnimation = true,
 }) => {
-  const navigate = useNavigate();
-
   let elem: any;
   if (onClick) {
     elem = activated ? (
