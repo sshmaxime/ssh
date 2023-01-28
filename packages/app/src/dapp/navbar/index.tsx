@@ -19,19 +19,20 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import LogoIcon from "../../_utils/assets/images/logo-typo.svg";
 import { DripStatus } from "@sshlabs/typings";
 import CenterItem from "@/_utils/components/grid/centerItem";
+import { useLocation } from "react-router-dom";
 
 import { Link, useParams } from "react-router-dom";
 
-const NavBarButton: FC<{ text: string }> = ({ text }) => {
+const NavBarButton: FC<{ text: string; to: string }> = ({ text, to }) => {
   return (
-    <Clickable hoverAnimation={false}>
+    <Clickable hoverAnimation={false} address={to}>
       <Style.LinkBarText>{text}</Style.LinkBarText>
     </Clickable>
   );
 };
 
 export const NavbarComponent: FC = () => {
-  const { auth, address, name, route } = useSelector((state) => state.web3);
+  const { auth, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   const { data: drips, isLoading } = useGetDripsQuery({ address }, { skip: !auth });
@@ -45,12 +46,30 @@ export const NavbarComponent: FC = () => {
   };
   const open = Boolean(anchorEl);
 
+  const location = useLocation();
+
+  const [dropId, setDropId] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    const path = location.pathname;
+    const regex = /app\/drop\/\d+(?![\w\d])/;
+    const regex2 = /^[^\d]*(\d+)/;
+
+    const isRouteMatching = regex.test(path);
+    if (isRouteMatching) {
+      const dropId = (regex2.exec(path) as any)[1];
+      setDropId(dropId);
+    } else {
+      setDropId(undefined);
+    }
+  }, [location]);
+
   return (
     <Style.Root>
       <Style.AppBar position="absolute">
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
-            <Grid item xs={2} style={{ display: "flex", alignItems: "center" }}>
+            <Grid item xs={2.25} style={{ display: "flex", alignItems: "center" }}>
               <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
                 <Grid item>
                   <Clickable address="/">
@@ -58,7 +77,7 @@ export const NavbarComponent: FC = () => {
                   </Clickable>
                 </Grid>
 
-                {route.dropId !== undefined ? (
+                {dropId ? (
                   <>
                     <Grid item style={{ marginLeft: "15px" }}>
                       <Style.Title3>{`>`}</Style.Title3>
@@ -70,13 +89,13 @@ export const NavbarComponent: FC = () => {
                       <Style.Title3>{`>`}</Style.Title3>
                     </Grid>
                     <Grid item style={{ marginLeft: "7.5px" }}>
-                      <Style.Title2>{route.dropId}</Style.Title2>
+                      <Style.Title2>{dropId}</Style.Title2>
                     </Grid>
                   </>
                 ) : null}
               </Grid>
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={0.5}>
               <Grid
                 container
                 justifyContent={"center"}
@@ -84,7 +103,7 @@ export const NavbarComponent: FC = () => {
                 columnSpacing={4}
                 style={{ height: "100%", color: "black", fontSize: "2em" }}
               >
-                |
+                <Grid item>|</Grid>
               </Grid>
             </Grid>
             <Grid item>
@@ -92,17 +111,23 @@ export const NavbarComponent: FC = () => {
                 container
                 justifyContent={"center"}
                 alignItems="center"
-                columnSpacing={4}
+                columnSpacing={2}
                 style={{ height: "100%" }}
               >
                 <Style.LinkNavbar item>
-                  <NavBarButton text="HOME" />
+                  <NavBarButton text="HOME" to="/app/" />
                 </Style.LinkNavbar>
+                <Grid item style={{ color: "black" }}>
+                  |
+                </Grid>
                 <Style.LinkNavbar item>
-                  <NavBarButton text="DROPS" />
+                  <NavBarButton text="DROP" to="/app/drop" />
                 </Style.LinkNavbar>
+                <Grid item style={{ color: "black" }}>
+                  |
+                </Grid>
                 <Style.LinkNavbar item>
-                  <NavBarButton text="DOCS" />
+                  <NavBarButton text="DOCS" to="/app/docs" />
                 </Style.LinkNavbar>
               </Grid>
             </Grid>

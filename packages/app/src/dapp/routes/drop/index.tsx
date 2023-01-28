@@ -14,10 +14,12 @@ import DripComponent from "./drip";
 
 const DropRoutes: FC = ({}) => {
   return (
-    <Routes>
-      <Route path="/:dropId/*" element={<DropAppRoutesProxy />} />
-      <Route path="*" element={<>Home</>} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/:dropId/*" element={<DropAppRoutesProxy />} />
+        <Route path="*" element={<>Drop</>} />
+      </Routes>
+    </>
   );
 };
 

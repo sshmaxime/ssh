@@ -20,13 +20,7 @@ import Tooltip from "@/_utils/components/tooltip";
 
 import { useDispatch, useSelector } from "@/dapp/store/hooks";
 import { useGetAssetsQuery, useGetDripQuery } from "@/dapp/store/services";
-import {
-  mint,
-  mintDefault,
-  mutate,
-  resetMintingProcess,
-  setRoute,
-} from "@/dapp/store/services/web3";
+import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/services/web3";
 import Style from "./style";
 import { useParams } from "react-router-dom";
 import { useSceneStore } from "../_3dScene/hook";
@@ -64,10 +58,6 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
       updateVersion(0);
     }
   }, [isLoaded]);
-
-  useEffect(() => {
-    dispatch(setRoute({ dropId: drop.id }));
-  }, [drop]);
 
   const updateVersion = (version: number) => {
     if (!sceneRef.current) return;

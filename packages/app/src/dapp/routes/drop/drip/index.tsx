@@ -20,13 +20,7 @@ import Tooltip from "@/_utils/components/tooltip";
 
 import { useDispatch, useSelector } from "@/dapp/store/hooks";
 import { useGetAssetsQuery, useGetDripQuery } from "@/dapp/store/services";
-import {
-  mint,
-  mintDefault,
-  mutate,
-  resetMintingProcess,
-  setRoute,
-} from "@/dapp/store/services/web3";
+import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/services/web3";
 import Style from "./style";
 import { useParams } from "react-router-dom";
 import { useSceneStore } from "../_3dScene/hook";
@@ -70,10 +64,6 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
 }) => {
   const { auth, address, name, txProcess } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setRoute({ dropId: drop.id, dripId: drip.id }));
-  }, [drop, drip]);
 
   const isDripMutated = drip.status === DripStatus.MUTATED;
 
