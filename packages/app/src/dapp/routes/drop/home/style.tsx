@@ -13,16 +13,17 @@ const style = {
     ...theme.myBreakpoints(theme).level3,
     height: `100vh`,
   })),
-
-  DropItem: styled("div")(({ theme }) => ({
-    height: "65vh",
-    width: "200px",
-    padding: "2.5px",
-    color: "white",
+  RootInner: styled("div")(({ theme }) => ({
+    paddingTop: headerHeight,
+    paddingBottom: "25px",
+    height: `100%`,
+    width: `100%`,
+    boxSizing: "border-box",
   })),
+
   GalleryWrapContainer: styled("div")(({ theme }) => ({
-    height: "60%",
-    width: "75%",
+    height: "calc(100%)",
+    width: "100%",
   })),
   GalleryWrap: styled("div")(({ theme }) => ({
     display: "flex",
@@ -38,11 +39,13 @@ const style = {
         display: "block",
         position: "absolute",
         backgroundImage: $onHover ? `url(${color})` : "",
+        backgroundColor: "black",
         filter: "grayscale(75%)",
         top: 0,
         left: 0,
-        objectPosition: "50% 50%",
-        backgroundPosition: "10% 30%",
+        objectPosition: "10% 10%",
+        backgroundPosition: "10% 10%",
+        backgroundSize: "cover",
         objectFit: "contain",
         width: "100%",
         height: "100%",
@@ -55,7 +58,7 @@ const style = {
       width: "100%",
       backgroundColor: $onHover ? "" : "black",
       transition: "flex 0.8s ease",
-      cursor: !disabled ? "pointer" : "auto",
+      cursor: !disabled ? ($onHover ? "auto" : "pointer") : "auto",
       borderRadius: "5px",
     })
   ),
@@ -82,6 +85,7 @@ const style = {
     writingMode: "vertical-rl",
     transform: "scale(-1)",
     color: "white",
+    letterSpacing: "0.5px",
   })),
   LiveTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -113,11 +117,14 @@ const style = {
     color: "white",
     padding: "10px",
   })),
-  ContainerExplore: styled("div")(({ theme }) => ({
+  ContainerExplore: styled("div")<{ isVisible: boolean }>(({ theme, isVisible }) => ({
     position: "absolute",
     left: `calc(50% + calc(${itemTitleContainerWidth} / 2))`,
     top: "50%",
     transform: "translate(-50%,-50%)",
+    transition: "all 0.5s ease-in-out",
+    opacity: isVisible ? "100%" : "0%",
+    scale: isVisible ? "scale(0.5)" : "0%",
   })),
 };
 

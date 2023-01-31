@@ -38,7 +38,7 @@ const Dapp: FC<props> = ({ children }) => {
       <Routes>
         <Route path="/drop/*" element={<DropRoutes />} />
         <Route path="/docs" element={<DocsComponent />} />
-        <Route path="/" element={<HomeComponent />} />
+        {/* <Route path="/" element={<HomeComponent />} /> */}
       </Routes>
     </>
   );

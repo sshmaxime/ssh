@@ -115,7 +115,7 @@ export const NavbarComponent: FC = () => {
                 style={{ height: "100%" }}
               >
                 <Style.LinkNavbar item>
-                  <NavBarButton text="HOME" to="/app/" />
+                  <NavBarButton text="HOME" to="/" />
                 </Style.LinkNavbar>
                 <Grid item style={{ color: "black" }}>
                   |
