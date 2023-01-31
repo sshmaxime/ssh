@@ -9,24 +9,29 @@ import { Grid } from "@mui/material";
 
 import ImgWave from "@/_utils/assets/images/wave.png";
 import CenterItem from "@/_utils/components/grid/centerItem";
+import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
 
 const HomeComponent: FC = ({}) => {
   const [hover, setHover] = useState(0);
 
   const abc = [
     {
+      name: "DROP #0",
       texture: "https://i.pinimg.com/originals/f4/6b/ee/f46beec83182962c9505734e663deefa.jpg",
       disabled: false,
     },
     {
+      name: "DROP #1",
       texture: "",
       disabled: true,
     },
     {
+      name: "DROP #2",
       texture: "",
       disabled: true,
     },
     {
+      name: "DROP #3",
       texture: "",
       disabled: true,
     },
@@ -50,7 +55,50 @@ const HomeComponent: FC = ({}) => {
                   borderRadius: "5px",
                 }}
               >
-                {!item.disabled && <Style.GalleryItemTitle>DROP #0</Style.GalleryItemTitle>}
+                <Style.GalleryItemContainer>
+                  <Grid
+                    container
+                    direction="column-reverse"
+                    alignItems="space-between"
+                    alignContent="center"
+                    rowSpacing={2}
+                    style={{ height: "100%" }}
+                  >
+                    <Grid item xs={1}>
+                      <CenterItem style={{ height: "100%" }}>
+                        <div style={{ width: "5px", height: "100%", backgroundColor: "white" }}>
+                          &nbsp;
+                        </div>
+                      </CenterItem>
+                    </Grid>
+                    <Grid item>
+                      <Style.GalleryItemTitle>{item.name}</Style.GalleryItemTitle>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <CenterItem style={{ height: "100%" }}>
+                        <div style={{ width: "5px", height: "100%", backgroundColor: "white" }}>
+                          &nbsp;
+                        </div>
+                      </CenterItem>
+                    </Grid>
+                    <Grid item style={{ color: "white" }} flexGrow={1}>
+                      <CenterItem>
+                        <Style.LiveTitle>{item.disabled ? "TBA" : "LIVE"}</Style.LiveTitle>
+                      </CenterItem>
+                    </Grid>
+                  </Grid>
+                </Style.GalleryItemContainer>
+
+                {!item.disabled && (
+                  <Style.ContainerExplore>
+                    <Style.ItemName>SKATEBOARD</Style.ItemName>
+                    <Style.ButtonDiscover>
+                      <Grid container justifyContent="space-between">
+                        <Grid item>EXPLORE</Grid>
+                      </Grid>
+                    </Style.ButtonDiscover>
+                  </Style.ContainerExplore>
+                )}
               </Style.GalleryItem>
             ))}
           </Style.GalleryWrap>
