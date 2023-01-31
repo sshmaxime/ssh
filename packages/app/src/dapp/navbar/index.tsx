@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 import { Toolbar, Grid } from "@mui/material";
 
@@ -35,7 +35,7 @@ export const NavbarComponent: FC = () => {
   const { auth, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
-  const { data: drips, isLoading } = useGetDripsQuery({ address }, { skip: !auth });
+  const { data: drips } = useGetDripsQuery({ address }, { skip: !auth });
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -48,6 +48,7 @@ export const NavbarComponent: FC = () => {
 
   const location = useLocation();
 
+  const f = useRef();
   const [dropId, setDropId] = useState<number | undefined>(undefined);
 
   useEffect(() => {
@@ -66,6 +67,17 @@ export const NavbarComponent: FC = () => {
 
   return (
     <Style.Root>
+      <div
+        style={{
+          position: "absolute",
+          right: "1.5vw",
+          top: "100px",
+          backgroundColor: "red",
+          width: "-2.5px",
+          height: "-2.5px",
+        }}
+        ref={f as any}
+      ></div>
       <Style.AppBar position="absolute">
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
@@ -150,12 +162,15 @@ export const NavbarComponent: FC = () => {
                   </Clickable>
                   <Popover
                     open={open}
-                    anchorEl={anchorEl}
+                    anchorEl={f.current}
                     anchorOrigin={{
                       vertical: "bottom",
                       horizontal: "left",
                     }}
-                    transformOrigin={{ horizontal: "left", vertical: -20 }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
                     disableRestoreFocus
                     style={{
                       zIndex: 2000,

@@ -20,7 +20,6 @@ const style = {
     width: `100%`,
     boxSizing: "border-box",
   })),
-
   GalleryWrapContainer: styled("div")(({ theme }) => ({
     height: "calc(100%)",
     width: "100%",
