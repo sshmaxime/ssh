@@ -17,7 +17,8 @@ const HomeComponent: FC = ({}) => {
   const abc = [
     {
       name: "DROP #0",
-      texture: "https://i.pinimg.com/originals/f4/6b/ee/f46beec83182962c9505734e663deefa.jpg",
+      texture:
+        "https://sothebys-com.brightspotcdn.com/ec/55/536759b9425ba43535be7da9024e/supreme-blog-top.jpg",
       disabled: false,
     },
     {

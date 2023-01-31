@@ -6,6 +6,7 @@ import ImgWave from "@/_utils/assets/images/wave.png";
 
 const headerHeight = "100px";
 const footerHeight = "25px";
+const itemTitleContainerWidth = "75px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
@@ -20,8 +21,8 @@ const style = {
     color: "white",
   })),
   GalleryWrapContainer: styled("div")(({ theme }) => ({
-    height: "50%",
-    width: "50%",
+    height: "60%",
+    width: "75%",
   })),
   GalleryWrap: styled("div")(({ theme }) => ({
     display: "flex",
@@ -37,16 +38,17 @@ const style = {
         display: "block",
         position: "absolute",
         backgroundImage: $onHover ? `url(${color})` : "",
-        filter: "grayscale(50%)",
+        filter: "grayscale(75%)",
         top: 0,
         left: 0,
         objectPosition: "50% 50%",
         backgroundPosition: "10% 30%",
-        objectFit: "none",
+        objectFit: "contain",
         width: "100%",
         height: "100%",
         imageRendering: "pixelated",
         WebkitPrintColorAdjust: "exact",
+        borderRadius: "5px",
       },
       position: "relative",
       flex: $onHover ? 7 : 1,
@@ -54,19 +56,21 @@ const style = {
       backgroundColor: $onHover ? "" : "black",
       transition: "flex 0.8s ease",
       cursor: !disabled ? "pointer" : "auto",
+      borderRadius: "5px",
     })
   ),
   GalleryItemContainer: styled("div")(({ theme }) => ({
     position: "absolute",
     top: 0,
     left: 0,
-    width: "50px",
+    width: itemTitleContainerWidth,
     paddingTop: "15px",
     paddingBottom: "15px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
+    borderRadius: "5px",
     backgroundColor: "black",
     // padding: "15px",
     boxSizing: "border-box",
@@ -111,7 +115,7 @@ const style = {
   })),
   ContainerExplore: styled("div")(({ theme }) => ({
     position: "absolute",
-    left: "calc(50% + 25px)",
+    left: `calc(50% + calc(${itemTitleContainerWidth} / 2))`,
     top: "50%",
     transform: "translate(-50%,-50%)",
   })),
