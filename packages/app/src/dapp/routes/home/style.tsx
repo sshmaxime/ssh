@@ -7,8 +7,27 @@ const footerHeight = "25px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
-    width: "100%",
-    height: "100%",
+    ...theme.myBreakpoints(theme).level3,
+  })),
+  HomeScreenContainer: styled("div")(({ theme }) => ({
+    paddingTop: headerHeight,
+    paddingBottom: "25px",
+    height: `100vh`,
+    width: `100%`,
+    boxSizing: "border-box",
+  })),
+  HomeScreen: styled("div")(({ theme }) => ({
+    height: `100%`,
+    width: `100%`,
+    borderRadius: "5px",
+    padding: "25px",
+    boxSizing: "border-box",
+    backgroundColor: theme.backgroundColor.primary,
+  })),
+  Title: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 500,
+    fontSize: "1.5em",
   })),
 };
 

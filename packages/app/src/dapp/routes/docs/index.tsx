@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import { Grid, Typography } from "@mui/material";
+
 import { sceneRefType } from "@/_3d/scenes/skate_1";
 import { Drop } from "@sshlabs/typings";
 import { ethers } from "ethers";
@@ -7,12 +9,22 @@ import { ethers } from "ethers";
 import Style from "./style";
 import CenterItem from "@/_utils/components/grid/centerItem";
 
-const DocsComponent: FC = ({}) => {
+const HomeComponent: FC = ({}) => {
   return (
     <Style.Root>
-      <CenterItem style={{ height: "100%" }}>To be added soon.</CenterItem>
+      <Style.HomeScreenContainer>
+        <Style.HomeScreen>
+          <Grid container style={{ height: "100%" }}>
+            <Grid item xs={12} style={{ height: "100%" }}>
+              <CenterItem $full={true}>
+                <Style.Title>To Be Added Soon.</Style.Title>
+              </CenterItem>
+            </Grid>
+          </Grid>
+        </Style.HomeScreen>
+      </Style.HomeScreenContainer>
     </Style.Root>
   );
 };
 
-export default DocsComponent;
+export default HomeComponent;

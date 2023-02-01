@@ -1,13 +1,28 @@
-import { FC } from "react";
+import React, { FC } from "react";
 
-import { sceneRefType } from "@/_3d/scenes/skate_1";
+import { Grid, Typography } from "@mui/material";
+
 import { Drop } from "@sshlabs/typings";
 import { ethers } from "ethers";
 
 import Style from "./style";
+import CenterItem from "@/_utils/components/grid/centerItem";
+import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_2";
 
 const HomeComponent: FC = ({}) => {
-  return <Style.Root>Home Root</Style.Root>;
+  const sceneRef = React.useRef<sceneRef>(null!);
+
+  return (
+    <Style.Root>
+      <Style.HomeScreenContainer>
+        <Style.HomeScreen>
+          <CenterItem $full={true}>
+            <Style.Title>HomePage</Style.Title>
+          </CenterItem>
+        </Style.HomeScreen>
+      </Style.HomeScreenContainer>
+    </Style.Root>
+  );
 };
 
 export default HomeComponent;

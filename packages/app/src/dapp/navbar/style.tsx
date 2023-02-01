@@ -171,14 +171,14 @@ const style = {
     color: "black",
   })),
   LinkNavbar: styled(Grid)(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: 800,
     marginRight: "5px",
     paddingTop: "5px",
     paddingBottom: "5px",
   })),
   LinkBarText: styled("div")(({ theme }) => ({
-    fontSize: "0.75em",
+    fontFamily: theme.fontFamily.tertiary,
+    fontSize: "0.8em",
+    fontWeight: 700,
     // padding: "2.5px",
     // paddingTop: "2.5px",
     paddingLeft: "5px",

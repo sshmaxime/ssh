@@ -55,7 +55,7 @@ const HomeComponent: FC = ({}) => {
                 <Style.GalleryItem
                   key={index}
                   disabled={item.disabled}
-                  onMouseEnter={() => setHover(index)}
+                  onMouseEnter={() => !item.disabled && setHover(index)}
                   onMouseLeave={() => {}}
                   onClick={() => {}}
                   $onHover={hover === index}
