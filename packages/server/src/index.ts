@@ -1,11 +1,11 @@
 import "dotenv/config";
 
+import { CONFIG } from "./config";
+
 import store from "./store";
 import server from "./server";
 
-import { CONFIG } from "./config";
-
-import "./http";
+import "./api";
 import "./io";
 
 const start = async (PORT: number) => {

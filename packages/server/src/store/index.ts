@@ -20,11 +20,11 @@ import {
   ChainIdToStoreContract,
 } from "@sshlabs/typings";
 import axios from "axios";
-import { axios as OpenSeaCli } from "../clients";
+import { OPENSEA } from "../clients/opensea";
 import io from "../server/io";
 import { normalizeIPFSUrl } from "../utils";
-import { provider } from "../network";
 import { CONFIG, isDevelopment } from "../config";
+import { provider } from "../web3";
 
 export class Store {
   private Store: StoreContract;
@@ -71,31 +71,6 @@ export class Store {
       currentSupply: (await dropContract.totalSupply()).toNumber(),
       metadata: metadata,
     };
-  };
-
-  getLocalAssetsTest = async (address: string) => {
-    const NFTs: NFTs = [];
-
-    for (const listName in ListMockTokens) {
-      const list = ListMockTokens[listName];
-
-      const contract = ERC721Enumerable__factory.connect(list.contract, provider);
-      const nbAssets = (await contract.balanceOf(address)).toNumber();
-
-      for (let nb = 0; nb < nbAssets; nb++) {
-        const tokenId = (await contract.tokenOfOwnerByIndex(address, nb)).toNumber();
-
-        NFTs.push({
-          address: list.contract,
-          img: list.tokens[tokenId],
-          id: tokenId,
-          name: await contract.name(),
-          symbol: await contract.symbol(),
-        });
-      }
-    }
-
-    return NFTs;
   };
 
   private initDropsListeners = async () => {
@@ -197,17 +172,7 @@ export class Store {
       return undefined;
     }
 
-    const asset = (
-      await OpenSeaCli.get(`https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`)
-    ).data;
-    const nft: NFT = {
-      address: asset.asset_contract.address,
-      img: asset.image_url,
-      id: asset.token_id,
-      name: asset.collection.name,
-      symbol: asset.collection.symbol,
-    };
-    return nft;
+    return OPENSEA.getAsset(contractAddress, tokenId);
   };
 
   getDripOwnedByAddress = async (address: string) => {
