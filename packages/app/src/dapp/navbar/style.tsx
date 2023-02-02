@@ -191,6 +191,12 @@ const style = {
       color: "white",
     },
   })),
+  NetworkSupported: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontSize: "0.8em",
+    letterSpacing: "-0.25px",
+    // fontWeight: 700,
+  })),
 };
 
 export default style;

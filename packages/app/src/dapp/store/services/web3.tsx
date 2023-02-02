@@ -5,6 +5,7 @@ import { BigNumber, ethers } from "ethers";
 
 export interface Web3 {
   auth: boolean;
+  authError: string;
   address: string;
   name: string | null;
 
@@ -36,6 +37,7 @@ export interface Web3 {
 
 const initialState: Web3 = {
   auth: false,
+  authError: "",
   address: "",
   name: "",
   txProcess: {
@@ -55,11 +57,22 @@ const initialState: Web3 = {
   route: {},
 };
 
+export const init = createAsyncThunk("web3/init", async (_, { dispatch }) => {
+  await sdk.web3Listeners(dispatch);
+});
+
+export const disconnect = createAsyncThunk(
+  "web3/disconnect",
+  async (obj: { error: string }, { dispatch }) => {
+    return obj.error;
+  }
+);
+
 export const login = createAsyncThunk("web3/login", async (_, { dispatch }) => {
-  await sdk.init(dispatch);
+  const loginResult = await sdk.init(dispatch);
   const { address, name } = sdk.getInfo();
 
-  return { address, name };
+  return { address, name, loginResult };
 });
 
 // MINT DEFAULT
@@ -137,10 +150,18 @@ const web3 = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // login
     builder.addCase(login.fulfilled, (state, action) => {
-      state.auth = true;
-      state.address = action.payload.address;
-      state.name = action.payload.name;
+      state.auth = action.payload.loginResult;
+      state.address = action.payload.loginResult ? action.payload.address : "";
+      state.name = action.payload.loginResult ? action.payload.name : "";
+    });
+    // disconnect
+    builder.addCase(disconnect.fulfilled, (state, action) => {
+      state.auth = false;
+      state.address = "";
+      state.name = "";
+      state.authError = action.payload;
     });
     // resetMintingProcess
     builder.addCase(resetMintingProcess.fulfilled, (state, action) => {

@@ -32,7 +32,7 @@ const NavBarButton: FC<{ text: string; to: string }> = ({ text, to }) => {
 };
 
 export const NavbarComponent: FC = () => {
-  const { auth, address, name } = useSelector((state) => state.web3);
+  const { auth, authError, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
   const { data: drips } = useGetDripsQuery({ address }, { skip: !auth });
@@ -346,6 +346,15 @@ export const NavbarComponent: FC = () => {
                       <Style.GoToAppButton>Connect Wallet</Style.GoToAppButton>
                     </Clickable>
                   )}
+                </Grid>
+                <Grid item style={{ color: "black" }}>
+                  <Style.NetworkSupported>
+                    {!auth && authError && (
+                      <>
+                        Network unsupported. Please switch to: <b>[Goerli]</b>
+                      </>
+                    )}
+                  </Style.NetworkSupported>
                 </Grid>
               </Grid>
             </Grid>

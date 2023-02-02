@@ -14,6 +14,12 @@ import App from "./app";
 import DApp from "./dapp";
 
 const Index: FC = () => {
+  if (window.innerWidth < 1000) {
+    return (
+      <>This website isn't yet fully working on mobile. Please come back on your computer :)</>
+    );
+  }
+
   return (
     <BrowserRouter>
       <React.StrictMode>

@@ -2,8 +2,8 @@ import { BigNumber, ethers, Signer } from "ethers";
 import { TestERC721__factory, Drop__factory, ERC721__factory } from "@sshlabs/contracts";
 import { isDevelopment } from "@/_config";
 
-import { NFT } from "@sshlabs/typings";
-import { login } from "../store/services/web3";
+import { ChainIdToStoreContract, NFT } from "@sshlabs/typings";
+import { disconnect, login } from "../store/services/web3";
 
 class SDK {
   private provider!: ethers.providers.Web3Provider;
@@ -35,16 +35,31 @@ class SDK {
     }
   };
 
+  web3Listeners = async (dispatch: Function) => {
+    window.ethereum.on("chainChanged", () => {
+      dispatch(login());
+    });
+
+    window.ethereum.on("accountsChanged", async () => {
+      dispatch(login());
+    });
+  };
+
   init = async (dispatch: Function) => {
     this.provider = new ethers.providers.Web3Provider(window.ethereum);
+    const chainId = (await this.provider.getNetwork()).chainId;
+
+    const storeAddress = ChainIdToStoreContract[chainId];
+    if (!storeAddress) {
+      console.log("Wrong network.");
+      dispatch(disconnect({ error: "Wrong Network" }));
+      return false;
+    }
 
     await this.provider.send("eth_requestAccounts", []);
     await this._setSigner(this.provider.getSigner() as Signer);
 
-    window.ethereum.on("chainChanged", () => {});
-    window.ethereum.on("accountsChanged", async () => {
-      dispatch(login());
-    });
+    return true;
   };
 
   mintDefault = async (contractAddress: string, value: string) => {
