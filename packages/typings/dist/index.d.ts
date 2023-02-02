@@ -67,3 +67,6 @@ export declare const ListMockTokens: {
         };
     };
 };
+export declare const ChainIdToStoreContract: {
+    [chainId: number]: string;
+};

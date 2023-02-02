@@ -6,7 +6,7 @@ import { axios } from "./clients";
 
 import store from "./store";
 import { NFTsByCollection, Drip, Drips, Drops, NFTs, Drop } from "@sshlabs/typings";
-import { ENV } from "./config";
+import { isDevelopment } from "./config";
 
 const { app } = server.get();
 
@@ -14,7 +14,7 @@ app.get("/assets/:address", async (req: Request, res: Response): Promise<Respons
   const address = req.params.address;
   const dataToReturn: NFTsByCollection = [];
 
-  if (ENV === "TEST") {
+  if (isDevelopment) {
     const getTestData = await store.getLocalAssetsTest(address);
 
     if (getTestData.length === 0) return res.status(200).send([]);

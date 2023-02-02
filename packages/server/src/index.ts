@@ -3,7 +3,7 @@ import "dotenv/config";
 import store from "./store";
 import server from "./server";
 
-import { PORT } from "./config";
+import { CONFIG } from "./config";
 
 import "./http";
 import "./io";
@@ -17,4 +17,4 @@ const start = async (PORT: number) => {
   }
 };
 
-start(PORT);
+start(CONFIG.server.port);

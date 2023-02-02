@@ -5,7 +5,7 @@ enum ENV {
 }
 
 const nodeEnv = (() => {
-  const env = process.env.SERVER__NODE_ENV;
+  const env = process.env.REACT_APP__NODE_ENV;
 
   switch (env) {
     case "development":
@@ -21,17 +21,9 @@ const nodeEnv = (() => {
 
 export const CONFIG = {
   env: nodeEnv,
-  chainId: process.env.SERVER__CHAIN_ID!,
-  server: {
-    port: Number(process.env.SERVER__PORT!),
-  },
   network: {
-    cors_origin: process.env.SERVER__CORS_ORIGIN!,
-    web3_endpoint: process.env.SERVER__WEB3_ENDPOINT!,
-    ipfs_endpoint: process.env.SERVER__IPFS_ENDPOINT!,
-  },
-  api_keys: {
-    opensea: process.env.SERVER__OPENSEA_API_KEY!,
+    server_url: process.env.REACT_APP__SERVER_URL!,
+    websocket_server_url: process.env.REACT_APP__WEBSOCKET_SERVER_URL!,
   },
 };
 

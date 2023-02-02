@@ -1,8 +1,8 @@
 import axios from "axios";
 
-import { OPENSEA_API_KEY } from "../config";
+import { CONFIG } from "../config";
 
 // Axios setup
-axios.defaults.headers.common["X-API-KEY"] = OPENSEA_API_KEY;
+axios.defaults.headers.common["X-API-KEY"] = CONFIG.api_keys.opensea;
 
 export { axios };

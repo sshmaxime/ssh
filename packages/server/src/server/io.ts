@@ -1,9 +1,8 @@
 import { Server } from "socket.io";
-
-import { CORS_ORIGIN } from "../config";
+import { CONFIG } from "../config";
 
 export default new Server({
   cors: {
-    origin: CORS_ORIGIN,
+    origin: CONFIG.network.cors_origin,
   },
 });

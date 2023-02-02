@@ -17,29 +17,27 @@ import {
   ListMockTokens,
   DripStatus,
   NFT,
+  ChainIdToStoreContract,
 } from "@sshlabs/typings";
 import axios from "axios";
 import { axios as OpenSeaCli } from "../clients";
-import { ADDRESS_STORE, ENV, IPFS_GATEWAY, WEB3_ENDPOINT } from "../config";
-import { IPFS_EXP } from "../_constants";
 import io from "../server/io";
+import { normalizeIPFSUrl } from "../utils";
+import { provider } from "../network";
+import { CONFIG, isDevelopment } from "../config";
 
 export class Store {
-  private Provider: ethers.providers.JsonRpcProvider;
-
   private Store: StoreContract;
 
   private DROPS: Drops = [];
 
   constructor() {
-    this.Provider = new ethers.providers.JsonRpcProvider(WEB3_ENDPOINT);
-    this.Store = Store__factory.connect(ADDRESS_STORE, this.Provider);
+    this.Store = Store__factory.connect(ChainIdToStoreContract[CONFIG.chainId], provider);
   }
 
   // init
   init = async () => {
     await this.snapshot();
-    // await this.initBlockchainListeners();
     await this.initDropsListeners();
   };
 
@@ -54,10 +52,15 @@ export class Store {
 
   private snapshotDrop = async (dropId: BigNumber): Promise<Drop> => {
     const dropContractAddress = await this.Store.drop(dropId);
-    const dropContract = Drop__factory.connect(dropContractAddress, this.Provider);
+    const dropContract = Drop__factory.connect(dropContractAddress, provider);
 
-    const metadataUrl = (await dropContract.dropURI()).replace(IPFS_EXP, IPFS_GATEWAY);
+    const metadataUrl = normalizeIPFSUrl(await dropContract.dropURI());
     const metadata = (await axios.get(metadataUrl)).data as DropMetadata;
+
+    for (const version of metadata.versions) {
+      version.texture = normalizeIPFSUrl(version.texture);
+    }
+    metadata.model = normalizeIPFSUrl(metadata.model);
 
     return {
       address: dropContractAddress,
@@ -76,7 +79,7 @@ export class Store {
     for (const listName in ListMockTokens) {
       const list = ListMockTokens[listName];
 
-      const contract = ERC721Enumerable__factory.connect(list.contract, this.Provider);
+      const contract = ERC721Enumerable__factory.connect(list.contract, provider);
       const nbAssets = (await contract.balanceOf(address)).toNumber();
 
       for (let nb = 0; nb < nbAssets; nb++) {
@@ -106,10 +109,10 @@ export class Store {
   private initDropListeners = async (dropIdAsBn: BigNumber) => {
     const dropId = dropIdAsBn.toNumber();
 
-    const startBlockNumber = await this.Provider.getBlockNumber();
+    const startBlockNumber = await provider.getBlockNumber();
 
     const dropContractAddress = await this.Store.drop(dropId);
-    const dropContract = Drop__factory.connect(dropContractAddress, this.Provider);
+    const dropContract = Drop__factory.connect(dropContractAddress, provider);
 
     // event Mint
     dropContract.on(dropContract.filters.Minted(null), async (...args) => {
@@ -152,7 +155,7 @@ export class Store {
 
   getDrip = async (dropId: number, tokenId: number): Promise<Drip> => {
     const dropContractAddress = await this.Store.drop(dropId);
-    const dropContract = Drop__factory.connect(dropContractAddress, this.Provider);
+    const dropContract = Drop__factory.connect(dropContractAddress, provider);
     const drip = await dropContract.drip(tokenId);
     const drop = this.getDrop(dropId);
 
@@ -175,12 +178,12 @@ export class Store {
   };
 
   getNft = async (contractAddress: string, tokenId: number): Promise<NFT> => {
-    if (ENV === "TEST") {
+    if (isDevelopment) {
       for (const listName in ListMockTokens) {
         const list = ListMockTokens[listName];
 
         if (list.contract === contractAddress) {
-          const contract = ERC721Enumerable__factory.connect(list.contract, this.Provider);
+          const contract = ERC721Enumerable__factory.connect(list.contract, provider);
           return {
             address: list.contract,
             img: list.tokens[tokenId],
@@ -213,7 +216,7 @@ export class Store {
     const dripsByAddress: Drips = [];
     for (let dropId = 0; dropId < dropSupply; dropId++) {
       const dropContractAddress = await this.Store.drop(dropId);
-      const dropContract = Drop__factory.connect(dropContractAddress, this.Provider);
+      const dropContract = Drop__factory.connect(dropContractAddress, provider);
 
       const balanceDripOfAddress = (await dropContract.balanceOf(address)).toNumber();
       const addressTokenIds: number[] = [];

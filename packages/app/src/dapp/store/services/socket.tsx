@@ -1,4 +1,3 @@
-import { normalizeIPFSUrl } from "@/dapp/utils";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Drop } from "@sshlabs/typings";
 

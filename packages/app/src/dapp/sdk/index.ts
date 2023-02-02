@@ -1,6 +1,7 @@
 import { BigNumber, ethers, Signer } from "ethers";
 import { TestERC721__factory, Drop__factory, ERC721__factory } from "@sshlabs/contracts";
-import { info } from "../../info";
+import { isDevelopment } from "@/_config";
+
 import { NFT } from "@sshlabs/typings";
 import { login } from "../store/services/web3";
 
@@ -27,7 +28,7 @@ class SDK {
     this._signer = newSigner;
     this._address = await newSigner.getAddress();
 
-    if (info.isDev) {
+    if (isDevelopment) {
       this._name = "tester.eth";
     } else {
       this._name = (await this.provider.lookupAddress(this._address)) || "cool human";

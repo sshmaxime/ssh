@@ -1,41 +1,24 @@
-import { normalizeIPFSUrl } from "@/dapp/utils";
+import { CONFIG } from "@/_config";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { NFTsByCollection, Drip, Drips, Drop } from "@sshlabs/typings";
 
 import { io } from "socket.io-client";
 
-export const socket = io("ws://localhost:3001");
-
-// Transform functions
-const getDropTransformResponse = (drop: Drop) => {
-  for (const version of drop.metadata.versions) {
-    version.texture = normalizeIPFSUrl(version.texture);
-  }
-
-  drop.metadata = {
-    ...drop.metadata,
-    model: normalizeIPFSUrl(drop.metadata.model),
-  };
-
-  return drop;
-};
+export const socket = io(CONFIG.network.websocket_server_url);
 
 export const dropApi = createApi({
   reducerPath: "dropApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: CONFIG.network.server_url }),
   endpoints: (builder) => ({
     //
     getDrop: builder.query<Drop, { dropId: number }>({
       query: ({ dropId }) => `drop/${dropId}`,
-      transformResponse(baseQueryReturnValue, meta, arg) {
-        return getDropTransformResponse(baseQueryReturnValue as Drop);
-      },
       async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
         try {
           await cacheDataLoaded;
 
           socket.on(`update_drop_${arg.dropId}`, (event: { data: Drop }) => {
-            const data = getDropTransformResponse(event.data);
+            const data = event.data;
             updateCachedData((draft) => {
               return data;
             });

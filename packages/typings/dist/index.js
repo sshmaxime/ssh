@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ListMockTokens = exports.dripStatus = exports.DripStatus = void 0;
+exports.ChainIdToStoreContract = exports.ListMockTokens = exports.dripStatus = exports.DripStatus = void 0;
 //////////////////
 ////// DRIP //////
 //////////////////
@@ -44,4 +44,8 @@ exports.ListMockTokens = {
             6268: "https://i.seadn.io/gae/_A40t3HLol1_8UYkAnKGCpkwe4uf3VZClYUesYjecSyB4wLexPCLcpol-jlZJa2fqEVMAJ3CIWSWhETdQWhYCp5taj15iZZYMLKRZQ?auto=format&w=1920",
         },
     },
+};
+exports.ChainIdToStoreContract = {
+    1337: "0x7fc2C86d96F5046F8056b8C8DDf5aA3849892C21",
+    5: "", // Goerli
 };
