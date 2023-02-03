@@ -1,6 +1,7 @@
 import '@typechain/hardhat';
 import '@nomiclabs/hardhat-waffle';
 import '@nomiclabs/hardhat-ethers';
+import '@nomiclabs/hardhat-etherscan';
 
 import 'hardhat-deploy';
 
@@ -40,9 +41,15 @@ const config: HardhatUserConfig = {
         },
         goerli: {
             url: env['GOERLI'],
+            chainId: 5,
             deploy: [DEFAULT_DEPLOY_DIR, './deploy/goerli'],
-            accounts: [env['HARDHAT_DEPLOYER']]
+            accounts: [env['HARDHAT_DEPLOYER']],
+            gasPrice: 10000000 // 0.01 Gwei
         }
+    },
+
+    etherscan: {
+        apiKey: env['ETHERSCAN_API']
     },
 
     namedAccounts: {

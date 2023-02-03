@@ -83,6 +83,7 @@ export interface DropInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "versions()": FunctionFragment;
+    "withdraw()": FunctionFragment;
   };
 
   getFunction(
@@ -118,6 +119,7 @@ export interface DropInterface extends utils.Interface {
       | "transferFrom"
       | "transferOwnership"
       | "versions"
+      | "withdraw"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -237,6 +239,7 @@ export interface DropInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "versions", values?: undefined): string;
+  encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -314,6 +317,7 @@ export interface DropInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "versions", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
@@ -561,6 +565,10 @@ export interface Drop extends BaseContract {
     ): Promise<ContractTransaction>;
 
     versions(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    withdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
   approve(
@@ -704,6 +712,10 @@ export interface Drop extends BaseContract {
 
   versions(overrides?: CallOverrides): Promise<BigNumber>;
 
+  withdraw(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     approve(
       to: PromiseOrValue<string>,
@@ -843,6 +855,8 @@ export interface Drop extends BaseContract {
     ): Promise<void>;
 
     versions(overrides?: CallOverrides): Promise<BigNumber>;
+
+    withdraw(overrides?: CallOverrides): Promise<void>;
   };
 
   filters: {
@@ -1040,6 +1054,10 @@ export interface Drop extends BaseContract {
     ): Promise<BigNumber>;
 
     versions(overrides?: CallOverrides): Promise<BigNumber>;
+
+    withdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1183,5 +1201,9 @@ export interface Drop extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     versions(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    withdraw(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
   };
 }

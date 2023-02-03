@@ -53,8 +53,9 @@ export interface DropInterface extends utils.Interface {
         "transferFrom(address,address,uint256)": FunctionFragment;
         "transferOwnership(address)": FunctionFragment;
         "versions()": FunctionFragment;
+        "withdraw()": FunctionFragment;
     };
-    getFunction(nameOrSignatureOrTopic: "approve" | "balanceOf" | "drip" | "dropId" | "dropURI" | "getApproved" | "getTokenInterface" | "isApprovedForAll" | "maxSupply" | "mint" | "mutate" | "name" | "owner" | "ownerOf" | "price" | "renounceOwnership" | "safeTransferFrom(address,address,uint256)" | "safeTransferFrom(address,address,uint256,bytes)" | "setApprovalForAll" | "setBaseTokenURI" | "setDropURI" | "setTokenInterface" | "supportsInterface" | "symbol" | "tokenByIndex" | "tokenOfOwnerByIndex" | "tokenURI" | "totalSupply" | "transferFrom" | "transferOwnership" | "versions"): FunctionFragment;
+    getFunction(nameOrSignatureOrTopic: "approve" | "balanceOf" | "drip" | "dropId" | "dropURI" | "getApproved" | "getTokenInterface" | "isApprovedForAll" | "maxSupply" | "mint" | "mutate" | "name" | "owner" | "ownerOf" | "price" | "renounceOwnership" | "safeTransferFrom(address,address,uint256)" | "safeTransferFrom(address,address,uint256,bytes)" | "setApprovalForAll" | "setBaseTokenURI" | "setDropURI" | "setTokenInterface" | "supportsInterface" | "symbol" | "tokenByIndex" | "tokenOfOwnerByIndex" | "tokenURI" | "totalSupply" | "transferFrom" | "transferOwnership" | "versions" | "withdraw"): FunctionFragment;
     encodeFunctionData(functionFragment: "approve", values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]): string;
     encodeFunctionData(functionFragment: "balanceOf", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "drip", values: [PromiseOrValue<BigNumberish>]): string;
@@ -103,6 +104,7 @@ export interface DropInterface extends utils.Interface {
     ]): string;
     encodeFunctionData(functionFragment: "transferOwnership", values: [PromiseOrValue<string>]): string;
     encodeFunctionData(functionFragment: "versions", values?: undefined): string;
+    encodeFunctionData(functionFragment: "withdraw", values?: undefined): string;
     decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "drip", data: BytesLike): Result;
@@ -134,6 +136,7 @@ export interface DropInterface extends utils.Interface {
     decodeFunctionResult(functionFragment: "transferFrom", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "transferOwnership", data: BytesLike): Result;
     decodeFunctionResult(functionFragment: "versions", data: BytesLike): Result;
+    decodeFunctionResult(functionFragment: "withdraw", data: BytesLike): Result;
     events: {
         "Approval(address,address,uint256)": EventFragment;
         "ApprovalForAll(address,address,bool)": EventFragment;
@@ -271,6 +274,9 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<ContractTransaction>;
         versions(overrides?: CallOverrides): Promise<[BigNumber]>;
+        withdraw(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<ContractTransaction>;
     };
     approve(to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
         from?: PromiseOrValue<string>;
@@ -327,6 +333,9 @@ export interface Drop extends BaseContract {
         from?: PromiseOrValue<string>;
     }): Promise<ContractTransaction>;
     versions(overrides?: CallOverrides): Promise<BigNumber>;
+    withdraw(overrides?: Overrides & {
+        from?: PromiseOrValue<string>;
+    }): Promise<ContractTransaction>;
     callStatic: {
         approve(to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         balanceOf(owner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<BigNumber>;
@@ -359,6 +368,7 @@ export interface Drop extends BaseContract {
         transferFrom(from: PromiseOrValue<string>, to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: CallOverrides): Promise<void>;
         transferOwnership(newOwner: PromiseOrValue<string>, overrides?: CallOverrides): Promise<void>;
         versions(overrides?: CallOverrides): Promise<BigNumber>;
+        withdraw(overrides?: CallOverrides): Promise<void>;
     };
     filters: {
         "Approval(address,address,uint256)"(owner?: PromiseOrValue<string> | null, approved?: PromiseOrValue<string> | null, tokenId?: PromiseOrValue<BigNumberish> | null): ApprovalEventFilter;
@@ -430,6 +440,9 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<BigNumber>;
         versions(overrides?: CallOverrides): Promise<BigNumber>;
+        withdraw(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<BigNumber>;
     };
     populateTransaction: {
         approve(to: PromiseOrValue<string>, tokenId: PromiseOrValue<BigNumberish>, overrides?: Overrides & {
@@ -487,5 +500,8 @@ export interface Drop extends BaseContract {
             from?: PromiseOrValue<string>;
         }): Promise<PopulatedTransaction>;
         versions(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+        withdraw(overrides?: Overrides & {
+            from?: PromiseOrValue<string>;
+        }): Promise<PopulatedTransaction>;
     };
 }

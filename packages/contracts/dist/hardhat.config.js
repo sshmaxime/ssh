@@ -39,6 +39,7 @@ const config = {
         },
         goerli: {
             url: env['GOERLI'],
+            chainId: 5,
             deploy: [DEFAULT_DEPLOY_DIR, './deploy/goerli'],
             accounts: [env['HARDHAT_DEPLOYER']]
         }
