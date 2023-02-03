@@ -226,4 +226,9 @@ contract Drop is ERC721Enumerable, Ownable {
 
         emit Mutated(dripToMutate);
     }
+
+    function withdraw() public onlyOwner {
+        uint balance = address(this).balance;
+        payable(msg.sender).transfer(balance);
+    }
 }
