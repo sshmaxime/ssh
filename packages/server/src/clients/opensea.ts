@@ -1,14 +1,18 @@
 import { NFT, NFTs, NFTsByCollection } from "@sshlabs/typings";
 import axios from "axios";
 
-import { CONFIG } from "../config";
+import { CONFIG, isProduction, isStaging } from "../config";
 
 axios.defaults.headers.common["X-API-KEY"] = CONFIG.api_keys.opensea;
 
+const endpoint = isProduction
+  ? "https://api.opensea.io/api/v1"
+  : isStaging
+  ? "https://testnets-api.opensea.io/api/v1"
+  : "";
+
 const getAsset = async (contractAddress: string, tokenId: number) => {
-  const asset = (
-    await axios.get(`https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenId}`)
-  ).data;
+  const asset = (await axios.get(`${endpoint}/asset/${contractAddress}/${tokenId}`)).data;
 
   const nft: NFT = {
     address: asset.asset_contract.address,
@@ -31,7 +35,7 @@ const getAssetsOwnedByAddress = async (address: string) => {
 
   while (!isRequestDone) {
     const resq = await axios.get(
-      `https://api.opensea.io/api/v1/assets?owner=${address}&offset=${offset}&limit=${limit}`
+      `${endpoint}/assets?owner=${address}&offset=${offset}&limit=${limit}`
     );
 
     for (let asset of resq.data.assets) {
