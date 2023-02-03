@@ -3,7 +3,9 @@ import axios from "axios";
 
 import { CONFIG, isProduction, isStaging } from "../config";
 
-axios.defaults.headers.common["X-API-KEY"] = CONFIG.api_keys.opensea;
+if (isProduction) {
+  axios.defaults.headers.common["X-API-KEY"] = CONFIG.api_keys.opensea;
+}
 
 const endpoint = isProduction
   ? "https://api.opensea.io/api/v1"
