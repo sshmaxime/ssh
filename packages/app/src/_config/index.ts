@@ -5,7 +5,7 @@ enum ENV {
 }
 
 const nodeEnv = (() => {
-  const env = process.env.REACT_APP__NODE_ENV;
+  const env = import.meta.env.VITE__NODE_ENV;
 
   switch (env) {
     case "development":
@@ -22,8 +22,8 @@ const nodeEnv = (() => {
 export const CONFIG = {
   env: nodeEnv,
   network: {
-    server_url: process.env.REACT_APP__SERVER_URL!,
-    websocket_server_url: process.env.REACT_APP__WEBSOCKET_SERVER_URL!,
+    server_url: import.meta.env.VITE__SERVER_URL!,
+    websocket_server_url: import.meta.env.VITE__WEBSOCKET_SERVER_URL!,
   },
 };
 

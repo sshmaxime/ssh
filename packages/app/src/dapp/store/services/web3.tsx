@@ -28,11 +28,6 @@ export interface Web3 {
       tx?: string;
     };
   };
-
-  route: {
-    dropId?: number;
-    dripId?: number;
-  };
 }
 
 const initialState: Web3 = {
@@ -54,7 +49,6 @@ const initialState: Web3 = {
       done: false,
     },
   },
-  route: {},
 };
 
 export const init = createAsyncThunk("web3/init", async (_, { dispatch }) => {
