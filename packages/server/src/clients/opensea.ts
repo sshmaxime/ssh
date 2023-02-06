@@ -10,8 +10,6 @@ if (isProduction) {
 
 const cacheNft: { [hash: string]: NFT } = {};
 
-const sha256 = (x: string) => createHash("sha256").update(x, "utf8").digest("hex");
-
 const endpoint = isProduction
   ? "https://api.opensea.io/api/v1"
   : isStaging
@@ -19,11 +17,11 @@ const endpoint = isProduction
   : "";
 
 const setInCache = (contractAddress: string, tokenId: number, nft: NFT) => {
-  cacheNft[sha256(contractAddress + tokenId)] = nft;
+  cacheNft[contractAddress + tokenId] = nft;
 };
 
 const getInCache = (contractAddress: string, tokenId: number) => {
-  return cacheNft[sha256(contractAddress + tokenId)];
+  return cacheNft[contractAddress + tokenId];
 };
 
 const getAsset = async (contractAddress: string, tokenId: number) => {
