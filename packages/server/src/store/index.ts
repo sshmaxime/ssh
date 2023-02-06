@@ -94,31 +94,29 @@ export class Store {
       const event = args[args.length - 1] as Event;
       if (event.blockNumber <= startBlockNumber) return; // do not react to this event
 
-      const dripId = (event.args.tokenId as BigNumber).toNumber();
-      const user = await dropContract.ownerOf(dripId);
+      const tokenId = (event.args.tokenId as BigNumber).toNumber();
+      const user = await dropContract.ownerOf(tokenId);
 
-      const { dripsOwnedByAddress } = await this.getDripOwnedByAddress(user);
+      const dripsOwnedByUser = await this.getDripOwnedByAddress(user);
 
       this.DROPS[dropId].currentSupply++;
       io.emit(`update_drop_${dropId}`, { data: this.getState()[dropId] });
-      io.emit(`update_drips_${user}`, { data: dripsOwnedByAddress });
+      io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
     });
 
     dropContract.on(dropContract.filters.Mutated(null), async (...args) => {
       const event = args[args.length - 1] as Event;
       if (event.blockNumber <= startBlockNumber) return; // do not react to this event
 
-      const dripId = (event.args.tokenId as BigNumber).toNumber();
-      const user = await dropContract.ownerOf(dripId);
+      const tokenId = (event.args.tokenId as BigNumber).toNumber();
+      const user = await dropContract.ownerOf(tokenId);
 
-      const { dripsOwnedByAddress, myExtraDrip } = await this.getDripOwnedByAddress(user, {
-        dropId,
-        dripId,
-      });
+      const dripsOwnedByUser = await this.getDripOwnedByAddress(user);
+      const drip = await this.getDrip(dropId, tokenId);
 
       this.DROPS[dropId].currentSupply++;
-      io.emit(`update_drop_${dropId}_drip_${dripId}`, { data: myExtraDrip });
-      io.emit(`update_drips_${user}`, { data: dripsOwnedByAddress });
+      io.emit(`update_drop_${dropId}_drip_${tokenId}`, { data: drip });
+      io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
     });
   };
 
@@ -130,10 +128,10 @@ export class Store {
     return this.DROPS[dropId];
   };
 
-  getDrip = async (dropId: number, dripId: number): Promise<Drip> => {
+  getDrip = async (dropId: number, tokenId: number): Promise<Drip> => {
     const dropContractAddress = await this.Store.drop(dropId);
     const dropContract = Drop__factory.connect(dropContractAddress, provider);
-    const drip = await dropContract.drip(dripId);
+    const drip = await dropContract.drip(tokenId);
     const drop = this.getDrop(dropId);
 
     const nft = (async () => {
@@ -145,11 +143,11 @@ export class Store {
 
     return {
       drop: drop,
-      id: dripId,
+      id: tokenId,
       version: drip.versionId.toNumber(),
       img: "", // TODO
       status: drip.status,
-      owner: await dropContract.ownerOf(dripId),
+      owner: await dropContract.ownerOf(tokenId),
       nft: await nft,
     };
   };
@@ -177,14 +175,10 @@ export class Store {
     return OPENSEA.getAsset(contractAddress, tokenId);
   };
 
-  getDripOwnedByAddress = async (
-    address: string,
-    extraDrip?: { dropId: number; dripId: number }
-  ) => {
+  getDripOwnedByAddress = async (address: string) => {
     const dropSupply = (await this.Store.totalSupply()).toNumber();
-    let myExtraDrip: Drip;
 
-    const dripsOwnedByAddress: Drips = [];
+    const dripsByAddress: Drips = [];
     for (let dropId = 0; dropId < dropSupply; dropId++) {
       const dropContractAddress = await this.Store.drop(dropId);
       const dropContract = Drop__factory.connect(dropContractAddress, provider);
@@ -192,16 +186,12 @@ export class Store {
       const balanceDripOfAddress = (await dropContract.balanceOf(address)).toNumber();
       const addressTokenIds: number[] = [];
       for (let dripIndex = 0; dripIndex < balanceDripOfAddress; dripIndex++) {
-        const dripId = (await dropContract.tokenOfOwnerByIndex(address, dripIndex)).toNumber();
-        const drip = await this.getDrip(dropId, dripId);
-        if (extraDrip && dropId === extraDrip.dropId && dripId === extraDrip.dripId) {
-          myExtraDrip = drip;
-        }
-        dripsOwnedByAddress.push();
-        addressTokenIds.push(dripId);
+        const tokenId = (await dropContract.tokenOfOwnerByIndex(address, dripIndex)).toNumber();
+        dripsByAddress.push(await this.getDrip(dropId, tokenId));
+        addressTokenIds.push(tokenId);
       }
     }
-    return { dripsOwnedByAddress, myExtraDrip };
+    return dripsByAddress;
   };
 }
 

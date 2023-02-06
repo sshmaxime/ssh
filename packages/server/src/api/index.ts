@@ -33,5 +33,5 @@ app.get("/drip/:dropId/:tokenId", async (req: Request, res: Response): Promise<R
 
 app.get("/drip/:address", async (req: Request, res: Response): Promise<Response> => {
   const address = req.params.address;
-  return res.status(200).send((await store.getDripOwnedByAddress(address)).dripsOwnedByAddress);
+  return res.status(200).send(await store.getDripOwnedByAddress(address));
 });
