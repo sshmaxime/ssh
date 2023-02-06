@@ -194,8 +194,9 @@ export class Store {
       for (let dripIndex = 0; dripIndex < balanceDripOfAddress; dripIndex++) {
         const dripId = (await dropContract.tokenOfOwnerByIndex(address, dripIndex)).toNumber();
         const drip = await this.getDrip(dropId, dripId);
-        if (extraDrip && dropId === extraDrip.dropId && dripId === extraDrip.dripId)
+        if (extraDrip && dropId === extraDrip.dropId && dripId === extraDrip.dripId) {
           myExtraDrip = drip;
+        }
         dripsOwnedByAddress.push();
         addressTokenIds.push(dripId);
       }
