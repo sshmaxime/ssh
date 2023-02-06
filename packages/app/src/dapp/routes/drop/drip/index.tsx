@@ -68,7 +68,10 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
   const isDripMutated = drip.status === DripStatus.MUTATED;
 
   // fetch data
-  const { data: assets, isLoading } = useGetAssetsQuery({ address: address }, { skip: !auth });
+  const { data: assets, isLoading } = useGetAssetsQuery(
+    { address: address },
+    { skip: !auth || isDripMutated }
+  );
 
   const placeholderItem: NFT = {
     address: AddressZero,
