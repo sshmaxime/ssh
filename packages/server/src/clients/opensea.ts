@@ -21,7 +21,11 @@ const setInCache = (contractAddress: string, tokenId: number, nft: NFT) => {
 };
 
 const getInCache = (contractAddress: string, tokenId: number) => {
-  return cacheNft[contractAddress + tokenId];
+  const cachedValue = cacheNft[contractAddress + tokenId];
+
+  if (cachedValue)
+    console.log("CACHE: Successfully loaded cached for: [", contractAddress, "#", tokenId, "]");
+  return cachedValue;
 };
 
 const getAsset = async (contractAddress: string, tokenId: number) => {
