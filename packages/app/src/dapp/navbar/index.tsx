@@ -35,7 +35,7 @@ export const NavbarComponent: FC = () => {
   const { auth, authError, address, name } = useSelector((state) => state.web3);
   const dispatch = useDispatch();
 
-  const { data: drips } = useGetDripsQuery({ address }, { skip: !auth });
+  const { data: drips, isLoading } = useGetDripsQuery({ address }, { skip: !auth });
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -308,7 +308,11 @@ export const NavbarComponent: FC = () => {
                             justifyContent="center"
                             alignItems="center"
                           >
-                            <Style.WalletTypo1>You do not own any drips :'(</Style.WalletTypo1>
+                            {isLoading ? (
+                              <Style.WalletTypo1>Loading ...</Style.WalletTypo1>
+                            ) : (
+                              <Style.WalletTypo1>You do not own any drips :'(</Style.WalletTypo1>
+                            )}
                           </Grid>
                         )}
                       </Style.WalletView>

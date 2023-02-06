@@ -502,7 +502,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       <Grid item>
                         <Clickable
                           activated={!isPlaceholderItem}
-                          address="https://twitter.com/sshlabs_"
+                          address={`${CONFIG.openseaUrl}/${currentItem.address}/${currentItem.id}`}
                         >
                           <img src={OpenSeaIcon} style={{ width: "16.5px" }} alt="" />
                         </Clickable>
@@ -510,7 +510,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                       <Grid item>
                         <Clickable
                           activated={!isPlaceholderItem}
-                          address="https://twitter.com/sshlabs_"
+                          address={`${CONFIG.blockExplorerUrl}/address/${currentItem.address}`}
                         >
                           <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />
                         </Clickable>
