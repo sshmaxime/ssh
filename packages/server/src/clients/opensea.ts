@@ -17,14 +17,27 @@ const endpoint = isProduction
   : "";
 
 const setInCache = (contractAddress: string, tokenId: number, nft: NFT) => {
+  const key = contractAddress + tokenId;
+  const cachedValue = cacheNft[key];
+
+  if (cachedValue) {
+    console.log("CACHE: Replacing cached value: [", key, "]");
+  } else {
+    console.log("CACHE: Setting cached value: [", key, "]");
+  }
   cacheNft[contractAddress + tokenId] = nft;
 };
 
 const getInCache = (contractAddress: string, tokenId: number) => {
-  const cachedValue = cacheNft[contractAddress + tokenId];
+  const key = contractAddress + tokenId;
+  const cachedValue = cacheNft[key];
 
-  if (cachedValue)
-    console.log("CACHE: Successfully loaded cached for: [", contractAddress, "#", tokenId, "]");
+  if (cachedValue) {
+    console.log("CACHE: Successfully loaded cached for: [", key, "]");
+  } else {
+    console.log("CACHE: No cache found for key: [", key, "]");
+  }
+
   return cachedValue;
 };
 
