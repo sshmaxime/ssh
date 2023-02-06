@@ -25,6 +25,7 @@ export const CONFIG = {
     server_url: import.meta.env.VITE__SERVER_URL!,
     websocket_server_url: import.meta.env.VITE__WEBSOCKET_SERVER_URL!,
   },
+  blockExplorerUrl: import.meta.env.VITE__BLOCKEXPLORER!,
 };
 
 export const isDevelopment = (() => CONFIG.env === ENV.DEVELOPMENT)();

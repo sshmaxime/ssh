@@ -25,6 +25,7 @@ import Style from "./style";
 import { useParams } from "react-router-dom";
 import { useSceneStore } from "../_3dScene/hook";
 import { shortenAddress } from "@/dapp/utils";
+import { CONFIG } from "@/_config";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 const { AddressZero } = ethers.constants;
@@ -256,7 +257,7 @@ const DripComponent: FC<{ drop: Drop; drip: Drip; sceneRef: sceneRefType }> = ({
                           </Clickable>
                         </CenterItem>
                         <CenterItem item>
-                          <Clickable address={`https://etherscan.io/tx/${step.tx}`}>
+                          <Clickable address={`${CONFIG.blockExplorerUrl}/tx/${step.tx}`}>
                             <img src={EtherscanIcon} style={{ width: "16.5px" }} alt="" />
                           </Clickable>
                         </CenterItem>

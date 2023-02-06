@@ -44,8 +44,8 @@ const getAsset = async (contractAddress: string, tokenId: number) => {
     address: asset.asset_contract.address,
     img: asset.image_url,
     id: asset.token_id,
-    name: asset.collection.name,
-    symbol: asset.collection.symbol,
+    name: asset.asset_contract.name,
+    symbol: asset.asset_contract.symbol,
   };
 
   setInCache(contractAddress, tokenId, nft);
@@ -77,8 +77,8 @@ const getAssetsOwnedByAddress = async (address: string) => {
         address: asset.asset_contract.address,
         img: asset.image_url,
         id: tokenId,
-        name: asset.collection.name,
-        symbol: asset.collection.symbol,
+        name: asset.asset_contract.name,
+        symbol: asset.asset_contract.symbol,
       };
 
       setInCache(contractAddress, tokenId, nft);

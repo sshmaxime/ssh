@@ -147,7 +147,7 @@ export class Store {
       img: "", // TODO
       status: drip.status,
       owner: await dropContract.ownerOf(tokenId),
-      nft: await nft, // populate later on
+      nft: await nft,
     };
   };
 
