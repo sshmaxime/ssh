@@ -17,7 +17,7 @@ const endpoint = isProduction
   : "";
 
 const setInCache = (contractAddress: string, tokenId: number, nft: NFT) => {
-  const key = contractAddress + tokenId;
+  const key = (contractAddress + tokenId).toLowerCase();
   const cachedValue = cacheNft[key];
 
   if (cachedValue) {
@@ -29,7 +29,7 @@ const setInCache = (contractAddress: string, tokenId: number, nft: NFT) => {
 };
 
 const getInCache = (contractAddress: string, tokenId: number) => {
-  const key = contractAddress + tokenId;
+  const key = (contractAddress + tokenId).toLowerCase();
   const cachedValue = cacheNft[key];
 
   if (cachedValue) {
@@ -89,7 +89,7 @@ const getAssetsOwnedByAddress = async (address: string) => {
 
       const tokenId = asset.token_id;
       const nft = {
-        address: asset.asset_contract.address,
+        address: contractAddress,
         img: asset.image_url,
         id: tokenId,
         name: asset.asset_contract.name,
