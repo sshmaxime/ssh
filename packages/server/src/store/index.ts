@@ -112,10 +112,16 @@ export class Store {
       const user = await dropContract.ownerOf(tokenId);
 
       const dripsOwnedByUser = await this.getDripOwnedByAddress(user);
-      const drip = await this.getDrip(dropId, tokenId);
+
+      let myDrip: Drip;
+      for (const drip of dripsOwnedByUser) {
+        if (drip.id === tokenId && drip.drop.id === dropId) {
+          myDrip = drip;
+        }
+      }
 
       this.DROPS[dropId].currentSupply++;
-      io.emit(`update_drop_${dropId}_drip_${tokenId}`, { data: drip });
+      io.emit(`update_drop_${dropId}_drip_${tokenId}`, { data: myDrip });
       io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
     });
   };
