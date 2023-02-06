@@ -147,7 +147,7 @@ export class Store {
       img: "", // TODO
       status: drip.status,
       owner: await dropContract.ownerOf(tokenId),
-      nft: await nft,
+      nft: await nft, // populate later on
     };
   };
 
@@ -190,6 +190,7 @@ export class Store {
         addressTokenIds.push(tokenId);
       }
     }
+
     return dripsByAddress;
   };
 }
