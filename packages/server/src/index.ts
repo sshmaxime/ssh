@@ -13,7 +13,7 @@ const start = async (PORT: number) => {
     await store.init();
     await server.start(PORT);
   } catch (error) {
-    console.error(`Error occured: ${error.message}`);
+    console.error(`Error occured: ${error}`);
   }
 };
 
