@@ -14,6 +14,13 @@ const endpoint = isProduction
   : "";
 
 const getAsset = async (contractAddress: string, tokenId: number) => {
+  console.log(
+    "Log: OPENSEA: getAsset contractAddress: [",
+    contractAddress,
+    "], tokenId: [",
+    tokenId,
+    "]"
+  );
   const asset = (await axios.get(`${endpoint}/asset/${contractAddress}/${tokenId}`)).data;
 
   const nft: NFT = {
@@ -24,10 +31,12 @@ const getAsset = async (contractAddress: string, tokenId: number) => {
     symbol: asset.collection.symbol,
   };
 
+  console.log("getAsset -> Done");
   return nft;
 };
 
 const getAssetsOwnedByAddress = async (address: string) => {
+  console.log("Log: OPENSEA: getAssetsOwnedByAddress address: [", address, "]");
   const dataToReturn: NFTsByCollection = [];
   const preData: { [contractAddress: string]: NFTs } = {};
 
@@ -68,6 +77,7 @@ const getAssetsOwnedByAddress = async (address: string) => {
     });
   }
 
+  console.log("getAssetsOwnedByAddress -> Done");
   return dataToReturn;
 };
 
