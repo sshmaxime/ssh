@@ -25,6 +25,8 @@ export const getAssetsOwnedByAddress_Mock = async (address: string) => {
     }
   }
 
+  if (!NFTs.length) return [];
+
   dataToReturn.push({
     collectionName: NFTs[0].name,
     collectionSymbol: NFTs[0].symbol,

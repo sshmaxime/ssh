@@ -97,11 +97,11 @@ export class Store {
       const tokenId = (event.args.tokenId as BigNumber).toNumber();
       const user = await dropContract.ownerOf(tokenId);
 
-      const dripsOwnedByUser = await this.getDripOwnedByAddress(user);
+      const drip = await this.getDrip(dropId, tokenId);
 
       this.DROPS[dropId].currentSupply++;
       io.emit(`update_drop_${dropId}`, { data: this.getState()[dropId] });
-      io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
+      io.emit(`update_drips_${user}`, { data: drip });
     });
 
     dropContract.on(dropContract.filters.Mutated(null), async (...args) => {
@@ -111,18 +111,11 @@ export class Store {
       const tokenId = (event.args.tokenId as BigNumber).toNumber();
       const user = await dropContract.ownerOf(tokenId);
 
-      const dripsOwnedByUser = await this.getDripOwnedByAddress(user);
-
-      let myDrip: Drip;
-      for (const drip of dripsOwnedByUser) {
-        if (drip.id === tokenId && drip.drop.id === dropId) {
-          myDrip = drip;
-        }
-      }
+      const drip = await this.getDrip(dropId, tokenId);
 
       this.DROPS[dropId].currentSupply++;
-      io.emit(`update_drop_${dropId}_drip_${tokenId}`, { data: myDrip });
-      io.emit(`update_drips_${user}`, { data: dripsOwnedByUser });
+      io.emit(`update_drop_${dropId}_drip_${tokenId}`, { data: drip });
+      io.emit(`update_drips_${user}`, { data: drip });
     });
   };
 

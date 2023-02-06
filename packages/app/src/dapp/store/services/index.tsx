@@ -55,10 +55,21 @@ export const dropApi = createApi({
         try {
           await cacheDataLoaded;
 
-          socket.on(`update_drips_${arg.address}`, (event: { data: Drip[] }) => {
+          socket.on(`update_drips_${arg.address}`, (event: { data: Drip }) => {
             const data = event.data;
+
             updateCachedData((draft) => {
-              draft.splice(0, draft.length, ...data);
+              let hasBeenFound = false;
+              for (let [index, drip] of draft.entries()) {
+                if (drip.id === data.id && drip.drop.id === data.drop.id) {
+                  hasBeenFound = true;
+                  draft[index] = data;
+                  break;
+                }
+              }
+              if (!hasBeenFound) {
+                draft.push(data);
+              }
             });
           });
         } catch {}
