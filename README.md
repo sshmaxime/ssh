@@ -14,6 +14,12 @@ The project is currently live on:
 
 Drop 0 IPFS entrypoint: [QmciaLdP3NwPa9PinfoEqHndz72FjNTPckGCDrb5C2LmQp](https://ipfs.io/ipfs/QmciaLdP3NwPa9PinfoEqHndz72FjNTPckGCDrb5C2LmQp)
 
+## Try It
+
+If you want to test the project, I'd suggest you to get some GoerliETH using https://goerlifaucet.com/, then mint some already-existing-on-other-chain NFT via https://www.testnetmint.com/. You'll then be able to see your NFT through the app and you'll be able to mutate a minted board with your own NFT.
+
+If you don't have any NFT you can still mint a board, you just won't be able to mutate it - until you get an NFT of course.
+
 ## DevOps
 
 The app is hosted on Netlify.
