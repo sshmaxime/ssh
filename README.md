@@ -12,14 +12,24 @@ The project is currently live on:
 
 `Drop#0.sol`: [0xd3b610ecD4f903599AfCd33De9473154662cc053](https://goerli.etherscan.io/address/0xd3b610ecD4f903599AfCd33De9473154662cc053)
 
+Drop 0 IPFS entrypoint: [QmciaLdP3NwPa9PinfoEqHndz72FjNTPckGCDrb5C2LmQp](https://ipfs.io/ipfs/QmciaLdP3NwPa9PinfoEqHndz72FjNTPckGCDrb5C2LmQp)
+
+## DevOps
+
+The app is hosted on Netlify.
+
+The server is hosted on a free Amazon EC2 instance.
+
+The IPFS files are being pinned and managed by Pinata.
+
 ## Architecture
 
 The project is splitted into 4 packages:
 
-- **Frontend**
-- **Backend**
-- **Contracts**
 - **Typings**
+- **Contracts**
+- **Server**
+- **App**
 
 ### Typings
 
