@@ -1,10 +1,8 @@
-# PREMIER
-
 ![Image Demo](resources/image-demo.png)
 
-# Introduction
+# PREMIER
 
-This is a side project of mine I started after working for a year at Bancor.
+Premier is a side project I started after working for a year at Bancor.
 
 ## Architecture
 
