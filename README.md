@@ -1,6 +1,6 @@
 # PREMIER
 
-[Image Demo](resources/image-demo.png)
+![Image Demo](resources/image-demo.png)
 
 # Introduction
 
