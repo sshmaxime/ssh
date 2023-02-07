@@ -41,18 +41,18 @@ const DripRouteProxy: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scen
     isError: isErrorDrip,
     isSuccess: isSuccessDrip,
   } = useGetDripQuery({ dropId, dripId }, { skip: isDripParamError });
-  const isDripQueryError = !isSuccessDrip || isErrorDrip || drip === undefined;
+  const isDripQueryError = !isSuccessDrip || isErrorDrip || !drip;
 
   if (isLoadingDrip) {
-    return <>iii</>; // TODO
+    return <>Loading</>; // TODO
   }
 
   if (isDripQueryError) {
-    return <>not fodund</>; // TODO
+    return <>Not Found</>; // TODO
   }
 
   if (isDripQueryError) {
-    return <>not found</>; // TODO
+    return <>Not Found</>; // TODO
   }
 
   return <DripComponent drop={drop} drip={drip} sceneRef={sceneRef} />;

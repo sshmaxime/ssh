@@ -127,10 +127,16 @@ export class Store {
     return this.DROPS[dropId];
   };
 
-  getDrip = async (dropId: number, tokenId: number): Promise<Drip> => {
+  getDrip = async (dropId: number, tokenId: number): Promise<Drip | undefined> => {
     const dropContractAddress = await this.Store.drop(dropId);
     const dropContract = Drop__factory.connect(dropContractAddress, provider);
-    const drip = await dropContract.drip(tokenId);
+
+    let drip: any;
+    try {
+      drip = await dropContract.drip(tokenId);
+    } catch {
+      return undefined;
+    }
     const drop = this.getDrop(dropId);
 
     const nft = (async () => {

@@ -34,10 +34,10 @@ const DropAppRoutesProxy: FC = () => {
     isError: isErrorDrops,
     isSuccess: isSuccessDrops,
   } = useGetDropQuery({ dropId }, { skip: isDropParamError });
-  const isDropQueryError = !isSuccessDrops || isErrorDrops || drop === undefined;
+  const isDropQueryError = !isSuccessDrops || isErrorDrops || !drop;
 
   if (isLoadingDrops) {
-    return <>iii</>; // TODO
+    return <>Loading</>;
   }
 
   if (isDropQueryError) {
