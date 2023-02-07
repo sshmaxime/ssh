@@ -4,7 +4,7 @@ import { sceneRefType } from "@/_3d/scenes/skate_1";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Grid, ImageList, ImageListItem, Modal } from "@mui/material";
-import { Drip, DripStatus, dripStatus, Drop, NFT } from "@sshlabs/typings";
+import { Drip, DripStatus, dripStatus, Drop, NFT } from "@premier/typings";
 import { ethers } from "ethers";
 
 import EtherscanIcon from "@/_utils/assets/icons/etherscan.svg";

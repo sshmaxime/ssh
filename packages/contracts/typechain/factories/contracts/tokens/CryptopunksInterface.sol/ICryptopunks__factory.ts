@@ -55,7 +55,7 @@ const _abi = [
     stateMutability: "view",
     type: "function",
   },
-];
+] as const;
 
 export class ICryptopunks__factory {
   static readonly abi = _abi;

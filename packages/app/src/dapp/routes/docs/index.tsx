@@ -3,7 +3,7 @@ import { FC } from "react";
 import { Grid, Typography } from "@mui/material";
 
 import { sceneRefType } from "@/_3d/scenes/skate_1";
-import { Drop } from "@sshlabs/typings";
+import { Drop } from "@premier/typings";
 import { ethers } from "ethers";
 
 import Style from "./style";

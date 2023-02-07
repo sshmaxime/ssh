@@ -1,6 +1,6 @@
 import { sdk } from "@/dapp/sdk";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { NFT } from "@sshlabs/typings";
+import { NFT } from "@premier/typings";
 import { BigNumber, ethers } from "ethers";
 
 export interface Web3 {

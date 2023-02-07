@@ -1,6 +1,6 @@
 import { provider } from "../web3";
-import { ERC721Enumerable__factory } from "@sshlabs/contracts";
-import { ListMockTokens, NFTs, NFTsByCollection } from "@sshlabs/typings";
+import { ERC721Enumerable__factory } from "@premier/contracts";
+import { ListMockTokens, NFTs, NFTsByCollection } from "@premier/typings";
 
 export const getAssetsOwnedByAddress_Mock = async (address: string) => {
   const NFTs: NFTs = [];

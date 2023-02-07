@@ -114,7 +114,7 @@ export const FooterComponent: FC = () => {
                   </Clickable>
                 </Grid>
                 <Grid item>
-                  <Clickable address="https://twitter.com/sshlabs_">
+                  <Clickable address="https://twitter.com/premier">
                     <TwitterIcon />
                   </Clickable>
                 </Grid>

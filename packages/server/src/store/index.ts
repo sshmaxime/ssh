@@ -4,7 +4,7 @@ import {
   Store as StoreContract,
   Store__factory,
   TestERC721__factory,
-} from "@sshlabs/contracts";
+} from "@premier/contracts";
 import { BigNumber, ethers, Event } from "ethers";
 
 import {
@@ -18,7 +18,7 @@ import {
   DripStatus,
   NFT,
   ChainIdToStoreContract,
-} from "@sshlabs/typings";
+} from "@premier/typings";
 import axios from "axios";
 import { OPENSEA } from "../clients/opensea";
 import io from "../server/io";

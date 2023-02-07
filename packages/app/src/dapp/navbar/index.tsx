@@ -17,7 +17,7 @@ import { useGetDripsQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import LogoIcon from "../../_utils/assets/images/logo-typo.svg";
-import { DripStatus } from "@sshlabs/typings";
+import { DripStatus } from "@premier/typings";
 import CenterItem from "@/_utils/components/grid/centerItem";
 import { useLocation } from "react-router-dom";
 

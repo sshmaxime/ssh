@@ -3,7 +3,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { DeployFunction } from 'hardhat-deploy/types';
 import Contracts from '../../components/contracts';
 
-import { ListMockTokens } from '@sshlabs/typings';
+import { ListMockTokens } from '@premier/typings';
 
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const { deployments, getNamedAccounts } = hre;

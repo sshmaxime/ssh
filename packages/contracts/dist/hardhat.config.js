@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("@typechain/hardhat");
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-ethers");
+require("@nomiclabs/hardhat-etherscan");
 require("hardhat-deploy");
 const hardhat_fork_config_1 = require("./hardhat.fork.config");
 const process_1 = __importDefault(require("process"));
@@ -41,8 +42,12 @@ const config = {
             url: env['GOERLI'],
             chainId: 5,
             deploy: [DEFAULT_DEPLOY_DIR, './deploy/goerli'],
-            accounts: [env['HARDHAT_DEPLOYER']]
+            accounts: [env['HARDHAT_DEPLOYER']],
+            gasPrice: 10000000 // 0.01 Gwei
         }
+    },
+    etherscan: {
+        apiKey: env['ETHERSCAN_API']
     },
     namedAccounts: {
         deployer: 0,

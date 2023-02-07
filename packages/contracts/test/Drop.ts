@@ -5,7 +5,7 @@ import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
 import { BigNumber } from 'ethers';
-import { DripStatus } from '@sshlabs/typings';
+import { DripStatus } from '@premier/typings';
 
 const { parseEther: toEth, formatBytes32String } = ethers.utils;
 const { AddressZero, HashZero } = ethers.constants;

@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 
 import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
 import { Grid } from "@mui/material";
-import { Drop } from "@sshlabs/typings";
+import { Drop } from "@premier/typings";
 import { Route, Routes, useParams } from "react-router-dom";
 
 import { CREDENTIALS } from "../../../_constants";

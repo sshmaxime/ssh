@@ -1,4 +1,4 @@
-import { NFT, NFTs, NFTsByCollection } from "@sshlabs/typings";
+import { NFT, NFTs, NFTsByCollection } from "@premier/typings";
 import axios from "axios";
 import { createHash } from "crypto";
 

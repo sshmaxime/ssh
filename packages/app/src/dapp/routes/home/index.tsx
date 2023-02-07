@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import { Grid, Typography } from "@mui/material";
 
-import { Drop } from "@sshlabs/typings";
+import { Drop } from "@premier/typings";
 import { ethers } from "ethers";
 
 import Style from "./style";
