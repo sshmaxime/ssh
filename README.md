@@ -16,9 +16,19 @@ Drop 0 IPFS entrypoint: [QmciaLdP3NwPa9PinfoEqHndz72FjNTPckGCDrb5C2LmQp](https:/
 
 ## Try It
 
-If you want to test the project, I'd suggest you to get some GoerliETH using https://goerlifaucet.com/, then mint some already-existing-on-other-chain NFT via https://www.testnetmint.com/. You'll then be able to see your NFT through the app and you'll be able to mutate a minted board with your own NFT.
+If you want to see some minted item, you can check those out:
 
-If you don't have any NFT you can still mint a board, you just won't be able to mutate it - until you get an NFT of course.
+[Drop 0 / Drip 0](https://sshtest.netlify.app/app/drop/0/0)
+
+[Drop 0 / Drip 1](https://sshtest.netlify.app/app/drop/0/1)
+
+[Drop 0 / Drip 2](https://sshtest.netlify.app/app/drop/0/2)
+
+[Drop 0 / Drip 3](https://sshtest.netlify.app/app/drop/0/3)
+
+Or, if you want to test the project, I'd suggest you to [get some GoerliETH](https://goerlifaucet.com/), then [mint some already-existing-on-other-chain NFT](https://www.testnetmint.com/). You'll then be able to see your NFT through the app and you'll be able to mutate a minted board with your just minted NFT.
+
+If you don't have any NFT you can still mint a board, you just won't be able to mutate it - until you get an NFT to mutate it with, of course.
 
 ## DevOps
 
