@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@premier/contracts": "file:../contracts",
-    "@premier/typings": "file:../typings",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@lottiefiles/react-lottie-player": "^3.4.9",
@@ -12,6 +10,8 @@
     "@mui/material": "^5.8.0",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
     "@mui/styled-engine-sc": "^5.8.0",
+    "@premier/contracts": "file:../contracts",
+    "@premier/typings": "file:../typings",
     "@react-spring/three": "^9.5.5",
     "@react-spring/web": "^9.6.1",
     "@react-three/fiber": "^7.0.24",

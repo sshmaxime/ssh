@@ -32,7 +32,7 @@
         "ethers": "^5.7.2",
         "ethers-deploy-or-attach": "^1.0.7",
         "hardhat": "^2.12.4",
-        "hardhat-deploy": "^0.11.22",
+        "hardhat-deploy": "^0.11.23",
         "hardhat-tracer": "^1.2.0",
         "ipfs-http-client": "56.0.2",
         "prettier": "^2.4.1",
