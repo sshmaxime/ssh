@@ -1,5 +1,4 @@
 {
     "extends": "./tsconfig.json",
-    "include": ["./typechain"],
-    "exclude": ["./deploy", "./components", "./test"]
+    "include": ["./typechain"]
 }

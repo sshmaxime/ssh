@@ -11,6 +11,5 @@
         "paths": {
             "*": ["node_modules/*"]
         }
-    },
-    "include": ["./deploy", "./components", "./test", "./scripts", "hardhat.config.ts"]
+    }
 }

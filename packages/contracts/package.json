@@ -2,8 +2,9 @@
     "name": "@premier/contracts",
     "version": "1.0.0",
     "license": "MIT",
-    "main": "dist/typechain/index.js",
-    "types": "dist/typechain/index.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [],
     "scripts": {
         "start": "FORK=MAINNET FORK_BN=16226501 yarn hardhat node",
         "build": "hardhat compile && yarn tsc -p tsconfig.build.json",

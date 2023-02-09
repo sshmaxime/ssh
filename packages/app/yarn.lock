@@ -1715,7 +1715,7 @@
     "@nomiclabs/hardhat-etherscan" "^3.1.5"
     "@nomiclabs/hardhat-waffle" "^2.0.3"
     "@openzeppelin/contracts" "^4.8.0"
-    "@premier/typings" "file:../../../../../Library/Caches/Yarn/v6/npm-@premier-contracts-1.0.0-3d311b51-cdb1-470c-aa84-2432b9a364fd-1675941179460/node_modules/@premier/typings"
+    "@premier/typings" "file:../../../../../Library/Caches/Yarn/v6/npm-@premier-contracts-1.0.0-564a6775-a964-487e-9da1-86f071afc721-1675943864895/node_modules/@premier/typings"
     "@typechain/ethers-v5" "^10.2.0"
     "@typechain/hardhat" "^6.1.5"
     "@types/chai" "^4.2.22"
@@ -1730,7 +1730,7 @@
     ethers "^5.7.2"
     ethers-deploy-or-attach "^1.0.7"
     hardhat "^2.12.4"
-    hardhat-deploy "^0.11.22"
+    hardhat-deploy "^0.11.23"
     hardhat-tracer "^1.2.0"
     ipfs-http-client "56.0.2"
     prettier "^2.4.1"
@@ -5913,7 +5913,7 @@ hard-rejection@^2.1.0:
   resolved "https://registry.yarnpkg.com/hard-rejection/-/hard-rejection-2.1.0.tgz#1c6eda5c1685c63942766d79bb40ae773cecd883"
   integrity sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==
 
-hardhat-deploy@^0.11.22:
+hardhat-deploy@^0.11.23:
   version "0.11.23"
   resolved "https://registry.yarnpkg.com/hardhat-deploy/-/hardhat-deploy-0.11.23.tgz#7c5d11ba32acfd7c5730490bf6af8815b435c996"
   integrity sha512-9F+sDRX79D/oV1cUEE0k2h5LiccrnzXEtrMofL5PTVDCJfUnRvhQqCRi4NhcYmxf2+MBkOIJv5KyzP0lz6ojTw==

@@ -1,5 +1,5 @@
 import { BigNumber, ethers, Signer } from "ethers";
-import { TestERC721__factory, Drop__factory, ERC721__factory } from "@premier/contracts";
+import { TestERC721__factory, Drop__factory } from "@premier/contracts";
 import { isDevelopment } from "@/_config";
 
 import { ChainIdToStoreContract, NFT } from "@premier/typings";
