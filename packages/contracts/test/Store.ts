@@ -38,7 +38,7 @@ describe('Store', () => {
             let snapshotDropTotalSupply: BigNumber;
             it('should create drop', async () => {
                 snapshotDropTotalSupply = await Store.totalSupply();
-                await Store.createDrop(maxSupply, mintPrice, versionNb, defaultItem.address);
+                await Store.createDrop(maxSupply, mintPrice, versionNb);
             });
 
             it('total supply of drop should be updated', async () => {

@@ -1,6 +1,6 @@
 import { Signer } from '@ethersproject/abstract-signer';
 import { ethers } from 'hardhat';
-import { initDeployOrAttach, buildContracts } from 'hh-plugin-contracts';
+import { initDeployOrAttach, buildContracts } from 'ethers-deploy-or-attach';
 import {
     TestERC721__factory,
     Drop__factory,
@@ -10,19 +10,19 @@ import {
     CryptopunksInterface__factory
 } from '../typechain';
 
-const { deployOrAttach, attachOnly } = initDeployOrAttach(ethers);
+const { deployOrAttach, attach } = initDeployOrAttach(ethers);
 
 export default buildContracts((signer?: Signer) => {
     return {
-        Drop: deployOrAttach('Drop', Drop__factory, signer),
-        Store: deployOrAttach('Store', Store__factory, signer),
+        Drop: deployOrAttach(Drop__factory, signer),
+        Store: deployOrAttach(Store__factory, signer),
         //
-        CryptoPunksMarket: deployOrAttach('CryptoPunksMarket', CryptoPunksMarket__factory, signer),
-        CryptopunksInterface: deployOrAttach('CryptopunksInterface', CryptopunksInterface__factory, signer),
+        CryptoPunksMarket: deployOrAttach(CryptoPunksMarket__factory, signer),
+        CryptopunksInterface: deployOrAttach(CryptopunksInterface__factory, signer),
         //
         //
         //
-        ERC721: deployOrAttach('ERC721', ERC721__factory, signer),
-        TestERC721: deployOrAttach('TestERC721', TestERC721__factory, signer)
+        ERC721: deployOrAttach(ERC721__factory, signer),
+        TestERC721: deployOrAttach(TestERC721__factory, signer)
     };
 });

@@ -1163,10 +1163,10 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*", "@types/node@>=13.7.0":
-  version "18.11.19"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.11.19.tgz#35e26df9ec441ab99d73e99e9aca82935eea216d"
-  integrity sha512-YUgMWAQBWLObABqrvx8qKO1enAvBUdjZOAWQ5grBAkp5LQv45jBvYKZ3oFS9iKRCQyFjqw6iuEa1vmFqtxYLZw==
+"@types/node@*", "@types/node@>=13.7.0", "@types/node@^18.13.0":
+  version "18.13.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.13.0.tgz#0400d1e6ce87e9d3032c19eb6c58205b0d3f7850"
+  integrity sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==
 
 "@types/node@^12.12.6":
   version "12.20.55"
@@ -2665,9 +2665,9 @@ camelcase@^6.0.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30000844:
-  version "1.0.30001450"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001450.tgz#022225b91200589196b814b51b1bbe45144cf74f"
-  integrity sha512-qMBmvmQmFXaSxexkjjfMvD5rnDL0+m+dUMZKoDYsGG8iZN29RuYh9eRoMvKsT6uMAWlyUUGDEQGJJYjzCIO9ew==
+  version "1.0.30001451"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001451.tgz#2e197c698fc1373d63e1406d6607ea4617c613f1"
+  integrity sha512-XY7UbUpGRatZzoRft//5xOa69/1iGJRBlrieH6QYrkKLIFn3m7OVEJ81dSrKoy2BnKsdbX5cLrOispZNYo9v2w==
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -3417,9 +3417,9 @@ electron-fetch@^1.7.2:
     encoding "^0.1.13"
 
 electron-to-chromium@^1.3.47:
-  version "1.4.287"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.287.tgz#d121f9675aa099fd23ddbcba423ea4340f768efe"
-  integrity sha512-Dj649q67z9oYp4dj7B80hdxb1ExIvy8KvrFqjCuGqFxUHk43b+VXQVFkD5zxAFmhvA6Mu9fou6ZQjJkMSXNFFg==
+  version "1.4.290"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.290.tgz#62ddde1ea2db0dc31b6fe5898911fc85b83977fb"
+  integrity sha512-3uIkNYprKqAixFqANvs7K3zacGz6iVIMcGG1M/7hMn6Gvzxe52Xg//wRUds7GPv2uouF7EZ4Sh51fLDw+aBkHw==
 
 elliptic@6.5.4, elliptic@^6.4.0, elliptic@^6.5.2, elliptic@^6.5.3, elliptic@^6.5.4:
   version "6.5.4"
@@ -4124,7 +4124,24 @@ ethereumjs-wallet@0.6.5:
     utf8 "^3.0.0"
     uuid "^3.3.2"
 
-ethers@^5.0.1, ethers@^5.0.2, ethers@^5.5.2, ethers@^5.5.3, ethers@^5.6.1, ethers@^5.7.2:
+ethers-deploy-or-attach@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/ethers-deploy-or-attach/-/ethers-deploy-or-attach-1.0.3.tgz#1a6fef0926f4f203e440bad972d77b47ec52e713"
+  integrity sha512-rkN+s7HNnFV3xyai3/Ja6t1btK+E1eMxW1ywWa1EZP4NEQAibCmkacXtUpnFIl17l3riuIS/ENF1j3bM2iWPyQ==
+  dependencies:
+    "@types/node" "^18.13.0"
+    ethers "5.7.2"
+
+ethers-deploy-or-attach@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/ethers-deploy-or-attach/-/ethers-deploy-or-attach-1.0.7.tgz#1044ac9672014dd0f3ecb82148fceb162578529f"
+  integrity sha512-rqispphxstF/xu9hf+MaPk5Y7jAZzWEfBmk/A4D+1Rn4RrNyUciWXHvFIipJ/k1mtKpFn0ORSoreDM4Duvwz/Q==
+  dependencies:
+    "@types/node" "^18.13.0"
+    ethers "5.7.2"
+    ethers-deploy-or-attach "^1.0.3"
+
+ethers@5.7.2, ethers@^5.0.1, ethers@^5.0.2, ethers@^5.5.2, ethers@^5.5.3, ethers@^5.6.1, ethers@^5.7.2:
   version "5.7.2"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-5.7.2.tgz#3a7deeabbb8c030d4126b24f84e525466145872e"
   integrity sha512-wswUsmWo1aOK8rR7DIKiWSw9DbLWe6x98Jrn8wcTflTVvaXhAMaB5zGAXy0GYQEQp9iO1iSHWVyARQm11zUtyg==
@@ -5083,11 +5100,6 @@ heap@0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/heap/-/heap-0.2.6.tgz#087e1f10b046932fc8594dd9e6d378afc9d1e5ac"
   integrity sha512-MzzWcnfB1e4EG2vHi3dXHoBupmuXNZzx6pY6HldVS55JKKBoq3xOyzfSaZRkJp37HIhEYC78knabHff3zc4dQQ==
-
-hh-plugin-contracts@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/hh-plugin-contracts/-/hh-plugin-contracts-2.0.1.tgz#4ed4c225a4237836830668d359efe7f103678254"
-  integrity sha512-LOX8d0IhyjJq3RQCwaj0ppnwQupcxypsEbLNVV4JSqtwIlKhdT0Xk/dISXq0U7MEK2euCCn4XYIK9phj2xTguQ==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
@@ -7334,9 +7346,9 @@ prettier-plugin-solidity@^1.0.0-beta.18:
     solidity-comments-extractor "^0.0.7"
 
 prettier@^2.1.2, prettier@^2.3.1, prettier@^2.4.1:
-  version "2.8.3"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.3.tgz#ab697b1d3dd46fb4626fbe2f543afe0cc98d8632"
-  integrity sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.4.tgz#34dd2595629bfbb79d344ac4a91ff948694463c3"
+  integrity sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==
 
 private@^0.1.6, private@^0.1.8:
   version "0.1.8"
