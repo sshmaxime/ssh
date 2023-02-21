@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC, useEffect } from "react";
 
 import { Toolbar, Grid } from "@mui/material";
 
@@ -13,8 +13,14 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import DiscordIcon from "@/common/assets/icons/discord.svg";
 
 import { CREDENTIALS } from "@/_common/constants";
+import SceneLoader, { sceneRef } from "@/_common/3d/scenes/skate_0";
+
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { ListMockTokens } from "@premier/typings";
 
 const HomeComponent: FC = ({}) => {
+  const sceneRef = React.useRef<sceneRef>(null!);
+
   return (
     <Style.Root>
       <Navbar />
@@ -22,13 +28,112 @@ const HomeComponent: FC = ({}) => {
         <Style.HomeScreen>
           <Grid container style={{ height: "100%" }}>
             <Grid item xs={6} style={{ height: "100%" }}>
-              <CenterItem $full={true}>
-                <Style.Title>WEB3 STUDIO.</Style.Title>
-              </CenterItem>
+              <Grid
+                container
+                style={{ height: "100%" }}
+                direction="column"
+                justifyContent="space-between"
+              >
+                <Grid item>
+                  <Style.Title>WEB3 STUDIO.</Style.Title>
+                  <Style.SubTitle>
+                    DIGITAL&nbsp;&nbsp;&nbsp;&nbsp;UTILITY&nbsp;&nbsp;&nbsp;&nbsp;TECHNOLOGY
+                  </Style.SubTitle>
+                </Grid>
+                <Grid item>
+                  <Grid container justifyContent="space-between">
+                    <Grid item>
+                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
+                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
+                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
+                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
+                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
+                    </Grid>
+                    <Grid item style={{ display: "flex", alignItems: "end" }}>
+                      <Style.SubTitle5>STUDIO</Style.SubTitle5>
+                    </Grid>
+                    <Grid item style={{ display: "flex", alignItems: "end" }}>
+                      <Style.SubTitle5>2023</Style.SubTitle5>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={0.5} style={{ borderRight: "2px solid black" }} />
+
+            <Grid item xs={5.5} style={{ height: "100%", paddingLeft: "15px" }}>
+              <Grid container style={{ height: "100%" }}>
+                <Grid item xs={8} style={{ height: "100%" }}>
+                  <Grid
+                    container
+                    direction="column"
+                    style={{ height: "100%" }}
+                    justifyContent="space-between"
+                  >
+                    <Grid item>
+                      <Style.SubTitle2>
+                        Discover
+                        <br />
+                        Our
+                        <br />
+                        First
+                        <br />
+                        Project
+                      </Style.SubTitle2>
+                    </Grid>
+                    <Grid item>
+                      <Style.SubTitle3>DROP</Style.SubTitle3>
+                      <div style={{ height: "15px" }} />
+
+                      <Style.SubTitleText>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id urna sed sem
+                        pharetra egestas id sit amet lacus. Pellentesque elementum, augue eu
+                        ultrices sollicitudin, nisl odio lobortis tellus.
+                      </Style.SubTitleText>
+
+                      <div style={{ height: "25px" }} />
+
+                      <Grid container alignItems="center">
+                        <Grid item>
+                          <Style.SubTitle4>DISCOVER</Style.SubTitle4>
+                        </Grid>
+                        <CenterItem item>
+                          <ArrowRightAltIcon />
+                        </CenterItem>
+                        <Grid item flexGrow={1} style={{}}></Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={4}>
+                  <SceneLoader
+                    sceneRef={sceneRef}
+                    model="models/model.glb"
+                    initialVersion={0}
+                    initialId={0}
+                    initialPlaceholderTexture="models/test.png"
+                    versions={[{ name: "0", texture: "models/0.texture.png" }]}
+                    initialDropSymbol="random"
+                    initialTokenNameId="random"
+                  />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Style.HomeScreen>
       </Style.HomeScreenContainer>
+
+      {/* <Style.ScreenContainer>
+        <Style.Screen>
+          <Grid container style={{ height: "100%" }}>
+            <CenterItem $full={true}>
+              <Style.Title2>ABOUT US.</Style.Title2>
+            </CenterItem>
+          </Grid>
+        </Style.Screen>
+      </Style.ScreenContainer> */}
+
       <FooterComponent />
     </Style.Root>
   );

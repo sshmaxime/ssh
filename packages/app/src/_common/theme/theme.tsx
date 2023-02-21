@@ -1,62 +1,22 @@
 import { createTheme, Theme } from "@mui/material";
 
-interface MyTheme {
-  myBreakpoints: (param: Theme) => {
-    level0: any;
-    level1: any;
-    level2: any;
-    level3: any;
-    level4: any;
-  };
-  titles: (param: Theme) => {
-    primary: any;
-    secondary: any;
-  };
-
-  backgroundColor: {
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    darker: string;
-  };
-  fontFamily: {
-    primary: string;
-    secondary: string;
-    tertiary: string;
-  };
-  cards: {
-    primary: {
-      boxShadow: string;
-      padding: string;
-      backgroundColor: string;
-      borderRadius: string;
-    };
-    secondary: {
-      boxShadow: string;
-      padding: string;
-      backgroundColor: string;
-      borderRadius: string;
-    };
-  };
-  button: {
-    cursor: string;
-  };
-}
-
 declare module "@mui/material/styles" {
   interface Theme extends MyTheme {}
   // allow configuration using `createTheme`
   interface ThemeOptions extends MyTheme {}
 }
 
-export const theme = createTheme({
+type MyTheme = typeof themeOpts;
+
+const themeOpts = {
+  header: {
+    height: "80px",
+  },
+
   components: {
     MuiGrid: {
       styleOverrides: {
-        container: {
-          // height: "100%",
-          // width: "100%",
-        },
+        container: {},
       },
     },
     MuiTooltip: {
@@ -71,6 +31,7 @@ export const theme = createTheme({
       },
     },
   },
+
   backgroundColor: {
     primary: "#f9f9fb",
     secondary: "#f1f1f5",
@@ -103,7 +64,7 @@ export const theme = createTheme({
     cursor: "pointer",
   },
 
-  titles: (themeObj: any) => {
+  titles: (themeObj: Theme) => {
     return {
       primary: {
         fontFamily: themeObj.fontFamily.secondary,
@@ -120,7 +81,7 @@ export const theme = createTheme({
     };
   },
 
-  myBreakpoints: (themeObj: any) => {
+  myBreakpoints: (themeObj: Theme) => {
     return {
       level0: {
         [themeObj.breakpoints.up("lg")]: {
@@ -190,4 +151,6 @@ export const theme = createTheme({
       },
     };
   },
-});
+};
+
+export const theme = createTheme(themeOpts);

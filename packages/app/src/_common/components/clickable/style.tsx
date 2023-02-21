@@ -28,12 +28,12 @@ const style = {
     width: "100%",
   })),
   RootLink: styled(Link)(({ theme }) => ({
-    color: "black",
+    color: "inherit",
     textDecoration: "none",
     width: "100%",
   })),
   RootHref: styled("a")(({ theme }) => ({
-    color: "black",
+    color: "inherit",
     textDecoration: "none",
     width: "100%",
   })),

@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 
 import { Grid, Typography } from "@mui/material";
 
-const headerHeight = "125px";
 const footerHeight = "25px";
 
 const sizeWidthLeft = "1.5vw";
@@ -18,7 +17,7 @@ const style = {
     ...theme.myBreakpoints(theme).level3,
     width: "100%",
     height: "100%",
-    paddingTop: headerHeight,
+    paddingTop: theme.header.height,
     paddingBottom: `calc(${footerHeight} + 1.5vw)`,
   })),
   BodyScene: styled("div")(({ theme }) => ({

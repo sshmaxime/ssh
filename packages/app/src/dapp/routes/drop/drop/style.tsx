@@ -2,8 +2,6 @@ import { styled } from "@mui/material/styles";
 
 import { Grid, Typography } from "@mui/material";
 
-const headerHeight = "100px";
-
 const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "350px";
 
@@ -232,7 +230,7 @@ const style = {
     overflowY: "scroll",
     height: "0",
     minHeight: "100%",
-    // height: `calc(100vh - ${headerHeight} - ${footerHeight} - 125px - ${sizeWidthLeft} - 50px)`,
+    // height: `calc(100vh - ${theme.header.height} - ${footerHeight} - 125px - ${sizeWidthLeft} - 50px)`,
     opacity: $connected ? 0.5 : 1,
     transition: "all 1s",
     ":hover": {

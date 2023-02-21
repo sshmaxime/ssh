@@ -12,7 +12,7 @@ const style = {
     padding: 0,
     backgroundColor: "transparent",
     boxShadow: "none",
-    height: "100px",
+    height: theme.header.height,
     display: "flex",
     justifyContent: "center",
   })),

@@ -4,7 +4,6 @@ import { Grid, Typography } from "@mui/material";
 import { url } from "inspector";
 import ImgWave from "@/common/assets/images/wave.png";
 
-const headerHeight = "100px";
 const footerHeight = "25px";
 const itemTitleContainerWidth = "75px";
 
@@ -14,7 +13,7 @@ const style = {
     height: `100vh`,
   })),
   RootInner: styled("div")(({ theme }) => ({
-    paddingTop: headerHeight,
+    paddingTop: theme.header.height,
     paddingBottom: "25px",
     height: `100%`,
     width: `100%`,

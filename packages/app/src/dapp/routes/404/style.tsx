@@ -2,8 +2,6 @@ import { styled } from "@mui/material/styles";
 
 import { Typography, Grid, Stepper, StepLabel, StepContent } from "@mui/material";
 
-const headerHeight = "125px";
-
 const leftDefaultWidth = "20vw";
 const rightDefaultWidth = "350px";
 
@@ -24,7 +22,7 @@ const style = {
   Header: styled("div")(({ theme }) => ({
     position: "absolute",
     top: 0,
-    height: headerHeight,
+    height: theme.header.height,
     width: "100vw",
   })),
   Body: styled("div")(({ theme }) => ({
@@ -88,7 +86,7 @@ const style = {
     bottom: footerHeight,
     left: sizeWidthLeft,
     width: leftDefaultWidth,
-    height: `calc(100vh - ${headerHeight} - ${footerHeight} - ${sizeWidthLeft} - 50px)`,
+    height: `calc(100vh - ${theme.header.height} - ${footerHeight} - ${sizeWidthLeft} - 50px)`,
     zIndex: 1,
   })),
   LeftSideRightSide: styled("div")(({ theme }) => ({
@@ -180,7 +178,7 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     borderRadius: "5px",
     overflowY: "scroll",
-    height: `calc(100vh - ${headerHeight} - ${footerHeight} - 50px - 125px - ${sizeWidthLeft} - 50px)`,
+    height: `calc(100vh - ${theme.header.height} - ${footerHeight} - 50px - 125px - ${sizeWidthLeft} - 50px)`,
     opacity: $connected ? 0.5 : 1,
     transition: "all 1s",
     ":hover": {
@@ -191,7 +189,7 @@ const style = {
     backgroundColor: theme.backgroundColor.primary,
     position: "relative",
     borderRadius: "5px",
-    height: `calc(100vh - ${headerHeight} - ${footerHeight} - 125px - ${bottom} - 50px)`,
+    height: `calc(100vh - ${theme.header.height} - ${footerHeight} - 125px - ${bottom} - 50px)`,
   })),
   BodyLeftSideText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -209,7 +207,7 @@ const style = {
     right: $maxed ? sizeWidthLeft : sizeWidthRight,
     backgroundColor: $maxed ? theme.backgroundColor.primary : "",
     maxHeight: $maxed
-      ? `calc(100vh - 1vh - ${footerHeight} - ${sizeWidthLeft} - ${headerHeight})`
+      ? `calc(100vh - 1vh - ${footerHeight} - ${sizeWidthLeft} - ${theme.header.height})`
       : rightHeightReduced,
     // minHeight: rightHeightReduced,
     transition: "all 0.5s ease-in-out",
@@ -241,7 +239,7 @@ const style = {
   ContainerMoreInfoContent: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     marginTop: "15px",
     maxHeight: $maxed
-      ? `calc(100vh - 2vh - ${bottomHeight} - ${sizeWidthLeft} - ${headerHeight} - 152.5px - 50px)`
+      ? `calc(100vh - 2vh - ${bottomHeight} - ${sizeWidthLeft} - ${theme.header.height} - 152.5px - 50px)`
       : "0px",
     overflowY: "scroll",
     opacity: $maxed ? 1 : 0,

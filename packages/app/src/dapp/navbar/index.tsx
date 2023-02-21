@@ -14,14 +14,11 @@ import { useDispatch, useSelector } from "../store/hooks";
 import { login } from "../store/services/web3";
 import { shortenAddress } from "../utils";
 import { useGetDripsQuery } from "../store/services";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import LogoIcon from "@/common/assets/images/logo-typo.svg";
 import { DripStatus } from "@premier/typings";
 import CenterItem from "@/_common/components/grid/centerItem";
 import { useLocation } from "react-router-dom";
-
-import { Link, useParams } from "react-router-dom";
 
 const NavBarButton: FC<{ text: string; to: string }> = ({ text, to }) => {
   return (

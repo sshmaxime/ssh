@@ -2,7 +2,6 @@ import { styled } from "@mui/material/styles";
 
 import { Grid, Typography } from "@mui/material";
 
-const headerHeight = "100px";
 const footerHeight = "25px";
 
 const style = {
@@ -10,7 +9,7 @@ const style = {
     ...theme.myBreakpoints(theme).level3,
   })),
   HomeScreenContainer: styled("div")(({ theme }) => ({
-    paddingTop: headerHeight,
+    paddingTop: theme.header.height,
     paddingBottom: "25px",
     height: `100vh`,
     width: `100%`,

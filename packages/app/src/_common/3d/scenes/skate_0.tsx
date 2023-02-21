@@ -18,17 +18,15 @@ const sceneFunctions = (refs: SkateRefs, props: ModelMetadataProps) => ({
   ...defaultSkateModelAnimation(refs, props),
 });
 
-const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo(
-  (props, ref) => {
-    return (
-      <LoaderScene>
-        <Suspense fallback={<Loader />}>
-          <Scene {...props} />
-        </Suspense>
-      </LoaderScene>
-    );
-  }
-);
+const SceneLoader: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = React.memo((props) => {
+  return (
+    <LoaderScene>
+      <Suspense fallback={<Loader />}>
+        <Scene {...props} />
+      </Suspense>
+    </LoaderScene>
+  );
+});
 
 const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
   const refs = useSkateRefsLoader();
@@ -36,11 +34,11 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
 
   const { camera } = useThree();
 
-  camera.position.set(0, 40, -60);
+  camera.position.set(0, 40, -55);
   camera.lookAt(0, 40, 0);
 
   useFrame((state, delta) => {
-    (refs.groupRef as any).current.rotation.y += 0.005;
+    // (refs.groupRef as any).current.rotation.y += 0.005;
   });
 
   return (
