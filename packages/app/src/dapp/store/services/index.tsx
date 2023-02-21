@@ -1,4 +1,4 @@
-import { CONFIG } from "@/_config";
+import { CONFIG } from "@/_common/config";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { NFTsByCollection, Drip, Drips, Drop } from "@premier/typings";
 

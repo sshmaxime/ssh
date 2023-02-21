@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
 
-import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_1";
+import SceneLoader, { sceneRef } from "@/_common/3d/scenes/skate_1";
 import { Grid } from "@mui/material";
 import { Drop } from "@premier/typings";
 import { Route, Routes, useParams } from "react-router-dom";
 
-import { CREDENTIALS } from "../../../_constants";
+import { CREDENTIALS } from "@/_common/constants";
 import { useGetDropQuery } from "../../store/services";
 import NotFound from "../404";
 import Style from "./style";

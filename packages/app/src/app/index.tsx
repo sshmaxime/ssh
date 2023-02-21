@@ -2,16 +2,17 @@ import { FC } from "react";
 
 import { Toolbar, Grid } from "@mui/material";
 
-import CenterItem from "../_utils/components/grid/centerItem";
+import CenterItem from "@/_common/components/grid/centerItem";
 
 import Style from "./style";
-import Clickable from "@/_utils/components/clickable";
-import LogoIcon from "@/_utils/assets/images/logo-typo.svg";
-import LogoFull from "@/_utils/assets/images/logo-full.svg";
-import LogoTypo from "@/_utils/assets/images/logo-typo.svg";
+import Clickable from "@/_common/components/clickable";
+import LogoIcon from "@/common/assets/images/logo-typo.svg";
+import LogoFull from "@/common/assets/images/logo-full.svg";
+import LogoTypo from "@/common/assets/images/logo-typo.svg";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import DiscordIcon from "../_utils/assets/icons/discord.svg";
-import { CREDENTIALS } from "@/_constants";
+import DiscordIcon from "@/common/assets/icons/discord.svg";
+
+import { CREDENTIALS } from "@/_common/constants";
 
 const HomeComponent: FC = ({}) => {
   return (

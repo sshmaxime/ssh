@@ -3,22 +3,22 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import { Toolbar, Grid } from "@mui/material";
 
 import Style from "./style";
-import Clickable from "../../_utils/components/clickable";
+import Clickable from "@/_common/components/clickable";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Popover from "@mui/material/Popover";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import VerifiedIcon from "@mui/icons-material/Verified";
-import OpenseaIcon from "../../_utils/assets/icons/opensea.svg";
-import EtherscanIcon from "../../_utils/assets/icons/etherscan.svg";
+import OpenseaIcon from "@/common/assets/icons/opensea.svg";
+import EtherscanIcon from "@/common/assets/icons/etherscan.svg";
 import { useDispatch, useSelector } from "../store/hooks";
 import { login } from "../store/services/web3";
 import { shortenAddress } from "../utils";
 import { useGetDripsQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-import LogoIcon from "../../_utils/assets/images/logo-typo.svg";
+import LogoIcon from "@/common/assets/images/logo-typo.svg";
 import { DripStatus } from "@premier/typings";
-import CenterItem from "@/_utils/components/grid/centerItem";
+import CenterItem from "@/_common/components/grid/centerItem";
 import { useLocation } from "react-router-dom";
 
 import { Link, useParams } from "react-router-dom";

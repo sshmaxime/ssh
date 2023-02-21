@@ -14,9 +14,7 @@ import DropRoutes from "./routes/drop";
 import DocsComponent from "./routes/docs";
 import HomeComponent from "./routes/home";
 
-type props = {};
-
-const IndexWrapper: FC<props> = ({ children }) => {
+const IndexWrapper: FC = ({ children }) => {
   return (
     <Provider store={store}>
       <Dapp />
@@ -24,7 +22,7 @@ const IndexWrapper: FC<props> = ({ children }) => {
   );
 };
 
-const Dapp: FC<props> = ({ children }) => {
+const Dapp: FC = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {

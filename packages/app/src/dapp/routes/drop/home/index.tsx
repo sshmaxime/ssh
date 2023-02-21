@@ -1,18 +1,18 @@
 import { FC, useState } from "react";
 
-import { sceneRefType } from "@/_3d/scenes/skate_1";
+import { sceneRefType } from "@/_common/3d/scenes/skate_1";
 import { Drop } from "@premier/typings";
 import { ethers } from "ethers";
 
 import Style from "./style";
 import { Grid } from "@mui/material";
 
-import ImgWave from "@/_utils/assets/images/wave.png";
-import CenterItem from "@/_utils/components/grid/centerItem";
+import ImgWave from "@/common/assets/images/wave.png";
+import CenterItem from "@/_common/components/grid/centerItem";
 import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
 
 import { animated, useSpring } from "@react-spring/web";
-import Clickable from "@/_utils/components/clickable";
+import Clickable from "@/_common/components/clickable";
 
 const HomeComponent: FC = ({}) => {
   const [hover, setHover] = useState(0);

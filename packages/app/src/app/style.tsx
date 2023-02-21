@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 
 import { AppBar, Grid, Typography } from "@mui/material";
 import { url } from "inspector";
-import ImgWave from "@/_utils/assets/images/wave.png";
+import ImgWave from "@/common/assets/images/wave.png";
 
 const headerHeight = "100px";
 const footerHeight = "25px";

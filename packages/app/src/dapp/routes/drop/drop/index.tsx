@@ -1,22 +1,22 @@
 import React, { FC, useEffect, useState } from "react";
 
-import { sceneRefType } from "@/_3d/scenes/skate_1";
+import { sceneRefType } from "@/_common/3d/scenes/skate_1";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Grid, ImageList, ImageListItem, Modal } from "@mui/material";
 import { Drip, Drop, NFT } from "@premier/typings";
 import { ethers } from "ethers";
 
-import EtherscanIcon from "@/_utils/assets/icons/etherscan.svg";
-import OpenSeaIcon from "@/_utils/assets/icons/opensea.svg";
+import EtherscanIcon from "@/common/assets/icons/etherscan.svg";
+import OpenSeaIcon from "@/common/assets/icons/opensea.svg";
 
-import { useCState } from "@/_3d/utils/hooks";
-import CenterItem from "@/_utils/components/grid/centerItem";
-import { useImagePreloader } from "@/_utils/hooks/imagePreloader";
-import logoeth from "@/_utils/assets/images/logoeth.svg";
-import Clickable from "@/_utils/components/clickable";
-import Pastille from "@/_utils/components/pastille";
-import Tooltip from "@/_utils/components/tooltip";
+import { useCState } from "@/_common/3d/utils/hooks";
+import CenterItem from "@/_common/components/grid/centerItem";
+import { useImagePreloader } from "@/_common/hooks/imagePreloader";
+import logoeth from "@/common/assets/images/logoeth.svg";
+import Clickable from "@/_common/components/clickable";
+import Pastille from "@/_common/components/pastille";
+import Tooltip from "@/_common/components/tooltip";
 
 import { useDispatch, useSelector } from "@/dapp/store/hooks";
 import { useGetAssetsQuery, useGetDripQuery } from "@/dapp/store/services";
@@ -24,7 +24,7 @@ import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/ser
 import Style from "./style";
 import { useParams } from "react-router-dom";
 import { useSceneStore } from "../_3dScene/hook";
-import { CONFIG } from "@/_config";
+import { CONFIG } from "@/_common/config";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 const { AddressZero } = ethers.constants;

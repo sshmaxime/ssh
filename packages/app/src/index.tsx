@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 // theme
 import { ThemeProvider } from "@mui/material";
-import { theme } from "./_theme";
+import { theme } from "@/_common/theme/theme";
 
 // navigation
 import { BrowserRouter, Routes, Route } from "react-router-dom";

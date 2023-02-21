@@ -7,8 +7,8 @@ import ModelSkate, {
   useSkateRefsLoader,
   ModelMetadataProps,
   defaultSkateModelAnimation,
-} from "@/_3d/models/skate";
-import LoaderScene from "@/_3d/utils/loaderScene";
+} from "@/_common/3d/models/skate";
+import LoaderScene from "@/_common/3d/utils/loaderScene";
 import { useFrame, useThree } from "@react-three/fiber";
 import { Loader } from "../utils/loader";
 

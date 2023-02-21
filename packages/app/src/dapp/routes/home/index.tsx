@@ -6,8 +6,8 @@ import { Drop } from "@premier/typings";
 import { ethers } from "ethers";
 
 import Style from "./style";
-import CenterItem from "@/_utils/components/grid/centerItem";
-import SceneLoader, { sceneRef } from "@/_3d/scenes/skate_2";
+import CenterItem from "@/_common/components/grid/centerItem";
+import SceneLoader, { sceneRef } from "@/_common/3d/scenes/skate_2";
 
 const HomeComponent: FC = ({}) => {
   const sceneRef = React.useRef<sceneRef>(null!);

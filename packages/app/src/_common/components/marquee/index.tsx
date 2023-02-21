@@ -4,7 +4,7 @@ import { FC } from "react";
 import Style from "./style";
 
 import Ticker from "react-ticker";
-import { usePageVisible } from "@/_utils/hooks/pageVisible";
+import { usePageVisible } from "@/_common/hooks/pageVisible";
 
 const Marquee: FC<{
   word: any;

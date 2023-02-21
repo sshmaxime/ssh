@@ -2,12 +2,12 @@ import { FC } from "react";
 
 import { Grid, Typography } from "@mui/material";
 
-import { sceneRefType } from "@/_3d/scenes/skate_1";
+import { sceneRefType } from "@/_common/3d/scenes/skate_1";
 import { Drop } from "@premier/typings";
 import { ethers } from "ethers";
 
 import Style from "./style";
-import CenterItem from "@/_utils/components/grid/centerItem";
+import CenterItem from "@/_common/components/grid/centerItem";
 
 const HomeComponent: FC = ({}) => {
   return (
