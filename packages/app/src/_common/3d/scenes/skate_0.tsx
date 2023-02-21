@@ -9,7 +9,7 @@ import ModelSkate, {
   defaultSkateModelAnimation,
 } from "@/_common/3d/models/skate";
 import LoaderScene from "@/_common/3d/utils/loaderScene";
-import { useFrame, useThree } from "@react-three/fiber";
+import { GroupProps, useFrame, useThree } from "@react-three/fiber";
 import { Loader } from "../utils/loader";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
@@ -38,7 +38,12 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
   camera.lookAt(0, 40, 0);
 
   useFrame((state, delta) => {
-    // (refs.groupRef as any).current.rotation.y += 0.005;
+    const t = state.clock.getElapsedTime();
+    const ref = refs.groupRef.current as GroupProps;
+
+    ref.rotation!.y = Math.sin(t / 1) / 8;
+    ref.rotation!.z = (1 + Math.sin(t / 1.5)) / 100;
+    ref.position!.y = (1 + Math.sin(t / 1)) / 1.25;
   });
 
   return (

@@ -109,6 +109,11 @@ export const ListMockTokens: {
       6268: "https://i.seadn.io/gae/_A40t3HLol1_8UYkAnKGCpkwe4uf3VZClYUesYjecSyB4wLexPCLcpol-jlZJa2fqEVMAJ3CIWSWhETdQWhYCp5taj15iZZYMLKRZQ?auto=format&w=1920",
     },
   },
+  Doodles: {
+    contract: "0x8a90cab2b38dba80c64b7734e58ee1db38b8992e",
+    owner: "",
+    tokens: {},
+  },
 };
 
 export const ChainIdToStoreContract: { [chainId: number]: string } = {

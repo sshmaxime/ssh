@@ -21,6 +21,30 @@ import { ListMockTokens } from "@premier/typings";
 const HomeComponent: FC = ({}) => {
   const sceneRef = React.useRef<sceneRef>(null!);
 
+  // const [currentItem, setCurrentItem] = React.useState(0);
+  // useEffect(() => {
+  //   const poolOfChoice = (() => {
+  //     const array = [];
+  //     return array;
+  //   })();
+
+  //   let rotationInterval = setInterval(() => {
+  //     if (currentItem === poolOfChoice.length - 1) {
+  //       setCurrentItem(0);
+  //     } else {
+  //       setCurrentItem(currentItem + 1);
+  //     }
+
+  //     sceneRef.current._changeTexturePlaceholder(poolOfChoice[currentItem]);
+  //     console.log(poolOfChoice[currentItem]);
+  //   }, 3000);
+
+  //   //Clean up can be done like this
+  //   return () => {
+  //     clearInterval(rotationInterval);
+  //   };
+  // }, [currentItem]); // Add dependencies here
+
   return (
     <Style.Root>
       <Navbar />
@@ -112,8 +136,8 @@ const HomeComponent: FC = ({}) => {
                     model="models/model.glb"
                     initialVersion={0}
                     initialId={0}
-                    initialPlaceholderTexture="models/test.png"
-                    versions={[{ name: "0", texture: "models/0.texture.png" }]}
+                    initialPlaceholderTexture="models/placeholder.png"
+                    versions={[{ name: "0", texture: "models/texture.png" }]}
                     initialDropSymbol="random"
                     initialTokenNameId="random"
                   />
