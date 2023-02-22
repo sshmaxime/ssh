@@ -64,6 +64,7 @@ const HomeComponent: FC = ({}) => {
                     DIGITAL&nbsp;&nbsp;&nbsp;&nbsp;UTILITY&nbsp;&nbsp;&nbsp;&nbsp;TECHNOLOGY
                   </Style.SubTitle>
                 </Grid>
+
                 <Grid item>
                   <Grid container justifyContent="space-between">
                     <Grid item>
@@ -107,6 +108,61 @@ const HomeComponent: FC = ({}) => {
                       </Style.SubTitle2>
                     </Grid>
                     <Grid item>
+                      <Style.ContainerExempleDrip>
+                        <Grid container columnSpacing={1} direction="row-reverse">
+                          <Grid item xs={7}>
+                            <Grid container direction="column" style={{ height: "100%" }}>
+                              <Grid item flexGrow={1}>
+                                <Style.ContainerExempleDripContainer style={{ paddingTop: "10px" }}>
+                                  <Style.InfoDivItemName>PLACEHOLDER</Style.InfoDivItemName>
+                                  <Style.ContainerInfoDiv>
+                                    <Style.ContainerContract>
+                                      <span style={{ fontWeight: 500 }}>Collection: </span>Bored Ape
+                                      Yatch Club
+                                    </Style.ContainerContract>
+                                    <div style={{ height: "5px" }} />
+
+                                    <Style.ContainerContract>
+                                      <span style={{ fontWeight: 500 }}>Address: </span>{" "}
+                                      0x1234...3456
+                                    </Style.ContainerContract>
+                                    <div style={{ height: "5px" }} />
+
+                                    <Style.ContainerContract>
+                                      <span style={{ fontWeight: 500 }}>Item: </span>BAYC #2345
+                                    </Style.ContainerContract>
+                                  </Style.ContainerInfoDiv>
+                                </Style.ContainerExempleDripContainer>
+                              </Grid>
+
+                              <Grid item xs={3}>
+                                <Style.ContainerExempleDripContainer>
+                                  <Style.InfoDivItemName>DECK</Style.InfoDivItemName>
+                                  <Style.GalleryWrap>
+                                    <Style.GalleryItem
+                                      $onHover={false}
+                                      color={"models/texture.png"}
+                                      style={{
+                                        height: "50px",
+                                        borderRadius: "5px",
+                                      }}
+                                    />
+                                  </Style.GalleryWrap>
+                                </Style.ContainerExempleDripContainer>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                          <Grid item xs={5}>
+                            <img
+                              src={"models/placeholder.png"}
+                              style={{ width: "100%", height: "100%" }}
+                              alt=""
+                            />
+                          </Grid>
+                        </Grid>
+                      </Style.ContainerExempleDrip>
+                    </Grid>
+                    <Grid item>
                       <Style.SubTitle3>DROP</Style.SubTitle3>
                       <div style={{ height: "15px" }} />
 
@@ -125,7 +181,6 @@ const HomeComponent: FC = ({}) => {
                         <CenterItem item>
                           <ArrowRightAltIcon />
                         </CenterItem>
-                        <Grid item flexGrow={1} style={{}}></Grid>
                       </Grid>
                     </Grid>
                   </Grid>

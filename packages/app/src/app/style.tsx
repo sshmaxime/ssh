@@ -68,7 +68,7 @@ const style = {
   Title: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 900,
-    fontSize: "12.5em",
+    fontSize: "10.5vw",
   })),
   Title2: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
@@ -95,6 +95,7 @@ const style = {
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 900,
     paddingLeft: "15px",
+    paddingRight: "10px",
     fontSize: "0.85em",
   })),
   SubTitle5: styled("div")(({ theme }) => ({
@@ -108,6 +109,66 @@ const style = {
     paddingLeft: "15px",
     paddingRight: "50px",
     // backgroundColor: "red",
+  })),
+  ContainerExempleDrip: styled("div")(({ theme }) => ({
+    backgroundColor: "white",
+    padding: "15px",
+    borderRadius: "5px",
+    boxShadow: `2.5px 2.5px 2.5px ${theme.backgroundColor.secondary}, -.1px -.1px 1.5px ${theme.backgroundColor.secondary}`,
+  })),
+  ContainerExempleDripContainer: styled("div")(({ theme }) => ({
+    backgroundColor: "white",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    borderRadius: "5px",
+  })),
+  GoToApp: styled("div")(({ theme }) => ({
+    borderRadius: "5px",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 800,
+    fontSize: "0.7em",
+    padding: "5px",
+  })),
+  ContainerContract: styled("div")(({ theme }) => ({
+    // backgroundColor: theme.backgroundColor.primary,
+    // padding: "10px",
+    borderRadius: "5px",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 800,
+    fontSize: "0.7em",
+  })),
+  GalleryWrap: styled("div")(({ theme }) => ({
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    height: "100%",
+    gap: "1.5px",
+  })),
+  GalleryItem: styled("div")<{ color: string; $onHover: boolean }>(
+    ({ theme, color, $onHover }) => ({
+      flex: $onHover ? 7 : 1,
+      backgroundPosition: "30% 10%",
+      imageRendering: "pixelated",
+      WebkitPrintColorAdjust: "exact",
+      width: "100%",
+      backgroundImage: `url(${color})`,
+      transition: "flex 0.8s ease",
+      objectFit: "none",
+      objectPosition: "30% 10%",
+      cursor: $onHover ? "pointer" : "auto",
+    })
+  ),
+  InfoDivItemName: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    fontSize: "0.8em",
+    letterSpacing: "1.25px",
+    marginBottom: "7.5px",
+  })),
+  ContainerInfoDiv: styled("div")(({ theme }) => ({
+    padding: "10px",
+    backgroundColor: theme.backgroundColor.primary,
+    borderRadius: "5px",
   })),
   // Footer
   RootFooter: styled("div")(({ theme }) => ({
