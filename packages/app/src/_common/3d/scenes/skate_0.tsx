@@ -41,9 +41,9 @@ const Scene: FC<ModelMetadataProps & { sceneRef: sceneRefType }> = (props) => {
     const t = state.clock.getElapsedTime();
     const ref = refs.groupRef.current as GroupProps;
 
-    ref.rotation!.y = Math.sin(t / 1) / 8;
-    ref.rotation!.z = (1 + Math.sin(t / 1.5)) / 100;
-    ref.position!.y = (1 + Math.sin(t / 1)) / 1.25;
+    ref.rotation!.y = Math.sin(t / 1) / 10;
+    ref.rotation!.z = (1 + Math.sin(t / 1.5)) / 90;
+    ref.position!.y = (1 + Math.sin(t / 1)) / 1;
   });
 
   return (

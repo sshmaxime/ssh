@@ -123,7 +123,7 @@ const HomeComponent: FC = ({}) => {
                                     <div style={{ height: "5px" }} />
 
                                     <Style.ContainerContract>
-                                      <span style={{ fontWeight: 500 }}>Address: </span>{" "}
+                                      <span style={{ fontWeight: 500 }}>Contract: </span>{" "}
                                       0x1234...3456
                                     </Style.ContainerContract>
                                     <div style={{ height: "5px" }} />
@@ -206,9 +206,40 @@ const HomeComponent: FC = ({}) => {
       {/* <Style.ScreenContainer>
         <Style.Screen>
           <Grid container style={{ height: "100%" }}>
-            <CenterItem $full={true}>
-              <Style.Title2>ABOUT US.</Style.Title2>
-            </CenterItem>
+            <Grid item xs={6}>
+              <CenterItem $full={true}>
+                <Style.Title2>DROP</Style.Title2>
+              </CenterItem>
+            </Grid>
+            <Grid item xs={6}>
+              hey
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              hey hey hey hey hey hey hey
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              hey hey hey hey hey hey hey
+            </Grid>
           </Grid>
         </Style.Screen>
       </Style.ScreenContainer> */}
