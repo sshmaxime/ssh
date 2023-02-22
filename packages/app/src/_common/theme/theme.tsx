@@ -10,7 +10,7 @@ type MyTheme = typeof themeOpts;
 
 const themeOpts = {
   header: {
-    height: "80px",
+    height: "100px",
   },
 
   components: {
