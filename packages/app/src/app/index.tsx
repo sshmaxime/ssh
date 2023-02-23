@@ -18,32 +18,53 @@ import SceneLoader, { sceneRef } from "@/_common/3d/scenes/skate_0";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { ListMockTokens } from "@premier/typings";
 
+const DemoItemList: {
+  collection: string;
+  contract: string;
+  item: string;
+  img: string;
+}[] = [
+  {
+    collection: "Bored Ape Yatch Club",
+    contract: "0xbc4c...f13d",
+    item: "BAYC #6268",
+    img: "models/placeholder.png",
+  },
+  {
+    collection: "Bored Ape Yatch Club",
+    contract: "0xbc4c...f13d",
+    item: "BAYC #8663",
+    img: ListMockTokens.BoredApe.tokens[8663],
+  },
+  {
+    collection: "Bored Ape Yatch Club",
+    contract: "0xbc4c...f13d",
+    item: "BAYC #5864",
+    img: ListMockTokens.BoredApe.tokens[5864],
+  },
+];
+
 const HomeComponent: FC = ({}) => {
   const sceneRef = React.useRef<sceneRef>(null!);
 
-  // const [currentItem, setCurrentItem] = React.useState(0);
-  // useEffect(() => {
-  //   const poolOfChoice = (() => {
-  //     const array = [];
-  //     return array;
-  //   })();
+  const [currentItem, setCurrentItem] = React.useState(0);
 
-  //   let rotationInterval = setInterval(() => {
-  //     if (currentItem === poolOfChoice.length - 1) {
-  //       setCurrentItem(0);
-  //     } else {
-  //       setCurrentItem(currentItem + 1);
-  //     }
+  useEffect(() => {
+    let rotationInterval = setInterval(() => {
+      if (currentItem === DemoItemList.length - 1) {
+        setCurrentItem(0);
+        sceneRef.current._changeTexturePlaceholder(DemoItemList[0].img);
+      } else {
+        setCurrentItem(currentItem + 1);
+        sceneRef.current._changeTexturePlaceholder(DemoItemList[currentItem + 1].img);
+      }
+    }, 5000);
 
-  //     sceneRef.current._changeTexturePlaceholder(poolOfChoice[currentItem]);
-  //     console.log(poolOfChoice[currentItem]);
-  //   }, 3000);
-
-  //   //Clean up can be done like this
-  //   return () => {
-  //     clearInterval(rotationInterval);
-  //   };
-  // }, [currentItem]); // Add dependencies here
+    //Clean up can be done like this
+    return () => {
+      clearInterval(rotationInterval);
+    };
+  }, [currentItem]); // Add dependencies here
 
   return (
     <Style.Root>
@@ -117,19 +138,20 @@ const HomeComponent: FC = ({}) => {
                                   <Style.InfoDivItemName>PLACEHOLDER</Style.InfoDivItemName>
                                   <Style.ContainerInfoDiv>
                                     <Style.ContainerContract>
-                                      <span style={{ fontWeight: 500 }}>Collection: </span>Bored Ape
-                                      Yatch Club
+                                      <span style={{ fontWeight: 500 }}>Collection: </span>
+                                      {DemoItemList[currentItem].collection}
                                     </Style.ContainerContract>
                                     <div style={{ height: "5px" }} />
 
                                     <Style.ContainerContract>
                                       <span style={{ fontWeight: 500 }}>Contract: </span>{" "}
-                                      0x1234...3456
+                                      {DemoItemList[currentItem].contract}
                                     </Style.ContainerContract>
                                     <div style={{ height: "5px" }} />
 
                                     <Style.ContainerContract>
-                                      <span style={{ fontWeight: 500 }}>Item: </span>BAYC #2345
+                                      <span style={{ fontWeight: 500 }}>Item: </span>
+                                      {DemoItemList[currentItem].item}
                                     </Style.ContainerContract>
                                   </Style.ContainerInfoDiv>
                                 </Style.ContainerExempleDripContainer>
@@ -141,7 +163,7 @@ const HomeComponent: FC = ({}) => {
                                   <Style.GalleryWrap>
                                     <Style.GalleryItem
                                       $onHover={false}
-                                      color={"models/texture.png"}
+                                      color={"models/0.texture.png"}
                                       style={{
                                         height: "50px",
                                         borderRadius: "5px",
@@ -154,7 +176,7 @@ const HomeComponent: FC = ({}) => {
                           </Grid>
                           <Grid item xs={5}>
                             <img
-                              src={"models/placeholder.png"}
+                              src={DemoItemList[currentItem].img}
                               style={{ width: "100%", height: "100%" }}
                               alt=""
                             />
@@ -191,8 +213,8 @@ const HomeComponent: FC = ({}) => {
                     model="models/model.glb"
                     initialVersion={0}
                     initialId={0}
-                    initialPlaceholderTexture="models/placeholder.png"
-                    versions={[{ name: "0", texture: "models/texture.png" }]}
+                    initialPlaceholderTexture={DemoItemList[0].img}
+                    versions={[{ name: "0", texture: "models/0.texture.png" }]}
                     initialDropSymbol="random"
                     initialTokenNameId="random"
                   />
