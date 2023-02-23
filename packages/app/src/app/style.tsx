@@ -84,7 +84,7 @@ const style = {
   SubTitle2: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 900,
-    fontSize: "2.5em",
+    fontSize: "2.25em",
     lineHeight: "1.1em",
   })),
   SubTitle3: styled("div")(({ theme }) => ({
@@ -97,12 +97,12 @@ const style = {
     fontWeight: 900,
     paddingLeft: "15px",
     paddingRight: "10px",
-    fontSize: "0.85em",
+    fontSize: "0.95em",
   })),
   SubTitle5: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 900,
-    fontSize: "1em",
+    fontSize: "0.95em",
   })),
   SubTitleText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,

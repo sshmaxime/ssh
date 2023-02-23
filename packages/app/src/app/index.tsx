@@ -7,7 +7,6 @@ import CenterItem from "@/_common/components/grid/centerItem";
 import Style from "./style";
 import Clickable from "@/_common/components/clickable";
 import LogoIcon from "@/common/assets/images/logo-typo.svg";
-import LogoFull from "@/common/assets/images/logo-full.svg";
 import LogoTypo from "@/common/assets/images/logo-typo.svg";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DiscordIcon from "@/common/assets/icons/discord.svg";
@@ -19,31 +18,36 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { ListMockTokens } from "@premier/typings";
 
 const DemoItemList: {
-  collection: string;
+  collectionName: string;
+  collectionSymbol: string;
   contract: string;
   item: string;
   img: string;
 }[] = [
   {
-    collection: "Bored Ape Yatch Club",
+    collectionName: "Bored Ape Yatch Club",
+    collectionSymbol: "BAYC",
     contract: "0xbc4c...f13d",
     item: "BAYC #6268",
     img: "models/placeholder.png",
   },
   {
-    collection: "Bored Ape Yatch Club",
+    collectionName: "Bored Ape Yatch Club",
+    collectionSymbol: "BAYC",
     contract: "0xbc4c...f13d",
     item: "BAYC #8663",
     img: ListMockTokens.BoredApe.tokens[8663],
   },
   {
-    collection: "Bored Ape Yatch Club",
+    collectionName: "Bored Ape Yatch Club",
+    collectionSymbol: "BAYC",
     contract: "0xbc4c...f13d",
     item: "BAYC #7693",
     img: "https://i.seadn.io/gae/awlHMs7ZVRLxuiJJ84CylogTTmTYRUTt_pPdWI6oED_60LOGSnH5pnQxpceQcQvUQL7uM4BQlPaBJuvn-pq7xkatOuqj2_nc3SCkeKk?auto=format&w=1920",
   },
   {
-    collection: "Bored Ape Yatch Club",
+    collectionName: "Bored Ape Yatch Club",
+    collectionSymbol: "BAYC",
     contract: "0xbc4c...f13d",
     item: "BAYC #9467",
     img: "https://i.seadn.io/gae/gZYA_fdqRicQEeY8FqoRbWQ3edVrNKovWLBPKxZ16qBf4EvsSq8VBKrhvSBfYyk1ZVF04bKa5kibtrdlBAVvONSWCmLWv0yfI5jx7Q?auto=format&w=1920",
@@ -127,7 +131,8 @@ const HomeComponent: FC = ({}) => {
                       <Style.SubTitle2>
                         Get
                         <br />
-                        <div>Your NFT</div>
+                        Your NFT
+                        <br />
                         On The Wall !
                       </Style.SubTitle2>
                     </Grid>
@@ -142,7 +147,7 @@ const HomeComponent: FC = ({}) => {
                                   <Style.ContainerInfoDiv>
                                     <Style.ContainerContract>
                                       <span style={{ fontWeight: 500 }}>Collection: </span>
-                                      {DemoItemList[currentItem].collection}
+                                      {DemoItemList[currentItem].collectionName}
                                     </Style.ContainerContract>
                                     <div style={{ height: "5px" }} />
 
