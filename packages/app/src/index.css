@@ -3,10 +3,6 @@
    License: none (public domain)
 */
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap");
-
 html,
 body,
 div,
@@ -219,75 +215,56 @@ body,
 /* SourceCode */
 @font-face {
   font-family: sourcecode;
-  src: url(./_utils/assets/fonts/SourceCodePro-Light.ttf);
+  src: url(./_common/assets/fonts/SourceCodePro-Light.ttf);
   font-weight: 300;
 }
 
 @font-face {
   font-family: sourcecode;
-  src: url(./_utils/assets/fonts/SourceCodePro-Regular.ttf);
+  src: url(./_common/assets/fonts/SourceCodePro-Regular.ttf);
   font-weight: 500;
 }
 
 @font-face {
   font-family: sourcecode;
-  src: url(./_utils/assets/fonts/SourceCodePro-Bold.ttf);
+  src: url(./_common/assets/fonts/SourceCodePro-Bold.ttf);
   font-weight: 700;
 }
 
 @font-face {
   font-family: sourcecode;
-  src: url(./_utils/assets/fonts/SourceCodePro-Black.ttf);
-  font-weight: 900;
-}
-
-/* SourceSans */
-@font-face {
-  font-family: sourcesans;
-  src: url(./_utils/assets/fonts/SourceSansPro-Light.ttf);
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: sourcesans;
-  src: url(./_utils/assets/fonts/SourceSansPro-Regular.ttf);
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: sourcesans;
-  src: url(./_utils/assets/fonts/SourceSansPro-Bold.ttf);
-  font-weight: 700;
-}
-
-@font-face {
-  font-family: sourcesans;
-  src: url(./_utils/assets/fonts/SourceSansPro-Black.ttf);
+  src: url(./_common/assets/fonts/SourceCodePro-Black.ttf);
   font-weight: 900;
 }
 
 /* Montserrat */
 @font-face {
   font-family: montserrat;
-  src: url(./_utils/assets/fonts/Montserrat-Light.ttf);
+  src: url(./_common/assets/fonts/Montserrat-Light.ttf);
   font-weight: 300;
 }
 
 @font-face {
   font-family: montserrat;
-  src: url(./_utils/assets/fonts/Montserrat-Regular.ttf);
+  src: url(./_common/assets/fonts/Montserrat-Regular.ttf);
   font-weight: 500;
 }
 
 @font-face {
   font-family: montserrat;
-  src: url(./_utils/assets/fonts/Montserrat-Black.ttf);
+  src: url(./_common/assets/fonts/Montserrat-ExtraBold.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: montserrat;
+  src: url(./_common/assets/fonts/Montserrat-Black.ttf);
   font-weight: 900;
 }
 
 @font-face {
   font-family: montserrat;
-  src: url(./_utils/assets/fonts/Montserrat-BlackItalic.ttf);
+  src: url(./_common/assets/fonts/Montserrat-BlackItalic.ttf);
   font-weight: 900;
   font-style: italic;
 }
@@ -296,47 +273,58 @@ body,
 
 @font-face {
   font-family: futura;
-  src: url(./_utils/assets/fonts/FuturaPTLight.otf);
+  src: url(./_common/assets/fonts/FuturaPTLight.otf);
   font-weight: 300;
 }
 
 @font-face {
   font-family: futura;
-  src: url(./_utils/assets/fonts/FuturaPTMediumOblique.otf);
+  src: url(./_common/assets/fonts/FuturaPTMedium.otf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: futura;
+  src: url(./_common/assets/fonts/FuturaPTMediumOblique.otf);
   font-weight: 500;
   font-style: italic;
 }
 
 @font-face {
   font-family: futura;
-  src: url(./_utils/assets/fonts/FuturaPTMedium.otf);
-  font-weight: 500;
+  src: url(./_common/assets/fonts/FuturaPTHeavy.otf);
+  font-weight: 700;
 }
-
 @font-face {
   font-family: futura;
-  src: url(./_utils/assets/fonts/FuturaPTHeavyOblique.otf);
+  src: url(./_common/assets/fonts/FuturaPTHeavyOblique.otf);
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: futura;
-  src: url(./_utils/assets/fonts/FuturaPTBold.otf);
-  font-weight: 900;
+  src: url(./_common/assets/fonts/FuturaPTBold.otf);
+  font-weight: 800;
 }
-
 @font-face {
   font-family: futura;
-  src: url(./_utils/assets/fonts/FuturaPTBoldOblique.otf);
-  font-weight: 900;
+  src: url(./_common/assets/fonts/FuturaPTBoldOblique.otf);
+  font-weight: 800;
   font-style: italic;
 }
 
 @font-face {
-  font-family: anton;
-  src: url(./_utils/assets/fonts/Anton-Regular.ttf);
+  font-family: futura;
+  src: url(./_common/assets/fonts/FuturaPTExtraBold.otf);
+  font-weight: 900;
 }
+@font-face {
+  font-family: futura;
+  src: url(./_common/assets/fonts/FuturaPTExtraBoldOblique.otf);
+  font-weight: 900;
+  font-style: italic;
+}
+
 /*  */
 
 @keyframes bounce {

@@ -200,25 +200,39 @@ const HomeComponent: FC = ({}) => {
                       <div style={{ height: "15px" }} />
 
                       <Style.SubTitleText>
-                        Your NFTs are cool but you would like to showcase them your house or
-                        somewhere, right ? We feel the same way ...
+                        Your NFTs are cool but you would like to showcase them in your house, right
+                        ? Yeah, we feel the same way ...
                         <div style={{ height: "1vh" }} />
                         Our very exclusive and limited Drops let you create high value real life
                         assets out of your NFTs.
                         <div style={{ height: "1vh" }} />
-                        Hang them, wear them, live them.
+                        Bring them to life.
                       </Style.SubTitleText>
 
                       <div style={{ height: "20px" }} />
 
-                      <Grid container alignItems="center">
-                        <Grid item>
-                          <Style.SubTitle4>DISCOVER NOW</Style.SubTitle4>
-                        </Grid>
-                        <CenterItem item>
-                          <ArrowRightAltIcon />
-                        </CenterItem>
-                      </Grid>
+                      <div style={{ display: "inline-block" }}>
+                        <Clickable address="/app/drop">
+                          <Grid
+                            container
+                            alignItems="center"
+                            style={{
+                              backgroundColor: "black",
+                              color: "white",
+                              marginLeft: "15px",
+                              padding: "1px",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            <Grid item>
+                              <Style.SubTitle4>DISCOVER NOW</Style.SubTitle4>
+                            </Grid>
+                            <CenterItem item style={{ marginLeft: "10px" }}>
+                              <ArrowRightAltIcon />
+                            </CenterItem>
+                          </Grid>
+                        </Clickable>
+                      </div>
                     </Grid>
                   </Grid>
                 </Grid>
