@@ -84,7 +84,7 @@ const style = {
   SubTitle2: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 900,
-    fontSize: "2.25em",
+    fontSize: "2.75em",
     lineHeight: "1.1em",
   })),
   SubTitle3: styled("div")(({ theme }) => ({
@@ -103,6 +103,18 @@ const style = {
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 900,
     fontSize: "0.95em",
+  })),
+  SubTitle6: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 900,
+    // color: "white",
+    backgroundColor: theme.backgroundColor.secondary,
+    fontSize: "0.85em",
+    // display: "inline-block",
+    float: "right",
+    // textAlign: "right",
+    padding: "5px",
+    borderRadius: "5px",
   })),
   SubTitleText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,

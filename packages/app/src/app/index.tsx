@@ -128,14 +128,17 @@ const HomeComponent: FC = ({}) => {
                     justifyContent="space-between"
                   >
                     <Grid item>
+                      <Style.SubTitle6>Our First Project</Style.SubTitle6>
+                      <div style={{ height: "10px" }} />
                       <Style.SubTitle2>
                         Get
                         <br />
-                        Your NFT
+                        Your {"[NFTs]"}
                         <br />
                         On The Wall !
                       </Style.SubTitle2>
                     </Grid>
+
                     <Grid item>
                       <Style.ContainerExempleDrip>
                         <Grid container columnSpacing={1} direction="row-reverse">
@@ -202,6 +205,8 @@ const HomeComponent: FC = ({}) => {
                         <div style={{ height: "1vh" }} />
                         Our very exclusive and limited Drops let you create high value real life
                         assets out of your NFTs.
+                        <div style={{ height: "1vh" }} />
+                        Hang them, wear them, live them.
                       </Style.SubTitleText>
 
                       <div style={{ height: "20px" }} />
