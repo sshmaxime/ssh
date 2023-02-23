@@ -85,6 +85,7 @@ const style = {
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 900,
     fontSize: "2.5em",
+    lineHeight: "1.1em",
   })),
   SubTitle3: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
@@ -108,6 +109,7 @@ const style = {
     fontWeight: 500,
     paddingLeft: "15px",
     paddingRight: "50px",
+    lineHeight: "1.1em",
     // backgroundColor: "red",
   })),
   ContainerExempleDrip: styled("div")(({ theme }) => ({

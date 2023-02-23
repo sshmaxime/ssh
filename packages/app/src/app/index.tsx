@@ -39,8 +39,14 @@ const DemoItemList: {
   {
     collection: "Bored Ape Yatch Club",
     contract: "0xbc4c...f13d",
-    item: "BAYC #5864",
-    img: ListMockTokens.BoredApe.tokens[5864],
+    item: "BAYC #7693",
+    img: "https://i.seadn.io/gae/awlHMs7ZVRLxuiJJ84CylogTTmTYRUTt_pPdWI6oED_60LOGSnH5pnQxpceQcQvUQL7uM4BQlPaBJuvn-pq7xkatOuqj2_nc3SCkeKk?auto=format&w=1920",
+  },
+  {
+    collection: "Bored Ape Yatch Club",
+    contract: "0xbc4c...f13d",
+    item: "BAYC #9467",
+    img: "https://i.seadn.io/gae/gZYA_fdqRicQEeY8FqoRbWQ3edVrNKovWLBPKxZ16qBf4EvsSq8VBKrhvSBfYyk1ZVF04bKa5kibtrdlBAVvONSWCmLWv0yfI5jx7Q?auto=format&w=1920",
   },
 ];
 
@@ -119,13 +125,10 @@ const HomeComponent: FC = ({}) => {
                   >
                     <Grid item>
                       <Style.SubTitle2>
-                        Discover
+                        Get
                         <br />
-                        Our
-                        <br />
-                        First
-                        <br />
-                        Project
+                        <div>Your NFT</div>
+                        On The Wall !
                       </Style.SubTitle2>
                     </Grid>
                     <Grid item>
@@ -189,16 +192,18 @@ const HomeComponent: FC = ({}) => {
                       <div style={{ height: "15px" }} />
 
                       <Style.SubTitleText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id urna sed sem
-                        pharetra egestas id sit amet lacus. Pellentesque elementum, augue eu
-                        ultrices sollicitudin, nisl odio lobortis tellus.
+                        Your NFTs are cool but you would like to showcase them your house or
+                        somewhere, right ? We feel the same way ...
+                        <div style={{ height: "1vh" }} />
+                        Our very exclusive and limited Drops let you create high value real life
+                        assets out of your NFTs.
                       </Style.SubTitleText>
 
-                      <div style={{ height: "25px" }} />
+                      <div style={{ height: "20px" }} />
 
                       <Grid container alignItems="center">
                         <Grid item>
-                          <Style.SubTitle4>DISCOVER</Style.SubTitle4>
+                          <Style.SubTitle4>DISCOVER NOW</Style.SubTitle4>
                         </Grid>
                         <CenterItem item>
                           <ArrowRightAltIcon />
