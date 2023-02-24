@@ -17,7 +17,7 @@ const style = {
     ...theme.myBreakpoints(theme).level3,
     width: "100%",
     height: "100%",
-    paddingTop: theme.header.height,
+    paddingTop: `calc(${theme.header.height} + 15px)`,
     paddingBottom: `calc(${footerHeight} + 1.5vw)`,
   })),
   BodyScene: styled("div")(({ theme }) => ({

@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 
-import { sceneRefType } from "@/_common/3d/scenes/skate_1";
+import { sceneRefType } from "@/common/3d/scenes/skate_1";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { Grid, ImageList, ImageListItem, Modal } from "@mui/material";
@@ -10,21 +10,21 @@ import { ethers } from "ethers";
 import EtherscanIcon from "@/common/assets/icons/etherscan.svg";
 import OpenSeaIcon from "@/common/assets/icons/opensea.svg";
 
-import { useCState } from "@/_common/3d/utils/hooks";
-import CenterItem from "@/_common/components/grid/centerItem";
-import { useImagePreloader } from "@/_common/hooks/imagePreloader";
+import { useCState } from "@/common/3d/utils/hooks";
+import CenterItem from "@/common/components/grid/centerItem";
+import { useImagePreloader } from "@/common/hooks/imagePreloader";
 import logoeth from "@/common/assets/images/logoeth.svg";
-import Clickable from "@/_common/components/clickable";
-import Pastille from "@/_common/components/pastille";
-import Tooltip from "@/_common/components/tooltip";
+import Clickable from "@/common/components/clickable";
+import Pastille from "@/common/components/pastille";
+import Tooltip from "@/common/components/tooltip";
 
-import { useDispatch, useSelector } from "@/dapp/store/hooks";
-import { useGetAssetsQuery, useGetDripQuery } from "@/dapp/store/services";
-import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/services/web3";
+import { useDispatch, useSelector } from "@/app/store/hooks";
+import { useGetAssetsQuery, useGetDripQuery } from "@/app/store/services";
+import { mint, mintDefault, mutate, resetMintingProcess } from "@/app/store/services/web3";
 import Style from "./style";
 import { useParams } from "react-router-dom";
 import { useSceneStore } from "../_3dScene/hook";
-import { CONFIG } from "@/_common/config";
+import { CONFIG } from "@/common/config";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;
 const { AddressZero } = ethers.constants;
@@ -354,7 +354,7 @@ const DropComponent: FC<{ drop: Drop; sceneRef: sceneRefType }> = ({ drop, scene
         <Grid item xs={12} style={{ zIndex: 10, height: "100%" }}>
           <Style.LeftSide>
             <Grid container direction="column" style={{ height: "100%" }}>
-              <Grid item xs={1} style={{ display: "flex", alignItems: "end" }}>
+              <Grid item>
                 <Style.HeaderFirstLeftSideTitle>
                   Hello
                   <b style={{ borderBottom: "2px solid black", marginLeft: "8px" }}>{name}</b>,

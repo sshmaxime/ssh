@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "../store/hooks";
 import { login } from "../store/services/web3";
 import { shortenAddress } from "../utils";
 import { useGetDripsQuery } from "../store/services";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 import LogoIcon from "@/common/assets/images/logo-typo.svg";
 import { DripStatus } from "@premier/typings";
@@ -43,24 +44,8 @@ export const NavbarComponent: FC = () => {
   };
   const open = Boolean(anchorEl);
 
-  const location = useLocation();
-
   const f = useRef();
   const [dropId, setDropId] = useState<number | undefined>(undefined);
-
-  useEffect(() => {
-    const path = location.pathname;
-    const regex = /app\/drop\/\d+(?![\w\d])/;
-    const regex2 = /^[^\d]*(\d+)/;
-
-    const isRouteMatching = regex.test(path);
-    if (isRouteMatching) {
-      const dropId = (regex2.exec(path) as any)[1];
-      setDropId(dropId);
-    } else {
-      setDropId(undefined);
-    }
-  }, [location]);
 
   return (
     <Style.Root>
@@ -85,62 +70,10 @@ export const NavbarComponent: FC = () => {
                     <img alt="" src={LogoIcon} style={{ width: "200px" }} />
                   </Clickable>
                 </Grid>
-
-                {dropId ? (
-                  <>
-                    <Grid item style={{ marginLeft: "15px" }}>
-                      <Style.Title3>{`>`}</Style.Title3>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "7.5px" }}>
-                      <Style.Title>{`DROP`}</Style.Title>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "7.5px" }}>
-                      <Style.Title3>{`>`}</Style.Title3>
-                    </Grid>
-                    <Grid item style={{ marginLeft: "7.5px" }}>
-                      <Style.Title2>{dropId}</Style.Title2>
-                    </Grid>
-                  </>
-                ) : null}
               </Grid>
             </Grid>
-            <Grid item xs={0.5}>
-              <Grid
-                container
-                justifyContent={"center"}
-                alignItems="center"
-                columnSpacing={4}
-                style={{ height: "100%", color: "black", fontSize: "2em" }}
-              >
-                <Grid item>|</Grid>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Grid
-                container
-                justifyContent={"center"}
-                alignItems="center"
-                columnSpacing={2}
-                style={{ height: "100%" }}
-              >
-                {/* <Style.LinkNavbar item>
-                  <NavBarButton text="HOME" to="/app/" />
-                </Style.LinkNavbar>
-                <Grid item style={{ color: "black" }}>
-                  |
-                </Grid> */}
-                <Style.LinkNavbar item>
-                  <NavBarButton text="DROP" to="/app/drop" />
-                </Style.LinkNavbar>
-                <Grid item style={{ color: "black" }}>
-                  |
-                </Grid>
-                <Style.LinkNavbar item>
-                  <NavBarButton text="DOCS" to="/app/docs" />
-                </Style.LinkNavbar>
-              </Grid>
-            </Grid>
-            <Grid item flexGrow={1} style={{ display: "flex", alignItems: "center" }}>
+            <Grid item flexGrow={1} />
+            <Grid item style={{ display: "flex", alignItems: "center" }}>
               <Grid
                 container
                 columnSpacing={2}
@@ -318,28 +251,23 @@ export const NavbarComponent: FC = () => {
                 </Grid>
                 <Grid item>
                   {auth ? (
-                    <Style.Wallet container>
+                    <Style.Wallet container style={{ justifyContent: "start" }}>
                       <Grid
                         item
-                        xs={1}
-                        style={{ display: "flex", justifyContent: "center", marginRight: "5px" }}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          marginRight: "10px",
+                        }}
                       >
                         <img
                           src="https://avatars.githubusercontent.com/u/96990732"
                           alt=""
-                          style={{ width: "40px", borderRadius: "20px" }}
+                          style={{ width: "30px", borderRadius: "50px" }}
                         />
                       </Grid>
-                      <Grid item xs={1} />
-                      <Grid item xs={7}>
-                        <Grid container>
-                          <Grid item xs={12}>
-                            <Style.WalletENS>{name}</Style.WalletENS>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Style.WalletAddy>{shortenAddress(address)}</Style.WalletAddy>
-                          </Grid>
-                        </Grid>
+                      <Grid item>
+                        <Style.WalletENS>{name ?? shortenAddress(address)}</Style.WalletENS>
                       </Grid>
                     </Style.Wallet>
                   ) : (

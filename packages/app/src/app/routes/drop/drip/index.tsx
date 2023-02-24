@@ -18,13 +18,13 @@ import Clickable from "@/_common/components/clickable";
 import Pastille from "@/_common/components/pastille";
 import Tooltip from "@/_common/components/tooltip";
 
-import { useDispatch, useSelector } from "@/dapp/store/hooks";
-import { useGetAssetsQuery, useGetDripQuery } from "@/dapp/store/services";
-import { mint, mintDefault, mutate, resetMintingProcess } from "@/dapp/store/services/web3";
+import { useDispatch, useSelector } from "@/app/store/hooks";
+import { useGetAssetsQuery, useGetDripQuery } from "@/app/store/services";
+import { mint, mintDefault, mutate, resetMintingProcess } from "@/app/store/services/web3";
 import Style from "./style";
 import { useParams } from "react-router-dom";
 import { useSceneStore } from "../_3dScene/hook";
-import { shortenAddress } from "@/dapp/utils";
+import { shortenAddress } from "@/app/utils";
 import { CONFIG } from "@/_common/config";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;

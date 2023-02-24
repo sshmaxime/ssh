@@ -14,16 +14,7 @@ const style = {
     justifyContent: "center",
   })),
   OpenApp: styled("div")(({ theme }) => ({
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: 900,
-    fontSize: "0.9em",
-    letterSpacing: "0.25px",
-    padding: "10px",
-    paddingLeft: "25px",
-    paddingRight: "25px",
-    borderRadius: "15px",
-    color: "black",
-    backgroundColor: theme.backgroundColor.primary,
+    ...theme.button.normal,
   })),
   //
   Root: styled("div")(({ theme }) => ({

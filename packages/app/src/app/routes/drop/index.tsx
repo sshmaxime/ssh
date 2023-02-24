@@ -11,14 +11,13 @@ import NotFound from "../404";
 import Style from "./style";
 import DropComponent from "./drop";
 import DripComponent from "./drip";
-import HomeComponent from "./home";
+import HomeComponent from "../../../static/routes/drop";
 
 const DropRoutes: FC = ({}) => {
   return (
     <>
       <Routes>
         <Route path="/:dropId/*" element={<DropAppRoutesProxy />} />
-        <Route path="*" element={<HomeComponent />} />
       </Routes>
     </>
   );

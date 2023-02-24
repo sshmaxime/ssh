@@ -1,4 +1,4 @@
-import { sdk } from "@/dapp/sdk";
+import { sdk } from "@/app/sdk";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { NFT } from "@premier/typings";
 import { BigNumber, ethers } from "ethers";

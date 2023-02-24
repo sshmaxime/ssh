@@ -12,7 +12,7 @@ import { CameraControls } from "../utils/cameraControls";
 import { useR3fState } from "../utils/hooks";
 import { Loader } from "../utils/loader";
 import { OrbitControls } from "@react-three/drei";
-import { useSceneStore } from "@/dapp/routes/drop/_3dScene/hook";
+import { useSceneStore } from "@/app/routes/drop/_3dScene/hook";
 
 export type sceneRef = ReturnType<typeof sceneFunctions>;
 export type sceneRefType = React.MutableRefObject<sceneRef>;

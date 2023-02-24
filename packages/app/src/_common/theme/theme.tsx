@@ -27,7 +27,7 @@ const themeOpts = {
   ...themeBasics,
 
   header: {
-    height: "100px",
+    height: "60px",
   },
 
   components: {
@@ -97,7 +97,22 @@ const themeOpts = {
   },
 
   button: {
-    cursor: "pointer",
+    normal: {
+      fontFamily: themeBasics.fontFamily.primary,
+      backgroundColor: themeBasics.backgroundColor.primary,
+      fontWeight: 900,
+      fontSize: "0.85em",
+      letterSpacing: "0.25px",
+      height: "35px",
+      minWidth: "150px",
+      borderRadius: "50px",
+      color: "black",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      paddingLeft: "20px",
+      paddingRight: "20px",
+    },
   },
 
   titles: {

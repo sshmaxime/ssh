@@ -14,11 +14,15 @@ const style = {
   HomeScreenContainer: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
     paddingBottom: "25px",
+    minHeight: "100vh",
     boxSizing: "border-box",
-    height: "100vh",
   })),
   HomeScreen: styled("div")(({ theme }) => ({
-    height: "100%",
+    backgroundColor: theme.backgroundColor.primary,
+    padding: "25px",
+    borderRadius: "5px",
+    minHeight: `calc(100vh - ${theme.header.height} - 25px)`,
+    boxSizing: "border-box",
   })),
   RootInner: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
@@ -28,7 +32,6 @@ const style = {
     boxSizing: "border-box",
   })),
   GalleryWrapContainer: styled("div")(({ theme }) => ({
-    height: "calc(100%)",
     width: "100%",
   })),
   GalleryWrap: styled("div")(({ theme }) => ({
@@ -45,7 +48,7 @@ const style = {
         display: "block",
         position: "absolute",
         backgroundImage: $onHover ? `url(${color})` : "",
-        backgroundColor: "black",
+        backgroundColor: "transparent",
         filter: "grayscale(75%)",
         top: 0,
         left: 0,
@@ -60,10 +63,11 @@ const style = {
         borderRadius: "5px",
       },
       position: "relative",
-      flex: $onHover ? 7 : 1,
+      flex: $onHover ? 10 : 1,
       width: "100%",
       backgroundColor: $onHover ? "" : "black",
       transition: "flex 0.8s ease",
+      color: $onHover ? "white" : "white",
       cursor: !disabled ? ($onHover ? "auto" : "pointer") : "auto",
       borderRadius: "5px",
     })
@@ -129,7 +133,7 @@ const style = {
     justifyContent: "center",
     height: "100%",
     borderRadius: "5px",
-    backgroundColor: "black",
+    backgroundColor: "transparent",
     // padding: "15px",
     boxSizing: "border-box",
   })),
@@ -139,7 +143,6 @@ const style = {
     fontSize: "2em",
     writingMode: "vertical-rl",
     transform: "scale(-1)",
-    color: "white",
     letterSpacing: "0.5px",
   })),
   LiveTitle: styled("div")(({ theme }) => ({
@@ -148,7 +151,6 @@ const style = {
     fontSize: "0.9em",
     writingMode: "vertical-rl",
     transform: "scale(-1)",
-    color: "white",
   })),
   ButtonDiscover: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -169,7 +171,7 @@ const style = {
   ItemName: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
     fontWeight: 900,
-    fontSize: "2.5em",
+    fontSize: "2.25em",
     backgroundColor: "red",
     color: "white",
     padding: "10px",
