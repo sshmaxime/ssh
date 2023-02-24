@@ -10,7 +10,18 @@ const itemTitleContainerWidth = "75px";
 const style = {
   Root: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level3,
-    height: `100vh`,
+  })),
+  HomeScreenContainer: styled("div")(({ theme }) => ({
+    paddingTop: theme.header.height,
+    paddingBottom: "25px",
+    boxSizing: "border-box",
+  })),
+  HomeScreen: styled("div")(({ theme }) => ({
+    height: "100%",
+    borderRadius: "5px",
+    padding: "25px",
+    boxSizing: "border-box",
+    backgroundColor: theme.backgroundColor.primary,
   })),
   RootInner: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,

@@ -1,11 +1,6 @@
 import { styled } from "@mui/material/styles";
 
 import { AppBar, Grid, Typography } from "@mui/material";
-import { url } from "inspector";
-import ImgWave from "@/common/assets/images/wave.png";
-
-const footerHeight = "25px";
-const itemTitleContainerWidth = "75px";
 
 const style = {
   // Navbar
@@ -34,7 +29,6 @@ const style = {
   Root: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level3,
   })),
-  RootInner: styled("div")(({ theme }) => ({})),
   HomeScreenContainer: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
     paddingBottom: "25px",
@@ -98,7 +92,6 @@ const style = {
   SubTitle4: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 800,
-    marginLeft: "15px",
     fontSize: "1em",
   })),
   SubTitle5: styled("div")(({ theme }) => ({

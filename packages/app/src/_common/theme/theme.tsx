@@ -8,7 +8,24 @@ declare module "@mui/material/styles" {
 
 type MyTheme = typeof themeOpts;
 
+const themeBasics = {
+  backgroundColor: {
+    primary: "#f9f9fb",
+    secondary: "#f1f1f5",
+    tertiary: "#cbcbdc",
+    darker: "#8B8BAD",
+  },
+
+  fontFamily: {
+    primary: "montserrat",
+    secondary: "sourcecode",
+    tertiary: "futura",
+  },
+};
+
 const themeOpts = {
+  ...themeBasics,
+
   header: {
     height: "100px",
   },
@@ -32,19 +49,6 @@ const themeOpts = {
     },
   },
 
-  backgroundColor: {
-    primary: "#f9f9fb",
-    secondary: "#f1f1f5",
-    tertiary: "#cbcbdc",
-    darker: "#8B8BAD",
-  },
-
-  fontFamily: {
-    primary: "montserrat",
-    secondary: "sourcecode",
-    tertiary: "futura",
-  },
-
   cards: {
     primary: {
       boxShadow: "5px 5px 5px #bebebe, -1px -1px 1px #fff",
@@ -60,25 +64,54 @@ const themeOpts = {
     },
   },
 
+  myTypography: {
+    huge: {
+      fontFamily: themeBasics.fontFamily.tertiary,
+      fontWeight: 800,
+      fontSize: "14em",
+      lineHeight: "0.9em",
+    },
+    big: {
+      fontFamily: themeBasics.fontFamily.tertiary,
+      fontWeight: 800,
+      fontSize: "8.5em",
+      lineHeight: "0.9em",
+    },
+    normalBig: {
+      fontFamily: themeBasics.fontFamily.tertiary,
+      fontWeight: 800,
+      fontSize: "3.1em",
+    },
+    normalBold: {
+      fontFamily: themeBasics.fontFamily.tertiary,
+      fontWeight: 800,
+      fontSize: "1.1em",
+      lineHeight: "0.9em",
+    },
+    normal: {
+      fontFamily: themeBasics.fontFamily.tertiary,
+      fontWeight: 500,
+      fontSize: "1.1em",
+    },
+  },
+
   button: {
     cursor: "pointer",
   },
 
-  titles: (themeObj: Theme) => {
-    return {
-      primary: {
-        fontFamily: themeObj.fontFamily.secondary,
-        fontSize: "17.5px",
-        fontWeight: 700,
-        letterSpacing: "-1.15px",
-      },
-      secondary: {
-        fontFamily: themeObj.fontFamily.secondary,
-        fontSize: "12.5px",
-        letterSpacing: "-0.5px",
-        fontWeight: 600,
-      },
-    };
+  titles: {
+    primary: {
+      fontFamily: themeBasics.fontFamily.secondary,
+      fontSize: "17.5px",
+      fontWeight: 700,
+      letterSpacing: "-1.15px",
+    },
+    secondary: {
+      fontFamily: themeBasics.fontFamily.secondary,
+      fontSize: "12.5px",
+      letterSpacing: "-0.5px",
+      fontWeight: 600,
+    },
   },
 
   myBreakpoints: (themeObj: Theme) => {

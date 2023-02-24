@@ -17,7 +17,7 @@ const style = {
     justifyContent: "center",
   })),
   Link: styled(Link)(({ theme }) => ({
-    ...theme.titles(theme).primary,
+    ...theme.titles.primary,
   })),
   ExtraMenuButton: styled("div")(({ theme }) => ({
     padding: "7px 20px 7px 20px",

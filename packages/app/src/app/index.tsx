@@ -16,6 +16,7 @@ import SceneLoader, { sceneRef } from "@/_common/3d/scenes/skate_0";
 
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { ListMockTokens } from "@premier/typings";
+import Typos from "@/_common/components/typography";
 
 const DemoItemList: {
   collectionName: string;
@@ -90,26 +91,26 @@ const HomeComponent: FC = ({}) => {
                 justifyContent="space-between"
               >
                 <Grid item>
-                  <Style.Title>WEB3 STUDIO.</Style.Title>
-                  <Style.SubTitle>
+                  <Typos.Huge>WEB3 STUDIO.</Typos.Huge>
+                  <Typos.NormalBig>
                     DIGITAL&nbsp;&nbsp;&nbsp;&nbsp;UTILITY&nbsp;&nbsp;&nbsp;&nbsp;TECHNOLOGY
-                  </Style.SubTitle>
+                  </Typos.NormalBig>
                 </Grid>
 
                 <Grid item>
                   <Grid container justifyContent="space-between">
                     <Grid item>
-                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
-                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
-                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
-                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
-                      <Style.SubTitle5>PREMIER</Style.SubTitle5>
+                      <Typos.NormalBold>PREMIER</Typos.NormalBold>
+                      <Typos.NormalBold>PREMIER</Typos.NormalBold>
+                      <Typos.NormalBold>PREMIER</Typos.NormalBold>
+                      <Typos.NormalBold>PREMIER</Typos.NormalBold>
+                      <Typos.NormalBold>PREMIER</Typos.NormalBold>
                     </Grid>
                     <Grid item style={{ display: "flex", alignItems: "end" }}>
-                      <Style.SubTitle5>STUDIO</Style.SubTitle5>
+                      <Typos.NormalBold>STUDIO</Typos.NormalBold>
                     </Grid>
                     <Grid item style={{ display: "flex", alignItems: "end" }}>
-                      <Style.SubTitle5>2023</Style.SubTitle5>
+                      <Typos.NormalBold>2023</Typos.NormalBold>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -130,13 +131,13 @@ const HomeComponent: FC = ({}) => {
                     <Grid item>
                       <Style.SubTitle6>Our First Project</Style.SubTitle6>
                       <div style={{ height: "10px" }} />
-                      <Style.SubTitle2>
+                      <Typos.NormalBig>
                         Get
                         <br />
                         Your {"[NFTs]"}
                         <br />
                         On The Wall !
-                      </Style.SubTitle2>
+                      </Typos.NormalBig>
                     </Grid>
 
                     <Grid item>
@@ -196,10 +197,10 @@ const HomeComponent: FC = ({}) => {
                       </Style.ContainerExempleDrip>
                     </Grid>
                     <Grid item>
-                      <Style.SubTitle3>DROP</Style.SubTitle3>
+                      <Typos.Big>DROP</Typos.Big>
                       <div style={{ height: "15px" }} />
 
-                      <Style.SubTitleText>
+                      <Typos.Normal style={{ marginLeft: "15px", marginRight: "50px" }}>
                         Your NFTs are cool but you would like to showcase them in your house, right
                         ? Yeah, we feel the same way ...
                         <div style={{ height: "1vh" }} />
@@ -207,11 +208,11 @@ const HomeComponent: FC = ({}) => {
                         assets out of your NFTs.
                         <div style={{ height: "1vh" }} />
                         Bring them to life.
-                      </Style.SubTitleText>
+                      </Typos.Normal>
 
                       <div style={{ height: "20px" }} />
 
-                      <div style={{ display: "inline-block" }}>
+                      <div style={{ display: "inline-block", marginLeft: "15px" }}>
                         <Clickable address="/app/drop">
                           <Grid
                             container
@@ -219,8 +220,9 @@ const HomeComponent: FC = ({}) => {
                             style={{
                               backgroundColor: "black",
                               color: "white",
-                              marginLeft: "15px",
                               padding: "1px",
+                              paddingLeft: "20px",
+                              paddingRight: "20px",
                               borderRadius: "5px",
                             }}
                           >

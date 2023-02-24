@@ -47,81 +47,78 @@ const HomeComponent: FC = ({}) => {
 
   return (
     <Style.Root>
-      <Style.RootInner>
-        <CenterItem style={{ height: "100%" }}>
-          <Style.GalleryWrapContainer>
-            <Style.GalleryWrap>
-              {abc.map((item, index) => (
-                <Style.GalleryItem
-                  key={index}
-                  disabled={item.disabled}
-                  onMouseEnter={() => !item.disabled && setHover(index)}
-                  onMouseLeave={() => {}}
-                  onClick={() => {}}
-                  $onHover={hover === index}
-                  color={item.texture}
-                  style={{
-                    borderRadius: "5px",
-                  }}
-                >
-                  <Style.GalleryItemContainer>
-                    <Grid
-                      container
-                      direction="column-reverse"
-                      alignItems="space-between"
-                      alignContent="center"
-                      rowSpacing={2}
-                      style={{ height: "100%" }}
-                    >
-                      <Grid item xs={1}>
-                        <CenterItem style={{ height: "100%" }}>
-                          <div style={{ width: "2px", height: "100%", backgroundColor: "white" }}>
-                            &nbsp;
-                          </div>
-                        </CenterItem>
-                      </Grid>
-                      <Grid item>
-                        <Style.GalleryItemTitle>{item.name}</Style.GalleryItemTitle>
-                      </Grid>
-
-                      <Grid item flexGrow={1}>
-                        <CenterItem style={{ height: "100%" }}>
-                          <div style={{ width: "2px", height: "100%", backgroundColor: "white" }}>
-                            &nbsp;
-                          </div>
-                        </CenterItem>
-                      </Grid>
-                      <Grid item style={{ color: "white" }}>
-                        <CenterItem>
-                          <Style.LiveTitle>{item.disabled ? "TBA" : "LIVE"}</Style.LiveTitle>
-                        </CenterItem>
-                      </Grid>
-                    </Grid>
-                  </Style.GalleryItemContainer>
-
-                  {/* {hover === index && ( */}
-                  <Style.ContainerExplore isVisible={hover === index}>
-                    <Style.ItemName>{item.description}</Style.ItemName>
-                    <Clickable address={`/app/drop/0`} hoverAnimation={false}>
-                      {!item.disabled && (
-                        <Style.ButtonDiscover>
-                          <Grid container justifyContent="space-between">
-                            <Grid item>EXPLORE</Grid>
-                          </Grid>
-                        </Style.ButtonDiscover>
-                      )}
-                    </Clickable>
-                  </Style.ContainerExplore>
-
-                  {/* )} */}
-                </Style.GalleryItem>
-              ))}
-            </Style.GalleryWrap>
-          </Style.GalleryWrapContainer>
-        </CenterItem>
-      </Style.RootInner>
+      <Style.HomeScreenContainer>
+        <Style.HomeScreen></Style.HomeScreen>
+      </Style.HomeScreenContainer>
     </Style.Root>
   );
 };
 
+// <Style.GalleryWrap>
+//             {abc.map((item, index) => (
+//               <Style.GalleryItem
+//                 key={index}
+//                 disabled={item.disabled}
+//                 onMouseEnter={() => !item.disabled && setHover(index)}
+//                 onMouseLeave={() => {}}
+//                 onClick={() => {}}
+//                 $onHover={hover === index}
+//                 color={item.texture}
+//                 style={{
+//                   borderRadius: "5px",
+//                 }}
+//               >
+//                 <Style.GalleryItemContainer>
+//                   <Grid
+//                     container
+//                     direction="column-reverse"
+//                     alignItems="space-between"
+//                     alignContent="center"
+//                     rowSpacing={2}
+//                     style={{ height: "100%" }}
+//                   >
+//                     <Grid item xs={1}>
+//                       <CenterItem style={{ height: "100%" }}>
+//                         <div style={{ width: "2px", height: "100%", backgroundColor: "white" }}>
+//                           &nbsp;
+//                         </div>
+//                       </CenterItem>
+//                     </Grid>
+//                     <Grid item>
+//                       <Style.GalleryItemTitle>{item.name}</Style.GalleryItemTitle>
+//                     </Grid>
+
+//                     <Grid item flexGrow={1}>
+//                       <CenterItem style={{ height: "100%" }}>
+//                         <div style={{ width: "2px", height: "100%", backgroundColor: "white" }}>
+//                           &nbsp;
+//                         </div>
+//                       </CenterItem>
+//                     </Grid>
+//                     <Grid item style={{ color: "white" }}>
+//                       <CenterItem>
+//                         <Style.LiveTitle>{item.disabled ? "TBA" : "LIVE"}</Style.LiveTitle>
+//                       </CenterItem>
+//                     </Grid>
+//                   </Grid>
+//                 </Style.GalleryItemContainer>
+
+//                 {/* {hover === index && ( */}
+//                 <Style.ContainerExplore isVisible={hover === index}>
+//                   <Style.ItemName>{item.description}</Style.ItemName>
+//                   <Clickable address={`/app/drop/0`} hoverAnimation={false}>
+//                     {!item.disabled && (
+//                       <Style.ButtonDiscover>
+//                         <Grid container justifyContent="space-between">
+//                           <Grid item>EXPLORE</Grid>
+//                         </Grid>
+//                       </Style.ButtonDiscover>
+//                     )}
+//                   </Clickable>
+//                 </Style.ContainerExplore>
+
+//                 {/* )} */}
+//               </Style.GalleryItem>
+//             ))}
+//           </Style.GalleryWrap>
 export default HomeComponent;
