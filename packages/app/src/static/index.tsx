@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { Navbar } from "@/static/components/navbar";
 import { Footer } from "@/static/components/footer";
 
-import Home from "@/static/routes/_";
+import Home from "@/static/routes/index";
 import Drop from "@/static/routes/drop";
 
 const App: FC = ({ children }) => {

@@ -333,13 +333,13 @@ body,
   50%,
   80%,
   100% {
-    transform: translateY(0) rotate(90deg);
+    transform: translateY(0);
   }
   40% {
-    transform: translateY(-10px) rotate(90deg);
+    transform: translateY(-10px);
   }
   60% {
-    transform: translateY(-7.5px) rotate(90deg);
+    transform: translateY(-7.5px);
   }
 }
 

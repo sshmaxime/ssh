@@ -19,6 +19,15 @@ const style = {
   Link: styled(Link)(({ theme }) => ({
     ...theme.titles.primary,
   })),
+  PointOpenWallet: styled("div")(({ theme }) => ({
+    // ...theme.myBreakpoints(theme).level3,
+    position: "absolute",
+    right: "1.5vw",
+    top: theme.header.height,
+    backgroundColor: "red",
+    width: "-2.5px",
+    height: "-2.5px",
+  })),
   ExtraMenuButton: styled("div")(({ theme }) => ({
     padding: "7px 20px 7px 20px",
     fontFamily: theme.fontFamily.primary,

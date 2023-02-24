@@ -1,10 +1,13 @@
 import { createTheme, Theme } from "@mui/material";
+import { createBreakpoints } from "@mui/system";
 
 declare module "@mui/material/styles" {
   interface Theme extends MyTheme {}
   // allow configuration using `createTheme`
   interface ThemeOptions extends MyTheme {}
 }
+
+const breakpoints = createBreakpoints({});
 
 type MyTheme = typeof themeOpts;
 
@@ -27,7 +30,7 @@ const themeOpts = {
   ...themeBasics,
 
   header: {
-    height: "60px",
+    height: "65px",
   },
 
   components: {
@@ -70,17 +73,26 @@ const themeOpts = {
       fontWeight: 800,
       fontSize: "14em",
       lineHeight: "0.9em",
+      [breakpoints.down("xl")]: {
+        fontSize: "11em",
+      },
     },
     big: {
       fontFamily: themeBasics.fontFamily.tertiary,
       fontWeight: 800,
       fontSize: "8.5em",
       lineHeight: "0.9em",
+      [breakpoints.down("xl")]: {
+        fontSize: "6em",
+      },
     },
     normalBig: {
       fontFamily: themeBasics.fontFamily.tertiary,
       fontWeight: 800,
       fontSize: "3.1em",
+      [breakpoints.down("xl")]: {
+        fontSize: "2.25em",
+      },
     },
     normalBold: {
       fontFamily: themeBasics.fontFamily.tertiary,
@@ -187,16 +199,12 @@ const themeOpts = {
         },
       },
       level3: {
-        [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "1.5vw",
-          paddingRight: "1.5vw",
-        },
+        paddingLeft: "1.5vw",
+        paddingRight: "1.5vw",
       },
       level4: {
-        [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "30vw",
-          paddingRight: "30vw",
-        },
+        paddingLeft: "calc(1.5vw + 25px)",
+        paddingRight: "calc(1.5vw + 25px)",
       },
     };
   },

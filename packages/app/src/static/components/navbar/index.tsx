@@ -1,22 +1,10 @@
-import React, { FC, useEffect } from "react";
+import LogoIcon from "@/common/assets/images/logo-typo.svg";
+import Clickable from "@/_common/components/clickable";
+import { Grid, Toolbar } from "@mui/material";
 
-import { Toolbar, Grid } from "@mui/material";
-
-import CenterItem from "@/_common/components/grid/centerItem";
+import { FC } from "react";
 
 import Style from "./style";
-import Clickable from "@/_common/components/clickable";
-import LogoIcon from "@/common/assets/images/logo-typo.svg";
-import LogoTypo from "@/common/assets/images/logo-typo.svg";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import DiscordIcon from "@/common/assets/icons/discord.svg";
-
-import { CREDENTIALS } from "@/_common/constants";
-import SceneLoader, { sceneRef } from "@/_common/3d/scenes/skate_0";
-
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import { ListMockTokens } from "@premier/typings";
-import Typos from "@/_common/components/typography";
 
 export const Navbar: FC = ({}) => {
   return (
@@ -35,7 +23,7 @@ export const Navbar: FC = ({}) => {
           <Grid item style={{ display: "flex", alignItems: "center" }}>
             <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
               <Grid item>
-                <Clickable address="/app/drop">
+                <Clickable address="/app">
                   <Style.OpenApp>OPEN APP</Style.OpenApp>
                 </Clickable>
               </Grid>

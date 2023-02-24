@@ -31,16 +31,9 @@ export const Footer: FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={5} style={{ marginTop: "15px" }}>
+        <Grid item xs={6}>
           <Grid container>
-            <Grid item xs={4}>
-              <Style.ContentCategory>
-                <ul>
-                  <li>About us</li>
-                </ul>
-              </Style.ContentCategory>
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <Style.ContentCategory>
                 <ul>
                   <li>FAQ</li>
@@ -49,7 +42,7 @@ export const Footer: FC = () => {
                 </ul>
               </Style.ContentCategory>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <Style.ContentCategory>
                 <ul>
                   <li>Returns {"&"} Refunds</li>
@@ -60,7 +53,7 @@ export const Footer: FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Grid container spacing={1} flexDirection="row-reverse" alignContent="center">

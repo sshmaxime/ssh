@@ -16,18 +16,11 @@ import { shortenAddress } from "../utils";
 import { useGetDripsQuery } from "../store/services";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
-import LogoIcon from "@/common/assets/images/logo-typo.svg";
+import LogoTypo from "@/common/assets/images/logo-typo.svg";
+import LogoIcon from "@/common/assets/images/logo-icon.svg";
 import { DripStatus } from "@premier/typings";
 import CenterItem from "@/_common/components/grid/centerItem";
 import { useLocation } from "react-router-dom";
-
-const NavBarButton: FC<{ text: string; to: string }> = ({ text, to }) => {
-  return (
-    <Clickable hoverAnimation={false} address={to}>
-      <Style.LinkBarText>{text}</Style.LinkBarText>
-    </Clickable>
-  );
-};
 
 export const NavbarComponent: FC = () => {
   const { auth, authError, address, name } = useSelector((state) => state.web3);
@@ -45,21 +38,10 @@ export const NavbarComponent: FC = () => {
   const open = Boolean(anchorEl);
 
   const f = useRef();
-  const [dropId, setDropId] = useState<number | undefined>(undefined);
 
   return (
     <Style.Root>
-      <div
-        style={{
-          position: "absolute",
-          right: "1.5vw",
-          top: "100px",
-          backgroundColor: "red",
-          width: "-2.5px",
-          height: "-2.5px",
-        }}
-        ref={f as any}
-      ></div>
+      <Style.PointOpenWallet ref={f as any} />
       <Style.AppBar position="absolute">
         <Toolbar style={{ padding: "0px" }}>
           <Grid container columnSpacing={0} rowSpacing={0}>
@@ -67,7 +49,7 @@ export const NavbarComponent: FC = () => {
               <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
                 <Grid item>
                   <Clickable address="/">
-                    <img alt="" src={LogoIcon} style={{ width: "200px" }} />
+                    <img alt="" src={LogoTypo} style={{ width: "200px" }} />
                   </Clickable>
                 </Grid>
               </Grid>
@@ -102,10 +84,6 @@ export const NavbarComponent: FC = () => {
                       horizontal: "right",
                     }}
                     disableRestoreFocus
-                    style={{
-                      zIndex: 2000,
-                      boxShadow: "2.5px 2.5px 5px #afafb4, -2.5px -2.5px 5px #ffffff",
-                    }}
                     elevation={10}
                   >
                     <ClickAwayListener onClickAway={handlePopoverClose}>
@@ -261,9 +239,9 @@ export const NavbarComponent: FC = () => {
                         }}
                       >
                         <img
-                          src="https://avatars.githubusercontent.com/u/96990732"
+                          src="https://cdn-icons-png.flaticon.com/512/17/17004.png"
                           alt=""
-                          style={{ width: "30px", borderRadius: "50px" }}
+                          style={{ width: "25px", height: "25px", borderRadius: "1500px" }}
                         />
                       </Grid>
                       <Grid item>

@@ -3,37 +3,29 @@ import { styled } from "@mui/material/styles";
 import { AppBar, Grid, Typography } from "@mui/material";
 
 const style = {
-  // Navbar
-  AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
-    height: theme.header.height,
-    padding: 0,
-    backgroundColor: "transparent",
-    boxShadow: "none",
-    display: "flex",
-    justifyContent: "center",
-  })),
-  OpenApp: styled("div")(({ theme }) => ({
-    ...theme.button.normal,
-  })),
-  //
   Root: styled("div")(({ theme }) => ({
     ...theme.myBreakpoints(theme).level3,
   })),
   HomeScreenContainer: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
     paddingBottom: "25px",
-    height: `100vh`,
-    width: `100%`,
     boxSizing: "border-box",
   })),
-  HomeScreen: styled("div")(({ theme }) => ({
-    height: `100%`,
-    width: `100%`,
+  HomeScreen: styled("div")(({ theme }) => ({})),
+  GridWholeHeight: styled(Grid)(({ theme }) => ({
     borderRadius: "5px",
-    padding: "25px",
-    boxSizing: "border-box",
     backgroundColor: theme.backgroundColor.primary,
+    boxSizing: "border-box",
+    height: `calc(100vh - ${theme.header.height} - 25px)`,
+    padding: "25px",
+  })),
+  Grid0: styled(Grid)(({ theme }) => ({
+    marginTop: "25px",
+    borderRadius: "5px",
+    backgroundColor: theme.backgroundColor.primary,
+    boxSizing: "border-box",
+    // minHeight: `calc(100vh - ${theme.header.height} - 25px)`,
+    padding: "25px",
   })),
 
   ScreenContainer: styled("div")(({ theme }) => ({
