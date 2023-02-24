@@ -129,7 +129,7 @@ const HomeComponent: FC = ({}) => {
                     justifyContent="space-between"
                   >
                     <Grid item>
-                      <Style.SubTitle6>Our First Project</Style.SubTitle6>
+                      <Style.SubTitle6>Our First Ever Project</Style.SubTitle6>
                       <div style={{ height: "10px" }} />
                       <Typos.NormalBig>
                         Get
@@ -201,13 +201,13 @@ const HomeComponent: FC = ({}) => {
                       <div style={{ height: "15px" }} />
 
                       <Typos.Normal style={{ marginLeft: "15px", marginRight: "50px" }}>
-                        Your NFTs are cool but you would like to showcase them in your house, right
-                        ? Yeah, we feel the same way ...
+                        Your <b>NFTs</b> are cool but you would like to <b>showcase them</b> in your
+                        house, right ? Yeah, <b>we feel the same way ...</b>
                         <div style={{ height: "1vh" }} />
-                        Our very exclusive and limited Drops let you create high value real life
-                        assets out of your NFTs.
+                        Our very <b>exclusive</b> and <b>limited</b> drops let you create
+                        <b> real life assets</b> out of your NFTs.
                         <div style={{ height: "1vh" }} />
-                        Bring them to life.
+                        Bring them to <b>life</b>.
                       </Typos.Normal>
 
                       <div style={{ height: "20px" }} />

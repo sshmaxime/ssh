@@ -15,13 +15,10 @@ const style = {
     paddingTop: theme.header.height,
     paddingBottom: "25px",
     boxSizing: "border-box",
+    height: "100vh",
   })),
   HomeScreen: styled("div")(({ theme }) => ({
     height: "100%",
-    borderRadius: "5px",
-    padding: "25px",
-    boxSizing: "border-box",
-    backgroundColor: theme.backgroundColor.primary,
   })),
   RootInner: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
@@ -71,6 +68,55 @@ const style = {
       borderRadius: "5px",
     })
   ),
+  ContainerExempleDrip: styled("div")(({ theme }) => ({
+    backgroundColor: "white",
+    padding: "15px",
+    borderRadius: "5px",
+    boxShadow: `2.5px 2.5px 2.5px ${theme.backgroundColor.secondary}, -.1px -.1px 1.5px ${theme.backgroundColor.secondary}`,
+  })),
+  ContainerExempleDripContainer: styled("div")(({ theme }) => ({
+    backgroundColor: "white",
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    borderRadius: "5px",
+  })),
+  SubTitle6: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 800,
+    // color: "white",
+    backgroundColor: theme.backgroundColor.secondary,
+    fontSize: "0.95em",
+    // display: "inline-block",
+    float: "right",
+    // textAlign: "right",
+    padding: "5px",
+    borderRadius: "5px",
+  })),
+  SubTitle4: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.tertiary,
+    fontWeight: 800,
+    fontSize: "1em",
+  })),
+  ContainerContract: styled("div")(({ theme }) => ({
+    // backgroundColor: theme.backgroundColor.primary,
+    // padding: "10px",
+    borderRadius: "5px",
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 800,
+    fontSize: "0.7em",
+  })),
+  ContainerInfoDiv: styled("div")(({ theme }) => ({
+    padding: "10px",
+    backgroundColor: theme.backgroundColor.primary,
+    borderRadius: "5px",
+  })),
+  InfoDivItemName: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 900,
+    fontSize: "0.8em",
+    letterSpacing: "1.25px",
+    marginBottom: "7.5px",
+  })),
   GalleryItemContainer: styled("div")(({ theme }) => ({
     position: "absolute",
     top: 0,
@@ -112,6 +158,8 @@ const style = {
     color: "black",
     padding: "10px",
     transition: "all .2s ease-in-out",
+    borderBottomRightRadius: "5px",
+    borderBottomLeftRadius: "5px",
     ":hover": {
       cursor: "pointer",
       backgroundColor: "black",
@@ -125,6 +173,8 @@ const style = {
     backgroundColor: "red",
     color: "white",
     padding: "10px",
+    borderTopRightRadius: "5px",
+    borderTopLeftRadius: "5px",
   })),
   ContainerExplore: styled("div")<{ isVisible: boolean }>(({ theme, isVisible }) => ({
     position: "absolute",

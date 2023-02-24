@@ -177,7 +177,7 @@ const style = {
   })),
   LinkBarText: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,
-    fontSize: "0.8em",
+    fontSize: "0.9em",
     fontWeight: 700,
     // padding: "2.5px",
     // paddingTop: "2.5px",

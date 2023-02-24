@@ -89,9 +89,10 @@ const themeOpts = {
       lineHeight: "0.9em",
     },
     normal: {
-      fontFamily: themeBasics.fontFamily.tertiary,
+      fontFamily: themeBasics.fontFamily.primary,
       fontWeight: 500,
-      fontSize: "1.1em",
+      fontSize: "0.95em",
+      lineHeight: "1.1em",
     },
   },
 
