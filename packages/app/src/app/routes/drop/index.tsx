@@ -11,7 +11,7 @@ import NotFound from "../404";
 import Style from "./style";
 import DropComponent from "./drop";
 import DripComponent from "./drip";
-import HomeComponent from "../../../static/routes/drop";
+import HomeComponent from "../../../static/routes/projects/drop";
 
 const DropRoutes: FC = ({}) => {
   return (

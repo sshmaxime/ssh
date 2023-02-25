@@ -247,7 +247,25 @@ body,
 @font-face {
   font-family: montserrat;
   src: url(./_common/assets/fonts/Montserrat-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: montserrat;
+  src: url(./_common/assets/fonts/Montserrat-Medium.ttf);
   font-weight: 500;
+}
+
+@font-face {
+  font-family: montserrat;
+  src: url(./_common/assets/fonts/Montserrat-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: montserrat;
+  src: url(./_common/assets/fonts/Montserrat-Bold.ttf);
+  font-weight: 700;
 }
 
 @font-face {

@@ -22,4 +22,8 @@ const Normal: FC<JSX.IntrinsicElements["div"]> = ({ children, style }) => {
   return <Style.Normal style={style}>{children}</Style.Normal>;
 };
 
-export default { Huge, Big, NormalBig, NormalBold, Normal };
+const NormalTitle: FC<JSX.IntrinsicElements["div"]> = ({ children, style }) => {
+  return <Style.NormalTitle style={style}>{children}</Style.NormalTitle>;
+};
+
+export default { Huge, Big, NormalBig, NormalBold, Normal, NormalTitle };

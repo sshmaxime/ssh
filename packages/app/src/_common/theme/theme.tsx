@@ -91,7 +91,7 @@ const themeOpts = {
       fontWeight: 800,
       fontSize: "3.1em",
       [breakpoints.down("xl")]: {
-        fontSize: "2.25em",
+        fontSize: "2.5em",
       },
     },
     normalBold: {
@@ -99,6 +99,11 @@ const themeOpts = {
       fontWeight: 800,
       fontSize: "1.1em",
       lineHeight: "0.9em",
+    },
+    normalTitle: {
+      fontFamily: themeBasics.fontFamily.primary,
+      fontWeight: 600,
+      fontSize: "0.9em",
     },
     normal: {
       fontFamily: themeBasics.fontFamily.primary,
@@ -203,6 +208,8 @@ const themeOpts = {
         paddingRight: "1.5vw",
       },
       level4: {
+        marginRight: "calc(1.5vw)",
+        marginLeft: "calc(1.5vw)",
         paddingLeft: "calc(1.5vw + 25px)",
         paddingRight: "calc(1.5vw + 25px)",
       },

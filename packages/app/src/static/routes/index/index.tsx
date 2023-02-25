@@ -87,18 +87,18 @@ const HomeComponent: FC = ({}) => {
               justifyContent="space-between"
             >
               <Grid item flexGrow={1}>
-                <CenterItem $full>
-                  <Typos.Big style={{ textAlign: "center" }}>
-                    WEB3
-                    <br />
-                    STUDIO
-                  </Typos.Big>
+                <CenterItem $full alignContent="normal">
+                  <Grid container>
+                    <Grid item xs={12}>
+                      <Typos.Big style={{ textAlign: "center" }}>
+                        WEB3
+                        <br />
+                        STUDIO
+                      </Typos.Big>
+                    </Grid>
+                  </Grid>
                 </CenterItem>
               </Grid>
-              {/* 
-              <Typos.NormalBig>
-                DIGITAL&nbsp;&nbsp;&nbsp;&nbsp;UTILITY&nbsp;&nbsp;&nbsp;&nbsp;TECHNOLOGY
-              </Typos.NormalBig> */}
 
               <Grid item>
                 <Grid container justifyContent="space-between">
@@ -129,11 +129,11 @@ const HomeComponent: FC = ({}) => {
           <Style.Grid0 item xs={12}>
             <CenterItem>
               <Typos.NormalBig>
-                We are all about creating a world that is not only technologically advanced, but
-                also socially conscious. We are firm believers that by integrating cutting-edge
-                technology with the world's resources, we can not only improve the lives of
-                individuals but also contribute to the greater good. We are committed to working
-                tirelessly to ensure that we leave a positive impact on the world.
+                We are creating a world that is not only technologically advanced, but also socially
+                conscious. We are firm believers that by integrating cutting-edge technology with
+                the world's resources, we can not only improve the lives of individuals but also
+                contribute to the greater good. We are committed to working tirelessly to ensure
+                that we leave a positive impact on the world.
               </Typos.NormalBig>
             </CenterItem>
           </Style.Grid0>

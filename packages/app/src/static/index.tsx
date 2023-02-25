@@ -6,7 +6,7 @@ import { Navbar } from "@/static/components/navbar";
 import { Footer } from "@/static/components/footer";
 
 import Home from "@/static/routes/index";
-import Drop from "@/static/routes/drop";
+import Projects from "@/static/routes/projects";
 
 const App: FC = ({ children }) => {
   return (
@@ -14,7 +14,7 @@ const App: FC = ({ children }) => {
       <Navbar />
 
       <Routes>
-        <Route path="/drop" element={<Drop />} />
+        <Route path="/projects/*" element={<Projects />} />
         <Route path="/" element={<Home />} />
       </Routes>
 

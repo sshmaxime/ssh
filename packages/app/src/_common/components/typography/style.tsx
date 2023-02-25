@@ -16,6 +16,9 @@ const style = {
   Normal: styled("div")(({ theme }) => ({
     ...theme.myTypography.normal,
   })),
+  NormalTitle: styled("div")(({ theme }) => ({
+    ...theme.myTypography.normalTitle,
+  })),
 };
 
 export default style;

@@ -11,6 +11,7 @@ const style = {
     boxShadow: "none",
     display: "flex",
     justifyContent: "center",
+    color: "black",
   })),
   OpenApp: styled("div")(({ theme }) => ({
     ...theme.button.normal,
