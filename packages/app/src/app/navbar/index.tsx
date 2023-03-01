@@ -49,7 +49,7 @@ export const NavbarComponent: FC = () => {
               <Grid container columnSpacing={0} rowSpacing={0} alignItems="center">
                 <Grid item>
                   <Clickable address="/">
-                    <img alt="" src={LogoTypo} style={{ width: "200px" }} />
+                    <img alt="" src={LogoTypo} style={{ width: "150px" }} />
                   </Clickable>
                 </Grid>
               </Grid>

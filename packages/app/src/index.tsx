@@ -14,11 +14,11 @@ import Static from "./static";
 import App from "./app";
 
 const Index: FC = () => {
-  if (window.innerWidth < 1000) {
-    return (
-      <>This website isn't yet fully working on mobile. Please come back on your computer :)</>
-    );
-  }
+  // if (window.innerWidth < 1000) {
+  //   return (
+  //     <>This website isn't yet fully working on mobile. Please come back on your computer :)</>
+  //   );
+  // }
 
   return (
     <BrowserRouter>

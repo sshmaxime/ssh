@@ -6,7 +6,7 @@ const footerHeight = "25px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
+    ...theme.myBreakpoints.static,
   })),
   HomeScreenContainer: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
@@ -21,7 +21,7 @@ const style = {
     borderRadius: "5px",
     padding: "25px",
     boxSizing: "border-box",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
   })),
   Title: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.tertiary,

@@ -11,7 +11,6 @@ import { useDispatch } from "./store/hooks";
 import { Route, Routes } from "react-router-dom";
 
 import DropRoutes from "./routes/drop";
-import DocsComponent from "./routes/docs";
 import HomeComponent from "./routes/home";
 
 const AppWrapper: FC = ({ children }) => {
@@ -36,7 +35,6 @@ const App: FC = ({ children }) => {
 
       <Routes>
         <Route path="/drop/*" element={<DropRoutes />} />
-        <Route path="/docs" element={<DocsComponent />} />
         <Route path="/" element={<HomeComponent />} />
       </Routes>
     </>

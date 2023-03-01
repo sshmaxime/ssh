@@ -7,9 +7,8 @@ import { Link } from "react-router-dom";
 const style = {
   Root: styled("div")(({ theme }) => ({})),
   AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
+    ...theme.myBreakpoints.app,
 
-    padding: 0,
     backgroundColor: "transparent",
     boxShadow: "none",
     height: theme.header.height,
@@ -20,7 +19,7 @@ const style = {
     ...theme.titles.primary,
   })),
   PointOpenWallet: styled("div")(({ theme }) => ({
-    // ...theme.myBreakpoints(theme).level3,
+    // ...theme.myBreakpoints.level3,
     position: "absolute",
     right: "1.5vw",
     top: theme.header.height,
@@ -86,7 +85,7 @@ const style = {
     paddingLeft: "10px",
     paddingRight: "10px",
     color: "grey",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     borderRadius: "5px",
   })),
   WalletTypoCollectionDrop: styled(Typography)(({ theme }) => ({
@@ -113,7 +112,7 @@ const style = {
     fontWeight: 600,
     color: "black",
     borderRadius: "5px",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     width: "25px",
     textAlign: "center",
     //
@@ -128,7 +127,7 @@ const style = {
     paddingRight: "10px",
     color: "black",
     borderRadius: "5px",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
   })),
   WalletTypoDripAction: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

@@ -31,7 +31,7 @@ const style = {
       borderRadius: "50%",
       backgroundColor: bgcolor,
       opacity: $selected ? "100%" : "75%",
-      border: `2px solid ${$selected ? "black" : theme.backgroundColor.tertiary}`,
+      border: `2px solid ${$selected ? "black" : theme.colors.tertiary}`,
       transition: "all 0.5s",
     })
   ),
@@ -70,7 +70,7 @@ const style = {
     paddingLeft: "6px",
     paddingRight: "6px",
     color: "grey",
-    backgroundColor: theme.backgroundColor.tertiary,
+    backgroundColor: theme.colors.tertiary,
     opacity: "50%",
   })),
 
@@ -111,7 +111,7 @@ const style = {
     position: "absolute",
     height: footerHeight,
     bottom: 0,
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     width: "100%",
     display: "flex",
     alignItems: "center",
@@ -129,7 +129,7 @@ const style = {
     zIndex: 1,
   })),
   LeftSideRightSideInner: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: "5px",
     color: "black",
     padding: "7.5px",
@@ -138,7 +138,7 @@ const style = {
     fontWeight: 700,
     fontSize: "0.6em",
     letterSpacing: "0.95px",
-    boxShadow: `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `1.5px 1.5px 0px ${theme.colors.tertiary}`,
   })),
   Explanation: styled("div")(({ theme }) => ({
     height: "20px",
@@ -171,7 +171,7 @@ const style = {
   HeaderLeftSide: styled(Grid)(({ theme }) => ({
     borderRadius: "5px",
     padding: "10px",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     marginBottom: "5px",
   })),
   GalleryWrap: styled("div")(({ theme }) => ({
@@ -202,10 +202,10 @@ const style = {
     marginBottom: "25px",
   })),
   CommandsContainer: styled(Grid)(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     padding: "10px",
     borderRadius: "5px",
-    boxShadow: `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `1.5px 1.5px 0px ${theme.colors.tertiary}`,
   })),
   CommandsText: styled("div")(({ theme }) => ({
     paddingBottom: "10px",
@@ -225,7 +225,7 @@ const style = {
     letterSpacing: "0.5px",
   })),
   BodyLeftSide: styled("div")<{ $connected: boolean }>(({ theme, $connected }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: "5px",
     overflowY: "scroll",
     height: "0",
@@ -267,7 +267,7 @@ const style = {
   PayContainerInfoGrid: styled(Grid)(({ theme }) => ({
     padding: "10px",
     borderRadius: "10px",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
   })),
 
   ModelBox: styled("div")(({ theme }) => ({
@@ -293,13 +293,13 @@ const style = {
   })),
   ModalTitle: styled("div")(({ theme }) => ({
     color: "black",
-    textShadow: `${theme.backgroundColor.tertiary} 2.5px 2.5px 0.5px`,
+    textShadow: `${theme.colors.tertiary} 2.5px 2.5px 0.5px`,
     fontFamily: theme.fontFamily.primary,
     fontSize: "2.75em",
     fontWeight: 900,
     marginBottom: "25px",
     paddingBottom: "10px",
-    borderBottom: `2.5px solid ${theme.backgroundColor.secondary}`,
+    borderBottom: `2.5px solid ${theme.colors.secondary}`,
   })),
 
   GridPricePortal: styled(Grid)(({ theme }) => ({})),
@@ -310,7 +310,7 @@ const style = {
     marginRight: "25px",
     marginBottom: "10px",
     lineHeight: "20px",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
   })),
   FinalStep: styled("div")(({ theme }) => ({
     fontSize: "0.9em",
@@ -319,7 +319,7 @@ const style = {
     fontWeight: 500,
     borderRadius: "15px",
     textAlign: "center",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     letterSpacing: "-0.25px",
   })),
   FinalStep2: styled("div")<{ $display: boolean }>(({ theme, $display }) => ({
@@ -376,7 +376,7 @@ const style = {
     padding: "10px",
   })),
   InnerContainerInfo2: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     padding: "25px",
   })),
   BottomBarContainer: styled(Grid)(({ theme }) => ({
@@ -411,7 +411,7 @@ const style = {
     paddingRight: "20px",
     backgroundColor: "white",
     borderRadius: "20px",
-    boxShadow: `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `1.5px 1.5px 0px ${theme.colors.tertiary}`,
   })),
   MintPriceTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -432,7 +432,7 @@ const style = {
     opacity: 0.3,
   })),
   DetailsContainer: styled(Grid)(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.tertiary,
+    backgroundColor: theme.colors.tertiary,
     paddingLeft: "10px",
     paddingRight: "10px",
     borderRadius: "5px",
@@ -453,7 +453,7 @@ const style = {
     fontWeight: 700,
     fontSize: "0.7em",
     display: "inline-block",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     borderRadius: "5px",
     padding: "1.5px 10px 1.5px 10px",
   })),
@@ -489,7 +489,7 @@ const style = {
     paddingRight: "5px",
     marginBottom: "10px",
     color: "black",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     borderRadius: "5px",
   })),
   //
@@ -501,7 +501,7 @@ const style = {
     transition: "all .2s ease-in-out",
     borderRadius: "5px",
     opacity: active ? "" : "25%",
-    boxShadow: `10px 15px 2px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `10px 15px 2px ${theme.colors.tertiary}`,
     backgroundColor: "white",
     transform: active ? "scale(1.1)" : "",
   })),
@@ -509,7 +509,7 @@ const style = {
   RootNotFound: styled("div")(({ theme }) => ({
     height: "100vh",
     position: "relative",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
   })),
   NotFound: styled("div")(({ theme }) => ({
     position: "absolute",

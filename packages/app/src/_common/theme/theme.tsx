@@ -1,5 +1,5 @@
 import { createTheme, Theme } from "@mui/material";
-import { createBreakpoints } from "@mui/system";
+import { createBreakpoints, useTheme as useThemeMUI } from "@mui/system";
 
 declare module "@mui/material/styles" {
   interface Theme extends MyTheme {}
@@ -11,12 +11,15 @@ const breakpoints = createBreakpoints({});
 
 type MyTheme = typeof themeOpts;
 
+export const useTheme = () => useThemeMUI() as Theme;
+
 const themeBasics = {
-  backgroundColor: {
+  colors: {
     primary: "#f9f9fb",
     secondary: "#f1f1f5",
     tertiary: "#cbcbdc",
-    darker: "#8B8BAD",
+    darker: "#09090c",
+    black: "#09090c",
   },
 
   fontFamily: {
@@ -30,7 +33,7 @@ const themeOpts = {
   ...themeBasics,
 
   header: {
-    height: "65px",
+    height: "60px",
   },
 
   components: {
@@ -69,66 +72,67 @@ const themeOpts = {
 
   myTypography: {
     huge: {
-      fontFamily: themeBasics.fontFamily.tertiary,
+      fontFamily: themeBasics.fontFamily.primary,
+      fontColor: themeBasics.colors.black,
       fontWeight: 800,
-      fontSize: "14em",
-      lineHeight: "0.9em",
-      [breakpoints.down("xl")]: {
-        fontSize: "11em",
-      },
+      fontSize: "8em",
+      [breakpoints.down("xl")]: {},
     },
     big: {
-      fontFamily: themeBasics.fontFamily.tertiary,
-      fontWeight: 800,
-      fontSize: "8.5em",
-      lineHeight: "0.9em",
-      [breakpoints.down("xl")]: {
-        fontSize: "6em",
+      fontFamily: themeBasics.fontFamily.primary,
+      fontColor: themeBasics.colors.black,
+      fontWeight: 600,
+      fontSize: "4em",
+      letterSpacing: "-0.025em",
+      [breakpoints.only("xs")]: {
+        fontSize: "3em",
       },
     },
     normalBig: {
-      fontFamily: themeBasics.fontFamily.tertiary,
-      fontWeight: 800,
-      fontSize: "3.1em",
-      [breakpoints.down("xl")]: {
+      fontFamily: themeBasics.fontFamily.primary,
+      fontColor: themeBasics.colors.black,
+      fontWeight: 600,
+      fontSize: "4em",
+      textAlign: "center",
+      // lineHeight: "1.2em",
+      [breakpoints.only("xs")]: {
         fontSize: "2.5em",
       },
     },
     normalBold: {
-      fontFamily: themeBasics.fontFamily.tertiary,
+      fontFamily: themeBasics.fontFamily.primary,
+      fontColor: themeBasics.colors.black,
       fontWeight: 800,
       fontSize: "1.1em",
-      lineHeight: "0.9em",
     },
     normalTitle: {
       fontFamily: themeBasics.fontFamily.primary,
+      fontColor: themeBasics.colors.black,
       fontWeight: 600,
       fontSize: "0.9em",
     },
     normal: {
       fontFamily: themeBasics.fontFamily.primary,
+      fontColor: themeBasics.colors.black,
       fontWeight: 500,
       fontSize: "0.95em",
-      lineHeight: "1.1em",
     },
   },
 
   button: {
     normal: {
       fontFamily: themeBasics.fontFamily.primary,
-      backgroundColor: themeBasics.backgroundColor.primary,
-      fontWeight: 900,
-      fontSize: "0.85em",
-      letterSpacing: "0.25px",
+      backgroundColor: themeBasics.colors.black,
+      color: themeBasics.colors.primary,
+      fontWeight: 600,
+      fontSize: "0.9em",
       height: "35px",
       minWidth: "150px",
       borderRadius: "50px",
-      color: "black",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      paddingLeft: "20px",
-      paddingRight: "20px",
+      boxShadow: "1px 1px 5px #bebebe, -1px -1px 1px #fff",
     },
   },
 
@@ -147,73 +151,33 @@ const themeOpts = {
     },
   },
 
-  myBreakpoints: (themeObj: Theme) => {
-    return {
-      level0: {
-        [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "22.5vw",
-          paddingRight: "22.5vw",
-        },
-        [themeObj.breakpoints.down("lg")]: {
-          paddingLeft: "15vw",
-          paddingRight: "15vw",
-        },
-        [themeObj.breakpoints.down("md")]: {
-          paddingLeft: "12vw",
-          paddingRight: "12vw",
-        },
-        [themeObj.breakpoints.down("sm")]: {
-          paddingLeft: "8vw",
-          paddingRight: "8vw",
-        },
+  myBreakpoints: {
+    static: {
+      [breakpoints.up("lg")]: {
+        paddingLeft: "10vw",
+        paddingRight: "10vw",
       },
-      level1: {
-        [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "12vw",
-          paddingRight: "12vw",
-        },
-        [themeObj.breakpoints.down("lg")]: {
-          paddingLeft: "10vw",
-          paddingRight: "10vw",
-        },
-        [themeObj.breakpoints.down("md")]: {
-          paddingLeft: "8vw",
-          paddingRight: "8vw",
-        },
-        [themeObj.breakpoints.down("sm")]: {
-          paddingLeft: "3vw",
-          paddingRight: "3vw",
-        },
+      [breakpoints.down("lg")]: {
+        paddingLeft: "7vw",
+        paddingRight: "7vw",
       },
-      level2: {
-        [themeObj.breakpoints.up("lg")]: {
-          paddingLeft: "8vw",
-          paddingRight: "8vw",
-        },
-        [themeObj.breakpoints.down("lg")]: {
-          paddingLeft: "7vw",
-          paddingRight: "7vw",
-        },
-        [themeObj.breakpoints.down("md")]: {
-          paddingLeft: "5vw",
-          paddingRight: "5vw",
-        },
-        [themeObj.breakpoints.down("sm")]: {
-          paddingLeft: "2vw",
-          paddingRight: "2vw",
-        },
+      [breakpoints.down("md")]: {
+        paddingLeft: "5vw",
+        paddingRight: "5vw",
       },
-      level3: {
-        paddingLeft: "1.5vw",
-        paddingRight: "1.5vw",
+      [breakpoints.down("sm")]: {
+        paddingLeft: "2vw",
+        paddingRight: "2vw",
       },
-      level4: {
-        marginRight: "calc(1.5vw)",
-        marginLeft: "calc(1.5vw)",
-        paddingLeft: "calc(1.5vw + 25px)",
-        paddingRight: "calc(1.5vw + 25px)",
+      [breakpoints.down("sm")]: {
+        paddingLeft: "20px",
+        paddingRight: "20px",
       },
-    };
+    },
+    app: {
+      paddingLeft: "25px",
+      paddingRight: "25px",
+    },
   },
 };
 

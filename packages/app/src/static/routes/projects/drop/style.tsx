@@ -9,7 +9,7 @@ const itemTitleContainerWidth = "75px";
 
 const style = {
   Root: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
+    ...theme.myBreakpoints.static,
   })),
   HomeScreenContainer: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
@@ -18,7 +18,7 @@ const style = {
     boxSizing: "border-box",
   })),
   HomeScreen: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     padding: "25px",
     borderRadius: "5px",
     minHeight: `calc(100vh - ${theme.header.height} - 25px)`,
@@ -76,7 +76,7 @@ const style = {
     backgroundColor: "white",
     padding: "15px",
     borderRadius: "5px",
-    boxShadow: `2.5px 2.5px 2.5px ${theme.backgroundColor.secondary}, -.1px -.1px 1.5px ${theme.backgroundColor.secondary}`,
+    boxShadow: `2.5px 2.5px 2.5px ${theme.colors.secondary}, -.1px -.1px 1.5px ${theme.colors.secondary}`,
   })),
   ContainerExempleDripContainer: styled("div")(({ theme }) => ({
     backgroundColor: "white",
@@ -88,7 +88,7 @@ const style = {
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 800,
     // color: "white",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     fontSize: "0.95em",
     // display: "inline-block",
     float: "right",
@@ -111,7 +111,7 @@ const style = {
   })),
   ContainerInfoDiv: styled("div")(({ theme }) => ({
     padding: "10px",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: "5px",
   })),
   InfoDivItemName: styled("div")(({ theme }) => ({

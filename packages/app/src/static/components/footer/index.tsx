@@ -21,28 +21,37 @@ import Typos from "@/_common/components/typography";
 export const Footer: FC = () => {
   return (
     <Style.RootFooter>
-      <Grid container>
-        <Grid item xs={4}>
+      <Grid container rowSpacing={4}>
+        <Grid item xs={12} md={4}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Clickable address="/">
-                <img alt="" src={LogoTypo} style={{ width: "200px" }} />
+                <img alt="" src={LogoTypo} style={{ width: "150px" }} />
               </Clickable>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={6}>
+
+        <Grid item xs={12} md={6}>
           <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={4}>
               <Style.ContentCategory>
                 <ul>
-                  <li>FAQ</li>
-                  <li>Documentation</li>
-                  <li>Discord</li>
+                  <li>Docs</li>
                 </ul>
               </Style.ContentCategory>
             </Grid>
-            <Grid item xs={6}>
+
+            <Grid item xs={12} md={4}>
+              <Style.ContentCategory>
+                <ul>
+                  <li>Instagram</li>
+                  <li>Discord</li>
+                  <li>Twitter</li>
+                </ul>
+              </Style.ContentCategory>
+            </Grid>
+            <Grid item xs={12} md={4}>
               <Style.ContentCategory>
                 <ul>
                   <li>Returns {"&"} Refunds</li>
@@ -53,10 +62,16 @@ export const Footer: FC = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={2}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Grid container spacing={1} flexDirection="row-reverse" alignContent="center">
+
+        <Grid item xs={0} md={2}>
+          <Grid container direction="column" spacing={1}>
+            <Grid item>
+              <Grid
+                container
+                sx={{ flexDirection: { sx: "row", md: "row-reverse" } }}
+                spacing={1}
+                alignContent="center"
+              >
                 <Grid item>
                   <Clickable address="https://discord.gg/FRAWgJJz4f">
                     <Style.ImgIcon2 src={DiscordIcon} alt="" />
@@ -69,7 +84,8 @@ export const Footer: FC = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={12}>
+
+            <Grid item xs={12} sx={{ textAlign: { xs: "left", md: "right" } }}>
               <Grid container>
                 <Grid item xs={12}>
                   <Style.Credentials>{CREDENTIALS}</Style.Credentials>

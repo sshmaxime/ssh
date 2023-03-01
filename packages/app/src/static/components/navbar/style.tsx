@@ -5,9 +5,9 @@ import { AppBar, Grid, Typography } from "@mui/material";
 const style = {
   // Navbar
   AppBar: styled(AppBar)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
+    ...theme.myBreakpoints.static,
     height: theme.header.height,
-    backgroundColor: "transparent",
+    backgroundColor: theme.colors.primary,
     boxShadow: "none",
     display: "flex",
     justifyContent: "center",
@@ -18,7 +18,7 @@ const style = {
   })),
   //
   Root: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
+    ...theme.myBreakpoints.static,
   })),
   HomeScreenContainer: styled("div")(({ theme }) => ({
     paddingTop: theme.header.height,
@@ -33,7 +33,7 @@ const style = {
     borderRadius: "5px",
     padding: "25px",
     boxSizing: "border-box",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
   })),
 
   ScreenContainer: styled("div")(({ theme }) => ({
@@ -47,7 +47,7 @@ const style = {
     borderRadius: "5px",
     padding: "25px",
     boxSizing: "border-box",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
   })),
 
   Title: styled("div")(({ theme }) => ({
@@ -95,7 +95,7 @@ const style = {
     fontFamily: theme.fontFamily.tertiary,
     fontWeight: 800,
     // color: "white",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     fontSize: "0.95em",
     // display: "inline-block",
     float: "right",
@@ -116,7 +116,7 @@ const style = {
     backgroundColor: "white",
     padding: "15px",
     borderRadius: "5px",
-    boxShadow: `2.5px 2.5px 2.5px ${theme.backgroundColor.secondary}, -.1px -.1px 1.5px ${theme.backgroundColor.secondary}`,
+    boxShadow: `2.5px 2.5px 2.5px ${theme.colors.secondary}, -.1px -.1px 1.5px ${theme.colors.secondary}`,
   })),
   ContainerExempleDripContainer: styled("div")(({ theme }) => ({
     backgroundColor: "white",
@@ -169,16 +169,8 @@ const style = {
   })),
   ContainerInfoDiv: styled("div")(({ theme }) => ({
     padding: "10px",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: "5px",
-  })),
-  // Footer
-  RootFooter: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level1,
-    paddingTop: "5vh",
-    paddingBottom: "5vh",
-    borderRadius: "5px",
-    backgroundColor: theme.backgroundColor.primary,
   })),
   ContentCategory: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

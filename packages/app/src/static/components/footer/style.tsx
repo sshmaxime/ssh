@@ -4,11 +4,16 @@ import { Typography } from "@mui/material";
 
 const style = {
   RootFooter: styled("div")(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level4,
-    paddingTop: "5vh",
-    paddingBottom: "5vh",
-    borderRadius: "5px",
-    backgroundColor: theme.backgroundColor.primary,
+    ...theme.myBreakpoints.static,
+
+    paddingTop: "7.5vh",
+    paddingBottom: "7.5vh",
+    [theme.breakpoints.down("sm")]: {
+      ...theme.myBreakpoints.static,
+      paddingTop: "5vh",
+      paddingBottom: "5vh",
+    },
+    backgroundColor: theme.colors.secondary,
   })),
   ContentCategory: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -22,13 +27,11 @@ const style = {
   })),
   Credentials: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    textAlign: "right",
     fontSize: "0.7em",
     fontWeight: 900,
   })),
   ExternalLink: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
-    textAlign: "right",
     fontSize: "0.8em",
     fontWeight: 500,
   })),

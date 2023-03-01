@@ -26,7 +26,7 @@ const style = {
     width: "100vw",
   })),
   Body: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     height: `calc(100vh - ${footerHeight})`,
     position: "relative",
   })),
@@ -44,7 +44,7 @@ const style = {
   BottomBarContainer: styled(Grid)(({ theme }) => ({
     height: "100%",
     minWidth: "250px",
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     opacity: "75%",
     borderRadius: "5px",
     color: "black",
@@ -60,7 +60,7 @@ const style = {
       borderRadius: "50%",
       backgroundColor: bgcolor,
       opacity: $selected ? "100%" : "75%",
-      border: `2px solid ${$selected ? "black" : theme.backgroundColor.tertiary}`,
+      border: `2px solid ${$selected ? "black" : theme.colors.tertiary}`,
       transition: "all 0.5s",
     })
   ),
@@ -75,7 +75,7 @@ const style = {
     position: "absolute",
     height: footerHeight,
     bottom: 0,
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     width: "100%",
     display: "flex",
     alignItems: "center",
@@ -97,7 +97,7 @@ const style = {
     zIndex: 1,
   })),
   LeftSideRightSideInner: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: "5px",
     color: "black",
     padding: "7.5px",
@@ -106,7 +106,7 @@ const style = {
     fontWeight: 700,
     fontSize: "0.6em",
     letterSpacing: "0.95px",
-    boxShadow: `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `1.5px 1.5px 0px ${theme.colors.tertiary}`,
   })),
   Explanation: styled("div")(({ theme }) => ({
     height: "20px",
@@ -152,10 +152,10 @@ const style = {
     fontWeight: 500,
   })),
   CommandsContainer: styled(Grid)(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     padding: "10px",
     borderRadius: "5px",
-    boxShadow: `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `1.5px 1.5px 0px ${theme.colors.tertiary}`,
   })),
   CommandsText: styled("div")(({ theme }) => ({
     paddingBottom: "10px",
@@ -175,7 +175,7 @@ const style = {
     letterSpacing: "0.5px",
   })),
   BodyLeftSide: styled("div")<{ $connected: boolean }>(({ theme, $connected }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     borderRadius: "5px",
     overflowY: "scroll",
     height: `calc(100vh - ${theme.header.height} - ${footerHeight} - 50px - 125px - ${sizeWidthLeft} - 50px)`,
@@ -186,7 +186,7 @@ const style = {
     },
   })),
   BodyLeftSideTextContainer: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     position: "relative",
     borderRadius: "5px",
     height: `calc(100vh - ${theme.header.height} - ${footerHeight} - 125px - ${bottom} - 50px)`,
@@ -205,13 +205,13 @@ const style = {
     width: $maxed ? "35vw" : rightDefaultWidth,
     bottom: `calc(${bottom} + 10px)`,
     right: $maxed ? sizeWidthLeft : sizeWidthRight,
-    backgroundColor: $maxed ? theme.backgroundColor.primary : "",
+    backgroundColor: $maxed ? theme.colors.primary : "",
     maxHeight: $maxed
       ? `calc(100vh - 1vh - ${footerHeight} - ${sizeWidthLeft} - ${theme.header.height})`
       : rightHeightReduced,
     // minHeight: rightHeightReduced,
     transition: "all 0.5s ease-in-out",
-    boxShadow: $maxed ? `5px 5px 2px ${theme.backgroundColor.tertiary}` : "",
+    boxShadow: $maxed ? `5px 5px 2px ${theme.colors.tertiary}` : "",
   })),
   DetailsButton: styled("div")(({ theme }) => ({
     letterSpacing: "2.5px",
@@ -221,7 +221,7 @@ const style = {
     transition: "all 0.5s ease-in-out",
   })),
   InnerContainerInfo2: styled("div")(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     padding: "25px",
   })),
   CloseContainerInfo: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
@@ -248,7 +248,7 @@ const style = {
   })),
   InnerContainerMoreInfoContent: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     padding: "15px",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     borderRadius: "10px",
   })),
   PayContainerInfoOpen: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
@@ -260,7 +260,7 @@ const style = {
   PayContainerInfoGrid: styled(Grid)(({ theme }) => ({
     padding: "10px",
     borderRadius: "10px",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
   })),
   EligibleCollection: styled("div")<{ $maxed?: boolean }>(({ theme, $maxed }) => ({
     display: $maxed ? "block" : "none",
@@ -326,7 +326,7 @@ const style = {
     paddingRight: "20px",
     backgroundColor: "white",
     borderRadius: "20px",
-    boxShadow: `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `1.5px 1.5px 0px ${theme.colors.tertiary}`,
   })),
   MintPriceTitle: styled("div")(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,
@@ -347,7 +347,7 @@ const style = {
     opacity: 0.3,
   })),
   DetailsContainer: styled(Grid)(({ theme }) => ({
-    backgroundColor: theme.backgroundColor.tertiary,
+    backgroundColor: theme.colors.tertiary,
     paddingLeft: "10px",
     paddingRight: "10px",
     borderRadius: "5px",
@@ -368,7 +368,7 @@ const style = {
     fontWeight: 700,
     fontSize: "0.7em",
     display: "inline-block",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     borderRadius: "5px",
     padding: "1.5px 10px 1.5px 10px",
   })),
@@ -404,7 +404,7 @@ const style = {
     paddingRight: "5px",
     marginBottom: "2.5px",
     color: "black",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
     borderRadius: "5px",
   })),
   //
@@ -416,7 +416,7 @@ const style = {
     transition: "all .2s ease-in-out",
     borderRadius: "5px",
     opacity: active ? "" : "25%",
-    boxShadow: `10px 15px 2px ${theme.backgroundColor.tertiary}`,
+    boxShadow: `10px 15px 2px ${theme.colors.tertiary}`,
     backgroundColor: "white",
     transform: active ? "scale(1.1)" : "",
   })),
@@ -424,7 +424,7 @@ const style = {
   RootNotFound: styled("div")(({ theme }) => ({
     height: "100vh",
     position: "relative",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
   })),
   NotFound: styled("div")(({ theme }) => ({
     position: "absolute",

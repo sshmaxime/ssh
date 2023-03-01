@@ -11,10 +11,10 @@ const style = {
   Root: styled("div")(({ theme }) => ({
     height: `calc(100vh)`,
     position: "relative",
-    backgroundColor: theme.backgroundColor.secondary,
+    backgroundColor: theme.colors.secondary,
   })),
   RootChild: styled(Grid)(({ theme }) => ({
-    ...theme.myBreakpoints(theme).level3,
+    ...theme.myBreakpoints.app,
     width: "100%",
     height: "100%",
     paddingTop: `calc(${theme.header.height} + 15px)`,
@@ -31,7 +31,7 @@ const style = {
     zIndex: 100,
     height: footerHeight,
     bottom: 0,
-    backgroundColor: theme.backgroundColor.primary,
+    backgroundColor: theme.colors.primary,
     width: "100%",
     display: "flex",
     alignItems: "center",

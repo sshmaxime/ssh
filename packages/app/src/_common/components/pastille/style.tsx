@@ -7,8 +7,8 @@ const style = {
       height: "20px",
       fontSize: $small ? "0.5em" : "0.7em",
       backgroundColor: $secondary
-        ? bgcolor || theme.backgroundColor.tertiary
-        : bgcolor || theme.backgroundColor.primary,
+        ? bgcolor || theme.colors.tertiary
+        : bgcolor || theme.colors.primary,
       color: "black",
       borderRadius: "20px",
       paddingLeft: $secondary ? "15px" : "20px",
@@ -19,7 +19,7 @@ const style = {
       fontFamily: "montserrat",
       fontWeight: $secondary ? 700 : 600,
       // opacity: $secondary ? "50%" : "",
-      boxShadow: $secondary ? "" : `1.5px 1.5px 0px ${theme.backgroundColor.tertiary}`,
+      boxShadow: $secondary ? "" : `1.5px 1.5px 0px ${theme.colors.tertiary}`,
     })
   ),
 };
