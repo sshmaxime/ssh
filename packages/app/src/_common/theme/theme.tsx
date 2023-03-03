@@ -18,7 +18,6 @@ const themeBasics = {
     primary: "#f9f9fb",
     secondary: "#f1f1f5",
     tertiary: "#cbcbdc",
-    darker: "#09090c",
     black: "#09090c",
   },
 
@@ -75,7 +74,7 @@ const themeOpts = {
       fontFamily: themeBasics.fontFamily.primary,
       fontColor: themeBasics.colors.black,
       fontWeight: 800,
-      fontSize: "8em",
+      fontSize: "7em",
       [breakpoints.down("xl")]: {},
     },
     big: {
@@ -85,7 +84,7 @@ const themeOpts = {
       fontSize: "4em",
       letterSpacing: "-0.025em",
       [breakpoints.only("xs")]: {
-        fontSize: "3em",
+        fontSize: "2.5em",
       },
     },
     normalBig: {

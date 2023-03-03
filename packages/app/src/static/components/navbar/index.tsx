@@ -25,7 +25,7 @@ export const Navbar: FC = ({}) => {
 
           <Grid item>
             <Grid container justifyContent="end" columnSpacing={2}>
-              <Grid
+              {/* <Grid
                 item
                 sx={{ display: { xs: "none", md: "flex" } }}
                 style={{ alignItems: "center" }}
@@ -47,7 +47,7 @@ export const Navbar: FC = ({}) => {
                     opacity: "100%",
                   }}
                 ></div>
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Clickable address="/app/drop/0">
                   <Style.OpenApp>Enter app</Style.OpenApp>
