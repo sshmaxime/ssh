@@ -75,7 +75,12 @@ const themeOpts = {
       fontColor: themeBasics.colors.black,
       fontWeight: 800,
       fontSize: "7em",
-      [breakpoints.down("xl")]: {},
+      [breakpoints.down("md")]: {
+        fontSize: "5em",
+      },
+      [breakpoints.only("xs")]: {
+        fontSize: "3em",
+      },
     },
     big: {
       fontFamily: themeBasics.fontFamily.primary,
@@ -83,6 +88,9 @@ const themeOpts = {
       fontWeight: 600,
       fontSize: "4em",
       letterSpacing: "-0.025em",
+      [breakpoints.down("lg")]: {
+        fontSize: "3em",
+      },
       [breakpoints.only("xs")]: {
         fontSize: "2.5em",
       },
@@ -92,8 +100,11 @@ const themeOpts = {
       fontColor: themeBasics.colors.black,
       fontWeight: 600,
       fontSize: "4em",
+      [breakpoints.down("md")]: {
+        fontSize: "3em",
+      },
       [breakpoints.only("xs")]: {
-        fontSize: "2.5em",
+        fontSize: "2em",
       },
     },
     normalBold: {
@@ -112,7 +123,11 @@ const themeOpts = {
       fontFamily: themeBasics.fontFamily.primary,
       fontColor: themeBasics.colors.black,
       fontWeight: 500,
-      fontSize: "0.95em",
+      fontSize: "1em",
+      [breakpoints.up("xl")]: {
+        fontSize: "1.1em",
+      },
+      [breakpoints.only("xs")]: {},
     },
   },
 

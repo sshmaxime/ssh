@@ -134,7 +134,6 @@ const HomeComponent: FC = ({}) => {
             justifyContent="center"
             rowSpacing={5}
             sx={{ height: { lg: "90%" }, marginTop: { xs: "25px", lg: "0px" } }}
-            // style={{ height: "100%" }}
           >
             <Grid item>
               <Typos.Big>
@@ -201,7 +200,7 @@ const HomeComponent: FC = ({}) => {
                         </Style.ContainerExempleDripContainer>
                       </Grid>
 
-                      <Grid item style={{ paddingBottom: "25px" }}>
+                      <Grid item style={{ paddingBottom: "10px" }}>
                         <Style.ContainerExempleDripContainer>
                           <Style.InfoDivItemName>DECK</Style.InfoDivItemName>
                           <Style.GalleryWrap2>
@@ -297,52 +296,22 @@ const HomeComponent: FC = ({}) => {
           <Typos.Huge
             style={{
               marginTop: "7.5vh",
-              marginBottom: "10vh",
+              marginBottom: "7.5vh",
               textAlign: "center",
             }}
           >
             Discover Drip
           </Typos.Huge>
 
-          <Grid container>
-            <Grid xs={7} style={{ display: "flex", alignItems: "center" }}>
-              <Typos.Big style={{ textAlign: "center" }}>
-                So you just bought this cool{" "}
-                <span style={{ color: color }}>${placeholderItem.item}</span> and wonder what to do
-                with it.
-              </Typos.Big>
-            </Grid>
-
-            <Grid item xs={1} />
-
-            <Grid xs={4}>
-              <img
-                src={placeholderItem.img}
-                style={{ width: "100%", borderRadius: "25px" }}
-                alt=""
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container style={{ paddingTop: "5vh", paddingBottom: "5vh" }}>
-            <Grid xs={12}>
-              <Typos.Big style={{ textAlign: "center", fontSize: "6em" }}>
-                Get a{" "}
-                <span style={{ color: color, borderBottom: `10px solid ${color}` }}>Drip</span>
-              </Typos.Big>
-            </Grid>
-          </Grid>
-
           <Grid container direction="row" spacing={0}>
             <Grid xs={12} style={{ marginBottom: "5vh" }}>
               <Grid container justifyContent="center">
-                <Grid xs={8}>
+                <Grid xs={12} md={8}>
                   <Typos.Big
                     style={{
                       textAlign: "center",
                       padding: "15px",
                       borderRadius: "5px",
-                      fontSize: "3.5em",
                     }}
                   >
                     A Drip is a <span style={{ color: color }}>custom-made</span> NFT backed by a{" "}
@@ -354,7 +323,7 @@ const HomeComponent: FC = ({}) => {
               </Grid>
             </Grid>
 
-            <Grid xs={7.5} style={{}}>
+            <Grid xs={12} lg={7.5} style={{}}>
               <Grid
                 container
                 style={{
@@ -363,9 +332,9 @@ const HomeComponent: FC = ({}) => {
                   borderRadius: "25px",
                 }}
               >
-                <Grid item xs={6} style={{}}>
+                <Grid item xs={12} sm={6}>
                   <Typos.Big style={{ fontSize: "2.5em", fontFamily: "futura" }}>Mint</Typos.Big>
-                  <Typos.Normal style={{ paddingTop: "25px", fontSize: "1.1em" }}>
+                  <Typos.Normal style={{ paddingTop: "25px" }}>
                     The first step is to {colored("mint your Drip")}.
                     <br />
                     <br />
@@ -382,8 +351,8 @@ const HomeComponent: FC = ({}) => {
                     {colored("mutate it directly, or do it later")}.
                   </Typos.Normal>
                 </Grid>
-                <Grid item xs={1} />
-                <Grid item xs={5}>
+                <Grid item xs={1} sx={{ display: { xs: "none", sm: "block" } }} />
+                <Grid item xs={5} sx={{ display: { xs: "none", sm: "block" } }}>
                   <Grid container direction="row" spacing={1} style={{ height: "100%" }}>
                     <Grid item xs={9}>
                       <div
@@ -426,7 +395,7 @@ const HomeComponent: FC = ({}) => {
                   borderRadius: "25px",
                 }}
               >
-                <Grid item xs={5}>
+                <Grid item xs={5} sx={{ display: { xs: "none", sm: "block" } }}>
                   <img
                     src={placeholderItem.img}
                     alt=""
@@ -434,9 +403,9 @@ const HomeComponent: FC = ({}) => {
                   />
                 </Grid>
                 <Grid item xs={1} />
-                <Grid item xs={6} style={{}}>
+                <Grid item xs={12} sm={6} style={{}}>
                   <Typos.Big style={{ fontSize: "2.5em", fontFamily: "futura" }}>Mutate</Typos.Big>
-                  <Typos.Normal style={{ paddingTop: "25px", fontSize: "1.1em" }}>
+                  <Typos.Normal style={{ paddingTop: "25px" }}>
                     A Drip can either be in two states: {colored("Default and Mutated")}.
                     <br />
                     <br />
@@ -459,9 +428,9 @@ const HomeComponent: FC = ({}) => {
                   borderRadius: "25px",
                 }}
               >
-                <Grid item xs={6} style={{}}>
+                <Grid item xs={12} sm={6}>
                   <Typos.Big style={{ fontSize: "2.5em", fontFamily: "futura" }}>Redeem</Typos.Big>
-                  <Typos.Normal style={{ paddingTop: "25px", fontSize: "1.1em" }}>
+                  <Typos.Normal style={{ paddingTop: "25px" }}>
                     Once in a Mutated state a Drip become {colored("redeemable")}.
                     <br />
                     <br />
@@ -478,7 +447,7 @@ const HomeComponent: FC = ({}) => {
                   </Typos.Normal>
                 </Grid>
                 <Grid item xs={1} />
-                <Grid item xs={5}>
+                <Grid item xs={5} sx={{ display: { xs: "none", sm: "block" } }}>
                   <img
                     src="./delivery.png"
                     alt=""
@@ -489,7 +458,7 @@ const HomeComponent: FC = ({}) => {
               <div style={{ height: "25px" }} />
             </Grid>
 
-            <Grid xs={4}>
+            <Grid xs={4} sx={{ display: { xs: "none", lg: "block" } }}>
               <SceneLoader
                 sceneRef={sceneRef}
                 model="models/model.glb"
@@ -522,12 +491,12 @@ const HomeComponent: FC = ({}) => {
               textAlign: "center",
             }}
           >
-            Governance
+            Royalties
           </Typos.Huge>
           <Grid container justifyContent="center">
-            <Grid item xs={6}>
-              <Typos.Normal style={{ fontSize: "1.1em" }}>
-                Once the project will have kicked off we will implement a system of governance.
+            <Grid item xs={12} md={10} xl={8}>
+              <Typos.Normal>
+                On every Drop, the first 10% holders will get 5% of the total revenue of mint sale.
               </Typos.Normal>
             </Grid>
           </Grid>
@@ -551,12 +520,12 @@ const HomeComponent: FC = ({}) => {
               textAlign: "center",
             }}
           >
-            Royalties
+            Governance
           </Typos.Huge>
           <Grid container justifyContent="center">
-            <Grid item xs={6}>
-              <Typos.Normal style={{ fontSize: "1.1em" }}>
-                On every Drop, the first 10% holders will get 5% of the total revenue of mint sale.
+            <Grid item xs={12} md={10} xl={8}>
+              <Typos.Normal>
+                Once the project will have kicked off we will implement a system of governance.
               </Typos.Normal>
             </Grid>
           </Grid>

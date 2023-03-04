@@ -16,7 +16,7 @@ const HomeComponent: FC = ({}) => {
       </Typos.Big>
 
       <Grid container justifyContent="center">
-        <Grid item xs={8}>
+        <Grid item xs={11} sm={8}>
           <Typos.Normal>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices, velit non
             elementum venenatis, magna libero viverra purus, a lacinia nisl nulla eget metus. Nullam
