@@ -92,8 +92,6 @@ const themeOpts = {
       fontColor: themeBasics.colors.black,
       fontWeight: 600,
       fontSize: "4em",
-      textAlign: "center",
-      // lineHeight: "1.2em",
       [breakpoints.only("xs")]: {
         fontSize: "2.5em",
       },

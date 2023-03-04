@@ -36,27 +36,53 @@ export const Footer: FC = () => {
           <Grid container>
             <Grid item xs={12} md={4}>
               <Style.ContentCategory>
-                <ul>
-                  <li>Docs</li>
-                </ul>
+                <ul>{/* <li>Docs</li> */}</ul>
               </Style.ContentCategory>
             </Grid>
 
             <Grid item xs={12} md={4}>
               <Style.ContentCategory>
                 <ul>
-                  <li>Instagram</li>
-                  <li>Discord</li>
-                  <li>Twitter</li>
+                  <li>
+                    <div style={{ display: "inline-block" }}>
+                      <Clickable address="">Instagram</Clickable>
+                    </div>
+                  </li>
+                  <li>
+                    <div style={{ display: "inline-block" }}>
+                      <Clickable address="">Discord</Clickable>
+                    </div>
+                  </li>
+                  <li>
+                    <div style={{ display: "inline-block" }}>
+                      <Clickable address="">Twitter</Clickable>
+                    </div>
+                  </li>
                 </ul>
               </Style.ContentCategory>
             </Grid>
             <Grid item xs={12} md={4}>
               <Style.ContentCategory>
                 <ul>
-                  <li>Returns {"&"} Refunds</li>
-                  <li>Ordering {"&"} Payment</li>
-                  <li>Shipping {"&"} Delivery</li>
+                  <li>
+                    <div style={{ display: "inline-block" }}>
+                      <Clickable address="/policy/returns-refunds">Returns {"&"} Refunds</Clickable>
+                    </div>
+                  </li>
+                  <li>
+                    <div style={{ display: "inline-block" }}>
+                      <Clickable address="/policy/ordering-payment">
+                        Ordering {"&"} Payment
+                      </Clickable>
+                    </div>
+                  </li>
+                  <li>
+                    <div style={{ display: "inline-block" }}>
+                      <Clickable address="/policy/shipping-delivery">
+                        Shipping {"&"} Delivery
+                      </Clickable>
+                    </div>
+                  </li>
                 </ul>
               </Style.ContentCategory>
             </Grid>
@@ -73,12 +99,12 @@ export const Footer: FC = () => {
                 alignContent="center"
               >
                 <Grid item>
-                  <Clickable address="https://discord.gg/FRAWgJJz4f">
+                  <Clickable address="">
                     <Style.ImgIcon2 src={DiscordIcon} alt="" />
                   </Clickable>
                 </Grid>
                 <Grid item>
-                  <Clickable address="https://twitter.com/premier">
+                  <Clickable address="">
                     <TwitterIcon />
                   </Clickable>
                 </Grid>

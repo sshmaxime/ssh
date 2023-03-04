@@ -118,6 +118,12 @@ const style = {
   ContainerExempleDripContainer: styled("div")(({ theme }) => ({
     borderRadius: "5px",
   })),
+  Price: styled("div")(({ theme }) => ({
+    fontFamily: theme.fontFamily.primary,
+    fontWeight: 700,
+    fontSize: "1em",
+    letterSpacing: "-0.25px",
+  })),
   GoToApp: styled("div")(({ theme }) => ({
     borderRadius: "5px",
     fontFamily: theme.fontFamily.primary,
@@ -133,6 +139,13 @@ const style = {
     lineHeight: "1.1em",
   })),
   GalleryWrap: styled("div")(({ theme }) => ({
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    height: "100%",
+    gap: "2.5px",
+  })),
+  GalleryWrap2: styled("div")(({ theme }) => ({
     display: "flex",
     flexDirection: "row",
     width: "100%",
@@ -160,6 +173,7 @@ const style = {
     letterSpacing: "1.25px",
     marginBottom: "7.5px",
   })),
+
   ContainerInfoDiv: styled("div")(({ theme }) => ({
     padding: "10px",
     backgroundColor: theme.colors.primary,
