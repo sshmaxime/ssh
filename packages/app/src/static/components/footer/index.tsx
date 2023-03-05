@@ -34,7 +34,7 @@ export const Footer: FC = () => {
 
         <Grid item xs={12} md={6}>
           <Grid container>
-            <Grid item xs={12} md={4}>
+            {/* <Grid item xs={12} md={4}>
               <Style.ContentCategory>
                 <ul>
                   <li>
@@ -44,7 +44,7 @@ export const Footer: FC = () => {
                   </li>
                 </ul>
               </Style.ContentCategory>
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={12} md={4}>
               <Style.ContentCategory>
