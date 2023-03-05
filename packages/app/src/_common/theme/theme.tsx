@@ -79,7 +79,7 @@ const themeOpts = {
         fontSize: "5em",
       },
       [breakpoints.only("xs")]: {
-        fontSize: "3em",
+        fontSize: "2.5em",
       },
     },
     big: {
@@ -92,7 +92,7 @@ const themeOpts = {
         fontSize: "3em",
       },
       [breakpoints.only("xs")]: {
-        fontSize: "2.5em",
+        fontSize: "2em",
       },
     },
     normalBig: {

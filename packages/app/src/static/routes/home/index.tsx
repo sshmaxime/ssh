@@ -288,8 +288,8 @@ const HomeComponent: FC = ({}) => {
           style={{
             backgroundColor: theme.colors.secondary,
             padding: "25px",
-            marginTop: "7.5vh",
-            marginBottom: "7.5vh",
+            marginTop: "5vh",
+            marginBottom: "5vh",
             borderRadius: "5px",
           }}
         >
@@ -333,7 +333,7 @@ const HomeComponent: FC = ({}) => {
                 }}
               >
                 <Grid item xs={12} sm={6}>
-                  <Typos.Big style={{ fontSize: "2.5em", fontFamily: "futura" }}>Mint</Typos.Big>
+                  <Typos.Big style={{ fontFamily: "futura" }}>Mint</Typos.Big>
                   <Typos.Normal style={{ paddingTop: "25px" }}>
                     The first step is to {colored("mint your Drip")}.
                     <br />
@@ -404,7 +404,7 @@ const HomeComponent: FC = ({}) => {
                 </Grid>
                 <Grid item xs={1} />
                 <Grid item xs={12} sm={6} style={{}}>
-                  <Typos.Big style={{ fontSize: "2.5em", fontFamily: "futura" }}>Mutate</Typos.Big>
+                  <Typos.Big style={{ fontFamily: "futura" }}>Mutate</Typos.Big>
                   <Typos.Normal style={{ paddingTop: "25px" }}>
                     A Drip can either be in two states: {colored("Default and Mutated")}.
                     <br />
@@ -429,7 +429,7 @@ const HomeComponent: FC = ({}) => {
                 }}
               >
                 <Grid item xs={12} sm={6}>
-                  <Typos.Big style={{ fontSize: "2.5em", fontFamily: "futura" }}>Redeem</Typos.Big>
+                  <Typos.Big style={{ fontFamily: "futura" }}>Redeem</Typos.Big>
                   <Typos.Normal style={{ paddingTop: "25px" }}>
                     Once in a Mutated state a Drip become {colored("redeemable")}.
                     <br />
@@ -479,8 +479,8 @@ const HomeComponent: FC = ({}) => {
           style={{
             backgroundColor: theme.colors.secondary,
             padding: "25px",
-            marginTop: "7.5vh",
-            marginBottom: "7.5vh",
+            marginTop: "5vh",
+            marginBottom: "5vh",
             borderRadius: "5px",
           }}
         >
@@ -496,7 +496,7 @@ const HomeComponent: FC = ({}) => {
           <Grid container justifyContent="center">
             <Grid item xs={12} md={10} xl={8}>
               <Typos.Normal>
-                On every Drop, the first 10% holders will get 5% of the total revenue of mint sale.
+                The first 10% holders of a Drop will share 5% of the total revenue of its mint sale.
               </Typos.Normal>
             </Grid>
           </Grid>
@@ -508,8 +508,8 @@ const HomeComponent: FC = ({}) => {
           style={{
             backgroundColor: theme.colors.secondary,
             padding: "25px",
-            marginTop: "7.5vh",
-            marginBottom: "7.5vh",
+            marginTop: "5vh",
+            marginBottom: "5vh",
             borderRadius: "5px",
           }}
         >
@@ -525,7 +525,8 @@ const HomeComponent: FC = ({}) => {
           <Grid container justifyContent="center">
             <Grid item xs={12} md={10} xl={8}>
               <Typos.Normal>
-                Once the project will have kicked off we will implement a system of governance.
+                At terms, we want to be community driven. It will take some time but there will be a
+                governance system.
               </Typos.Normal>
             </Grid>
           </Grid>

@@ -36,7 +36,13 @@ export const Footer: FC = () => {
           <Grid container>
             <Grid item xs={12} md={4}>
               <Style.ContentCategory>
-                <ul>{/* <li>Docs</li> */}</ul>
+                <ul>
+                  <li>
+                    <div style={{ display: "inline-block" }}>
+                      <Clickable address="">Docs</Clickable>
+                    </div>
+                  </li>
+                </ul>
               </Style.ContentCategory>
             </Grid>
 
