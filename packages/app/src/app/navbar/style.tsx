@@ -44,6 +44,10 @@ const style = {
   })),
   Wallet: styled(Grid)(({ theme }) => ({
     ...theme.button.normal,
+    backgroundColor: "white",
+    color: "black",
+    paddingLeft: "25px",
+    paddingRight: "25px",
   })),
   WalletENS: styled(Typography)(({ theme }) => ({
     fontFamily: theme.fontFamily.primary,

@@ -23,7 +23,7 @@ import { useGetAssetsQuery, useGetDripQuery } from "@/app/store/services";
 import { mint, mintDefault, mutate, resetMintingProcess } from "@/app/store/services/web3";
 import Style from "./style";
 import { useParams } from "react-router-dom";
-import { useSceneStore } from "../_3dScene/hook";
+import { useSceneStore } from "../../../../_common/3d/hooks/hook";
 import { CONFIG } from "@/common/config";
 
 const { parseEther: toEth, formatEther, formatBytes32String } = ethers.utils;

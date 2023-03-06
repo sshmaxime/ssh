@@ -11,7 +11,6 @@ import { useDispatch } from "./store/hooks";
 import { Route, Routes } from "react-router-dom";
 
 import DropRoutes from "./routes/drop";
-import HomeComponent from "./routes/home";
 
 const AppWrapper: FC = ({ children }) => {
   return (
@@ -22,6 +21,12 @@ const AppWrapper: FC = ({ children }) => {
 };
 
 const App: FC = ({ children }) => {
+  if (window.innerWidth < 1000) {
+    return (
+      <>This website isn't yet fully working on mobile. Please come back on your computer :)</>
+    );
+  }
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +40,6 @@ const App: FC = ({ children }) => {
 
       <Routes>
         <Route path="/drop/*" element={<DropRoutes />} />
-        <Route path="/" element={<HomeComponent />} />
       </Routes>
     </>
   );

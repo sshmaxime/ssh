@@ -229,7 +229,7 @@ export const NavbarComponent: FC = () => {
                 </Grid>
                 <Grid item>
                   {auth ? (
-                    <Style.Wallet container style={{ justifyContent: "start" }}>
+                    <Style.Wallet container>
                       <Grid
                         item
                         style={{
