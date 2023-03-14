@@ -1,3 +1,5 @@
+## The repository moved [here](https://github.com/premier-labs/premier-contracts).
+
 ![Image Demo](resources/image-demo.png)
 
 # PREMIER
